@@ -22,7 +22,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <layout class="QVBoxLayout" name="verticalLayout" stretch="500,50,0,0,150">
+     <layout class="QVBoxLayout" name="verticalLayout" stretch="500,50,0,150,0">
       <item>
        <widget class="QTableWidget" name="articles_list">
         <property name="enabled">
@@ -239,25 +239,6 @@
          </widget>
         </item>
        </layout>
-      </item>
-      <item>
-       <widget class="QPlainTextEdit" name="query_input">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="tabChangesFocus">
-         <bool>false</bool>
-        </property>
-        <property name="undoRedoEnabled">
-         <bool>true</bool>
-        </property>
-        <property name="plainText">
-         <string>asdasd</string>
-        </property>
-        <property name="textInteractionFlags">
-         <set>Qt::TextEditorInteraction</set>
-        </property>
-       </widget>
       </item>
       <item>
        <widget class="QPlainTextEdit" name="query_input">

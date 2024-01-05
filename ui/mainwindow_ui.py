@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'd:\3441\Documents\Familie\Edgar\Weiterbildungen\Kurse\Python Bootcamp\Projekte\SUN_Article_Fetcher\ui\mainwindow.ui'
+# Form implementation generated from reading ui file 'd:\3441\Documents\Familie\Edgar\Weiterbildungen\Kurse\Python Bootcamp\Projekte\SUN_Article_Fetcher_git\ui\mainwindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #
@@ -117,17 +117,10 @@ class Ui_MainWindow(object):
         self.query_input.setEnabled(True)
         self.query_input.setTabChangesFocus(False)
         self.query_input.setUndoRedoEnabled(True)
+        self.query_input.setPlainText("")
         self.query_input.setTextInteractionFlags(QtCore.Qt.TextEditorInteraction)
         self.query_input.setObjectName("query_input")
         self.verticalLayout.addWidget(self.query_input)
-        self.query_input1 = QtWidgets.QPlainTextEdit(self.centralwidget)
-        self.query_input1.setEnabled(True)
-        self.query_input1.setTabChangesFocus(False)
-        self.query_input1.setUndoRedoEnabled(True)
-        self.query_input1.setPlainText("")
-        self.query_input1.setTextInteractionFlags(QtCore.Qt.TextEditorInteraction)
-        self.query_input1.setObjectName("query_input1")
-        self.verticalLayout.addWidget(self.query_input1)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setContentsMargins(5, 5, 5, 5)
         self.horizontalLayout_2.setSpacing(5)
@@ -233,7 +226,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addLayout(self.formLayout_2)
         self.verticalLayout.setStretch(0, 500)
         self.verticalLayout.setStretch(1, 50)
-        self.verticalLayout.setStretch(4, 150)
+        self.verticalLayout.setStretch(3, 150)
         self.gridLayout.addLayout(self.verticalLayout, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -261,7 +254,6 @@ class Ui_MainWindow(object):
         self.load_articles_file_btn.setText(_translate("MainWindow", "Lade Artikelliste für das Projekt (aus Datei)"))
         self.load_articles_db_btn.setText(_translate("MainWindow", "Lade Artikelliste für das Projekt (aus DB)"))
         self.sql_query_btn.setText(_translate("MainWindow", "SQL-Query"))
-        self.query_input.setPlainText(_translate("MainWindow", "asdasd"))
         self.db_type.setItemText(0, _translate("MainWindow", "PostgreSQL"))
         self.db_type.setItemText(1, _translate("MainWindow", "MySQL"))
         self.db_server_label.setText(_translate("MainWindow", "Server (Port)"))
