@@ -97,7 +97,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def on_target_path_btn_click(self):
         # Öffne einen Dialog für die Auswahl eines Zielordners
         target_path = QFileDialog.getExistingDirectory(
-            self, "Select Source Folder")
+            self, "Select Target Folder")
         if target_path:
             # Setze den ausgewählten Zielordner im Textfeld
             self.ui.target_path_text.setPlainText(target_path)
