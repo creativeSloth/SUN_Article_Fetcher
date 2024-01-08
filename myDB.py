@@ -3,12 +3,16 @@ from sqlalchemy import create_engine
 import pandas as pd
 
 # Funktion zum Abrufen des DataFrames
+
+
 def get_df():
-    file_path = "D:/3441/Documents/Familie/Edgar/Weiterbildungen/Kurse/Python Bootcamp/Projekte/SUN-Artikel-Fetcher/db/SUN 24-001/articles.csv"
+    file_path = "D:/3441/Documents/Familie/Edgar/Weiterbildungen/Kurse/Python Bootcamp/Projekte/SUN_Article_Fetcher/data/SUN 24-001/articles.csv"
+
     dtypes = {0: str, 1: str}
     df = pd.read_csv(file_path, header=None, dtype=dtypes)
     df = df.drop_duplicates()
     return df
+
 
 # Verbindung zur MySQL-Datenbank herstellen
 server = "127.0.0.1"
@@ -27,11 +31,13 @@ mydb = mysql.connector.connect(
 df = get_df()
 
 # MySQL-Engine erstellen
-engine = create_engine(f"mysql+mysqlconnector://{user}:{pw}@{server}/{DB_name}")
+engine = create_engine(
+    f"mysql+mysqlconnector://{user}:{pw}@{server}/{DB_name}")
 
 # DataFrame in die MySQL-Tabelle einfügen
 table_name = "articles"  # Ersetze "deine_tabelle" durch den tatsächlichen Tabellennamen
-df.columns = ['article_no', 'article_name']  # Ersetze durch die tatsächlichen Spaltennamen
+# Ersetze durch die tatsächlichen Spaltennamen
+df.columns = ['article_no', 'article_name']
 
 # DataFrame in die MySQL-Tabelle einfügen
 df.to_sql(name=table_name, con=engine, if_exists='replace', index=False)

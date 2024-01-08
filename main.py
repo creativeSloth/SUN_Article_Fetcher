@@ -53,6 +53,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.target_path_btn.clicked.connect(self.on_target_path_btn_click)
         self.ui.paste_docs_btn.clicked.connect(self.on_copy_files_btn_click)
         self.ui.sql_query_btn.clicked.connect(self.on_sql_query_btn_click)
+        self.ui.articles_list.horizontalHeader(
+        ).sortIndicatorChanged.connect(self.sort_table)
+
+    def sort_table(self, column, order):
+        self.ui.articles_list.sortItems(column, order)
 
     def initialize_instance_vars(self):
         self.df = None
@@ -320,8 +325,12 @@ class MainWindow(QtWidgets.QMainWindow):
 
             # Beispiel-SQL-Abfrage
             if self.sql_query is None or self.sql_query == "":
-                self.sql_query = "SELECT * FROM articles;"
+                self.sql_query = "SELECT * FROM articles WHERE project_name = '{{project}}';"
                 self.ui.query_input.setPlainText(self.sql_query)
+
+            if "{{project}}" in self.sql_query:
+                self.sql_query = self.sql_query.replace(
+                    "{{project}}", self.get_project())
 
             # Verwende pd.read_sql, um die Abfrage auszuführen und die Ergebnisse in einen DataFrame zu lesen
             df = pd.read_sql(self.sql_query, con=engine)
