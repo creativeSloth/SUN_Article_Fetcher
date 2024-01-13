@@ -303,6 +303,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def read_sql(self):
         self.sql_query = self.ui.query_input.toPlainText()
         self.write_query_to_log(self.sql_query)
+        db_type = self.ui.db_type.currentText()
 
         # Konfiguriere MySQL-Verbindungsinformationen
         server = self.get_server()  # "127.0.0.1"
@@ -315,13 +316,29 @@ class MainWindow(QtWidgets.QMainWindow):
         # Schreibe die Server-Info in die Log-Datei
         self.write_server_info_to_log(server_info)
 
+        print(db_type)
         try:
-            # Erstelle eine SQLAlchemy-Engine für MySQL-Verbindung
-            engine = create_engine(
-                f"mysql+mysqlconnector://{user}:{pw}@{server}/{dB_name}")
+
+            if db_type == "MySQL":
+                # Erstelle eine SQLAlchemy-Engine für MySQL-Verbindung
+                engine = create_engine(
+                    f"mysql+mysqlconnector://{user}:{pw}@{server}/{dB_name}")
+                print("MySQL")
+                engine.connect()
+
+            elif db_type == "PostgreSQL":
+                # Erstelle eine SQLAlchemy-Engine für PostgreSQL-Verbindung
+                engine = create_engine(
+                    f"postgresql+psycopg2://{user}:{pw}@{server}/{dB_name}")
+                print("PostgreSQL")
+                engine.connect()
+
+            else:
+                # Fügen Sie hier weitere Datenbanktypen hinzu, wenn benötigt
+                raise ValueError(
+                    f"Datenbanktyp wird nicht unterstützt: {db_type}")
 
             # Überprüfe, ob die Verbindung erfolgreich hergestellt wurde
-            engine.connect()
 
             # Beispiel-SQL-Abfrage
             if self.sql_query is None or self.sql_query == "":
@@ -408,7 +425,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
                 # Rückgabe des Werts
                 self.server_info = server_info
-                # Wenn Server-Info vorhanden ist, setze die Werte in die Textfelder
 
         except FileNotFoundError:
             server_info = None
