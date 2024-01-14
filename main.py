@@ -115,11 +115,11 @@ class MainWindow(QtWidgets.QMainWindow):
         # Überprüfe, ob source_path und target_path existieren
         if not os.path.exists(source_path) or not os.path.exists(target_path):
             QtWidgets.QMessageBox.warning(
-                self, "Error", "Source or target path does not exist.")
+                self, "Fehler", "Quell- oder Zielpfad existieren nicht.")
             return
 
         # Holen Sie sich alle Dateinamen im source_path
-        source_files = os.listdir(source_path)
+        source_files = self.get_files_in_source_path(source_path)
 
         # Rufen Sie die separate Funktion für das Logging auf
         self.log_copy_details(source_path, target_path,
@@ -135,21 +135,78 @@ class MainWindow(QtWidgets.QMainWindow):
 
             # Kopiere die Datei
             try:
+                self.create_target_directory(target_file_path)
                 shutil.copy(source_file_path, target_file_path)
-                # Gib eine Erfolgsmeldung aus
-                QtWidgets.QMessageBox.information(self, "Erfolg!",
-                                                  "Dateien wurden erfolgreich kopiert\nLog-Datei bezüglich der kopierten Dateien wurde erstellt.")
+
             except Exception as e:
-                # Gib eine Erfolgsmeldung aus
+                # Gib eine Meldung aus
                 QtWidgets.QMessageBox.warning(self, "Fehler!",
-                                              f"Die Datei konnte nicht erstellt werden.\n\n {e}")
+                                              f"Die Datei für {matching_filename} konnte nicht kopiert werden.\n\n {e}")
+
+        # Gib eine Erfolgsmeldung aus
+        QtWidgets.QMessageBox.information(self, "Erfolg!",
+                                          f"Das Kopieren der Dateien wurde beendet.\n\n"
+                                          f"Es wurde eine Logdatei im log-Ordner {self.log_sub2folder_path} erstellt und")
+    
+    def fill_article_list(self, file_path=None, df=None):
+
+        # ? Drucke den Dateipfad (optional, zum Testen)
+        if file_path is not None and df is None:
+            # Wenn ein Dateipfad übergeben wurde, lese Daten aus der Datei
+            df = self.read_data(file_path)
+
+        if df is not None:
+            for index, row in df.iterrows():
+                tw_row = self.ui.articles_list.rowCount()
+                self.ui.articles_list.insertRow(tw_row)
+
+                # Spalte 1 (statisch) mit einer Checkbox
+                checkbox_item = QtWidgets.QTableWidgetItem()
+                checkbox_item.setFlags(
+                    QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
+                checkbox_item.setCheckState(QtCore.Qt.Checked)
+                self.ui.articles_list.setItem(tw_row, 0, checkbox_item)
+
+                # Spalte 2 (dynamisch) mit den Werten aus der Spalte 0 des DataFrames
+                item_col1 = QtWidgets.QTableWidgetItem(str(row.iloc[0]))
+                self.ui.articles_list.setItem(tw_row, 1, item_col1)
+                # Spalte 3 (dynamisch) mit den Werten aus der Spalte 1 des DataFrames
+                item_col2 = QtWidgets.QTableWidgetItem(str(row.iloc[1]))
+                self.ui.articles_list.setItem(tw_row, 2, item_col2)
+
+        # Iteriere über alle Zellen im Table Widget
+        for row in range(self.ui.articles_list.rowCount()):
+            for col in range(1, self.ui.articles_list.columnCount()):
+                item = self.ui.articles_list.item(row, col)
+                if item:
+                    # Deaktiviere die Editierbarkeit für die Zelle
+                    item.setFlags(item.flags() & ~QtCore.Qt.ItemIsEditable)
+
+        self.resize_columns_to_contents()
+
+    def get_files_in_source_path(self, directory):
+        all_files = []
+
+        for root, _, files in os.walk(directory):
+            for file in files:
+                file_path = os.path.relpath(
+                    os.path.join(root, file), directory)
+                all_files.append(file_path)
+
+        return all_files
+
+    def create_target_directory(self, target_file_path):
+        target_directory = os.path.dirname(target_file_path)
+
+        if not os.path.exists(target_directory):
+            os.makedirs(target_directory)
 
     def log_copy_details(self, source_path, target_path, source_files):
         # Erstelle einen Zeitstempel für die Log-Datei
         timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
         log_source_file_name = f"datalog_{timestamp}.txt"
 
-        # Erstelle den Unterordner, falls er noch nicht existiert
+        # Erstelle den Unterordner, falls er noch nicht existiert1
         os.makedirs(self.log_subfolder_path, exist_ok=True)
         os.makedirs(self.log_sub2folder_path, exist_ok=True)
 
@@ -192,43 +249,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.query_input.show()
         else:
             self.ui.query_input.hide()
-
-    def fill_article_list(self, file_path=None, df=None):
-
-        # ? Drucke den Dateipfad (optional, zum Testen)
-        if file_path is not None and df is None:
-            # Wenn ein Dateipfad übergeben wurde, lese Daten aus der Datei
-            df = self.read_data(file_path)
-
-        if df is not None:
-            for index, row in df.iterrows():
-                tw_row = self.ui.articles_list.rowCount()
-                self.ui.articles_list.insertRow(tw_row)
-
-                # Spalte 1 (statisch) mit einer Checkbox
-                checkbox_item = QtWidgets.QTableWidgetItem()
-                checkbox_item.setFlags(
-                    QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
-                checkbox_item.setCheckState(QtCore.Qt.Checked)
-                self.ui.articles_list.setItem(tw_row, 0, checkbox_item)
-
-                # Spalte 2 (dynamisch) mit den Werten aus der Spalte 0 des DataFrames
-                item_col1 = QtWidgets.QTableWidgetItem(str(row.iloc[0]))
-                self.ui.articles_list.setItem(tw_row, 1, item_col1)
-                # Spalte 3 (dynamisch) mit den Werten aus der Spalte 1 des DataFrames
-                item_col2 = QtWidgets.QTableWidgetItem(str(row.iloc[1]))
-                self.ui.articles_list.setItem(tw_row, 2, item_col2)
-
-        # Iteriere über alle Zellen im Table Widget
-        for row in range(self.ui.articles_list.rowCount()):
-            for col in range(1, self.ui.articles_list.columnCount()):
-                item = self.ui.articles_list.item(row, col)
-                if item:
-                    # Deaktiviere die Editierbarkeit für die Zelle
-                    item.setFlags(item.flags() & ~QtCore.Qt.ItemIsEditable)
-
-        self.resize_columns_to_contents()
-
+ 
     def set_log_directories(self,
                             log_source_file_name,
                             log_query,
