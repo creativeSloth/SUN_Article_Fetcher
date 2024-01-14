@@ -316,21 +316,18 @@ class MainWindow(QtWidgets.QMainWindow):
         # Schreibe die Server-Info in die Log-Datei
         self.write_server_info_to_log(server_info)
 
-        print(db_type)
         try:
 
             if db_type == "MySQL":
                 # Erstelle eine SQLAlchemy-Engine für MySQL-Verbindung
                 engine = create_engine(
                     f"mysql+mysqlconnector://{user}:{pw}@{server}/{dB_name}")
-                print("MySQL")
                 engine.connect()
 
             elif db_type == "PostgreSQL":
                 # Erstelle eine SQLAlchemy-Engine für PostgreSQL-Verbindung
                 engine = create_engine(
                     f"postgresql+psycopg2://{user}:{pw}@{server}/{dB_name}")
-                print("PostgreSQL")
                 engine.connect()
 
             else:
