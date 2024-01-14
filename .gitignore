@@ -74,5 +74,5 @@ CMakeLists.txt.user*
 *.exe
 
 # files
-./myDB.py
+myDB.py
 
