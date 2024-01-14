@@ -147,7 +147,7 @@ class MainWindow(QtWidgets.QMainWindow):
         QtWidgets.QMessageBox.information(self, "Erfolg!",
                                           f"Das Kopieren der Dateien wurde beendet.\n\n"
                                           f"Es wurde eine Logdatei im log-Ordner {self.log_sub2folder_path} erstellt und")
-    
+
     def fill_article_list(self, file_path=None, df=None):
 
         # ? Drucke den Dateipfad (optional, zum Testen)
@@ -249,7 +249,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.query_input.show()
         else:
             self.ui.query_input.hide()
- 
+
     def set_log_directories(self,
                             log_source_file_name,
                             log_query,
