@@ -6,6 +6,7 @@
 *.a
 *.core
 *.cpp
+*.h
 *.moc
 *.o
 *.obj
