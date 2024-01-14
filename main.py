@@ -121,6 +121,30 @@ class MainWindow(QtWidgets.QMainWindow):
         # Holen Sie sich alle Dateinamen im source_path
         source_files = os.listdir(source_path)
 
+        # Rufen Sie die separate Funktion für das Logging auf
+        self.log_copy_details(source_path, target_path,
+                              source_files)
+
+        # Iteriere über alle übereinstimmenden Dateinamen
+        for matching_filename in source_files:
+            # Konstruiere den vollständigen Pfad zur Quelldatei
+            source_file_path = os.path.join(source_path, matching_filename)
+
+            # Konstruiere den vollständigen Pfad zum Ziel
+            target_file_path = os.path.join(target_path, matching_filename)
+
+            # Kopiere die Datei
+            try:
+                shutil.copy(source_file_path, target_file_path)
+                # Gib eine Erfolgsmeldung aus
+                QtWidgets.QMessageBox.information(self, "Erfolg!",
+                                                  "Dateien wurden erfolgreich kopiert\nLog-Datei bezüglich der kopierten Dateien wurde erstellt.")
+            except Exception as e:
+                # Gib eine Erfolgsmeldung aus
+                QtWidgets.QMessageBox.warning(self, "Fehler!",
+                                              f"Die Datei konnte nicht erstellt werden.\n\n {e}")
+
+    def log_copy_details(self, source_path, target_path, source_files):
         # Erstelle einen Zeitstempel für die Log-Datei
         timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
         log_source_file_name = f"datalog_{timestamp}.txt"
@@ -139,8 +163,14 @@ class MainWindow(QtWidgets.QMainWindow):
             log_file.write(f"Source Folder: {source_path}\n")
             log_file.write(f"Target Folder: {target_path}\n\n")
 
-            # Holen Sie sich alle ausgewählten Dateien im Table Widget
-            selected_files = []
+            # Schreibe alle Dateinamen im source_path in die Log-Datei
+            log_file.write("All Files in Source Folder:\n")
+            for file in source_files:
+                log_file.write(f"- {file}\n")
+            log_file.write("\n")
+
+            # Schreibe die ausgewählten Artikel in die Log-Datei
+            log_file.write("Selected articles:\n")
             for row in range(self.ui.articles_list.rowCount()):
                 checkbox_item = self.ui.articles_list.item(row, 0)
                 filename_item = self.ui.articles_list.item(row, 1)
@@ -148,48 +178,13 @@ class MainWindow(QtWidgets.QMainWindow):
                 # Überprüfe, ob die Checkbox in der aktuellen Zeile angehakt ist
                 if checkbox_item and checkbox_item.checkState() == QtCore.Qt.Checked:
                     filename = filename_item.text()
-                    selected_files.append(filename)
-
-            # Schreibe die ausgewählten Artikel in die Log-Datei
-            log_file.write("Selected articles:\n")
-            for file in selected_files:
-                log_file.write(f"- {file}\n")
+                    log_file.write(f"- {filename}\n")
             log_file.write("\n")
-
-            # Holen Sie sich alle Dateinamen im Quellordner, die den ausgewählten Dateien entsprechen
-            matching_files = [file for file in source_files if
-                              any(selected_file in file for selected_file in selected_files)]
-
-            # Schreibe die gefundenen Dateien im Quellordner in die Log-Datei
-            log_file.write("Matching Files in Source Folder:\n")
-            for file in matching_files:
-                log_file.write(f"- {file}\n")
 
             # Schreibe das DataFrame in die Log-Datei
             log_file.write("\nDataFrame from File or Database:\n")
             if self.df is not None:
                 log_file.write(self.df.to_csv(index=False))
-
-        # Iteriere über alle übereinstimmenden Dateinamen
-        for matching_filename in matching_files:
-            # Konstruiere den vollständigen Pfad zur Quelldatei
-            source_file_path = os.path.join(source_path, matching_filename)
-
-            # Konstruiere den vollständigen Pfad zum Ziel
-            target_file_path = os.path.join(target_path, matching_filename)
-
-            # Kopiere die Datei
-            try:
-                shutil.copy(source_file_path, target_file_path)
-                # Gib eine Erfolgsmeldung aus
-
-            except Exception as e:
-                # Gib eine Erfolgsmeldung aus
-                QtWidgets.QMessageBox.warning(self, "Fehler!",
-                                                    "Die Datei konnten nicht erstellt werden.\n\n {e}")
-
-        QtWidgets.QMessageBox.information(self, "Erfolg!",
-                                          "Dateien wurden erfolgreich kopiert\nLog-Datei bezüglich der kopierten Dateien wurde unter folgendem Pfad erstellt:\n\n" + log_file_path)
 
     def on_sql_query_btn_click(self):
 

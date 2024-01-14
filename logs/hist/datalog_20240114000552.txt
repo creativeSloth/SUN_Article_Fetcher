@@ -1,8 +1,0 @@
-Source Folder: D:/3441/Documents/Familie/Edgar/Weiterbildungen/Kurse/Python Bootcamp/Projekte/SUN_Article_Fetcher/data/Quellordner
-Target Folder: D:/3441/Documents/Familie/Edgar/Weiterbildungen/Kurse/Python Bootcamp/Projekte/SUN_Article_Fetcher/data/SUN 24-001/Zielordner
-
-Selected articles:
-
-Matching Files in Source Folder:
-
-DataFrame from File or Database:
