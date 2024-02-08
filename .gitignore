@@ -77,3 +77,9 @@ CMakeLists.txt.user*
 # files
 myDB.py
 
+
+# folders
+data/
+.vscode/
+vsc_venv/
+

@@ -187,13 +187,23 @@ class MainWindow(QtWidgets.QMainWindow):
     def get_files_in_source_path(self, directory):
         all_files = []
 
-        for root, _, files in os.walk(directory):
-            for file in files:
-                file_path = os.path.relpath(
-                    os.path.join(root, file), directory)
-                all_files.append(file_path)
+        try:
+            for root, _, files in os.walk(directory):
+                for file in files:
+                    try:
+                        file_path = os.path.relpath(
+                            os.path.join(root, file), directory)
+                        all_files.append(file_path)
 
-        return all_files
+                    except Exception as e:
+                        QtWidgets.QMessageBox.warning(self, "Fehler!",
+                                                      f"Die Datei für {file_path} konnte nicht gelesen werden.\n\n {e}")
+
+            return all_files
+
+        except Exception as e:
+            QtWidgets.QMessageBox.warning(self, "Fehler!",
+                                          f"Die Datei für {directory} konnte nicht gelesen werden.\n\n {e}")
 
     def create_target_directory(self, target_file_path):
         target_directory = os.path.dirname(target_file_path)
