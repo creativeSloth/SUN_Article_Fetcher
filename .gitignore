@@ -82,4 +82,5 @@ myDB.py
 data/
 .vscode/
 vsc_venv/
+logs/
 
