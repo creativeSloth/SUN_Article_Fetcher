@@ -255,7 +255,7 @@ class MainWindow(QtWidgets.QMainWindow):
         timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
         log_source_file_name = f"datalog_{timestamp}.txt"
 
-        # Erstelle den Unterordner, falls er noch nicht existiert1
+        # Erstelle den Unterordner, falls er noch nicht existiert
         os.makedirs(self.log_subfolder_path, exist_ok=True)
         os.makedirs(self.log_sub2folder_path, exist_ok=True)
 
@@ -264,7 +264,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.log_sub2folder_path, log_source_file_name)
 
         # Öffne die Log-Datei für das Schreiben
-        with open(log_file_path, 'w') as log_file:
+        with open(log_file_path, 'w', encoding='utf-8') as log_file:
             # Schreibe die Quell- und Zielordner in die Log-Datei
             log_file.write(f"Source Folder: {source_path}\n")
             log_file.write(f"Target Folder: {target_path}\n\n")
@@ -273,7 +273,10 @@ class MainWindow(QtWidgets.QMainWindow):
             log_file.write("All Files in Source Folder:\n")
             for file in source_files:
                 try:
-                    log_file.write(f"- {file}\n")
+                    # Kodiere den Dateinamen als UTF-8, um sicherzustellen, dass Sonderzeichen korrekt verarbeitet werden
+                    file_encoded = file.encode(
+                        'utf-8', errors='ignore').decode('utf-8')
+                    log_file.write(f"- {file_encoded}\n")
                 except Exception as e:
                     QtWidgets.QMessageBox.warning(self, "Fehler!",
                                                   f"Die Datei '{file}' des Quellordners konnte nicht in der log-datei registriert werden.\n\n {e}")
@@ -283,7 +286,10 @@ class MainWindow(QtWidgets.QMainWindow):
             log_file.write("Selected articles:\n")
             for file in matching_files:
                 try:
-                    log_file.write(f"- {file}\n")
+                    # Kodiere den Dateinamen als UTF-8, um sicherzustellen, dass Sonderzeichen korrekt verarbeitet werden
+                    file_encoded = file.encode(
+                        'utf-8', errors='ignore').decode('utf-8')
+                    log_file.write(f"- {file_encoded}\n")
                 except Exception as e:
                     QtWidgets.QMessageBox.warning(self, "Fehler!",
                                                   f"Die passende Datei '{file}' des Zielordner konnte nicht in der log-datei registriert werden.\n\n {e}")
