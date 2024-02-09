@@ -126,27 +126,61 @@ class MainWindow(QtWidgets.QMainWindow):
         # Holen Sie sich alle Dateinamen im source_path
         source_files = self.get_files_in_source_path(source_path)
 
-        # Rufen Sie die separate Funktion für das Logging auf
-        self.log_copy_details(source_path, target_path,
-                              source_files)
+        for file in source_files:
+            print("--------                " + file)
+
+        # Holen Sie sich alle ausgewählten Dateien im Table Widget
+        selected_files = []
+        for row in range(self.ui.articles_list.rowCount()):
+            checkbox_item = self.ui.articles_list.item(row, 0)
+            filename_item = self.ui.articles_list.item(row, 1)
+
+            # Überprüfe, ob die Checkbox in der aktuellen Zeile angehakt ist
+            if checkbox_item and checkbox_item.checkState() == QtCore.Qt.Checked:
+                filename = filename_item.text()
+                selected_files.append(filename)
+
+        selected_files = list(set(selected_files))
+
+        for file in selected_files:
+            print("--------------                " + file)
+
+        # Holen Sie sich alle Dateinamen im Quellordner, die den ausgewählten Dateien entsprechen
+        matching_files = []
+        matching_files = [file for file in source_files if
+                          any(selected_file in file for selected_file in selected_files)]
+
+        for file in matching_files:
+            print("-----------------                " + file)
 
         # Iteriere über alle übereinstimmenden Dateinamen
-        for matching_filename in source_files:
+        for matching_filename in matching_files:
             # Konstruiere den vollständigen Pfad zur Quelldatei
             source_file_path = os.path.join(source_path, matching_filename)
 
             # Konstruiere den vollständigen Pfad zum Ziel
             target_file_path = os.path.join(target_path, matching_filename)
+            target_file_path_ext = os.path.dirname(target_file_path)
+            try:
+                if not os.path.exists(target_file_path_ext):
+                    os.makedirs(target_file_path_ext)
+
+            except Exception as e:
+                QtWidgets.QMessageBox.warning(
+                    self, "Fehler", f"Fehler beim Erstellen des Verzeichnisses {target_file_path.root()}.\n\n"
+                                    f"Fehler: {e}")
 
             # Kopiere die Datei
             try:
-                self.create_target_directory(target_file_path)
                 shutil.copy(source_file_path, target_file_path)
-
             except Exception as e:
-                # Gib eine Meldung aus
-                QtWidgets.QMessageBox.warning(self, "Fehler!",
-                                              f"Die Datei für {matching_filename} konnte nicht kopiert werden.\n\n {e}")
+                QtWidgets.QMessageBox.warning(
+                    self, "Fehler", f"Fehler beim Kopieren der Datei {source_file_path} zu {target_file_path}.\n\n"
+                                    f"Fehler: {e}")
+
+        # Rufen Sie die separate Funktion für das Logging auf
+        self.log_copy_details(source_path, target_path,
+                              source_files, matching_files)
 
         # Gib eine Erfolgsmeldung aus
         QtWidgets.QMessageBox.information(self, "Erfolg!",
@@ -216,7 +250,7 @@ class MainWindow(QtWidgets.QMainWindow):
         if not os.path.exists(target_directory):
             os.makedirs(target_directory)
 
-    def log_copy_details(self, source_path, target_path, source_files):
+    def log_copy_details(self, source_path, target_path, source_files, matching_files):
         # Erstelle einen Zeitstempel für die Log-Datei
         timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
         log_source_file_name = f"datalog_{timestamp}.txt"
@@ -242,19 +276,17 @@ class MainWindow(QtWidgets.QMainWindow):
                     log_file.write(f"- {file}\n")
                 except Exception as e:
                     QtWidgets.QMessageBox.warning(self, "Fehler!",
-                                                  f"Die Datei für {file} konnte nicht in die log-datei geschrieben werden.\n\n {e}")
+                                                  f"Die Datei '{file}' des Quellordners konnte nicht in der log-datei registriert werden.\n\n {e}")
             log_file.write("\n")
 
             # Schreibe die ausgewählten Artikel in die Log-Datei
             log_file.write("Selected articles:\n")
-            for row in range(self.ui.articles_list.rowCount()):
-                checkbox_item = self.ui.articles_list.item(row, 0)
-                filename_item = self.ui.articles_list.item(row, 1)
-
-                # Überprüfe, ob die Checkbox in der aktuellen Zeile angehakt ist
-                if checkbox_item and checkbox_item.checkState() == QtCore.Qt.Checked:
-                    filename = filename_item.text()
-                    log_file.write(f"- {filename}\n")
+            for file in matching_files:
+                try:
+                    log_file.write(f"- {file}\n")
+                except Exception as e:
+                    QtWidgets.QMessageBox.warning(self, "Fehler!",
+                                                  f"Die passende Datei '{file}' des Zielordner konnte nicht in der log-datei registriert werden.\n\n {e}")
             log_file.write("\n")
 
             # Schreibe das DataFrame in die Log-Datei
