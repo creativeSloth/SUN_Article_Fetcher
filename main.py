@@ -282,8 +282,8 @@ class MainWindow(QtWidgets.QMainWindow):
                                                   f"Die Datei '{file}' des Quellordners konnte nicht in der log-datei registriert werden.\n\n {e}")
             log_file.write("\n")
 
-            # Schreibe die ausgewählten Artikel in die Log-Datei
-            log_file.write("Selected articles:\n")
+            # Schreibe die ausgewählten Dokumente in die Log-Datei
+            log_file.write("Selected documents:\n")
             for file in matching_files:
                 try:
                     # Kodiere den Dateinamen als UTF-8, um sicherzustellen, dass Sonderzeichen korrekt verarbeitet werden
