@@ -49,10 +49,15 @@ class MainWindow(QtWidgets.QMainWindow):
             self.on_load_articles_from_file_btn_click)
         self.ui.load_articles_db_btn.clicked.connect(
             self.on_load_articles_from_db_btn_click)
-        self.ui.source_path_btn.clicked.connect(self.on_source_path_btn_click)
-        self.ui.target_path_btn.clicked.connect(self.on_target_path_btn_click)
-        self.ui.paste_docs_btn.clicked.connect(self.on_copy_files_btn_click)
-        self.ui.sql_query_btn.clicked.connect(self.on_sql_query_btn_click)
+        self.ui.source_path_btn.clicked.connect(
+            self.on_source_path_btn_click)
+        self.ui.target_path_btn.clicked.connect(
+            self.on_target_path_btn_click)
+        self.ui.paste_docs_btn.clicked.connect(
+            self.on_copy_files_btn_click)
+        self.ui.sql_query_btn.clicked.connect(
+            self.on_sql_query_btn_click)
+
         self.ui.articles_list.horizontalHeader(
         ).sortIndicatorChanged.connect(self.sort_table)
 
@@ -233,7 +238,11 @@ class MainWindow(QtWidgets.QMainWindow):
             # Schreibe alle Dateinamen im source_path in die Log-Datei
             log_file.write("All Files in Source Folder:\n")
             for file in source_files:
-                log_file.write(f"- {file}\n")
+                try:
+                    log_file.write(f"- {file}\n")
+                except Exception as e:
+                    QtWidgets.QMessageBox.warning(self, "Fehler!",
+                                                  f"Die Datei für {file} konnte nicht in die log-datei geschrieben werden.\n\n {e}")
             log_file.write("\n")
 
             # Schreibe die ausgewählten Artikel in die Log-Datei
