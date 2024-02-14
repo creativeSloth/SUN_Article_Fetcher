@@ -42,7 +42,6 @@ class MainWindow(QtWidgets.QMainWindow):
         # Lese das zuletzt eingegebene query zur DB-Abfrage
         self.read_query_from_log()
         # setze Tabstops in Eingabefelder ---> funktioniert noch nicht
-        self.set_tabstops()
 
     def map_ui_buttons(self):
         self.ui.load_articles_file_btn.clicked.connect(
@@ -513,49 +512,6 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.ui.pw.setPlainText(pw)
             if self.ui.db_name.toPlainText() == "":
                 self.ui.db_name.setPlainText(db_name)
-
-    def set_tabstops(self):
-        # Festlegen der Tab-Reihenfolge
-        self.setTabOrder(self.ui.project,
-                         self.ui.sql_query_btn)
-
-        self.setTabOrder(self.ui.sql_query_btn,
-                         self.ui.db_server)
-
-        self.setTabOrder(self.ui.db_server,
-                         self.ui.user)
-
-        self.setTabOrder(self.ui.user,
-                         self.ui.pw)
-
-        self.setTabOrder(self.ui.pw,
-                         self.ui.db_name)
-
-        self.setTabOrder(self.ui.db_name,
-                         self.ui.source_path_text)
-
-        self.setTabOrder(self.ui.source_path_text,
-                         self.ui.target_path_text)
-
-    def get_project(self):
-        # Gibt den Text im Projekt-Textfeld zurück
-        return self.ui.project.toPlainText()
-
-    def get_server(self):
-        # Gibt den Text im Projekt-Textfeld zurück
-        return self.ui.db_server.toPlainText()
-
-    def get_pw(self):
-        # Gibt den Text im Projekt-Textfeld zurück
-        return self.ui.pw.toPlainText()
-
-    def get_dB_name(self):
-        # Gibt den Text im Projekt-Textfeld zurück
-        return self.ui.db_name.toPlainText()
-
-    def get_user(self):
-        # Gibt den Text im Projekt-Textfeld zurück
-        return self.ui.user.toPlainText()
 
 
 # Führe das Programm aus, wenn es direkt gestartet wird
