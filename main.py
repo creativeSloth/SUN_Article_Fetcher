@@ -29,6 +29,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # query_input-Box verstecken
         self.ui.query_input.hide()
+        self.ui.query_2_input.hide()
         self.set_log_directories(log_source_file_name=log_source_file_name,
                                  log_query=log_query,
                                  log_server_info=log_server_info)
@@ -41,7 +42,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.read_server_info_from_log()
         # Lese das zuletzt eingegebene query zur DB-Abfrage
         self.read_query_from_log()
-        # setze Tabstops in Eingabefelder ---> funktioniert noch nicht
+        # lasse Unnötige Felder Verschwinden
 
     def map_ui_buttons(self):
         self.ui.load_articles_file_btn.clicked.connect(
@@ -66,6 +67,18 @@ class MainWindow(QtWidgets.QMainWindow):
     def initialize_instance_vars(self):
         self.df = None
         self.sql_query = None
+
+    def hide_buttons_and_fields(self):
+        for child in range(self.ui.horizontalLayout_2.count()):
+            widget = self.ui.horizontalLayout_2.itemAt(child).widget()
+            if widget:
+                widget.hide()
+
+    def show_buttons_and_fields(self):
+        for child in range(self.ui.horizontalLayout_2.count()):
+            widget = self.ui.horizontalLayout_2.itemAt(child).widget()
+            if widget:
+                widget.show()
 
     def on_load_articles_from_file_btn_click(self):
         # Öffne einen Dateiauswahldialog für Benutzer
@@ -125,9 +138,6 @@ class MainWindow(QtWidgets.QMainWindow):
         # Holen Sie sich alle Dateinamen im source_path
         source_files = self.get_files_in_source_path(source_path)
 
-        for file in source_files:
-            print("--------                " + file)
-
         # Holen Sie sich alle ausgewählten Dateien im Table Widget
         selected_files = []
         for row in range(self.ui.articles_list.rowCount()):
@@ -141,16 +151,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
         selected_files = list(set(selected_files))
 
-        for file in selected_files:
-            print("--------------                " + file)
-
         # Holen Sie sich alle Dateinamen im Quellordner, die den ausgewählten Dateien entsprechen
         matching_files = []
         matching_files = [file for file in source_files if
                           any(selected_file in file for selected_file in selected_files)]
-
-        for file in matching_files:
-            print("-----------------                " + file)
 
         # Iteriere über alle übereinstimmenden Dateinamen
         for matching_filename in matching_files:
@@ -495,9 +499,17 @@ class MainWindow(QtWidgets.QMainWindow):
                 # Rückgabe des Werts
                 self.server_info = server_info
 
+            server_info_list = server_info.split(",")
+
+            if any(not info for info in server_info_list) is not None and len(server_info_list) == 4:
+                self.show_buttons_and_fields()
+            else:
+                self.hide_buttons_and_fields()
+
         except FileNotFoundError:
             server_info = None
             self.server_info = None
+            self.show_buttons_and_fields()
 
         self.set_server_info_ui_fields(self.server_info)
 
