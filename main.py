@@ -375,17 +375,31 @@ class MainWindow(QtWidgets.QMainWindow):
         df = pd.read_excel(file_path, header=None, dtype=dtypes, engine="odf")
         df = df.drop_duplicates()
         return df
-
+    
+    def get_server_info(self):
+        server_info = []
+        server_info.append(self.ui.db_server.toPlainText())
+        server_info.append(self.ui.user.toPlainText())
+        server_info.append(self.ui.pw.toPlainText())
+        server_info.append(self.ui.db_name.toPlainText())
+        
+        return server_info
+    
+    def get_project(self):
+        return self.ui.project.toPlainText()
+    
     def read_sql(self):
         self.sql_query = self.ui.query_input.toPlainText()
         self.write_query_to_log(self.sql_query)
-        db_type = self.ui.db_type.currentText()
+        db_type = self.ui.db_type.currentText()       
+        
+        self.server_info = self.get_server_info()
 
         # Konfiguriere MySQL-Verbindungsinformationen
-        server = self.get_server()  # "127.0.0.1"
-        user = self.get_user()  # "root"
-        pw = self.get_pw()  # "12345678"
-        dB_name = self.get_dB_name()  # "db"
+        server = self.server_info[0] # "127.0.0.1"
+        user = self.server_info[1]  # "root"
+        pw = self.server_info[2]  # "12345678"
+        dB_name = self.server_info[3]  # "db"
 
         server_info = f"{server}, {user}, {pw}, {dB_name}"
 

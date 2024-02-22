@@ -79,7 +79,6 @@ myDB.py
 todo.txt
 
 # folders
-data/
 .vscode/
 vsc_venv/
 logs/
