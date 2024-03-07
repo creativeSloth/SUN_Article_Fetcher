@@ -25,7 +25,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(800, 609)
+        MainWindow.resize(800, 619)
         sizePolicy = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -35,6 +35,50 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.gridLayout = QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName(u"gridLayout")
+        self.line = QFrame(self.centralwidget)
+        self.line.setObjectName(u"line")
+        self.line.setFrameShape(QFrame.HLine)
+        self.line.setFrameShadow(QFrame.Sunken)
+
+        self.gridLayout.addWidget(self.line, 2, 0, 1, 1)
+
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.project_label = QLabel(self.centralwidget)
+        self.project_label.setObjectName(u"project_label")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.project_label.sizePolicy().hasHeightForWidth())
+        self.project_label.setSizePolicy(sizePolicy1)
+        self.project_label.setMinimumSize(QSize(0, 0))
+        self.project_label.setMaximumSize(QSize(2245, 25))
+        font = QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        self.project_label.setFont(font)
+
+        self.horizontalLayout.addWidget(self.project_label)
+
+        self.project = QPlainTextEdit(self.centralwidget)
+        self.project.setObjectName(u"project")
+        sizePolicy1.setHeightForWidth(self.project.sizePolicy().hasHeightForWidth())
+        self.project.setSizePolicy(sizePolicy1)
+        self.project.setMinimumSize(QSize(0, 0))
+        self.project.setMaximumSize(QSize(16777215, 25))
+        self.project.setSizeIncrement(QSize(0, 0))
+        font1 = QFont()
+        font1.setPointSize(12)
+        self.project.setFont(font1)
+        self.project.viewport().setProperty("cursor", QCursor(Qt.IBeamCursor))
+
+        self.horizontalLayout.addWidget(self.project)
+
+        self.horizontalLayout.setStretch(0, 20)
+        self.horizontalLayout.setStretch(1, 100)
+
+        self.gridLayout.addLayout(self.horizontalLayout, 0, 0, 1, 1)
+
         self.tabWidget = QTabWidget(self.centralwidget)
         self.tabWidget.setObjectName(u"tabWidget")
         self.tabWidget.setIconSize(QSize(16, 16))
@@ -57,22 +101,19 @@ class Ui_MainWindow(object):
         self.load_articles_db_btn.setObjectName(u"load_articles_db_btn")
         self.load_articles_db_btn.setMinimumSize(QSize(0, 40))
         self.load_articles_db_btn.setMaximumSize(QSize(150, 40))
-        font = QFont()
-        font.setUnderline(False)
-        self.load_articles_db_btn.setFont(font)
+        font2 = QFont()
+        font2.setUnderline(False)
+        self.load_articles_db_btn.setFont(font2)
 
         self.gridLayout_4.addWidget(self.load_articles_db_btn, 0, 3, 1, 1)
 
         self.load_articles_file_btn = QPushButton(self.tab1)
         self.load_articles_file_btn.setObjectName(u"load_articles_file_btn")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.load_articles_file_btn.sizePolicy().hasHeightForWidth())
         self.load_articles_file_btn.setSizePolicy(sizePolicy1)
         self.load_articles_file_btn.setMinimumSize(QSize(0, 40))
         self.load_articles_file_btn.setMaximumSize(QSize(150, 40))
-        self.load_articles_file_btn.setFont(font)
+        self.load_articles_file_btn.setFont(font2)
         self.load_articles_file_btn.setCheckable(False)
         self.load_articles_file_btn.setChecked(False)
         self.load_articles_file_btn.setAutoDefault(False)
@@ -122,71 +163,6 @@ class Ui_MainWindow(object):
         self.articles_list.verticalHeader().setStretchLastSection(False)
 
         self.verticalLayout.addWidget(self.articles_list)
-
-        self.horizontalLayout_2 = QHBoxLayout()
-        self.horizontalLayout_2.setSpacing(5)
-        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.horizontalLayout_2.setContentsMargins(5, 5, 5, 5)
-        self.db_type = QComboBox(self.tab1)
-        self.db_type.addItem("")
-        self.db_type.addItem("")
-        self.db_type.setObjectName(u"db_type")
-
-        self.horizontalLayout_2.addWidget(self.db_type)
-
-        self.db_server_label = QLabel(self.tab1)
-        self.db_server_label.setObjectName(u"db_server_label")
-
-        self.horizontalLayout_2.addWidget(self.db_server_label)
-
-        self.db_server = QPlainTextEdit(self.tab1)
-        self.db_server.setObjectName(u"db_server")
-        self.db_server.setMaximumSize(QSize(16777215, 25))
-
-        self.horizontalLayout_2.addWidget(self.db_server)
-
-        self.user_label = QLabel(self.tab1)
-        self.user_label.setObjectName(u"user_label")
-
-        self.horizontalLayout_2.addWidget(self.user_label)
-
-        self.user = QPlainTextEdit(self.tab1)
-        self.user.setObjectName(u"user")
-        self.user.setMaximumSize(QSize(16777215, 25))
-
-        self.horizontalLayout_2.addWidget(self.user)
-
-        self.pw_label = QLabel(self.tab1)
-        self.pw_label.setObjectName(u"pw_label")
-
-        self.horizontalLayout_2.addWidget(self.pw_label)
-
-        self.pw = QPlainTextEdit(self.tab1)
-        self.pw.setObjectName(u"pw")
-        self.pw.setMaximumSize(QSize(16777215, 25))
-
-        self.horizontalLayout_2.addWidget(self.pw)
-
-        self.db_name_label = QLabel(self.tab1)
-        self.db_name_label.setObjectName(u"db_name_label")
-
-        self.horizontalLayout_2.addWidget(self.db_name_label)
-
-        self.db_name = QPlainTextEdit(self.tab1)
-        self.db_name.setObjectName(u"db_name")
-        self.db_name.setMaximumSize(QSize(16777215, 25))
-
-        self.horizontalLayout_2.addWidget(self.db_name)
-
-        self.horizontalLayout_2.setStretch(0, 50)
-        self.horizontalLayout_2.setStretch(1, 30)
-        self.horizontalLayout_2.setStretch(2, 80)
-        self.horizontalLayout_2.setStretch(4, 10)
-        self.horizontalLayout_2.setStretch(5, 10)
-        self.horizontalLayout_2.setStretch(6, 50)
-        self.horizontalLayout_2.setStretch(8, 50)
-
-        self.verticalLayout.addLayout(self.horizontalLayout_2)
 
         self.sql_query_btn = QPushButton(self.tab1)
         self.sql_query_btn.setObjectName(u"sql_query_btn")
@@ -245,6 +221,11 @@ class Ui_MainWindow(object):
         self.paste_docs_btn.setSizePolicy(sizePolicy1)
         self.paste_docs_btn.setMinimumSize(QSize(135, 50))
         self.paste_docs_btn.setMaximumSize(QSize(150, 100))
+        font3 = QFont()
+        font3.setUnderline(True)
+        self.paste_docs_btn.setFont(font3)
+        self.paste_docs_btn.setAutoDefault(False)
+        self.paste_docs_btn.setFlat(False)
 
         self.gridLayout_2.addWidget(self.paste_docs_btn, 4, 0, 1, 1)
 
@@ -311,14 +292,14 @@ class Ui_MainWindow(object):
         self.gridLayout_6.setObjectName(u"gridLayout_6")
         self.gridLayout_6.setSizeConstraint(QLayout.SetNoConstraint)
         self.gridLayout_6.setContentsMargins(5, 5, 5, 5)
-        self.creat_doc_1 = QPushButton(self.tab_2)
-        self.creat_doc_1.setObjectName(u"creat_doc_1")
-        sizePolicy1.setHeightForWidth(self.creat_doc_1.sizePolicy().hasHeightForWidth())
-        self.creat_doc_1.setSizePolicy(sizePolicy1)
-        self.creat_doc_1.setMinimumSize(QSize(135, 50))
-        self.creat_doc_1.setMaximumSize(QSize(150, 100))
+        self.create_docs_btn = QPushButton(self.tab_2)
+        self.create_docs_btn.setObjectName(u"create_docs_btn")
+        sizePolicy1.setHeightForWidth(self.create_docs_btn.sizePolicy().hasHeightForWidth())
+        self.create_docs_btn.setSizePolicy(sizePolicy1)
+        self.create_docs_btn.setMinimumSize(QSize(135, 50))
+        self.create_docs_btn.setMaximumSize(QSize(150, 100))
 
-        self.gridLayout_6.addWidget(self.creat_doc_1, 3, 0, 1, 1)
+        self.gridLayout_6.addWidget(self.create_docs_btn, 3, 0, 1, 1)
 
         self.target_path_btn_2 = QPushButton(self.tab_2)
         self.target_path_btn_2.setObjectName(u"target_path_btn_2")
@@ -353,48 +334,72 @@ class Ui_MainWindow(object):
 
         self.tabWidget.addTab(self.tab_2, "")
 
-        self.gridLayout.addWidget(self.tabWidget, 3, 0, 1, 1)
+        self.gridLayout.addWidget(self.tabWidget, 4, 0, 1, 1)
 
-        self.horizontalLayout = QHBoxLayout()
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.project_label = QLabel(self.centralwidget)
-        self.project_label.setObjectName(u"project_label")
-        sizePolicy1.setHeightForWidth(self.project_label.sizePolicy().hasHeightForWidth())
-        self.project_label.setSizePolicy(sizePolicy1)
-        self.project_label.setMinimumSize(QSize(0, 0))
-        self.project_label.setMaximumSize(QSize(2245, 25))
-        font1 = QFont()
-        font1.setPointSize(12)
-        font1.setBold(True)
-        self.project_label.setFont(font1)
+        self.horizontalLayout_2 = QHBoxLayout()
+        self.horizontalLayout_2.setSpacing(5)
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.horizontalLayout_2.setContentsMargins(5, 5, 5, 5)
+        self.db_type = QComboBox(self.centralwidget)
+        self.db_type.addItem("")
+        self.db_type.addItem("")
+        self.db_type.setObjectName(u"db_type")
 
-        self.horizontalLayout.addWidget(self.project_label)
+        self.horizontalLayout_2.addWidget(self.db_type)
 
-        self.project = QPlainTextEdit(self.centralwidget)
-        self.project.setObjectName(u"project")
-        sizePolicy1.setHeightForWidth(self.project.sizePolicy().hasHeightForWidth())
-        self.project.setSizePolicy(sizePolicy1)
-        self.project.setMinimumSize(QSize(0, 0))
-        self.project.setMaximumSize(QSize(16777215, 25))
-        self.project.setSizeIncrement(QSize(0, 0))
-        font2 = QFont()
-        font2.setPointSize(12)
-        self.project.setFont(font2)
-        self.project.viewport().setProperty("cursor", QCursor(Qt.IBeamCursor))
+        self.db_server_label = QLabel(self.centralwidget)
+        self.db_server_label.setObjectName(u"db_server_label")
 
-        self.horizontalLayout.addWidget(self.project)
+        self.horizontalLayout_2.addWidget(self.db_server_label)
 
-        self.horizontalLayout.setStretch(0, 20)
-        self.horizontalLayout.setStretch(1, 100)
+        self.db_server = QPlainTextEdit(self.centralwidget)
+        self.db_server.setObjectName(u"db_server")
+        self.db_server.setMaximumSize(QSize(16777215, 25))
 
-        self.gridLayout.addLayout(self.horizontalLayout, 0, 0, 1, 1)
+        self.horizontalLayout_2.addWidget(self.db_server)
 
-        self.line = QFrame(self.centralwidget)
-        self.line.setObjectName(u"line")
-        self.line.setFrameShape(QFrame.HLine)
-        self.line.setFrameShadow(QFrame.Sunken)
+        self.user_label = QLabel(self.centralwidget)
+        self.user_label.setObjectName(u"user_label")
 
-        self.gridLayout.addWidget(self.line, 2, 0, 1, 1)
+        self.horizontalLayout_2.addWidget(self.user_label)
+
+        self.user = QPlainTextEdit(self.centralwidget)
+        self.user.setObjectName(u"user")
+        self.user.setMaximumSize(QSize(16777215, 25))
+
+        self.horizontalLayout_2.addWidget(self.user)
+
+        self.pw_label = QLabel(self.centralwidget)
+        self.pw_label.setObjectName(u"pw_label")
+
+        self.horizontalLayout_2.addWidget(self.pw_label)
+
+        self.pw = QPlainTextEdit(self.centralwidget)
+        self.pw.setObjectName(u"pw")
+        self.pw.setMaximumSize(QSize(16777215, 25))
+
+        self.horizontalLayout_2.addWidget(self.pw)
+
+        self.db_name_label = QLabel(self.centralwidget)
+        self.db_name_label.setObjectName(u"db_name_label")
+
+        self.horizontalLayout_2.addWidget(self.db_name_label)
+
+        self.db_name = QPlainTextEdit(self.centralwidget)
+        self.db_name.setObjectName(u"db_name")
+        self.db_name.setMaximumSize(QSize(16777215, 25))
+
+        self.horizontalLayout_2.addWidget(self.db_name)
+
+        self.horizontalLayout_2.setStretch(0, 50)
+        self.horizontalLayout_2.setStretch(1, 30)
+        self.horizontalLayout_2.setStretch(2, 80)
+        self.horizontalLayout_2.setStretch(4, 10)
+        self.horizontalLayout_2.setStretch(5, 10)
+        self.horizontalLayout_2.setStretch(6, 50)
+        self.horizontalLayout_2.setStretch(8, 50)
+
+        self.gridLayout.addLayout(self.horizontalLayout_2, 3, 0, 1, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
@@ -410,7 +415,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
         self.load_articles_db_btn.setDefault(True)
         self.load_articles_file_btn.setDefault(True)
         self.sql_query_btn.setDefault(True)
@@ -418,7 +423,7 @@ class Ui_MainWindow(object):
         self.source_path_btn.setDefault(True)
         self.paste_docs_btn.setDefault(True)
         self.sql_query_2_btn.setDefault(True)
-        self.creat_doc_1.setDefault(True)
+        self.create_docs_btn.setDefault(True)
         self.target_path_btn_2.setDefault(True)
 
 
@@ -427,6 +432,8 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        self.project_label.setText(QCoreApplication.translate("MainWindow", u"Projektname:", None))
+        self.project.setPlainText(QCoreApplication.translate("MainWindow", u"SUN 24-001", None))
         self.load_articles_db_btn.setText(QCoreApplication.translate("MainWindow", u"Lade Artikelliste f\u00fcr \n"
 "das Projekt (aus DB)", None))
         self.load_articles_file_btn.setText(QCoreApplication.translate("MainWindow", u"Lade Artikelliste f\u00fcr\n"
@@ -435,13 +442,6 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"Artikel", None));
         ___qtablewidgetitem1 = self.articles_list.horizontalHeaderItem(2)
         ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"Name", None));
-        self.db_type.setItemText(0, QCoreApplication.translate("MainWindow", u"PostgreSQL", None))
-        self.db_type.setItemText(1, QCoreApplication.translate("MainWindow", u"MySQL", None))
-
-        self.db_server_label.setText(QCoreApplication.translate("MainWindow", u"Server (Port)", None))
-        self.user_label.setText(QCoreApplication.translate("MainWindow", u"User:", None))
-        self.pw_label.setText(QCoreApplication.translate("MainWindow", u"Passwort:", None))
-        self.db_name_label.setText(QCoreApplication.translate("MainWindow", u"Datenbankname:", None))
         self.sql_query_btn.setText(QCoreApplication.translate("MainWindow", u"SQL-Query zur DB-Abfrage eingeben", None))
         self.query_input.setPlainText("")
         self.target_path_btn.setText(QCoreApplication.translate("MainWindow", u"Zielpfad festlegen", None))
@@ -451,12 +451,17 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab1), QCoreApplication.translate("MainWindow", u"\u00dcbertragung von Dokumenten", None))
         self.sql_query_2_btn.setText(QCoreApplication.translate("MainWindow", u"SQL-Query zur DB-Abfrage eingeben", None))
         self.query_2_input.setPlainText("")
-        self.creat_doc_1.setText(QCoreApplication.translate("MainWindow", u"Doku gem\u00e4\u00df\n"
+        self.create_docs_btn.setText(QCoreApplication.translate("MainWindow", u"Doku gem\u00e4\u00df\n"
 "MaStR erzeugen", None))
-        self.target_path_btn_2.setText(QCoreApplication.translate("MainWindow", u"Zielpfad festlegen", None))
+        self.target_path_btn_2.setText(QCoreApplication.translate("MainWindow", u"Vorlage (MatStR) ausw\u00e4hlen", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Doku gem. MatStR", None))
-        self.project_label.setText(QCoreApplication.translate("MainWindow", u"Projektname:", None))
-        self.project.setPlainText(QCoreApplication.translate("MainWindow", u"SUN 24-001", None))
+        self.db_type.setItemText(0, QCoreApplication.translate("MainWindow", u"PostgreSQL", None))
+        self.db_type.setItemText(1, QCoreApplication.translate("MainWindow", u"MySQL", None))
+
+        self.db_server_label.setText(QCoreApplication.translate("MainWindow", u"Server (Port)", None))
+        self.user_label.setText(QCoreApplication.translate("MainWindow", u"User:", None))
+        self.pw_label.setText(QCoreApplication.translate("MainWindow", u"Passwort:", None))
+        self.db_name_label.setText(QCoreApplication.translate("MainWindow", u"Datenbankname:", None))
         self.toolBar.setWindowTitle(QCoreApplication.translate("MainWindow", u"toolBar", None))
     # retranslateUi
 

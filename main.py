@@ -1,13 +1,15 @@
 import sys
 import os
+import logging
 import shutil
 from datetime import datetime
+from odf.opendocument import load
+from odf.text import P
 
 from qtpy import QtCore, QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 
 from ui.mainwindow import Ui_MainWindow
-
 
 import pandas as pd
 import csv
@@ -548,6 +550,66 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.ui.pw.setPlainText(pw)
             if self.ui.db_name.toPlainText() == "":
                 self.ui.db_name.setPlainText(db_name)
+
+# * * * * * * * * * * * * * * * * * Documentation-module * * * * * * * * * * * * * * *
+
+    def set_directories(self):
+        template1_name = "SUN xx-xxx Doku - Anlagendaten für MaStR NIO - SQL Adressen V1.0.odt"
+        template2_name = "SUN xx-xxx Doku NIO - SQL Adressen V1.0"
+        doc1_name = f"{self.project} Doku - Anlagendaten für MaStR.odt"
+        doc2_name = f"{self.project} Doku NIO - SQL Adressen V1.0"
+
+        if getattr(sys, 'frozen', False):
+            self.script_dir = os.path.dirname(sys.executable)
+        else:
+            self.script_dir = os.path.abspath(os.path.dirname(__file__))
+
+        templates_subfolder_path = os.path.join(self.script_dir, "data")
+
+        self.template1_path = os.path.join(
+            templates_subfolder_path, template1_name)
+        self.template2_path = os.path.join(
+            templates_subfolder_path, template2_name)
+        self.doc1_path = os.path.join(
+            templates_subfolder_path, doc1_name)
+        self.doc2_path = os.path.join(
+            templates_subfolder_path, doc2_name)
+
+    def get_context(self):
+        context = {'{{project}}': self.project,
+
+
+                   }
+        return context
+
+    def replace_field(self):
+        try:
+            doc1 = load(self.template1_path)
+            context = self.get_context()
+
+            # Durchlaufe alle Text-Paragraphen im Dokument
+            for paragraph in doc1.getElementsByType(P):
+                # Hole den Text aus dem Paragraphen
+                paragraph_text = ""
+                for text_node in paragraph.childNodes:
+                    if text_node.nodeType == text_node.TEXT_NODE:
+                        paragraph_text += text_node.data
+
+                # Ersetze die Platzhalter im Text
+                for field_name, field_value in context.items():
+                    if field_name in paragraph_text:
+                        paragraph_text = paragraph_text.replace(
+                            field_name, str(field_value))
+
+                # Setze den aktualisierten Text zurück in den Paragraphen
+                for text_node in paragraph.childNodes:
+                    if text_node.nodeType == text_node.TEXT_NODE:
+                        text_node.data = paragraph_text
+
+            # Entferne die doppelten geschweiften Klammern
+            doc1.save(self.doc1_path)
+        except Exception as e:
+            logging.error(f"Fehler beim Ersetzen der Felder: {e}")
 
 
 # Führe das Programm aus, wenn es direkt gestartet wird

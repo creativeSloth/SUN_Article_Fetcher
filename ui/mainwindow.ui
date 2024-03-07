@@ -676,7 +676,7 @@ MaStR erzeugen</string>
                </size>
               </property>
               <property name="text">
-               <string>Zielpfad festlegen</string>
+               <string>Vorlage (MatStR) auswählen</string>
               </property>
               <property name="autoDefault">
                <bool>false</bool>
