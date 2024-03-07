@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>609</height>
+    <height>619</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -21,10 +21,91 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="3" column="0">
+    <item row="2" column="0">
+     <widget class="Line" name="line">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout" stretch="20,100">
+      <item>
+       <widget class="QLabel" name="project_label">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>2245</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Projektname:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPlainTextEdit" name="project">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="sizeIncrement">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="cursor" stdset="0">
+         <cursorShape>IBeamCursor</cursorShape>
+        </property>
+        <property name="plainText">
+         <string>SUN 24-001</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="4" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="iconSize">
        <size>
@@ -59,7 +140,7 @@
          <number>50</number>
         </property>
         <item row="0" column="0">
-         <layout class="QVBoxLayout" name="verticalLayout" stretch="10,50,10,0,0,0,0">
+         <layout class="QVBoxLayout" name="verticalLayout" stretch="10,50,10,0,0,0">
           <item>
            <layout class="QGridLayout" name="gridLayout_4">
             <property name="leftMargin">
@@ -229,107 +310,6 @@ das Projekt aus Datei</string>
              </property>
             </column>
            </widget>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="50,30,80,0,10,10,50,0,50">
-            <property name="spacing">
-             <number>5</number>
-            </property>
-            <property name="leftMargin">
-             <number>5</number>
-            </property>
-            <property name="topMargin">
-             <number>5</number>
-            </property>
-            <property name="rightMargin">
-             <number>5</number>
-            </property>
-            <property name="bottomMargin">
-             <number>5</number>
-            </property>
-            <item>
-             <widget class="QComboBox" name="db_type">
-              <item>
-               <property name="text">
-                <string>PostgreSQL</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>MySQL</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="db_server_label">
-              <property name="text">
-               <string>Server (Port)</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPlainTextEdit" name="db_server">
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>25</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="user_label">
-              <property name="text">
-               <string>User:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPlainTextEdit" name="user">
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>25</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="pw_label">
-              <property name="text">
-               <string>Passwort:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPlainTextEdit" name="pw">
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>25</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="db_name_label">
-              <property name="text">
-               <string>Datenbankname:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPlainTextEdit" name="db_name">
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>25</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-           </layout>
           </item>
           <item>
            <widget class="QPushButton" name="sql_query_btn">
@@ -502,11 +482,22 @@ das Projekt aus Datei</string>
                 <height>100</height>
                </size>
               </property>
+              <property name="font">
+               <font>
+                <underline>true</underline>
+               </font>
+              </property>
               <property name="text">
                <string>Dokumente übertragen</string>
               </property>
+              <property name="autoDefault">
+               <bool>false</bool>
+              </property>
               <property name="default">
                <bool>true</bool>
+              </property>
+              <property name="flat">
+               <bool>false</bool>
               </property>
              </widget>
             </item>
@@ -636,7 +627,7 @@ das Projekt aus Datei</string>
              <number>5</number>
             </property>
             <item row="3" column="0">
-             <widget class="QPushButton" name="creat_doc_1">
+             <widget class="QPushButton" name="create_docs_btn">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                 <horstretch>0</horstretch>
@@ -729,86 +720,106 @@ MaStR erzeugen</string>
       </widget>
      </widget>
     </item>
-    <item row="0" column="0">
-     <layout class="QHBoxLayout" name="horizontalLayout" stretch="20,100">
+    <item row="3" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="50,30,80,0,10,10,50,0,50">
+      <property name="spacing">
+       <number>5</number>
+      </property>
+      <property name="leftMargin">
+       <number>5</number>
+      </property>
+      <property name="topMargin">
+       <number>5</number>
+      </property>
+      <property name="rightMargin">
+       <number>5</number>
+      </property>
+      <property name="bottomMargin">
+       <number>5</number>
+      </property>
       <item>
-       <widget class="QLabel" name="project_label">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>2245</width>
-          <height>25</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-          <bold>true</bold>
-         </font>
-        </property>
+       <widget class="QComboBox" name="db_type">
+        <item>
+         <property name="text">
+          <string>PostgreSQL</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>MySQL</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="db_server_label">
         <property name="text">
-         <string>Projektname:</string>
+         <string>Server (Port)</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPlainTextEdit" name="project">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
+       <widget class="QPlainTextEdit" name="db_server">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
           <height>25</height>
          </size>
         </property>
-        <property name="sizeIncrement">
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="user_label">
+        <property name="text">
+         <string>User:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPlainTextEdit" name="user">
+        <property name="maximumSize">
          <size>
-          <width>0</width>
-          <height>0</height>
+          <width>16777215</width>
+          <height>25</height>
          </size>
         </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="pw_label">
+        <property name="text">
+         <string>Passwort:</string>
         </property>
-        <property name="cursor" stdset="0">
-         <cursorShape>IBeamCursor</cursorShape>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPlainTextEdit" name="pw">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>25</height>
+         </size>
         </property>
-        <property name="plainText">
-         <string>SUN 24-001</string>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="db_name_label">
+        <property name="text">
+         <string>Datenbankname:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPlainTextEdit" name="db_name">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>25</height>
+         </size>
         </property>
        </widget>
       </item>
      </layout>
-    </item>
-    <item row="2" column="0">
-     <widget class="Line" name="line">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
     </item>
    </layout>
   </widget>
