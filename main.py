@@ -3,8 +3,10 @@ import os
 import logging
 import shutil
 from datetime import datetime
+
 from odf.opendocument import load
-from odf.text import P
+from odf import text, teletype
+from odf.table import Table, TableRow, TableCell
 
 from qtpy import QtCore, QtWidgets
 from PyQt5.QtWidgets import QFileDialog
@@ -639,7 +641,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.dl_connect_ext = self.ui.dl_connect_ext_text.toPlainText()
 
     def get_context(self):
-        context = {
+        return {
             '{{project}}': self.project,
             '{{operator}}': self.operator,
             '{{op_adress_1}}': self.op_adress_1,
@@ -693,36 +695,46 @@ class MainWindow(QtWidgets.QMainWindow):
             '{{dl_connect_ext}}': self.dl_connect_ext
         }
 
-        return context
-
     def replace_field(self):
         try:
             doc1 = load(self.template1_path)
             context = self.get_context()
 
-            # Durchlaufe alle Text-Paragraphen im Dokument
-            for paragraph in doc1.getElementsByType(P):
-                # Hole den Text aus dem Paragraphen
-                paragraph_text = ""
-                for text_node in paragraph.childNodes:
-                    if text_node.nodeType == text_node.TEXT_NODE:
-                        paragraph_text += text_node.data
+            # Durchlaufe alle Tabellen in der ODF-Datei
+            for table in doc1.getElementsByType(Table):
+                # Durchlaufe alle Zeilen in der Tabelle
+                for row in table.getElementsByType(TableRow):
+                    # Durchlaufe alle Zellen in der Zeile
+                    for cell in row.getElementsByType(TableCell):
+                        # Text in der Zelle erhalten
+                        cell_text = ""
+                        for text_node in cell.getElementsByType(text.P):
+                            cell_text = teletype.extractText(text_node)
 
-                # Ersetze die Platzhalter im Text
-                for field_name, field_value in context.items():
-                    if field_name in paragraph_text:
-                        paragraph_text = paragraph_text.replace(
-                            field_name, str(field_value))
+                            # Ersetze die Platzhalter im Text
 
-                # Setze den aktualisierten Text zurück in den Paragraphen
-                for text_node in paragraph.childNodes:
-                    if text_node.nodeType == text_node.TEXT_NODE:
-                        text_node.data = paragraph_text
+                            for field_name, field_value in context.items():
+                                if field_name in cell_text:
+                                    print(f"cell_text_alt {cell_text}")
+                                    cell_text = cell_text.replace(
+                                        field_name, str(field_value))
+                                    print(f"cell_text_neu {cell_text} \n")
 
-            # Entferne die doppelten geschweiften Klammern
+                             # Erstelle den neuen Textknoten mit dem aktualisierten Text
+                            new_text_node = text.P(text=cell_text)
+
+                            # Füge den neuen Textknoten in die Zelle ein
+                            cell.addElement(new_text_node)
+
+                            # Entferne den alten Textknoten
+                            cell.removeChild(text_node)
+
+            # Entferne die Platzhalter in den doppeltgeschweiften Klammern
+            print("Done")
             doc1.save(self.doc1_path)
+
         except Exception as e:
-            logging.error(f"Fehler beim Ersetzen der Felder: {e}")
+            print("Fehler beim Ersetzen der Felder:" + str(text_node), e)
 
 
 # Führe das Programm aus, wenn es direkt gestartet wird
