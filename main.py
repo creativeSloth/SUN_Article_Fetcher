@@ -1,6 +1,5 @@
 import sys
 import os
-import logging
 import shutil
 from datetime import datetime
 
@@ -16,6 +15,8 @@ from ui.mainwindow import Ui_MainWindow
 import pandas as pd
 import csv
 from sqlalchemy import create_engine
+
+from decorators import get_file_path, get_folder_path
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -69,7 +70,10 @@ class MainWindow(QtWidgets.QMainWindow):
         ).sortIndicatorChanged.connect(self.sort_table)
 
         #  *********************************** Mapping buttons for "Documentation"- module *****************************************
-
+        self.ui.source_btn_matstr.clicked.connect(
+            self.on_source_btn_matstr_click)
+        self.ui.source_btn_docu.clicked.connect(
+            self.on_source_btn_docu_click)
         self.ui.target_path_btn_2.clicked.connect(
             self.on_target_path_btn_2_click)
         self.ui.create_docs_btn.clicked.connect(
@@ -119,24 +123,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.clear_article_list()
         self.fill_article_list(file_path=None, df=self.df)
 
-    def on_source_path_btn_click(self):
-        # Öffne einen Dialog für die Auswahl eines Quellordners
-        source_path = QFileDialog.getExistingDirectory(
-            self, "Select Source Folder")
-        if source_path:
-            # Setze den ausgewählten Quellordner im Textfeld
-            self.ui.source_path_text.setPlainText(source_path)
-            # Speichere den Quellordnerpfad in der Log-Datei
+    @get_folder_path
+    def on_source_path_btn_click(self, folder_path):
+        self.ui.source_path_text.setPlainText(folder_path)
+        self.write_source_path_to_log(folder_path)
 
-            self.write_source_path_to_log(source_path)
-
-    def on_target_path_btn_click(self):
-        # Öffne einen Dialog für die Auswahl eines Zielordners
-        target_path = QFileDialog.getExistingDirectory(
-            self, "Select Target Folder")
-        if target_path:
-            # Setze den ausgewählten Zielordner im Textfeld
-            self.ui.target_path_text.setPlainText(target_path)
+    @get_folder_path
+    def on_target_path_btn_click(self, folder_path):
+        self.ui.target_path_text.setPlainText(folder_path)
 
     def on_copy_files_btn_click(self):
         # Holen Sie sich Pfade für Quell- und Zielordner aus den Textfeldern
@@ -559,11 +553,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.set_directories()
         self.replace_field()
 
-    def on_target_path_btn_2_click(self):
-        target_path = QFileDialog.getExistingDirectory(
-            self, "Select Target Folder")
-        if target_path:
-            self.ui.target_path_text.setPlainText(target_path)
+    @get_file_path
+    def on_source_btn_matstr_click(self, file_path):
+        self.ui.source_path_text_matstr.setPlainText(file_path)
+
+    @get_file_path
+    def on_source_btn_docu_click(self, file_path):
+        self.ui.source_path_text_docu.setPlainText(file_path)
+
+    @get_folder_path
+    def on_target_path_btn_2_click(self, folder_path):
+        self.ui.target_path_text_2.setPlainText(folder_path)
 
     def set_directories(self):
         template1_name = "SUN xx-xxx Doku - Anlagendaten für MaStR NIO - SQL Adressen V1.0.odt"
