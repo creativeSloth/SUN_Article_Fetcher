@@ -165,6 +165,7 @@ class MainWindow(QtWidgets.QMainWindow):
                           any(selected_file in file for selected_file in selected_files)]
 
         # Iteriere über alle übereinstimmenden Dateinamen
+        count = 0
         for matching_filename in matching_files:
             # Konstruiere den vollständigen Pfad zur Quelldatei
             source_file_path = os.path.join(source_path, matching_filename)
@@ -184,6 +185,7 @@ class MainWindow(QtWidgets.QMainWindow):
             # Kopiere die Datei
             try:
                 shutil.copy(source_file_path, target_file_path)
+                count += 1
             except Exception as e:
                 QtWidgets.QMessageBox.warning(
                     self, "Fehler", f"Fehler beim Kopieren der Datei {source_file_path} zu {target_file_path}.\n\n"
@@ -195,7 +197,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Gib eine Erfolgsmeldung aus
         QtWidgets.QMessageBox.information(self, "Erfolg!",
-                                          f"Das Kopieren der Dateien wurde beendet.\n\n"
+                                          f"Das Kopieren der Dateien wurde beendet.\n"
+                                          f"Es wurden insgesamt {count} Dateien übertragen.\n\n"
                                           f"Es wurde eine Logdatei im log-Ordner {self.log_sub2folder_path} erstellt und")
 
     def fill_article_list(self, file_path=None, df=None):
@@ -233,6 +236,9 @@ class MainWindow(QtWidgets.QMainWindow):
                     item.setFlags(item.flags() & ~QtCore.Qt.ItemIsEditable)
 
         self.resize_columns_to_contents()
+
+        QtWidgets.QMessageBox.information(
+            self, "Abgeschlossen!", "Liste geladen!")
 
     def get_files_in_source_path(self, directory):
         all_files = []
