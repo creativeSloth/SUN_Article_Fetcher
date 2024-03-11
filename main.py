@@ -566,26 +566,87 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.target_path_text_2.setPlainText(folder_path)
 
     def set_directories(self):
-        template1_name = "SUN xx-xxx Doku - Anlagendaten für MaStR NIO - SQL Adressen V1.0.odt"
-        template2_name = "SUN xx-xxx Doku NIO - SQL Adressen V1.0"
-        doc1_name = f"{self.project} Doku - Anlagendaten für MaStR.odt"
-        doc2_name = f"{self.project} Doku NIO - SQL Adressen V1.0"
+        current_date = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+        doc1_name = f"{self.project} Doku - Anlagendaten für MaStR {current_date}.odt"
+        doc2_name = f"{self.project} Doku NIO - SQL Adressen V1.0 {current_date}.odt"
+        target_path = self.ui.target_path_text_2.toPlainText()
 
-        if getattr(sys, 'frozen', False):
-            self.script_dir = os.path.dirname(sys.executable)
-        else:
-            self.script_dir = os.path.abspath(os.path.dirname(__file__))
+        # Ziehen der Dateipfade aus den Textfeldern
+        self.template1_path = self.ui.source_path_text_matstr.toPlainText()
+        self.template2_path = self.ui.source_path_text_docu.toPlainText()
 
-        templates_subfolder_path = os.path.join(self.script_dir, "data")
-
-        self.template1_path = os.path.join(
-            templates_subfolder_path, template1_name)
-        self.template2_path = os.path.join(
-            templates_subfolder_path, template2_name)
         self.doc1_path = os.path.join(
-            templates_subfolder_path, doc1_name)
+            self.template1_path, doc1_name)
+        self.doc1_path = os.path.join(
+            target_path, doc1_name)
         self.doc2_path = os.path.join(
-            templates_subfolder_path, doc2_name)
+            target_path, doc2_name)
+        try:
+            # Überprüfe, ob die Vorlagen-Dateien existieren
+            if not os.path.exists(self.template1_path):
+                raise FileNotFoundError(
+                    f"Template '{self.template1_path}' (Anlagendatenblatt) existiert nicht.")
+            if not os.path.exists(self.template2_path):
+                raise FileNotFoundError(
+                    f"Template '{self.template2_path}' (Dokumentation) existiert nicht.")
+
+            # Überprüfe, ob die Ausgabedatei existiert
+            if not os.path.exists(self.doc1_path):
+                raise FileNotFoundError(
+                    f"Ablagepfad für Dokumente existiert nicht.")
+
+            # Überprüfe, ob die Ausgabedatei existiert
+            if not os.path.exists(self.doc2_path):
+                raise FileNotFoundError(
+                    f"Ablagepfad für Dokumente existiert nicht.")
+
+        except FileNotFoundError as e:
+            QtWidgets.QMessageBox.warning(
+                self, "Fehler", f"Dateifehler: {e}")
+
+    def replace_field(self):
+        try:
+            doc1 = load(self.template1_path)
+            context = self.get_context()
+
+            # Durchlaufe alle Tabellen in der ODF-Datei
+            for table in doc1.getElementsByType(Table):
+                # Durchlaufe alle Zeilen in der Tabelle
+                for row in table.getElementsByType(TableRow):
+                    # Durchlaufe alle Zellen in der Zeile
+                    for cell in row.getElementsByType(TableCell):
+                        # Text in der Zelle erhalten
+                        cell_text = ""
+                        for text_node in cell.getElementsByType(text.P):
+                            cell_text = teletype.extractText(text_node)
+
+                            # Ersetze die Platzhalter im Text
+
+                            for field_name, field_value in context.items():
+                                if field_name in cell_text:
+                                    cell_text = cell_text.replace(
+                                        field_name, str(field_value))
+
+                             # Erstelle den neuen Textknoten mit dem aktualisierten Text
+                            new_text_node = text.P(text=cell_text)
+
+                            # Füge den neuen Textknoten in die Zelle ein
+                            cell.addElement(new_text_node)
+
+                            # Entferne den alten Textknoten
+                            cell.removeChild(text_node)
+
+            # Entferne die Platzhalter in den doppeltgeschweiften Klammern
+
+            doc1.save(self.doc1_path)
+            QtWidgets.QMessageBox.information(
+                self, "Abgeschlossen!",
+                f"Die Datei wurde unter folgendem Pfad gespeichert:\n"
+                f"{self.doc1_path}")
+
+        except Exception as e:
+            QtWidgets.QMessageBox.warning(
+                self, "Fehler", f"Fehler bei der Feldersetzung: {e}")
 
     def set_field_inputs(self):
         self.project = self.ui.project.toPlainText()
@@ -694,47 +755,6 @@ class MainWindow(QtWidgets.QMainWindow):
             '{{dl_type}}': self.dl_type,
             '{{dl_connect_ext}}': self.dl_connect_ext
         }
-
-    def replace_field(self):
-        try:
-            doc1 = load(self.template1_path)
-            context = self.get_context()
-
-            # Durchlaufe alle Tabellen in der ODF-Datei
-            for table in doc1.getElementsByType(Table):
-                # Durchlaufe alle Zeilen in der Tabelle
-                for row in table.getElementsByType(TableRow):
-                    # Durchlaufe alle Zellen in der Zeile
-                    for cell in row.getElementsByType(TableCell):
-                        # Text in der Zelle erhalten
-                        cell_text = ""
-                        for text_node in cell.getElementsByType(text.P):
-                            cell_text = teletype.extractText(text_node)
-
-                            # Ersetze die Platzhalter im Text
-
-                            for field_name, field_value in context.items():
-                                if field_name in cell_text:
-                                    print(f"cell_text_alt {cell_text}")
-                                    cell_text = cell_text.replace(
-                                        field_name, str(field_value))
-                                    print(f"cell_text_neu {cell_text} \n")
-
-                             # Erstelle den neuen Textknoten mit dem aktualisierten Text
-                            new_text_node = text.P(text=cell_text)
-
-                            # Füge den neuen Textknoten in die Zelle ein
-                            cell.addElement(new_text_node)
-
-                            # Entferne den alten Textknoten
-                            cell.removeChild(text_node)
-
-            # Entferne die Platzhalter in den doppeltgeschweiften Klammern
-            print("Done")
-            doc1.save(self.doc1_path)
-
-        except Exception as e:
-            print("Fehler beim Ersetzen der Felder:" + str(text_node), e)
 
 
 # Führe das Programm aus, wenn es direkt gestartet wird

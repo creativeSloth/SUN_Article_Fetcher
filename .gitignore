@@ -83,4 +83,6 @@ bin.py
 .vscode/
 vsc_venv/
 logs/
+data/
+
 
