@@ -1,3 +1,6 @@
+import logs_and_config
+
+
 def set_field_inputs(self):
     self.project = self.ui.project.toPlainText()
     self.operator = self.ui.operator_text.toPlainText()
@@ -106,3 +109,28 @@ def get_context(self):
         '{{dl_type}}': self.dl_type,
         '{{dl_connect_ext}}': self.dl_connect_ext
     }
+
+
+def config_to_fields(self):
+    self.ui.db_server.setPlainText(
+        logs_and_config.read_config_value(self, 'Server', 'server'))
+    self.ui.user.setPlainText(
+        logs_and_config.read_config_value(self, 'Server', 'user'))
+    self.ui.pw.setPlainText(
+        logs_and_config.read_config_value(self, 'Server', 'password'))
+    self.ui.db_name.setPlainText(
+        logs_and_config.read_config_value(self, 'Server', 'dB_name'))
+    self.ui.query_input.setPlainText(
+        logs_and_config.read_config_value(self, 'Abfrage', 'sql1'))
+    self.ui.query_2_input.setPlainText(
+        logs_and_config.read_config_value(self, 'Abfrage', 'sql2'))
+    self.ui.source_path_text.setPlainText(
+        logs_and_config.read_config_value(self, 'Pfade', 'source_path'))
+    self.ui.target_path_text.setPlainText(
+        logs_and_config.read_config_value(self, 'Pfade', 'target_path'))
+    self.ui.target_path_text_2.setPlainText(
+        logs_and_config.read_config_value(self, 'Pfade', 'target_path_2'))
+    self.ui.source_path_text_matstr.setPlainText(
+        logs_and_config.read_config_value(self, 'Pfade', 'template1_path'))
+    self.ui.source_path_text_docu.setPlainText(
+        logs_and_config.read_config_value(self, 'Pfade', 'template2_path'))

@@ -38,6 +38,7 @@ def check_path_existence(modus):
             template1_path = paths_dict['template1_path']
             target_path_2 = paths_dict['target_path_2']
             template2_path = paths_dict['template2_path']
+            config_path = paths_dict['config_path']
 
             paths_and_messages = [
                 (source_path, "Quellpfad existiert nicht."),
@@ -74,6 +75,10 @@ def check_path_existence(modus):
                     if not os.path.isfile(file) and message != files_and_messages[1][1]:
                         QtWidgets.QMessageBox.warning(self, "Fehler", message)
                         return
+
+            if modus == 2:
+                if os.path.exists(config_path):
+                    return
 
             return func(self, *args, **kwargs)
         return wrapper

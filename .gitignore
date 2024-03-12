@@ -78,6 +78,7 @@ CMakeLists.txt.user*
 myDB.py
 todo.txt
 bin.py
+config.ini
 
 # folders
 .vscode/

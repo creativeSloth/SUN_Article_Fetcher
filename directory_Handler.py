@@ -32,7 +32,9 @@ def get_directories(self):
     template2_path = self.ui.source_path_text_docu.toPlainText()
     doc2_path = os.path.join(target_path_2, doc2_name)
 
-    # ***************************  LOGGING  **********************************************************
+    # ***************************  Config and LOGGING  **********************************************************
+    # Pfad zur Config
+    config_path = os.path.join(script_dir, 'config.ini')
     # Pfad zum Unterordner "logs"
     log_subfolder_path = os.path.join(script_dir, "logs")
     log_sub2folder_path = os.path.join(
@@ -49,7 +51,8 @@ def get_directories(self):
         'template2_path': template2_path,
         'doc2_path': doc2_path,
         'log_subfolder_path': log_subfolder_path,
-        'log_sub2folder_path': log_sub2folder_path
+        'log_sub2folder_path': log_sub2folder_path,
+        'config_path': config_path
     }
 
     return paths_dict

@@ -32,6 +32,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.initialize()
         # Verbinde die Signale mit den entsprechenden Slots
         self.map_ui_buttons()
+        logs_and_config.create_config_file(self)
+        ui_fields_Handler.config_to_fields(self)
 
     def map_ui_buttons(self):
 
@@ -103,10 +105,14 @@ class MainWindow(QtWidgets.QMainWindow):
     @get_folder_path
     def on_source_path_btn_click(self, folder_path):
         self.ui.source_path_text.setPlainText(folder_path)
+        logs_and_config.update_config_file(
+            self, 'Pfade', 'source_path', folder_path)
 
     @get_folder_path
     def on_target_path_btn_click(self, folder_path):
         self.ui.target_path_text.setPlainText(folder_path)
+        logs_and_config.update_config_file(
+            self, 'Pfade', 'target_path', folder_path)
 
     @ check_path_existence(modus=0)
     def on_copy_files_btn_click(self, *args, **kwargs):
@@ -276,6 +282,7 @@ class MainWindow(QtWidgets.QMainWindow):
         return df
 
     def get_server_info(self):
+
         server_info = []
         server_info.append(self.ui.db_server.toPlainText())
         server_info.append(self.ui.user.toPlainText())
@@ -289,6 +296,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def read_sql(self):
         self.sql_query = self.ui.query_input.toPlainText()
+        sql_query = self.ui.query_input.toPlainText()
         db_type = self.ui.db_type.currentText()
 
         self.server_info = self.get_server_info()
@@ -299,8 +307,11 @@ class MainWindow(QtWidgets.QMainWindow):
         pw = self.server_info[2]  # "12345678"
         dB_name = self.server_info[3]  # "db"
 
-        server_info = f"{server}, {user}, {pw}, {dB_name}"
-
+        logs_and_config.update_config_file(self, 'Abfrage', 'sql1', sql_query)
+        logs_and_config.update_config_file(self, 'Server', 'server', server)
+        logs_and_config.update_config_file(self, 'Server', 'user', user)
+        logs_and_config.update_config_file(self, 'Server', 'password', pw)
+        logs_and_config.update_config_file(self, 'Server', 'dB_name', dB_name)
         try:
 
             if db_type == "MySQL":
@@ -372,14 +383,20 @@ class MainWindow(QtWidgets.QMainWindow):
     @get_file_path
     def on_source_btn_matstr_click(self, file_path):
         self.ui.source_path_text_matstr.setPlainText(file_path)
+        logs_and_config.update_config_file(
+            self, 'Pfade', 'template1_path', file_path)
 
     @get_file_path
     def on_source_btn_docu_click(self, file_path):
         self.ui.source_path_text_docu.setPlainText(file_path)
+        logs_and_config.update_config_file(
+            self, 'Pfade', 'template2_path', file_path)
 
     @get_folder_path
     def on_target_path_btn_2_click(self, folder_path):
         self.ui.target_path_text_2.setPlainText(folder_path)
+        logs_and_config.update_config_file(
+            self, 'Pfade', 'target_path_2', folder_path)
 
     @check_path_existence(modus=1)
     def replace_field(self):

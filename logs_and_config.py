@@ -1,12 +1,17 @@
 import configparser
+from fileinput import filename
 import os
 from datetime import datetime
 from qtpy import QtWidgets
+from decorators import check_path_existence
 
 import directory_Handler
 
 
-def create_config_file(filename):
+@check_path_existence(modus=2)
+def create_config_file(self):
+    config_path = directory_Handler.get_directories(self)['config_path']
+
     config = configparser.ConfigParser()
 
     # Fülle die Konfiguration mit Standardwerten
@@ -15,7 +20,8 @@ def create_config_file(filename):
         'target_path': '',
         'template1_path': '',
         'template2_path': '',
-        'target_path_2': ''
+        'target_path_2': '',
+        'config_path': directory_Handler.get_directories(self)['config_path']
     }
 
     config['Abfrage'] = {
@@ -26,12 +32,30 @@ def create_config_file(filename):
         'server': '',
         'user': '',
         'password': '',
-        'DB-name': ''
+        'dB_name': ''
     }
 
     # Schreibe die Konfiguration in die Datei
-    with open(filename, 'w') as configfile:
+    with open(config_path, 'w') as configfile:
         config.write(configfile)
+
+
+def update_config_file(self, section, option, value):
+    config_path = directory_Handler.get_directories(self)['config_path']
+    config = configparser.ConfigParser()
+    config.read(config_path)
+    config[section][option] = value
+
+    with open(config_path, 'w') as configfile:
+        config.write(configfile)
+
+
+def read_config_value(self, section, option):
+    config_path = directory_Handler.get_directories(self)['config_path']
+    config = configparser.ConfigParser()
+    config.read(config_path)
+    value = config[section][option]
+    return value
 
 
 def log_copy_details(self, source_path, target_path, source_files, matching_files):
