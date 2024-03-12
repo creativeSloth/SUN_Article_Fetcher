@@ -5,6 +5,8 @@ from functools import wraps
 from PyQt5.QtWidgets import QFileDialog
 from qtpy import QtWidgets
 
+import directory_Handler
+
 
 def get_file_path(func):
     @wraps(func)
@@ -29,11 +31,17 @@ def get_folder_path(func):
 def check_path_existence(modus):
     def sub_check_path_existence(func):
         def wrapper(self, *args, **kwargs):
-            source_path, target_path, template1_path, _, template2_path, _, target_path_2 = self.get_directories()
+
+            paths_dict = directory_Handler.get_directories(self)
+            source_path = paths_dict['source_path']
+            target_path_1 = paths_dict['target_path_1']
+            template1_path = paths_dict['template1_path']
+            target_path_2 = paths_dict['target_path_2']
+            template2_path = paths_dict['template2_path']
 
             paths_and_messages = [
                 (source_path, "Quellpfad existiert nicht."),
-                (target_path, "Zielpfad existiert nicht."),
+                (target_path_1, "Zielpfad existiert nicht."),
                 (template1_path, "Template (Anlagendatenblatt gem. MatStR) existiert nicht unter angegebenen Pfad."),
                 (target_path_2, "Ablagepfad existiert nicht oder wurde nicht ausgewählt."),
                 (template2_path, "Template (Dokumentation) existiert nicht unter angegebenen Pfad.")
