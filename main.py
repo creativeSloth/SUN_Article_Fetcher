@@ -16,7 +16,7 @@ import pandas as pd
 import csv
 from sqlalchemy import create_engine
 
-from decorators import get_file_path, get_folder_path
+from decorators import get_file_path, get_folder_path, check_path_existence
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -132,16 +132,10 @@ class MainWindow(QtWidgets.QMainWindow):
     def on_target_path_btn_click(self, folder_path):
         self.ui.target_path_text.setPlainText(folder_path)
 
+    @ check_path_existence(modus=0)
     def on_copy_files_btn_click(self):
         # Holen Sie sich Pfade für Quell- und Zielordner aus den Textfeldern
-        source_path = self.ui.source_path_text.toPlainText()
-        target_path = self.ui.target_path_text.toPlainText()
-
-        # Überprüfe, ob source_path und target_path existieren
-        if not os.path.exists(source_path) or not os.path.exists(target_path):
-            QtWidgets.QMessageBox.warning(
-                self, "Fehler", "Quell- oder Zielpfad existieren nicht.")
-            return
+        source_path, target_path, _, _, _, _, _ = self.get_directories()
 
         # Holen Sie sich alle Dateinamen im source_path
         source_files = self.get_files_in_source_path(source_path)
@@ -203,7 +197,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def fill_article_list(self, file_path=None, df=None):
 
-        # ? Drucke den Dateipfad (optional, zum Testen)
         if file_path is not None and df is None:
             # Wenn ein Dateipfad übergeben wurde, lese Daten aus der Datei
             df = self.read_data(file_path)
@@ -556,7 +549,6 @@ class MainWindow(QtWidgets.QMainWindow):
 # * * * * * * * * * * * * * * * * * Documentation-module * * * * * * * * * * * * * * *
     def on_btn_create_docs_clicked(self):
         self.set_field_inputs()
-        self.set_directories()
         self.replace_field()
 
     @get_file_path
@@ -571,48 +563,33 @@ class MainWindow(QtWidgets.QMainWindow):
     def on_target_path_btn_2_click(self, folder_path):
         self.ui.target_path_text_2.setPlainText(folder_path)
 
-    def set_directories(self):
+    def get_directories(self):
+        # ************************************************************************************************
+        source_path = self.ui.source_path_text.toPlainText()
+        target_path_1 = self.ui.target_path_text.toPlainText()
+        # ************************************************************************************************
         current_date = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
         doc1_name = f"{self.project} Doku - Anlagendaten für MaStR {current_date}.odt"
         doc2_name = f"{self.project} Doku NIO - SQL Adressen V1.0 {current_date}.odt"
-        target_path = self.ui.target_path_text_2.toPlainText()
+        target_path_2 = self.ui.target_path_text_2.toPlainText()
+        # ************************************************************************************************
 
         # Ziehen der Dateipfade aus den Textfeldern
-        self.template1_path = self.ui.source_path_text_matstr.toPlainText()
-        self.template2_path = self.ui.source_path_text_docu.toPlainText()
+        template1_path = self.ui.source_path_text_matstr.toPlainText()
+        doc1_path = os.path.join(target_path_2, doc1_name)
 
-        self.doc1_path = os.path.join(
-            self.template1_path, doc1_name)
-        self.doc1_path = os.path.join(
-            target_path, doc1_name)
-        self.doc2_path = os.path.join(
-            target_path, doc2_name)
-        try:
-            # Überprüfe, ob die Vorlagen-Dateien existieren
-            if not os.path.exists(self.template1_path):
-                raise FileNotFoundError(
-                    f"Template '{self.template1_path}' (Anlagendatenblatt) existiert nicht.")
-            if not os.path.exists(self.template2_path):
-                raise FileNotFoundError(
-                    f"Template '{self.template2_path}' (Dokumentation) existiert nicht.")
+        template2_path = self.ui.source_path_text_docu.toPlainText()
+        doc2_path = os.path.join(target_path_2, doc2_name)
 
-            # Überprüfe, ob die Ausgabedatei existiert
-            if not os.path.exists(self.doc1_path):
-                raise FileNotFoundError(
-                    f"Ablagepfad für Dokumente existiert nicht.")
+        return source_path, target_path_1, template1_path, doc1_path, template2_path, doc2_path, target_path_2
 
-            # Überprüfe, ob die Ausgabedatei existiert
-            if not os.path.exists(self.doc2_path):
-                raise FileNotFoundError(
-                    f"Ablagepfad für Dokumente existiert nicht.")
-
-        except FileNotFoundError as e:
-            QtWidgets.QMessageBox.warning(
-                self, "Fehler", f"Dateifehler: {e}")
-
+    @check_path_existence(modus=1)
     def replace_field(self):
+        # Rufe get_directories auf, um die Pfade zu erhalten
+        _, _, template1_path, doc1_path, template2_path, doc2_path, _ = self.get_directories()
+
         try:
-            doc1 = load(self.template1_path)
+            doc1 = load(template1_path)
             context = self.get_context()
 
             # Durchlaufe alle Tabellen in der ODF-Datei
@@ -644,11 +621,11 @@ class MainWindow(QtWidgets.QMainWindow):
 
             # Entferne die Platzhalter in den doppeltgeschweiften Klammern
 
-            doc1.save(self.doc1_path)
+            doc1.save(doc1_path)
             QtWidgets.QMessageBox.information(
                 self, "Abgeschlossen!",
                 f"Die Datei wurde unter folgendem Pfad gespeichert:\n"
-                f"{self.doc1_path}")
+                f"{doc1_path}")
 
         except Exception as e:
             QtWidgets.QMessageBox.warning(
