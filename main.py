@@ -363,19 +363,9 @@ class MainWindow(QtWidgets.QMainWindow):
         header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
         header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
 
-    def set_server_info_ui_fields(self, server_info):
-        if server_info:
-            server, user, pw, db_name = server_info.split(", ")
-            if self.ui.db_server.toPlainText() == "":
-                self.ui.db_server.setPlainText(server)
-            if self.ui.user.toPlainText() == "":
-                self.ui.user.setPlainText(user)
-            if self.ui.pw.toPlainText() == "":
-                self.ui.pw.setPlainText(pw)
-            if self.ui.db_name.toPlainText() == "":
-                self.ui.db_name.setPlainText(db_name)
 
-# * * * * * * * * * * * * * * * * * Documentation-module * * * * * * * * * * * * * * *
+# * * * * * * * * * * * * * * * * * Documentation-module * * * * * * * * * * * * * * * *
+
     def on_btn_create_docs_clicked(self):
         ui_fields_Handler.set_field_inputs(self)
         self.replace_field()
