@@ -26,7 +26,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(807, 676)
+        MainWindow.resize(807, 778)
         sizePolicy = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -335,7 +335,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, -880, 749, 1600))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 749, 1600))
         self.gridLayout_5 = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_5.setSpacing(9)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
@@ -1375,7 +1375,7 @@ class Ui_MainWindow(object):
         self.query_2_input = QPlainTextEdit(self.tab_2)
         self.query_2_input.setObjectName(u"query_2_input")
         self.query_2_input.setEnabled(True)
-        self.query_2_input.setMinimumSize(QSize(0, 10))
+        self.query_2_input.setMinimumSize(QSize(0, 40))
         self.query_2_input.setMaximumSize(QSize(16777215, 50))
         self.query_2_input.setSizeIncrement(QSize(0, 500))
         self.query_2_input.setAutoFillBackground(True)
@@ -1449,7 +1449,12 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addLayout(self.gridLayout_6)
 
 
-        self.gridLayout_7.addLayout(self.verticalLayout_2, 0, 0, 1, 1)
+        self.gridLayout_7.addLayout(self.verticalLayout_2, 1, 0, 1, 1)
+
+        self.load_docu_db_data_btn = QPushButton(self.tab_2)
+        self.load_docu_db_data_btn.setObjectName(u"load_docu_db_data_btn")
+
+        self.gridLayout_7.addWidget(self.load_docu_db_data_btn, 0, 0, 1, 1)
 
         self.tabWidget.addTab(self.tab_2, "")
 
@@ -1611,6 +1616,7 @@ class Ui_MainWindow(object):
         self.source_btn_matstr.setText(QCoreApplication.translate("MainWindow", u"Template gem. MatStR", None))
         self.create_docs_btn.setText(QCoreApplication.translate("MainWindow", u"Doku gem\u00e4\u00df\n"
 "MaStR erzeugen", None))
+        self.load_docu_db_data_btn.setText(QCoreApplication.translate("MainWindow", u"Lade Daten aus Datenbank", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Doku gem. MatStR", None))
         self.toolBar.setWindowTitle(QCoreApplication.translate("MainWindow", u"toolBar", None))
     # retranslateUi

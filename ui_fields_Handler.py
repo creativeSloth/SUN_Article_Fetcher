@@ -2,7 +2,41 @@ import os
 from qtpy import QtWidgets
 
 import logs_and_config
-from directory_Handler import get_directories
+import directory_Handler
+
+
+def config_to_fields(self):
+    try:
+        self.ui.db_server.setPlainText(
+            logs_and_config.read_config_value(self, 'Server', 'server'))
+        self.ui.user.setPlainText(
+            logs_and_config.read_config_value(self, 'Server', 'user'))
+        self.ui.pw.setPlainText(
+            logs_and_config.read_config_value(self, 'Server', 'password'))
+        self.ui.db_name.setPlainText(
+            logs_and_config.read_config_value(self, 'Server', 'dB_name'))
+        self.ui.query_input.setPlainText(
+            logs_and_config.read_config_value(self, 'Abfrage', 'sql1'))
+        self.ui.query_2_input.setPlainText(
+            logs_and_config.read_config_value(self, 'Abfrage', 'sql2'))
+        self.ui.source_path_text.setPlainText(
+            logs_and_config.read_config_value(self, 'Pfade', 'source_path'))
+        self.ui.target_path_text.setPlainText(
+            logs_and_config.read_config_value(self, 'Pfade', 'target_path'))
+        self.ui.target_path_text_2.setPlainText(
+            logs_and_config.read_config_value(self, 'Pfade', 'target_path_2'))
+        self.ui.source_path_text_matstr.setPlainText(
+            logs_and_config.read_config_value(self, 'Pfade', 'template1_path'))
+        self.ui.source_path_text_docu.setPlainText(
+            logs_and_config.read_config_value(self, 'Pfade', 'template2_path'))
+    except Exception as e:
+        QtWidgets.QMessageBox.warning(
+            self, "Fehler", f"Konfigurationsdaten konnten nicht geladen werden, daher wurde eine neue Konfigurationsdatei erstellt.\n\n"
+            f"Fehlermeldung:\n {e}")
+        config_path = directory_Handler.get_directories(self)['config_path']
+        if os.path.exists(config_path):
+            os.remove(config_path)
+        logs_and_config.create_config_file(self)
 
 
 def set_field_inputs(self):
@@ -115,35 +149,56 @@ def get_context(self):
     }
 
 
-def config_to_fields(self):
-    try:
-        self.ui.db_server.setPlainText(
-            logs_and_config.read_config_value(self, 'Server', 'server'))
-        self.ui.user.setPlainText(
-            logs_and_config.read_config_value(self, 'Server', 'user'))
-        self.ui.pw.setPlainText(
-            logs_and_config.read_config_value(self, 'Server', 'password'))
-        self.ui.db_name.setPlainText(
-            logs_and_config.read_config_value(self, 'Server', 'dB_name'))
-        self.ui.query_input.setPlainText(
-            logs_and_config.read_config_value(self, 'Abfrage', 'sql1'))
-        self.ui.query_2_input.setPlainText(
-            logs_and_config.read_config_value(self, 'Abfrage', 'sql2'))
-        self.ui.source_path_text.setPlainText(
-            logs_and_config.read_config_value(self, 'Pfade', 'source_path'))
-        self.ui.target_path_text.setPlainText(
-            logs_and_config.read_config_value(self, 'Pfade', 'target_path'))
-        self.ui.target_path_text_2.setPlainText(
-            logs_and_config.read_config_value(self, 'Pfade', 'target_path_2'))
-        self.ui.source_path_text_matstr.setPlainText(
-            logs_and_config.read_config_value(self, 'Pfade', 'template1_path'))
-        self.ui.source_path_text_docu.setPlainText(
-            logs_and_config.read_config_value(self, 'Pfade', 'template2_path'))
-    except Exception as e:
-        QtWidgets.QMessageBox.warning(
-            self, "Fehler", f"Konfigurationsdaten konnten nicht geladen werden, daher wurde eine neue Konfigurationsdatei erstellt.\n\n"
-            f"Fehlermeldung:\n {e}")
-        config_path = get_directories(self)['config_path']
-        if os.path.exists(config_path):
-            os.remove(config_path)
-        logs_and_config.create_config_file(self)
+def clear_docu_fields(self):
+    # Leere alle Eingabefelder in der GUI
+    self.ui.project.clear()
+    self.ui.operator.clear()
+    self.ui.op_adress_1.clear()
+    self.ui.op_adress_2.clear()
+    self.ui.op_adress_3.clear()
+    self.ui.loc_adress_1.clear()
+    self.ui.loc_adress_2.clear()
+    self.ui.loc_adress_3.clear()
+    self.ui.sys_perf.clear()
+    self.ui.constr_style.clear()
+    self.ui.bool_consist_azimuth.clear()
+    self.ui.maj_azimuth.clear()
+    self.ui.maj_card_point.clear()
+    self.ui.min_azimuth.clear()
+    self.ui.min_card_point.clear()
+    self.ui.maj_tilt.clear()
+    self.ui.min_tilt.clear()
+    self.ui.module_count.clear()
+    self.ui.module_type.clear()
+    self.ui.mounting_type.clear()
+    self.ui.hybrid_inverter_bool.clear()
+    self.ui.inverter_type.clear()
+    self.ui.inverter_SN.clear()
+    self.ui.inverter_power.clear()
+    self.ui.commiss_date.clear()
+    self.ui.bat_inverter_type.clear()
+    self.ui.bat_inverter_SN.clear()
+    self.ui.bat_inverter_power.clear()
+    self.ui.coupling_type.clear()
+    self.ui.bat_storage_type.clear()
+    self.ui.bat_storage_SN.clear()
+    self.ui.bat_storage_cap.clear()
+    self.ui.bat_commiss_date.clear()
+    self.ui.max_discharge_pow.clear()
+    self.ui.em_pow_ability_bool.clear()
+    self.ui.energy_storage_type.clear()
+    self.ui.bat_technology.clear()
+    self.ui.charging_point_type.clear()
+    self.ui.charging_point_SN.clear()
+    self.ui.feeding_type.clear()
+    self.ui.pow_limit_bool.clear()
+    self.ui.rmt_grd_op_bool.clear()
+    self.ui.rmt_drct_mrktr_bool.clear()
+    self.ui.rmt_3rd_prt_bool.clear()
+    self.ui.prequali_bool.clear()
+    self.ui.citizen_corp_bool.clear()
+    self.ui.tendering_bool.clear()
+    self.ui.meter_cabinet.clear()
+    self.ui.meter_box_type.clear()
+    self.ui.dl_type.clear()
+    self.ui.dl_connect_ext.clear()

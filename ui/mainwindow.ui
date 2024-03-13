@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>807</width>
-    <height>676</height>
+    <height>778</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -646,7 +646,7 @@ das Projekt aus Datei</string>
         <string>Doku gem. MatStR</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_7">
-        <item row="0" column="0">
+        <item row="1" column="0">
          <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,0,0">
           <property name="spacing">
            <number>10</number>
@@ -666,7 +666,7 @@ das Projekt aus Datei</string>
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-880</y>
+               <y>0</y>
                <width>749</width>
                <height>1600</height>
               </rect>
@@ -3019,7 +3019,7 @@ Bürgerenergiegesellschaft:</string>
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>10</height>
+              <height>40</height>
              </size>
             </property>
             <property name="maximumSize">
@@ -3221,6 +3221,13 @@ MaStR erzeugen</string>
            </layout>
           </item>
          </layout>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="load_docu_db_data_btn">
+          <property name="text">
+           <string>Lade Daten aus Datenbank</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>

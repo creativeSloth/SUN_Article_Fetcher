@@ -1,3 +1,4 @@
+from cgi import print_directory
 import sys
 import os
 import shutil
@@ -7,9 +8,8 @@ from odf import text, teletype
 from odf.table import Table, TableRow, TableCell
 
 import pandas as pd
-from sqlalchemy import create_engine
 
-from qtpy import QtCore, QtWidgets, QtGui
+from qtpy import QtCore, QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 
 from ui.mainwindow import Ui_MainWindow
@@ -17,6 +17,7 @@ from decorators import get_file_path, get_folder_path, check_path_existence
 import directory_Handler
 import ui_fields_Handler
 import logs_and_config
+import data_Handler
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -57,6 +58,11 @@ class MainWindow(QtWidgets.QMainWindow):
         ).sortIndicatorChanged.connect(self.sort_table)
 
         #  *********************************** Mapping buttons for "Documentation"- module *****************************************
+
+        self.ui.load_docu_db_data_btn.clicked.connect(
+            self.on_load_docu_data_from_db_btn_click)
+        self.ui.sql_query_2_btn.clicked.connect(
+            self.on_sql_query_2_btn_click)
         self.ui.source_btn_matstr.clicked.connect(
             self.on_source_btn_matstr_click)
         self.ui.source_btn_docu.clicked.connect(
@@ -96,10 +102,13 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def on_load_articles_from_db_btn_click(self):
         # Lese Daten aus der MySQL-Datenbank und speichere sie in der Instanzvariable df
-        self.df = self.read_sql()
+        df = data_Handler.execute_query(
+            self, data_Handler.get_sql_query(self)['sql1'])
+        logs_and_config.update_config_file(self, 'Abfrage', 'sql1',
+                                           data_Handler.get_sql_query(self)['sql1'])
         # Lösche die vorhandenen Daten und fülle die Tabelle mit den Daten aus der Datenbank
         self.clear_article_list()
-        self.fill_article_list(file_path=None, df=self.df)
+        self.fill_article_list(file_path=None, df=df)
 
     def on_project_text_changed(self):
         self.char_validation()
@@ -341,67 +350,6 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             return text
 
-    def read_sql(self):
-        sql_query = self.ui.query_input.toPlainText()
-        db_type = self.ui.db_type.currentText()
-
-        server_info = self.get_server_info()
-
-        # Konfiguriere MySQL-Verbindungsinformationen
-        server = server_info[0]  # "127.0.0.1"
-        user = server_info[1]  # "root"
-        pw = server_info[2]  # "12345678"
-        dB_name = server_info[3]  # "db"
-
-        logs_and_config.update_config_file(self, 'Abfrage', 'sql1', sql_query)
-        logs_and_config.update_config_file(self, 'Server', 'server', server)
-        logs_and_config.update_config_file(self, 'Server', 'user', user)
-        logs_and_config.update_config_file(self, 'Server', 'password', pw)
-        logs_and_config.update_config_file(self, 'Server', 'dB_name', dB_name)
-        try:
-
-            if db_type == "MySQL":
-                # Erstelle eine SQLAlchemy-Engine für MySQL-Verbindung
-                engine = create_engine(
-                    f"mysql+mysqlconnector://{user}:{pw}@{server}/{dB_name}")
-                engine.connect()
-
-            elif db_type == "PostgreSQL":
-                # Erstelle eine SQLAlchemy-Engine für PostgreSQL-Verbindung
-                engine = create_engine(
-                    f"postgresql+psycopg2://{user}:{pw}@{server}/{dB_name}")
-                engine.connect()
-
-            else:
-                # Fügen Sie hier weitere Datenbanktypen hinzu, wenn benötigt
-                raise ValueError(
-                    f"Datenbanktyp wird nicht unterstützt: {db_type}")
-
-            # Überprüfe, ob die Verbindung erfolgreich hergestellt wurde
-
-            # Beispiel-SQL-Abfrage
-            if sql_query is None or sql_query == "":
-                sql_query = "SELECT * FROM articles WHERE project_name = '{{project}}';"
-                self.ui.query_input.setPlainText(sql_query)
-
-            if "{{project}}" in sql_query:
-                sql_query = self.sql_query.replace(
-                    "{{project}}", self.get_project())
-
-            # Verwende pd.read_sql, um die Abfrage auszuführen und die Ergebnisse in einen DataFrame zu lesen
-            df = pd.read_sql(sql_query, con=engine)
-            return df
-
-        except Exception as e:
-            # Gib eine Erfolgsmeldung aus
-            QtWidgets.QMessageBox.critical(
-                self,
-                "Verbindungsfehler zur Datenbank",
-                f"Fehler bei der Verbindung zur Datenbank: {e}\n\n"
-                "Überprüfen Sie die Zugangsinformationen zur SQL-Datenbank!"
-            )
-            return None
-
     # Beispiel zum manuellen Einstellen der Spaltenbreite
     def resize_columns_to_contents(self):
         header = self.ui.articles_list.horizontalHeader()
@@ -415,6 +363,20 @@ class MainWindow(QtWidgets.QMainWindow):
     def on_btn_create_docs_clicked(self):
         ui_fields_Handler.set_field_inputs(self)
         self.replace_field()
+
+    def on_load_docu_data_from_db_btn_click(self):
+        df = data_Handler.execute_query(
+            self, data_Handler.get_sql_query(self)['sql2'])
+        logs_and_config.update_config_file(self, 'Abfrage', 'sql2',
+                                           data_Handler.get_sql_query(self)['sql2'])
+        # self.clear_docu_fields()
+        # self.fill_docu_fields(df=df)
+
+    def on_sql_query_2_btn_click(self):
+        if self.ui.query_2_input.isHidden():
+            self.ui.query_2_input.show()
+        else:
+            self.ui.query_2_input.hide()
 
     @get_file_path
     def on_source_btn_matstr_click(self, file_path):
