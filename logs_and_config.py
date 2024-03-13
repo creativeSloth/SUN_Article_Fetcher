@@ -58,7 +58,7 @@ def read_config_value(self, section, option):
     return value
 
 
-def log_copy_details(self, source_path, target_path, source_files, matching_files):
+def log_copy_details(self, source_path, target_path, source_files, matching_files, df):
     # Erstelle einen Zeitstempel für die Log-Datei
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
     log_source_file_name = f"datalog_{timestamp}.txt"
@@ -107,5 +107,5 @@ def log_copy_details(self, source_path, target_path, source_files, matching_file
 
         # Schreibe das DataFrame in die Log-Datei
         log_file.write("\nDataFrame from File or Database:\n")
-        if self.df is not None:
-            log_file.write(self.df.to_csv(index=False))
+        if df is not None:
+            log_file.write(df.to_csv(index=False))

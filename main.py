@@ -52,8 +52,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self.on_copy_files_btn_click)
         self.ui.sql_query_btn.clicked.connect(
             self.on_sql_query_btn_click)
-        self.ui.project.textChanged.connect(self.on_project_text_changed)
 
+        self.ui.project.textChanged.connect(self.on_project_text_changed)
         self.ui.articles_list.horizontalHeader(
         ).sortIndicatorChanged.connect(self.sort_table)
 
@@ -98,7 +98,8 @@ class MainWindow(QtWidgets.QMainWindow):
             if file_path:
                 # Lösche die vorhandenen Daten und fülle die Tabelle mit Daten aus der Datei
                 self.clear_article_list()
-                self.fill_article_list(file_path=file_path, df=None)
+                df = self.read_data(file_path)
+                self.fill_article_list(df=df)
 
     def on_load_articles_from_db_btn_click(self):
         # Lese Daten aus der MySQL-Datenbank und speichere sie in der Instanzvariable df
@@ -108,7 +109,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                            data_Handler.get_sql_query(self)['sql1'])
         # Lösche die vorhandenen Daten und fülle die Tabelle mit den Daten aus der Datenbank
         self.clear_article_list()
-        self.fill_article_list(file_path=None, df=df)
+        self.fill_article_list(df=df)
 
     def on_project_text_changed(self):
         self.char_validation()
@@ -140,14 +141,26 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Holen Sie sich alle ausgewählten Dateien im Table Widget
         selected_files = []
+        df = pd.DataFrame(columns=['article_no', 'article_name'])
         for row in range(self.ui.articles_list.rowCount()):
+
             checkbox_item = self.ui.articles_list.item(row, 0)
-            filename_item = self.ui.articles_list.item(row, 1)
+            article_no_item = self.ui.articles_list.item(row, 1)
+            article_no = article_no_item.text()
+            article_name_item = self.ui.articles_list.item(row, 2)
+            article_name = article_name_item.text()
+
+            # Erstelle ein DataFrame mit den neuen Daten
+            new_data = pd.DataFrame(
+                {'article_no': [article_no], 'article_name': [article_name]})
+
+            # Füge die neuen Daten zum vorhandenen DataFrame hinzu
+            df = pd.concat([df, new_data], ignore_index=True)
 
             # Überprüfe, ob die Checkbox in der aktuellen Zeile angehakt ist
             if checkbox_item and checkbox_item.checkState() == QtCore.Qt.Checked:
-                filename = filename_item.text()
-                selected_files.append(filename)
+
+                selected_files.append(article_no)
 
         selected_files = list(set(selected_files))
 
@@ -185,7 +198,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Rufen Sie die separate Funktion für das Logging auf
         logs_and_config.log_copy_details(self, source_path, target_path,
-                                         source_files, matching_files)
+                                         source_files, matching_files, df)
 
         # Gib eine Erfolgsmeldung aus
         QtWidgets.QMessageBox.information(self, "Erfolg!",
@@ -193,14 +206,9 @@ class MainWindow(QtWidgets.QMainWindow):
                                           f"Es wurden insgesamt {count} Dateien übertragen.\n\n"
                                           f"Es wurde eine Logdatei im log-Ordner:\n\n {log_sub2folder_path}\n\n erstellt.")
 
-    def fill_article_list(self, file_path=None):
-
-        if file_path is not None:
-            # Wenn ein Dateipfad übergeben wurde, lese Daten aus der Datei
-            self.df = self.read_data(file_path)
-
-        if self.df is not None:
-            for index, row in self.df.iterrows():
+    def fill_article_list(self, df=None):
+        if df is not None:
+            for index, row in df.iterrows():
                 tw_row = self.ui.articles_list.rowCount()
                 self.ui.articles_list.insertRow(tw_row)
 
@@ -349,6 +357,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 # * * * * * * * * * * * * * * * * * Documentation-module * * * * * * * * * * * * * * * *
+
 
     def on_btn_create_docs_clicked(self):
         ui_fields_Handler.set_field_inputs(self)
