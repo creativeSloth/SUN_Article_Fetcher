@@ -193,14 +193,14 @@ class MainWindow(QtWidgets.QMainWindow):
                                           f"Es wurden insgesamt {count} Dateien übertragen.\n\n"
                                           f"Es wurde eine Logdatei im log-Ordner:\n\n {log_sub2folder_path}\n\n erstellt.")
 
-    def fill_article_list(self, file_path=None, df=None):
+    def fill_article_list(self, file_path=None):
 
-        if file_path is not None and df is None:
+        if file_path is not None:
             # Wenn ein Dateipfad übergeben wurde, lese Daten aus der Datei
-            df = self.read_data(file_path)
+            self.df = self.read_data(file_path)
 
-        if df is not None:
-            for index, row in df.iterrows():
+        if self.df is not None:
+            for index, row in self.df.iterrows():
                 tw_row = self.ui.articles_list.rowCount()
                 self.ui.articles_list.insertRow(tw_row)
 
@@ -291,16 +291,6 @@ class MainWindow(QtWidgets.QMainWindow):
         df = pd.read_excel(file_path, header=None, dtype=dtypes, engine="odf")
         df = df.drop_duplicates()
         return df
-
-    def get_server_info(self):
-
-        server_info = []
-        server_info.append(self.ui.db_server.toPlainText())
-        server_info.append(self.ui.user.toPlainText())
-        server_info.append(self.ui.pw.toPlainText())
-        server_info.append(self.ui.db_name.toPlainText())
-
-        return server_info
 
     def get_project(self):
         return self.ui.project.toPlainText()
