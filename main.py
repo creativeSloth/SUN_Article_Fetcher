@@ -9,7 +9,7 @@ from odf.table import Table, TableRow, TableCell
 import pandas as pd
 from sqlalchemy import create_engine
 
-from qtpy import QtCore, QtWidgets
+from qtpy import QtCore, QtWidgets, QtGui
 from PyQt5.QtWidgets import QFileDialog
 
 from ui.mainwindow import Ui_MainWindow
@@ -51,6 +51,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.on_copy_files_btn_click)
         self.ui.sql_query_btn.clicked.connect(
             self.on_sql_query_btn_click)
+        self.ui.project.textChanged.connect(self.on_project_text_changed)
 
         self.ui.articles_list.horizontalHeader(
         ).sortIndicatorChanged.connect(self.sort_table)
@@ -69,9 +70,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.articles_list.sortItems(column, order)
 
     def initialize(self):
-        # set default values
-        self.df = None
-        self.sql_query = None
+        self.previous_project_text = self.get_project()
 
         # query_input-Box verstecken
         self.ui.query_input.hide()
@@ -101,6 +100,9 @@ class MainWindow(QtWidgets.QMainWindow):
         # Lösche die vorhandenen Daten und fülle die Tabelle mit den Daten aus der Datenbank
         self.clear_article_list()
         self.fill_article_list(file_path=None, df=self.df)
+
+    def on_project_text_changed(self):
+        self.char_validation()
 
     @get_folder_path
     def on_source_path_btn_click(self, folder_path):
@@ -294,18 +296,62 @@ class MainWindow(QtWidgets.QMainWindow):
     def get_project(self):
         return self.ui.project.toPlainText()
 
+    def char_validation(self):
+        textlength = 10
+        # Speichere den vorherigen Text
+        prev_string = self.previous_project_text
+        current_string = self.get_project()
+        cursor = self.ui.project.textCursor()
+        cur_cursor_pos = cursor.position()
+
+        # Überprüfe, ob die Länge des aktuellen Strings größer als 10 ist
+        if len(current_string) > textlength:
+            # Aktuellen Text durch den vorherigen Text ersetzen
+            current_string = prev_string
+            # Speichere die Position des Cursors vor der Änderung
+            prev_cursor_pos = cur_cursor_pos - 1
+            # Setze den Text des Textfeldes auf den aktuellen Text
+            self.ui.project.setPlainText(current_string)
+            # Setze den Cursor wieder auf seine vorherige Position
+            cur_cursor_pos = prev_cursor_pos
+
+        # Setze den Cursor auf die vorherige Position
+        cursor.setPosition(cur_cursor_pos)
+
+        # Wandle den Text in Großbuchstaben um und aktualisiere den Text im Textfeld
+        uppercase_string = self.project_to_uppercase(
+            current_string, cur_cursor_pos)
+
+        # Aktualisiere den Textcursor im Textfeld
+        self.ui.project.setTextCursor(cursor)
+
+        # Speichere den aktuellen Text als den vorherigen Text
+        self.previous_project_text = uppercase_string
+
+    def project_to_uppercase(self, text, cur_cursor_pos):
+        if any(char.islower() for char in text):
+            # Wandle den Text in Großbuchstaben um
+            uppercase_string = "".join(
+                char.upper() if char.islower() else char for char in text)
+            # Setze den Text des Textfeldes auf den umgewandelten Text
+            self.ui.project.setPlainText(uppercase_string)
+            cursor = self.ui.project.textCursor()
+            cursor.setPosition(cur_cursor_pos)
+            return uppercase_string
+        else:
+            return text
+
     def read_sql(self):
-        self.sql_query = self.ui.query_input.toPlainText()
         sql_query = self.ui.query_input.toPlainText()
         db_type = self.ui.db_type.currentText()
 
-        self.server_info = self.get_server_info()
+        server_info = self.get_server_info()
 
         # Konfiguriere MySQL-Verbindungsinformationen
-        server = self.server_info[0]  # "127.0.0.1"
-        user = self.server_info[1]  # "root"
-        pw = self.server_info[2]  # "12345678"
-        dB_name = self.server_info[3]  # "db"
+        server = server_info[0]  # "127.0.0.1"
+        user = server_info[1]  # "root"
+        pw = server_info[2]  # "12345678"
+        dB_name = server_info[3]  # "db"
 
         logs_and_config.update_config_file(self, 'Abfrage', 'sql1', sql_query)
         logs_and_config.update_config_file(self, 'Server', 'server', server)
@@ -334,16 +380,16 @@ class MainWindow(QtWidgets.QMainWindow):
             # Überprüfe, ob die Verbindung erfolgreich hergestellt wurde
 
             # Beispiel-SQL-Abfrage
-            if self.sql_query is None or self.sql_query == "":
-                self.sql_query = "SELECT * FROM articles WHERE project_name = '{{project}}';"
-                self.ui.query_input.setPlainText(self.sql_query)
+            if sql_query is None or sql_query == "":
+                sql_query = "SELECT * FROM articles WHERE project_name = '{{project}}';"
+                self.ui.query_input.setPlainText(sql_query)
 
-            if "{{project}}" in self.sql_query:
-                self.sql_query = self.sql_query.replace(
+            if "{{project}}" in sql_query:
+                sql_query = self.sql_query.replace(
                     "{{project}}", self.get_project())
 
             # Verwende pd.read_sql, um die Abfrage auszuführen und die Ergebnisse in einen DataFrame zu lesen
-            df = pd.read_sql(self.sql_query, con=engine)
+            df = pd.read_sql(sql_query, con=engine)
             return df
 
         except Exception as e:

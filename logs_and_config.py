@@ -21,7 +21,7 @@ def create_config_file(self):
         'template1_path': '',
         'template2_path': '',
         'target_path_2': '',
-        'config_path': directory_Handler.get_directories(self)['config_path']
+        'config_path': config_path
     }
 
     config['Abfrage'] = {
