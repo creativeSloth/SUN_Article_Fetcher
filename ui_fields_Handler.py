@@ -39,7 +39,7 @@ def config_to_fields(self):
         logs_and_config.create_config_file(self)
 
 
-def get_context(self):
+def get_mapped_context(self):
     return {
         '{{project}}': (self.ui.project, 'data_1', 'default'),
         '{{operator}}': (self.ui.operator_text, 'data_2', 'default'),
@@ -96,4 +96,4 @@ def get_context(self):
 
 
 def clear_docu_fields(self):
-    [value[0].clear() for value in get_context(self).values()]
+    [value[0].clear() for value in get_mapped_context(self).values()]

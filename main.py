@@ -404,7 +404,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         try:
             doc1 = load(template1_path)
-            context = ui_fields_Handler.get_context(self)
+            context = ui_fields_Handler.get_mapped_context(self)
 
             # Durchlaufe alle Tabellen in der ODF-Datei
             for table in doc1.getElementsByType(Table):
