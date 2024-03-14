@@ -39,166 +39,61 @@ def config_to_fields(self):
         logs_and_config.create_config_file(self)
 
 
-def set_field_inputs(self):
-    self.project = self.ui.project.toPlainText()
-    self.operator = self.ui.operator_text.toPlainText()
-    self.op_adress_1 = self.ui.op_adress_1_text.toPlainText()
-    self.op_adress_2 = self.ui.op_adress_2_text.toPlainText()
-    self.op_adress_3 = self.ui.op_adress_3_text.toPlainText()
-    self.loc_adress_1 = self.ui.loc_adress_1_text.toPlainText()
-    self.loc_adress_2 = self.ui.loc_adress_2_text.toPlainText()
-    self.loc_adress_3 = self.ui.loc_adress_3_text.toPlainText()
-    self.sys_perf = self.ui.sys_perf_text.toPlainText()
-    self.constr_style = self.ui.constr_style_text.toPlainText()
-    self.bool_consist_azimuth = self.ui.bool_consist_azimuth_text.toPlainText()
-    self.maj_azimuth = self.ui.maj_azimuth_text.toPlainText()
-    self.maj_card_point = self.ui.maj_card_point_text.toPlainText()
-    self.min_azimuth = self.ui.min_azimuth_text.toPlainText()
-    self.min_card_point = self.ui.min_card_point_text.toPlainText()
-    self.maj_tilt = self.ui.maj_tilt_text.toPlainText()
-    self.min_tilt = self.ui.min_tilt_text.toPlainText()
-    self.module_count = self.ui.module_count_text.toPlainText()
-    self.module_type = self.ui.module_type_text.toPlainText()
-    self.mounting_type = self.ui.mounting_type_text.toPlainText()
-    self.hybrid_inverter_bool = self.ui.hybrid_inverter_bool_text.toPlainText()
-    self.inverter_type = self.ui.inverter_type_text.toPlainText()
-    self.inverter_SN = self.ui.inverter_SN_text.toPlainText()
-    self.inverter_power = self.ui.inverter_power_text.toPlainText()
-    self.commiss_date = self.ui.commiss_date_text.toPlainText()
-    self.bat_inverter_type = self.ui.bat_inverter_type_text.toPlainText()
-    self.bat_inverter_SN = self.ui.bat_inverter_SN_text.toPlainText()
-    self.bat_inverter_power = self.ui.bat_inverter_power_text.toPlainText()
-    self.coupling_type = self.ui.coupling_type_text.toPlainText()
-    self.bat_storage_type = self.ui.bat_storage_type_text.toPlainText()
-    self.bat_storage_SN = self.ui.bat_storage_SN_text.toPlainText()
-    self.bat_storage_cap = self.ui.bat_storage_cap_text.toPlainText()
-    self.bat_commiss_date = self.ui.bat_commiss_date_text.toPlainText()
-    self.max_discharge_pow = self.ui.max_discharge_pow_text.toPlainText()
-    self.em_pow_ability_bool = self.ui.em_pow_ability_bool_text.toPlainText()
-    self.energy_storage_type = self.ui.energy_storage_type_text.toPlainText()
-    self.bat_technology = self.ui.bat_technology_text.toPlainText()
-    self.charging_point_type = self.ui.charging_point_type_text.toPlainText()
-    self.charging_point_SN = self.ui.charging_point_SN_text.toPlainText()
-    self.feeding_type = self.ui.feeding_type_text.toPlainText()
-    self.pow_limit_bool = self.ui.pow_limit_bool_text.toPlainText()
-    self.rmt_grd_op_bool = self.ui.rmt_grd_op_bool_text.toPlainText()
-    self.rmt_drct_mrktr_bool = self.ui.rmt_drct_mrktr_bool_text.toPlainText()
-    self.rmt_3rd_prt_bool = self.ui.rmt_3rd_prt_bool_text.toPlainText()
-    self.prequali_bool = self.ui.prequali_bool_text.toPlainText()
-    self.citizen_corp_bool = self.ui.citizen_corp_bool_text.toPlainText()
-    self.tendering_bool = self.ui.tendering_bool_text.toPlainText()
-    self.meter_cabinet = self.ui.meter_cabinet_text.toPlainText()
-    self.meter_box_type = self.ui.meter_box_type_text.toPlainText()
-    self.dl_type = self.ui.dl_type_text.toPlainText()
-    self.dl_connect_ext = self.ui.dl_connect_ext_text.toPlainText()
-
-
 def get_context(self):
     return {
-        '{{project}}': self.project,
-        '{{operator}}': self.operator,
-        '{{op_adress_1}}': self.op_adress_1,
-        '{{op_adress_2}}': self.op_adress_2,
-        '{{op_adress_3}}': self.op_adress_3,
-        '{{loc_adress_1}}': self.loc_adress_1,
-        '{{loc_adress_2}}': self.loc_adress_2,
-        '{{loc_adress_3}}': self.loc_adress_3,
-        '{{sys_perf}}': self.sys_perf,
-        '{{constr_style}}': self.constr_style,
-        '{{bool_consist_azimuth}}': self.bool_consist_azimuth,
-        '{{maj_azimuth}}': self.maj_azimuth,
-        '{{maj_card_point}}': self.maj_card_point,
-        '{{min_azimuth}}': self.min_azimuth,
-        '{{min_card_point}}': self.min_card_point,
-        '{{maj_tilt}}': self.maj_tilt,
-        '{{min_tilt}}': self.min_tilt,
-        '{{module_count}}': self.module_count,
-        '{{module_type}}': self.module_type,
-        '{{mounting_type}}': self.mounting_type,
-        '{{hybrid_inverter_bool}}': self.hybrid_inverter_bool,
-        '{{inverter_type}}': self.inverter_type,
-        '{{inverter_SN}}': self.inverter_SN,
-        '{{inverter_power}}': self.inverter_power,
-        '{{commiss_date}}': self.commiss_date,
-        '{{bat_inverter_type}}': self.bat_inverter_type,
-        '{{bat_inverter_SN}}': self.bat_inverter_SN,
-        '{{bat_inverter_power}}': self.bat_inverter_power,
-        '{{coupling_type}}': self.coupling_type,
-        '{{bat_storage_type}}': self.bat_storage_type,
-        '{{bat_storage_SN}}': self.bat_storage_SN,
-        '{{bat_storage_cap}}': self.bat_storage_cap,
-        '{{bat_commiss_date}}': self.bat_commiss_date,
-        '{{max_discharge_pow}}': self.max_discharge_pow,
-        '{{em_pow_ability_bool}}': self.em_pow_ability_bool,
-        '{{energy_storage_type}}': self.energy_storage_type,
-        '{{bat_technology}}': self.bat_technology,
-        '{{charging_point_type}}': self.charging_point_type,
-        '{{charging_point_SN}}': self.charging_point_SN,
-        '{{feeding_type}}': self.feeding_type,
-        '{{pow_limit_bool}}': self.pow_limit_bool,
-        '{{rmt_grd_op_bool}}': self.rmt_grd_op_bool,
-        '{{rmt_drct_mrktr_bool}}': self.rmt_drct_mrktr_bool,
-        '{{rmt_3rd_prt_bool}}': self.rmt_3rd_prt_bool,
-        '{{prequali_bool}}': self.prequali_bool,
-        '{{citizen_corp_bool}}': self.citizen_corp_bool,
-        '{{tendering_bool}}': self.tendering_bool,
-        '{{meter_cabinet}}': self.meter_cabinet,
-        '{{meter_box_type}}': self.meter_box_type,
-        '{{dl_type}}': self.dl_type,
-        '{{dl_connect_ext}}': self.dl_connect_ext
+        '{{project}}': (self.ui.project, 'data_1', 'default'),
+        '{{operator}}': (self.ui.operator_text, 'data_2', 'default'),
+        '{{op_adress_1}}': (self.ui.op_adress_1_text, 'data_3', 'default'),
+        '{{op_adress_2}}': (self.ui.op_adress_2_text, 'data_4', 'default'),
+        '{{op_adress_3}}': (self.ui.op_adress_3_text, 'data_5', 'default'),
+        '{{loc_adress_1}}': (self.ui.loc_adress_1_text, 'data_6', 'default'),
+        '{{loc_adress_2}}': (self.ui.loc_adress_2_text, 'data_7', 'default'),
+        '{{loc_adress_3}}': (self.ui.loc_adress_3_text, 'data_8', 'default'),
+        '{{sys_perf}}': (self.ui.sys_perf_text, 'data_9', 'default'),
+        '{{constr_style}}': (self.ui.constr_style_text, 'data_10', 'default'),
+        '{{bool_consist_azimuth}}': (self.ui.bool_consist_azimuth_text, 'data_11', 'default'),
+        '{{maj_azimuth}}': (self.ui.maj_azimuth_text, 'data_12', 'default'),
+        '{{maj_card_point}}': (self.ui.maj_card_point_text, 'data_13', 'default'),
+        '{{min_azimuth}}': (self.ui.min_azimuth_text, 'data_14', 'default'),
+        '{{min_card_point}}': (self.ui.min_card_point_text, 'data_15', 'default'),
+        '{{maj_tilt}}': (self.ui.maj_tilt_text, 'data_16', 'default'),
+        '{{min_tilt}}': (self.ui.min_tilt_text, 'data_17', 'default'),
+        '{{module_count}}': (self.ui.module_count_text, 'data_18', 'default'),
+        '{{module_type}}': (self.ui.module_type_text, 'data_19', 'default'),
+        '{{mounting_type}}': (self.ui.mounting_type_text, 'data_20', 'default'),
+        '{{hybrid_inverter_bool}}': (self.ui.hybrid_inverter_bool_text, 'data_21', 'default'),
+        '{{inverter_type}}': (self.ui.inverter_type_text, 'data_22', 'default'),
+        '{{inverter_SN}}': (self.ui.inverter_SN_text, 'data_23', 'default'),
+        '{{inverter_power}}': (self.ui.inverter_power_text, 'data_24', 'default'),
+        '{{commiss_date}}': (self.ui.commiss_date_text, 'data_25', 'default'),
+        '{{bat_inverter_type}}': (self.ui.bat_inverter_type_text, 'data_26', 'default'),
+        '{{bat_inverter_SN}}': (self.ui.bat_inverter_SN_text, 'data_27', 'default'),
+        '{{bat_inverter_power}}': (self.ui.bat_inverter_power_text, 'data_28', 'default'),
+        '{{coupling_type}}': (self.ui.coupling_type_text, 'data_29', 'default'),
+        '{{bat_storage_type}}': (self.ui.bat_storage_type_text, 'data_30', 'default'),
+        '{{bat_storage_SN}}': (self.ui.bat_storage_SN_text, 'data_31', 'default'),
+        '{{bat_storage_cap}}': (self.ui.bat_storage_cap_text, 'data_32', 'default'),
+        '{{bat_commiss_date}}': (self.ui.bat_commiss_date_text, 'data_33', 'default'),
+        '{{max_discharge_pow}}': (self.ui.max_discharge_pow_text, 'data_34', 'default'),
+        '{{em_pow_ability_bool}}': (self.ui.em_pow_ability_bool_text, 'data_35', 'default'),
+        '{{energy_storage_type}}': (self.ui.energy_storage_type_text, 'data_36', 'default'),
+        '{{bat_technology}}': (self.ui.bat_technology_text, 'data_37', 'default'),
+        '{{charging_point_type}}': (self.ui.charging_point_type_text, 'data_38', 'default'),
+        '{{charging_point_SN}}': (self.ui.charging_point_SN_text, 'data_39', 'default'),
+        '{{feeding_type}}': (self.ui.feeding_type_text, 'data_40', 'default'),
+        '{{pow_limit_bool}}': (self.ui.pow_limit_bool_text, 'data_41', 'default'),
+        '{{rmt_grd_op_bool}}': (self.ui.rmt_grd_op_bool_text, 'data_42', 'default'),
+        '{{rmt_drct_mrktr_bool}}': (self.ui.rmt_drct_mrktr_bool_text, 'data_43', 'default'),
+        '{{rmt_3rd_prt_bool}}': (self.ui.rmt_3rd_prt_bool_text, 'data_44', 'default'),
+        '{{prequali_bool}}': (self.ui.prequali_bool_text, 'data_45', 'default'),
+        '{{citizen_corp_bool}}': (self.ui.citizen_corp_bool_text, 'data_46', 'default'),
+        '{{tendering_bool}}': (self.ui.tendering_bool_text, 'data_47', 'default'),
+        '{{meter_cabinet}}': (self.ui.meter_cabinet_text, 'data_48', 'default'),
+        '{{meter_box_type}}': (self.ui.meter_box_type_text, 'data_49', 'default'),
+        '{{dl_type}}': (self.ui.dl_type_text, 'data_50', 'default'),
+        '{{dl_connect_ext}}': (self.ui.dl_connect_ext_text, 'data_51', 'default')
     }
 
 
 def clear_docu_fields(self):
-    # Leere alle Eingabefelder in der GUI
-    self.ui.project.clear()
-    self.ui.operator.clear()
-    self.ui.op_adress_1.clear()
-    self.ui.op_adress_2.clear()
-    self.ui.op_adress_3.clear()
-    self.ui.loc_adress_1.clear()
-    self.ui.loc_adress_2.clear()
-    self.ui.loc_adress_3.clear()
-    self.ui.sys_perf.clear()
-    self.ui.constr_style.clear()
-    self.ui.bool_consist_azimuth.clear()
-    self.ui.maj_azimuth.clear()
-    self.ui.maj_card_point.clear()
-    self.ui.min_azimuth.clear()
-    self.ui.min_card_point.clear()
-    self.ui.maj_tilt.clear()
-    self.ui.min_tilt.clear()
-    self.ui.module_count.clear()
-    self.ui.module_type.clear()
-    self.ui.mounting_type.clear()
-    self.ui.hybrid_inverter_bool.clear()
-    self.ui.inverter_type.clear()
-    self.ui.inverter_SN.clear()
-    self.ui.inverter_power.clear()
-    self.ui.commiss_date.clear()
-    self.ui.bat_inverter_type.clear()
-    self.ui.bat_inverter_SN.clear()
-    self.ui.bat_inverter_power.clear()
-    self.ui.coupling_type.clear()
-    self.ui.bat_storage_type.clear()
-    self.ui.bat_storage_SN.clear()
-    self.ui.bat_storage_cap.clear()
-    self.ui.bat_commiss_date.clear()
-    self.ui.max_discharge_pow.clear()
-    self.ui.em_pow_ability_bool.clear()
-    self.ui.energy_storage_type.clear()
-    self.ui.bat_technology.clear()
-    self.ui.charging_point_type.clear()
-    self.ui.charging_point_SN.clear()
-    self.ui.feeding_type.clear()
-    self.ui.pow_limit_bool.clear()
-    self.ui.rmt_grd_op_bool.clear()
-    self.ui.rmt_drct_mrktr_bool.clear()
-    self.ui.rmt_3rd_prt_bool.clear()
-    self.ui.prequali_bool.clear()
-    self.ui.citizen_corp_bool.clear()
-    self.ui.tendering_bool.clear()
-    self.ui.meter_cabinet.clear()
-    self.ui.meter_box_type.clear()
-    self.ui.dl_type.clear()
-    self.ui.dl_connect_ext.clear()
+    [value[0].clear() for value in get_context(self).values()]

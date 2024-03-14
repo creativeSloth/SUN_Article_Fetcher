@@ -360,15 +360,14 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
     def on_btn_create_docs_clicked(self):
-        ui_fields_Handler.set_field_inputs(self)
-        self.replace_field()
+        self.replace_fields_in_doc1()
 
     def on_load_docu_data_from_db_btn_click(self):
         df = data_Handler.execute_query(
             self, data_Handler.get_sql_query(self)['sql2'])
         logs_and_config.update_config_file(self, 'Abfrage', 'sql2',
                                            data_Handler.get_sql_query(self)['sql2'])
-        # self.clear_docu_fields()
+        ui_fields_Handler.clear_docu_fields(self)
         # self.fill_docu_fields(df=df)
 
     def on_sql_query_2_btn_click(self):
@@ -396,7 +395,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self, 'Pfade', 'target_path_2', folder_path)
 
     @check_path_existence(modus=1)
-    def replace_field(self):
+    def replace_fields_in_doc1(self):
         # Rufe get_directories auf, um die Pfade zu erhalten
         template1_path = directory_Handler.get_directories(self)[
             'template1_path']
@@ -423,9 +422,9 @@ class MainWindow(QtWidgets.QMainWindow):
                             for field_name, field_value in context.items():
                                 if field_name in cell_text:
                                     cell_text = cell_text.replace(
-                                        field_name, str(field_value))
+                                        field_name, str(field_value[0].toPlainText()))
 
-                             # Erstelle den neuen Textknoten mit dem aktualisierten Text
+                         # Erstelle den neuen Textknoten mit dem aktualisierten Text
                             new_text_node = text.P(text=cell_text)
 
                             # Füge den neuen Textknoten in die Zelle ein
