@@ -1,4 +1,3 @@
-from cgi import print_directory
 import sys
 import os
 import shutil
@@ -55,7 +54,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.ui.project.textChanged.connect(self.on_project_text_changed)
         self.ui.articles_list.horizontalHeader(
-        ).sortIndicatorChanged.connect(self.sort_table)
+        ).sortIndicatorChanged.connect(ui_fields_Handler.sort_table)
 
         #  *********************************** Mapping buttons for "Documentation"- module *****************************************
 
@@ -72,11 +71,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.create_docs_btn.clicked.connect(
             self.on_btn_create_docs_clicked)
 
-    def sort_table(self, column, order):
-        self.ui.articles_list.sortItems(column, order)
-
     def initialize(self):
-        self.previous_project_text = self.get_project()
+        self.previous_project_text = ui_fields_Handler.get_project(self)
 
         # query_input-Box verstecken
         self.ui.query_input.hide()
@@ -97,22 +93,21 @@ class MainWindow(QtWidgets.QMainWindow):
             # Überprüfen Sie zusätzlich, ob file_path nicht leer ist
             if file_path:
                 # Lösche die vorhandenen Daten und fülle die Tabelle mit Daten aus der Datei
-                self.clear_article_list()
-                df = self.read_data(file_path)
-                self.fill_article_list(df=df)
+                ui_fields_Handler.clear_article_list(self)
+                df = data_Handler.read_data_from_file(file_path)
+                ui_fields_Handler.fill_article_list(self, df=df)
 
     def on_load_articles_from_db_btn_click(self):
         # Lese Daten aus der MySQL-Datenbank und speichere sie in der Instanzvariable df
-        df = data_Handler.execute_query(
-            self, data_Handler.get_sql_query(self)['sql1'])
+        df = data_Handler.execute_query(self, query='sql1')
         logs_and_config.update_config_file(self, 'Abfrage', 'sql1',
                                            data_Handler.get_sql_query(self)['sql1'])
         # Lösche die vorhandenen Daten und fülle die Tabelle mit den Daten aus der Datenbank
-        self.clear_article_list()
-        self.fill_article_list(df=df)
+        ui_fields_Handler.clear_article_list(self)
+        ui_fields_Handler.fill_article_list(self, df=df)
 
     def on_project_text_changed(self):
-        self.char_validation()
+        ui_fields_Handler.char_validation()
 
     @get_folder_path
     def on_source_path_btn_click(self, folder_path):
@@ -137,22 +132,24 @@ class MainWindow(QtWidgets.QMainWindow):
             'log_sub2folder_path']
 
         # Holen Sie sich alle Dateinamen im source_path
-        source_files = self.get_files_in_source_path(source_path)
+        source_files = data_Handler.get_files_in_source_path(self, source_path)
 
         # Holen Sie sich alle ausgewählten Dateien im Table Widget
         selected_files = []
-        df = pd.DataFrame(columns=['article_no', 'article_name'])
+        df = pd.DataFrame(columns=['article_no', 'article_name', 'count'])
         for row in range(self.ui.articles_list.rowCount()):
 
             checkbox_item = self.ui.articles_list.item(row, 0)
-            article_no_item = self.ui.articles_list.item(row, 1)
-            article_no = article_no_item.text()
-            article_name_item = self.ui.articles_list.item(row, 2)
-            article_name = article_name_item.text()
-
+            article_no = self.ui.articles_list.item(row, 1).text()
+            article_name = self.ui.articles_list.item(row, 2).text()
+            # ? count = self.ui.articles_list.item(row, 3).text()
             # Erstelle ein DataFrame mit den neuen Daten
+
             new_data = pd.DataFrame(
-                {'article_no': [article_no], 'article_name': [article_name]})
+                {'article_no': [article_no],
+                 'article_name': [article_name]
+                 # ? ,'count': [count]
+                 })
 
             # Füge die neuen Daten zum vorhandenen DataFrame hinzu
             df = pd.concat([df, new_data], ignore_index=True)
@@ -206,60 +203,6 @@ class MainWindow(QtWidgets.QMainWindow):
                                           f"Es wurden insgesamt {count} Dateien übertragen.\n\n"
                                           f"Es wurde eine Logdatei im log-Ordner:\n\n {log_sub2folder_path}\n\n erstellt.")
 
-    def fill_article_list(self, df=None):
-        if df is not None:
-            for index, row in df.iterrows():
-                tw_row = self.ui.articles_list.rowCount()
-                self.ui.articles_list.insertRow(tw_row)
-
-                # Spalte 1 (statisch) mit einer Checkbox
-                checkbox_item = QtWidgets.QTableWidgetItem()
-                checkbox_item.setFlags(
-                    QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
-                checkbox_item.setCheckState(QtCore.Qt.Checked)
-                self.ui.articles_list.setItem(tw_row, 0, checkbox_item)
-
-                # Spalte 2 (dynamisch) mit den Werten aus der Spalte 0 des DataFrames
-                item_col1 = QtWidgets.QTableWidgetItem(str(row.iloc[0]))
-                self.ui.articles_list.setItem(tw_row, 1, item_col1)
-                # Spalte 3 (dynamisch) mit den Werten aus der Spalte 1 des DataFrames
-                item_col2 = QtWidgets.QTableWidgetItem(str(row.iloc[1]))
-                self.ui.articles_list.setItem(tw_row, 2, item_col2)
-
-        # Iteriere über alle Zellen im Table Widget
-        for row in range(self.ui.articles_list.rowCount()):
-            for col in range(1, self.ui.articles_list.columnCount()):
-                item = self.ui.articles_list.item(row, col)
-                if item:
-                    # Deaktiviere die Editierbarkeit für die Zelle
-                    item.setFlags(item.flags() & ~QtCore.Qt.ItemIsEditable)
-
-        self.resize_columns_to_contents()
-
-        QtWidgets.QMessageBox.information(
-            self, "Abgeschlossen!", "Liste geladen!")
-
-    def get_files_in_source_path(self, directory):
-        all_files = []
-
-        try:
-            for root, _, files in os.walk(directory):
-                for file in files:
-                    try:
-                        file_path = os.path.relpath(
-                            os.path.join(root, file), directory)
-                        all_files.append(file_path)
-
-                    except Exception as e:
-                        QtWidgets.QMessageBox.warning(self, "Fehler!",
-                                                      f"Die Datei für {file_path} konnte nicht gelesen werden.\n\n {e}")
-
-            return all_files
-
-        except Exception as e:
-            QtWidgets.QMessageBox.warning(self, "Fehler!",
-                                          f"Die Datei für {directory} konnte nicht gelesen werden.\n\n {e}")
-
     def on_sql_query_btn_click(self):
 
         if self.ui.query_input.isHidden():
@@ -267,108 +210,18 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.ui.query_input.hide()
 
-    def clear_article_list(self):
-        # Setze die Anzahl der Zeilen auf 0, um alle Zeilen zu entfernen
-        self.ui.articles_list.setRowCount(0)
-
-    def read_data(self, file_path):
-        if file_path.endswith('.csv'):
-            return self.read_csv(file_path)
-        elif file_path.endswith('.xlsx'):
-            return self.read_xlsx(file_path)
-        elif file_path.endswith('.ods'):
-            return self.read_ods(file_path)
-
-    def read_csv(self, file_path):
-        # Lese CSV-Datei und gebe DataFrame zurück
-        dtypes = {0: str, 1: str}
-        df = pd.read_csv(file_path, header=None, dtype=dtypes)
-        df = df.drop_duplicates()
-        return df
-
-    def read_xlsx(self, file_path):
-        # Lese Excel-Datei und gebe DataFrame zurück
-        dtypes = {0: str, 1: str}
-        df = pd.read_excel(file_path, header=None, dtype=dtypes)
-        df = df.drop_duplicates()
-        return df
-
-    def read_ods(self, file_path):
-        # Lese Excel-Datei und gebe DataFrame zurück
-        dtypes = {0: str, 1: str}
-        df = pd.read_excel(file_path, header=None, dtype=dtypes, engine="odf")
-        df = df.drop_duplicates()
-        return df
-
-    def get_project(self):
-        return self.ui.project.toPlainText()
-
-    def char_validation(self):
-        textlength = 10
-        # Speichere den vorherigen Text
-        prev_string = self.previous_project_text
-        current_string = self.get_project()
-        cursor = self.ui.project.textCursor()
-        cur_cursor_pos = cursor.position()
-
-        # Überprüfe, ob die Länge des aktuellen Strings größer als 10 ist
-        if len(current_string) > textlength:
-            # Aktuellen Text durch den vorherigen Text ersetzen
-            current_string = prev_string
-            # Speichere die Position des Cursors vor der Änderung
-            prev_cursor_pos = cur_cursor_pos - 1
-            # Setze den Text des Textfeldes auf den aktuellen Text
-            self.ui.project.setPlainText(current_string)
-            # Setze den Cursor wieder auf seine vorherige Position
-            cur_cursor_pos = prev_cursor_pos
-
-        # Setze den Cursor auf die vorherige Position
-        cursor.setPosition(cur_cursor_pos)
-
-        # Wandle den Text in Großbuchstaben um und aktualisiere den Text im Textfeld
-        uppercase_string = self.project_to_uppercase(
-            current_string, cur_cursor_pos)
-
-        # Aktualisiere den Textcursor im Textfeld
-        self.ui.project.setTextCursor(cursor)
-
-        # Speichere den aktuellen Text als den vorherigen Text
-        self.previous_project_text = uppercase_string
-
-    def project_to_uppercase(self, text, cur_cursor_pos):
-        if any(char.islower() for char in text):
-            # Wandle den Text in Großbuchstaben um
-            uppercase_string = "".join(
-                char.upper() if char.islower() else char for char in text)
-            # Setze den Text des Textfeldes auf den umgewandelten Text
-            self.ui.project.setPlainText(uppercase_string)
-            cursor = self.ui.project.textCursor()
-            cursor.setPosition(cur_cursor_pos)
-            return uppercase_string
-        else:
-            return text
-
-    # Beispiel zum manuellen Einstellen der Spaltenbreite
-    def resize_columns_to_contents(self):
-        header = self.ui.articles_list.horizontalHeader()
-        header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
-        header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
-        header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
-
 
 # * * * * * * * * * * * * * * * * * Documentation-module * * * * * * * * * * * * * * * *
-
 
     def on_btn_create_docs_clicked(self):
         self.replace_fields_in_doc1()
 
     def on_load_docu_data_from_db_btn_click(self):
-        df = data_Handler.execute_query(
-            self, data_Handler.get_sql_query(self)['sql2'])
+        df = data_Handler.execute_query(self, query='sql2')
         logs_and_config.update_config_file(self, 'Abfrage', 'sql2',
                                            data_Handler.get_sql_query(self)['sql2'])
         ui_fields_Handler.clear_docu_fields(self)
-        # self.fill_docu_fields(df=df)
+        ui_fields_Handler.fill_docu_fields(self)
 
     def on_sql_query_2_btn_click(self):
         if self.ui.query_2_input.isHidden():

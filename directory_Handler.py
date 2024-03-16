@@ -1,10 +1,11 @@
 import os
 import sys
 from datetime import datetime
+import ui_fields_Handler
 
 
 def get_directories(self):
-    project = self.get_project()
+    project = ui_fields_Handler.get_project(self)
     # Setze den dynamischen Pfad zur Log-Datei relativ zum Skript
     if getattr(sys, 'frozen', False):
         # Skript wird im gepackten Zustand ausgeführt

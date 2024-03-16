@@ -1,5 +1,6 @@
 import os
 from qtpy import QtWidgets
+from qtpy import QtCore
 
 import logs_and_config
 import directory_Handler
@@ -37,6 +38,57 @@ def config_to_fields(self):
         if os.path.exists(config_path):
             os.remove(config_path)
         logs_and_config.create_config_file(self)
+
+
+def get_project(self):
+    return self.ui.project.toPlainText()
+
+
+def char_validation(self):
+    textlength = 10
+    # Speichere den vorherigen Text
+    prev_string = self.previous_project_text
+    current_string = get_project(self)
+    cursor = self.ui.project.textCursor()
+    cur_cursor_pos = cursor.position()
+
+    # Überprüfe, ob die Länge des aktuellen Strings größer als 10 ist
+    if len(current_string) > textlength:
+        # Aktuellen Text durch den vorherigen Text ersetzen
+        current_string = prev_string
+        # Speichere die Position des Cursors vor der Änderung
+        prev_cursor_pos = cur_cursor_pos - 1
+        # Setze den Text des Textfeldes auf den aktuellen Text
+        self.ui.project.setPlainText(current_string)
+        # Setze den Cursor wieder auf seine vorherige Position
+        cur_cursor_pos = prev_cursor_pos
+
+    # Setze den Cursor auf die vorherige Position
+    cursor.setPosition(cur_cursor_pos)
+
+    # Wandle den Text in Großbuchstaben um und aktualisiere den Text im Textfeld
+    uppercase_string = project_to_uppercase(self,
+                                            current_string, cur_cursor_pos)
+
+    # Aktualisiere den Textcursor im Textfeld
+    self.ui.project.setTextCursor(cursor)
+
+    # Speichere den aktuellen Text als den vorherigen Text
+    self.previous_project_text = uppercase_string
+
+
+def project_to_uppercase(self, text, cur_cursor_pos):
+    if any(char.islower() for char in text):
+        # Wandle den Text in Großbuchstaben um
+        uppercase_string = "".join(
+            char.upper() if char.islower() else char for char in text)
+        # Setze den Text des Textfeldes auf den umgewandelten Text
+        self.ui.project.setPlainText(uppercase_string)
+        cursor = self.ui.project.textCursor()
+        cursor.setPosition(cur_cursor_pos)
+        return uppercase_string
+    else:
+        return text
 
 
 def get_mapped_context(self):
@@ -95,5 +147,71 @@ def get_mapped_context(self):
     }
 
 
+def fill_docu_fields(self):
+    [value[0].setPlainText(value[1])
+     for value in get_mapped_context(self).values()
+     if value[0] != self.ui.project]
+
+
 def clear_docu_fields(self):
-    [value[0].clear() for value in get_mapped_context(self).values()]
+    [value[0].clear()
+     for value in get_mapped_context(self).values()
+     if value[0] != self.ui.project]
+
+
+def fill_article_list(self, df=None):
+    if df is not None:
+        for _, row in df.iterrows():
+            tw_row = self.ui.articles_list.rowCount()
+            self.ui.articles_list.insertRow(tw_row)
+
+            # Spalte 1 (statisch) mit einer Checkbox
+            checkbox_item = QtWidgets.QTableWidgetItem()
+            checkbox_item.setFlags(
+                QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
+            checkbox_item.setCheckState(QtCore.Qt.Checked)
+
+            # Spalte 1 mit der CheckBox
+            self.ui.articles_list.setItem(tw_row, 0, checkbox_item)
+
+            # Spalte 2 (dynamisch) mit den Werten aus der Spalte 0 des DataFrames
+            item_col1 = QtWidgets.QTableWidgetItem(str(row.iloc[0]))
+            self.ui.articles_list.setItem(tw_row, 1, item_col1)
+            # Spalte 3 (dynamisch) mit den Werten aus der Spalte 1 des DataFrames
+            item_col2 = QtWidgets.QTableWidgetItem(str(row.iloc[1]))
+            self.ui.articles_list.setItem(tw_row, 2, item_col2)
+            #! Spalte 4 (dynamisch) mit den Werten aus der Spalte 2 des DataFrames
+            if row.shape[0] == 3:
+                item_col3 = QtWidgets.QTableWidgetItem(str(row.iloc[2]))
+                self.ui.articles_list.setItem(tw_row, 3, item_col3)
+
+    # Iteriere über alle Zellen im Table Widget
+    for row in range(self.ui.articles_list.rowCount()):
+        for col in range(1, self.ui.articles_list.columnCount()):
+            item = self.ui.articles_list.item(row, col)
+            if item:
+                # Deaktiviere die Editierbarkeit für die Zelle
+                item.setFlags(item.flags() & ~QtCore.Qt.ItemIsEditable)
+
+    resize_columns_to_contents(self)
+
+    QtWidgets.QMessageBox.information(
+        self, "Abgeschlossen!", "Liste geladen!")
+
+
+def clear_article_list(self):
+    # Setze die Anzahl der Zeilen auf 0, um alle Zeilen zu entfernen
+    self.ui.articles_list.setRowCount(0)
+
+
+def sort_table(self, column, order):
+    self.ui.articles_list.sortItems(column, order)
+
+# Beispiel zum manuellen Einstellen der Spaltenbreite
+
+
+def resize_columns_to_contents(self):
+    header = self.ui.articles_list.horizontalHeader()
+    header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
+    header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
+    header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)

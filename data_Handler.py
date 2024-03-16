@@ -1,8 +1,10 @@
+import os
 import pandas as pd
 from sqlalchemy import create_engine
 from qtpy import QtWidgets
 
 import logs_and_config
+import ui_fields_Handler
 
 
 def get_server_info(self):
@@ -22,7 +24,9 @@ def get_server_info(self):
     return server_info
 
 
-def execute_query(self, sql_query):
+def execute_query(self, query):
+
+    sql_query = get_sql_query(self)[query]
 
     # Konfiguriere MySQL-Verbindungsinformationen
     server_info = get_server_info(self)
@@ -65,7 +69,7 @@ def execute_query(self, sql_query):
 
         if "{{project}}" in sql_query:
             sql_query = sql_query.replace(
-                "{{project}}", self.get_project())
+                "{{project}}", ui_fields_Handler.get_project(self))
 
         # Verwende pd.read_sql, um die Abfrage auszuführen und die Ergebnisse in einen DataFrame zu lesen
         df = pd.read_sql(sql_query, con=engine)
@@ -87,3 +91,58 @@ def get_sql_query(self):
 
                  'sql2': self.ui.query_2_input.toPlainText()}
     return sql_query
+
+
+def get_files_in_source_path(self, directory):
+    all_files = []
+
+    try:
+        for root, _, files in os.walk(directory):
+            for file in files:
+                try:
+                    file_path = os.path.relpath(
+                        os.path.join(root, file), directory)
+                    all_files.append(file_path)
+
+                except Exception as e:
+                    QtWidgets.QMessageBox.warning(self, "Fehler!",
+                                                  f"Die Datei für {file_path} konnte nicht gelesen werden.\n\n {e}")
+
+        return all_files
+
+    except Exception as e:
+        QtWidgets.QMessageBox.warning(self, "Fehler!",
+                                      f"Die Datei für {directory} konnte nicht gelesen werden.\n\n {e}")
+
+
+def read_csv(file_path):
+    # Lese CSV-Datei und gebe DataFrame zurück
+    dtypes = {0: str, 1: str}
+    df = pd.read_csv(file_path, header=None, dtype=dtypes)
+    df = df.drop_duplicates()
+    return df
+
+
+def read_xlsx(file_path):
+    # Lese Excel-Datei und gebe DataFrame zurück
+    dtypes = {0: str, 1: str}
+    df = pd.read_excel(file_path, header=None, dtype=dtypes)
+    df = df.drop_duplicates()
+    return df
+
+
+def read_ods(file_path):
+    # Lese Excel-Datei und gebe DataFrame zurück
+    dtypes = {0: str, 1: str}
+    df = pd.read_excel(file_path, header=None, dtype=dtypes, engine="odf")
+    df = df.drop_duplicates()
+    return df
+
+
+def read_data_from_file(file_path):
+    if file_path.endswith('.csv'):
+        return read_csv(file_path)
+    elif file_path.endswith('.xlsx'):
+        return read_xlsx(file_path)
+    elif file_path.endswith('.ods'):
+        return read_ods(file_path)
