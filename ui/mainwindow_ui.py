@@ -203,7 +203,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 931, 1686))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, -514, 931, 1806))
         self.gridLayout_5 = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_5.setSpacing(9)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
@@ -733,7 +733,9 @@ class Ui_MainWindow(object):
         __qtablewidgetitem9 = QTableWidgetItem()
         self.PV_inverters_list.setHorizontalHeaderItem(5, __qtablewidgetitem9)
         self.PV_inverters_list.setObjectName(u"PV_inverters_list")
-        self.PV_inverters_list.setMinimumSize(QSize(0, 80))
+        sizePolicy6.setHeightForWidth(self.PV_inverters_list.sizePolicy().hasHeightForWidth())
+        self.PV_inverters_list.setSizePolicy(sizePolicy6)
+        self.PV_inverters_list.setMinimumSize(QSize(0, 200))
         self.PV_inverters_list.setAutoFillBackground(False)
         self.PV_inverters_list.setMidLineWidth(1)
         self.PV_inverters_list.setDragDropOverwriteMode(False)
@@ -744,6 +746,8 @@ class Ui_MainWindow(object):
         self.PV_inverters_list.setCornerButtonEnabled(True)
         self.PV_inverters_list.horizontalHeader().setMinimumSectionSize(50)
         self.PV_inverters_list.horizontalHeader().setDefaultSectionSize(150)
+        self.PV_inverters_list.verticalHeader().setVisible(False)
+        self.PV_inverters_list.verticalHeader().setHighlightSections(False)
 
         self.gridLayout_14.addWidget(self.PV_inverters_list, 2, 0, 1, 4)
 
@@ -1557,7 +1561,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(1)
         self.load_articles_file_btn.setDefault(True)
         self.load_articles_db_btn.setDefault(True)
         self.source_path_btn.setDefault(True)

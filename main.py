@@ -220,7 +220,7 @@ class MainWindow(QtWidgets.QMainWindow):
         logs_and_config.update_config_file(self, 'Abfrage', 'sql2',
                                            data_Handler.get_sql_query(self)['sql2'])
         ui_fields_Handler.clear_docu_fields(self)
-        ui_fields_Handler.fill_docu_fields(self)
+        ui_fields_Handler.fill_docu_fields(self, df)
 
     def on_sql_query_2_btn_click(self):
         if self.ui.query_2_input.isHidden():

@@ -4,6 +4,7 @@ from qtpy import QtCore
 
 import logs_and_config
 import directory_Handler
+import data_Handler
 
 
 def config_to_fields(self):
@@ -114,9 +115,9 @@ def get_mapped_context(self):
         '{{module_type}}': (self.ui.module_type_text, 'data_19', 'default'),
         '{{mounting_type}}': (self.ui.mounting_type_text, 'data_20', 'default'),
         '{{hybrid_inverter_bool}}': (self.ui.hybrid_inverter_bool_text, 'data_21', 'default'),
-        '{{inverter_type}}': (self.ui.inverter_type_text, 'data_22', 'default'),
-        '{{inverter_SN}}': (self.ui.inverter_SN_text, 'data_23', 'default'),
-        '{{inverter_power}}': (self.ui.inverter_power_text, 'data_24', 'default'),
+        '{{inverter_type}}': (self.ui.inverter_type_text, data_Handler.get_inv_types(self), 'default'),
+        '{{inverter_SN}}': (self.ui.inverter_SN_text, data_Handler.get_serial_of_inv(self), 'default'),
+        '{{inverter_power}}': (self.ui.inverter_power_text, data_Handler.get_power_of_inv(self), 'default'),
         '{{commiss_date}}': (self.ui.commiss_date_text, 'data_25', 'default'),
         '{{bat_inverter_type}}': (self.ui.bat_inverter_type_text, 'data_26', 'default'),
         '{{bat_inverter_SN}}': (self.ui.bat_inverter_SN_text, 'data_27', 'default'),
@@ -147,10 +148,11 @@ def get_mapped_context(self):
     }
 
 
-def fill_docu_fields(self):
+def fill_docu_fields(self, df):
     [value[0].setPlainText(value[1])
      for value in get_mapped_context(self).values()
      if value[0] != self.ui.project]
+    fill_PV_inverter_list(self, df)
 
 
 def clear_docu_fields(self):
@@ -193,10 +195,25 @@ def fill_article_list(self, df=None):
                 # Deaktiviere die Editierbarkeit für die Zelle
                 item.setFlags(item.flags() & ~QtCore.Qt.ItemIsEditable)
 
-    resize_columns_to_contents(self)
+
+def fill_PV_inverter_list(self, df=None):
+    if df is not None:
+        ui_list = self.ui.PV_inverters_list
+        #!------------------------------------------------
+        print('Dataframe: ' + str(df))
+        for _, row in df.iterrows():
+            tw_row = ui_list.rowCount()
+            ui_list.insertRow(tw_row)
+
+            for i in range(6):
+                item_col = QtWidgets.QTableWidgetItem(str(row.iloc[i]))
+                ui_list.setItem(tw_row, i, item_col)
+
+    # Anzahl der Spalten ist flexibel, muss später angepasst hinzugefügt werden
+    # resize_columns_to_contents(self)
 
     QtWidgets.QMessageBox.information(
-        self, "Abgeschlossen!", "Liste geladen!")
+        self, "Abgeschlossen!", "PV-Inverter Liste geladen!")
 
 
 def clear_article_list(self):

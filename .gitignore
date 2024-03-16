@@ -76,6 +76,8 @@ CMakeLists.txt.user*
 
 # files
 myDB.py
+myDB_alter_table.py
+myDB_fill_table.py
 todo.txt
 bin.py
 config.ini

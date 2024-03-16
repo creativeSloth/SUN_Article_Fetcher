@@ -146,3 +146,16 @@ def read_data_from_file(file_path):
         return read_xlsx(file_path)
     elif file_path.endswith('.ods'):
         return read_ods(file_path)
+
+
+def get_inv_types(self):
+
+    pass
+
+
+def get_serial_of_inv(self):
+    pass
+
+
+def get_power_of_inv(self):
+    pass

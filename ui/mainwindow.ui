@@ -49,7 +49,7 @@
      </sizepolicy>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <property name="iconSize">
      <size>
@@ -459,9 +459,9 @@
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>0</y>
+             <y>-514</y>
              <width>931</width>
-             <height>1686</height>
+             <height>1806</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_5">
@@ -1666,10 +1666,16 @@ Wechselrichterleistung [kW]:</string>
                 </item>
                 <item row="2" column="0" colspan="4">
                  <widget class="QTableWidget" name="PV_inverters_list">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="minimumSize">
                    <size>
                     <width>0</width>
-                    <height>80</height>
+                    <height>200</height>
                    </size>
                   </property>
                   <property name="autoFillBackground">
@@ -1701,6 +1707,12 @@ Wechselrichterleistung [kW]:</string>
                   </attribute>
                   <attribute name="horizontalHeaderDefaultSectionSize">
                    <number>150</number>
+                  </attribute>
+                  <attribute name="verticalHeaderVisible">
+                   <bool>false</bool>
+                  </attribute>
+                  <attribute name="verticalHeaderHighlightSections">
+                   <bool>false</bool>
                   </attribute>
                   <column>
                    <property name="text">
