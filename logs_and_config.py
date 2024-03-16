@@ -3,14 +3,15 @@ from fileinput import filename
 import os
 from datetime import datetime
 from qtpy import QtWidgets
-from decorators import check_path_existence
 
 import directory_Handler
 
 
-@check_path_existence(modus=2)
 def create_config_file(self):
     config_path = directory_Handler.get_directories(self)['config_path']
+
+    if os.path.exists(config_path):
+        return
 
     config = configparser.ConfigParser()
 

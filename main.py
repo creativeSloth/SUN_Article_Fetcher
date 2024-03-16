@@ -12,7 +12,6 @@ from qtpy import QtCore, QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 
 from ui.mainwindow import Ui_MainWindow
-from decorators import get_file_path, get_folder_path, check_path_existence
 import directory_Handler
 import ui_fields_Handler
 import logs_and_config
@@ -107,21 +106,21 @@ class MainWindow(QtWidgets.QMainWindow):
         ui_fields_Handler.fill_article_list(self, df=df)
 
     def on_project_text_changed(self):
-        ui_fields_Handler.char_validation()
+        ui_fields_Handler.char_validation(self)
 
-    @get_folder_path
+    @directory_Handler.get_folder_path
     def on_source_path_btn_click(self, folder_path):
         self.ui.source_path_text.setPlainText(folder_path)
         logs_and_config.update_config_file(
             self, 'Pfade', 'source_path', folder_path)
 
-    @get_folder_path
+    @directory_Handler.get_folder_path
     def on_target_path_btn_click(self, folder_path):
         self.ui.target_path_text.setPlainText(folder_path)
         logs_and_config.update_config_file(
             self, 'Pfade', 'target_path', folder_path)
 
-    @ check_path_existence(modus=0)
+    @directory_Handler.check_path_existence(modus=0)
     def on_copy_files_btn_click(self, *args, **kwargs):
         # Holen Sie sich Pfade für Quell- und Zielordner aus den Textfeldern
         source_path = directory_Handler.get_directories(self)[
@@ -229,25 +228,25 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.ui.query_2_input.hide()
 
-    @get_file_path
+    @directory_Handler.get_file_path
     def on_source_btn_matstr_click(self, file_path):
         self.ui.source_path_text_matstr.setPlainText(file_path)
         logs_and_config.update_config_file(
             self, 'Pfade', 'template1_path', file_path)
 
-    @get_file_path
+    @directory_Handler.get_file_path
     def on_source_btn_docu_click(self, file_path):
         self.ui.source_path_text_docu.setPlainText(file_path)
         logs_and_config.update_config_file(
             self, 'Pfade', 'template2_path', file_path)
 
-    @get_folder_path
+    @directory_Handler.get_folder_path
     def on_target_path_btn_2_click(self, folder_path):
         self.ui.target_path_text_2.setPlainText(folder_path)
         logs_and_config.update_config_file(
             self, 'Pfade', 'target_path_2', folder_path)
 
-    @check_path_existence(modus=1)
+    @directory_Handler.check_path_existence(modus=1)
     def replace_fields_in_doc1(self):
         # Rufe get_directories auf, um die Pfade zu erhalten
         template1_path = directory_Handler.get_directories(self)[
