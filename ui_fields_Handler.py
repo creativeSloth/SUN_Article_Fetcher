@@ -1,6 +1,7 @@
 import os
 from qtpy import QtWidgets
 from qtpy import QtCore
+import pandas as pd
 
 import logs_and_config
 import directory_Handler
@@ -152,6 +153,9 @@ def fill_docu_fields(self, df):
     [value[0].setPlainText(value[1])
      for value in get_mapped_context(self).values()
      if value[0] != self.ui.project]
+
+
+def fill_device_lists(self, df):
     fill_PV_inverter_list(self, df)
 
 
@@ -162,10 +166,13 @@ def clear_docu_fields(self):
 
 
 def fill_article_list(self, df=None):
+    ui_list = self.ui.articles_list
+    clear_article_list(self, list=ui_list)
     if df is not None:
         for _, row in df.iterrows():
-            tw_row = self.ui.articles_list.rowCount()
-            self.ui.articles_list.insertRow(tw_row)
+
+            tw_row = ui_list.rowCount()
+            ui_list.insertRow(tw_row)
 
             # Spalte 1 (statisch) mit einer Checkbox
             checkbox_item = QtWidgets.QTableWidgetItem()
@@ -174,51 +181,107 @@ def fill_article_list(self, df=None):
             checkbox_item.setCheckState(QtCore.Qt.Checked)
 
             # Spalte 1 mit der CheckBox
-            self.ui.articles_list.setItem(tw_row, 0, checkbox_item)
+            ui_list.setItem(tw_row, 0, checkbox_item)
 
             # Spalte 2 (dynamisch) mit den Werten aus der Spalte 0 des DataFrames
             item_col1 = QtWidgets.QTableWidgetItem(str(row.iloc[0]))
-            self.ui.articles_list.setItem(tw_row, 1, item_col1)
+            ui_list.setItem(tw_row, 1, item_col1)
             # Spalte 3 (dynamisch) mit den Werten aus der Spalte 1 des DataFrames
             item_col2 = QtWidgets.QTableWidgetItem(str(row.iloc[1]))
-            self.ui.articles_list.setItem(tw_row, 2, item_col2)
+            ui_list.setItem(tw_row, 2, item_col2)
             #! Spalte 4 (dynamisch) mit den Werten aus der Spalte 2 des DataFrames
             if row.shape[0] == 3:
                 item_col3 = QtWidgets.QTableWidgetItem(str(row.iloc[2]))
-                self.ui.articles_list.setItem(tw_row, 3, item_col3)
+                ui_list.setItem(tw_row, 3, item_col3)
 
     # Iteriere über alle Zellen im Table Widget
-    for row in range(self.ui.articles_list.rowCount()):
-        for col in range(1, self.ui.articles_list.columnCount()):
-            item = self.ui.articles_list.item(row, col)
+    for row in range(ui_list.rowCount()):
+        for col in range(1, ui_list.columnCount()):
+            item = ui_list.item(row, col)
             if item:
                 # Deaktiviere die Editierbarkeit für die Zelle
                 item.setFlags(item.flags() & ~QtCore.Qt.ItemIsEditable)
 
+    resize_columns_to_contents(
+        self, list=ui_list, columns=ui_list.columnCount())
+
 
 def fill_PV_inverter_list(self, df=None):
+    ui_list = self.ui.PV_inverters_list
+    clear_article_list(self, list=ui_list)
     if df is not None:
-        ui_list = self.ui.PV_inverters_list
         #!------------------------------------------------
         print('Dataframe: ' + str(df))
         for _, row in df.iterrows():
             tw_row = ui_list.rowCount()
             ui_list.insertRow(tw_row)
 
-            for i in range(6):
-                item_col = QtWidgets.QTableWidgetItem(str(row.iloc[i]))
-                ui_list.setItem(tw_row, i, item_col)
+            # Spalte 1 (statisch) mit einer Checkbox
+            checkbox_item = QtWidgets.QTableWidgetItem()
+            checkbox_item.setFlags(
+                QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
+            checkbox_item.setCheckState(QtCore.Qt.Checked)
+
+            # Spalte 1 mit der CheckBox
+            ui_list.setItem(tw_row, 0, checkbox_item)
+
+            # Spalte 2 (dynamisch) mit den Werten aus der Spalte 0 des DataFrames
+            ui_list.setItem(
+                tw_row, 1, QtWidgets.QTableWidgetItem(str(row.iloc[0])))
+
+            # Spalte 3 (dynamisch) mit den Werten aus der Spalte 1 des DataFrames
+            ui_list.setItem(
+                tw_row, 2, QtWidgets.QTableWidgetItem(str(row.iloc[1])))
+
+            # Spalte 4 (dynamisch) mit den Werten aus der Spalte 2 des DataFrames
+            ui_list.setItem(
+                tw_row, 3, QtWidgets.QTableWidgetItem(str(row.iloc[2])))
+
+            # Spalte 5 (dynamisch) mit den Werten aus der Spalte 3 des DataFrames
+            ui_list.setItem(
+                tw_row, 4, QtWidgets.QTableWidgetItem(str(row.iloc[3])))
+
+            # Spalte 6 (dynamisch) mit den Werten aus der Spalte 4 des DataFrames
+            ui_list.setItem(
+                tw_row, 5, QtWidgets.QTableWidgetItem('noch keine Informationsverknüpfung vorhanden'))
 
     # Anzahl der Spalten ist flexibel, muss später angepasst hinzugefügt werden
-    # resize_columns_to_contents(self)
+    resize_columns_to_contents(
+        self, list=ui_list, columns=ui_list.columnCount())
 
     QtWidgets.QMessageBox.information(
         self, "Abgeschlossen!", "PV-Inverter Liste geladen!")
 
 
-def clear_article_list(self):
+def remove_articles_from_list(self, list):
+    # Holen Sie sich alle ausgewählten Dateien im Table Widget
+    df = pd.DataFrame(columns=['article_no', 'article_name'])
+    rows_to_remove = []
+    for row in range(list.rowCount()):
+        checkbox_item = list.item(row, 0)
+        article_no = list.item(row, 1).text()
+        article_name = list.item(row, 2).text()
+
+        # Überprüfe, ob die Checkbox in der aktuellen Zeile angehakt ist
+        if checkbox_item and checkbox_item.checkState() == QtCore.Qt.Checked:
+
+            new_data = pd.DataFrame(
+                {'article_no': [article_no],
+                 'article_name': [article_name]
+                 })
+            # Füge die neuen Daten zum vorhandenen DataFrame hinzu
+            df = pd.concat([df, new_data], ignore_index=True)
+            rows_to_remove.append(row)
+    # Entfernen Sie die ausgewählten Zeilen
+    for row in reversed(rows_to_remove):
+        list.removeRow(row)
+
+    logs_and_config.update_blacklist(self, df, list.objectName())
+
+
+def clear_article_list(self, list):
     # Setze die Anzahl der Zeilen auf 0, um alle Zeilen zu entfernen
-    self.ui.articles_list.setRowCount(0)
+    list.setRowCount(0)
 
 
 def sort_table(self, column, order):
@@ -227,8 +290,7 @@ def sort_table(self, column, order):
 # Beispiel zum manuellen Einstellen der Spaltenbreite
 
 
-def resize_columns_to_contents(self):
-    header = self.ui.articles_list.horizontalHeader()
-    header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
-    header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
-    header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
+def resize_columns_to_contents(self, list, columns):
+    header = list.horizontalHeader()
+    for i in range(columns):
+        header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)

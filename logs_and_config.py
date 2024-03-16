@@ -110,3 +110,7 @@ def log_copy_details(self, source_path, target_path, source_files, matching_file
         log_file.write("\nDataFrame from File or Database:\n")
         if df is not None:
             log_file.write(df.to_csv(index=False))
+
+
+def update_blacklist(self, df, list_name):
+    pass

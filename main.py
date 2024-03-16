@@ -57,6 +57,11 @@ class MainWindow(QtWidgets.QMainWindow):
 
         #  *********************************** Mapping buttons for "Documentation"- module *****************************************
 
+        self.ui.load_data_to_device_lists.clicked.connect(
+            self.on_load_data_to_device_click)
+        self.ui.move_to_PV_inverters_blacklist.clicked.connect(
+            self.on_move_to_PV_inverters_blacklist_click)
+
         self.ui.load_docu_db_data_btn.clicked.connect(
             self.on_load_docu_data_from_db_btn_click)
         self.ui.sql_query_2_btn.clicked.connect(
@@ -102,7 +107,6 @@ class MainWindow(QtWidgets.QMainWindow):
         logs_and_config.update_config_file(self, 'Abfrage', 'sql1',
                                            data_Handler.get_sql_query(self)['sql1'])
         # Lösche die vorhandenen Daten und fülle die Tabelle mit den Daten aus der Datenbank
-        ui_fields_Handler.clear_article_list(self)
         ui_fields_Handler.fill_article_list(self, df=df)
 
     def on_project_text_changed(self):
@@ -214,6 +218,16 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def on_btn_create_docs_clicked(self):
         self.replace_fields_in_doc1()
+
+    def on_load_data_to_device_click(self):
+        df = data_Handler.execute_query(self, query='sql2')
+        logs_and_config.update_config_file(self, 'Abfrage', 'sql2',
+                                           data_Handler.get_sql_query(self)['sql2'])
+        ui_fields_Handler.fill_device_lists(self, df)
+
+    def on_move_to_PV_inverters_blacklist_click(self):
+        ui_fields_Handler.remove_articles_from_list(
+            self, list=self.ui.PV_inverters_list)
 
     def on_load_docu_data_from_db_btn_click(self):
         df = data_Handler.execute_query(self, query='sql2')

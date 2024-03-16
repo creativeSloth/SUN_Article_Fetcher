@@ -194,6 +194,11 @@ class Ui_MainWindow(object):
         self.tab_2.setObjectName(u"tab_2")
         self.gridLayout_7 = QGridLayout(self.tab_2)
         self.gridLayout_7.setObjectName(u"gridLayout_7")
+        self.load_docu_db_data_btn = QPushButton(self.tab_2)
+        self.load_docu_db_data_btn.setObjectName(u"load_docu_db_data_btn")
+
+        self.gridLayout_7.addWidget(self.load_docu_db_data_btn, 1, 0, 1, 1)
+
         self.verticalLayout_2 = QVBoxLayout()
         self.verticalLayout_2.setSpacing(10)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
@@ -203,7 +208,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, -514, 931, 1806))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, -74, 931, 2684))
         self.gridLayout_5 = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_5.setSpacing(9)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
@@ -544,6 +549,43 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.headline_02)
 
+        self.PV_modules_list = QTableWidget(self.scrollAreaWidgetContents)
+        if (self.PV_modules_list.columnCount() < 6):
+            self.PV_modules_list.setColumnCount(6)
+        __qtablewidgetitem4 = QTableWidgetItem()
+        self.PV_modules_list.setHorizontalHeaderItem(0, __qtablewidgetitem4)
+        __qtablewidgetitem5 = QTableWidgetItem()
+        self.PV_modules_list.setHorizontalHeaderItem(1, __qtablewidgetitem5)
+        __qtablewidgetitem6 = QTableWidgetItem()
+        self.PV_modules_list.setHorizontalHeaderItem(2, __qtablewidgetitem6)
+        __qtablewidgetitem7 = QTableWidgetItem()
+        self.PV_modules_list.setHorizontalHeaderItem(3, __qtablewidgetitem7)
+        __qtablewidgetitem8 = QTableWidgetItem()
+        self.PV_modules_list.setHorizontalHeaderItem(4, __qtablewidgetitem8)
+        __qtablewidgetitem9 = QTableWidgetItem()
+        self.PV_modules_list.setHorizontalHeaderItem(5, __qtablewidgetitem9)
+        self.PV_modules_list.setObjectName(u"PV_modules_list")
+        sizePolicy5 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.MinimumExpanding)
+        sizePolicy5.setHorizontalStretch(0)
+        sizePolicy5.setVerticalStretch(0)
+        sizePolicy5.setHeightForWidth(self.PV_modules_list.sizePolicy().hasHeightForWidth())
+        self.PV_modules_list.setSizePolicy(sizePolicy5)
+        self.PV_modules_list.setMinimumSize(QSize(0, 200))
+        self.PV_modules_list.setAutoFillBackground(False)
+        self.PV_modules_list.setMidLineWidth(1)
+        self.PV_modules_list.setDragDropOverwriteMode(False)
+        self.PV_modules_list.setAlternatingRowColors(True)
+        self.PV_modules_list.setGridStyle(Qt.DashDotDotLine)
+        self.PV_modules_list.setSortingEnabled(True)
+        self.PV_modules_list.setWordWrap(True)
+        self.PV_modules_list.setCornerButtonEnabled(True)
+        self.PV_modules_list.horizontalHeader().setMinimumSectionSize(50)
+        self.PV_modules_list.horizontalHeader().setDefaultSectionSize(150)
+        self.PV_modules_list.verticalHeader().setVisible(False)
+        self.PV_modules_list.verticalHeader().setHighlightSections(False)
+
+        self.verticalLayout_3.addWidget(self.PV_modules_list)
+
         self.gridLayout_13 = QGridLayout()
         self.gridLayout_13.setObjectName(u"gridLayout_13")
         self.module_count_text = QPlainTextEdit(self.scrollAreaWidgetContents)
@@ -611,15 +653,54 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.headline_03)
 
+        self.PV_inverters_list = QTableWidget(self.scrollAreaWidgetContents)
+        if (self.PV_inverters_list.columnCount() < 6):
+            self.PV_inverters_list.setColumnCount(6)
+        __qtablewidgetitem10 = QTableWidgetItem()
+        self.PV_inverters_list.setHorizontalHeaderItem(0, __qtablewidgetitem10)
+        __qtablewidgetitem11 = QTableWidgetItem()
+        self.PV_inverters_list.setHorizontalHeaderItem(1, __qtablewidgetitem11)
+        __qtablewidgetitem12 = QTableWidgetItem()
+        self.PV_inverters_list.setHorizontalHeaderItem(2, __qtablewidgetitem12)
+        __qtablewidgetitem13 = QTableWidgetItem()
+        self.PV_inverters_list.setHorizontalHeaderItem(3, __qtablewidgetitem13)
+        __qtablewidgetitem14 = QTableWidgetItem()
+        self.PV_inverters_list.setHorizontalHeaderItem(4, __qtablewidgetitem14)
+        __qtablewidgetitem15 = QTableWidgetItem()
+        self.PV_inverters_list.setHorizontalHeaderItem(5, __qtablewidgetitem15)
+        self.PV_inverters_list.setObjectName(u"PV_inverters_list")
+        sizePolicy5.setHeightForWidth(self.PV_inverters_list.sizePolicy().hasHeightForWidth())
+        self.PV_inverters_list.setSizePolicy(sizePolicy5)
+        self.PV_inverters_list.setMinimumSize(QSize(0, 200))
+        self.PV_inverters_list.setAutoFillBackground(False)
+        self.PV_inverters_list.setMidLineWidth(1)
+        self.PV_inverters_list.setDragDropOverwriteMode(False)
+        self.PV_inverters_list.setAlternatingRowColors(True)
+        self.PV_inverters_list.setGridStyle(Qt.DashDotDotLine)
+        self.PV_inverters_list.setSortingEnabled(True)
+        self.PV_inverters_list.setWordWrap(True)
+        self.PV_inverters_list.setCornerButtonEnabled(True)
+        self.PV_inverters_list.horizontalHeader().setMinimumSectionSize(50)
+        self.PV_inverters_list.horizontalHeader().setDefaultSectionSize(150)
+        self.PV_inverters_list.verticalHeader().setVisible(False)
+        self.PV_inverters_list.verticalHeader().setHighlightSections(False)
+
+        self.verticalLayout_3.addWidget(self.PV_inverters_list)
+
+        self.move_to_PV_inverters_blacklist = QPushButton(self.scrollAreaWidgetContents)
+        self.move_to_PV_inverters_blacklist.setObjectName(u"move_to_PV_inverters_blacklist")
+
+        self.verticalLayout_3.addWidget(self.move_to_PV_inverters_blacklist)
+
         self.horizontalLayout_4 = QHBoxLayout()
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.hybrid_inverter_bool_label = QLabel(self.scrollAreaWidgetContents)
         self.hybrid_inverter_bool_label.setObjectName(u"hybrid_inverter_bool_label")
-        sizePolicy5 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.MinimumExpanding)
-        sizePolicy5.setHorizontalStretch(0)
-        sizePolicy5.setVerticalStretch(0)
-        sizePolicy5.setHeightForWidth(self.hybrid_inverter_bool_label.sizePolicy().hasHeightForWidth())
-        self.hybrid_inverter_bool_label.setSizePolicy(sizePolicy5)
+        sizePolicy6 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.MinimumExpanding)
+        sizePolicy6.setHorizontalStretch(0)
+        sizePolicy6.setVerticalStretch(0)
+        sizePolicy6.setHeightForWidth(self.hybrid_inverter_bool_label.sizePolicy().hasHeightForWidth())
+        self.hybrid_inverter_bool_label.setSizePolicy(sizePolicy6)
         self.hybrid_inverter_bool_label.setMinimumSize(QSize(0, 30))
         self.hybrid_inverter_bool_label.setMaximumSize(QSize(16777215, 30))
 
@@ -627,11 +708,8 @@ class Ui_MainWindow(object):
 
         self.hybrid_inverter_bool_text = QPlainTextEdit(self.scrollAreaWidgetContents)
         self.hybrid_inverter_bool_text.setObjectName(u"hybrid_inverter_bool_text")
-        sizePolicy6 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.MinimumExpanding)
-        sizePolicy6.setHorizontalStretch(0)
-        sizePolicy6.setVerticalStretch(0)
-        sizePolicy6.setHeightForWidth(self.hybrid_inverter_bool_text.sizePolicy().hasHeightForWidth())
-        self.hybrid_inverter_bool_text.setSizePolicy(sizePolicy6)
+        sizePolicy5.setHeightForWidth(self.hybrid_inverter_bool_text.sizePolicy().hasHeightForWidth())
+        self.hybrid_inverter_bool_text.setSizePolicy(sizePolicy5)
         self.hybrid_inverter_bool_text.setMinimumSize(QSize(0, 30))
         self.hybrid_inverter_bool_text.setMaximumSize(QSize(16777215, 30))
 
@@ -656,8 +734,8 @@ class Ui_MainWindow(object):
 
         self.inverter_SN_text = QPlainTextEdit(self.scrollAreaWidgetContents)
         self.inverter_SN_text.setObjectName(u"inverter_SN_text")
-        sizePolicy6.setHeightForWidth(self.inverter_SN_text.sizePolicy().hasHeightForWidth())
-        self.inverter_SN_text.setSizePolicy(sizePolicy6)
+        sizePolicy5.setHeightForWidth(self.inverter_SN_text.sizePolicy().hasHeightForWidth())
+        self.inverter_SN_text.setSizePolicy(sizePolicy5)
         self.inverter_SN_text.setMinimumSize(QSize(0, 30))
         self.inverter_SN_text.setMaximumSize(QSize(16777215, 16777215))
 
@@ -665,8 +743,8 @@ class Ui_MainWindow(object):
 
         self.inverter_type_text = QPlainTextEdit(self.scrollAreaWidgetContents)
         self.inverter_type_text.setObjectName(u"inverter_type_text")
-        sizePolicy6.setHeightForWidth(self.inverter_type_text.sizePolicy().hasHeightForWidth())
-        self.inverter_type_text.setSizePolicy(sizePolicy6)
+        sizePolicy5.setHeightForWidth(self.inverter_type_text.sizePolicy().hasHeightForWidth())
+        self.inverter_type_text.setSizePolicy(sizePolicy5)
         self.inverter_type_text.setMinimumSize(QSize(0, 30))
         self.inverter_type_text.setMaximumSize(QSize(16777215, 30))
 
@@ -674,8 +752,8 @@ class Ui_MainWindow(object):
 
         self.commiss_date_text = QPlainTextEdit(self.scrollAreaWidgetContents)
         self.commiss_date_text.setObjectName(u"commiss_date_text")
-        sizePolicy6.setHeightForWidth(self.commiss_date_text.sizePolicy().hasHeightForWidth())
-        self.commiss_date_text.setSizePolicy(sizePolicy6)
+        sizePolicy5.setHeightForWidth(self.commiss_date_text.sizePolicy().hasHeightForWidth())
+        self.commiss_date_text.setSizePolicy(sizePolicy5)
         self.commiss_date_text.setMinimumSize(QSize(0, 30))
         self.commiss_date_text.setMaximumSize(QSize(16777215, 30))
 
@@ -683,8 +761,8 @@ class Ui_MainWindow(object):
 
         self.commiss_date_label = QLabel(self.scrollAreaWidgetContents)
         self.commiss_date_label.setObjectName(u"commiss_date_label")
-        sizePolicy5.setHeightForWidth(self.commiss_date_label.sizePolicy().hasHeightForWidth())
-        self.commiss_date_label.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.commiss_date_label.sizePolicy().hasHeightForWidth())
+        self.commiss_date_label.setSizePolicy(sizePolicy6)
         self.commiss_date_label.setMinimumSize(QSize(0, 30))
         self.commiss_date_label.setMaximumSize(QSize(16777215, 30))
 
@@ -692,8 +770,8 @@ class Ui_MainWindow(object):
 
         self.inverter_power_text = QPlainTextEdit(self.scrollAreaWidgetContents)
         self.inverter_power_text.setObjectName(u"inverter_power_text")
-        sizePolicy6.setHeightForWidth(self.inverter_power_text.sizePolicy().hasHeightForWidth())
-        self.inverter_power_text.setSizePolicy(sizePolicy6)
+        sizePolicy5.setHeightForWidth(self.inverter_power_text.sizePolicy().hasHeightForWidth())
+        self.inverter_power_text.setSizePolicy(sizePolicy5)
         self.inverter_power_text.setMinimumSize(QSize(0, 30))
         self.inverter_power_text.setMaximumSize(QSize(16777215, 30))
 
@@ -701,8 +779,8 @@ class Ui_MainWindow(object):
 
         self.inverter_power_label = QLabel(self.scrollAreaWidgetContents)
         self.inverter_power_label.setObjectName(u"inverter_power_label")
-        sizePolicy5.setHeightForWidth(self.inverter_power_label.sizePolicy().hasHeightForWidth())
-        self.inverter_power_label.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.inverter_power_label.sizePolicy().hasHeightForWidth())
+        self.inverter_power_label.setSizePolicy(sizePolicy6)
         self.inverter_power_label.setMinimumSize(QSize(0, 30))
         self.inverter_power_label.setMaximumSize(QSize(16777215, 30))
 
@@ -710,46 +788,12 @@ class Ui_MainWindow(object):
 
         self.inverter_type_label = QLabel(self.scrollAreaWidgetContents)
         self.inverter_type_label.setObjectName(u"inverter_type_label")
-        sizePolicy5.setHeightForWidth(self.inverter_type_label.sizePolicy().hasHeightForWidth())
-        self.inverter_type_label.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.inverter_type_label.sizePolicy().hasHeightForWidth())
+        self.inverter_type_label.setSizePolicy(sizePolicy6)
         self.inverter_type_label.setMinimumSize(QSize(0, 30))
         self.inverter_type_label.setMaximumSize(QSize(16777215, 30))
 
         self.gridLayout_14.addWidget(self.inverter_type_label, 0, 0, 1, 1)
-
-        self.PV_inverters_list = QTableWidget(self.scrollAreaWidgetContents)
-        if (self.PV_inverters_list.columnCount() < 6):
-            self.PV_inverters_list.setColumnCount(6)
-        __qtablewidgetitem4 = QTableWidgetItem()
-        self.PV_inverters_list.setHorizontalHeaderItem(0, __qtablewidgetitem4)
-        __qtablewidgetitem5 = QTableWidgetItem()
-        self.PV_inverters_list.setHorizontalHeaderItem(1, __qtablewidgetitem5)
-        __qtablewidgetitem6 = QTableWidgetItem()
-        self.PV_inverters_list.setHorizontalHeaderItem(2, __qtablewidgetitem6)
-        __qtablewidgetitem7 = QTableWidgetItem()
-        self.PV_inverters_list.setHorizontalHeaderItem(3, __qtablewidgetitem7)
-        __qtablewidgetitem8 = QTableWidgetItem()
-        self.PV_inverters_list.setHorizontalHeaderItem(4, __qtablewidgetitem8)
-        __qtablewidgetitem9 = QTableWidgetItem()
-        self.PV_inverters_list.setHorizontalHeaderItem(5, __qtablewidgetitem9)
-        self.PV_inverters_list.setObjectName(u"PV_inverters_list")
-        sizePolicy6.setHeightForWidth(self.PV_inverters_list.sizePolicy().hasHeightForWidth())
-        self.PV_inverters_list.setSizePolicy(sizePolicy6)
-        self.PV_inverters_list.setMinimumSize(QSize(0, 200))
-        self.PV_inverters_list.setAutoFillBackground(False)
-        self.PV_inverters_list.setMidLineWidth(1)
-        self.PV_inverters_list.setDragDropOverwriteMode(False)
-        self.PV_inverters_list.setAlternatingRowColors(True)
-        self.PV_inverters_list.setGridStyle(Qt.DashDotDotLine)
-        self.PV_inverters_list.setSortingEnabled(True)
-        self.PV_inverters_list.setWordWrap(True)
-        self.PV_inverters_list.setCornerButtonEnabled(True)
-        self.PV_inverters_list.horizontalHeader().setMinimumSectionSize(50)
-        self.PV_inverters_list.horizontalHeader().setDefaultSectionSize(150)
-        self.PV_inverters_list.verticalHeader().setVisible(False)
-        self.PV_inverters_list.verticalHeader().setHighlightSections(False)
-
-        self.gridLayout_14.addWidget(self.PV_inverters_list, 2, 0, 1, 4)
 
 
         self.verticalLayout_3.addLayout(self.gridLayout_14)
@@ -762,68 +806,104 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.headline_04)
 
+        self.BAT_inverters_list = QTableWidget(self.scrollAreaWidgetContents)
+        if (self.BAT_inverters_list.columnCount() < 7):
+            self.BAT_inverters_list.setColumnCount(7)
+        __qtablewidgetitem16 = QTableWidgetItem()
+        self.BAT_inverters_list.setHorizontalHeaderItem(0, __qtablewidgetitem16)
+        __qtablewidgetitem17 = QTableWidgetItem()
+        self.BAT_inverters_list.setHorizontalHeaderItem(1, __qtablewidgetitem17)
+        __qtablewidgetitem18 = QTableWidgetItem()
+        self.BAT_inverters_list.setHorizontalHeaderItem(2, __qtablewidgetitem18)
+        __qtablewidgetitem19 = QTableWidgetItem()
+        self.BAT_inverters_list.setHorizontalHeaderItem(3, __qtablewidgetitem19)
+        __qtablewidgetitem20 = QTableWidgetItem()
+        self.BAT_inverters_list.setHorizontalHeaderItem(4, __qtablewidgetitem20)
+        __qtablewidgetitem21 = QTableWidgetItem()
+        self.BAT_inverters_list.setHorizontalHeaderItem(5, __qtablewidgetitem21)
+        __qtablewidgetitem22 = QTableWidgetItem()
+        self.BAT_inverters_list.setHorizontalHeaderItem(6, __qtablewidgetitem22)
+        self.BAT_inverters_list.setObjectName(u"BAT_inverters_list")
+        sizePolicy5.setHeightForWidth(self.BAT_inverters_list.sizePolicy().hasHeightForWidth())
+        self.BAT_inverters_list.setSizePolicy(sizePolicy5)
+        self.BAT_inverters_list.setMinimumSize(QSize(0, 200))
+        self.BAT_inverters_list.setAutoFillBackground(False)
+        self.BAT_inverters_list.setMidLineWidth(1)
+        self.BAT_inverters_list.setDragDropOverwriteMode(False)
+        self.BAT_inverters_list.setAlternatingRowColors(True)
+        self.BAT_inverters_list.setGridStyle(Qt.DashDotDotLine)
+        self.BAT_inverters_list.setSortingEnabled(True)
+        self.BAT_inverters_list.setWordWrap(True)
+        self.BAT_inverters_list.setCornerButtonEnabled(True)
+        self.BAT_inverters_list.horizontalHeader().setMinimumSectionSize(50)
+        self.BAT_inverters_list.horizontalHeader().setDefaultSectionSize(150)
+        self.BAT_inverters_list.verticalHeader().setVisible(False)
+        self.BAT_inverters_list.verticalHeader().setHighlightSections(False)
+
+        self.verticalLayout_3.addWidget(self.BAT_inverters_list)
+
         self.gridLayout_16 = QGridLayout()
         self.gridLayout_16.setObjectName(u"gridLayout_16")
         self.bat_inverter_type_text = QPlainTextEdit(self.scrollAreaWidgetContents)
         self.bat_inverter_type_text.setObjectName(u"bat_inverter_type_text")
-        sizePolicy6.setHeightForWidth(self.bat_inverter_type_text.sizePolicy().hasHeightForWidth())
-        self.bat_inverter_type_text.setSizePolicy(sizePolicy6)
+        sizePolicy5.setHeightForWidth(self.bat_inverter_type_text.sizePolicy().hasHeightForWidth())
+        self.bat_inverter_type_text.setSizePolicy(sizePolicy5)
         self.bat_inverter_type_text.setMinimumSize(QSize(0, 30))
 
         self.gridLayout_16.addWidget(self.bat_inverter_type_text, 0, 1, 1, 1)
 
         self.bat_inverter_type_label = QLabel(self.scrollAreaWidgetContents)
         self.bat_inverter_type_label.setObjectName(u"bat_inverter_type_label")
-        sizePolicy5.setHeightForWidth(self.bat_inverter_type_label.sizePolicy().hasHeightForWidth())
-        self.bat_inverter_type_label.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.bat_inverter_type_label.sizePolicy().hasHeightForWidth())
+        self.bat_inverter_type_label.setSizePolicy(sizePolicy6)
         self.bat_inverter_type_label.setMinimumSize(QSize(0, 30))
 
         self.gridLayout_16.addWidget(self.bat_inverter_type_label, 0, 0, 1, 1)
 
         self.bat_inverter_SN_text = QPlainTextEdit(self.scrollAreaWidgetContents)
         self.bat_inverter_SN_text.setObjectName(u"bat_inverter_SN_text")
-        sizePolicy6.setHeightForWidth(self.bat_inverter_SN_text.sizePolicy().hasHeightForWidth())
-        self.bat_inverter_SN_text.setSizePolicy(sizePolicy6)
+        sizePolicy5.setHeightForWidth(self.bat_inverter_SN_text.sizePolicy().hasHeightForWidth())
+        self.bat_inverter_SN_text.setSizePolicy(sizePolicy5)
         self.bat_inverter_SN_text.setMinimumSize(QSize(0, 30))
 
         self.gridLayout_16.addWidget(self.bat_inverter_SN_text, 0, 3, 1, 1)
 
         self.coupling_type_label = QLabel(self.scrollAreaWidgetContents)
         self.coupling_type_label.setObjectName(u"coupling_type_label")
-        sizePolicy5.setHeightForWidth(self.coupling_type_label.sizePolicy().hasHeightForWidth())
-        self.coupling_type_label.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.coupling_type_label.sizePolicy().hasHeightForWidth())
+        self.coupling_type_label.setSizePolicy(sizePolicy6)
         self.coupling_type_label.setMinimumSize(QSize(0, 30))
 
         self.gridLayout_16.addWidget(self.coupling_type_label, 1, 2, 1, 1)
 
         self.bat_inverter_power_label = QLabel(self.scrollAreaWidgetContents)
         self.bat_inverter_power_label.setObjectName(u"bat_inverter_power_label")
-        sizePolicy5.setHeightForWidth(self.bat_inverter_power_label.sizePolicy().hasHeightForWidth())
-        self.bat_inverter_power_label.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.bat_inverter_power_label.sizePolicy().hasHeightForWidth())
+        self.bat_inverter_power_label.setSizePolicy(sizePolicy6)
         self.bat_inverter_power_label.setMinimumSize(QSize(0, 30))
 
         self.gridLayout_16.addWidget(self.bat_inverter_power_label, 1, 0, 1, 1)
 
         self.bat_inverter_power_text = QPlainTextEdit(self.scrollAreaWidgetContents)
         self.bat_inverter_power_text.setObjectName(u"bat_inverter_power_text")
-        sizePolicy6.setHeightForWidth(self.bat_inverter_power_text.sizePolicy().hasHeightForWidth())
-        self.bat_inverter_power_text.setSizePolicy(sizePolicy6)
+        sizePolicy5.setHeightForWidth(self.bat_inverter_power_text.sizePolicy().hasHeightForWidth())
+        self.bat_inverter_power_text.setSizePolicy(sizePolicy5)
         self.bat_inverter_power_text.setMinimumSize(QSize(0, 30))
 
         self.gridLayout_16.addWidget(self.bat_inverter_power_text, 1, 1, 1, 1)
 
         self.bat_inverter_SN_label = QLabel(self.scrollAreaWidgetContents)
         self.bat_inverter_SN_label.setObjectName(u"bat_inverter_SN_label")
-        sizePolicy5.setHeightForWidth(self.bat_inverter_SN_label.sizePolicy().hasHeightForWidth())
-        self.bat_inverter_SN_label.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.bat_inverter_SN_label.sizePolicy().hasHeightForWidth())
+        self.bat_inverter_SN_label.setSizePolicy(sizePolicy6)
         self.bat_inverter_SN_label.setMinimumSize(QSize(0, 30))
 
         self.gridLayout_16.addWidget(self.bat_inverter_SN_label, 0, 2, 1, 1)
 
         self.coupling_type_text = QPlainTextEdit(self.scrollAreaWidgetContents)
         self.coupling_type_text.setObjectName(u"coupling_type_text")
-        sizePolicy6.setHeightForWidth(self.coupling_type_text.sizePolicy().hasHeightForWidth())
-        self.coupling_type_text.setSizePolicy(sizePolicy6)
+        sizePolicy5.setHeightForWidth(self.coupling_type_text.sizePolicy().hasHeightForWidth())
+        self.coupling_type_text.setSizePolicy(sizePolicy5)
         self.coupling_type_text.setMinimumSize(QSize(0, 30))
 
         self.gridLayout_16.addWidget(self.coupling_type_text, 1, 3, 1, 1)
@@ -839,135 +919,173 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.headline_05)
 
+        self.BAT_storage_list = QTableWidget(self.scrollAreaWidgetContents)
+        if (self.BAT_storage_list.columnCount() < 8):
+            self.BAT_storage_list.setColumnCount(8)
+        __qtablewidgetitem23 = QTableWidgetItem()
+        self.BAT_storage_list.setHorizontalHeaderItem(0, __qtablewidgetitem23)
+        __qtablewidgetitem24 = QTableWidgetItem()
+        self.BAT_storage_list.setHorizontalHeaderItem(1, __qtablewidgetitem24)
+        __qtablewidgetitem25 = QTableWidgetItem()
+        self.BAT_storage_list.setHorizontalHeaderItem(2, __qtablewidgetitem25)
+        __qtablewidgetitem26 = QTableWidgetItem()
+        self.BAT_storage_list.setHorizontalHeaderItem(3, __qtablewidgetitem26)
+        __qtablewidgetitem27 = QTableWidgetItem()
+        self.BAT_storage_list.setHorizontalHeaderItem(4, __qtablewidgetitem27)
+        __qtablewidgetitem28 = QTableWidgetItem()
+        self.BAT_storage_list.setHorizontalHeaderItem(5, __qtablewidgetitem28)
+        __qtablewidgetitem29 = QTableWidgetItem()
+        self.BAT_storage_list.setHorizontalHeaderItem(6, __qtablewidgetitem29)
+        __qtablewidgetitem30 = QTableWidgetItem()
+        self.BAT_storage_list.setHorizontalHeaderItem(7, __qtablewidgetitem30)
+        self.BAT_storage_list.setObjectName(u"BAT_storage_list")
+        sizePolicy5.setHeightForWidth(self.BAT_storage_list.sizePolicy().hasHeightForWidth())
+        self.BAT_storage_list.setSizePolicy(sizePolicy5)
+        self.BAT_storage_list.setMinimumSize(QSize(0, 200))
+        self.BAT_storage_list.setAutoFillBackground(False)
+        self.BAT_storage_list.setMidLineWidth(1)
+        self.BAT_storage_list.setDragDropOverwriteMode(False)
+        self.BAT_storage_list.setAlternatingRowColors(True)
+        self.BAT_storage_list.setGridStyle(Qt.DashDotDotLine)
+        self.BAT_storage_list.setSortingEnabled(True)
+        self.BAT_storage_list.setWordWrap(True)
+        self.BAT_storage_list.setCornerButtonEnabled(True)
+        self.BAT_storage_list.horizontalHeader().setMinimumSectionSize(50)
+        self.BAT_storage_list.horizontalHeader().setDefaultSectionSize(150)
+        self.BAT_storage_list.verticalHeader().setVisible(False)
+        self.BAT_storage_list.verticalHeader().setHighlightSections(False)
+
+        self.verticalLayout_3.addWidget(self.BAT_storage_list)
+
         self.gridLayout_15 = QGridLayout()
         self.gridLayout_15.setObjectName(u"gridLayout_15")
-        self.bat_storage_type_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.bat_storage_type_text.setObjectName(u"bat_storage_type_text")
-        sizePolicy6.setHeightForWidth(self.bat_storage_type_text.sizePolicy().hasHeightForWidth())
-        self.bat_storage_type_text.setSizePolicy(sizePolicy6)
-        self.bat_storage_type_text.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.bat_storage_type_text, 0, 1, 1, 1)
-
-        self.bat_technology_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.bat_technology_text.setObjectName(u"bat_technology_text")
-        sizePolicy6.setHeightForWidth(self.bat_technology_text.sizePolicy().hasHeightForWidth())
-        self.bat_technology_text.setSizePolicy(sizePolicy6)
-        self.bat_technology_text.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.bat_technology_text, 3, 3, 1, 1)
-
-        self.bat_storage_cap_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.bat_storage_cap_text.setObjectName(u"bat_storage_cap_text")
-        sizePolicy6.setHeightForWidth(self.bat_storage_cap_text.sizePolicy().hasHeightForWidth())
-        self.bat_storage_cap_text.setSizePolicy(sizePolicy6)
-        self.bat_storage_cap_text.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.bat_storage_cap_text, 1, 1, 1, 1)
-
-        self.energy_storage_type_label = QLabel(self.scrollAreaWidgetContents)
-        self.energy_storage_type_label.setObjectName(u"energy_storage_type_label")
-        sizePolicy5.setHeightForWidth(self.energy_storage_type_label.sizePolicy().hasHeightForWidth())
-        self.energy_storage_type_label.setSizePolicy(sizePolicy5)
-        self.energy_storage_type_label.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.energy_storage_type_label, 3, 0, 1, 1)
-
-        self.max_discharge_pow_label = QLabel(self.scrollAreaWidgetContents)
-        self.max_discharge_pow_label.setObjectName(u"max_discharge_pow_label")
-        sizePolicy5.setHeightForWidth(self.max_discharge_pow_label.sizePolicy().hasHeightForWidth())
-        self.max_discharge_pow_label.setSizePolicy(sizePolicy5)
-        self.max_discharge_pow_label.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.max_discharge_pow_label, 2, 0, 1, 1)
-
-        self.bat_storage_cap_label = QLabel(self.scrollAreaWidgetContents)
-        self.bat_storage_cap_label.setObjectName(u"bat_storage_cap_label")
-        sizePolicy5.setHeightForWidth(self.bat_storage_cap_label.sizePolicy().hasHeightForWidth())
-        self.bat_storage_cap_label.setSizePolicy(sizePolicy5)
-        self.bat_storage_cap_label.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.bat_storage_cap_label, 1, 0, 1, 1)
-
-        self.energy_storage_type_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.energy_storage_type_text.setObjectName(u"energy_storage_type_text")
-        sizePolicy6.setHeightForWidth(self.energy_storage_type_text.sizePolicy().hasHeightForWidth())
-        self.energy_storage_type_text.setSizePolicy(sizePolicy6)
-        self.energy_storage_type_text.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.energy_storage_type_text, 3, 1, 1, 1)
-
         self.bat_storage_SN_text = QPlainTextEdit(self.scrollAreaWidgetContents)
         self.bat_storage_SN_text.setObjectName(u"bat_storage_SN_text")
-        sizePolicy6.setHeightForWidth(self.bat_storage_SN_text.sizePolicy().hasHeightForWidth())
-        self.bat_storage_SN_text.setSizePolicy(sizePolicy6)
+        sizePolicy5.setHeightForWidth(self.bat_storage_SN_text.sizePolicy().hasHeightForWidth())
+        self.bat_storage_SN_text.setSizePolicy(sizePolicy5)
         self.bat_storage_SN_text.setMinimumSize(QSize(0, 30))
 
-        self.gridLayout_15.addWidget(self.bat_storage_SN_text, 0, 3, 1, 1)
-
-        self.bat_storage_type_label = QLabel(self.scrollAreaWidgetContents)
-        self.bat_storage_type_label.setObjectName(u"bat_storage_type_label")
-        sizePolicy5.setHeightForWidth(self.bat_storage_type_label.sizePolicy().hasHeightForWidth())
-        self.bat_storage_type_label.setSizePolicy(sizePolicy5)
-        self.bat_storage_type_label.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.bat_storage_type_label, 0, 0, 1, 1)
-
-        self.em_pow_ability_bool_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.em_pow_ability_bool_text.setObjectName(u"em_pow_ability_bool_text")
-        sizePolicy6.setHeightForWidth(self.em_pow_ability_bool_text.sizePolicy().hasHeightForWidth())
-        self.em_pow_ability_bool_text.setSizePolicy(sizePolicy6)
-        self.em_pow_ability_bool_text.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.em_pow_ability_bool_text, 2, 3, 1, 1)
-
-        self.bat_commiss_date_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.bat_commiss_date_text.setObjectName(u"bat_commiss_date_text")
-        sizePolicy6.setHeightForWidth(self.bat_commiss_date_text.sizePolicy().hasHeightForWidth())
-        self.bat_commiss_date_text.setSizePolicy(sizePolicy6)
-        self.bat_commiss_date_text.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.bat_commiss_date_text, 1, 3, 1, 1)
+        self.gridLayout_15.addWidget(self.bat_storage_SN_text, 1, 3, 1, 1)
 
         self.max_discharge_pow_text = QPlainTextEdit(self.scrollAreaWidgetContents)
         self.max_discharge_pow_text.setObjectName(u"max_discharge_pow_text")
-        sizePolicy6.setHeightForWidth(self.max_discharge_pow_text.sizePolicy().hasHeightForWidth())
-        self.max_discharge_pow_text.setSizePolicy(sizePolicy6)
+        sizePolicy5.setHeightForWidth(self.max_discharge_pow_text.sizePolicy().hasHeightForWidth())
+        self.max_discharge_pow_text.setSizePolicy(sizePolicy5)
         self.max_discharge_pow_text.setMinimumSize(QSize(0, 30))
 
-        self.gridLayout_15.addWidget(self.max_discharge_pow_text, 2, 1, 1, 1)
-
-        self.bat_storage_SN_label = QLabel(self.scrollAreaWidgetContents)
-        self.bat_storage_SN_label.setObjectName(u"bat_storage_SN_label")
-        sizePolicy5.setHeightForWidth(self.bat_storage_SN_label.sizePolicy().hasHeightForWidth())
-        self.bat_storage_SN_label.setSizePolicy(sizePolicy5)
-        self.bat_storage_SN_label.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.bat_storage_SN_label, 0, 2, 1, 1)
-
-        self.bat_commiss_date_label = QLabel(self.scrollAreaWidgetContents)
-        self.bat_commiss_date_label.setObjectName(u"bat_commiss_date_label")
-        sizePolicy5.setHeightForWidth(self.bat_commiss_date_label.sizePolicy().hasHeightForWidth())
-        self.bat_commiss_date_label.setSizePolicy(sizePolicy5)
-        self.bat_commiss_date_label.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.bat_commiss_date_label, 1, 2, 1, 1)
+        self.gridLayout_15.addWidget(self.max_discharge_pow_text, 3, 1, 1, 1)
 
         self.em_pow_ability_bool_label = QLabel(self.scrollAreaWidgetContents)
         self.em_pow_ability_bool_label.setObjectName(u"em_pow_ability_bool_label")
-        sizePolicy5.setHeightForWidth(self.em_pow_ability_bool_label.sizePolicy().hasHeightForWidth())
-        self.em_pow_ability_bool_label.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.em_pow_ability_bool_label.sizePolicy().hasHeightForWidth())
+        self.em_pow_ability_bool_label.setSizePolicy(sizePolicy6)
         self.em_pow_ability_bool_label.setMinimumSize(QSize(0, 30))
 
-        self.gridLayout_15.addWidget(self.em_pow_ability_bool_label, 2, 2, 1, 1)
+        self.gridLayout_15.addWidget(self.em_pow_ability_bool_label, 3, 2, 1, 1)
+
+        self.bat_storage_cap_text = QPlainTextEdit(self.scrollAreaWidgetContents)
+        self.bat_storage_cap_text.setObjectName(u"bat_storage_cap_text")
+        sizePolicy5.setHeightForWidth(self.bat_storage_cap_text.sizePolicy().hasHeightForWidth())
+        self.bat_storage_cap_text.setSizePolicy(sizePolicy5)
+        self.bat_storage_cap_text.setMinimumSize(QSize(0, 30))
+
+        self.gridLayout_15.addWidget(self.bat_storage_cap_text, 2, 1, 1, 1)
+
+        self.energy_storage_type_text = QPlainTextEdit(self.scrollAreaWidgetContents)
+        self.energy_storage_type_text.setObjectName(u"energy_storage_type_text")
+        sizePolicy5.setHeightForWidth(self.energy_storage_type_text.sizePolicy().hasHeightForWidth())
+        self.energy_storage_type_text.setSizePolicy(sizePolicy5)
+        self.energy_storage_type_text.setMinimumSize(QSize(0, 30))
+
+        self.gridLayout_15.addWidget(self.energy_storage_type_text, 4, 1, 1, 1)
+
+        self.bat_storage_SN_label = QLabel(self.scrollAreaWidgetContents)
+        self.bat_storage_SN_label.setObjectName(u"bat_storage_SN_label")
+        sizePolicy6.setHeightForWidth(self.bat_storage_SN_label.sizePolicy().hasHeightForWidth())
+        self.bat_storage_SN_label.setSizePolicy(sizePolicy6)
+        self.bat_storage_SN_label.setMinimumSize(QSize(0, 30))
+
+        self.gridLayout_15.addWidget(self.bat_storage_SN_label, 1, 2, 1, 1)
+
+        self.bat_storage_cap_label = QLabel(self.scrollAreaWidgetContents)
+        self.bat_storage_cap_label.setObjectName(u"bat_storage_cap_label")
+        sizePolicy6.setHeightForWidth(self.bat_storage_cap_label.sizePolicy().hasHeightForWidth())
+        self.bat_storage_cap_label.setSizePolicy(sizePolicy6)
+        self.bat_storage_cap_label.setMinimumSize(QSize(0, 30))
+
+        self.gridLayout_15.addWidget(self.bat_storage_cap_label, 2, 0, 1, 1)
+
+        self.bat_storage_type_label = QLabel(self.scrollAreaWidgetContents)
+        self.bat_storage_type_label.setObjectName(u"bat_storage_type_label")
+        sizePolicy6.setHeightForWidth(self.bat_storage_type_label.sizePolicy().hasHeightForWidth())
+        self.bat_storage_type_label.setSizePolicy(sizePolicy6)
+        self.bat_storage_type_label.setMinimumSize(QSize(0, 30))
+
+        self.gridLayout_15.addWidget(self.bat_storage_type_label, 1, 0, 1, 1)
+
+        self.bat_technology_text = QPlainTextEdit(self.scrollAreaWidgetContents)
+        self.bat_technology_text.setObjectName(u"bat_technology_text")
+        sizePolicy5.setHeightForWidth(self.bat_technology_text.sizePolicy().hasHeightForWidth())
+        self.bat_technology_text.setSizePolicy(sizePolicy5)
+        self.bat_technology_text.setMinimumSize(QSize(0, 30))
+
+        self.gridLayout_15.addWidget(self.bat_technology_text, 4, 3, 1, 1)
+
+        self.bat_commiss_date_text = QPlainTextEdit(self.scrollAreaWidgetContents)
+        self.bat_commiss_date_text.setObjectName(u"bat_commiss_date_text")
+        sizePolicy5.setHeightForWidth(self.bat_commiss_date_text.sizePolicy().hasHeightForWidth())
+        self.bat_commiss_date_text.setSizePolicy(sizePolicy5)
+        self.bat_commiss_date_text.setMinimumSize(QSize(0, 30))
+
+        self.gridLayout_15.addWidget(self.bat_commiss_date_text, 2, 3, 1, 1)
+
+        self.bat_commiss_date_label = QLabel(self.scrollAreaWidgetContents)
+        self.bat_commiss_date_label.setObjectName(u"bat_commiss_date_label")
+        sizePolicy6.setHeightForWidth(self.bat_commiss_date_label.sizePolicy().hasHeightForWidth())
+        self.bat_commiss_date_label.setSizePolicy(sizePolicy6)
+        self.bat_commiss_date_label.setMinimumSize(QSize(0, 30))
+
+        self.gridLayout_15.addWidget(self.bat_commiss_date_label, 2, 2, 1, 1)
+
+        self.energy_storage_type_label = QLabel(self.scrollAreaWidgetContents)
+        self.energy_storage_type_label.setObjectName(u"energy_storage_type_label")
+        sizePolicy6.setHeightForWidth(self.energy_storage_type_label.sizePolicy().hasHeightForWidth())
+        self.energy_storage_type_label.setSizePolicy(sizePolicy6)
+        self.energy_storage_type_label.setMinimumSize(QSize(0, 30))
+
+        self.gridLayout_15.addWidget(self.energy_storage_type_label, 4, 0, 1, 1)
 
         self.bat_technology_label = QLabel(self.scrollAreaWidgetContents)
         self.bat_technology_label.setObjectName(u"bat_technology_label")
-        sizePolicy5.setHeightForWidth(self.bat_technology_label.sizePolicy().hasHeightForWidth())
-        self.bat_technology_label.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.bat_technology_label.sizePolicy().hasHeightForWidth())
+        self.bat_technology_label.setSizePolicy(sizePolicy6)
         self.bat_technology_label.setMinimumSize(QSize(0, 30))
 
-        self.gridLayout_15.addWidget(self.bat_technology_label, 3, 2, 1, 1)
+        self.gridLayout_15.addWidget(self.bat_technology_label, 4, 2, 1, 1)
+
+        self.em_pow_ability_bool_text = QPlainTextEdit(self.scrollAreaWidgetContents)
+        self.em_pow_ability_bool_text.setObjectName(u"em_pow_ability_bool_text")
+        sizePolicy5.setHeightForWidth(self.em_pow_ability_bool_text.sizePolicy().hasHeightForWidth())
+        self.em_pow_ability_bool_text.setSizePolicy(sizePolicy5)
+        self.em_pow_ability_bool_text.setMinimumSize(QSize(0, 30))
+
+        self.gridLayout_15.addWidget(self.em_pow_ability_bool_text, 3, 3, 1, 1)
+
+        self.max_discharge_pow_label = QLabel(self.scrollAreaWidgetContents)
+        self.max_discharge_pow_label.setObjectName(u"max_discharge_pow_label")
+        sizePolicy6.setHeightForWidth(self.max_discharge_pow_label.sizePolicy().hasHeightForWidth())
+        self.max_discharge_pow_label.setSizePolicy(sizePolicy6)
+        self.max_discharge_pow_label.setMinimumSize(QSize(0, 30))
+
+        self.gridLayout_15.addWidget(self.max_discharge_pow_label, 3, 0, 1, 1)
+
+        self.bat_storage_type_text = QPlainTextEdit(self.scrollAreaWidgetContents)
+        self.bat_storage_type_text.setObjectName(u"bat_storage_type_text")
+        sizePolicy5.setHeightForWidth(self.bat_storage_type_text.sizePolicy().hasHeightForWidth())
+        self.bat_storage_type_text.setSizePolicy(sizePolicy5)
+        self.bat_storage_type_text.setMinimumSize(QSize(0, 30))
+
+        self.gridLayout_15.addWidget(self.bat_storage_type_text, 1, 1, 1, 1)
 
 
         self.verticalLayout_3.addLayout(self.gridLayout_15)
@@ -980,36 +1098,68 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.headline_06)
 
+        self.CHG_point_list = QTableWidget(self.scrollAreaWidgetContents)
+        if (self.CHG_point_list.columnCount() < 5):
+            self.CHG_point_list.setColumnCount(5)
+        __qtablewidgetitem31 = QTableWidgetItem()
+        self.CHG_point_list.setHorizontalHeaderItem(0, __qtablewidgetitem31)
+        __qtablewidgetitem32 = QTableWidgetItem()
+        self.CHG_point_list.setHorizontalHeaderItem(1, __qtablewidgetitem32)
+        __qtablewidgetitem33 = QTableWidgetItem()
+        self.CHG_point_list.setHorizontalHeaderItem(2, __qtablewidgetitem33)
+        __qtablewidgetitem34 = QTableWidgetItem()
+        self.CHG_point_list.setHorizontalHeaderItem(3, __qtablewidgetitem34)
+        __qtablewidgetitem35 = QTableWidgetItem()
+        self.CHG_point_list.setHorizontalHeaderItem(4, __qtablewidgetitem35)
+        self.CHG_point_list.setObjectName(u"CHG_point_list")
+        sizePolicy5.setHeightForWidth(self.CHG_point_list.sizePolicy().hasHeightForWidth())
+        self.CHG_point_list.setSizePolicy(sizePolicy5)
+        self.CHG_point_list.setMinimumSize(QSize(0, 200))
+        self.CHG_point_list.setAutoFillBackground(False)
+        self.CHG_point_list.setMidLineWidth(1)
+        self.CHG_point_list.setDragDropOverwriteMode(False)
+        self.CHG_point_list.setAlternatingRowColors(True)
+        self.CHG_point_list.setGridStyle(Qt.DashDotDotLine)
+        self.CHG_point_list.setSortingEnabled(True)
+        self.CHG_point_list.setWordWrap(True)
+        self.CHG_point_list.setCornerButtonEnabled(True)
+        self.CHG_point_list.horizontalHeader().setMinimumSectionSize(50)
+        self.CHG_point_list.horizontalHeader().setDefaultSectionSize(150)
+        self.CHG_point_list.verticalHeader().setVisible(False)
+        self.CHG_point_list.verticalHeader().setHighlightSections(False)
+
+        self.verticalLayout_3.addWidget(self.CHG_point_list)
+
         self.gridLayout_17 = QGridLayout()
         self.gridLayout_17.setObjectName(u"gridLayout_17")
         self.charging_point_type_text = QPlainTextEdit(self.scrollAreaWidgetContents)
         self.charging_point_type_text.setObjectName(u"charging_point_type_text")
-        sizePolicy6.setHeightForWidth(self.charging_point_type_text.sizePolicy().hasHeightForWidth())
-        self.charging_point_type_text.setSizePolicy(sizePolicy6)
+        sizePolicy5.setHeightForWidth(self.charging_point_type_text.sizePolicy().hasHeightForWidth())
+        self.charging_point_type_text.setSizePolicy(sizePolicy5)
         self.charging_point_type_text.setMinimumSize(QSize(0, 30))
 
         self.gridLayout_17.addWidget(self.charging_point_type_text, 0, 1, 1, 1)
 
         self.charging_point_SN_text = QTextEdit(self.scrollAreaWidgetContents)
         self.charging_point_SN_text.setObjectName(u"charging_point_SN_text")
-        sizePolicy6.setHeightForWidth(self.charging_point_SN_text.sizePolicy().hasHeightForWidth())
-        self.charging_point_SN_text.setSizePolicy(sizePolicy6)
+        sizePolicy5.setHeightForWidth(self.charging_point_SN_text.sizePolicy().hasHeightForWidth())
+        self.charging_point_SN_text.setSizePolicy(sizePolicy5)
         self.charging_point_SN_text.setMinimumSize(QSize(0, 30))
 
         self.gridLayout_17.addWidget(self.charging_point_SN_text, 0, 3, 1, 1)
 
         self.charging_point_type_label = QLabel(self.scrollAreaWidgetContents)
         self.charging_point_type_label.setObjectName(u"charging_point_type_label")
-        sizePolicy5.setHeightForWidth(self.charging_point_type_label.sizePolicy().hasHeightForWidth())
-        self.charging_point_type_label.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.charging_point_type_label.sizePolicy().hasHeightForWidth())
+        self.charging_point_type_label.setSizePolicy(sizePolicy6)
         self.charging_point_type_label.setMinimumSize(QSize(0, 30))
 
         self.gridLayout_17.addWidget(self.charging_point_type_label, 0, 0, 1, 1)
 
         self.charging_point_SN_label = QLabel(self.scrollAreaWidgetContents)
         self.charging_point_SN_label.setObjectName(u"charging_point_SN_label")
-        sizePolicy5.setHeightForWidth(self.charging_point_SN_label.sizePolicy().hasHeightForWidth())
-        self.charging_point_SN_label.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.charging_point_SN_label.sizePolicy().hasHeightForWidth())
+        self.charging_point_SN_label.setSizePolicy(sizePolicy6)
         self.charging_point_SN_label.setMinimumSize(QSize(0, 30))
 
         self.gridLayout_17.addWidget(self.charging_point_SN_label, 0, 2, 1, 1)
@@ -1334,12 +1484,12 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addLayout(self.gridLayout_6)
 
 
-        self.gridLayout_7.addLayout(self.verticalLayout_2, 1, 0, 1, 1)
+        self.gridLayout_7.addLayout(self.verticalLayout_2, 2, 0, 1, 1)
 
-        self.load_docu_db_data_btn = QPushButton(self.tab_2)
-        self.load_docu_db_data_btn.setObjectName(u"load_docu_db_data_btn")
+        self.load_data_to_device_lists = QPushButton(self.tab_2)
+        self.load_data_to_device_lists.setObjectName(u"load_data_to_device_lists")
 
-        self.gridLayout_7.addWidget(self.load_docu_db_data_btn, 0, 0, 1, 1)
+        self.gridLayout_7.addWidget(self.load_data_to_device_lists, 0, 0, 1, 1)
 
         self.tabWidget.addTab(self.tab_2, "")
         self.tab0 = QWidget()
@@ -1561,7 +1711,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         self.load_articles_file_btn.setDefault(True)
         self.load_articles_db_btn.setDefault(True)
         self.source_path_btn.setDefault(True)
@@ -1593,6 +1743,7 @@ class Ui_MainWindow(object):
         self.target_path_btn.setText(QCoreApplication.translate("MainWindow", u"Zielpfad festlegen", None))
         self.source_path_text.setPlainText("")
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab1), QCoreApplication.translate("MainWindow", u"\u00dcbertragung von Dokumenten", None))
+        self.load_docu_db_data_btn.setText(QCoreApplication.translate("MainWindow", u"2. F\u00fclle Datenfelder", None))
         self.headline_01.setText(QCoreApplication.translate("MainWindow", u"Anlagen\u00fcbersicht", None))
         self.loc_adress_2_label.setText(QCoreApplication.translate("MainWindow", u"PLZ:", None))
         self.loc_adress_1_label.setText(QCoreApplication.translate("MainWindow", u"Stra\u00dfe:", None))
@@ -1617,11 +1768,37 @@ class Ui_MainWindow(object):
         self.min_card_point_label.setText(QCoreApplication.translate("MainWindow", u"Weitere:", None))
         self.min_azimuth_label.setText(QCoreApplication.translate("MainWindow", u"Ausrichtung weitere:", None))
         self.headline_02.setText(QCoreApplication.translate("MainWindow", u"Solargenerator", None))
+        ___qtablewidgetitem4 = self.PV_modules_list.horizontalHeaderItem(0)
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"<>", None));
+        ___qtablewidgetitem5 = self.PV_modules_list.horizontalHeaderItem(1)
+        ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"Artikelnummer", None));
+        ___qtablewidgetitem6 = self.PV_modules_list.horizontalHeaderItem(2)
+        ___qtablewidgetitem6.setText(QCoreApplication.translate("MainWindow", u"Modul-Typ", None));
+        ___qtablewidgetitem7 = self.PV_modules_list.horizontalHeaderItem(3)
+        ___qtablewidgetitem7.setText(QCoreApplication.translate("MainWindow", u"Anzahl [Stk.]", None));
+        ___qtablewidgetitem8 = self.PV_modules_list.horizontalHeaderItem(4)
+        ___qtablewidgetitem8.setText(QCoreApplication.translate("MainWindow", u"Modulleistung [kWp]", None));
+        ___qtablewidgetitem9 = self.PV_modules_list.horizontalHeaderItem(5)
+        ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
         self.module_count_label.setText(QCoreApplication.translate("MainWindow", u"Anzahl der Module:", None))
         self.mounting_type_label.setText(QCoreApplication.translate("MainWindow", u"Montagesystem:", None))
         self.module_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
         self.mounting_type_text.setPlainText(QCoreApplication.translate("MainWindow", u"PMT EVO 2.0 Ost-West", None))
         self.headline_03.setText(QCoreApplication.translate("MainWindow", u"PV-Wechselrichter", None))
+        ___qtablewidgetitem10 = self.PV_inverters_list.horizontalHeaderItem(0)
+        ___qtablewidgetitem10.setText(QCoreApplication.translate("MainWindow", u"<>", None));
+        ___qtablewidgetitem11 = self.PV_inverters_list.horizontalHeaderItem(1)
+        ___qtablewidgetitem11.setText(QCoreApplication.translate("MainWindow", u"Artikelnummer", None));
+        ___qtablewidgetitem12 = self.PV_inverters_list.horizontalHeaderItem(2)
+        ___qtablewidgetitem12.setText(QCoreApplication.translate("MainWindow", u"Wechselrichter-Typ", None));
+        ___qtablewidgetitem13 = self.PV_inverters_list.horizontalHeaderItem(3)
+        ___qtablewidgetitem13.setText(QCoreApplication.translate("MainWindow", u"Anzahl [Stk.]", None));
+        ___qtablewidgetitem14 = self.PV_inverters_list.horizontalHeaderItem(4)
+        ___qtablewidgetitem14.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
+        ___qtablewidgetitem15 = self.PV_inverters_list.horizontalHeaderItem(5)
+        ___qtablewidgetitem15.setText(QCoreApplication.translate("MainWindow", u"Zugeordnete \n"
+"WR-Leistung [kW]", None));
+        self.move_to_PV_inverters_blacklist.setText(QCoreApplication.translate("MainWindow", u"Entferne die markierten Artikel", None))
         self.hybrid_inverter_bool_label.setText(QCoreApplication.translate("MainWindow", u"Gemeinsamer PV-Batterie-\n"
 "Wechselricher:", None))
         self.hybrid_inverter_bool_text.setPlainText(QCoreApplication.translate("MainWindow", u"Ja/Nein", None))
@@ -1631,19 +1808,22 @@ class Ui_MainWindow(object):
         self.inverter_power_label.setText(QCoreApplication.translate("MainWindow", u"Zugeordnete\n"
 "Wechselrichterleistung [kW]:", None))
         self.inverter_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
-        ___qtablewidgetitem4 = self.PV_inverters_list.horizontalHeaderItem(0)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"Artikelnummer", None));
-        ___qtablewidgetitem5 = self.PV_inverters_list.horizontalHeaderItem(1)
-        ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"Wechselrichter-Typ", None));
-        ___qtablewidgetitem6 = self.PV_inverters_list.horizontalHeaderItem(2)
-        ___qtablewidgetitem6.setText(QCoreApplication.translate("MainWindow", u"Anzahl", None));
-        ___qtablewidgetitem7 = self.PV_inverters_list.horizontalHeaderItem(3)
-        ___qtablewidgetitem7.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
-        ___qtablewidgetitem8 = self.PV_inverters_list.horizontalHeaderItem(4)
-        ___qtablewidgetitem8.setText(QCoreApplication.translate("MainWindow", u"Zugeordnete WR-Leistung", None));
-        ___qtablewidgetitem9 = self.PV_inverters_list.horizontalHeaderItem(5)
-        ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"Art der Kopplung", None));
         self.headline_04.setText(QCoreApplication.translate("MainWindow", u"Batteriewechselrichter", None))
+        ___qtablewidgetitem16 = self.BAT_inverters_list.horizontalHeaderItem(0)
+        ___qtablewidgetitem16.setText(QCoreApplication.translate("MainWindow", u"<>", None));
+        ___qtablewidgetitem17 = self.BAT_inverters_list.horizontalHeaderItem(1)
+        ___qtablewidgetitem17.setText(QCoreApplication.translate("MainWindow", u"Artikelnummer", None));
+        ___qtablewidgetitem18 = self.BAT_inverters_list.horizontalHeaderItem(2)
+        ___qtablewidgetitem18.setText(QCoreApplication.translate("MainWindow", u"Wechselrichter-Typ", None));
+        ___qtablewidgetitem19 = self.BAT_inverters_list.horizontalHeaderItem(3)
+        ___qtablewidgetitem19.setText(QCoreApplication.translate("MainWindow", u"Anzahl [Stk.]", None));
+        ___qtablewidgetitem20 = self.BAT_inverters_list.horizontalHeaderItem(4)
+        ___qtablewidgetitem20.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
+        ___qtablewidgetitem21 = self.BAT_inverters_list.horizontalHeaderItem(5)
+        ___qtablewidgetitem21.setText(QCoreApplication.translate("MainWindow", u"Zugeordnete \n"
+"WR-Leistung [kW]", None));
+        ___qtablewidgetitem22 = self.BAT_inverters_list.horizontalHeaderItem(6)
+        ___qtablewidgetitem22.setText(QCoreApplication.translate("MainWindow", u"Art der Kopplung", None));
         self.bat_inverter_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
         self.coupling_type_label.setText(QCoreApplication.translate("MainWindow", u"Art der Kopplung:", None))
         self.bat_inverter_power_label.setText(QCoreApplication.translate("MainWindow", u"Zugeordnete\n"
@@ -1651,21 +1831,50 @@ class Ui_MainWindow(object):
         self.bat_inverter_SN_label.setText(QCoreApplication.translate("MainWindow", u"Seriennummer:", None))
         self.coupling_type_text.setPlainText(QCoreApplication.translate("MainWindow", u"AC gekoppeltes System", None))
         self.headline_05.setText(QCoreApplication.translate("MainWindow", u"Speicher", None))
-        self.energy_storage_type_label.setText(QCoreApplication.translate("MainWindow", u"Technologie der \n"
-"Stromspeicherung:", None))
-        self.max_discharge_pow_label.setText(QCoreApplication.translate("MainWindow", u"Maximale Entladeleistung \n"
-"im Dauerbetrieb:", None))
+        ___qtablewidgetitem23 = self.BAT_storage_list.horizontalHeaderItem(0)
+        ___qtablewidgetitem23.setText(QCoreApplication.translate("MainWindow", u"<>", None));
+        ___qtablewidgetitem24 = self.BAT_storage_list.horizontalHeaderItem(1)
+        ___qtablewidgetitem24.setText(QCoreApplication.translate("MainWindow", u"Artikelnummer", None));
+        ___qtablewidgetitem25 = self.BAT_storage_list.horizontalHeaderItem(2)
+        ___qtablewidgetitem25.setText(QCoreApplication.translate("MainWindow", u"Speicher-Typ", None));
+        ___qtablewidgetitem26 = self.BAT_storage_list.horizontalHeaderItem(3)
+        ___qtablewidgetitem26.setText(QCoreApplication.translate("MainWindow", u"Anzahl [Stk.]", None));
+        ___qtablewidgetitem27 = self.BAT_storage_list.horizontalHeaderItem(4)
+        ___qtablewidgetitem27.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
+        ___qtablewidgetitem28 = self.BAT_storage_list.horizontalHeaderItem(5)
+        ___qtablewidgetitem28.setText(QCoreApplication.translate("MainWindow", u"Nutzbare \n"
+"Speicherkapazit\u00e4t\n"
+"[kWh]", None));
+        ___qtablewidgetitem29 = self.BAT_storage_list.horizontalHeaderItem(6)
+        ___qtablewidgetitem29.setText(QCoreApplication.translate("MainWindow", u"Max. Entladeleistung\n"
+"im Dauerbetrieb", None));
+        ___qtablewidgetitem30 = self.BAT_storage_list.horizontalHeaderItem(7)
+        ___qtablewidgetitem30.setText(QCoreApplication.translate("MainWindow", u"Batterietechnologie", None));
+        self.em_pow_ability_bool_label.setText(QCoreApplication.translate("MainWindow", u"Notstromf\u00e4higkeit\n"
+"bei Netzst\u00f6rungen: ", None))
+        self.bat_storage_SN_label.setText(QCoreApplication.translate("MainWindow", u"Seriennummer:", None))
         self.bat_storage_cap_label.setText(QCoreApplication.translate("MainWindow", u"Nutzbare\n"
 "Speicherkapazit\u00e4t:", None))
         self.bat_storage_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
-        self.em_pow_ability_bool_text.setPlainText(QCoreApplication.translate("MainWindow", u"Ja/Nein", None))
-        self.bat_storage_SN_label.setText(QCoreApplication.translate("MainWindow", u"Seriennummer:", None))
         self.bat_commiss_date_label.setText(QCoreApplication.translate("MainWindow", u"Datum erstmalige\n"
 "Inbetriebnahme:", None))
-        self.em_pow_ability_bool_label.setText(QCoreApplication.translate("MainWindow", u"Notstromf\u00e4higkeit\n"
-"bei Netzst\u00f6rungen: ", None))
+        self.energy_storage_type_label.setText(QCoreApplication.translate("MainWindow", u"Technologie der \n"
+"Stromspeicherung:", None))
         self.bat_technology_label.setText(QCoreApplication.translate("MainWindow", u"Batterietechnologie:", None))
+        self.em_pow_ability_bool_text.setPlainText(QCoreApplication.translate("MainWindow", u"Ja/Nein", None))
+        self.max_discharge_pow_label.setText(QCoreApplication.translate("MainWindow", u"Maximale Entladeleistung \n"
+"im Dauerbetrieb:", None))
         self.headline_06.setText(QCoreApplication.translate("MainWindow", u"Ladestation", None))
+        ___qtablewidgetitem31 = self.CHG_point_list.horizontalHeaderItem(0)
+        ___qtablewidgetitem31.setText(QCoreApplication.translate("MainWindow", u"<>", None));
+        ___qtablewidgetitem32 = self.CHG_point_list.horizontalHeaderItem(1)
+        ___qtablewidgetitem32.setText(QCoreApplication.translate("MainWindow", u"Artikelnummer", None));
+        ___qtablewidgetitem33 = self.CHG_point_list.horizontalHeaderItem(2)
+        ___qtablewidgetitem33.setText(QCoreApplication.translate("MainWindow", u"Ladestations-Typ", None));
+        ___qtablewidgetitem34 = self.CHG_point_list.horizontalHeaderItem(3)
+        ___qtablewidgetitem34.setText(QCoreApplication.translate("MainWindow", u"Anzahl [Stk.]", None));
+        ___qtablewidgetitem35 = self.CHG_point_list.horizontalHeaderItem(4)
+        ___qtablewidgetitem35.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
         self.charging_point_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
         self.charging_point_SN_label.setText(QCoreApplication.translate("MainWindow", u"Seriennummer:", None))
         self.headline_07.setText(QCoreApplication.translate("MainWindow", u"Anschlussart", None))
@@ -1704,7 +1913,7 @@ class Ui_MainWindow(object):
         self.source_btn_matstr.setText(QCoreApplication.translate("MainWindow", u"Template gem. MatStR", None))
         self.create_docs_btn.setText(QCoreApplication.translate("MainWindow", u"Doku gem\u00e4\u00df\n"
 "MaStR erzeugen", None))
-        self.load_docu_db_data_btn.setText(QCoreApplication.translate("MainWindow", u"Lade Daten aus Datenbank", None))
+        self.load_data_to_device_lists.setText(QCoreApplication.translate("MainWindow", u"1. F\u00fclle Ger\u00e4telisten (WR-, BWR-, Batterie- und Ladestationsliste)", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Doku gem. MatStR", None))
         self.server_sttings_headline_label.setText(QCoreApplication.translate("MainWindow", u"Servereinstellungen", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Datenbanktyp:", None))

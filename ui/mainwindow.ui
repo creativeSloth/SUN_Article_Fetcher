@@ -49,7 +49,7 @@
      </sizepolicy>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <property name="iconSize">
      <size>
@@ -440,6 +440,13 @@
      </attribute>
      <layout class="QGridLayout" name="gridLayout_7">
       <item row="1" column="0">
+       <widget class="QPushButton" name="load_docu_db_data_btn">
+        <property name="text">
+         <string>2. Fülle Datenfelder</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
        <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0">
         <property name="spacing">
          <number>10</number>
@@ -459,9 +466,9 @@
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-514</y>
+             <y>-74</y>
              <width>931</width>
-             <height>1806</height>
+             <height>2684</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_5">
@@ -1251,6 +1258,88 @@
                </widget>
               </item>
               <item>
+               <widget class="QTableWidget" name="PV_modules_list">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>200</height>
+                 </size>
+                </property>
+                <property name="autoFillBackground">
+                 <bool>false</bool>
+                </property>
+                <property name="midLineWidth">
+                 <number>1</number>
+                </property>
+                <property name="dragDropOverwriteMode">
+                 <bool>false</bool>
+                </property>
+                <property name="alternatingRowColors">
+                 <bool>true</bool>
+                </property>
+                <property name="gridStyle">
+                 <enum>Qt::DashDotDotLine</enum>
+                </property>
+                <property name="sortingEnabled">
+                 <bool>true</bool>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+                <property name="cornerButtonEnabled">
+                 <bool>true</bool>
+                </property>
+                <attribute name="horizontalHeaderMinimumSectionSize">
+                 <number>50</number>
+                </attribute>
+                <attribute name="horizontalHeaderDefaultSectionSize">
+                 <number>150</number>
+                </attribute>
+                <attribute name="verticalHeaderVisible">
+                 <bool>false</bool>
+                </attribute>
+                <attribute name="verticalHeaderHighlightSections">
+                 <bool>false</bool>
+                </attribute>
+                <column>
+                 <property name="text">
+                  <string>&lt;&gt;</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Artikelnummer</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Modul-Typ</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Anzahl [Stk.]</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Modulleistung [kWp]</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Seriennummer</string>
+                 </property>
+                </column>
+               </widget>
+              </item>
+              <item>
                <layout class="QGridLayout" name="gridLayout_13">
                 <item row="0" column="1">
                  <widget class="QPlainTextEdit" name="module_count_text">
@@ -1414,6 +1503,96 @@
                 </property>
                 <property name="text">
                  <string>PV-Wechselrichter</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTableWidget" name="PV_inverters_list">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>200</height>
+                 </size>
+                </property>
+                <property name="autoFillBackground">
+                 <bool>false</bool>
+                </property>
+                <property name="midLineWidth">
+                 <number>1</number>
+                </property>
+                <property name="dragDropOverwriteMode">
+                 <bool>false</bool>
+                </property>
+                <property name="alternatingRowColors">
+                 <bool>true</bool>
+                </property>
+                <property name="gridStyle">
+                 <enum>Qt::DashDotDotLine</enum>
+                </property>
+                <property name="sortingEnabled">
+                 <bool>true</bool>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+                <property name="cornerButtonEnabled">
+                 <bool>true</bool>
+                </property>
+                <attribute name="horizontalHeaderMinimumSectionSize">
+                 <number>50</number>
+                </attribute>
+                <attribute name="horizontalHeaderDefaultSectionSize">
+                 <number>150</number>
+                </attribute>
+                <attribute name="verticalHeaderVisible">
+                 <bool>false</bool>
+                </attribute>
+                <attribute name="verticalHeaderHighlightSections">
+                 <bool>false</bool>
+                </attribute>
+                <column>
+                 <property name="text">
+                  <string>&lt;&gt;</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Artikelnummer</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Wechselrichter-Typ</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Anzahl [Stk.]</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Seriennummer</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Zugeordnete 
+WR-Leistung [kW]</string>
+                 </property>
+                </column>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="move_to_PV_inverters_blacklist">
+                <property name="text">
+                 <string>Entferne die markierten Artikel</string>
                 </property>
                </widget>
               </item>
@@ -1664,88 +1843,6 @@ Wechselrichterleistung [kW]:</string>
                   </property>
                  </widget>
                 </item>
-                <item row="2" column="0" colspan="4">
-                 <widget class="QTableWidget" name="PV_inverters_list">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>200</height>
-                   </size>
-                  </property>
-                  <property name="autoFillBackground">
-                   <bool>false</bool>
-                  </property>
-                  <property name="midLineWidth">
-                   <number>1</number>
-                  </property>
-                  <property name="dragDropOverwriteMode">
-                   <bool>false</bool>
-                  </property>
-                  <property name="alternatingRowColors">
-                   <bool>true</bool>
-                  </property>
-                  <property name="gridStyle">
-                   <enum>Qt::DashDotDotLine</enum>
-                  </property>
-                  <property name="sortingEnabled">
-                   <bool>true</bool>
-                  </property>
-                  <property name="wordWrap">
-                   <bool>true</bool>
-                  </property>
-                  <property name="cornerButtonEnabled">
-                   <bool>true</bool>
-                  </property>
-                  <attribute name="horizontalHeaderMinimumSectionSize">
-                   <number>50</number>
-                  </attribute>
-                  <attribute name="horizontalHeaderDefaultSectionSize">
-                   <number>150</number>
-                  </attribute>
-                  <attribute name="verticalHeaderVisible">
-                   <bool>false</bool>
-                  </attribute>
-                  <attribute name="verticalHeaderHighlightSections">
-                   <bool>false</bool>
-                  </attribute>
-                  <column>
-                   <property name="text">
-                    <string>Artikelnummer</string>
-                   </property>
-                  </column>
-                  <column>
-                   <property name="text">
-                    <string>Wechselrichter-Typ</string>
-                   </property>
-                  </column>
-                  <column>
-                   <property name="text">
-                    <string>Anzahl</string>
-                   </property>
-                  </column>
-                  <column>
-                   <property name="text">
-                    <string>Seriennummer</string>
-                   </property>
-                  </column>
-                  <column>
-                   <property name="text">
-                    <string>Zugeordnete WR-Leistung</string>
-                   </property>
-                  </column>
-                  <column>
-                   <property name="text">
-                    <string>Art der Kopplung</string>
-                   </property>
-                  </column>
-                 </widget>
-                </item>
                </layout>
               </item>
               <item>
@@ -1765,6 +1862,94 @@ Wechselrichterleistung [kW]:</string>
                 <property name="text">
                  <string>Batteriewechselrichter</string>
                 </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTableWidget" name="BAT_inverters_list">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>200</height>
+                 </size>
+                </property>
+                <property name="autoFillBackground">
+                 <bool>false</bool>
+                </property>
+                <property name="midLineWidth">
+                 <number>1</number>
+                </property>
+                <property name="dragDropOverwriteMode">
+                 <bool>false</bool>
+                </property>
+                <property name="alternatingRowColors">
+                 <bool>true</bool>
+                </property>
+                <property name="gridStyle">
+                 <enum>Qt::DashDotDotLine</enum>
+                </property>
+                <property name="sortingEnabled">
+                 <bool>true</bool>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+                <property name="cornerButtonEnabled">
+                 <bool>true</bool>
+                </property>
+                <attribute name="horizontalHeaderMinimumSectionSize">
+                 <number>50</number>
+                </attribute>
+                <attribute name="horizontalHeaderDefaultSectionSize">
+                 <number>150</number>
+                </attribute>
+                <attribute name="verticalHeaderVisible">
+                 <bool>false</bool>
+                </attribute>
+                <attribute name="verticalHeaderHighlightSections">
+                 <bool>false</bool>
+                </attribute>
+                <column>
+                 <property name="text">
+                  <string>&lt;&gt;</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Artikelnummer</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Wechselrichter-Typ</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Anzahl [Stk.]</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Seriennummer</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Zugeordnete 
+WR-Leistung [kW]</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Art der Kopplung</string>
+                 </property>
+                </column>
                </widget>
               </item>
               <item>
@@ -1935,132 +2120,103 @@ Wechselrichterleistung [kW]:</string>
                </widget>
               </item>
               <item>
+               <widget class="QTableWidget" name="BAT_storage_list">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>200</height>
+                 </size>
+                </property>
+                <property name="autoFillBackground">
+                 <bool>false</bool>
+                </property>
+                <property name="midLineWidth">
+                 <number>1</number>
+                </property>
+                <property name="dragDropOverwriteMode">
+                 <bool>false</bool>
+                </property>
+                <property name="alternatingRowColors">
+                 <bool>true</bool>
+                </property>
+                <property name="gridStyle">
+                 <enum>Qt::DashDotDotLine</enum>
+                </property>
+                <property name="sortingEnabled">
+                 <bool>true</bool>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+                <property name="cornerButtonEnabled">
+                 <bool>true</bool>
+                </property>
+                <attribute name="horizontalHeaderMinimumSectionSize">
+                 <number>50</number>
+                </attribute>
+                <attribute name="horizontalHeaderDefaultSectionSize">
+                 <number>150</number>
+                </attribute>
+                <attribute name="verticalHeaderVisible">
+                 <bool>false</bool>
+                </attribute>
+                <attribute name="verticalHeaderHighlightSections">
+                 <bool>false</bool>
+                </attribute>
+                <column>
+                 <property name="text">
+                  <string>&lt;&gt;</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Artikelnummer</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Speicher-Typ</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Anzahl [Stk.]</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Seriennummer</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Nutzbare 
+Speicherkapazität
+[kWh]</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Max. Entladeleistung
+im Dauerbetrieb</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Batterietechnologie</string>
+                 </property>
+                </column>
+               </widget>
+              </item>
+              <item>
                <layout class="QGridLayout" name="gridLayout_15">
-                <item row="0" column="1">
-                 <widget class="QPlainTextEdit" name="bat_storage_type_text">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>30</height>
-                   </size>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="3">
-                 <widget class="QPlainTextEdit" name="bat_technology_text">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>30</height>
-                   </size>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="1">
-                 <widget class="QPlainTextEdit" name="bat_storage_cap_text">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>30</height>
-                   </size>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="0">
-                 <widget class="QLabel" name="energy_storage_type_label">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>30</height>
-                   </size>
-                  </property>
-                  <property name="text">
-                   <string>Technologie der 
-Stromspeicherung:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="0">
-                 <widget class="QLabel" name="max_discharge_pow_label">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>30</height>
-                   </size>
-                  </property>
-                  <property name="text">
-                   <string>Maximale Entladeleistung 
-im Dauerbetrieb:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="0">
-                 <widget class="QLabel" name="bat_storage_cap_label">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>30</height>
-                   </size>
-                  </property>
-                  <property name="text">
-                   <string>Nutzbare
-Speicherkapazität:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="1">
-                 <widget class="QPlainTextEdit" name="energy_storage_type_text">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>30</height>
-                   </size>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="3">
+                <item row="1" column="3">
                  <widget class="QPlainTextEdit" name="bat_storage_SN_text">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
@@ -2076,61 +2232,7 @@ Speicherkapazität:</string>
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="0">
-                 <widget class="QLabel" name="bat_storage_type_label">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>30</height>
-                   </size>
-                  </property>
-                  <property name="text">
-                   <string>Typ:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="3">
-                 <widget class="QPlainTextEdit" name="em_pow_ability_bool_text">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>30</height>
-                   </size>
-                  </property>
-                  <property name="plainText">
-                   <string>Ja/Nein</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="3">
-                 <widget class="QPlainTextEdit" name="bat_commiss_date_text">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>30</height>
-                   </size>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="1">
+                <item row="3" column="1">
                  <widget class="QPlainTextEdit" name="max_discharge_pow_text">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
@@ -2146,46 +2248,7 @@ Speicherkapazität:</string>
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="2">
-                 <widget class="QLabel" name="bat_storage_SN_label">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>30</height>
-                   </size>
-                  </property>
-                  <property name="text">
-                   <string>Seriennummer:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="2">
-                 <widget class="QLabel" name="bat_commiss_date_label">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>30</height>
-                   </size>
-                  </property>
-                  <property name="text">
-                   <string>Datum erstmalige
-Inbetriebnahme:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="2">
+                <item row="3" column="2">
                  <widget class="QLabel" name="em_pow_ability_bool_label">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
@@ -2205,7 +2268,169 @@ bei Netzstörungen: </string>
                   </property>
                  </widget>
                 </item>
-                <item row="3" column="2">
+                <item row="2" column="1">
+                 <widget class="QPlainTextEdit" name="bat_storage_cap_text">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="1">
+                 <widget class="QPlainTextEdit" name="energy_storage_type_text">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="2">
+                 <widget class="QLabel" name="bat_storage_SN_label">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Seriennummer:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QLabel" name="bat_storage_cap_label">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Nutzbare
+Speicherkapazität:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="bat_storage_type_label">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Typ:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="3">
+                 <widget class="QPlainTextEdit" name="bat_technology_text">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="3">
+                 <widget class="QPlainTextEdit" name="bat_commiss_date_text">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="2">
+                 <widget class="QLabel" name="bat_commiss_date_label">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Datum erstmalige
+Inbetriebnahme:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="0">
+                 <widget class="QLabel" name="energy_storage_type_label">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Technologie der 
+Stromspeicherung:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="2">
                  <widget class="QLabel" name="bat_technology_label">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
@@ -2221,6 +2446,61 @@ bei Netzstörungen: </string>
                   </property>
                   <property name="text">
                    <string>Batterietechnologie:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="3">
+                 <widget class="QPlainTextEdit" name="em_pow_ability_bool_text">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="plainText">
+                   <string>Ja/Nein</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="0">
+                 <widget class="QLabel" name="max_discharge_pow_label">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Maximale Entladeleistung 
+im Dauerbetrieb:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QPlainTextEdit" name="bat_storage_type_text">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>30</height>
+                   </size>
                   </property>
                  </widget>
                 </item>
@@ -2243,6 +2523,83 @@ bei Netzstörungen: </string>
                 <property name="text">
                  <string>Ladestation</string>
                 </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTableWidget" name="CHG_point_list">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>200</height>
+                 </size>
+                </property>
+                <property name="autoFillBackground">
+                 <bool>false</bool>
+                </property>
+                <property name="midLineWidth">
+                 <number>1</number>
+                </property>
+                <property name="dragDropOverwriteMode">
+                 <bool>false</bool>
+                </property>
+                <property name="alternatingRowColors">
+                 <bool>true</bool>
+                </property>
+                <property name="gridStyle">
+                 <enum>Qt::DashDotDotLine</enum>
+                </property>
+                <property name="sortingEnabled">
+                 <bool>true</bool>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+                <property name="cornerButtonEnabled">
+                 <bool>true</bool>
+                </property>
+                <attribute name="horizontalHeaderMinimumSectionSize">
+                 <number>50</number>
+                </attribute>
+                <attribute name="horizontalHeaderDefaultSectionSize">
+                 <number>150</number>
+                </attribute>
+                <attribute name="verticalHeaderVisible">
+                 <bool>false</bool>
+                </attribute>
+                <attribute name="verticalHeaderHighlightSections">
+                 <bool>false</bool>
+                </attribute>
+                <column>
+                 <property name="text">
+                  <string>&lt;&gt;</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Artikelnummer</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Ladestations-Typ</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Anzahl [Stk.]</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Seriennummer</string>
+                 </property>
+                </column>
                </widget>
               </item>
               <item>
@@ -3039,9 +3396,9 @@ MaStR erzeugen</string>
        </layout>
       </item>
       <item row="0" column="0">
-       <widget class="QPushButton" name="load_docu_db_data_btn">
+       <widget class="QPushButton" name="load_data_to_device_lists">
         <property name="text">
-         <string>Lade Daten aus Datenbank</string>
+         <string>1. Fülle Gerätelisten (WR-, BWR-, Batterie- und Ladestationsliste)</string>
         </property>
        </widget>
       </item>
