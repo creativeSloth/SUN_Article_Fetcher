@@ -49,7 +49,7 @@
      </sizepolicy>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <property name="iconSize">
      <size>
@@ -466,9 +466,9 @@
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-74</y>
+             <y>-1990</y>
              <width>931</width>
-             <height>2684</height>
+             <height>2820</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_5">
@@ -1329,14 +1329,21 @@
                 </column>
                 <column>
                  <property name="text">
-                  <string>Modulleistung [kWp]</string>
+                  <string>Seriennummer</string>
                  </property>
                 </column>
                 <column>
                  <property name="text">
-                  <string>Seriennummer</string>
+                  <string>Modulleistung [kWp]</string>
                  </property>
                 </column>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="move_none_PV_modules_to_blacklist">
+                <property name="text">
+                 <string>Entferne die markierten Artikel</string>
+                </property>
                </widget>
               </item>
               <item>
@@ -1590,7 +1597,7 @@ WR-Leistung [kW]</string>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="move_to_PV_inverters_blacklist">
+               <widget class="QPushButton" name="move_none_PV_inverters_to_blacklist">
                 <property name="text">
                  <string>Entferne die markierten Artikel</string>
                 </property>
@@ -1953,6 +1960,13 @@ WR-Leistung [kW]</string>
                </widget>
               </item>
               <item>
+               <widget class="QPushButton" name="move_none_BAT_inverters_to_blacklist">
+                <property name="text">
+                 <string>Entferne die markierten Artikel</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <layout class="QGridLayout" name="gridLayout_16">
                 <item row="0" column="1">
                  <widget class="QPlainTextEdit" name="bat_inverter_type_text">
@@ -2212,6 +2226,13 @@ im Dauerbetrieb</string>
                   <string>Batterietechnologie</string>
                  </property>
                 </column>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="move_none_BAT_storage_to_blacklist">
+                <property name="text">
+                 <string>Entferne die markierten Artikel</string>
+                </property>
                </widget>
               </item>
               <item>
@@ -2600,6 +2621,13 @@ im Dauerbetrieb:</string>
                   <string>Seriennummer</string>
                  </property>
                 </column>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="move_none_CHG_point_to_blacklist">
+                <property name="text">
+                 <string>Entferne die markierten Artikel</string>
+                </property>
                </widget>
               </item>
               <item>

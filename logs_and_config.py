@@ -112,5 +112,55 @@ def log_copy_details(self, source_path, target_path, source_files, matching_file
             log_file.write(df.to_csv(index=False))
 
 
-def update_blacklist(self, df, list_name):
-    pass
+def create_blacklist(self):
+    blacklist_path = directory_Handler.get_directories(self)['blacklist_path']
+
+    if os.path.exists(blacklist_path):
+        return
+    config = configparser.ConfigParser()
+
+    # Schreibe die Konfiguration in die Datei
+    with open(blacklist_path, 'w') as blacklist_file:
+        config.write(blacklist_file)
+
+
+def update_blacklist(self, df, list):
+    blacklist_path = directory_Handler.get_directories(self)['blacklist_path']
+
+    config = configparser.ConfigParser()
+
+    # Lade vorhandene Konfiguration, wenn die Datei vorhanden ist
+    if os.path.exists(blacklist_path):
+        config.read(blacklist_path)
+
+    # Erstellen Sie die Sektion, wenn sie noch nicht existiert
+    if not config.has_section(list):
+        config.add_section(list)
+
+    # Überprüfen, ob Artikel bereits vorhanden sind, und nur neue hinzufügen
+    existing_articles = set(config.options(list))
+    for _, row in df.iterrows():
+        article_no = row['article_no']
+        article_name = row['article_name']
+        if article_no not in existing_articles:
+            # Fügen Sie die Daten als Optionen unter der gegebenen Sektion hinzu
+            config.set(list, article_no, article_name)
+
+    # Schreibe die aktualisierte Konfiguration in die Datei
+    with open(blacklist_path, 'w') as blacklist_file:
+        config.write(blacklist_file)
+
+
+def read_blacklist_article_numbers(self, list_name):
+    blacklist_path = directory_Handler.get_directories(self)['blacklist_path']
+    config = configparser.ConfigParser()
+    config.read(blacklist_path)
+    # Überprüfen Sie, ob die angegebene Sektion vorhanden ist
+    article_numbers = []
+    if config.has_section(list_name):
+        # Holen Sie sich alle Schlüssel-Wert-Paare in der Sektion
+        article_numbers = [str(key) for key, _ in config.items(list_name)]
+
+    for number in article_numbers:
+        print(number)
+    return article_numbers

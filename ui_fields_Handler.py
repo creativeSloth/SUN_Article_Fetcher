@@ -155,10 +155,6 @@ def fill_docu_fields(self, df):
      if value[0] != self.ui.project]
 
 
-def fill_device_lists(self, df):
-    fill_PV_inverter_list(self, df)
-
-
 def clear_docu_fields(self):
     [value[0].clear()
      for value in get_mapped_context(self).values()
@@ -206,51 +202,95 @@ def fill_article_list(self, df=None):
         self, list=ui_list, columns=ui_list.columnCount())
 
 
-def fill_PV_inverter_list(self, df=None):
-    ui_list = self.ui.PV_inverters_list
+def fill_device_lists(self, df):
+    fill_specific_device_list(self, df, ui_list=self.ui.PV_modules_list)
+    fill_specific_device_list(self, df, ui_list=self.ui.PV_inverters_list)
+    fill_specific_device_list(self, df, ui_list=self.ui.BAT_inverters_list)
+    fill_specific_device_list(self, df, ui_list=self.ui.BAT_storage_list)
+    fill_specific_device_list(self, df, ui_list=self.ui.CHG_point_list)
+
+    QtWidgets.QMessageBox.information(
+        self, "Abgeschlossen!", "Geräteliste wurden geladen!")
+
+
+def fill_specific_device_list(self, df=None, ui_list=None):
+
     clear_article_list(self, list=ui_list)
+
+    # Laden Sie die Artikelnummern aus der Blacklist
+    blacklist_article_numbers = logs_and_config.read_blacklist_article_numbers(
+        self, list_name=ui_list.objectName())
+
     if df is not None:
-        #!------------------------------------------------
-        print('Dataframe: ' + str(df))
-        for _, row in df.iterrows():
-            tw_row = ui_list.rowCount()
-            ui_list.insertRow(tw_row)
+        for _, df_row in df.iterrows():
+            # Überprüfen Sie, ob die Artikelnummer nicht in der Blacklist enthalten ist
+            print(str(df_row.iloc[0]))
+            if str(df_row.iloc[0]) not in blacklist_article_numbers:
+                tw_row = ui_list.rowCount()
+                ui_list.insertRow(tw_row)
 
-            # Spalte 1 (statisch) mit einer Checkbox
-            checkbox_item = QtWidgets.QTableWidgetItem()
-            checkbox_item.setFlags(
-                QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
-            checkbox_item.setCheckState(QtCore.Qt.Checked)
+                # Spalte 1 (statisch) mit einer Checkbox
+                checkbox_item = QtWidgets.QTableWidgetItem()
+                checkbox_item.setFlags(
+                    QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
+                checkbox_item.setCheckState(QtCore.Qt.Checked)
 
-            # Spalte 1 mit der CheckBox
-            ui_list.setItem(tw_row, 0, checkbox_item)
+                # Spalte 1 mit der CheckBox
+                ui_list.setItem(tw_row, 0, checkbox_item)
 
-            # Spalte 2 (dynamisch) mit den Werten aus der Spalte 0 des DataFrames
-            ui_list.setItem(
-                tw_row, 1, QtWidgets.QTableWidgetItem(str(row.iloc[0])))
+                # Spalte 2 (dynamisch) mit den Werten aus der Spalte 0 des DataFrames
+                ui_list.setItem(
+                    tw_row, 1, QtWidgets.QTableWidgetItem(str(df_row.iloc[0])))
 
-            # Spalte 3 (dynamisch) mit den Werten aus der Spalte 1 des DataFrames
-            ui_list.setItem(
-                tw_row, 2, QtWidgets.QTableWidgetItem(str(row.iloc[1])))
+                # Spalte 3 (dynamisch) mit den Werten aus der Spalte 1 des DataFrames
+                ui_list.setItem(
+                    tw_row, 2, QtWidgets.QTableWidgetItem(str(df_row.iloc[1])))
 
-            # Spalte 4 (dynamisch) mit den Werten aus der Spalte 2 des DataFrames
-            ui_list.setItem(
-                tw_row, 3, QtWidgets.QTableWidgetItem(str(row.iloc[2])))
+                # Spalte 4 (dynamisch) mit den Werten aus der Spalte 2 des DataFrames
+                ui_list.setItem(
+                    tw_row, 3, QtWidgets.QTableWidgetItem(str(df_row.iloc[2])))
 
-            # Spalte 5 (dynamisch) mit den Werten aus der Spalte 3 des DataFrames
-            ui_list.setItem(
-                tw_row, 4, QtWidgets.QTableWidgetItem(str(row.iloc[3])))
-
-            # Spalte 6 (dynamisch) mit den Werten aus der Spalte 4 des DataFrames
-            ui_list.setItem(
-                tw_row, 5, QtWidgets.QTableWidgetItem('noch keine Informationsverknüpfung vorhanden'))
-
+                # Spalte 5 (dynamisch) mit den Werten aus der Spalte 3 des DataFrames
+                ui_list.setItem(
+                    tw_row, 4, QtWidgets.QTableWidgetItem(str(df_row.iloc[3])))
+                ui_list_to_df_mapping(self, ui_list, tw_row, df_row)
     # Anzahl der Spalten ist flexibel, muss später angepasst hinzugefügt werden
     resize_columns_to_contents(
         self, list=ui_list, columns=ui_list.columnCount())
 
-    QtWidgets.QMessageBox.information(
-        self, "Abgeschlossen!", "PV-Inverter Liste geladen!")
+
+def ui_list_to_df_mapping(self, ui_list, tw_row=None, df_row=None):
+    if ui_list == self.ui.PV_modules_list:
+        # Spalte 6 (dynamisch) mit den Werten aus der Spalte 4 des DataFrames
+        ui_list.setItem(
+            tw_row, 5, QtWidgets.QTableWidgetItem('Hier wird zukünftig die Modulleistung gezogen'))
+
+    if ui_list == self.ui.PV_inverters_list:
+        # Spalte 6 (dynamisch) mit den Werten aus der Spalte 4 des DataFrames
+        ui_list.setItem(
+            tw_row, 5, QtWidgets.QTableWidgetItem('Hier wird zukünftig die WR-AC-Leistung gezogen'))
+
+    if ui_list == self.ui.BAT_inverters_list:
+        # Spalte 6 (dynamisch) mit den Werten aus der Spalte 4 des DataFrames
+        ui_list.setItem(
+            tw_row, 5, QtWidgets.QTableWidgetItem('Hier wird zukünftig die WR-AC-Entladeleistung gezogen'))
+        # Spalte 7 (dynamisch) mit den Werten aus der Spalte 4 des DataFrames
+        ui_list.setItem(
+            tw_row, 6, QtWidgets.QTableWidgetItem('AC-Kopplung'))
+
+    if ui_list == self.ui.BAT_storage_list:
+        # Spalte 6 (dynamisch) mit den Werten aus der Spalte 4 des DataFrames
+        ui_list.setItem(
+            tw_row, 5, QtWidgets.QTableWidgetItem('Hier wird zukünftig die nutzbare Speicherkapazität gezogen'))
+        # Spalte 7 (dynamisch) mit den Werten aus der Spalte 4 des DataFrames
+        ui_list.setItem(
+            tw_row, 7, QtWidgets.QTableWidgetItem('Hier wird zukünftig die maximale Entladeleistung gezogen'))
+        # Spalte 8 (dynamisch) mit den Werten aus der Spalte 4 des DataFrames
+        ui_list.setItem(
+            tw_row, 8, QtWidgets.QTableWidgetItem('Hier wird zukünftig die Batterietechnologie gezogen'))
+
+    if ui_list == self.ui.CHG_point_list:
+        pass
 
 
 def remove_articles_from_list(self, list):

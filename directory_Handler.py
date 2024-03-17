@@ -40,12 +40,15 @@ def get_directories(self):
     doc2_path = os.path.join(target_path_2, doc2_name)
 
     # ***************************  Config and LOGGING  **********************************************************
-    # Pfad zur Config
-    config_path = os.path.join(script_dir, 'config.ini')
+
     # Pfad zum Unterordner "logs"
     log_subfolder_path = os.path.join(script_dir, "logs")
     log_sub2folder_path = os.path.join(
         log_subfolder_path, "hist")
+    # Pfad zur Config
+    config_path = os.path.join(log_subfolder_path, 'config.ini')
+    # Pfad zur Config
+    blacklist_path = os.path.join(log_subfolder_path, 'blacklist.ini')
 
     # ************************************************************************************************
 
@@ -59,7 +62,8 @@ def get_directories(self):
         'doc2_path': doc2_path,
         'log_subfolder_path': log_subfolder_path,
         'log_sub2folder_path': log_sub2folder_path,
-        'config_path': config_path
+        'config_path': config_path,
+        'blacklist_path': blacklist_path
     }
 
     return paths_dict

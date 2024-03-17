@@ -208,7 +208,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, -74, 931, 2684))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, -1990, 931, 2820))
         self.gridLayout_5 = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_5.setSpacing(9)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
@@ -586,6 +586,11 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.PV_modules_list)
 
+        self.move_none_PV_modules_to_blacklist = QPushButton(self.scrollAreaWidgetContents)
+        self.move_none_PV_modules_to_blacklist.setObjectName(u"move_none_PV_modules_to_blacklist")
+
+        self.verticalLayout_3.addWidget(self.move_none_PV_modules_to_blacklist)
+
         self.gridLayout_13 = QGridLayout()
         self.gridLayout_13.setObjectName(u"gridLayout_13")
         self.module_count_text = QPlainTextEdit(self.scrollAreaWidgetContents)
@@ -687,10 +692,10 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.PV_inverters_list)
 
-        self.move_to_PV_inverters_blacklist = QPushButton(self.scrollAreaWidgetContents)
-        self.move_to_PV_inverters_blacklist.setObjectName(u"move_to_PV_inverters_blacklist")
+        self.move_none_PV_inverters_to_blacklist = QPushButton(self.scrollAreaWidgetContents)
+        self.move_none_PV_inverters_to_blacklist.setObjectName(u"move_none_PV_inverters_to_blacklist")
 
-        self.verticalLayout_3.addWidget(self.move_to_PV_inverters_blacklist)
+        self.verticalLayout_3.addWidget(self.move_none_PV_inverters_to_blacklist)
 
         self.horizontalLayout_4 = QHBoxLayout()
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
@@ -842,6 +847,11 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.BAT_inverters_list)
 
+        self.move_none_BAT_inverters_to_blacklist = QPushButton(self.scrollAreaWidgetContents)
+        self.move_none_BAT_inverters_to_blacklist.setObjectName(u"move_none_BAT_inverters_to_blacklist")
+
+        self.verticalLayout_3.addWidget(self.move_none_BAT_inverters_to_blacklist)
+
         self.gridLayout_16 = QGridLayout()
         self.gridLayout_16.setObjectName(u"gridLayout_16")
         self.bat_inverter_type_text = QPlainTextEdit(self.scrollAreaWidgetContents)
@@ -956,6 +966,11 @@ class Ui_MainWindow(object):
         self.BAT_storage_list.verticalHeader().setHighlightSections(False)
 
         self.verticalLayout_3.addWidget(self.BAT_storage_list)
+
+        self.move_none_BAT_storage_to_blacklist = QPushButton(self.scrollAreaWidgetContents)
+        self.move_none_BAT_storage_to_blacklist.setObjectName(u"move_none_BAT_storage_to_blacklist")
+
+        self.verticalLayout_3.addWidget(self.move_none_BAT_storage_to_blacklist)
 
         self.gridLayout_15 = QGridLayout()
         self.gridLayout_15.setObjectName(u"gridLayout_15")
@@ -1129,6 +1144,11 @@ class Ui_MainWindow(object):
         self.CHG_point_list.verticalHeader().setHighlightSections(False)
 
         self.verticalLayout_3.addWidget(self.CHG_point_list)
+
+        self.move_none_CHG_point_to_blacklist = QPushButton(self.scrollAreaWidgetContents)
+        self.move_none_CHG_point_to_blacklist.setObjectName(u"move_none_CHG_point_to_blacklist")
+
+        self.verticalLayout_3.addWidget(self.move_none_CHG_point_to_blacklist)
 
         self.gridLayout_17 = QGridLayout()
         self.gridLayout_17.setObjectName(u"gridLayout_17")
@@ -1711,7 +1731,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
         self.load_articles_file_btn.setDefault(True)
         self.load_articles_db_btn.setDefault(True)
         self.source_path_btn.setDefault(True)
@@ -1777,9 +1797,10 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem7 = self.PV_modules_list.horizontalHeaderItem(3)
         ___qtablewidgetitem7.setText(QCoreApplication.translate("MainWindow", u"Anzahl [Stk.]", None));
         ___qtablewidgetitem8 = self.PV_modules_list.horizontalHeaderItem(4)
-        ___qtablewidgetitem8.setText(QCoreApplication.translate("MainWindow", u"Modulleistung [kWp]", None));
+        ___qtablewidgetitem8.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
         ___qtablewidgetitem9 = self.PV_modules_list.horizontalHeaderItem(5)
-        ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
+        ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"Modulleistung [kWp]", None));
+        self.move_none_PV_modules_to_blacklist.setText(QCoreApplication.translate("MainWindow", u"Entferne die markierten Artikel", None))
         self.module_count_label.setText(QCoreApplication.translate("MainWindow", u"Anzahl der Module:", None))
         self.mounting_type_label.setText(QCoreApplication.translate("MainWindow", u"Montagesystem:", None))
         self.module_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
@@ -1798,7 +1819,7 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem15 = self.PV_inverters_list.horizontalHeaderItem(5)
         ___qtablewidgetitem15.setText(QCoreApplication.translate("MainWindow", u"Zugeordnete \n"
 "WR-Leistung [kW]", None));
-        self.move_to_PV_inverters_blacklist.setText(QCoreApplication.translate("MainWindow", u"Entferne die markierten Artikel", None))
+        self.move_none_PV_inverters_to_blacklist.setText(QCoreApplication.translate("MainWindow", u"Entferne die markierten Artikel", None))
         self.hybrid_inverter_bool_label.setText(QCoreApplication.translate("MainWindow", u"Gemeinsamer PV-Batterie-\n"
 "Wechselricher:", None))
         self.hybrid_inverter_bool_text.setPlainText(QCoreApplication.translate("MainWindow", u"Ja/Nein", None))
@@ -1824,6 +1845,7 @@ class Ui_MainWindow(object):
 "WR-Leistung [kW]", None));
         ___qtablewidgetitem22 = self.BAT_inverters_list.horizontalHeaderItem(6)
         ___qtablewidgetitem22.setText(QCoreApplication.translate("MainWindow", u"Art der Kopplung", None));
+        self.move_none_BAT_inverters_to_blacklist.setText(QCoreApplication.translate("MainWindow", u"Entferne die markierten Artikel", None))
         self.bat_inverter_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
         self.coupling_type_label.setText(QCoreApplication.translate("MainWindow", u"Art der Kopplung:", None))
         self.bat_inverter_power_label.setText(QCoreApplication.translate("MainWindow", u"Zugeordnete\n"
@@ -1850,6 +1872,7 @@ class Ui_MainWindow(object):
 "im Dauerbetrieb", None));
         ___qtablewidgetitem30 = self.BAT_storage_list.horizontalHeaderItem(7)
         ___qtablewidgetitem30.setText(QCoreApplication.translate("MainWindow", u"Batterietechnologie", None));
+        self.move_none_BAT_storage_to_blacklist.setText(QCoreApplication.translate("MainWindow", u"Entferne die markierten Artikel", None))
         self.em_pow_ability_bool_label.setText(QCoreApplication.translate("MainWindow", u"Notstromf\u00e4higkeit\n"
 "bei Netzst\u00f6rungen: ", None))
         self.bat_storage_SN_label.setText(QCoreApplication.translate("MainWindow", u"Seriennummer:", None))
@@ -1875,6 +1898,7 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem34.setText(QCoreApplication.translate("MainWindow", u"Anzahl [Stk.]", None));
         ___qtablewidgetitem35 = self.CHG_point_list.horizontalHeaderItem(4)
         ___qtablewidgetitem35.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
+        self.move_none_CHG_point_to_blacklist.setText(QCoreApplication.translate("MainWindow", u"Entferne die markierten Artikel", None))
         self.charging_point_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
         self.charging_point_SN_label.setText(QCoreApplication.translate("MainWindow", u"Seriennummer:", None))
         self.headline_07.setText(QCoreApplication.translate("MainWindow", u"Anschlussart", None))

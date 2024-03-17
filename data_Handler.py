@@ -62,10 +62,10 @@ def execute_query(self, query):
         # Überprüfe, ob die Verbindung erfolgreich hergestellt wurde
 
         # Beispiel-SQL-Abfrage
-        if sql_query is None or sql_query == "":
-            sql_query = "SELECT * FROM articles WHERE project_name = '{{project}}';"
-            self.ui.query_input.setPlainText(sql_query)
-            self.ui.query_2_input.setPlainText(sql_query)
+        # if sql_query is None or sql_query == "":
+        #     sql_query = "SELECT * FROM articles WHERE project_name = '{{project}}';"
+        #     self.ui.query_input.setPlainText(sql_query)
+        #     self.ui.query_2_input.setPlainText(sql_query)
 
         if "{{project}}" in sql_query:
             sql_query = sql_query.replace(
