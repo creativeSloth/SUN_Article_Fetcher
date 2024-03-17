@@ -334,3 +334,11 @@ def resize_columns_to_contents(self, list, columns):
     header = list.horizontalHeader()
     for i in range(columns):
         header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
+
+
+def check_specs_in_device_tables(self):
+    section = ''
+    option = ''
+    value = ''
+    logs_and_config.update_device_related_storage_list(
+        self, 'device_specs_list_path', section, option, value)

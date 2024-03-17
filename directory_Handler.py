@@ -49,6 +49,8 @@ def get_directories(self):
     config_path = os.path.join(log_subfolder_path, 'config.ini')
     # Pfad zur Config
     blacklist_path = os.path.join(log_subfolder_path, 'blacklist.ini')
+    device_specs_list_path = os.path.join(
+        log_subfolder_path, 'device_specs_list.ini')
 
     # ************************************************************************************************
 
@@ -63,7 +65,8 @@ def get_directories(self):
         'log_subfolder_path': log_subfolder_path,
         'log_sub2folder_path': log_sub2folder_path,
         'config_path': config_path,
-        'blacklist_path': blacklist_path
+        'blacklist_path': blacklist_path,
+        'device_specs_list_path': device_specs_list_path
     }
 
     return paths_dict

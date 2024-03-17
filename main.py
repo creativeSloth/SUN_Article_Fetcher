@@ -85,7 +85,10 @@ class MainWindow(QtWidgets.QMainWindow):
     def initialize(self):
         self.previous_project_text = ui_fields_Handler.get_project(self)
         logs_and_config.create_config_file(self)
-        logs_and_config.create_blacklist(self)
+        logs_and_config.create_device_related_storage_list(
+            self, storage_file='blacklist_path')
+        logs_and_config.create_device_related_storage_list(
+            self, storage_file='device_specs_list_path')
         ui_fields_Handler.config_to_fields(self)
 
         # query_input-Box verstecken
@@ -226,6 +229,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 # * * * * * * * * * * * * * * * * * Documentation-module * * * * * * * * * * * * * * * *
 
+
     def on_btn_create_docs_clicked(self):
         self.replace_fields_in_doc1()
 
@@ -256,6 +260,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self, list=self.ui.CHG_point_list)
 
     def on_load_docu_data_from_db_btn_click(self):
+        ui_fields_Handler.check_specs_in_device_tables(self)
+
         df = data_Handler.execute_query(self, query='sql2')
         logs_and_config.update_config_file(self, 'Abfrage', 'sql2',
                                            data_Handler.get_sql_query(self)['sql2'])

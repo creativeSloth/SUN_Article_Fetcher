@@ -112,18 +112,6 @@ def log_copy_details(self, source_path, target_path, source_files, matching_file
             log_file.write(df.to_csv(index=False))
 
 
-def create_blacklist(self):
-    blacklist_path = directory_Handler.get_directories(self)['blacklist_path']
-
-    if os.path.exists(blacklist_path):
-        return
-    config = configparser.ConfigParser()
-
-    # Schreibe die Konfiguration in die Datei
-    with open(blacklist_path, 'w') as blacklist_file:
-        config.write(blacklist_file)
-
-
 def update_blacklist(self, df, list):
     blacklist_path = directory_Handler.get_directories(self)['blacklist_path']
 
@@ -164,3 +152,25 @@ def read_blacklist_article_numbers(self, list_name):
     for number in article_numbers:
         print(number)
     return article_numbers
+
+
+def create_device_related_storage_list(self, storage_file=None):
+    related_path = directory_Handler.get_directories(self)[storage_file]
+
+    if os.path.exists(related_path):
+        return
+    config = configparser.ConfigParser()
+
+    # Schreibe die Konfiguration in die Datei
+    with open(related_path, 'w') as related_file:
+        config.write(related_file)
+
+
+def update_device_related_storage_list(self, storage_file, section, option, value):
+    file_path = directory_Handler.get_directories(self)[storage_file]
+    store_file = configparser.ConfigParser()
+    store_file.read(file_path)
+    store_file[section][option] = value
+
+    with open(file_path, 'w') as file:
+        store_file.write(file)
