@@ -149,8 +149,6 @@ def read_blacklist_article_numbers(self, list_name):
         # Holen Sie sich alle Schlüssel-Wert-Paare in der Sektion
         article_numbers = [str(key) for key, _ in config.items(list_name)]
 
-    for number in article_numbers:
-        print(number)
     return article_numbers
 
 
@@ -166,11 +164,21 @@ def create_device_related_storage_list(self, storage_file=None):
         config.write(related_file)
 
 
-def update_device_related_storage_list(self, storage_file, section, option, value):
+def update_device_related_storage_list(self, storage_file, data_set):
     file_path = directory_Handler.get_directories(self)[storage_file]
     store_file = configparser.ConfigParser()
-    store_file.read(file_path)
-    store_file[section][option] = value
+
+    # Lade vorhandene Konfiguration, wenn die Datei vorhanden ist
+    if os.path.exists(storage_file):
+        store_file.read(storage_file)
+
+    for section, option, value in data_set:
+        # Erstellen Sie die Sektion, wenn sie noch nicht existiert
+        if not store_file.has_section(section):
+            store_file.add_section(section)
+
+        # Fügen den Wert unter der gegebenen Sektion und option hinzu
+        store_file.set(section, option, value)
 
     with open(file_path, 'w') as file:
         store_file.write(file)

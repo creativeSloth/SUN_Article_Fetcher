@@ -224,7 +224,6 @@ def fill_specific_device_list(self, df=None, ui_list=None):
     if df is not None:
         for _, df_row in df.iterrows():
             # Überprüfen Sie, ob die Artikelnummer nicht in der Blacklist enthalten ist
-            print(str(df_row.iloc[0]))
             if str(df_row.iloc[0]) not in blacklist_article_numbers:
                 tw_row = ui_list.rowCount()
                 ui_list.insertRow(tw_row)
@@ -336,9 +335,68 @@ def resize_columns_to_contents(self, list, columns):
         header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
 
 
+def get_article_no_column_index(table):
+    """Suche den Index der 'Artikelnummer'-Spalte in der Tabelle."""
+    for column in range(table.columnCount()):
+        if table.horizontalHeaderItem(column).text() == 'Artikelnummer':
+            return column
+    return None
+
+
+def collect_data_from_table(table, article_no_col_index, discard_columns):
+    """Sammle Daten aus der Tabelle."""
+    data_set = set()
+    for row in range(table.rowCount()):
+        section_item = table.item(row, article_no_col_index)
+        if section_item is not None:
+            section = section_item.text()
+            for column in range(table.columnCount()):
+                column_header = table.horizontalHeaderItem(column).text()
+                if column_header not in discard_columns:
+                    option_item = table.horizontalHeaderItem(column)
+                    value_item = table.item(row, column)
+                    if option_item is not None and value_item is not None:
+                        option = option_item.text()
+                        value = value_item.text() if value_item.text() is not None else ""
+                        data_set.add((section, option, value))
+    return data_set
+
+
 def check_specs_in_device_tables(self):
-    section = ''
-    option = ''
-    value = ''
+    # Alle Tabellen mit PV-Geräten
+    device_tables = [
+        self.ui.PV_modules_list,
+        self.ui.PV_inverters_list,
+        self.ui.BAT_inverters_list,
+        self.ui.BAT_storage_list,
+        self.ui.CHG_point_list
+    ]
+    discard_columns = ['<>',
+                       'Anzahl [Stk.]',
+                       'Seriennummer',
+                       'Artikelnummer']
+
+    # Suche den Index der 'Artikelnummer'-Spalte in einer der Tabellen
+    article_no_col_index = None
+    for table in device_tables:
+        article_no_col_index = get_article_no_column_index(table)
+        if article_no_col_index is not None:
+            break
+
+    # Beende die Funktion, wenn die 'Artikelnummer'-Spalte nicht gefunden wurde
+    if article_no_col_index is None:
+        return
+
+    # Sammle Daten aus allen Tabellen
+    data_set = set()
+    for table in device_tables:
+        data_set |= collect_data_from_table(
+            table, article_no_col_index, discard_columns)
+
+    # Sortiere das data_set nach der section
+    sorted_data_set = sorted(data_set, key=lambda x: x[0])
+
+    # Aktualisiere die Gerätespezifikationsliste
     logs_and_config.update_device_related_storage_list(
-        self, 'device_specs_list_path', section, option, value)
+        self, 'device_specs_list_path', sorted_data_set
+    )
