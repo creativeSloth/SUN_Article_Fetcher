@@ -207,5 +207,5 @@ def read_device_related_storage_list(self, storage_file, section, option):
 def change_str_to_config_format(string):
     string = string.replace('[', '<')
     string = string.replace(']', '>')
-    string = string.replace('\n', 'chr(13)')
+    string = string.replace('\n', '')
     return string
