@@ -195,7 +195,6 @@ def read_device_related_storage_list(self, storage_file, section, option):
     store_file = configparser.ConfigParser()
     store_file.read(file_path)
     # Überprüfen Sie, ob die angegebene Sektion vorhanden ist
-    print(option)
     if store_file.has_section(section):
         option = change_str_to_config_format(option)
         if store_file.has_option(section, option):
