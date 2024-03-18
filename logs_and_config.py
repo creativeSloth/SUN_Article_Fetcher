@@ -111,6 +111,8 @@ def log_copy_details(self, source_path, target_path, source_files, matching_file
         if df is not None:
             log_file.write(df.to_csv(index=False))
 
+#! Vllt die folgende Funktion mit "update_device_related_storage_list()" vereinen?
+
 
 def update_blacklist(self, df, list):
     blacklist_path = directory_Handler.get_directories(self)['blacklist_path']
@@ -177,8 +179,34 @@ def update_device_related_storage_list(self, storage_file, data_set):
         if not store_file.has_section(section):
             store_file.add_section(section)
 
+        option = change_str_to_config_format(option)
+
         # Fügen den Wert unter der gegebenen Sektion und option hinzu
         store_file.set(section, option, value)
 
     with open(file_path, 'w') as file:
         store_file.write(file)
+
+
+def read_device_related_storage_list(self, storage_file, section, option):
+    file_path = directory_Handler.get_directories(
+        self)[storage_file]
+
+    store_file = configparser.ConfigParser()
+    store_file.read(file_path)
+    # Überprüfen Sie, ob die angegebene Sektion vorhanden ist
+    print(option)
+    if store_file.has_section(section):
+        option = change_str_to_config_format(option)
+        if store_file.has_option(section, option):
+            value = store_file[section][option]
+            if value is not None and value != '':
+                return value
+            return None
+
+
+def change_str_to_config_format(string):
+    string = string.replace('[', '<')
+    string = string.replace(']', '>')
+    string = string.replace('\n', 'chr(13)')
+    return string

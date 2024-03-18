@@ -254,6 +254,7 @@ def fill_specific_device_list(self, df=None, ui_list=None):
                     tw_row, 4, QtWidgets.QTableWidgetItem(str(df_row.iloc[3])))
                 ui_list_to_df_mapping(self, ui_list, tw_row, df_row)
     # Anzahl der Spalten ist flexibel, muss später angepasst hinzugefügt werden
+    fill_device_specs_in_device_tables(self, ui_list)
     resize_columns_to_contents(
         self, list=ui_list, columns=ui_list.columnCount())
 
@@ -335,11 +336,12 @@ def resize_columns_to_contents(self, list, columns):
         header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
 
 
-def get_article_no_column_index(table):
+def get_column_index(table, column):
     """Suche den Index der 'Artikelnummer'-Spalte in der Tabelle."""
-    for column in range(table.columnCount()):
-        if table.horizontalHeaderItem(column).text() == 'Artikelnummer':
-            return column
+    column_index = None
+    for column_index in range(table.columnCount()):
+        if table.horizontalHeaderItem(column_index).text() == column:
+            return column_index
     return None
 
 
@@ -362,7 +364,7 @@ def collect_data_from_table(table, article_no_col_index, discard_columns):
     return data_set
 
 
-def check_specs_in_device_tables(self):
+def get_device_tables(self):
     # Alle Tabellen mit PV-Geräten
     device_tables = [
         self.ui.PV_modules_list,
@@ -371,27 +373,35 @@ def check_specs_in_device_tables(self):
         self.ui.BAT_storage_list,
         self.ui.CHG_point_list
     ]
+    return device_tables
+
+
+def get_fixed_val_columns():
     discard_columns = ['<>',
                        'Anzahl [Stk.]',
                        'Seriennummer',
                        'Artikelnummer']
+    return discard_columns
 
-    # Suche den Index der 'Artikelnummer'-Spalte in einer der Tabellen
-    article_no_col_index = None
-    for table in device_tables:
-        article_no_col_index = get_article_no_column_index(table)
-        if article_no_col_index is not None:
-            break
 
-    # Beende die Funktion, wenn die 'Artikelnummer'-Spalte nicht gefunden wurde
-    if article_no_col_index is None:
-        return
+def check_specs_in_device_tables(self):
 
-    # Sammle Daten aus allen Tabellen
+    device_tables = get_device_tables(self)
+    fixed_val_columns = get_fixed_val_columns()
+
     data_set = set()
     for table in device_tables:
+        # Suche den Index der 'Artikelnummer'-Spalte in einer der Tabellen
+
+        article_no_col_index = get_column_index(
+            table, 'Artikelnummer')
+
+        # Beende die Funktion, wenn die 'Artikelnummer'-Spalte nicht gefunden wurde
+        if article_no_col_index is None:
+            continue
+
         data_set |= collect_data_from_table(
-            table, article_no_col_index, discard_columns)
+            table, article_no_col_index, fixed_val_columns)
 
     # Sortiere das data_set nach der section
     sorted_data_set = sorted(data_set, key=lambda x: x[0])
@@ -400,3 +410,23 @@ def check_specs_in_device_tables(self):
     logs_and_config.update_device_related_storage_list(
         self, 'device_specs_list_path', sorted_data_set
     )
+
+
+def fill_device_specs_in_device_tables(self, ui_list):
+
+    fixed_val_columns = get_fixed_val_columns()
+
+    # Finde Spaltenindex der Artikelnummer
+    article_no_col_index = get_column_index(
+        ui_list, 'Artikelnummer')
+
+    for row in range(ui_list.rowCount()):
+        for column in range(ui_list.columnCount()):
+            column_header = ui_list.horizontalHeaderItem(column).text()
+            if column_header not in fixed_val_columns:
+                article_no = ui_list.item(row, article_no_col_index).text()
+                value = logs_and_config.read_device_related_storage_list(
+                    self, 'device_specs_list_path', article_no, column_header)
+                if value is not None:
+                    ui_list.setItem(
+                        row, column, QtWidgets.QTableWidgetItem(value))
