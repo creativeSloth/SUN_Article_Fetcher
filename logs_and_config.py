@@ -8,6 +8,7 @@ import directory_Handler
 
 
 def create_config_file(self):
+    directory_Handler.set_directories(self)
     config_path = directory_Handler.get_directories(self)['config_path']
 
     if os.path.exists(config_path):
