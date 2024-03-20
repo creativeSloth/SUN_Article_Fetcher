@@ -55,6 +55,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.ui.load_data_to_device_lists.clicked.connect(
             self.on_load_data_to_device_list_click)
+        self.ui.load_docu_db_data_btn.clicked.connect(
+            self.on_load_docu_data_from_db_btn_click)
 
         self.ui.move_none_PV_modules_to_blacklist.clicked.connect(
             self.on_move_none_PV_modules_to_blacklist_click)
@@ -67,8 +69,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.move_none_CHG_point_to_blacklist.clicked.connect(
             self.on_move_none_CHG_point_to_blacklist_click)
 
-        self.ui.load_docu_db_data_btn.clicked.connect(
-            self.on_load_docu_data_from_db_btn_click)
         self.ui.sql_query_2_btn.clicked.connect(
             self.on_sql_query_2_btn_click)
         self.ui.source_btn_matstr.clicked.connect(

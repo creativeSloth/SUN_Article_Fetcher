@@ -148,6 +148,15 @@ def read_data_from_file(file_path):
         return read_ods(file_path)
 
 
+def agregate_data_from_device_list(device_list, column_index):
+    value = ''
+    for row in range(device_list.rowCount()):
+        if not device_list.item(row, column_index) == None:
+            value = value + device_list.item(row, column_index).text() + '\n'
+    value = value.rstrip('\n')
+    return value
+
+
 def get_inv_types(self):
 
     pass
