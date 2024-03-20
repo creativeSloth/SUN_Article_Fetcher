@@ -50,8 +50,6 @@ class MainWindow(QtWidgets.QMainWindow):
             self.on_sql_query_btn_click)
 
         self.ui.project.textChanged.connect(self.on_project_text_changed)
-        self.ui.articles_list.horizontalHeader(
-        ).sortIndicatorChanged.connect(ui_fields_Handler.sort_table)
 
         #  *********************************** Mapping buttons for "Documentation"- module *****************************************
 

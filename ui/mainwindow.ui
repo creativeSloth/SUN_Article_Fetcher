@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
+    <width>1900</width>
     <height>1000</height>
    </rect>
   </property>
@@ -38,8 +38,8 @@
      <rect>
       <x>8</x>
       <y>121</y>
-      <width>971</width>
-      <height>800</height>
+      <width>1881</width>
+      <height>841</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -205,6 +205,9 @@
         </property>
         <property name="gridStyle">
          <enum>Qt::SolidLine</enum>
+        </property>
+        <property name="sortingEnabled">
+         <bool>true</bool>
         </property>
         <property name="wordWrap">
          <bool>false</bool>
@@ -445,10 +448,53 @@
       <string>Doku gem. MatStR</string>
      </attribute>
      <layout class="QGridLayout" name="gridLayout_7">
-      <item row="1" column="0">
+      <item row="1" column="0" alignment="Qt::AlignLeft">
        <widget class="QPushButton" name="load_docu_db_data_btn">
+        <property name="minimumSize">
+         <size>
+          <width>300</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>200</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="mouseTracking">
+         <bool>true</bool>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::StrongFocus</enum>
+        </property>
+        <property name="contextMenuPolicy">
+         <enum>Qt::NoContextMenu</enum>
+        </property>
+        <property name="acceptDrops">
+         <bool>false</bool>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
         <property name="text">
-         <string>2. Fülle Datenfelder</string>
+         <string>2. Lade zusammengefasste Gerätelisten und sonstige 
+Daten in die offenen Formularfelder</string>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="default">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
         </property>
        </widget>
       </item>
@@ -462,7 +508,7 @@
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>300</height>
+            <height>500</height>
            </size>
           </property>
           <property name="widgetResizable">
@@ -472,9 +518,9 @@
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-2052</y>
-             <width>931</width>
-             <height>2820</height>
+             <y>0</y>
+             <width>1841</width>
+             <height>3820</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_5">
@@ -1274,20 +1320,35 @@
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
-                  <height>200</height>
+                  <height>400</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>1800</width>
+                  <height>16777215</height>
                  </size>
                 </property>
                 <property name="autoFillBackground">
                  <bool>false</bool>
                 </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
                 <property name="midLineWidth">
                  <number>1</number>
+                </property>
+                <property name="sizeAdjustPolicy">
+                 <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
                 </property>
                 <property name="dragDropOverwriteMode">
                  <bool>false</bool>
                 </property>
                 <property name="alternatingRowColors">
                  <bool>true</bool>
+                </property>
+                <property name="selectionMode">
+                 <enum>QAbstractItemView::SingleSelection</enum>
                 </property>
                 <property name="gridStyle">
                  <enum>Qt::DashDotDotLine</enum>
@@ -1296,10 +1357,10 @@
                  <bool>true</bool>
                 </property>
                 <property name="wordWrap">
-                 <bool>true</bool>
+                 <bool>false</bool>
                 </property>
                 <property name="cornerButtonEnabled">
-                 <bool>true</bool>
+                 <bool>false</bool>
                 </property>
                 <attribute name="horizontalHeaderMinimumSectionSize">
                  <number>50</number>
@@ -1530,20 +1591,35 @@
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
-                  <height>200</height>
+                  <height>400</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>1800</width>
+                  <height>16777215</height>
                  </size>
                 </property>
                 <property name="autoFillBackground">
                  <bool>false</bool>
                 </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
                 <property name="midLineWidth">
                  <number>1</number>
+                </property>
+                <property name="sizeAdjustPolicy">
+                 <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
                 </property>
                 <property name="dragDropOverwriteMode">
                  <bool>false</bool>
                 </property>
                 <property name="alternatingRowColors">
                  <bool>true</bool>
+                </property>
+                <property name="selectionMode">
+                 <enum>QAbstractItemView::SingleSelection</enum>
                 </property>
                 <property name="gridStyle">
                  <enum>Qt::DashDotDotLine</enum>
@@ -1552,10 +1628,10 @@
                  <bool>true</bool>
                 </property>
                 <property name="wordWrap">
-                 <bool>true</bool>
+                 <bool>false</bool>
                 </property>
                 <property name="cornerButtonEnabled">
-                 <bool>true</bool>
+                 <bool>false</bool>
                 </property>
                 <attribute name="horizontalHeaderMinimumSectionSize">
                  <number>50</number>
@@ -1888,20 +1964,35 @@ Wechselrichterleistung [kW]:</string>
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
-                  <height>200</height>
+                  <height>400</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>1800</width>
+                  <height>16777215</height>
                  </size>
                 </property>
                 <property name="autoFillBackground">
                  <bool>false</bool>
                 </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
                 <property name="midLineWidth">
                  <number>1</number>
+                </property>
+                <property name="sizeAdjustPolicy">
+                 <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
                 </property>
                 <property name="dragDropOverwriteMode">
                  <bool>false</bool>
                 </property>
                 <property name="alternatingRowColors">
                  <bool>true</bool>
+                </property>
+                <property name="selectionMode">
+                 <enum>QAbstractItemView::SingleSelection</enum>
                 </property>
                 <property name="gridStyle">
                  <enum>Qt::DashDotDotLine</enum>
@@ -1910,10 +2001,10 @@ Wechselrichterleistung [kW]:</string>
                  <bool>true</bool>
                 </property>
                 <property name="wordWrap">
-                 <bool>true</bool>
+                 <bool>false</bool>
                 </property>
                 <property name="cornerButtonEnabled">
-                 <bool>true</bool>
+                 <bool>false</bool>
                 </property>
                 <attribute name="horizontalHeaderMinimumSectionSize">
                  <number>50</number>
@@ -2150,20 +2241,35 @@ Wechselrichterleistung [kW]:</string>
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
-                  <height>200</height>
+                  <height>400</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>1800</width>
+                  <height>16777215</height>
                  </size>
                 </property>
                 <property name="autoFillBackground">
                  <bool>false</bool>
                 </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
                 <property name="midLineWidth">
                  <number>1</number>
+                </property>
+                <property name="sizeAdjustPolicy">
+                 <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
                 </property>
                 <property name="dragDropOverwriteMode">
                  <bool>false</bool>
                 </property>
                 <property name="alternatingRowColors">
                  <bool>true</bool>
+                </property>
+                <property name="selectionMode">
+                 <enum>QAbstractItemView::SingleSelection</enum>
                 </property>
                 <property name="gridStyle">
                  <enum>Qt::DashDotDotLine</enum>
@@ -2172,10 +2278,10 @@ Wechselrichterleistung [kW]:</string>
                  <bool>true</bool>
                 </property>
                 <property name="wordWrap">
-                 <bool>true</bool>
+                 <bool>false</bool>
                 </property>
                 <property name="cornerButtonEnabled">
-                 <bool>true</bool>
+                 <bool>false</bool>
                 </property>
                 <attribute name="horizontalHeaderMinimumSectionSize">
                  <number>50</number>
@@ -2563,20 +2669,35 @@ im Dauerbetrieb:</string>
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
-                  <height>200</height>
+                  <height>400</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>1800</width>
+                  <height>16777215</height>
                  </size>
                 </property>
                 <property name="autoFillBackground">
                  <bool>false</bool>
                 </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
                 <property name="midLineWidth">
                  <number>1</number>
+                </property>
+                <property name="sizeAdjustPolicy">
+                 <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
                 </property>
                 <property name="dragDropOverwriteMode">
                  <bool>false</bool>
                 </property>
                 <property name="alternatingRowColors">
                  <bool>true</bool>
+                </property>
+                <property name="selectionMode">
+                 <enum>QAbstractItemView::SingleSelection</enum>
                 </property>
                 <property name="gridStyle">
                  <enum>Qt::DashDotDotLine</enum>
@@ -2585,10 +2706,10 @@ im Dauerbetrieb:</string>
                  <bool>true</bool>
                 </property>
                 <property name="wordWrap">
-                 <bool>true</bool>
+                 <bool>false</bool>
                 </property>
                 <property name="cornerButtonEnabled">
-                 <bool>true</bool>
+                 <bool>false</bool>
                 </property>
                 <attribute name="horizontalHeaderMinimumSectionSize">
                  <number>50</number>
@@ -3270,7 +3391,7 @@ Bürgerenergiegesellschaft:</string>
            <number>5</number>
           </property>
           <property name="topMargin">
-           <number>5</number>
+           <number>0</number>
           </property>
           <property name="rightMargin">
            <number>5</number>
@@ -3278,67 +3399,28 @@ Bürgerenergiegesellschaft:</string>
           <property name="bottomMargin">
            <number>5</number>
           </property>
-          <property name="spacing">
+          <property name="horizontalSpacing">
            <number>5</number>
           </property>
-          <item row="5" column="2">
-           <widget class="QPlainTextEdit" name="target_path_text_2">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>40</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>40</height>
-             </size>
-            </property>
-           </widget>
-          </item>
+          <property name="verticalSpacing">
+           <number>0</number>
+          </property>
           <item row="3" column="0">
            <widget class="QPushButton" name="source_btn_docu">
             <property name="minimumSize">
              <size>
-              <width>0</width>
-              <height>40</height>
+              <width>250</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>150</width>
+              <height>30</height>
              </size>
             </property>
             <property name="text">
              <string>Template Dokumentation</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="2">
-           <widget class="QPlainTextEdit" name="source_path_text_docu">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>40</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>40</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QPlainTextEdit" name="source_path_text_matstr">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>40</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>40</height>
-             </size>
             </property>
            </widget>
           </item>
@@ -3352,28 +3434,43 @@ Bürgerenergiegesellschaft:</string>
             </property>
             <property name="minimumSize">
              <size>
-              <width>135</width>
-              <height>40</height>
+              <width>250</width>
+              <height>30</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
               <width>150</width>
-              <height>40</height>
+              <height>30</height>
              </size>
             </property>
             <property name="text">
-             <string>Ablagepfad für 
-Dokumente auswählen</string>
+             <string>Ablagepfad für Dokumente auswählen</string>
             </property>
             <property name="autoDefault">
              <bool>false</bool>
             </property>
             <property name="default">
-             <bool>true</bool>
+             <bool>false</bool>
             </property>
             <property name="flat">
              <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPlainTextEdit" name="source_path_text_matstr">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>30</height>
+             </size>
             </property>
            </widget>
           </item>
@@ -3381,8 +3478,14 @@ Dokumente auswählen</string>
            <widget class="QPushButton" name="source_btn_matstr">
             <property name="minimumSize">
              <size>
-              <width>0</width>
-              <height>40</height>
+              <width>250</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>150</width>
+              <height>30</height>
              </size>
             </property>
             <property name="text">
@@ -3390,7 +3493,39 @@ Dokumente auswählen</string>
             </property>
            </widget>
           </item>
-          <item row="6" column="2">
+          <item row="3" column="2">
+           <widget class="QPlainTextEdit" name="source_path_text_docu">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>30</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="2">
+           <widget class="QPlainTextEdit" name="target_path_text_2">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>30</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
            <widget class="QPushButton" name="create_docs_btn">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -3400,14 +3535,14 @@ Dokumente auswählen</string>
             </property>
             <property name="minimumSize">
              <size>
-              <width>500</width>
-              <height>50</height>
+              <width>250</width>
+              <height>30</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>400000</width>
-              <height>100</height>
+              <width>150</width>
+              <height>30</height>
              </size>
             </property>
             <property name="font">
@@ -3417,11 +3552,16 @@ Dokumente auswählen</string>
              </font>
             </property>
             <property name="text">
-             <string>Doku gemäß
-MaStR erzeugen</string>
+             <string>Doku gemäß MaStR erzeugen</string>
+            </property>
+            <property name="autoDefault">
+             <bool>true</bool>
             </property>
             <property name="default">
-             <bool>true</bool>
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -3429,10 +3569,41 @@ MaStR erzeugen</string>
         </item>
        </layout>
       </item>
-      <item row="0" column="0">
+      <item row="0" column="0" alignment="Qt::AlignLeft">
        <widget class="QPushButton" name="load_data_to_device_lists">
+        <property name="minimumSize">
+         <size>
+          <width>300</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>200</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="mouseTracking">
+         <bool>true</bool>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::StrongFocus</enum>
+        </property>
+        <property name="contextMenuPolicy">
+         <enum>Qt::NoContextMenu</enum>
+        </property>
+        <property name="acceptDrops">
+         <bool>false</bool>
+        </property>
         <property name="text">
-         <string>1. Fülle Gerätelisten (WR-, BWR-, Batterie- und Ladestationsliste)</string>
+         <string>1. Lade Gerätelisten (Module, Wechselrichter, 
+Batteriewechselrichter, Speicher, Ladestation)</string>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
         </property>
        </widget>
       </item>
@@ -3465,7 +3636,7 @@ MaStR erzeugen</string>
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>947</width>
+           <width>1857</width>
            <height>480</height>
           </rect>
          </property>
@@ -3792,143 +3963,136 @@ MaStR erzeugen</string>
      </layout>
     </widget>
    </widget>
-   <widget class="QWidget" name="gridLayoutWidget">
+   <widget class="QTextEdit" name="project">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>0</y>
-      <width>971</width>
-      <height>111</height>
+      <x>220</x>
+      <y>10</y>
+      <width>181</width>
+      <height>41</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout_4">
-     <item row="3" column="1">
-      <widget class="QTextEdit" name="textEdit">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>50</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="project_label">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>150</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>200</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="sizeIncrement">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Projektnummer:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="project_name_label">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>150</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>150</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="sizeIncrement">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Projektname:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QPlainTextEdit" name="project">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>150</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="sizeIncrement">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="cursor" stdset="0">
-        <cursorShape>IBeamCursor</cursorShape>
-       </property>
-       <property name="plainText">
-        <string>SUN 24-001</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;SUN 24-001&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="project_name_label">
+    <property name="geometry">
+     <rect>
+      <x>11</x>
+      <y>69</y>
+      <width>150</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>150</width>
+      <height>30</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>150</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="sizeIncrement">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Projektname:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="project_label">
+    <property name="geometry">
+     <rect>
+      <x>11</x>
+      <y>13</y>
+      <width>150</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>150</width>
+      <height>30</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>200</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="sizeIncrement">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Projektnummer:</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>219</x>
+      <y>57</y>
+      <width>1661</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>50</height>
+     </size>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -3936,7 +4100,7 @@ MaStR erzeugen</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1000</width>
+     <width>1900</width>
      <height>21</height>
     </rect>
    </property>

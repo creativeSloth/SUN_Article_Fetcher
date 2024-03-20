@@ -324,12 +324,6 @@ def clear_article_list(self, list):
     list.setRowCount(0)
 
 
-def sort_table(self, column, order):
-    self.ui.articles_list.sortItems(column, order)
-
-# Beispiel zum manuellen Einstellen der Spaltenbreite
-
-
 def resize_columns_to_contents(self, list, columns):
     header = list.horizontalHeader()
     for i in range(columns):
