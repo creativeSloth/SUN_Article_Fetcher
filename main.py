@@ -16,6 +16,7 @@ import directory_Handler
 import ui_fields_Handler
 import logs_and_config
 import data_Handler
+import table_Handler
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -31,6 +32,20 @@ class MainWindow(QtWidgets.QMainWindow):
         self.initialize()
         # Verbinde die Signale mit den entsprechenden Slots
         self.map_ui_buttons()
+
+    def initialize(self):
+        # todo table_Handler.set_all_table_headers(self)
+        self.previous_project_text = ui_fields_Handler.get_project(self)
+        logs_and_config.create_config_file(self)
+        logs_and_config.create_device_related_storage_list(
+            self, storage_file='blacklist_path')
+        logs_and_config.create_device_related_storage_list(
+            self, storage_file='device_specs_list_path')
+        ui_fields_Handler.config_to_fields(self)
+
+        # query_input-Box verstecken
+        self.ui.query_input.hide()
+        self.ui.query_2_input.hide()
 
     def map_ui_buttons(self):
 
@@ -79,19 +94,6 @@ class MainWindow(QtWidgets.QMainWindow):
             self.on_target_path_btn_2_click)
         self.ui.create_docs_btn.clicked.connect(
             self.on_btn_create_docs_clicked)
-
-    def initialize(self):
-        self.previous_project_text = ui_fields_Handler.get_project(self)
-        logs_and_config.create_config_file(self)
-        logs_and_config.create_device_related_storage_list(
-            self, storage_file='blacklist_path')
-        logs_and_config.create_device_related_storage_list(
-            self, storage_file='device_specs_list_path')
-        ui_fields_Handler.config_to_fields(self)
-
-        # query_input-Box verstecken
-        self.ui.query_input.hide()
-        self.ui.query_2_input.hide()
 
     def on_load_articles_from_file_btn_click(self):
         # Öffne einen Dateiauswahldialog für Benutzer

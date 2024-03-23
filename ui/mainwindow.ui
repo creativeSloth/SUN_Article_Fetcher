@@ -92,7 +92,7 @@
       <string>Übertragung von Dokumenten</string>
      </attribute>
      <layout class="QGridLayout" name="gridLayout_3">
-      <item row="1" column="0">
+      <item row="0" column="0">
        <layout class="QVBoxLayout" name="verticalLayout">
         <property name="spacing">
          <number>0</number>

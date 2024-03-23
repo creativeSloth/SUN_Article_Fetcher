@@ -203,7 +203,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addLayout(self.gridLayout_2)
 
 
-        self.gridLayout_3.addLayout(self.verticalLayout, 1, 0, 1, 1)
+        self.gridLayout_3.addLayout(self.verticalLayout, 0, 0, 1, 1)
 
         self.tabWidget.addTab(self.tab1, "")
         self.tab_2 = QWidget()

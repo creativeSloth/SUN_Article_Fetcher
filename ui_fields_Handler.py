@@ -1,6 +1,5 @@
 import os
-from qtpy import QtWidgets
-from qtpy import QtCore
+from qtpy import QtCore, QtWidgets
 import pandas as pd
 
 import logs_and_config
@@ -165,7 +164,7 @@ def fill_article_list(self, df=None):
     ui_list = self.ui.articles_list
     clear_article_list(self, list=ui_list)
     if df is not None:
-        for _, row in df.iterrows():
+        for _, df_row in df.iterrows():
 
             tw_row = ui_list.rowCount()
             ui_list.insertRow(tw_row)
@@ -180,19 +179,19 @@ def fill_article_list(self, df=None):
             ui_list.setItem(tw_row, 0, checkbox_item)
 
             # Spalte 2 (dynamisch) mit den Werten aus der Spalte 0 des DataFrames
-            item_col1 = QtWidgets.QTableWidgetItem(str(row.iloc[0]))
+            item_col1 = QtWidgets.QTableWidgetItem(str(df_row.iloc[0]))
             ui_list.setItem(tw_row, 1, item_col1)
             # Spalte 3 (dynamisch) mit den Werten aus der Spalte 1 des DataFrames
-            item_col2 = QtWidgets.QTableWidgetItem(str(row.iloc[1]))
+            item_col2 = QtWidgets.QTableWidgetItem(str(df_row.iloc[1]))
             ui_list.setItem(tw_row, 2, item_col2)
-            #! Spalte 4 (dynamisch) mit den Werten aus der Spalte 2 des DataFrames
-            if row.shape[0] == 3:
-                item_col3 = QtWidgets.QTableWidgetItem(str(row.iloc[2]))
+            # Spalte 4 (dynamisch) mit den Werten aus der Spalte 2 des DataFrames
+            if row.shape[0] == 3:  # !!!!!!!!
+                item_col3 = QtWidgets.QTableWidgetItem(str(df_row.iloc[2]))
                 ui_list.setItem(tw_row, 3, item_col3)
 
     # Iteriere über alle Zellen im Table Widget
     for row in range(ui_list.rowCount()):
-        for col in range(1, ui_list.columnCount()):
+        for col in range(ui_list.columnCount()):
             item = ui_list.item(row, col)
             if item:
                 # Deaktiviere die Editierbarkeit für die Zelle
@@ -370,6 +369,22 @@ def get_device_tables(self):
     return device_tables
 
 
+def get_articles_table(self):
+    # Alle Tabellen mit PV-Geräten
+    articles_table = [
+        self.ui.articles_list
+    ]
+    return articles_table
+
+
+def get_all_tables(self):
+    device_tables = get_device_tables(self)
+    articles_table = get_articles_table(self)
+    all_tables = device_tables + articles_table
+
+    return all_tables
+
+
 def get_fixed_val_columns():
     discard_columns = ['<>',
                        'Anzahl [Stk.]',
@@ -414,7 +429,7 @@ def fill_device_specs_in_device_tables(self, ui_list):
     article_no_col_index = get_column_index(
         ui_list, 'Artikelnummer')
 
-    for row in range(ui_list.rowCount()):
+    for row in range(1, ui_list.rowCount()):
         for column in range(ui_list.columnCount()):
             column_header = ui_list.horizontalHeaderItem(column).text()
             if column_header not in fixed_val_columns:
