@@ -68,19 +68,13 @@ def add_table_header_search_box(table, layout):
 def init_search_button_click_signal(table, button, text_edit):
     button.clicked.connect(
         lambda: on_search_button_click(table=table,
-                                       button=button,
                                        text_edit=text_edit
                                        ))
 
 
-def on_search_button_click(table, button, text_edit):
+def on_search_button_click(table, text_edit):
 
     search_string = text_edit.toPlainText()
-
-    print(text_edit.objectName())
-    print(button.objectName())
-    print(search_string)
-
     hide_rows_without_string(table, search_string)
 
 
