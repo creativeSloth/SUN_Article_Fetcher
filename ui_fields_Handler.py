@@ -257,12 +257,12 @@ def fill_specific_device_list(self, df=None, ui_list=None):
     fill_device_specs_in_device_tables(self, ui_list)
     resize_columns_to_contents(
         self, list=ui_list, columns=ui_list.columnCount())
-    disable_colums_edit(ui_list)
+    disable_colums_edit(ui_list, firstcol=1, lastcol=5)
 
 
-def disable_colums_edit(ui_list):
+def disable_colums_edit(ui_list, firstcol, lastcol):
     for row in range(ui_list.rowCount()):
-        for col in range(1, 5):
+        for col in range(firstcol, lastcol):
             # Das vorhandene QTableWidgetItem abrufen
             item = ui_list.item(row, col)
             # Entfernt das Bearbeitungsflag für die 2. Spaltess
