@@ -1,56 +1,47 @@
-from PyQt5.QtWidgets import QTableWidgetItem, QToolButton, QHBoxLayout, QLineEdit, QWidget, QHeaderView
+from PyQt5.QtWidgets import QTextEdit, QLabel, QHBoxLayout, QVBoxLayout, QSizePolicy
 import ui_fields_Handler
 
 
 def set_all_table_headers(self):
-    tables = ui_fields_Handler.get_all_tables(self)
+    tables = ui_fields_Handler.get_device_tables(self)
     for table in tables:
-        for column in range(table.columnCount()):
-            set_table_header_search_box(table=table, column=column)
+        add_table_header_search_box(
+            table=table, layout=self.ui.verticalLayout_3)
+    tables = ui_fields_Handler.get_articles_table(self)
+    for table in tables:
+        add_table_header_search_box(
+            table=table, layout=self.ui.verticalLayout)
 
 
-def set_table_header_search_box(table, column):
-    # Einfügen einer Zeile, wenn die Tabelle leer ist
-    if table.rowCount() == 0:
-        table.insertRow(0)
+def add_table_header_search_box(table, layout):
+    index = layout.indexOf(table)
 
-    # Holen Sie sich den vorhandenen Text des Spaltenkopfes für die angegebene Spalte
-    column_header_text = table.horizontalHeaderItem(column).text()
+    # QHBoxLayout erstellen, um die Suchleiste nebeneinander anzuordnen
+    search_layout = QHBoxLayout()
 
-    if column_header_text.endswith('Typ') or column_header_text in ['Artikelnummer', 'Artikelbezeichnung']:
+    # QLabel für die Suchleiste erstellen und hinzufügen
+    label = QLabel("Suche:")
+    search_layout.addWidget(label)
 
-        # Erstellen Sie ein benutzerdefiniertes Widget für den Header der Spalte
-        header_widget = QWidget()
+    # QTextEdit für die Suchleiste erstellen und hinzufügen
+    text_edit = QTextEdit()
+    text_edit.setMaximumHeight(25)  # Maximale Höhe auf 30 setzen
+    text_edit.setObjectName(table.objectName() + "_search_text_edit")  # Objektname ableiten und zuweisen
+    search_layout.addWidget(text_edit)
+    
 
-        # Erstellen Sie ein Layout für das benutzerdefinierte Widget
-        layout = QHBoxLayout(header_widget)
-        layout.setContentsMargins(0, 0, 0, 0)
+    # QHBoxLayout für die Tabelle erstellen und die Tabelle hinzufügen
+    table_layout = QHBoxLayout()
+    table_layout.addWidget(table)
 
-        # Erstellen Sie ein QLineEdit für den Spaltenkopftext und fügen Sie es zum Layout hinzu
-        header_line_edit = QLineEdit()
-        # Setzen Sie die minimale Breite des QLineEdit
-        header_line_edit.setMinimumWidth(200)
-        layout.addWidget(header_line_edit)
+    # QVBoxLayout für die Kombination von Suchleiste und Tabelle erstellen
+    comb_search_layout = QVBoxLayout()
 
-        # Erstellen Sie die Suchschaltfläche (QToolButton)
-        search_button = QToolButton()
-        # Setzen Sie optional den Text für die Schaltfläche
-        search_button.setText("Search")
-        # Hier kannst du die Schaltfläche nach deinen Bedürfnissen anpassen, z.B. Icon hinzufügen usw.
+    # Suchleiste in den kombinierten Layout einfügen
+    comb_search_layout.insertLayout(0, search_layout)
 
-        # Fügen Sie die Schaltfläche zum Layout hinzu
-        layout.addWidget(search_button)
+    # Tabelle in den kombinierten Layout einfügen
+    comb_search_layout.addLayout(table_layout)
 
-        # Setzen Sie das Layout für das benutzerdefinierte Widget
-        header_widget.setLayout(layout)
-
-        # Setzen Sie das benutzerdefinierte Widget als Kopfzeilen-Element für die Spalte
-        table.setHorizontalHeaderItem(column, QTableWidgetItem())
-        table.setHorizontalHeaderItem(column, QTableWidgetItem(
-            column_header_text))  # Spaltenkopftext einsetzen
-        # Annahme: Das benutzerdefinierte Widget wird in der ersten Zeile der Kopfzeile platziert
-        table.setCellWidget(0, column, header_widget)
-        # Die erste Zeile einfrieren
-        table.verticalHeader().setSectionResizeMode(0, QHeaderView.Fixed)
-        # Automatisches Anpassen der Breite der Spalte 0 an den Inhalt
-        table.resizeColumnToContents(column)
+    # Kombiniertes Layout an der ursprünglichen Position einfügen
+    layout.insertLayout(index, comb_search_layout)

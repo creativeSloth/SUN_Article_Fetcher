@@ -39,7 +39,7 @@
       <x>8</x>
       <y>121</y>
       <width>1850</width>
-      <height>800</height>
+      <height>831</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -190,7 +190,7 @@
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>600</height>
+            <height>550</height>
            </size>
           </property>
           <property name="maximumSize">
@@ -537,7 +537,7 @@ Daten in die offenen Formularfelder</string>
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>0</y>
+             <y>-341</y>
              <width>1810</width>
              <height>3820</height>
             </rect>

@@ -34,7 +34,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.map_ui_buttons()
 
     def initialize(self):
-        # todo table_Handler.set_all_table_headers(self)
+        table_Handler.set_all_table_headers(self)
         self.previous_project_text = ui_fields_Handler.get_project(self)
         logs_and_config.create_config_file(self)
         logs_and_config.create_device_related_storage_list(
