@@ -185,9 +185,9 @@ def fill_article_list(self, df=None):
             item_col2 = QtWidgets.QTableWidgetItem(str(df_row.iloc[1]))
             ui_list.setItem(tw_row, 2, item_col2)
             # Spalte 4 (dynamisch) mit den Werten aus der Spalte 2 des DataFrames
-            if row.shape[0] == 3:  # !!!!!!!!
-                item_col3 = QtWidgets.QTableWidgetItem(str(df_row.iloc[2]))
-                ui_list.setItem(tw_row, 3, item_col3)
+            # if row.shape[0] == 3:  # !!!!!!!!
+            #     item_col3 = QtWidgets.QTableWidgetItem(str(df_row.iloc[2]))
+            #     ui_list.setItem(tw_row, 3, item_col3)
 
     # Iteriere über alle Zellen im Table Widget
     for row in range(ui_list.rowCount()):

@@ -16,7 +16,7 @@ import directory_Handler
 import ui_fields_Handler
 import logs_and_config
 import data_Handler
-import table_Handler
+import table_search
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -34,7 +34,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.map_ui_buttons()
 
     def initialize(self):
-        table_Handler.set_all_table_headers(self)
+        table_search.set_all_table_headers(self)
         self.previous_project_text = ui_fields_Handler.get_project(self)
         logs_and_config.create_config_file(self)
         logs_and_config.create_device_related_storage_list(
@@ -146,6 +146,7 @@ class MainWindow(QtWidgets.QMainWindow):
             'target_path_1']
         log_sub2folder_path = directory_Handler.get_directories(self)[
             'log_sub2folder_path']
+        
 
         # Holen Sie sich alle Dateinamen im source_path
         source_files = data_Handler.get_files_in_source_path(self, source_path)
