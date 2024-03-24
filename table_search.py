@@ -1,4 +1,4 @@
-import pandas as pd
+
 from PyQt5.QtWidgets import QTextEdit, QHBoxLayout, QVBoxLayout, QSizePolicy, QPushButton
 import ui_fields_Handler
 
