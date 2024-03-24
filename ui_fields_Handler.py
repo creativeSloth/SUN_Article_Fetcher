@@ -1,5 +1,6 @@
 import os
 from qtpy import QtCore, QtWidgets
+
 import pandas as pd
 
 import logs_and_config
@@ -185,9 +186,9 @@ def fill_article_list(self, df=None):
             item_col2 = QtWidgets.QTableWidgetItem(str(df_row.iloc[1]))
             ui_list.setItem(tw_row, 2, item_col2)
             # Spalte 4 (dynamisch) mit den Werten aus der Spalte 2 des DataFrames
-            # if row.shape[0] == 3:  # !!!!!!!!
-            #     item_col3 = QtWidgets.QTableWidgetItem(str(df_row.iloc[2]))
-            #     ui_list.setItem(tw_row, 3, item_col3)
+            if df_row.shape[0] >= 3:  # !!!!!!!!
+                item_col3 = QtWidgets.QTableWidgetItem(str(df_row.iloc[2]))
+                ui_list.setItem(tw_row, 3, item_col3)
 
     # Iteriere über alle Zellen im Table Widget
     for row in range(ui_list.rowCount()):
@@ -256,37 +257,47 @@ def fill_specific_device_list(self, df=None, ui_list=None):
     fill_device_specs_in_device_tables(self, ui_list)
     resize_columns_to_contents(
         self, list=ui_list, columns=ui_list.columnCount())
+    disable_colums_edit(ui_list)
+
+
+def disable_colums_edit(ui_list):
+    for row in range(ui_list.rowCount()):
+        for col in range(1, 5):
+            # Das vorhandene QTableWidgetItem abrufen
+            item = ui_list.item(row, col)
+            # Entfernt das Bearbeitungsflag für die 2. Spaltess
+            item.setFlags(item.flags() & ~QtCore.Qt.ItemIsEditable)
 
 
 def ui_list_to_df_mapping(self, ui_list, tw_row=None, df_row=None):
     if ui_list == self.ui.PV_modules_list:
         # Spalte 6 (dynamisch) mit den Werten aus der Spalte 4 des DataFrames
         ui_list.setItem(
-            tw_row, 5, QtWidgets.QTableWidgetItem('Hier wird zukünftig die Modulleistung gezogen'))
+            tw_row, 5, QtWidgets.QTableWidgetItem(''))
 
     if ui_list == self.ui.PV_inverters_list:
         # Spalte 6 (dynamisch) mit den Werten aus der Spalte 4 des DataFrames
         ui_list.setItem(
-            tw_row, 5, QtWidgets.QTableWidgetItem('Hier wird zukünftig die WR-AC-Leistung gezogen'))
+            tw_row, 5, QtWidgets.QTableWidgetItem(''))
 
     if ui_list == self.ui.BAT_inverters_list:
         # Spalte 6 (dynamisch) mit den Werten aus der Spalte 4 des DataFrames
         ui_list.setItem(
-            tw_row, 5, QtWidgets.QTableWidgetItem('Hier wird zukünftig die WR-AC-Entladeleistung gezogen'))
-        # Spalte 7 (dynamisch) mit den Werten aus der Spalte 4 des DataFrames
+            tw_row, 5, QtWidgets.QTableWidgetItem(''))
+        # Spalte 7 (dynamisch) mit den Werten aus der Spalte 5 des DataFrames
         ui_list.setItem(
-            tw_row, 6, QtWidgets.QTableWidgetItem('AC-Kopplung'))
+            tw_row, 6, QtWidgets.QTableWidgetItem(''))
 
     if ui_list == self.ui.BAT_storage_list:
         # Spalte 6 (dynamisch) mit den Werten aus der Spalte 4 des DataFrames
         ui_list.setItem(
-            tw_row, 5, QtWidgets.QTableWidgetItem('Hier wird zukünftig die nutzbare Speicherkapazität gezogen'))
-        # Spalte 7 (dynamisch) mit den Werten aus der Spalte 4 des DataFrames
+            tw_row, 5, QtWidgets.QTableWidgetItem(''))
+        # Spalte 7 (dynamisch) mit den Werten aus der Spalte 5 des DataFrames
         ui_list.setItem(
-            tw_row, 7, QtWidgets.QTableWidgetItem('Hier wird zukünftig die maximale Entladeleistung gezogen'))
-        # Spalte 8 (dynamisch) mit den Werten aus der Spalte 4 des DataFrames
+            tw_row, 7, QtWidgets.QTableWidgetItem(''))
+        # Spalte 8 (dynamisch) mit den Werten aus der Spalte 6 des DataFrames
         ui_list.setItem(
-            tw_row, 8, QtWidgets.QTableWidgetItem('Hier wird zukünftig die Batterietechnologie gezogen'))
+            tw_row, 8, QtWidgets.QTableWidgetItem(''))
 
     if ui_list == self.ui.CHG_point_list:
         pass
