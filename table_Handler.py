@@ -1,3 +1,4 @@
+from tkinter import HORIZONTAL
 from PyQt5.QtWidgets import QTextEdit, QLabel, QHBoxLayout, QVBoxLayout, QSizePolicy
 import ui_fields_Handler
 
@@ -42,6 +43,10 @@ def add_table_header_search_box(table, layout):
 
     # Tabelle in den kombinierten Layout einfügen
     comb_search_layout.addLayout(table_layout)
+    # Horizontal und Vertikal dehnen
+    table.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+    text_edit.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+    
 
     # Kombiniertes Layout an der ursprünglichen Position einfügen
     layout.insertLayout(index, comb_search_layout)
