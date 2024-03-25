@@ -146,7 +146,6 @@ class MainWindow(QtWidgets.QMainWindow):
             'target_path_1']
         log_sub2folder_path = directory_Handler.get_directories(self)[
             'log_sub2folder_path']
-        
 
         # Holen Sie sich alle Dateinamen im source_path
         source_files = data_Handler.get_files_in_source_path(self, source_path)
@@ -229,7 +228,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 # * * * * * * * * * * * * * * * * * Documentation-module * * * * * * * * * * * * * * * *
-
 
     def on_btn_create_docs_clicked(self):
         self.replace_fields_in_doc1()
@@ -315,6 +313,8 @@ class MainWindow(QtWidgets.QMainWindow):
                         cell_text = ""
                         for text_node in cell.getElementsByType(text.P):
                             cell_text = teletype.extractText(text_node)
+                            cell_format = text_node.getAttribute(
+                                "stylename")
 
                             # Ersetze die Platzhalter im Text
 
@@ -323,16 +323,16 @@ class MainWindow(QtWidgets.QMainWindow):
                                     cell_text = cell_text.replace(
                                         field_name, str(field_value[0].toPlainText()))
 
-                         # Erstelle den neuen Textknoten mit dem aktualisierten Text
+                            # Erstelle einen neuen Textknoten mit dem aktualisierten Text und Format
                             new_text_node = text.P(text=cell_text)
+                            new_text_node.setAttribute(
+                                ("stylename"), cell_format)
 
                             # Füge den neuen Textknoten in die Zelle ein
                             cell.addElement(new_text_node)
 
                             # Entferne den alten Textknoten
                             cell.removeChild(text_node)
-
-            # Entferne die Platzhalter in den doppeltgeschweiften Klammern
 
             doc1.save(doc1_path)
             QtWidgets.QMessageBox.information(

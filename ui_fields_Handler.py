@@ -6,6 +6,7 @@ import pandas as pd
 import logs_and_config
 import directory_Handler
 import data_Handler
+import ui_fields_Handler
 
 
 def config_to_fields(self):
@@ -203,11 +204,9 @@ def fill_article_list(self, df=None):
 
 
 def fill_device_lists(self, df):
-    fill_specific_device_list(self, df, ui_list=self.ui.PV_modules_list)
-    fill_specific_device_list(self, df, ui_list=self.ui.PV_inverters_list)
-    fill_specific_device_list(self, df, ui_list=self.ui.BAT_inverters_list)
-    fill_specific_device_list(self, df, ui_list=self.ui.BAT_storage_list)
-    fill_specific_device_list(self, df, ui_list=self.ui.CHG_point_list)
+    tables = ui_fields_Handler.get_device_tables(self)
+    for table in tables:
+        fill_specific_device_list(self, df, ui_list=table)
 
     QtWidgets.QMessageBox.information(
         self, "Abgeschlossen!", "Geräteliste wurden geladen!")
