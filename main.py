@@ -2,10 +2,6 @@ import sys
 import os
 import shutil
 
-from odf.opendocument import load
-from odf import text, teletype
-from odf.table import Table, TableRow, TableCell
-
 import pandas as pd
 
 from qtpy import QtCore, QtWidgets
@@ -34,9 +30,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.map_ui_buttons()
 
     def initialize(self):
+        self.project = self.ui.project.toPlainText()
         table_search.set_all_table_headers(self)
-        self.previous_project_text = ui_fields_Handler.get_project(self)
-        logs_and_config.create_config_file(self)
+        self.previous_project_text = self.project
         logs_and_config.create_device_related_storage_list(
             self, storage_file='blacklist_path')
         logs_and_config.create_device_related_storage_list(
@@ -230,7 +226,7 @@ class MainWindow(QtWidgets.QMainWindow):
 # * * * * * * * * * * * * * * * * * Documentation-module * * * * * * * * * * * * * * * *
 
     def on_btn_create_docs_clicked(self):
-        self.replace_fields_in_doc1()
+        ui_fields_Handler.replace_fields_in_doc1(self)
 
     def on_load_data_to_device_list_click(self):
         df = data_Handler.execute_query(self, query='sql1')
@@ -265,7 +261,7 @@ class MainWindow(QtWidgets.QMainWindow):
         logs_and_config.update_config_file(self, 'Abfrage', 'sql2',
                                            data_Handler.get_sql_query(self)['sql2'])
         ui_fields_Handler.clear_docu_fields(self)
-        ui_fields_Handler.fill_docu_fields(self, df)
+        ui_fields_Handler.fill_docu_fields(self)
 
     def on_sql_query_2_btn_click(self):
         if self.ui.query_2_input.isHidden():
@@ -290,59 +286,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.target_path_text_2.setPlainText(folder_path)
         logs_and_config.update_config_file(
             self, 'Pfade', 'target_path_2', folder_path)
-
-    @directory_Handler.check_path_existence(modus=1)
-    def replace_fields_in_doc1(self):
-        # Rufe get_directories auf, um die Pfade zu erhalten
-        template1_path = directory_Handler.get_directories(self)[
-            'template1_path']
-        doc1_path = directory_Handler.get_directories(self)[
-            'doc1_path']
-
-        try:
-            doc1 = load(template1_path)
-            context = ui_fields_Handler.get_mapped_context(self)
-
-            # Durchlaufe alle Tabellen in der ODF-Datei
-            for table in doc1.getElementsByType(Table):
-                # Durchlaufe alle Zeilen in der Tabelle
-                for row in table.getElementsByType(TableRow):
-                    # Durchlaufe alle Zellen in der Zeile
-                    for cell in row.getElementsByType(TableCell):
-                        # Text in der Zelle erhalten
-                        cell_text = ""
-                        for text_node in cell.getElementsByType(text.P):
-                            cell_text = teletype.extractText(text_node)
-                            cell_format = text_node.getAttribute(
-                                "stylename")
-
-                            # Ersetze die Platzhalter im Text
-
-                            for field_name, field_value in context.items():
-                                if field_name in cell_text:
-                                    cell_text = cell_text.replace(
-                                        field_name, str(field_value[0].toPlainText()))
-
-                            # Erstelle einen neuen Textknoten mit dem aktualisierten Text und Format
-                            new_text_node = text.P(text=cell_text)
-                            new_text_node.setAttribute(
-                                ("stylename"), cell_format)
-
-                            # Füge den neuen Textknoten in die Zelle ein
-                            cell.addElement(new_text_node)
-
-                            # Entferne den alten Textknoten
-                            cell.removeChild(text_node)
-
-            doc1.save(doc1_path)
-            QtWidgets.QMessageBox.information(
-                self, "Abgeschlossen!",
-                f"Die Datei wurde unter folgendem Pfad gespeichert:\n"
-                f"{doc1_path}")
-
-        except Exception as e:
-            QtWidgets.QMessageBox.warning(
-                self, "Fehler", f"Fehler bei der Feldersetzung: {e}")
 
 
 # Führe das Programm aus, wenn es direkt gestartet wird

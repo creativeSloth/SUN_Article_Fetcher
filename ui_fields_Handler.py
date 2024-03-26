@@ -3,10 +3,14 @@ from qtpy import QtCore, QtWidgets
 
 import pandas as pd
 
+from odf.opendocument import load
+from odf import text, teletype
+from odf.table import Table, TableRow, TableCell
+
 import logs_and_config
 import directory_Handler
 import data_Handler
-import ui_fields_Handler
+import directory_Handler
 
 
 def config_to_fields(self):
@@ -43,15 +47,11 @@ def config_to_fields(self):
         logs_and_config.create_config_file(self)
 
 
-def get_project(self):
-    return self.ui.project.toPlainText()
-
-
 def char_validation(self):
     textlength = 10
     # Speichere den vorherigen Text
     prev_string = self.previous_project_text
-    current_string = get_project(self)
+    current_string = self.project
     cursor = self.ui.project.textCursor()
     cur_cursor_pos = cursor.position()
 
@@ -96,61 +96,62 @@ def project_to_uppercase(self, text, cur_cursor_pos):
 
 def get_mapped_context(self):
     return {
-        '{{project}}': (self.ui.project, 'data_1', 'default'),
-        '{{operator}}': (self.ui.operator_text, 'data_2', 'default'),
-        '{{op_adress_1}}': (self.ui.op_adress_1_text, 'data_3', 'default'),
-        '{{op_adress_2}}': (self.ui.op_adress_2_text, 'data_4', 'default'),
-        '{{op_adress_3}}': (self.ui.op_adress_3_text, 'data_5', 'default'),
-        '{{loc_adress_1}}': (self.ui.loc_adress_1_text, 'data_6', 'default'),
-        '{{loc_adress_2}}': (self.ui.loc_adress_2_text, 'data_7', 'default'),
-        '{{loc_adress_3}}': (self.ui.loc_adress_3_text, 'data_8', 'default'),
-        '{{sys_perf}}': (self.ui.sys_perf_text, 'data_9', 'default'),
-        '{{constr_style}}': (self.ui.constr_style_text, 'data_10', 'default'),
-        '{{bool_consist_azimuth}}': (self.ui.bool_consist_azimuth_text, 'data_11', 'default'),
-        '{{maj_azimuth}}': (self.ui.maj_azimuth_text, 'data_12', 'default'),
-        '{{maj_card_point}}': (self.ui.maj_card_point_text, 'data_13', 'default'),
-        '{{min_azimuth}}': (self.ui.min_azimuth_text, 'data_14', 'default'),
-        '{{min_card_point}}': (self.ui.min_card_point_text, 'data_15', 'default'),
-        '{{maj_tilt}}': (self.ui.maj_tilt_text, 'data_16', 'default'),
-        '{{min_tilt}}': (self.ui.min_tilt_text, 'data_17', 'default'),
-        '{{module_count}}': (self.ui.module_count_text, 'data_18', 'default'),
-        '{{module_type}}': (self.ui.module_type_text, data_Handler.agregate_data_from_device_list(self.ui.PV_modules_list, 2), 'default'),
-        '{{mounting_type}}': (self.ui.mounting_type_text, 'data_20', 'default'),
-        '{{hybrid_inverter_bool}}': (self.ui.hybrid_inverter_bool_text, 'data_21', 'default'),
-        '{{inverter_type}}': (self.ui.inverter_type_text, data_Handler.agregate_data_from_device_list(self.ui.PV_inverters_list, 2), 'default'),
-        '{{inverter_SN}}': (self.ui.inverter_SN_text, data_Handler.agregate_data_from_device_list(self.ui.PV_inverters_list, 4), 'default'),
-        '{{inverter_power}}': (self.ui.inverter_power_text, data_Handler.agregate_data_from_device_list(self.ui.PV_inverters_list, 5), 'default'),
-        '{{commiss_date}}': (self.ui.commiss_date_text, 'data_25', 'default'),
-        '{{bat_inverter_type}}': (self.ui.bat_inverter_type_text, data_Handler.agregate_data_from_device_list(self.ui.BAT_inverters_list, 2), 'default'),
-        '{{bat_inverter_SN}}': (self.ui.bat_inverter_SN_text, data_Handler.agregate_data_from_device_list(self.ui.BAT_inverters_list, 4), 'default'),
-        '{{bat_inverter_power}}': (self.ui.bat_inverter_power_text, data_Handler.agregate_data_from_device_list(self.ui.BAT_inverters_list, 5), 'default'),
-        '{{coupling_type}}': (self.ui.coupling_type_text, data_Handler.agregate_data_from_device_list(self.ui.BAT_inverters_list, 6), 'default'),
-        '{{bat_storage_type}}': (self.ui.bat_storage_type_text, data_Handler.agregate_data_from_device_list(self.ui.BAT_storage_list, 2), 'default'),
-        '{{bat_storage_SN}}': (self.ui.bat_storage_SN_text, data_Handler.agregate_data_from_device_list(self.ui.BAT_storage_list, 4), 'default'),
-        '{{bat_storage_cap}}': (self.ui.bat_storage_cap_text, data_Handler.agregate_data_from_device_list(self.ui.BAT_storage_list, 5), 'default'),
-        '{{bat_commiss_date}}': (self.ui.bat_commiss_date_text, 'data_33', 'default'),
-        '{{max_discharge_pow}}': (self.ui.max_discharge_pow_text, data_Handler.agregate_data_from_device_list(self.ui.BAT_storage_list, 6), 'default'),
-        '{{em_pow_ability_bool}}': (self.ui.em_pow_ability_bool_text, 'data_35', 'default'),
-        '{{energy_storage_type}}': (self.ui.energy_storage_type_text, 'data_36', 'default'),
-        '{{bat_technology}}': (self.ui.bat_technology_text, 'data_37', 'default'),
-        '{{charging_point_type}}': (self.ui.charging_point_type_text, data_Handler.agregate_data_from_device_list(self.ui.CHG_point_list, 2), 'default'),
-        '{{charging_point_SN}}': (self.ui.charging_point_SN_text, data_Handler.agregate_data_from_device_list(self.ui.CHG_point_list, 4), 'default'),
-        '{{feeding_type}}': (self.ui.feeding_type_text, 'data_40', 'default'),
-        '{{pow_limit_bool}}': (self.ui.pow_limit_bool_text, 'data_41', 'default'),
-        '{{rmt_grd_op_bool}}': (self.ui.rmt_grd_op_bool_text, 'data_42', 'default'),
-        '{{rmt_drct_mrktr_bool}}': (self.ui.rmt_drct_mrktr_bool_text, 'data_43', 'default'),
-        '{{rmt_3rd_prt_bool}}': (self.ui.rmt_3rd_prt_bool_text, 'data_44', 'default'),
-        '{{prequali_bool}}': (self.ui.prequali_bool_text, 'data_45', 'default'),
-        '{{citizen_corp_bool}}': (self.ui.citizen_corp_bool_text, 'data_46', 'default'),
-        '{{tendering_bool}}': (self.ui.tendering_bool_text, 'data_47', 'default'),
-        '{{meter_cabinet}}': (self.ui.meter_cabinet_text, 'data_48', 'default'),
-        '{{meter_box_type}}': (self.ui.meter_box_type_text, 'data_49', 'default'),
-        '{{dl_type}}': (self.ui.dl_type_text, 'data_50', 'default'),
-        '{{dl_connect_ext}}': (self.ui.dl_connect_ext_text, 'data_51', 'default')
+        '{{project}}': (self.ui.project, 'data_1'),
+        '{{operator}}': (self.ui.operator_text, 'data_2'),
+        '{{op_adress_1}}': (self.ui.op_adress_1_text, 'data_3'),
+        '{{op_adress_2}}': (self.ui.op_adress_2_text, 'data_4'),
+        '{{op_adress_3}}': (self.ui.op_adress_3_text, 'data_5'),
+        '{{loc_adress_1}}': (self.ui.loc_adress_1_text, 'data_6'),
+        '{{loc_adress_2}}': (self.ui.loc_adress_2_text, 'data_7'),
+        '{{loc_adress_3}}': (self.ui.loc_adress_3_text, 'data_8'),
+        '{{sys_perf}}': (self.ui.sys_perf_text, 'data_9'),
+        '{{constr_style}}': (self.ui.constr_style_text, 'data_10'),
+        '{{bool_consist_azimuth}}': (self.ui.bool_consist_azimuth_text, 'data_11'),
+        '{{maj_azimuth}}': (self.ui.maj_azimuth_text, 'data_12'),
+        '{{maj_card_point}}': (self.ui.maj_card_point_text, 'data_13'),
+        '{{min_azimuth}}': (self.ui.min_azimuth_text, 'data_14'),
+        '{{min_card_point}}': (self.ui.min_card_point_text, 'data_15'),
+        '{{maj_tilt}}': (self.ui.maj_tilt_text, 'data_16'),
+        '{{min_tilt}}': (self.ui.min_tilt_text, 'data_17'),
+        '{{module_count}}': (self.ui.module_count_text, 'data_18'),
+        '{{module_type}}': (self.ui.module_type_text, data_Handler.aggr_dev_list(self.ui.PV_modules_list, 2)),
+        '{{mounting_type}}': (self.ui.mounting_type_text, 'data_20'),
+        '{{hybrid_inverter_bool}}': (self.ui.hybrid_inverter_bool_text, 'data_21'),
+        '{{inverter_type}}': (self.ui.inverter_type_text, data_Handler.aggr_dev_list(self.ui.PV_inverters_list, 2)),
+        '{{inverter_SN}}': (self.ui.inverter_SN_text, data_Handler.aggr_dev_list(self.ui.PV_inverters_list, 4)),
+        '{{inverter_power}}': (self.ui.inverter_power_text, data_Handler.aggr_dev_list(self.ui.PV_inverters_list, 5)),
+        '{{commiss_date}}': (self.ui.commiss_date_text, 'data_25'),
+        '{{bat_inverter_type}}': (self.ui.bat_inverter_type_text, data_Handler.aggr_dev_list(self.ui.BAT_inverters_list, 2)),
+        '{{bat_inverter_SN}}': (self.ui.bat_inverter_SN_text, data_Handler.aggr_dev_list(self.ui.BAT_inverters_list, 4)),
+        '{{bat_inverter_power}}': (self.ui.bat_inverter_power_text, data_Handler.aggr_dev_list(self.ui.BAT_inverters_list, 5)),
+        '{{coupling_type}}': (self.ui.coupling_type_text, data_Handler.aggr_dev_list(self.ui.BAT_inverters_list, 6)),
+        '{{bat_storage_type}}': (self.ui.bat_storage_type_text, data_Handler.aggr_dev_list(self.ui.BAT_storage_list, 2)),
+        '{{bat_storage_SN}}': (self.ui.bat_storage_SN_text, data_Handler.aggr_dev_list(self.ui.BAT_storage_list, 4)),
+        '{{bat_storage_cap}}': (self.ui.bat_storage_cap_text, data_Handler.aggr_dev_list(self.ui.BAT_storage_list, 5)),
+        '{{bat_commiss_date}}': (self.ui.bat_commiss_date_text, 'data_33'),
+        '{{max_discharge_pow}}': (self.ui.max_discharge_pow_text, data_Handler.aggr_dev_list(self.ui.BAT_storage_list, 6)),
+        '{{em_pow_ability_bool}}': (self.ui.em_pow_ability_bool_text, 'data_35'),
+        '{{energy_storage_type}}': (self.ui.energy_storage_type_text, 'data_36'),
+        '{{bat_technology}}': (self.ui.bat_technology_text, 'data_37'),
+        '{{charging_point_type}}': (self.ui.charging_point_type_text, data_Handler.aggr_dev_list(self.ui.CHG_point_list, 2)),
+        '{{charging_point_SN}}': (self.ui.charging_point_SN_text, data_Handler.aggr_dev_list(self.ui.CHG_point_list, 4)),
+        '{{feeding_type}}': (self.ui.feeding_type_text, 'data_40'),
+        '{{pow_limit_bool}}': (self.ui.pow_limit_bool_text, 'data_41'),
+        '{{rmt_grd_op_bool}}': (self.ui.rmt_grd_op_bool_text, 'data_42'),
+        '{{rmt_drct_mrktr_bool}}': (self.ui.rmt_drct_mrktr_bool_text, 'data_43'),
+        '{{rmt_3rd_prt_bool}}': (self.ui.rmt_3rd_prt_bool_text, 'data_44'),
+        '{{prequali_bool}}': (self.ui.prequali_bool_text, 'data_45'),
+        '{{citizen_corp_bool}}': (self.ui.citizen_corp_bool_text, 'data_46'),
+        '{{tendering_bool}}': (self.ui.tendering_bool_text, 'data_47'),
+        '{{meter_cabinet}}': (self.ui.meter_cabinet_text, 'data_48'),
+        '{{meter_box_type}}': (self.ui.meter_box_type_text, 'data_49'),
+        '{{dl_type}}': (self.ui.dl_type_text, 'data_50'),
+        '{{dl_connect_ext}}': (self.ui.dl_connect_ext_text, 'data_51')
     }
 
 
-def fill_docu_fields(self, df):
+
+def fill_docu_fields(self):
     [value[0].setPlainText(value[1])
      for value in get_mapped_context(self).values()
      if value[0] != self.ui.project]
@@ -203,9 +204,64 @@ def fill_article_list(self, df=None):
         self, list=ui_list, columns=ui_list.columnCount())
 
 
+@directory_Handler.check_path_existence(modus=1)
+def replace_fields_in_doc1(self):
+    # Rufe get_directories auf, um die Pfade zu erhalten
+    template1_path = directory_Handler.get_directories(self)[
+        'template1_path']
+    doc1_path = directory_Handler.get_directories(self)[
+        'doc1_path']
+
+    try:
+        doc1 = load(template1_path)
+        context = get_mapped_context(self)
+
+        # Durchlaufe alle Tabellen in der ODF-Datei
+        for table in doc1.getElementsByType(Table):
+            # Durchlaufe alle Zeilen in der Tabelle
+            for row in table.getElementsByType(TableRow):
+                # Durchlaufe alle Zellen in der Zeile
+                for cell in row.getElementsByType(TableCell):
+                    # Text in der Zelle erhalten
+                    cell_text = ""
+                    for text_node in cell.getElementsByType(text.P):
+                        cell_text = teletype.extractText(text_node)
+                        cell_format = text_node.getAttribute(
+                            "stylename")
+
+                        # Ersetze die Platzhalter im Text
+
+                        for field_name, field_value in context.items():
+                            if field_name in cell_text:
+                                cell_text = cell_text.replace(
+                                    field_name, str(field_value[0].toPlainText()))
+
+                        # Erstelle einen neuen Textknoten mit dem aktualisierten Text und Format
+                        new_text_node = text.P(text=cell_text)
+                        new_text_node.setAttribute(
+                            ("stylename"), cell_format)
+
+                        # Füge den neuen Textknoten in die Zelle ein
+                        cell.addElement(new_text_node)
+
+                        # Entferne den alten Textknoten
+                        cell.removeChild(text_node)
+
+        doc1.save(doc1_path)
+        QtWidgets.QMessageBox.information(
+            self, "Abgeschlossen!",
+            f"Die Datei wurde unter folgendem Pfad gespeichert:\n"
+            f"{doc1_path}")
+
+    except Exception as e:
+        QtWidgets.QMessageBox.warning(
+            self, "Fehler", f"Fehler bei der Feldersetzung: {e}")
+
+
 def fill_device_lists(self, df):
-    tables = ui_fields_Handler.get_device_tables(self)
+    tables = get_device_tables(self)
     for table in tables:
+
         fill_specific_device_list(self, df, ui_list=table)
 
     QtWidgets.QMessageBox.information(
@@ -439,7 +495,7 @@ def fill_device_specs_in_device_tables(self, ui_list):
     article_no_col_index = get_column_index(
         ui_list, 'Artikelnummer')
 
-    for row in range(1, ui_list.rowCount()):
+    for row in range(0, ui_list.rowCount()):
         for column in range(ui_list.columnCount()):
             column_header = ui_list.horizontalHeaderItem(column).text()
             if column_header not in fixed_val_columns:

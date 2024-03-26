@@ -148,7 +148,7 @@ def read_data_from_file(file_path):
         return read_ods(file_path)
 
 
-def agregate_data_from_device_list(device_list, column_index):
+def aggr_dev_list(device_list, column_index):
     value = ''
     for row in range(device_list.rowCount()):
         if not device_list.item(row, column_index) == None:

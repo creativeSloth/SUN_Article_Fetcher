@@ -7,11 +7,9 @@ from functools import wraps
 from PyQt5.QtWidgets import QFileDialog
 from qtpy import QtWidgets
 
-import ui_fields_Handler
-
 
 def get_directories(self):
-    project = ui_fields_Handler.get_project(self)
+    project = self.project
     # Setze den dynamischen Pfad zur Log-Datei relativ zum Skript
     if getattr(sys, 'frozen', False):
         # Skript wird im gepackten Zustand ausgeführt
