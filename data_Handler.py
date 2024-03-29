@@ -1,4 +1,5 @@
 import os
+from re import ASCII
 import pandas as pd
 from sqlalchemy import create_engine
 from qtpy import QtWidgets
@@ -149,10 +150,13 @@ def read_data_from_file(file_path):
 
 
 def aggr_dev_list(device_list, column_index):
+    k = 1
     value = ''
     for row in range(device_list.rowCount()):
         if not device_list.item(row, column_index) == None:
-            value = value + device_list.item(row, column_index).text() + '\n'
+            value = value + \
+                f'{device_list.item(row, column_index).text()} ({str(k)})\n'
+            k += 1
     value = value.rstrip('\n')
     return value
 

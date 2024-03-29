@@ -96,7 +96,7 @@ def project_to_uppercase(self, text, cur_cursor_pos):
 
 def get_mapped_context(self):
     return {
-        '{{project}}': (self.ui.project, 'data_1'),
+        '{{project}}': (self.ui.project, ''),
         '{{operator}}': (self.ui.operator_text, 'data_2'),
         '{{op_adress_1}}': (self.ui.op_adress_1_text, 'data_3'),
         '{{op_adress_2}}': (self.ui.op_adress_2_text, 'data_4'),
@@ -148,7 +148,6 @@ def get_mapped_context(self):
         '{{dl_type}}': (self.ui.dl_type_text, 'data_50'),
         '{{dl_connect_ext}}': (self.ui.dl_connect_ext_text, 'data_51')
     }
-
 
 
 def fill_docu_fields(self):
@@ -224,28 +223,34 @@ def replace_fields_in_doc1(self):
                 for cell in row.getElementsByType(TableCell):
                     # Text in der Zelle erhalten
                     cell_text = ""
+                    Flag = False
                     for text_node in cell.getElementsByType(text.P):
                         cell_text = teletype.extractText(text_node)
                         cell_format = text_node.getAttribute(
                             "stylename")
 
-                        # Ersetze die Platzhalter im Text
+                        for field_name, field_val in context.items():
+                            field_values = field_val[0].toPlainText().split(
+                                '\n')
 
-                        for field_name, field_value in context.items():
                             if field_name in cell_text:
-                                cell_text = cell_text.replace(
-                                    field_name, str(field_value[0].toPlainText()))
+                                print(field_name)
+                                Flag = True
 
-                        # Erstelle einen neuen Textknoten mit dem aktualisierten Text und Format
-                        new_text_node = text.P(text=cell_text)
-                        new_text_node.setAttribute(
-                            ("stylename"), cell_format)
+                                for field_value in field_values:
+                                    # Erstelle einen neuen Textknoten mit dem aktualisierten Text und Format
+                                    new_text_node = text.P(
+                                        text=str(field_value))
+                                    new_text_node.setAttribute(
+                                        ("stylename"), cell_format)
 
-                        # Füge den neuen Textknoten in die Zelle ein
-                        cell.addElement(new_text_node)
-
-                        # Entferne den alten Textknoten
-                        cell.removeChild(text_node)
+                                    # Füge den neuen Textknoten in die Zelle ein
+                                    cell.addElement(new_text_node)
+                                    print(str(field_value))
+                                    # Entferne den alten Textknoten
+                        if Flag == True:
+                            cell.removeChild(text_node)
+                            Flag = False
 
         doc1.save(doc1_path)
         QtWidgets.QMessageBox.information(
