@@ -234,7 +234,6 @@ def replace_fields_in_doc1(self):
                                 '\n')
 
                             if field_name in cell_text:
-                                print(field_name)
                                 Flag = True
 
                                 for field_value in field_values:
@@ -246,7 +245,6 @@ def replace_fields_in_doc1(self):
 
                                     # Füge den neuen Textknoten in die Zelle ein
                                     cell.addElement(new_text_node)
-                                    print(str(field_value))
                                     # Entferne den alten Textknoten
                         if Flag == True:
                             cell.removeChild(text_node)
