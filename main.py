@@ -63,7 +63,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.project.textChanged.connect(self.on_project_text_changed)
 
         #  *********************************** Mapping buttons for "Documentation"- module *****************************************
-
+        self.ui.save_btn.clicked.connect(
+            self.on_save_btn_click)
+        self.ui.load_btn.clicked.connect(
+            self.on_load_btn_click)
         self.ui.load_data_to_device_lists.clicked.connect(
             self.on_load_data_to_device_list_click)
         self.ui.load_docu_db_data_btn.clicked.connect(
@@ -224,6 +227,12 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 # * * * * * * * * * * * * * * * * * Documentation-module * * * * * * * * * * * * * * * *
+
+    def on_save_btn_click(self):
+        ui_fields_Handler.save_fields_text(self)
+
+    def on_load_btn_click(self):
+        ui_fields_Handler.load_fields_text(self)
 
     def on_btn_create_docs_clicked(self):
         ui_fields_Handler.replace_fields_in_doc1(self)

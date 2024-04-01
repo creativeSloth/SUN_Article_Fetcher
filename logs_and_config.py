@@ -5,6 +5,7 @@ from datetime import datetime
 from qtpy import QtWidgets
 
 import directory_Handler
+import datetime
 
 
 def create_config_file(self):
@@ -40,6 +41,25 @@ def create_config_file(self):
     # Schreibe die Konfiguration in die Datei
     with open(config_path, 'w') as configfile:
         config.write(configfile)
+
+
+def create_save_file(self, field_map):
+    file_path = directory_Handler.set_save_file_dir(self)
+
+    if file_path:
+        save_file = configparser.ConfigParser()
+
+        if os.path.exists(file_path):
+            save_file.read(file_path)
+
+        for field in field_map:
+            section_name = field[0].objectName()
+            if not save_file.has_section(section_name):
+                save_file.add_section(section_name)
+            save_file.set(section_name, 'PlainText', field[1])
+
+        with open(file_path, 'w') as savefile:
+            save_file.write(savefile)
 
 
 def update_config_file(self, section, option, value):

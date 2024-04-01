@@ -76,6 +76,13 @@ def set_directories(self):
     os.makedirs(log_subfolder_path, exist_ok=True)
     os.makedirs(log_sub2folder_path, exist_ok=True)
 
+
+def set_save_file_dir(self):
+    file_path, _ = QFileDialog.getSaveFileName(
+        self, "Datei speichern", "", "Save files (*.sav)")
+    return file_path
+
+
 # *********************************  Decorators  *************************************
 
 

@@ -10,7 +10,6 @@ from odf.table import Table, TableRow, TableCell
 import logs_and_config
 import directory_Handler
 import data_Handler
-import directory_Handler
 
 
 def config_to_fields(self):
@@ -508,3 +507,14 @@ def fill_device_specs_in_device_tables(self, ui_list):
                 if value is not None:
                     ui_list.setItem(
                         row, column, QtWidgets.QTableWidgetItem(value))
+
+
+def save_fields_text(self):
+    mapped_values = get_mapped_context(self).values()
+    field_map = [(field[0], field[0].toPlainText()) for field in mapped_values]
+
+    logs_and_config.create_save_file(self, field_map=field_map)
+
+
+def load_fields_text(self):
+    pass
