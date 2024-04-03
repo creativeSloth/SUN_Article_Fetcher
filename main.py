@@ -229,7 +229,9 @@ class MainWindow(QtWidgets.QMainWindow):
 # * * * * * * * * * * * * * * * * * Documentation-module * * * * * * * * * * * * * * * *
 
     def on_save_btn_click(self):
-        ui_fields_Handler.save_fields_text(self)
+        file_path = logs_and_config.create_save_file(self)
+        ui_fields_Handler.save_fields_text(self, file_path)
+        ui_fields_Handler.save_tables_content(self, file_path)
 
     def on_load_btn_click(self):
         ui_fields_Handler.load_fields_text(self)

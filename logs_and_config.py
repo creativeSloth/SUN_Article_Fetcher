@@ -43,9 +43,20 @@ def create_config_file(self):
         config.write(configfile)
 
 
-def create_save_file(self, field_map):
+def create_save_file(self):
     file_path = directory_Handler.set_save_file_dir(self)
 
+    if file_path != '':
+        save_file = configparser.ConfigParser()
+        save_file['Fields text'] = {}
+        save_file['Tables content'] = {}
+
+        with open(file_path, 'w') as savefile:
+            save_file.write(savefile)
+    return file_path
+
+
+def update_save_file(field_map, file_path, section):
     if file_path:
         save_file = configparser.ConfigParser()
 
@@ -53,10 +64,8 @@ def create_save_file(self, field_map):
             save_file.read(file_path)
 
         for field in field_map:
-            section_name = field[0].objectName()
-            if not save_file.has_section(section_name):
-                save_file.add_section(section_name)
-            save_file.set(section_name, 'PlainText', field[1])
+            save_file.set(section, str(
+                field[0]), str(field[1]))
 
         with open(file_path, 'w') as savefile:
             save_file.write(savefile)

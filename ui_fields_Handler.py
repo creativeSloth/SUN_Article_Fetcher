@@ -351,8 +351,11 @@ def ui_list_to_df_mapping(self, ui_list, tw_row=None, df_row=None):
             tw_row, 5, QtWidgets.QTableWidgetItem(''))
         # Spalte 7 (dynamisch) mit den Werten aus der Spalte 5 des DataFrames
         ui_list.setItem(
-            tw_row, 7, QtWidgets.QTableWidgetItem(''))
+            tw_row, 6, QtWidgets.QTableWidgetItem(''))
         # Spalte 8 (dynamisch) mit den Werten aus der Spalte 6 des DataFrames
+        ui_list.setItem(
+            tw_row, 7, QtWidgets.QTableWidgetItem(''))
+        # Spalte 9 (dynamisch) mit den Werten aus der Spalte 7 des DataFrames
         ui_list.setItem(
             tw_row, 8, QtWidgets.QTableWidgetItem(''))
 
@@ -509,11 +512,31 @@ def fill_device_specs_in_device_tables(self, ui_list):
                         row, column, QtWidgets.QTableWidgetItem(value))
 
 
-def save_fields_text(self):
-    mapped_values = get_mapped_context(self).values()
-    field_map = [(field[0], field[0].toPlainText()) for field in mapped_values]
+def save_fields_text(self, file_path):
 
-    logs_and_config.create_save_file(self, field_map=field_map)
+    mapped_values = get_mapped_context(self).values()
+    field_map = [(field[0].objectName(), field[0].toPlainText())
+                 for field in mapped_values]
+    logs_and_config.update_save_file(
+        field_map=field_map, file_path=file_path, section='Fields text')
+
+
+def save_tables_content(self, file_path):
+    tables = get_all_tables(self)
+    field_map = []
+    for table in tables:
+        for row in range(table.rowCount()):
+
+            for column in range(table.columnCount()):
+                if column == 0:
+                    continue
+                value = table.item(row, column).text()
+
+                table_map = f'{table.objectName()}({row};{column})'
+                field_map.append((table_map, value))
+
+    logs_and_config.update_save_file(
+        field_map=field_map, file_path=file_path, section='Tables content')
 
 
 def load_fields_text(self):
