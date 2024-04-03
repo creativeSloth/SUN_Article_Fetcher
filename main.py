@@ -234,7 +234,10 @@ class MainWindow(QtWidgets.QMainWindow):
         ui_fields_Handler.save_tables_content(self, file_path)
 
     def on_load_btn_click(self):
-        ui_fields_Handler.load_fields_text(self)
+        file_path = directory_Handler.get_save_file_dir(self)
+        if file_path != '':
+            ui_fields_Handler.load_fields_text(self, file_path)
+            ui_fields_Handler.load_tables_content(self, file_path)
 
     def on_btn_create_docs_clicked(self):
         ui_fields_Handler.replace_fields_in_doc1(self)

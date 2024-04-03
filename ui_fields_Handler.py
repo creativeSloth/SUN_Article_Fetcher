@@ -541,3 +541,7 @@ def save_tables_content(self, file_path):
 
 def load_fields_text(self):
     pass
+
+
+def load_tables_content(self):
+    pass

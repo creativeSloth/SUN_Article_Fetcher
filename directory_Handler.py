@@ -83,6 +83,13 @@ def set_save_file_dir(self):
     return file_path
 
 
+def get_save_file_dir(self):
+    file_path, _ = QFileDialog.getSaveFileName(
+        self, "Datei laden", "", "Save files (*.sav)")
+
+    return file_path
+
+
 # *********************************  Decorators  *************************************
 
 
