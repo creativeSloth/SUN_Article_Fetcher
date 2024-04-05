@@ -71,6 +71,16 @@ def update_save_file(field_map, file_path, section):
             save_file.write(savefile)
 
 
+def load_save_file(file_path, section):
+    save_file = configparser.ConfigParser()
+    save_file.read(file_path)
+    saved_field_values = {}
+    if save_file.has_section(section):
+        for option in save_file[section]:
+            saved_field_values[option] = save_file[section][option]
+    return saved_field_values
+
+
 def update_config_file(self, section, option, value):
     config_path = directory_Handler.get_directories(self)['config_path']
     config = configparser.ConfigParser()
@@ -222,13 +232,13 @@ def read_device_related_storage_list(self, storage_file, section, option):
     file_path = directory_Handler.get_directories(
         self)[storage_file]
 
-    store_file = configparser.ConfigParser()
-    store_file.read(file_path)
+    stored_file = configparser.ConfigParser()
+    stored_file.read(file_path)
     # Überprüfen Sie, ob die angegebene Sektion vorhanden ist
-    if store_file.has_section(section):
+    if stored_file.has_section(section):
         option = change_str_to_config_format(option)
-        if store_file.has_option(section, option):
-            value = store_file[section][option]
+        if stored_file.has_option(section, option):
+            value = stored_file[section][option]
             if value is not None and value != '':
                 return value
             return None

@@ -539,9 +539,22 @@ def save_tables_content(self, file_path):
         field_map=field_map, file_path=file_path, section='Tables content')
 
 
-def load_fields_text(self):
-    pass
+def load_fields_text(self, file_path):
+    section = 'Fields text'
+
+    field_map = get_mapped_context(self)
+    saved_field_values = logs_and_config.load_save_file(
+        file_path, section)
+    for _, field in field_map.items():
+        fill_field_value(field[0], saved_field_values)
 
 
-def load_tables_content(self):
+def fill_field_value(field, saved_field_values):
+    field_name = field.objectName().lower()
+
+    if field_name in saved_field_values:
+        field.setPlainText(saved_field_values[field_name])
+
+
+def load_tables_content(self, file_path):
     pass
