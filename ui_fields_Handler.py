@@ -163,7 +163,7 @@ def clear_docu_fields(self):
 
 def fill_article_list(self, df=None):
     ui_list = self.ui.articles_list
-    clear_article_list(self, list=ui_list)
+    clear_table(self, list=ui_list)
     if df is not None:
         for _, df_row in df.iterrows():
 
@@ -272,7 +272,7 @@ def fill_device_lists(self, df):
 
 def fill_specific_device_list(self, df=None, ui_list=None):
 
-    clear_article_list(self, list=ui_list)
+    clear_table(self, list=ui_list)
 
     # Laden Sie die Artikelnummern aus der Blacklist
     blacklist_article_numbers = logs_and_config.read_blacklist_article_numbers(
@@ -389,9 +389,9 @@ def remove_articles_from_list(self, list):
     logs_and_config.update_blacklist(self, df, list.objectName())
 
 
-def clear_article_list(self, list):
+def clear_table(table):
     # Setze die Anzahl der Zeilen auf 0, um alle Zeilen zu entfernen
-    list.setRowCount(0)
+    table.setRowCount(0)
 
 
 def resize_columns_to_contents(self, list, columns):
@@ -543,18 +543,63 @@ def load_fields_text(self, file_path):
     section = 'Fields text'
 
     field_map = get_mapped_context(self)
-    saved_field_values = logs_and_config.load_save_file(
+    saved_field_texts = logs_and_config.load_save_file(
         file_path, section)
     for _, field in field_map.items():
-        fill_field_value(field[0], saved_field_values)
+        fill_field_value(field[0], saved_field_texts)
 
 
-def fill_field_value(field, saved_field_values):
+def fill_field_value(field, saved_field_texts):
     field_name = field.objectName().lower()
 
-    if field_name in saved_field_values:
-        field.setPlainText(saved_field_values[field_name])
+    if field_name in saved_field_texts:
+        field.setPlainText(saved_field_texts[field_name])
 
 
 def load_tables_content(self, file_path):
-    pass
+    section = 'Tables content'
+
+    saved_tables_content = logs_and_config.load_save_file(
+        file_path, section)
+
+    fill_tables_content(self, saved_tables_content)
+
+
+def fill_tables_content(self, saved_tables_content):
+    # Alle Tabellen holen
+    tables = get_all_tables(self)
+    for table in tables:
+        clear_table(table)
+
+    # Durch jedes Element im gespeicherten Tabelleninhalt iterieren
+    for table_map, value in saved_tables_content.items():
+        # Tabellennamen, Zeile und Spalte extrahieren
+        table_name = table_map.split('(')[0]
+        table_row = int(table_map.split('(')[1].split(';')[0])
+        table_column = int(table_map.split('(')[1].split(';')[1].split(')')[0])
+
+        # Durch jede Qt-Tabelle iterieren
+        for table in tables:
+
+            # Wenn der Tabellenname übereinstimmt
+            if table_name == table.objectName().lower():
+                # Wenn die Anzahl der Zeilen kleiner oder gleich der Zielzeile ist
+                if table.rowCount() <= table_row:
+                    # Differenz berechnen und fehlende Zeilen einfügen
+                    diff = table_row - table.rowCount()
+                    for _ in range(diff + 1):
+                        table.insertRow(table.rowCount())
+
+                # Checkbox in Spalte 1 setzen
+                checkbox_item = QtWidgets.QTableWidgetItem()
+                checkbox_item.setFlags(
+                    QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
+                checkbox_item.setCheckState(QtCore.Qt.Checked)
+
+                # Checkbox in die Tabelle einfügen
+                table.setItem(table_row, 0, checkbox_item)
+
+                # Wert in die spezifische Spalte einfügen
+                # Hier wird der Wert in ein QTableWidgetItem-Objekt konvertiert
+                value_item = QtWidgets.QTableWidgetItem(str(value))
+                table.setItem(table_row, table_column, value_item)

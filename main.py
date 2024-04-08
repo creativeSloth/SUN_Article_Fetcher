@@ -109,7 +109,7 @@ class MainWindow(QtWidgets.QMainWindow):
             # Überprüfen Sie zusätzlich, ob file_path nicht leer ist
             if file_path:
                 # Lösche die vorhandenen Daten und fülle die Tabelle mit Daten aus der Datei
-                ui_fields_Handler.clear_article_list(self)
+                ui_fields_Handler.clear_table(self)
                 df = data_Handler.read_data_from_file(file_path)
                 ui_fields_Handler.fill_article_list(self, df=df)
 
