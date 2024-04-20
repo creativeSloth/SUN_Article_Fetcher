@@ -87,6 +87,6 @@ config - Kopie.ini
 .vscode/
 vsc_venv/
 logs/
-data/
+.data/
 
 
