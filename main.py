@@ -121,7 +121,8 @@ class MainWindow(QtWidgets.QMainWindow):
         logs_and_config.update_config_file(self, 'Abfrage', 'sql1',
                                            data_Handler.get_sql_query(self)['sql1'])
         # Lösche die vorhandenen Daten und fülle die Tabelle mit den Daten aus der Datenbank
-        ui_fields_Handler.fill_article_list(table=self.ui.articles_list, df=df)
+        ui_fields_Handler.fill_article_list(
+            self, table=self.ui.articles_list, df=df)
 
     def on_project_text_changed(self):
         ui_fields_Handler.char_validation(self)
@@ -229,7 +230,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 # * * * * * * * * * * * * * * * * * Documentation-module * * * * * * * * * * * * * * * *
-
 
     def on_save_btn_click(self):
         file_path = logs_and_config.create_save_file(self)

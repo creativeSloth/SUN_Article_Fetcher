@@ -1,6 +1,7 @@
 import os
 from qtpy import QtCore, QtWidgets
 from PyQt5 import QtGui
+from PyQt5.QtWidgets import QMessageBox
 
 import pandas as pd
 
@@ -163,16 +164,15 @@ def clear_docu_fields(self):
 
 
 def change_table_row_colour(func):
-    def wrapper(*args, **kwargs):
-        table = kwargs.get('table', None)  # Default-Wert von None
-        
-        if table is None:
-            table = args[0]
+    def wrapper(self, *args, **kwargs):
+
+        table = kwargs['table']
+        # table = None --> Für Entwicklertests
 
         if table is not None:
-            table.setSortingEnabled(False)            
+            table.setSortingEnabled(False)
 
-        func(*args, **kwargs)  # Rufe die ursprüngliche Funktion auf
+        func(self, *args, **kwargs)  # Rufe die ursprüngliche Funktion auf
 
         if table is not None:
             table.setSortingEnabled(True)
@@ -187,12 +187,18 @@ def change_table_row_colour(func):
                         # Hintergrundfarbe für ungerade Zeilen
                         table.item(row, column).setBackground(
                             QtGui.QColor("#BAE290"))
+        else:
+            # Wenn table None ist, gebe eine Fehlermeldung aus
+            QMessageBox.information(
+                self, "Entwicklerinfo", f"Die Zeilenfarbe wird nicht geändert.\n"
+                                        "def change_table_row_colour(func):\n"
+                                        "table = kwargs['table'] --> None")
 
     return wrapper
 
 
 @change_table_row_colour
-def fill_article_list(table, df=None):
+def fill_article_list(self, table, df=None):
     clear_table(table=table)
 
     if df is not None:
@@ -237,11 +243,11 @@ def connect_sort_indicator_changed(self):
     for table in tables:
         # Verwendung von lambda-Funktion, um das Argument "table" zu übergeben
         table.horizontalHeader().sortIndicatorChanged.connect(
-            lambda sortIndex, order, table=table: on_sort_indicator_changed(table))
+            lambda sortIndex, order, table=table: on_sort_indicator_changed(self, table=table))
 
 
 @change_table_row_colour
-def on_sort_indicator_changed(table):
+def on_sort_indicator_changed(self, table):
     pass
 
 
