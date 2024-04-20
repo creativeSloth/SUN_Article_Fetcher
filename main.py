@@ -7,12 +7,17 @@ import pandas as pd
 from qtpy import QtCore, QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 
+import save_and_load.load
+import save_and_load.save
+import tables.interactions
+import tables.search_bar
 from ui.mainwindow import Ui_MainWindow
 import directory_Handler
 import ui_fields_Handler
 import logs_and_config
 import data_Handler
-import table_search
+import tables
+import save_and_load
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -31,7 +36,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def initialize(self):
         self.project = self.ui.project.toPlainText()
-        table_search.set_all_table_headers(self)
+        tables.search_bar.set_all_table_headers(self)
         self.previous_project_text = self.project
         logs_and_config.create_device_related_storage_list(
             self, storage_file='blacklist_path')
@@ -62,7 +67,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.ui.project.textChanged.connect(self.on_project_text_changed)
 
-        ui_fields_Handler.connect_sort_indicator_changed(self)
+        tables.interactions.connect_sort_indicator_changed(self)
 
         #  *********************************** Mapping buttons for "Documentation"- module *****************************************
         self.ui.save_btn.clicked.connect(
@@ -112,7 +117,7 @@ class MainWindow(QtWidgets.QMainWindow):
             if file_path:
                 # Lösche die vorhandenen Daten und fülle die Tabelle mit Daten aus der Datei
                 df = data_Handler.read_data_from_file(file_path)
-                ui_fields_Handler.fill_article_list(
+                tables.interactions.fill_article_table(
                     table=self.ui.articles_list, df=df)
 
     def on_load_articles_from_db_btn_click(self):
@@ -121,7 +126,7 @@ class MainWindow(QtWidgets.QMainWindow):
         logs_and_config.update_config_file(self, 'Abfrage', 'sql1',
                                            data_Handler.get_sql_query(self)['sql1'])
         # Lösche die vorhandenen Daten und fülle die Tabelle mit den Daten aus der Datenbank
-        ui_fields_Handler.fill_article_list(
+        tables.interactions.fill_article_table(
             self, table=self.ui.articles_list, df=df)
 
     def on_project_text_changed(self):
@@ -231,16 +236,17 @@ class MainWindow(QtWidgets.QMainWindow):
 
 # * * * * * * * * * * * * * * * * * Documentation-module * * * * * * * * * * * * * * * *
 
+
     def on_save_btn_click(self):
         file_path = logs_and_config.create_save_file(self)
-        ui_fields_Handler.save_fields_text(self, file_path)
-        ui_fields_Handler.save_tables_content(self, file_path)
+        save_and_load.save.save_fields_text(self, file_path)
+        save_and_load.save.save_tables_content(self, file_path)
 
     def on_load_btn_click(self):
         file_path = directory_Handler.get_save_file_dir(self)
         if file_path != '':
-            ui_fields_Handler.load_fields_text(self, file_path)
-            ui_fields_Handler.load_tables_content(self, file_path)
+            save_and_load.load.load_fields_text(self, file_path)
+            save_and_load.load.load_tables_content(self, file_path)
 
     def on_btn_create_docs_clicked(self):
         ui_fields_Handler.replace_fields_in_doc1(self)
@@ -249,30 +255,30 @@ class MainWindow(QtWidgets.QMainWindow):
         df = data_Handler.execute_query(self, query='sql1')
         logs_and_config.update_config_file(self, 'Abfrage', 'sql1',
                                            data_Handler.get_sql_query(self)['sql1'])
-        ui_fields_Handler.fill_device_lists(self, df)
+        tables.interactions.fill_device_lists(self, df)
 
     def on_move_none_PV_modules_to_blacklist_click(self):
-        ui_fields_Handler.remove_articles_from_list(
+        tables.interactions.remove_articles_from_list(
             self, list=self.ui.PV_modules_list)
 
     def on_move_none_PV_inverters_to_blacklist_click(self):
-        ui_fields_Handler.remove_articles_from_list(
+        tables.interactions.remove_articles_from_list(
             self, list=self.ui.PV_inverters_list)
 
     def on_move_none_BAT_inverters_to_blacklist_click(self):
-        ui_fields_Handler.remove_articles_from_list(
+        tables.interactions.remove_articles_from_list(
             self, list=self.ui.BAT_inverters_list)
 
     def on_move_none_BAT_storage_to_blacklist_click(self):
-        ui_fields_Handler.remove_articles_from_list(
+        tables.interactions.remove_articles_from_list(
             self, list=self.ui.BAT_storage_list)
 
     def on_move_none_CHG_point_to_blacklist_click(self):
-        ui_fields_Handler.remove_articles_from_list(
+        tables.interactions.remove_articles_from_list(
             self, list=self.ui.CHG_point_list)
 
     def on_load_docu_data_from_db_btn_click(self):
-        ui_fields_Handler.check_specs_in_device_tables(self)
+        tables.interactions.check_specs_in_device_tables(self)
 
         df = data_Handler.execute_query(self, query='sql2')
         logs_and_config.update_config_file(self, 'Abfrage', 'sql2',

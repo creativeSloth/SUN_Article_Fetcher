@@ -1,0 +1,501 @@
+[Fields text]
+project = SUN 24-001
+operator_text = data_2
+op_adress_1_text = data_3
+op_adress_2_text = data_4
+op_adress_3_text = data_5
+loc_adress_1_text = data_6
+loc_adress_2_text = data_7
+loc_adress_3_text = data_8
+sys_perf_text = data_9
+constr_style_text = data_10
+bool_consist_azimuth_text = data_11
+maj_azimuth_text = data_12
+maj_card_point_text = data_13
+min_azimuth_text = data_14
+min_card_point_text = data_15
+maj_tilt_text = data_16
+min_tilt_text = data_17
+module_count_text = data_18
+module_type_text = Modul-Typ_1 (1)
+mounting_type_text = data_20
+hybrid_inverter_bool_text = data_21
+inverter_type_text = WR (1)
+	WR 3 (2)
+inverter_sn_text = 4564596899 (1)
+	6788596899 (2)
+inverter_power_text = 4 (1)
+	(2)
+commiss_date_text = data_25
+bat_inverter_type_text = Material 72 (1)
+	Material 71 (2)
+	WR (3)
+	Batteriemodul (4)
+	Modul-Typ_1 (5)
+	BWR (6)
+	BCU (7)
+	Material 6 (8)
+	Material 0 (9)
+	Material 1 (10)
+	Material 2 (11)
+	Material 6 (12)
+	Material 100 (13)
+	WR 3 (14)
+	Ladestation Typ 1 (15)
+	Ladestation Typ 2 (16)
+bat_inverter_sn_text = None (1)
+	None (2)
+	4564596899 (3)
+	4564596899 (4)
+	None (5)
+	4635687678 (6)
+	4564596899 (7)
+	None (8)
+	None (9)
+	None (10)
+	None (11)
+	None (12)
+	None (13)
+	6788596899 (14)
+	4357768878 (15)
+	8769868878 (16)
+bat_inverter_power_text = (1)
+	(2)
+	4 (3)
+	2 (4)
+	(5)
+	1 (6)
+	3 (7)
+	6 (8)
+	(9)
+	(10)
+	(11)
+	(12)
+	(13)
+	(14)
+	(15)
+	(16)
+coupling_type_text = (1)
+	(2)
+	(3)
+	(4)
+	(5)
+	(6)
+	(7)
+	(8)
+	(9)
+	(10)
+	(11)
+	(12)
+	(13)
+	(14)
+	(15)
+	(16)
+bat_storage_type_text = BWR (1)
+	Batteriemodul (2)
+	BCU (3)
+	WR (4)
+	Material 6 (5)
+	Material 0 (6)
+	Material 1 (7)
+	Material 2 (8)
+	Material 3 (9)
+	Material 6 (10)
+	Material 100 (11)
+	WR 3 (12)
+	Modul-Typ_1 (13)
+	Ladestation Typ 1 (14)
+	Ladestation Typ 2 (15)
+	Material 71 (16)
+	Material 72 (17)
+	Material 73 (18)
+	Material 74 (19)
+bat_storage_sn_text = 4635687678 (1)
+	4564596899 (2)
+	4564596899 (3)
+	4564596899 (4)
+	None (5)
+	None (6)
+	None (7)
+	None (8)
+	None (9)
+	None (10)
+	None (11)
+	6788596899 (12)
+	None (13)
+	4357768878 (14)
+	8769868878 (15)
+	None (16)
+	None (17)
+	None (18)
+	None (19)
+bat_storage_cap_text = (1)
+	(2)
+	(3)
+	(4)
+	(5)
+	(6)
+	(7)
+	(8)
+	(9)
+	(10)
+	(11)
+	(12)
+	(13)
+	(14)
+	(15)
+	(16)
+	(17)
+	(18)
+	(19)
+bat_commiss_date_text = data_33
+max_discharge_pow_text = 567567657 (1)
+	(2)
+	(3)
+	(4)
+	(5)
+	(6)
+	(7)
+	(8)
+	(9)
+	(10)
+	(11)
+	(12)
+	(13)
+	(14)
+	(15)
+	(16)
+	(17)
+	(18)
+	(19)
+em_pow_ability_bool_text = data_35
+energy_storage_type_text = data_36
+bat_technology_text = data_37
+charging_point_type_text = Material 73 (1)
+	Material 74 (2)
+charging_point_sn_text = None (1)
+	None (2)
+feeding_type_text = data_40
+pow_limit_bool_text = data_41
+rmt_grd_op_bool_text = data_42
+rmt_drct_mrktr_bool_text = data_43
+rmt_3rd_prt_bool_text = data_44
+prequali_bool_text = data_45
+citizen_corp_bool_text = data_46
+tendering_bool_text = data_47
+meter_cabinet_text = data_48
+meter_box_type_text = data_49
+dl_type_text = data_50
+dl_connect_ext_text = data_51
+
+[Tables content]
+pv_modules_list(0;1) = 000068
+pv_modules_list(0;2) = Modul-Typ_1
+pv_modules_list(0;3) = 100.0
+pv_modules_list(0;4) = None
+pv_modules_list(0;5) = 
+pv_inverters_list(0;1) = 000004
+pv_inverters_list(0;2) = WR
+pv_inverters_list(0;3) = 3.0
+pv_inverters_list(0;4) = 4564596899
+pv_inverters_list(0;5) = 4
+pv_inverters_list(1;1) = 000067
+pv_inverters_list(1;2) = WR 3
+pv_inverters_list(1;3) = 1.0
+pv_inverters_list(1;4) = 6788596899
+pv_inverters_list(1;5) = 
+bat_inverters_list(0;1) = 000072
+bat_inverters_list(0;2) = Material 72
+bat_inverters_list(0;3) = 6.0
+bat_inverters_list(0;4) = None
+bat_inverters_list(0;5) = 
+bat_inverters_list(0;6) = 
+bat_inverters_list(1;1) = 000071
+bat_inverters_list(1;2) = Material 71
+bat_inverters_list(1;3) = 54.0
+bat_inverters_list(1;4) = None
+bat_inverters_list(1;5) = 
+bat_inverters_list(1;6) = 
+bat_inverters_list(2;1) = 000004
+bat_inverters_list(2;2) = WR
+bat_inverters_list(2;3) = 3.0
+bat_inverters_list(2;4) = 4564596899
+bat_inverters_list(2;5) = 4
+bat_inverters_list(2;6) = 
+bat_inverters_list(3;1) = 000002
+bat_inverters_list(3;2) = Batteriemodul
+bat_inverters_list(3;3) = 2.0
+bat_inverters_list(3;4) = 4564596899
+bat_inverters_list(3;5) = 2
+bat_inverters_list(3;6) = 
+bat_inverters_list(4;1) = 000068
+bat_inverters_list(4;2) = Modul-Typ_1
+bat_inverters_list(4;3) = 100.0
+bat_inverters_list(4;4) = None
+bat_inverters_list(4;5) = 
+bat_inverters_list(4;6) = 
+bat_inverters_list(5;1) = 000001
+bat_inverters_list(5;2) = BWR
+bat_inverters_list(5;3) = 1.0
+bat_inverters_list(5;4) = 4635687678
+bat_inverters_list(5;5) = 1
+bat_inverters_list(5;6) = 
+bat_inverters_list(6;1) = 000003
+bat_inverters_list(6;2) = BCU
+bat_inverters_list(6;3) = 1.0
+bat_inverters_list(6;4) = 4564596899
+bat_inverters_list(6;5) = 3
+bat_inverters_list(6;6) = 
+bat_inverters_list(7;1) = 000006
+bat_inverters_list(7;2) = Material 6
+bat_inverters_list(7;3) = 1.0
+bat_inverters_list(7;4) = None
+bat_inverters_list(7;5) = 6
+bat_inverters_list(7;6) = 
+bat_inverters_list(8;1) = 000000
+bat_inverters_list(8;2) = Material 0
+bat_inverters_list(8;3) = 1.0
+bat_inverters_list(8;4) = None
+bat_inverters_list(8;5) = 
+bat_inverters_list(8;6) = 
+bat_inverters_list(9;1) = 000011
+bat_inverters_list(9;2) = Material 1
+bat_inverters_list(9;3) = 1.0
+bat_inverters_list(9;4) = None
+bat_inverters_list(9;5) = 
+bat_inverters_list(9;6) = 
+bat_inverters_list(10;1) = 000012
+bat_inverters_list(10;2) = Material 2
+bat_inverters_list(10;3) = 1.0
+bat_inverters_list(10;4) = None
+bat_inverters_list(10;5) = 
+bat_inverters_list(10;6) = 
+bat_inverters_list(11;1) = 000005
+bat_inverters_list(11;2) = Material 6
+bat_inverters_list(11;3) = 1.0
+bat_inverters_list(11;4) = None
+bat_inverters_list(11;5) = 
+bat_inverters_list(11;6) = 
+bat_inverters_list(12;1) = 000100
+bat_inverters_list(12;2) = Material 100
+bat_inverters_list(12;3) = 1.0
+bat_inverters_list(12;4) = None
+bat_inverters_list(12;5) = 
+bat_inverters_list(12;6) = 
+bat_inverters_list(13;1) = 000067
+bat_inverters_list(13;2) = WR 3
+bat_inverters_list(13;3) = 1.0
+bat_inverters_list(13;4) = 6788596899
+bat_inverters_list(13;5) = 
+bat_inverters_list(13;6) = 
+bat_inverters_list(14;1) = 000069
+bat_inverters_list(14;2) = Ladestation Typ 1
+bat_inverters_list(14;3) = 1.0
+bat_inverters_list(14;4) = 4357768878
+bat_inverters_list(14;5) = 
+bat_inverters_list(14;6) = 
+bat_inverters_list(15;1) = 000070
+bat_inverters_list(15;2) = Ladestation Typ 2
+bat_inverters_list(15;3) = 1.0
+bat_inverters_list(15;4) = 8769868878
+bat_inverters_list(15;5) = 
+bat_inverters_list(15;6) = 
+bat_storage_list(0;1) = 000001
+bat_storage_list(0;2) = BWR
+bat_storage_list(0;3) = 1.0
+bat_storage_list(0;4) = 4635687678
+bat_storage_list(0;5) = 
+bat_storage_list(0;6) = 567567657
+bat_storage_list(0;7) = ghjhgjghj
+bat_storage_list(1;1) = 000002
+bat_storage_list(1;2) = Batteriemodul
+bat_storage_list(1;3) = 2.0
+bat_storage_list(1;4) = 4564596899
+bat_storage_list(1;5) = 
+bat_storage_list(1;6) = 
+bat_storage_list(1;7) = 
+bat_storage_list(2;1) = 000003
+bat_storage_list(2;2) = BCU
+bat_storage_list(2;3) = 1.0
+bat_storage_list(2;4) = 4564596899
+bat_storage_list(2;5) = 
+bat_storage_list(2;6) = 
+bat_storage_list(2;7) = 
+bat_storage_list(3;1) = 000004
+bat_storage_list(3;2) = WR
+bat_storage_list(3;3) = 3.0
+bat_storage_list(3;4) = 4564596899
+bat_storage_list(3;5) = 
+bat_storage_list(3;6) = 
+bat_storage_list(3;7) = 
+bat_storage_list(4;1) = 000006
+bat_storage_list(4;2) = Material 6
+bat_storage_list(4;3) = 1.0
+bat_storage_list(4;4) = None
+bat_storage_list(4;5) = 
+bat_storage_list(4;6) = 
+bat_storage_list(4;7) = 
+bat_storage_list(5;1) = 000000
+bat_storage_list(5;2) = Material 0
+bat_storage_list(5;3) = 1.0
+bat_storage_list(5;4) = None
+bat_storage_list(5;5) = 
+bat_storage_list(5;6) = 
+bat_storage_list(5;7) = 
+bat_storage_list(6;1) = 000011
+bat_storage_list(6;2) = Material 1
+bat_storage_list(6;3) = 1.0
+bat_storage_list(6;4) = None
+bat_storage_list(6;5) = 
+bat_storage_list(6;6) = 
+bat_storage_list(6;7) = 
+bat_storage_list(7;1) = 000012
+bat_storage_list(7;2) = Material 2
+bat_storage_list(7;3) = 1.0
+bat_storage_list(7;4) = None
+bat_storage_list(7;5) = 
+bat_storage_list(7;6) = 
+bat_storage_list(7;7) = 
+bat_storage_list(8;1) = 000203
+bat_storage_list(8;2) = Material 3
+bat_storage_list(8;3) = 1.0
+bat_storage_list(8;4) = None
+bat_storage_list(8;5) = 
+bat_storage_list(8;6) = 
+bat_storage_list(8;7) = 
+bat_storage_list(9;1) = 000005
+bat_storage_list(9;2) = Material 6
+bat_storage_list(9;3) = 1.0
+bat_storage_list(9;4) = None
+bat_storage_list(9;5) = 
+bat_storage_list(9;6) = 
+bat_storage_list(9;7) = 
+bat_storage_list(10;1) = 000100
+bat_storage_list(10;2) = Material 100
+bat_storage_list(10;3) = 1.0
+bat_storage_list(10;4) = None
+bat_storage_list(10;5) = 
+bat_storage_list(10;6) = 
+bat_storage_list(10;7) = 
+bat_storage_list(11;1) = 000067
+bat_storage_list(11;2) = WR 3
+bat_storage_list(11;3) = 1.0
+bat_storage_list(11;4) = 6788596899
+bat_storage_list(11;5) = 
+bat_storage_list(11;6) = 
+bat_storage_list(11;7) = 
+bat_storage_list(12;1) = 000068
+bat_storage_list(12;2) = Modul-Typ_1
+bat_storage_list(12;3) = 100.0
+bat_storage_list(12;4) = None
+bat_storage_list(12;5) = 
+bat_storage_list(12;6) = 
+bat_storage_list(12;7) = 
+bat_storage_list(13;1) = 000069
+bat_storage_list(13;2) = Ladestation Typ 1
+bat_storage_list(13;3) = 1.0
+bat_storage_list(13;4) = 4357768878
+bat_storage_list(13;5) = 
+bat_storage_list(13;6) = 
+bat_storage_list(13;7) = 
+bat_storage_list(14;1) = 000070
+bat_storage_list(14;2) = Ladestation Typ 2
+bat_storage_list(14;3) = 1.0
+bat_storage_list(14;4) = 8769868878
+bat_storage_list(14;5) = 
+bat_storage_list(14;6) = 
+bat_storage_list(14;7) = 
+bat_storage_list(15;1) = 000071
+bat_storage_list(15;2) = Material 71
+bat_storage_list(15;3) = 54.0
+bat_storage_list(15;4) = None
+bat_storage_list(15;5) = 
+bat_storage_list(15;6) = 
+bat_storage_list(15;7) = 
+bat_storage_list(16;1) = 000072
+bat_storage_list(16;2) = Material 72
+bat_storage_list(16;3) = 6.0
+bat_storage_list(16;4) = None
+bat_storage_list(16;5) = 
+bat_storage_list(16;6) = 
+bat_storage_list(16;7) = 
+bat_storage_list(17;1) = 000073
+bat_storage_list(17;2) = Material 73
+bat_storage_list(17;3) = 100.0
+bat_storage_list(17;4) = None
+bat_storage_list(17;5) = 
+bat_storage_list(17;6) = 
+bat_storage_list(17;7) = 
+bat_storage_list(18;1) = 000074
+bat_storage_list(18;2) = Material 74
+bat_storage_list(18;3) = 354.0
+bat_storage_list(18;4) = None
+bat_storage_list(18;5) = 
+bat_storage_list(18;6) = 
+bat_storage_list(18;7) = 
+chg_point_list(0;1) = 000073
+chg_point_list(0;2) = Material 73
+chg_point_list(0;3) = 100.0
+chg_point_list(0;4) = None
+chg_point_list(1;1) = 000074
+chg_point_list(1;2) = Material 74
+chg_point_list(1;3) = 354.0
+chg_point_list(1;4) = None
+articles_list(0;1) = 000067
+articles_list(0;2) = WR 3
+articles_list(0;3) = 1.0
+articles_list(1;1) = 000004
+articles_list(1;2) = WR
+articles_list(1;3) = 3.0
+articles_list(2;1) = 000068
+articles_list(2;2) = Modul-Typ_1
+articles_list(2;3) = 100.0
+articles_list(3;1) = 000074
+articles_list(3;2) = Material 74
+articles_list(3;3) = 354.0
+articles_list(4;1) = 000073
+articles_list(4;2) = Material 73
+articles_list(4;3) = 100.0
+articles_list(5;1) = 000072
+articles_list(5;2) = Material 72
+articles_list(5;3) = 6.0
+articles_list(6;1) = 000071
+articles_list(6;2) = Material 71
+articles_list(6;3) = 54.0
+articles_list(7;1) = 000006
+articles_list(7;2) = Material 6
+articles_list(7;3) = 1.0
+articles_list(8;1) = 000005
+articles_list(8;2) = Material 6
+articles_list(8;3) = 1.0
+articles_list(9;1) = 000203
+articles_list(9;2) = Material 3
+articles_list(9;3) = 1.0
+articles_list(10;1) = 000012
+articles_list(10;2) = Material 2
+articles_list(10;3) = 1.0
+articles_list(11;1) = 000100
+articles_list(11;2) = Material 100
+articles_list(11;3) = 1.0
+articles_list(12;1) = 000011
+articles_list(12;2) = Material 1
+articles_list(12;3) = 1.0
+articles_list(13;1) = 000000
+articles_list(13;2) = Material 0
+articles_list(13;3) = 1.0
+articles_list(14;1) = 000070
+articles_list(14;2) = Ladestation Typ 2
+articles_list(14;3) = 1.0
+articles_list(15;1) = 000069
+articles_list(15;2) = Ladestation Typ 1
+articles_list(15;3) = 1.0
+articles_list(16;1) = 000001
+articles_list(16;2) = BWR
+articles_list(16;3) = 1.0
+articles_list(17;1) = 000003
+articles_list(17;2) = BCU
+articles_list(17;3) = 1.0
+articles_list(18;1) = 000002
+articles_list(18;2) = Batteriemodul
+articles_list(18;3) = 2.0
+

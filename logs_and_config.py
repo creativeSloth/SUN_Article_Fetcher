@@ -1,5 +1,4 @@
 import configparser
-from fileinput import filename
 import os
 from datetime import datetime
 from qtpy import QtWidgets

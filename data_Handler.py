@@ -1,5 +1,4 @@
 import os
-from re import ASCII
 import pandas as pd
 from sqlalchemy import create_engine
 from qtpy import QtWidgets
@@ -159,16 +158,3 @@ def aggr_dev_list(device_list, column_index):
             k += 1
     value = value.rstrip('\n')
     return value
-
-
-def get_inv_types(self):
-
-    pass
-
-
-def get_serial_of_inv(self):
-    pass
-
-
-def get_power_of_inv(self):
-    pass
