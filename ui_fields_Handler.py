@@ -1,5 +1,6 @@
 import os
 from qtpy import QtCore, QtWidgets
+from PyQt5 import QtGui
 
 import pandas as pd
 
@@ -161,14 +162,44 @@ def clear_docu_fields(self):
      if value[0] != self.ui.project]
 
 
-def fill_article_list(self, df=None):
-    ui_list = self.ui.articles_list
-    clear_table(self, list=ui_list)
+def change_table_row_colour(func):
+    def wrapper(*args, **kwargs):
+        table = kwargs.get('table', None)  # Default-Wert von None
+        
+        if table is None:
+            table = args[0]
+
+        if table is not None:
+            table.setSortingEnabled(False)            
+
+        func(*args, **kwargs)  # Rufe die ursprüngliche Funktion auf
+
+        if table is not None:
+            table.setSortingEnabled(True)
+
+            # Führe die Anpassung der Zeilenfarben durch
+            for row in range(table.rowCount()):
+                for column in range(table.columnCount()):
+                    if row % 2 == 0:
+                        table.item(row, column).setBackground(QtGui.QColor(
+                            "#F6A4A4"))  # Hintergrundfarbe für gerade Zeilen
+                    else:
+                        # Hintergrundfarbe für ungerade Zeilen
+                        table.item(row, column).setBackground(
+                            QtGui.QColor("#BAE290"))
+
+    return wrapper
+
+
+@change_table_row_colour
+def fill_article_list(table, df=None):
+    clear_table(table=table)
+
     if df is not None:
         for _, df_row in df.iterrows():
 
-            tw_row = ui_list.rowCount()
-            ui_list.insertRow(tw_row)
+            tw_row = table.rowCount()
+            table.insertRow(tw_row)
 
             # Spalte 1 (statisch) mit einer Checkbox
             checkbox_item = QtWidgets.QTableWidgetItem()
@@ -177,29 +208,41 @@ def fill_article_list(self, df=None):
             checkbox_item.setCheckState(QtCore.Qt.Checked)
 
             # Spalte 1 mit der CheckBox
-            ui_list.setItem(tw_row, 0, checkbox_item)
+            table.setItem(tw_row, 0, checkbox_item)
 
             # Spalte 2 (dynamisch) mit den Werten aus der Spalte 0 des DataFrames
             item_col1 = QtWidgets.QTableWidgetItem(str(df_row.iloc[0]))
-            ui_list.setItem(tw_row, 1, item_col1)
+            table.setItem(tw_row, 1, item_col1)
             # Spalte 3 (dynamisch) mit den Werten aus der Spalte 1 des DataFrames
             item_col2 = QtWidgets.QTableWidgetItem(str(df_row.iloc[1]))
-            ui_list.setItem(tw_row, 2, item_col2)
+            table.setItem(tw_row, 2, item_col2)
             # Spalte 4 (dynamisch) mit den Werten aus der Spalte 2 des DataFrames
             if df_row.shape[0] >= 3:  # !!!!!!!!
                 item_col3 = QtWidgets.QTableWidgetItem(str(df_row.iloc[2]))
-                ui_list.setItem(tw_row, 3, item_col3)
+                table.setItem(tw_row, 3, item_col3)
 
     # Iteriere über alle Zellen im Table Widget
-    for row in range(ui_list.rowCount()):
-        for col in range(ui_list.columnCount()):
-            item = ui_list.item(row, col)
+    for row in range(table.rowCount()):
+        for col in range(table.columnCount()):
+            item = table.item(row, col)
             if item:
                 # Deaktiviere die Editierbarkeit für die Zelle
                 item.setFlags(item.flags() & ~QtCore.Qt.ItemIsEditable)
 
-    resize_columns_to_contents(
-        self, list=ui_list, columns=ui_list.columnCount())
+    resize_columns_to_contents(list=table, columns=table.columnCount())
+
+
+def connect_sort_indicator_changed(self):
+    tables = get_all_tables(self)
+    for table in tables:
+        # Verwendung von lambda-Funktion, um das Argument "table" zu übergeben
+        table.horizontalHeader().sortIndicatorChanged.connect(
+            lambda sortIndex, order, table=table: on_sort_indicator_changed(table))
+
+
+@change_table_row_colour
+def on_sort_indicator_changed(table):
+    pass
 
 
 @directory_Handler.check_path_existence(modus=1)
@@ -263,27 +306,27 @@ def replace_fields_in_doc1(self):
 def fill_device_lists(self, df):
     tables = get_device_tables(self)
     for table in tables:
-
-        fill_specific_device_list(self, df, ui_list=table)
+        fill_specific_device_list(self, table=table, df=df)
 
     QtWidgets.QMessageBox.information(
         self, "Abgeschlossen!", "Geräteliste wurden geladen!")
 
 
-def fill_specific_device_list(self, df=None, ui_list=None):
+@change_table_row_colour
+def fill_specific_device_list(self, table, df):
 
-    clear_table(self, list=ui_list)
+    clear_table(table)
 
     # Laden Sie die Artikelnummern aus der Blacklist
     blacklist_article_numbers = logs_and_config.read_blacklist_article_numbers(
-        self, list_name=ui_list.objectName())
+        self, table_name=table.objectName())
 
     if df is not None:
         for _, df_row in df.iterrows():
             # Überprüfen Sie, ob die Artikelnummer nicht in der Blacklist enthalten ist
             if str(df_row.iloc[0]) not in blacklist_article_numbers:
-                tw_row = ui_list.rowCount()
-                ui_list.insertRow(tw_row)
+                tw_row = table.rowCount()
+                table.insertRow(tw_row)
 
                 # Spalte 1 (statisch) mit einer Checkbox
                 checkbox_item = QtWidgets.QTableWidgetItem()
@@ -292,29 +335,28 @@ def fill_specific_device_list(self, df=None, ui_list=None):
                 checkbox_item.setCheckState(QtCore.Qt.Checked)
 
                 # Spalte 1 mit der CheckBox
-                ui_list.setItem(tw_row, 0, checkbox_item)
+                table.setItem(tw_row, 0, checkbox_item)
 
                 # Spalte 2 (dynamisch) mit den Werten aus der Spalte 0 des DataFrames
-                ui_list.setItem(
+                table.setItem(
                     tw_row, 1, QtWidgets.QTableWidgetItem(str(df_row.iloc[0])))
 
                 # Spalte 3 (dynamisch) mit den Werten aus der Spalte 1 des DataFrames
-                ui_list.setItem(
+                table.setItem(
                     tw_row, 2, QtWidgets.QTableWidgetItem(str(df_row.iloc[1])))
 
                 # Spalte 4 (dynamisch) mit den Werten aus der Spalte 2 des DataFrames
-                ui_list.setItem(
+                table.setItem(
                     tw_row, 3, QtWidgets.QTableWidgetItem(str(df_row.iloc[2])))
 
                 # Spalte 5 (dynamisch) mit den Werten aus der Spalte 3 des DataFrames
-                ui_list.setItem(
+                table.setItem(
                     tw_row, 4, QtWidgets.QTableWidgetItem(str(df_row.iloc[3])))
-                ui_list_to_df_mapping(self, ui_list, tw_row, df_row)
+                ui_list_to_df_mapping(self, table, tw_row, df_row)
     # Anzahl der Spalten ist flexibel, muss später angepasst hinzugefügt werden
-    fill_device_specs_in_device_tables(self, ui_list)
-    resize_columns_to_contents(
-        self, list=ui_list, columns=ui_list.columnCount())
-    disable_colums_edit(ui_list, firstcol=1, lastcol=5)
+    fill_device_specs_in_device_tables(self, table)
+    resize_columns_to_contents(list=table, columns=table.columnCount())
+    disable_colums_edit(table, firstcol=1, lastcol=5)
 
 
 def disable_colums_edit(ui_list, firstcol, lastcol):
@@ -394,17 +436,17 @@ def clear_table(table):
     table.setRowCount(0)
 
 
-def resize_columns_to_contents(self, list, columns):
+def resize_columns_to_contents(list, columns):
     header = list.horizontalHeader()
     for i in range(columns):
         header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
 
 
-def get_column_index(table, column):
+def get_column_index(list, column):
     """Suche den Index der 'Artikelnummer'-Spalte in der Tabelle."""
     column_index = None
-    for column_index in range(table.columnCount()):
-        if table.horizontalHeaderItem(column_index).text() == column:
+    for column_index in range(list.columnCount()):
+        if list.horizontalHeaderItem(column_index).text() == column:
             return column_index
     return None
 

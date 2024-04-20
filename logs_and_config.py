@@ -181,15 +181,15 @@ def update_blacklist(self, df, list):
         config.write(blacklist_file)
 
 
-def read_blacklist_article_numbers(self, list_name):
+def read_blacklist_article_numbers(self, table_name):
     blacklist_path = directory_Handler.get_directories(self)['blacklist_path']
     config = configparser.ConfigParser()
     config.read(blacklist_path)
     # Überprüfen Sie, ob die angegebene Sektion vorhanden ist
     article_numbers = []
-    if config.has_section(list_name):
+    if config.has_section(table_name):
         # Holen Sie sich alle Schlüssel-Wert-Paare in der Sektion
-        article_numbers = [str(key) for key, _ in config.items(list_name)]
+        article_numbers = [str(key) for key, _ in config.items(table_name)]
 
     return article_numbers
 
