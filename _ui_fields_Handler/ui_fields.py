@@ -7,8 +7,6 @@ from odf.table import Table, TableRow, TableCell
 
 import logs_and_config
 import directory_Handler
-import data_Handler
-
 
 def config_to_fields(self):
     try:
@@ -48,7 +46,7 @@ def char_validation(self):
     textlength = 10
     # Speichere den vorherigen Text
     prev_string = self.previous_project_text
-    current_string = self.project
+    current_string = self.ui.project.toPlainText()
     cursor = self.ui.project.textCursor()
     cur_cursor_pos = cursor.position()
 
@@ -111,27 +109,27 @@ def get_mapped_context(self):
         '{{maj_tilt}}': (self.ui.maj_tilt_text, 'data_16'),
         '{{min_tilt}}': (self.ui.min_tilt_text, 'data_17'),
         '{{module_count}}': (self.ui.module_count_text, 'data_18'),
-        '{{module_type}}': (self.ui.module_type_text, data_Handler.aggr_dev_list(self.ui.PV_modules_list, 2)),
+        '{{module_type}}': (self.ui.module_type_text, aggr_dev_list(self.ui.PV_modules_list, 2)),
         '{{mounting_type}}': (self.ui.mounting_type_text, 'data_20'),
         '{{hybrid_inverter_bool}}': (self.ui.hybrid_inverter_bool_text, 'data_21'),
-        '{{inverter_type}}': (self.ui.inverter_type_text, data_Handler.aggr_dev_list(self.ui.PV_inverters_list, 2)),
-        '{{inverter_SN}}': (self.ui.inverter_SN_text, data_Handler.aggr_dev_list(self.ui.PV_inverters_list, 4)),
-        '{{inverter_power}}': (self.ui.inverter_power_text, data_Handler.aggr_dev_list(self.ui.PV_inverters_list, 5)),
+        '{{inverter_type}}': (self.ui.inverter_type_text, aggr_dev_list(self.ui.PV_inverters_list, 2)),
+        '{{inverter_SN}}': (self.ui.inverter_SN_text, aggr_dev_list(self.ui.PV_inverters_list, 4)),
+        '{{inverter_power}}': (self.ui.inverter_power_text, aggr_dev_list(self.ui.PV_inverters_list, 5)),
         '{{commiss_date}}': (self.ui.commiss_date_text, 'data_25'),
-        '{{bat_inverter_type}}': (self.ui.bat_inverter_type_text, data_Handler.aggr_dev_list(self.ui.BAT_inverters_list, 2)),
-        '{{bat_inverter_SN}}': (self.ui.bat_inverter_SN_text, data_Handler.aggr_dev_list(self.ui.BAT_inverters_list, 4)),
-        '{{bat_inverter_power}}': (self.ui.bat_inverter_power_text, data_Handler.aggr_dev_list(self.ui.BAT_inverters_list, 5)),
-        '{{coupling_type}}': (self.ui.coupling_type_text, data_Handler.aggr_dev_list(self.ui.BAT_inverters_list, 6)),
-        '{{bat_storage_type}}': (self.ui.bat_storage_type_text, data_Handler.aggr_dev_list(self.ui.BAT_storage_list, 2)),
-        '{{bat_storage_SN}}': (self.ui.bat_storage_SN_text, data_Handler.aggr_dev_list(self.ui.BAT_storage_list, 4)),
-        '{{bat_storage_cap}}': (self.ui.bat_storage_cap_text, data_Handler.aggr_dev_list(self.ui.BAT_storage_list, 5)),
+        '{{bat_inverter_type}}': (self.ui.bat_inverter_type_text, aggr_dev_list(self.ui.BAT_inverters_list, 2)),
+        '{{bat_inverter_SN}}': (self.ui.bat_inverter_SN_text, aggr_dev_list(self.ui.BAT_inverters_list, 4)),
+        '{{bat_inverter_power}}': (self.ui.bat_inverter_power_text, aggr_dev_list(self.ui.BAT_inverters_list, 5)),
+        '{{coupling_type}}': (self.ui.coupling_type_text, aggr_dev_list(self.ui.BAT_inverters_list, 6)),
+        '{{bat_storage_type}}': (self.ui.bat_storage_type_text, aggr_dev_list(self.ui.BAT_storage_list, 2)),
+        '{{bat_storage_SN}}': (self.ui.bat_storage_SN_text, aggr_dev_list(self.ui.BAT_storage_list, 4)),
+        '{{bat_storage_cap}}': (self.ui.bat_storage_cap_text, aggr_dev_list(self.ui.BAT_storage_list, 5)),
         '{{bat_commiss_date}}': (self.ui.bat_commiss_date_text, 'data_33'),
-        '{{max_discharge_pow}}': (self.ui.max_discharge_pow_text, data_Handler.aggr_dev_list(self.ui.BAT_storage_list, 6)),
+        '{{max_discharge_pow}}': (self.ui.max_discharge_pow_text, aggr_dev_list(self.ui.BAT_storage_list, 6)),
         '{{em_pow_ability_bool}}': (self.ui.em_pow_ability_bool_text, 'data_35'),
         '{{energy_storage_type}}': (self.ui.energy_storage_type_text, 'data_36'),
         '{{bat_technology}}': (self.ui.bat_technology_text, 'data_37'),
-        '{{charging_point_type}}': (self.ui.charging_point_type_text, data_Handler.aggr_dev_list(self.ui.CHG_point_list, 2)),
-        '{{charging_point_SN}}': (self.ui.charging_point_SN_text, data_Handler.aggr_dev_list(self.ui.CHG_point_list, 4)),
+        '{{charging_point_type}}': (self.ui.charging_point_type_text, aggr_dev_list(self.ui.CHG_point_list, 2)),
+        '{{charging_point_SN}}': (self.ui.charging_point_SN_text, aggr_dev_list(self.ui.CHG_point_list, 4)),
         '{{feeding_type}}': (self.ui.feeding_type_text, 'data_40'),
         '{{pow_limit_bool}}': (self.ui.pow_limit_bool_text, 'data_41'),
         '{{rmt_grd_op_bool}}': (self.ui.rmt_grd_op_bool_text, 'data_42'),
@@ -157,6 +155,18 @@ def clear_docu_fields(self):
     [value[0].clear()
      for value in get_mapped_context(self).values()
      if value[0] != self.ui.project]
+
+
+def aggr_dev_list(device_list, column_index):
+    k = 1
+    value = ''
+    for row in range(device_list.rowCount()):
+        if not device_list.item(row, column_index) == None:
+            value = value + \
+                f'{device_list.item(row, column_index).text()} ({str(k)})\n'
+            k += 1
+    value = value.rstrip('\n')
+    return value
 
 
 @directory_Handler.check_path_existence(modus=1)

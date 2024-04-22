@@ -1832,7 +1832,7 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem2 = self.articles_list.horizontalHeaderItem(2)
         ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"Artikelbezeichnung", None));
         ___qtablewidgetitem3 = self.articles_list.horizontalHeaderItem(3)
-        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"Anzahl", None));
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"Menge verbraucht [Stk.]", None));
         self.paste_docs_btn.setText(QCoreApplication.translate("MainWindow", u"Dokumente \u00fcbertragen", None))
         self.target_path_btn.setText(QCoreApplication.translate("MainWindow", u"Zielpfad festlegen", None))
         self.source_path_text.setPlainText("")
@@ -1875,7 +1875,7 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem6 = self.PV_modules_list.horizontalHeaderItem(2)
         ___qtablewidgetitem6.setText(QCoreApplication.translate("MainWindow", u"Modul-Typ", None));
         ___qtablewidgetitem7 = self.PV_modules_list.horizontalHeaderItem(3)
-        ___qtablewidgetitem7.setText(QCoreApplication.translate("MainWindow", u"Anzahl [Stk.]", None));
+        ___qtablewidgetitem7.setText(QCoreApplication.translate("MainWindow", u"Menge verbraucht [Stk.]", None));
         ___qtablewidgetitem8 = self.PV_modules_list.horizontalHeaderItem(4)
         ___qtablewidgetitem8.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
         ___qtablewidgetitem9 = self.PV_modules_list.horizontalHeaderItem(5)
@@ -1893,7 +1893,7 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem12 = self.PV_inverters_list.horizontalHeaderItem(2)
         ___qtablewidgetitem12.setText(QCoreApplication.translate("MainWindow", u"Wechselrichter-Typ", None));
         ___qtablewidgetitem13 = self.PV_inverters_list.horizontalHeaderItem(3)
-        ___qtablewidgetitem13.setText(QCoreApplication.translate("MainWindow", u"Anzahl [Stk.]", None));
+        ___qtablewidgetitem13.setText(QCoreApplication.translate("MainWindow", u"Menge verbraucht [Stk.]", None));
         ___qtablewidgetitem14 = self.PV_inverters_list.horizontalHeaderItem(4)
         ___qtablewidgetitem14.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
         ___qtablewidgetitem15 = self.PV_inverters_list.horizontalHeaderItem(5)
@@ -1917,7 +1917,7 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem18 = self.BAT_inverters_list.horizontalHeaderItem(2)
         ___qtablewidgetitem18.setText(QCoreApplication.translate("MainWindow", u"Wechselrichter-Typ", None));
         ___qtablewidgetitem19 = self.BAT_inverters_list.horizontalHeaderItem(3)
-        ___qtablewidgetitem19.setText(QCoreApplication.translate("MainWindow", u"Anzahl [Stk.]", None));
+        ___qtablewidgetitem19.setText(QCoreApplication.translate("MainWindow", u"Menge verbraucht [Stk.]", None));
         ___qtablewidgetitem20 = self.BAT_inverters_list.horizontalHeaderItem(4)
         ___qtablewidgetitem20.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
         ___qtablewidgetitem21 = self.BAT_inverters_list.horizontalHeaderItem(5)
@@ -1940,7 +1940,7 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem25 = self.BAT_storage_list.horizontalHeaderItem(2)
         ___qtablewidgetitem25.setText(QCoreApplication.translate("MainWindow", u"Speicher-Typ", None));
         ___qtablewidgetitem26 = self.BAT_storage_list.horizontalHeaderItem(3)
-        ___qtablewidgetitem26.setText(QCoreApplication.translate("MainWindow", u"Anzahl [Stk.]", None));
+        ___qtablewidgetitem26.setText(QCoreApplication.translate("MainWindow", u"Menge verbraucht [Stk.]", None));
         ___qtablewidgetitem27 = self.BAT_storage_list.horizontalHeaderItem(4)
         ___qtablewidgetitem27.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
         ___qtablewidgetitem28 = self.BAT_storage_list.horizontalHeaderItem(5)
@@ -1975,7 +1975,7 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem33 = self.CHG_point_list.horizontalHeaderItem(2)
         ___qtablewidgetitem33.setText(QCoreApplication.translate("MainWindow", u"Ladestations-Typ", None));
         ___qtablewidgetitem34 = self.CHG_point_list.horizontalHeaderItem(3)
-        ___qtablewidgetitem34.setText(QCoreApplication.translate("MainWindow", u"Anzahl [Stk.]", None));
+        ___qtablewidgetitem34.setText(QCoreApplication.translate("MainWindow", u"Menge verbraucht [Stk.]", None));
         ___qtablewidgetitem35 = self.CHG_point_list.horizontalHeaderItem(4)
         ___qtablewidgetitem35.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
         self.move_none_CHG_point_to_blacklist.setText(QCoreApplication.translate("MainWindow", u"Entferne die markierten Artikel", None))

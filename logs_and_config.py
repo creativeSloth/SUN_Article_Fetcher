@@ -4,7 +4,6 @@ from datetime import datetime
 from qtpy import QtWidgets
 
 import directory_Handler
-import datetime
 
 
 def create_config_file(self):

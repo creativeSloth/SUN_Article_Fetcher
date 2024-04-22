@@ -61,7 +61,7 @@
      </size>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <property name="iconSize">
      <size>
@@ -265,16 +265,6 @@
           <attribute name="verticalHeaderStretchLastSection">
            <bool>false</bool>
           </attribute>
-          <row>
-           <property name="text">
-            <string>Neue Zeile</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>345345</string>
-           </property>
-          </row>
           <column>
            <property name="text">
             <string>&lt;&gt;</string>

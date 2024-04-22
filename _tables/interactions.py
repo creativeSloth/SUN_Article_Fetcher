@@ -1,17 +1,17 @@
 import pandas as pd
 
-from qtpy import QtCore, QtWidgets
+from qtpy import QtCore, QtWidgets, QtGui
 
 from odf.opendocument import load
 
 import logs_and_config
 
-from tables.row_colour import change_table_row_colour
-import ui_fields_Handler
+from _tables.row_colour import change_table_row_colour
+import _ui_fields_Handler.ui_fields
 
 
 def connect_sort_indicator_changed(self):
-    tables = ui_fields_Handler.get_all_tables(self)
+    tables = _ui_fields_Handler.ui_fields.get_all_tables(self)
     for table in tables:
         # Verwendung von lambda-Funktion, um das Argument "table" zu übergeben
         table.horizontalHeader().sortIndicatorChanged.connect(
@@ -45,6 +45,7 @@ def fill_article_table(self, table, df=None):
             # Spalte 2 (dynamisch) mit den Werten aus der Spalte 0 des DataFrames
             item_col1 = QtWidgets.QTableWidgetItem(str(df_row.iloc[0]))
             table.setItem(tw_row, 1, item_col1)
+
             # Spalte 3 (dynamisch) mit den Werten aus der Spalte 1 des DataFrames
             item_col2 = QtWidgets.QTableWidgetItem(str(df_row.iloc[1]))
             table.setItem(tw_row, 2, item_col2)
@@ -52,6 +53,11 @@ def fill_article_table(self, table, df=None):
             if df_row.shape[0] >= 3:  # !!!!!!!!
                 item_col3 = QtWidgets.QTableWidgetItem(str(df_row.iloc[2]))
                 table.setItem(tw_row, 3, item_col3)
+
+            if df_row.iloc[2] == 0:
+                for column in range(1, table.columnCount()):
+                    table.item(tw_row, column).setForeground(
+                        QtGui.QColor("#e20000"))
 
     # Iteriere über alle Zellen im Table Widget
     for row in range(table.rowCount()):
@@ -65,7 +71,7 @@ def fill_article_table(self, table, df=None):
 
 
 def fill_device_lists(self, df):
-    tables = ui_fields_Handler.get_device_tables(self)
+    tables = _ui_fields_Handler.ui_fields.get_device_tables(self)
     for table in tables:
         fill_specific_device_list(self, table=table, df=df)
 
@@ -241,7 +247,7 @@ def get_fixed_val_columns():
 
 def check_specs_in_device_tables(self):
 
-    device_tables = ui_fields_Handler.get_device_tables(self)
+    device_tables = _ui_fields_Handler.ui_fields.get_device_tables(self)
     fixed_val_columns = get_fixed_val_columns()
 
     data_set = set()
@@ -289,7 +295,7 @@ def fill_device_specs_in_device_tables(self, ui_list):
 
 def fill_tables_content(self, saved_tables_content):
     # Alle Tabellen holen
-    tables = ui_fields_Handler.get_all_tables(self)
+    tables = _ui_fields_Handler.ui_fields.get_all_tables(self)
     for table in tables:
         clear_table(table)
 

@@ -7,17 +7,17 @@ import pandas as pd
 from qtpy import QtCore, QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 
-import save_and_load.load
-import save_and_load.save
-import tables.interactions
-import tables.search_bar
+import _data_Handler.data
+import _save_and_load.load
+import _save_and_load.save
+import _tables.interactions
+import _tables.search_bar
 from ui.mainwindow import Ui_MainWindow
 import directory_Handler
-import ui_fields_Handler
 import logs_and_config
-import data_Handler
-import tables
-import save_and_load
+import _tables
+import _save_and_load
+import _ui_fields_Handler.ui_fields
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -35,14 +35,13 @@ class MainWindow(QtWidgets.QMainWindow):
         self.map_ui_buttons()
 
     def initialize(self):
-        self.project = self.ui.project.toPlainText()
-        tables.search_bar.set_all_table_headers(self)
-        self.previous_project_text = self.project
+        self.previous_project_text = self.ui.project.toPlainText()
+        _tables.search_bar.set_all_table_headers(self)
         logs_and_config.create_device_related_storage_list(
             self, storage_file='blacklist_path')
         logs_and_config.create_device_related_storage_list(
             self, storage_file='device_specs_list_path')
-        ui_fields_Handler.config_to_fields(self)
+        _ui_fields_Handler.ui_fields.config_to_fields(self)
 
         # query_input-Box verstecken
         self.ui.query_input.hide()
@@ -67,7 +66,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.ui.project.textChanged.connect(self.on_project_text_changed)
 
-        tables.interactions.connect_sort_indicator_changed(self)
+        _tables.interactions.connect_sort_indicator_changed(self)
 
         #  *********************************** Mapping buttons for "Documentation"- module *****************************************
         self.ui.save_btn.clicked.connect(
@@ -116,21 +115,21 @@ class MainWindow(QtWidgets.QMainWindow):
             # Überprüfen Sie zusätzlich, ob file_path nicht leer ist
             if file_path:
                 # Lösche die vorhandenen Daten und fülle die Tabelle mit Daten aus der Datei
-                df = data_Handler.read_data_from_file(file_path)
-                tables.interactions.fill_article_table(
+                df = _data_Handler.data.read_data_from_file(file_path)
+                _tables.interactions.fill_article_table(
                     table=self.ui.articles_list, df=df)
 
     def on_load_articles_from_db_btn_click(self):
         # Lese Daten aus der MySQL-Datenbank und speichere sie in der Instanzvariable df
-        df = data_Handler.execute_query(self, query='sql1')
+        df = _data_Handler.data.execute_query(self, query='sql1')
         logs_and_config.update_config_file(self, 'Abfrage', 'sql1',
-                                           data_Handler.get_sql_query(self)['sql1'])
+                                           _data_Handler.data.get_sql_query(self)['sql1'])
         # Lösche die vorhandenen Daten und fülle die Tabelle mit den Daten aus der Datenbank
-        tables.interactions.fill_article_table(
+        _tables.interactions.fill_article_table(
             self, table=self.ui.articles_list, df=df)
 
     def on_project_text_changed(self):
-        ui_fields_Handler.char_validation(self)
+        _ui_fields_Handler.ui_fields.char_validation(self)
 
     @directory_Handler.get_folder_path
     def on_source_path_btn_click(self, folder_path):
@@ -155,7 +154,8 @@ class MainWindow(QtWidgets.QMainWindow):
             'log_sub2folder_path']
 
         # Holen Sie sich alle Dateinamen im source_path
-        source_files = data_Handler.get_files_in_source_path(self, source_path)
+        source_files = _data_Handler.data.get_files_in_source_path(
+            self, source_path)
 
         # Holen Sie sich alle ausgewählten Dateien im Table Widget
         selected_files = []
@@ -239,52 +239,52 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def on_save_btn_click(self):
         file_path = logs_and_config.create_save_file(self)
-        save_and_load.save.save_fields_text(self, file_path)
-        save_and_load.save.save_tables_content(self, file_path)
+        _save_and_load.save.save_fields_text(self, file_path)
+        _save_and_load.save.save_tables_content(self, file_path)
 
     def on_load_btn_click(self):
         file_path = directory_Handler.get_save_file_dir(self)
         if file_path != '':
-            save_and_load.load.load_fields_text(self, file_path)
-            save_and_load.load.load_tables_content(self, file_path)
+            _save_and_load.load.load_fields_text(self, file_path)
+            _save_and_load.load.load_tables_content(self, file_path)
 
     def on_btn_create_docs_clicked(self):
-        ui_fields_Handler.replace_fields_in_doc1(self)
+        _ui_fields_Handler.ui_fields.replace_fields_in_doc1(self)
 
     def on_load_data_to_device_list_click(self):
-        df = data_Handler.execute_query(self, query='sql1')
+        df = _data_Handler.data.execute_query(self, query='sql1')
         logs_and_config.update_config_file(self, 'Abfrage', 'sql1',
-                                           data_Handler.get_sql_query(self)['sql1'])
-        tables.interactions.fill_device_lists(self, df)
+                                           _data_Handler.data.get_sql_query(self)['sql1'])
+        _tables.interactions.fill_device_lists(self, df)
 
     def on_move_none_PV_modules_to_blacklist_click(self):
-        tables.interactions.remove_articles_from_list(
+        _tables.interactions.remove_articles_from_list(
             self, list=self.ui.PV_modules_list)
 
     def on_move_none_PV_inverters_to_blacklist_click(self):
-        tables.interactions.remove_articles_from_list(
+        _tables.interactions.remove_articles_from_list(
             self, list=self.ui.PV_inverters_list)
 
     def on_move_none_BAT_inverters_to_blacklist_click(self):
-        tables.interactions.remove_articles_from_list(
+        _tables.interactions.remove_articles_from_list(
             self, list=self.ui.BAT_inverters_list)
 
     def on_move_none_BAT_storage_to_blacklist_click(self):
-        tables.interactions.remove_articles_from_list(
+        _tables.interactions.remove_articles_from_list(
             self, list=self.ui.BAT_storage_list)
 
     def on_move_none_CHG_point_to_blacklist_click(self):
-        tables.interactions.remove_articles_from_list(
+        _tables.interactions.remove_articles_from_list(
             self, list=self.ui.CHG_point_list)
 
     def on_load_docu_data_from_db_btn_click(self):
-        tables.interactions.check_specs_in_device_tables(self)
+        _tables.interactions.check_specs_in_device_tables(self)
 
-        df = data_Handler.execute_query(self, query='sql2')
+        df = _data_Handler.data.execute_query(self, query='sql2')
         logs_and_config.update_config_file(self, 'Abfrage', 'sql2',
-                                           data_Handler.get_sql_query(self)['sql2'])
-        ui_fields_Handler.clear_docu_fields(self)
-        ui_fields_Handler.fill_docu_fields(self)
+                                           _data_Handler.data.get_sql_query(self)['sql2'])
+        _ui_fields_Handler.ui_fields.clear_docu_fields(self)
+        _ui_fields_Handler.ui_fields.fill_docu_fields(self)
 
     def on_sql_query_2_btn_click(self):
         if self.ui.query_2_input.isHidden():

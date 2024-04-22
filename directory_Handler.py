@@ -9,7 +9,7 @@ from qtpy import QtWidgets
 
 
 def get_directories(self):
-    project = self.project
+    project = self.ui.project.toPlainText()
     # Setze den dynamischen Pfad zur Log-Datei relativ zum Skript
     if getattr(sys, 'frozen', False):
         # Skript wird im gepackten Zustand ausgeführt

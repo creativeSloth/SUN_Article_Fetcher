@@ -4,7 +4,6 @@ from sqlalchemy import create_engine
 from qtpy import QtWidgets
 
 import logs_and_config
-import ui_fields_Handler
 
 
 def get_server_info(self):
@@ -69,7 +68,7 @@ def execute_query(self, query):
 
         if "{{project}}" in sql_query:
             sql_query = sql_query.replace(
-                "{{project}}", ui_fields_Handler.get_project(self))
+                "{{project}}", self.ui.project.toPlainText())
 
         # Verwende pd.read_sql, um die Abfrage auszuführen und die Ergebnisse in einen DataFrame zu lesen
         df = pd.read_sql(sql_query, con=engine)
@@ -146,15 +145,3 @@ def read_data_from_file(file_path):
         return read_xlsx(file_path)
     elif file_path.endswith('.ods'):
         return read_ods(file_path)
-
-
-def aggr_dev_list(device_list, column_index):
-    k = 1
-    value = ''
-    for row in range(device_list.rowCount()):
-        if not device_list.item(row, column_index) == None:
-            value = value + \
-                f'{device_list.item(row, column_index).text()} ({str(k)})\n'
-            k += 1
-    value = value.rstrip('\n')
-    return value
