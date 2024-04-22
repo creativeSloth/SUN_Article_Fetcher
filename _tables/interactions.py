@@ -23,6 +23,13 @@ def on_sort_indicator_changed(self, table):
     pass
 
 
+def change_foreground_if_zero(count, table, row):
+    if count == 0:
+        for column in range(1, table.columnCount()):
+            table.item(row, column).setForeground(
+                QtGui.QColor("#e20000"))
+
+
 @change_table_row_colour
 def fill_article_table(self, table, df=None):
     clear_table(table=table)
@@ -53,11 +60,7 @@ def fill_article_table(self, table, df=None):
             if df_row.shape[0] >= 3:  # !!!!!!!!
                 item_col3 = QtWidgets.QTableWidgetItem(str(df_row.iloc[2]))
                 table.setItem(tw_row, 3, item_col3)
-
-            if df_row.iloc[2] == 0:
-                for column in range(1, table.columnCount()):
-                    table.item(tw_row, column).setForeground(
-                        QtGui.QColor("#e20000"))
+            change_foreground_if_zero(df_row.iloc[2], table, tw_row)
 
     # Iteriere über alle Zellen im Table Widget
     for row in range(table.rowCount()):
@@ -120,6 +123,7 @@ def fill_specific_device_list(self, table, df):
                 table.setItem(
                     tw_row, 4, QtWidgets.QTableWidgetItem(str(df_row.iloc[3])))
                 ui_list_to_df_mapping(self, table, tw_row, df_row)
+                change_foreground_if_zero(df_row.iloc[2], table, tw_row)
     # Anzahl der Spalten ist flexibel, muss später angepasst hinzugefügt werden
     fill_device_specs_in_device_tables(self, table)
     resize_columns_to_contents(list=table, columns=table.columnCount())
@@ -282,7 +286,7 @@ def fill_device_specs_in_device_tables(self, ui_list):
         ui_list, 'Artikelnummer')
 
     for row in range(0, ui_list.rowCount()):
-        for column in range(ui_list.columnCount()):
+        for column in range(5, ui_list.columnCount()):
             column_header = ui_list.horizontalHeaderItem(column).text()
             if column_header not in fixed_val_columns:
                 article_no = ui_list.item(row, article_no_col_index).text()
