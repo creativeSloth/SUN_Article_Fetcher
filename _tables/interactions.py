@@ -243,7 +243,7 @@ def disable_colums_edit(ui_list, firstcol, lastcol):
 
 def get_fixed_val_columns():
     discard_columns = ['<>',
-                       'Anzahl [Stk.]',
+                       'Menge verbraucht [Stk.]',
                        'Seriennummer',
                        'Artikelnummer']
     return discard_columns
