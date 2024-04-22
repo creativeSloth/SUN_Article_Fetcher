@@ -124,6 +124,7 @@ def fill_specific_device_list(self, table, df):
                     tw_row, 4, QtWidgets.QTableWidgetItem(str(df_row.iloc[3])))
                 ui_list_to_df_mapping(self, table, tw_row, df_row)
                 change_foreground_if_zero(df_row.iloc[2], table, tw_row)
+
     # Anzahl der Spalten ist flexibel, muss später angepasst hinzugefügt werden
     fill_device_specs_in_device_tables(self, table)
     resize_columns_to_contents(list=table, columns=table.columnCount())
@@ -220,7 +221,7 @@ def collect_data_from_table(table, article_no_col_index, discard_columns):
         section_item = table.item(row, article_no_col_index)
         if section_item is not None:
             section = section_item.text()
-            for column in range(table.columnCount()):
+            for column in range(5, table.columnCount()):
                 column_header = table.horizontalHeaderItem(column).text()
                 if column_header not in discard_columns:
                     option_item = table.horizontalHeaderItem(column)
