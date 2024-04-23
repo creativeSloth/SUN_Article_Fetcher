@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QMessageBox
 from PyQt5 import QtGui
 
 
-def change_table_row_colour(func):
+def change_table_row(func):
     def wrapper(self, *args, **kwargs):
 
         table = kwargs['table']
@@ -18,14 +18,12 @@ def change_table_row_colour(func):
 
             # Führe die Anpassung der Zeilenfarben durch
             for row in range(table.rowCount()):
+                count = table.item(row, 3).text()
                 for column in range(table.columnCount()):
-                    if row % 2 == 0:
-                        table.item(row, column).setBackground(QtGui.QColor(
-                            "#F6A4A4"))  # Hintergrundfarbe für gerade Zeilen
-                    else:
-                        # Hintergrundfarbe für ungerade Zeilen
-                        table.item(row, column).setBackground(
-                            QtGui.QColor("#BAE290"))
+
+                    change_foreground_if_zero(
+                        count, table, row, column)
+                    change_background_colour(table, row, column)
         else:
             # Wenn table None ist, gebe eine Fehlermeldung aus
             QMessageBox.information(
@@ -34,3 +32,20 @@ def change_table_row_colour(func):
                                         "table = kwargs['table'] --> None")
 
     return wrapper
+
+
+def change_foreground_if_zero(count, table, row, column):
+    if float(count) == 0:
+        for column in range(1, table.columnCount()):
+            table.item(row, column).setForeground(
+                QtGui.QColor("#e20000"))
+
+
+def change_background_colour(table, row, column):
+    if row % 2 == 0:
+        table.item(row, column).setBackground(QtGui.QColor(
+            "#F6A4A4"))  # Hintergrundfarbe für gerade Zeilen
+    else:
+        # Hintergrundfarbe für ungerade Zeilen
+        table.item(row, column).setBackground(
+            QtGui.QColor("#BAE290"))

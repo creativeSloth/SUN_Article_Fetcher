@@ -6,7 +6,7 @@ from odf.opendocument import load
 
 import logs_and_config
 
-from _tables.row_colour import change_table_row_colour
+from _tables.row_colour import change_table_row
 import _ui_fields_Handler.ui_fields
 
 
@@ -18,19 +18,12 @@ def connect_sort_indicator_changed(self):
             lambda sortIndex, order, table=table: on_sort_indicator_changed(self, table=table))
 
 
-@change_table_row_colour
+@change_table_row
 def on_sort_indicator_changed(self, table):
     pass
 
 
-def change_foreground_if_zero(count, table, row):
-    if count == 0:
-        for column in range(1, table.columnCount()):
-            table.item(row, column).setForeground(
-                QtGui.QColor("#e20000"))
-
-
-@change_table_row_colour
+@change_table_row
 def fill_article_table(self, table, df=None):
     clear_table(table=table)
 
@@ -60,7 +53,6 @@ def fill_article_table(self, table, df=None):
             if df_row.shape[0] >= 3:  # !!!!!!!!
                 item_col3 = QtWidgets.QTableWidgetItem(str(df_row.iloc[2]))
                 table.setItem(tw_row, 3, item_col3)
-            change_foreground_if_zero(df_row.iloc[2], table, tw_row)
 
     # Iteriere über alle Zellen im Table Widget
     for row in range(table.rowCount()):
@@ -82,7 +74,7 @@ def fill_device_lists(self, df):
         self, "Abgeschlossen!", "Geräteliste wurden geladen!")
 
 
-@change_table_row_colour
+@change_table_row
 def fill_specific_device_list(self, table, df):
 
     clear_table(table)
@@ -123,7 +115,6 @@ def fill_specific_device_list(self, table, df):
                 table.setItem(
                     tw_row, 4, QtWidgets.QTableWidgetItem(str(df_row.iloc[3])))
                 ui_list_to_df_mapping(self, table, tw_row, df_row)
-                change_foreground_if_zero(df_row.iloc[2], table, tw_row)
 
     # Anzahl der Spalten ist flexibel, muss später angepasst hinzugefügt werden
     fill_device_specs_in_device_tables(self, table)
