@@ -61,18 +61,22 @@ class MainWindow(QtWidgets.QMainWindow):
             self.on_target_path_btn_click)
         self.ui.paste_docs_btn.clicked.connect(
             self.on_copy_files_btn_click)
-        self.ui.sql_query_btn.clicked.connect(
-            self.on_sql_query_btn_click)
 
         self.ui.project.textChanged.connect(self.on_project_text_changed)
 
         _tables.interactions.connect_sort_indicator_changed(self)
 
-        #  *********************************** Mapping buttons for "Documentation"- module *****************************************
+        #  *********************************** Settings- module *****************************************
         self.ui.save_btn.clicked.connect(
             self.on_save_btn_click)
         self.ui.load_btn.clicked.connect(
             self.on_load_btn_click)
+        self.ui.sql_query_btn.clicked.connect(
+            self.on_sql_query_btn_click)
+        self.ui.sql_query_2_btn.clicked.connect(
+            self.on_sql_query_2_btn_click)
+
+        #  *********************************** Mapping buttons for "Documentation"- module *****************************************
         self.ui.load_data_to_device_lists_btn.clicked.connect(
             self.on_load_data_to_device_list_btn_click)
         self.ui.fill_fields_btn.clicked.connect(
@@ -91,16 +95,18 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.move_none_CHG_point_to_blacklist.clicked.connect(
             self.on_move_none_CHG_point_to_blacklist_click)
 
-        self.ui.sql_query_2_btn.clicked.connect(
-            self.on_sql_query_2_btn_click)
         self.ui.source_btn_matstr.clicked.connect(
             self.on_source_btn_matstr_click)
         self.ui.source_btn_docu.clicked.connect(
             self.on_source_btn_docu_click)
         self.ui.target_path_btn_2.clicked.connect(
             self.on_target_path_btn_2_click)
-        self.ui.create_docs_btn.clicked.connect(
-            self.on_btn_create_docs_clicked)
+        self.ui.create_doc1_btn.clicked.connect(
+            self.on_btn_create_doc1_clicked)
+        self.ui.create_doc2_btn.clicked.connect(
+            self.on_btn_create_doc2_clicked)
+
+# * * * * * * * * * * * * * * * * * Fetcher-module * * * * * * * * * * * * * * * *
 
     def on_load_articles_from_file_btn_click(self):
         # Öffne einen Dateiauswahldialog für Benutzer
@@ -228,15 +234,8 @@ class MainWindow(QtWidgets.QMainWindow):
                                           f"Es wurden insgesamt {count} Dateien übertragen.\n\n"
                                           f"Es wurde eine Logdatei im log-Ordner:\n\n {log_sub2folder_path}\n\n erstellt.")
 
-    def on_sql_query_btn_click(self):
 
-        if self.ui.query_input.isHidden():
-            self.ui.query_input.show()
-        else:
-            self.ui.query_input.hide()
-
-
-# * * * * * * * * * * * * * * * * * Documentation-module * * * * * * * * * * * * * * * *
+# * * * * * * * * * * * * * * * * * Settings * * * * * * * * * * * * * * * *
 
 
     def on_save_btn_click(self):
@@ -250,8 +249,28 @@ class MainWindow(QtWidgets.QMainWindow):
             _save_and_load.load.load_fields_text(self, file_path)
             _save_and_load.load.load_tables_content(self, file_path)
 
-    def on_btn_create_docs_clicked(self):
-        _ui_fields_Handler.ui_fields.replace_fields_in_doc1(self)
+    def on_sql_query_btn_click(self):
+
+        if self.ui.query_input.isHidden():
+            self.ui.query_input.show()
+        else:
+            self.ui.query_input.hide()
+
+    def on_sql_query_2_btn_click(self):
+        if self.ui.query_2_input.isHidden():
+            self.ui.query_2_input.show()
+        else:
+            self.ui.query_2_input.hide()
+
+# * * * * * * * * * * * * * * * * * Documentation-module * * * * * * * * * * * * * * * *
+
+    def on_btn_create_doc1_clicked(self):
+        _ui_fields_Handler.ui_fields.replace_fields_in_doc(
+            self, doc_path='doc1_path', template_path='template1_path')
+
+    def on_btn_create_doc2_clicked(self):
+        _ui_fields_Handler.ui_fields.replace_fields_in_doc(
+            self, doc_path='doc2_path', template_path='template2_path')
 
     def on_load_data_to_device_list_btn_click(self):
         _ui_fields_Handler.ui_fields.clear_docu_fields(self)
@@ -290,12 +309,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def on_store_device_specs_btn_click(self):
         _tables.interactions.check_specs_in_device_tables(self)
-
-    def on_sql_query_2_btn_click(self):
-        if self.ui.query_2_input.isHidden():
-            self.ui.query_2_input.show()
-        else:
-            self.ui.query_2_input.hide()
 
     @directory_Handler.get_file_path
     def on_source_btn_matstr_click(self, file_path):

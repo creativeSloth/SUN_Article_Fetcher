@@ -8,6 +8,7 @@ from odf.table import Table, TableRow, TableCell
 import logs_and_config
 import directory_Handler
 
+
 def config_to_fields(self):
     try:
         self.ui.db_server.setPlainText(
@@ -170,19 +171,19 @@ def aggr_dev_list(device_list, column_index):
 
 
 @directory_Handler.check_path_existence(modus=1)
-def replace_fields_in_doc1(self):
+def replace_fields_in_doc(self, doc_path, template_path):
     # Rufe get_directories auf, um die Pfade zu erhalten
-    template1_path = directory_Handler.get_directories(self)[
-        'template1_path']
-    doc1_path = directory_Handler.get_directories(self)[
-        'doc1_path']
+    template = directory_Handler.get_directories(self)[
+        template_path]
+    doc = directory_Handler.get_directories(self)[
+        doc_path]
 
     try:
-        doc1 = load(template1_path)
+        document = load(template)
         context = get_mapped_context(self)
 
         # Durchlaufe alle Tabellen in der ODF-Datei
-        for table in doc1.getElementsByType(Table):
+        for table in document.getElementsByType(Table):
             # Durchlaufe alle Zeilen in der Tabelle
             for row in table.getElementsByType(TableRow):
                 # Durchlaufe alle Zellen in der Zeile
@@ -216,11 +217,11 @@ def replace_fields_in_doc1(self):
                             cell.removeChild(text_node)
                             Flag = False
 
-        doc1.save(doc1_path)
+        document.save(doc)
         QtWidgets.QMessageBox.information(
             self, "Abgeschlossen!",
             f"Die Datei wurde unter folgendem Pfad gespeichert:\n"
-            f"{doc1_path}")
+            f"{doc}")
 
     except Exception as e:
         QtWidgets.QMessageBox.warning(

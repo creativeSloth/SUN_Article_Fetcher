@@ -219,7 +219,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 1810, 3820))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, -307, 1810, 3820))
         self.gridLayout_5 = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_5.setSpacing(9)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
@@ -1508,6 +1508,7 @@ class Ui_MainWindow(object):
         self.store_device_specs_btn.setObjectName(u"store_device_specs_btn")
         self.store_device_specs_btn.setMinimumSize(QSize(0, 40))
         self.store_device_specs_btn.setMaximumSize(QSize(300, 16777215))
+        self.store_device_specs_btn.setStyleSheet(u"")
 
         self.horizontalLayout_2.addWidget(self.store_device_specs_btn)
 
@@ -1531,17 +1532,17 @@ class Ui_MainWindow(object):
 
         self.gridLayout_6.addWidget(self.target_path_btn_2, 5, 0, 1, 1)
 
-        self.create_docs_btn = QPushButton(self.tab_2)
-        self.create_docs_btn.setObjectName(u"create_docs_btn")
-        sizePolicy.setHeightForWidth(self.create_docs_btn.sizePolicy().hasHeightForWidth())
-        self.create_docs_btn.setSizePolicy(sizePolicy)
-        self.create_docs_btn.setMinimumSize(QSize(250, 30))
-        self.create_docs_btn.setMaximumSize(QSize(150, 30))
-        self.create_docs_btn.setFont(font1)
-        self.create_docs_btn.setAutoDefault(True)
-        self.create_docs_btn.setFlat(False)
+        self.create_doc1_btn = QPushButton(self.tab_2)
+        self.create_doc1_btn.setObjectName(u"create_doc1_btn")
+        sizePolicy.setHeightForWidth(self.create_doc1_btn.sizePolicy().hasHeightForWidth())
+        self.create_doc1_btn.setSizePolicy(sizePolicy)
+        self.create_doc1_btn.setMinimumSize(QSize(250, 30))
+        self.create_doc1_btn.setMaximumSize(QSize(150, 30))
+        self.create_doc1_btn.setFont(font1)
+        self.create_doc1_btn.setAutoDefault(True)
+        self.create_doc1_btn.setFlat(False)
 
-        self.gridLayout_6.addWidget(self.create_docs_btn, 7, 0, 1, 1)
+        self.gridLayout_6.addWidget(self.create_doc1_btn, 7, 0, 1, 1)
 
         self.source_path_text_docu = QPlainTextEdit(self.tab_2)
         self.source_path_text_docu.setObjectName(u"source_path_text_docu")
@@ -1577,6 +1578,18 @@ class Ui_MainWindow(object):
         self.source_btn_matstr.setMaximumSize(QSize(150, 30))
 
         self.gridLayout_6.addWidget(self.source_btn_matstr, 1, 0, 1, 1)
+
+        self.create_doc2_btn = QPushButton(self.tab_2)
+        self.create_doc2_btn.setObjectName(u"create_doc2_btn")
+        sizePolicy.setHeightForWidth(self.create_doc2_btn.sizePolicy().hasHeightForWidth())
+        self.create_doc2_btn.setSizePolicy(sizePolicy)
+        self.create_doc2_btn.setMinimumSize(QSize(250, 30))
+        self.create_doc2_btn.setMaximumSize(QSize(150, 30))
+        self.create_doc2_btn.setFont(font1)
+        self.create_doc2_btn.setAutoDefault(True)
+        self.create_doc2_btn.setFlat(False)
+
+        self.gridLayout_6.addWidget(self.create_doc2_btn, 7, 2, 1, 1)
 
 
         self.verticalLayout_2.addLayout(self.gridLayout_6)
@@ -1826,7 +1839,8 @@ class Ui_MainWindow(object):
         self.source_path_btn.setDefault(True)
         self.fill_fields_btn.setDefault(False)
         self.target_path_btn_2.setDefault(False)
-        self.create_docs_btn.setDefault(False)
+        self.create_doc1_btn.setDefault(False)
+        self.create_doc2_btn.setDefault(False)
         self.sql_query_btn.setDefault(True)
         self.sql_query_2_btn.setDefault(True)
 
@@ -2025,9 +2039,10 @@ class Ui_MainWindow(object):
         self.fill_fields_btn.setText(QCoreApplication.translate("MainWindow", u"2. F\u00fclle  Formularfelder", None))
         self.store_device_specs_btn.setText(QCoreApplication.translate("MainWindow", u"Hinterlege technische Daten", None))
         self.target_path_btn_2.setText(QCoreApplication.translate("MainWindow", u"Ablagepfad f\u00fcr Dokumente ausw\u00e4hlen", None))
-        self.create_docs_btn.setText(QCoreApplication.translate("MainWindow", u"Doku gem\u00e4\u00df MaStR erzeugen", None))
+        self.create_doc1_btn.setText(QCoreApplication.translate("MainWindow", u"Doku gem\u00e4\u00df MaStR erzeugen", None))
         self.source_btn_docu.setText(QCoreApplication.translate("MainWindow", u"Template Dokumentation", None))
         self.source_btn_matstr.setText(QCoreApplication.translate("MainWindow", u"Template gem. MatStR", None))
+        self.create_doc2_btn.setText(QCoreApplication.translate("MainWindow", u"SUN-Doku erzeugen", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Doku gem. MatStR", None))
         self.server_sttings_headline_label.setText(QCoreApplication.translate("MainWindow", u"Servereinstellungen", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Datenbanktyp:", None))

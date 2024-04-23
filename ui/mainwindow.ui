@@ -487,7 +487,7 @@
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>0</y>
+             <y>-307</y>
              <width>1810</width>
              <height>3820</height>
             </rect>
@@ -3459,6 +3459,9 @@ Bürgerenergiegesellschaft:</string>
               <height>16777215</height>
              </size>
             </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
             <property name="text">
              <string>Hinterlege technische Daten</string>
             </property>
@@ -3524,7 +3527,7 @@ Bürgerenergiegesellschaft:</string>
            </widget>
           </item>
           <item row="7" column="0">
-           <widget class="QPushButton" name="create_docs_btn">
+           <widget class="QPushButton" name="create_doc1_btn">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -3646,6 +3649,46 @@ Bürgerenergiegesellschaft:</string>
             </property>
             <property name="text">
              <string>Template gem. MatStR</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="2">
+           <widget class="QPushButton" name="create_doc2_btn">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>250</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>150</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <bold>true</bold>
+              <underline>true</underline>
+             </font>
+            </property>
+            <property name="text">
+             <string>SUN-Doku erzeugen</string>
+            </property>
+            <property name="autoDefault">
+             <bool>true</bool>
+            </property>
+            <property name="default">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
