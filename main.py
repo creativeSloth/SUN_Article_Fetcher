@@ -73,10 +73,12 @@ class MainWindow(QtWidgets.QMainWindow):
             self.on_save_btn_click)
         self.ui.load_btn.clicked.connect(
             self.on_load_btn_click)
-        self.ui.load_data_to_device_lists.clicked.connect(
-            self.on_load_data_to_device_list_click)
-        self.ui.load_docu_db_data_btn.clicked.connect(
-            self.on_load_docu_data_from_db_btn_click)
+        self.ui.load_data_to_device_lists_btn.clicked.connect(
+            self.on_load_data_to_device_list_btn_click)
+        self.ui.fill_fields_btn.clicked.connect(
+            self.on_fill_fields_btn_click)
+        self.ui.store_device_specs_btn.clicked.connect(
+            self.on_store_device_specs_btn_click)
 
         self.ui.move_none_PV_modules_to_blacklist.clicked.connect(
             self.on_move_none_PV_modules_to_blacklist_click)
@@ -251,7 +253,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def on_btn_create_docs_clicked(self):
         _ui_fields_Handler.ui_fields.replace_fields_in_doc1(self)
 
-    def on_load_data_to_device_list_click(self):
+    def on_load_data_to_device_list_btn_click(self):
+        _ui_fields_Handler.ui_fields.clear_docu_fields(self)
         df = _data_Handler.data.execute_query(self, query='sql1')
         logs_and_config.update_config_file(self, 'Abfrage', 'sql1',
                                            _data_Handler.data.get_sql_query(self)['sql1'])
@@ -277,14 +280,16 @@ class MainWindow(QtWidgets.QMainWindow):
         _tables.interactions.remove_articles_from_list(
             self, list=self.ui.CHG_point_list)
 
-    def on_load_docu_data_from_db_btn_click(self):
-        _tables.interactions.check_specs_in_device_tables(self)
+    def on_fill_fields_btn_click(self):
 
         df = _data_Handler.data.execute_query(self, query='sql2')
         logs_and_config.update_config_file(self, 'Abfrage', 'sql2',
                                            _data_Handler.data.get_sql_query(self)['sql2'])
         _ui_fields_Handler.ui_fields.clear_docu_fields(self)
         _ui_fields_Handler.ui_fields.fill_docu_fields(self)
+
+    def on_store_device_specs_btn_click(self):
+        _tables.interactions.check_specs_in_device_tables(self)
 
     def on_sql_query_2_btn_click(self):
         if self.ui.query_2_input.isHidden():
