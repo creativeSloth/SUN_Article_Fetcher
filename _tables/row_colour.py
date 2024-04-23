@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QMessageBox
 from PyQt5 import QtGui
 
 
-def change_table_row(func):
+def customize_table_row(func):
     def wrapper(self, *args, **kwargs):
 
         table = kwargs['table']

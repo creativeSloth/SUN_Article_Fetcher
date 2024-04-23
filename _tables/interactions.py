@@ -6,7 +6,7 @@ from odf.opendocument import load
 
 import logs_and_config
 
-from _tables.row_colour import change_table_row
+from _tables.row_colour import customize_table_row
 import _ui_fields_Handler.ui_fields
 
 
@@ -18,12 +18,12 @@ def connect_sort_indicator_changed(self):
             lambda sortIndex, order, table=table: on_sort_indicator_changed(self, table=table))
 
 
-@change_table_row
+@customize_table_row
 def on_sort_indicator_changed(self, table):
     pass
 
 
-@change_table_row
+@customize_table_row
 def fill_article_table(self, table, df=None):
     clear_table(table=table)
 
@@ -74,7 +74,7 @@ def fill_device_lists(self, df):
         self, "Abgeschlossen!", "Geräteliste wurden geladen!")
 
 
-@change_table_row
+@customize_table_row
 def fill_specific_device_list(self, table, df):
 
     clear_table(table)
