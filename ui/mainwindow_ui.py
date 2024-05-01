@@ -19,37 +19,304 @@ from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplicat
     QFormLayout, QFrame, QGridLayout, QHBoxLayout,
     QHeaderView, QLabel, QLayout, QMainWindow,
     QMenuBar, QPlainTextEdit, QPushButton, QScrollArea,
-    QSizePolicy, QSpacerItem, QStatusBar, QTabWidget,
-    QTableWidget, QTableWidgetItem, QTextEdit, QToolBar,
-    QVBoxLayout, QWidget)
+    QSizePolicy, QSpacerItem, QSplitter, QStatusBar,
+    QTabWidget, QTableWidget, QTableWidgetItem, QTextEdit,
+    QToolBar, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1900, 1000)
-        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        MainWindow.resize(1890, 952)
+        sizePolicy = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
+        MainWindow.setAutoFillBackground(True)
+        MainWindow.setStyleSheet(u"/* Allgemeine Stile */\n"
+"\n"
+"/* Setzt die Standardschrift f\u00fcr alle Elemente */\n"
+"* {\n"
+"    font: 12pt \"Sitka Heading\";\n"
+"}\n"
+"\n"
+"/* Stil f\u00fcr verschiedene Elemente */\n"
+"\n"
+"/* QLabel */\n"
+"QLabel {\n"
+"    padding-left: 10px;\n"
+"    color: #13213b; /* Textfarbe */\n"
+"    background-color: none; /* Hintergrundfarbe */\n"
+"    border-radius: 5px; /* Abgerundete Ecken */\n"
+"}\n"
+"\n"
+"/* QTextEdit */\n"
+"QTextEdit {\n"
+"    color: #13213b; /* Textfarbe */\n"
+"    border-radius: 5px; /* Abgerundete Ecken */\n"
+"    background-color: rgb(255, 255, 255); /* Hintergrundfarbe */\n"
+"    font: 12pt \"Sitka Heading\"; /* Schriftart */\n"
+"	text-align: left;\n"
+"}\n"
+"\n"
+"QPlainTextEdit {\n"
+"    color: #13213b; /* Textfarbe */\n"
+"    border-radius: 5px; /* Abgerundete Ecken */\n"
+"    background-color: rgb(255, 255, 255); /* Hintergrundfarbe */\n"
+"    font: 12pt \"Sitka Heading\"; /* Schriftart */\n"
+"	text-align: left;\n"
+"}\n"
+"\n"
+"/* Deaktivierte QTextEdit */\n"
+"QPlainTextEdit::disa"
+                        "bled {\n"
+"    color: #13213b; /* Textfarbe */\n"
+"    border-radius: 5px; /* Abgerundete Ecken */\n"
+"    background-color: rgb(144, 216, 216); /* Hintergrundfarbe */\n"
+"}\n"
+"\n"
+"/* QPushButton */\n"
+"QPushButton {\n"
+"    background-color: #e21839; /* Hintergrundfarbe */\n"
+"    border-radius: 5px; /* Abgerundete Ecken */\n"
+"}\n"
+"\n"
+"/* QPushButton beim \u00dcberfahren mit der Maus */\n"
+"QPushButton::hover {\n"
+"    background-color: rgb(170, 18, 43); /* Hintergrundfarbe */\n"
+"    color: rgb(71, 71, 71); /* Textfarbe */\n"
+"}\n"
+"\n"
+"/* QPushButton beim Klicken */\n"
+"QPushButton:pressed {\n"
+"    background-color: rgb(0, 170, 255); /* Hintergrundfarbe */\n"
+"    color: white; /* Textfarbe */\n"
+"}\n"
+"\n"
+"/* QFrame und QTabWidget-Panels (Inhalt) */\n"
+"\n"
+"QFrame#frame0\n"
+"{\n"
+"    background-color: #13213b; /* Hintergrundfarbe */\n"
+"    border-radius: 5px; /* Abgerundete Ecken */\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+"QFrame#frame010,\n"
+"QFrame#frame011\n"
+"{\n"
+"    background-color: rgb(170, 255, 255); "
+                        "/* Hintergrundfarbe */\n"
+"    border-radius: 5px; /* Abgerundete Ecken */\n"
+"}\n"
+"\n"
+"QTabWidget,\n"
+"QTabWidget::pane \n"
+"{\n"
+"    background-color: rgb(170, 255, 255); /* Hintergrundfarbe */\n"
+"    border-top-right-radius: 5px; /* Abgerundete Ecken */\n"
+"    border-bottom-left-radius: 5px; /* Abgerundete Ecken */\n"
+"    border-bottom-right-radius: 5px; /* Abgerundete Ecken */\n"
+"}\n"
+"\n"
+"/* Registerkarten im TabBar und deren Ableitungen */\n"
+"QTabBar::tab,\n"
+"QTabBar::tab:selected,\n"
+"QTabBar:tab:!selected {\n"
+"    margin: 0.5px; /* Margin */\n"
+"    width: 30px; /* Breite */\n"
+"    min-height: 50px; /* Mindesth\u00f6he */\n"
+"    max-height: 250px; /* Maximale H\u00f6he */\n"
+"    padding-top: 10px; /* Padding nur oben */\n"
+"    padding-bottom: 10px; /* Padding nur unten */\n"
+"    border-top-left-radius: 5px; /* Obere linke Ecke abgerundet */\n"
+"    border-bottom-left-radius: 5px; /* Untere linke Ecke abgerundet */\n"
+"}\n"
+"\n"
+"/* Ausgew\u00e4hlte Registerkarten */\n"
+"QTabBar::tab:sel"
+                        "ected {\n"
+"    background-color: rgb(0, 170, 255); /* Hintergrundfarbe */\n"
+"    color: rgb(0, 0, 0); /* Textfarbe */\n"
+"}\n"
+"\n"
+"/* Nicht ausgew\u00e4hlte Registerkarten */\n"
+"QTabBar:tab:!selected {\n"
+"    background-color: rgb(210, 255, 255); /* Hintergrundfarbe */\n"
+"    color: rgb(170, 170, 255); /* Textfarbe */\n"
+"}\n"
+"\n"
+"/* Hover-Effekt f\u00fcr nicht ausgew\u00e4hlte Registerkarten */\n"
+"QTabBar:tab:!selected::hover {\n"
+"    alignment: top; \n"
+"    background-color: rgb(0, 255, 255); \n"
+"    color: rgb(0, 85, 255); \n"
+"}\n"
+"\n"
+"QTableWidget{\n"
+"	background-color: rgb(220, 255, 255);\n"
+"    border-radius: 5px; /* Abgerundete Ecken */\n"
+"}\n"
+"\n"
+"QTableWidget::item:alternate {\n"
+"    background-color: rgb(240, 255, 255); /* Beispielhintergrundfarbe f\u00fcr alternative Zeilen */\n"
+"}\n"
+"\n"
+"QTableWidget::item:alternate::selected {\n"
+"    background-color: rgb(200, 255, 255); /* Beispielhintergrundfarbe f\u00fcr alternative Zeilen */\n"
+"	color: #13213b;\n"
+"}\n"
+"\n"
+"QTableW"
+                        "idget::item::selected {\n"
+"    background-color: rgb(200, 255, 255); /* Beispielhintergrundfarbe f\u00fcr alternative Zeilen */\n"
+"	color: #13213b;\n"
+"}\n"
+"\n"
+"QHeaderView::section{\n"
+"	background-color: rgb(220, 255, 255);\n"
+"}\n"
+"")
+        MainWindow.setAnimated(False)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.line = QFrame(self.centralwidget)
-        self.line.setObjectName(u"line")
-        self.line.setGeometry(QRect(10, 110, 981, 16))
-        self.line.setFrameShape(QFrame.HLine)
-        self.line.setFrameShadow(QFrame.Sunken)
-        self.tabWidget = QTabWidget(self.centralwidget)
-        self.tabWidget.setObjectName(u"tabWidget")
-        self.tabWidget.setGeometry(QRect(8, 121, 1850, 800))
-        sizePolicy1 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Expanding)
+        self.formLayout_3 = QFormLayout(self.centralwidget)
+        self.formLayout_3.setObjectName(u"formLayout_3")
+        self.frame0 = QFrame(self.centralwidget)
+        self.frame0.setObjectName(u"frame0")
+        sizePolicy.setHeightForWidth(self.frame0.sizePolicy().hasHeightForWidth())
+        self.frame0.setSizePolicy(sizePolicy)
+        self.frame0.setStyleSheet(u"")
+        self.frame0.setFrameShape(QFrame.StyledPanel)
+        self.frame0.setFrameShadow(QFrame.Raised)
+        self.gridLayout_4 = QGridLayout(self.frame0)
+        self.gridLayout_4.setSpacing(5)
+        self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.gridLayout_4.setContentsMargins(5, 5, 5, 5)
+        self.frame01 = QFrame(self.frame0)
+        self.frame01.setObjectName(u"frame01")
+        sizePolicy.setHeightForWidth(self.frame01.sizePolicy().hasHeightForWidth())
+        self.frame01.setSizePolicy(sizePolicy)
+        self.frame01.setMaximumSize(QSize(16777215, 60))
+        self.frame01.setFrameShape(QFrame.StyledPanel)
+        self.frame01.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_10 = QHBoxLayout(self.frame01)
+        self.horizontalLayout_10.setSpacing(5)
+        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.horizontalLayout_10.setContentsMargins(5, 5, 5, 5)
+        self.frame010 = QFrame(self.frame01)
+        self.frame010.setObjectName(u"frame010")
+        sizePolicy.setHeightForWidth(self.frame010.sizePolicy().hasHeightForWidth())
+        self.frame010.setSizePolicy(sizePolicy)
+        self.frame010.setMinimumSize(QSize(200, 40))
+        self.frame010.setMaximumSize(QSize(400, 40))
+        self.frame010.setFrameShape(QFrame.StyledPanel)
+        self.frame010.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_5 = QHBoxLayout(self.frame010)
+        self.horizontalLayout_5.setSpacing(5)
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.horizontalLayout_5.setContentsMargins(5, 5, 5, 5)
+        self.project_label = QLabel(self.frame010)
+        self.project_label.setObjectName(u"project_label")
+        sizePolicy.setHeightForWidth(self.project_label.sizePolicy().hasHeightForWidth())
+        self.project_label.setSizePolicy(sizePolicy)
+        self.project_label.setMinimumSize(QSize(100, 30))
+        self.project_label.setMaximumSize(QSize(150, 30))
+        self.project_label.setSizeIncrement(QSize(0, 0))
+        font = QFont()
+        font.setFamilies([u"Sitka Heading"])
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        self.project_label.setFont(font)
+        self.project_label.setWordWrap(False)
+
+        self.horizontalLayout_5.addWidget(self.project_label)
+
+        self.project = QPlainTextEdit(self.frame010)
+        self.project.setObjectName(u"project")
+        self.project.setMinimumSize(QSize(150, 30))
+        self.project.setMaximumSize(QSize(200, 30))
+        self.project.setFont(font)
+        self.project.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.project.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.project.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
+        self.project.setTabChangesFocus(False)
+
+        self.horizontalLayout_5.addWidget(self.project)
+
+
+        self.horizontalLayout_10.addWidget(self.frame010)
+
+        self.frame011 = QFrame(self.frame01)
+        self.frame011.setObjectName(u"frame011")
+        self.frame011.setEnabled(True)
+        sizePolicy1 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Minimum)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.tabWidget.sizePolicy().hasHeightForWidth())
-        self.tabWidget.setSizePolicy(sizePolicy1)
+        sizePolicy1.setHeightForWidth(self.frame011.sizePolicy().hasHeightForWidth())
+        self.frame011.setSizePolicy(sizePolicy1)
+        self.frame011.setMinimumSize(QSize(150, 40))
+        self.frame011.setMaximumSize(QSize(16777215, 40))
+        self.frame011.setFrameShape(QFrame.StyledPanel)
+        self.frame011.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_6 = QHBoxLayout(self.frame011)
+        self.horizontalLayout_6.setSpacing(5)
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.horizontalLayout_6.setContentsMargins(5, 5, 5, 5)
+        self.project_name_label = QLabel(self.frame011)
+        self.project_name_label.setObjectName(u"project_name_label")
+        sizePolicy.setHeightForWidth(self.project_name_label.sizePolicy().hasHeightForWidth())
+        self.project_name_label.setSizePolicy(sizePolicy)
+        self.project_name_label.setMinimumSize(QSize(0, 0))
+        self.project_name_label.setMaximumSize(QSize(200, 30))
+        self.project_name_label.setSizeIncrement(QSize(0, 0))
+        self.project_name_label.setFont(font)
+
+        self.horizontalLayout_6.addWidget(self.project_name_label, 0, Qt.AlignVCenter)
+
+        self.project_name = QPlainTextEdit(self.frame011)
+        self.project_name.setObjectName(u"project_name")
+        self.project_name.setEnabled(False)
+        sizePolicy.setHeightForWidth(self.project_name.sizePolicy().hasHeightForWidth())
+        self.project_name.setSizePolicy(sizePolicy)
+        self.project_name.setMinimumSize(QSize(1200, 30))
+        self.project_name.setMaximumSize(QSize(16777215, 30))
+        self.project_name.setFont(font)
+        self.project_name.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.project_name.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.project_name.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
+
+        self.horizontalLayout_6.addWidget(self.project_name, 0, Qt.AlignLeft|Qt.AlignVCenter)
+
+
+        self.horizontalLayout_10.addWidget(self.frame011)
+
+
+        self.gridLayout_4.addWidget(self.frame01, 0, 0, 1, 1)
+
+        self.frame02 = QFrame(self.frame0)
+        self.frame02.setObjectName(u"frame02")
+        sizePolicy.setHeightForWidth(self.frame02.sizePolicy().hasHeightForWidth())
+        self.frame02.setSizePolicy(sizePolicy)
+        self.frame02.setFrameShape(QFrame.StyledPanel)
+        self.frame02.setFrameShadow(QFrame.Raised)
+        self.gridLayout_22 = QGridLayout(self.frame02)
+        self.gridLayout_22.setSpacing(5)
+        self.gridLayout_22.setObjectName(u"gridLayout_22")
+        self.gridLayout_22.setContentsMargins(5, 5, 5, 5)
+        self.tabWidget = QTabWidget(self.frame02)
+        self.tabWidget.setObjectName(u"tabWidget")
+        sizePolicy.setHeightForWidth(self.tabWidget.sizePolicy().hasHeightForWidth())
+        self.tabWidget.setSizePolicy(sizePolicy)
         self.tabWidget.setMinimumSize(QSize(1850, 800))
         self.tabWidget.setMaximumSize(QSize(1850, 16777215))
+        self.tabWidget.setFocusPolicy(Qt.NoFocus)
+        self.tabWidget.setAutoFillBackground(False)
+        self.tabWidget.setStyleSheet(u"")
+        self.tabWidget.setTabPosition(QTabWidget.West)
         self.tabWidget.setIconSize(QSize(16, 16))
         self.tabWidget.setElideMode(Qt.ElideMiddle)
         self.tabWidget.setTabsClosable(False)
@@ -60,40 +327,68 @@ class Ui_MainWindow(object):
         self.tab1.setMinimumSize(QSize(0, 0))
         self.gridLayout_3 = QGridLayout(self.tab1)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.verticalLayout = QVBoxLayout()
-        self.verticalLayout.setSpacing(0)
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout.setSizeConstraint(QLayout.SetFixedSize)
-        self.formLayout_2 = QFormLayout()
-        self.formLayout_2.setObjectName(u"formLayout_2")
-        self.load_articles_db_btn = QPushButton(self.tab1)
+        self.frame021 = QFrame(self.tab1)
+        self.frame021.setObjectName(u"frame021")
+        sizePolicy.setHeightForWidth(self.frame021.sizePolicy().hasHeightForWidth())
+        self.frame021.setSizePolicy(sizePolicy)
+        self.frame021.setFrameShape(QFrame.StyledPanel)
+        self.frame021.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_7 = QVBoxLayout(self.frame021)
+        self.verticalLayout_7.setSpacing(5)
+        self.verticalLayout_7.setObjectName(u"verticalLayout_7")
+        self.verticalLayout_7.setContentsMargins(0, 0, 0, 0)
+        self.frame_6 = QFrame(self.frame021)
+        self.frame_6.setObjectName(u"frame_6")
+        sizePolicy.setHeightForWidth(self.frame_6.sizePolicy().hasHeightForWidth())
+        self.frame_6.setSizePolicy(sizePolicy)
+        self.frame_6.setMaximumSize(QSize(16777215, 50))
+        self.frame_6.setFrameShape(QFrame.StyledPanel)
+        self.frame_6.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_7 = QHBoxLayout(self.frame_6)
+        self.horizontalLayout_7.setSpacing(5)
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.horizontalLayout_7.setContentsMargins(5, 5, 5, 5)
+        self.load_articles_db_btn = QPushButton(self.frame_6)
         self.load_articles_db_btn.setObjectName(u"load_articles_db_btn")
         self.load_articles_db_btn.setMinimumSize(QSize(300, 40))
         self.load_articles_db_btn.setMaximumSize(QSize(300, 40))
-        font = QFont()
-        font.setUnderline(False)
-        self.load_articles_db_btn.setFont(font)
+        font1 = QFont()
+        font1.setFamilies([u"Sitka Heading"])
+        font1.setPointSize(12)
+        font1.setBold(False)
+        font1.setItalic(False)
+        font1.setUnderline(False)
+        self.load_articles_db_btn.setFont(font1)
+        self.load_articles_db_btn.setStyleSheet(u"")
+        self.load_articles_db_btn.setAutoDefault(False)
 
-        self.formLayout_2.setWidget(0, QFormLayout.LabelRole, self.load_articles_db_btn)
+        self.horizontalLayout_7.addWidget(self.load_articles_db_btn)
 
-        self.load_articles_file_btn = QPushButton(self.tab1)
+        self.load_articles_file_btn = QPushButton(self.frame_6)
         self.load_articles_file_btn.setObjectName(u"load_articles_file_btn")
-        sizePolicy.setHeightForWidth(self.load_articles_file_btn.sizePolicy().hasHeightForWidth())
-        self.load_articles_file_btn.setSizePolicy(sizePolicy)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.load_articles_file_btn.sizePolicy().hasHeightForWidth())
+        self.load_articles_file_btn.setSizePolicy(sizePolicy2)
         self.load_articles_file_btn.setMinimumSize(QSize(300, 40))
         self.load_articles_file_btn.setMaximumSize(QSize(300, 40))
-        self.load_articles_file_btn.setFont(font)
+        self.load_articles_file_btn.setFont(font1)
         self.load_articles_file_btn.setCheckable(False)
         self.load_articles_file_btn.setChecked(False)
         self.load_articles_file_btn.setAutoDefault(False)
         self.load_articles_file_btn.setFlat(False)
 
-        self.formLayout_2.setWidget(0, QFormLayout.FieldRole, self.load_articles_file_btn)
+        self.horizontalLayout_7.addWidget(self.load_articles_file_btn)
 
 
-        self.verticalLayout.addLayout(self.formLayout_2)
+        self.verticalLayout_7.addWidget(self.frame_6, 0, Qt.AlignLeft)
 
-        self.articles_list = QTableWidget(self.tab1)
+        self.verticalLayout = QVBoxLayout()
+        self.verticalLayout.setSpacing(0)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout.setSizeConstraint(QLayout.SetDefaultConstraint)
+        self.articles_list = QTableWidget(self.frame021)
         if (self.articles_list.columnCount() < 4):
             self.articles_list.setColumnCount(4)
         __qtablewidgetitem = QTableWidgetItem()
@@ -108,8 +403,9 @@ class Ui_MainWindow(object):
         self.articles_list.setEnabled(True)
         sizePolicy.setHeightForWidth(self.articles_list.sizePolicy().hasHeightForWidth())
         self.articles_list.setSizePolicy(sizePolicy)
-        self.articles_list.setMinimumSize(QSize(0, 0))
-        self.articles_list.setMaximumSize(QSize(16777215, 4756456))
+        self.articles_list.setMinimumSize(QSize(1000, 100))
+        self.articles_list.setMaximumSize(QSize(16777215, 550))
+        self.articles_list.setAutoFillBackground(True)
         self.articles_list.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
         self.articles_list.setDragDropOverwriteMode(False)
         self.articles_list.setDragDropMode(QAbstractItemView.NoDragDrop)
@@ -121,8 +417,8 @@ class Ui_MainWindow(object):
         self.articles_list.setCornerButtonEnabled(True)
         self.articles_list.horizontalHeader().setVisible(True)
         self.articles_list.horizontalHeader().setCascadingSectionResizes(True)
-        self.articles_list.horizontalHeader().setMinimumSectionSize(50)
-        self.articles_list.horizontalHeader().setDefaultSectionSize(120)
+        self.articles_list.horizontalHeader().setMinimumSectionSize(60)
+        self.articles_list.horizontalHeader().setDefaultSectionSize(180)
         self.articles_list.horizontalHeader().setHighlightSections(True)
         self.articles_list.horizontalHeader().setProperty("showSortIndicator", True)
         self.articles_list.horizontalHeader().setStretchLastSection(False)
@@ -135,41 +431,42 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.articles_list)
 
-        self.gridLayout_2 = QGridLayout()
-        self.gridLayout_2.setSpacing(5)
-        self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.gridLayout_2.setSizeConstraint(QLayout.SetDefaultConstraint)
-        self.gridLayout_2.setContentsMargins(5, 0, 5, 0)
-        self.paste_docs_btn = QPushButton(self.tab1)
-        self.paste_docs_btn.setObjectName(u"paste_docs_btn")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Fixed)
-        sizePolicy2.setHorizontalStretch(200)
-        sizePolicy2.setVerticalStretch(200)
-        sizePolicy2.setHeightForWidth(self.paste_docs_btn.sizePolicy().hasHeightForWidth())
-        self.paste_docs_btn.setSizePolicy(sizePolicy2)
-        self.paste_docs_btn.setMinimumSize(QSize(135, 50))
-        self.paste_docs_btn.setMaximumSize(QSize(500, 100))
-        font1 = QFont()
-        font1.setBold(True)
-        font1.setUnderline(True)
-        self.paste_docs_btn.setFont(font1)
-        self.paste_docs_btn.setAutoDefault(False)
-        self.paste_docs_btn.setFlat(False)
 
-        self.gridLayout_2.addWidget(self.paste_docs_btn, 3, 1, 1, 1)
+        self.verticalLayout_7.addLayout(self.verticalLayout)
 
-        self.target_path_btn = QPushButton(self.tab1)
-        self.target_path_btn.setObjectName(u"target_path_btn")
-        sizePolicy.setHeightForWidth(self.target_path_btn.sizePolicy().hasHeightForWidth())
-        self.target_path_btn.setSizePolicy(sizePolicy)
-        self.target_path_btn.setMinimumSize(QSize(135, 30))
-        self.target_path_btn.setMaximumSize(QSize(300, 40))
-        self.target_path_btn.setAutoDefault(False)
-        self.target_path_btn.setFlat(False)
+        self.frame = QFrame(self.frame021)
+        self.frame.setObjectName(u"frame")
+        sizePolicy.setHeightForWidth(self.frame.sizePolicy().hasHeightForWidth())
+        self.frame.setSizePolicy(sizePolicy)
+        self.frame.setMinimumSize(QSize(0, 120))
+        self.frame.setMaximumSize(QSize(16777215, 200))
+        self.frame.setFrameShape(QFrame.StyledPanel)
+        self.frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_6 = QVBoxLayout(self.frame)
+        self.verticalLayout_6.setSpacing(5)
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.verticalLayout_6.setContentsMargins(5, 5, 5, 5)
+        self.frame_2 = QFrame(self.frame)
+        self.frame_2.setObjectName(u"frame_2")
+        sizePolicy.setHeightForWidth(self.frame_2.sizePolicy().hasHeightForWidth())
+        self.frame_2.setSizePolicy(sizePolicy)
+        self.frame_2.setFrameShape(QFrame.StyledPanel)
+        self.frame_2.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_8 = QHBoxLayout(self.frame_2)
+        self.horizontalLayout_8.setSpacing(5)
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
+        self.source_path_btn = QPushButton(self.frame_2)
+        self.source_path_btn.setObjectName(u"source_path_btn")
+        sizePolicy2.setHeightForWidth(self.source_path_btn.sizePolicy().hasHeightForWidth())
+        self.source_path_btn.setSizePolicy(sizePolicy2)
+        self.source_path_btn.setMinimumSize(QSize(135, 30))
+        self.source_path_btn.setMaximumSize(QSize(300, 40))
+        self.source_path_btn.setAutoDefault(False)
 
-        self.gridLayout_2.addWidget(self.target_path_btn, 2, 0, 1, 1)
+        self.horizontalLayout_8.addWidget(self.source_path_btn)
 
-        self.source_path_text = QPlainTextEdit(self.tab1)
+        self.source_path_text = QPlainTextEdit(self.frame_2)
         self.source_path_text.setObjectName(u"source_path_text")
         sizePolicy3 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Expanding)
         sizePolicy3.setHorizontalStretch(0)
@@ -179,64 +476,107 @@ class Ui_MainWindow(object):
         self.source_path_text.setMinimumSize(QSize(0, 30))
         self.source_path_text.setMaximumSize(QSize(4556, 40))
 
-        self.gridLayout_2.addWidget(self.source_path_text, 1, 1, 1, 1)
+        self.horizontalLayout_8.addWidget(self.source_path_text)
 
-        self.target_path_text = QPlainTextEdit(self.tab1)
+
+        self.verticalLayout_6.addWidget(self.frame_2)
+
+        self.frame_3 = QFrame(self.frame)
+        self.frame_3.setObjectName(u"frame_3")
+        sizePolicy.setHeightForWidth(self.frame_3.sizePolicy().hasHeightForWidth())
+        self.frame_3.setSizePolicy(sizePolicy)
+        self.frame_3.setFrameShape(QFrame.StyledPanel)
+        self.frame_3.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_9 = QHBoxLayout(self.frame_3)
+        self.horizontalLayout_9.setSpacing(5)
+        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
+        self.horizontalLayout_9.setContentsMargins(0, 0, 0, 0)
+        self.target_path_btn = QPushButton(self.frame_3)
+        self.target_path_btn.setObjectName(u"target_path_btn")
+        sizePolicy2.setHeightForWidth(self.target_path_btn.sizePolicy().hasHeightForWidth())
+        self.target_path_btn.setSizePolicy(sizePolicy2)
+        self.target_path_btn.setMinimumSize(QSize(135, 30))
+        self.target_path_btn.setMaximumSize(QSize(300, 40))
+        self.target_path_btn.setAutoDefault(False)
+        self.target_path_btn.setFlat(False)
+
+        self.horizontalLayout_9.addWidget(self.target_path_btn)
+
+        self.target_path_text = QPlainTextEdit(self.frame_3)
         self.target_path_text.setObjectName(u"target_path_text")
         sizePolicy3.setHeightForWidth(self.target_path_text.sizePolicy().hasHeightForWidth())
         self.target_path_text.setSizePolicy(sizePolicy3)
         self.target_path_text.setMinimumSize(QSize(0, 30))
         self.target_path_text.setMaximumSize(QSize(4556, 40))
 
-        self.gridLayout_2.addWidget(self.target_path_text, 2, 1, 1, 1)
-
-        self.source_path_btn = QPushButton(self.tab1)
-        self.source_path_btn.setObjectName(u"source_path_btn")
-        sizePolicy.setHeightForWidth(self.source_path_btn.sizePolicy().hasHeightForWidth())
-        self.source_path_btn.setSizePolicy(sizePolicy)
-        self.source_path_btn.setMinimumSize(QSize(135, 30))
-        self.source_path_btn.setMaximumSize(QSize(300, 40))
-
-        self.gridLayout_2.addWidget(self.source_path_btn, 1, 0, 1, 1)
+        self.horizontalLayout_9.addWidget(self.target_path_text)
 
 
-        self.verticalLayout.addLayout(self.gridLayout_2)
+        self.verticalLayout_6.addWidget(self.frame_3)
+
+        self.paste_docs_btn = QPushButton(self.frame)
+        self.paste_docs_btn.setObjectName(u"paste_docs_btn")
+        sizePolicy4 = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Fixed)
+        sizePolicy4.setHorizontalStretch(200)
+        sizePolicy4.setVerticalStretch(200)
+        sizePolicy4.setHeightForWidth(self.paste_docs_btn.sizePolicy().hasHeightForWidth())
+        self.paste_docs_btn.setSizePolicy(sizePolicy4)
+        self.paste_docs_btn.setMinimumSize(QSize(135, 50))
+        self.paste_docs_btn.setMaximumSize(QSize(500, 60))
+        font2 = QFont()
+        font2.setFamilies([u"Sitka Heading"])
+        font2.setPointSize(12)
+        font2.setBold(False)
+        font2.setItalic(False)
+        font2.setUnderline(True)
+        self.paste_docs_btn.setFont(font2)
+        self.paste_docs_btn.setAutoDefault(False)
+        self.paste_docs_btn.setFlat(False)
+
+        self.verticalLayout_6.addWidget(self.paste_docs_btn)
 
 
-        self.gridLayout_3.addLayout(self.verticalLayout, 0, 0, 1, 1)
+        self.verticalLayout_7.addWidget(self.frame)
+
+
+        self.gridLayout_3.addWidget(self.frame021, 0, 0, 1, 1)
 
         self.tabWidget.addTab(self.tab1, "")
-        self.tab_2 = QWidget()
-        self.tab_2.setObjectName(u"tab_2")
-        self.gridLayout_7 = QGridLayout(self.tab_2)
-        self.gridLayout_7.setObjectName(u"gridLayout_7")
-        self.verticalLayout_2 = QVBoxLayout()
-        self.verticalLayout_2.setSpacing(10)
-        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.scrollArea = QScrollArea(self.tab_2)
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab1), u"\u00dcbertragung von Dokumenten")
+        self.tab2 = QWidget()
+        self.tab2.setObjectName(u"tab2")
+        self.tab2.setMinimumSize(QSize(1200, 0))
+        self.layoutWidget = QWidget(self.tab2)
+        self.layoutWidget.setObjectName(u"layoutWidget")
+        self.layoutWidget.setGeometry(QRect(0, 0, 1802, 826))
+        self.frame0220 = QVBoxLayout(self.layoutWidget)
+        self.frame0220.setSpacing(10)
+        self.frame0220.setObjectName(u"frame0220")
+        self.frame0220.setContentsMargins(0, 0, 0, 0)
+        self.scrollArea = QScrollArea(self.layoutWidget)
         self.scrollArea.setObjectName(u"scrollArea")
-        self.scrollArea.setMinimumSize(QSize(0, 500))
+        self.scrollArea.setMinimumSize(QSize(1800, 500))
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, -307, 1810, 3820))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, -411, 1781, 4892))
         self.gridLayout_5 = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_5.setSpacing(9)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
+        self.frame0221 = QFrame(self.scrollAreaWidgetContents)
+        self.frame0221.setObjectName(u"frame0221")
+        self.frame0221.setFrameShape(QFrame.StyledPanel)
+        self.frame0221.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_5 = QVBoxLayout(self.frame0221)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.verticalLayout_5.setSizeConstraint(QLayout.SetDefaultConstraint)
         self.verticalLayout_3 = QVBoxLayout()
         self.verticalLayout_3.setSpacing(10)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
-
-        self.verticalLayout_3.addItem(self.verticalSpacer)
-
-        self.headline_01 = QLabel(self.scrollAreaWidgetContents)
+        self.headline_01 = QLabel(self.frame0221)
         self.headline_01.setObjectName(u"headline_01")
-        font2 = QFont()
-        font2.setPointSize(12)
-        font2.setBold(True)
-        font2.setUnderline(False)
-        self.headline_01.setFont(font2)
+        self.headline_01.setMinimumSize(QSize(250, 50))
+        self.headline_01.setFont(font1)
         self.headline_01.setLayoutDirection(Qt.LeftToRight)
         self.headline_01.setAutoFillBackground(False)
         self.headline_01.setFrameShape(QFrame.StyledPanel)
@@ -244,232 +584,278 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.headline_01)
 
-        self.gridLayout_08 = QGridLayout()
-        self.gridLayout_08.setObjectName(u"gridLayout_08")
-        self.loc_adress_1_label = QLabel(self.scrollAreaWidgetContents)
-        self.loc_adress_1_label.setObjectName(u"loc_adress_1_label")
-        self.loc_adress_1_label.setMinimumSize(QSize(0, 30))
-        self.loc_adress_1_label.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_08.addWidget(self.loc_adress_1_label, 2, 3, 1, 1)
-
-        self.op_adress_2_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.op_adress_2_text.setObjectName(u"op_adress_2_text")
-        self.op_adress_2_text.setMinimumSize(QSize(0, 30))
-        self.op_adress_2_text.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_08.addWidget(self.op_adress_2_text, 3, 1, 1, 1)
-
-        self.op_adress_2_label = QLabel(self.scrollAreaWidgetContents)
-        self.op_adress_2_label.setObjectName(u"op_adress_2_label")
-        self.op_adress_2_label.setMinimumSize(QSize(0, 30))
-        self.op_adress_2_label.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_08.addWidget(self.op_adress_2_label, 3, 0, 1, 1)
-
-        self.op_adress_3_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.op_adress_3_text.setObjectName(u"op_adress_3_text")
-        self.op_adress_3_text.setMinimumSize(QSize(0, 30))
-        self.op_adress_3_text.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_08.addWidget(self.op_adress_3_text, 4, 1, 1, 1)
-
-        self.loc_head_label = QLabel(self.scrollAreaWidgetContents)
-        self.loc_head_label.setObjectName(u"loc_head_label")
-        self.loc_head_label.setMinimumSize(QSize(0, 30))
-        self.loc_head_label.setMaximumSize(QSize(16777215, 30))
-        font3 = QFont()
-        font3.setBold(True)
-        self.loc_head_label.setFont(font3)
-
-        self.gridLayout_08.addWidget(self.loc_head_label, 1, 3, 1, 1)
-
-        self.op_adress_3_label = QLabel(self.scrollAreaWidgetContents)
+        self.frame1 = QFrame(self.frame0221)
+        self.frame1.setObjectName(u"frame1")
+        self.frame1.setFrameShape(QFrame.StyledPanel)
+        self.frame1.setFrameShadow(QFrame.Raised)
+        self.gridLayout_2 = QGridLayout(self.frame1)
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.frame_7 = QFrame(self.frame1)
+        self.frame_7.setObjectName(u"frame_7")
+        self.frame_7.setFrameShape(QFrame.StyledPanel)
+        self.frame_7.setFrameShadow(QFrame.Raised)
+        self.formLayout_2 = QFormLayout(self.frame_7)
+        self.formLayout_2.setObjectName(u"formLayout_2")
+        self.frame_8 = QFrame(self.frame_7)
+        self.frame_8.setObjectName(u"frame_8")
+        self.frame_8.setFrameShape(QFrame.StyledPanel)
+        self.frame_8.setFrameShadow(QFrame.Raised)
+        self.gridLayout_11 = QGridLayout(self.frame_8)
+        self.gridLayout_11.setObjectName(u"gridLayout_11")
+        self.op_adress_3_label = QLabel(self.frame_8)
         self.op_adress_3_label.setObjectName(u"op_adress_3_label")
         self.op_adress_3_label.setMinimumSize(QSize(0, 30))
         self.op_adress_3_label.setMaximumSize(QSize(16777209, 30))
-        self.op_adress_3_label.setFont(font3)
+        self.op_adress_3_label.setFont(font)
 
-        self.gridLayout_08.addWidget(self.op_adress_3_label, 1, 0, 1, 1)
+        self.gridLayout_11.addWidget(self.op_adress_3_label, 0, 0, 1, 1)
 
-        self.horizontalSpacer = QSpacerItem(10, 20, QSizePolicy.MinimumExpanding, QSizePolicy.Minimum)
+        self.operator_text = QPlainTextEdit(self.frame_8)
+        self.operator_text.setObjectName(u"operator_text")
+        self.operator_text.setMinimumSize(QSize(0, 30))
+        self.operator_text.setMaximumSize(QSize(16777215, 30))
 
-        self.gridLayout_08.addItem(self.horizontalSpacer, 2, 2, 1, 1)
+        self.gridLayout_11.addWidget(self.operator_text, 0, 1, 1, 1)
 
-        self.loc_adress_2_label = QLabel(self.scrollAreaWidgetContents)
-        self.loc_adress_2_label.setObjectName(u"loc_adress_2_label")
-        self.loc_adress_2_label.setMinimumSize(QSize(0, 30))
-        self.loc_adress_2_label.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_08.addWidget(self.loc_adress_2_label, 3, 3, 1, 1)
-
-        self.loc_adress_1_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.loc_adress_1_text.setObjectName(u"loc_adress_1_text")
-        self.loc_adress_1_text.setMinimumSize(QSize(0, 30))
-        self.loc_adress_1_text.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_08.addWidget(self.loc_adress_1_text, 2, 4, 1, 1)
-
-        self.loc_adress_3_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.loc_adress_3_text.setObjectName(u"loc_adress_3_text")
-        self.loc_adress_3_text.setMinimumSize(QSize(0, 30))
-        self.loc_adress_3_text.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_08.addWidget(self.loc_adress_3_text, 4, 4, 1, 1)
-
-        self.op_adress_1_label = QLabel(self.scrollAreaWidgetContents)
+        self.op_adress_1_label = QLabel(self.frame_8)
         self.op_adress_1_label.setObjectName(u"op_adress_1_label")
         self.op_adress_1_label.setMinimumSize(QSize(0, 30))
         self.op_adress_1_label.setMaximumSize(QSize(16777215, 30))
 
-        self.gridLayout_08.addWidget(self.op_adress_1_label, 2, 0, 1, 1)
+        self.gridLayout_11.addWidget(self.op_adress_1_label, 1, 0, 1, 1)
 
-        self.loc_adress_3_label = QLabel(self.scrollAreaWidgetContents)
-        self.loc_adress_3_label.setObjectName(u"loc_adress_3_label")
-        self.loc_adress_3_label.setMinimumSize(QSize(0, 30))
-        self.loc_adress_3_label.setMaximumSize(QSize(16777215, 30))
+        self.op_adress_1_text = QPlainTextEdit(self.frame_8)
+        self.op_adress_1_text.setObjectName(u"op_adress_1_text")
+        self.op_adress_1_text.setMinimumSize(QSize(0, 30))
+        self.op_adress_1_text.setMaximumSize(QSize(16777215, 30))
 
-        self.gridLayout_08.addWidget(self.loc_adress_3_label, 4, 3, 1, 1)
+        self.gridLayout_11.addWidget(self.op_adress_1_text, 1, 1, 1, 1)
 
-        self.op_adress_3_label_2 = QLabel(self.scrollAreaWidgetContents)
+        self.op_adress_2_label = QLabel(self.frame_8)
+        self.op_adress_2_label.setObjectName(u"op_adress_2_label")
+        self.op_adress_2_label.setMinimumSize(QSize(0, 30))
+        self.op_adress_2_label.setMaximumSize(QSize(16777215, 30))
+
+        self.gridLayout_11.addWidget(self.op_adress_2_label, 2, 0, 1, 1)
+
+        self.op_adress_3_text = QPlainTextEdit(self.frame_8)
+        self.op_adress_3_text.setObjectName(u"op_adress_3_text")
+        self.op_adress_3_text.setMinimumSize(QSize(0, 30))
+        self.op_adress_3_text.setMaximumSize(QSize(16777215, 30))
+
+        self.gridLayout_11.addWidget(self.op_adress_3_text, 2, 1, 1, 1)
+
+        self.op_adress_3_label_2 = QLabel(self.frame_8)
         self.op_adress_3_label_2.setObjectName(u"op_adress_3_label_2")
         self.op_adress_3_label_2.setMinimumSize(QSize(0, 30))
         self.op_adress_3_label_2.setMaximumSize(QSize(16777215, 30))
 
-        self.gridLayout_08.addWidget(self.op_adress_3_label_2, 4, 0, 1, 1)
+        self.gridLayout_11.addWidget(self.op_adress_3_label_2, 3, 0, 1, 1)
 
-        self.loc_adress_2_text = QPlainTextEdit(self.scrollAreaWidgetContents)
+        self.op_adress_2_text = QPlainTextEdit(self.frame_8)
+        self.op_adress_2_text.setObjectName(u"op_adress_2_text")
+        self.op_adress_2_text.setMinimumSize(QSize(0, 30))
+        self.op_adress_2_text.setMaximumSize(QSize(16777215, 30))
+
+        self.gridLayout_11.addWidget(self.op_adress_2_text, 3, 1, 1, 1)
+
+
+        self.formLayout_2.setWidget(1, QFormLayout.LabelRole, self.frame_8)
+
+        self.frame_5 = QFrame(self.frame_7)
+        self.frame_5.setObjectName(u"frame_5")
+        self.frame_5.setFrameShape(QFrame.StyledPanel)
+        self.frame_5.setFrameShadow(QFrame.Raised)
+        self.gridLayout_23 = QGridLayout(self.frame_5)
+        self.gridLayout_23.setObjectName(u"gridLayout_23")
+        self.loc_head_label = QLabel(self.frame_5)
+        self.loc_head_label.setObjectName(u"loc_head_label")
+        self.loc_head_label.setMinimumSize(QSize(0, 30))
+        self.loc_head_label.setMaximumSize(QSize(16777215, 30))
+        self.loc_head_label.setFont(font)
+
+        self.gridLayout_23.addWidget(self.loc_head_label, 0, 0, 1, 1)
+
+        self.loc_adress_1_label = QLabel(self.frame_5)
+        self.loc_adress_1_label.setObjectName(u"loc_adress_1_label")
+        self.loc_adress_1_label.setMinimumSize(QSize(0, 30))
+        self.loc_adress_1_label.setMaximumSize(QSize(16777215, 30))
+
+        self.gridLayout_23.addWidget(self.loc_adress_1_label, 1, 0, 1, 1)
+
+        self.loc_adress_1_text = QPlainTextEdit(self.frame_5)
+        self.loc_adress_1_text.setObjectName(u"loc_adress_1_text")
+        self.loc_adress_1_text.setMinimumSize(QSize(0, 30))
+        self.loc_adress_1_text.setMaximumSize(QSize(16777215, 30))
+
+        self.gridLayout_23.addWidget(self.loc_adress_1_text, 1, 1, 1, 1)
+
+        self.loc_adress_2_label = QLabel(self.frame_5)
+        self.loc_adress_2_label.setObjectName(u"loc_adress_2_label")
+        self.loc_adress_2_label.setMinimumSize(QSize(0, 30))
+        self.loc_adress_2_label.setMaximumSize(QSize(16777215, 30))
+
+        self.gridLayout_23.addWidget(self.loc_adress_2_label, 2, 0, 1, 1)
+
+        self.loc_adress_2_text = QPlainTextEdit(self.frame_5)
         self.loc_adress_2_text.setObjectName(u"loc_adress_2_text")
         self.loc_adress_2_text.setMinimumSize(QSize(0, 30))
         self.loc_adress_2_text.setMaximumSize(QSize(16777215, 30))
         self.loc_adress_2_text.setFrameShape(QFrame.StyledPanel)
 
-        self.gridLayout_08.addWidget(self.loc_adress_2_text, 3, 4, 1, 1)
+        self.gridLayout_23.addWidget(self.loc_adress_2_text, 2, 1, 1, 1)
 
-        self.operator_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.operator_text.setObjectName(u"operator_text")
-        self.operator_text.setMinimumSize(QSize(0, 30))
-        self.operator_text.setMaximumSize(QSize(16777215, 30))
+        self.loc_adress_3_label = QLabel(self.frame_5)
+        self.loc_adress_3_label.setObjectName(u"loc_adress_3_label")
+        self.loc_adress_3_label.setMinimumSize(QSize(0, 30))
+        self.loc_adress_3_label.setMaximumSize(QSize(16777215, 30))
 
-        self.gridLayout_08.addWidget(self.operator_text, 1, 1, 1, 1)
+        self.gridLayout_23.addWidget(self.loc_adress_3_label, 3, 0, 1, 1)
 
-        self.op_adress_1_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.op_adress_1_text.setObjectName(u"op_adress_1_text")
-        self.op_adress_1_text.setMinimumSize(QSize(0, 30))
-        self.op_adress_1_text.setMaximumSize(QSize(16777215, 30))
+        self.loc_adress_3_text = QPlainTextEdit(self.frame_5)
+        self.loc_adress_3_text.setObjectName(u"loc_adress_3_text")
+        self.loc_adress_3_text.setMinimumSize(QSize(0, 30))
+        self.loc_adress_3_text.setMaximumSize(QSize(16777215, 30))
 
-        self.gridLayout_08.addWidget(self.op_adress_1_text, 2, 1, 1, 1)
+        self.gridLayout_23.addWidget(self.loc_adress_3_text, 3, 1, 1, 1)
 
 
-        self.verticalLayout_3.addLayout(self.gridLayout_08)
+        self.formLayout_2.setWidget(1, QFormLayout.FieldRole, self.frame_5)
 
-        self.gridLayout_10 = QGridLayout()
-        self.gridLayout_10.setObjectName(u"gridLayout_10")
-        self.gridLayout_10.setSizeConstraint(QLayout.SetMinimumSize)
-        self.constr_style_label = QLabel(self.scrollAreaWidgetContents)
-        self.constr_style_label.setObjectName(u"constr_style_label")
-        self.constr_style_label.setMinimumSize(QSize(0, 30))
-        self.constr_style_label.setMaximumSize(QSize(16777215, 30))
-        self.constr_style_label.setFont(font3)
 
-        self.gridLayout_10.addWidget(self.constr_style_label, 0, 3, 1, 1)
+        self.gridLayout_2.addWidget(self.frame_7, 2, 0, 2, 1)
 
-        self.sys_perf_text = QPlainTextEdit(self.scrollAreaWidgetContents)
+        self.frame_13 = QFrame(self.frame1)
+        self.frame_13.setObjectName(u"frame_13")
+        self.frame_13.setFrameShape(QFrame.StyledPanel)
+        self.frame_13.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_13 = QHBoxLayout(self.frame_13)
+        self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
+        self.frame_12 = QFrame(self.frame_13)
+        self.frame_12.setObjectName(u"frame_12")
+        self.frame_12.setFrameShape(QFrame.StyledPanel)
+        self.frame_12.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_12 = QHBoxLayout(self.frame_12)
+        self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
+        self.sys_perf_label = QLabel(self.frame_12)
+        self.sys_perf_label.setObjectName(u"sys_perf_label")
+        self.sys_perf_label.setMinimumSize(QSize(0, 30))
+        self.sys_perf_label.setMaximumSize(QSize(16777215, 30))
+        self.sys_perf_label.setFont(font)
+
+        self.horizontalLayout_12.addWidget(self.sys_perf_label)
+
+        self.sys_perf_text = QPlainTextEdit(self.frame_12)
         self.sys_perf_text.setObjectName(u"sys_perf_text")
         self.sys_perf_text.setMinimumSize(QSize(0, 30))
         self.sys_perf_text.setMaximumSize(QSize(16777215, 30))
 
-        self.gridLayout_10.addWidget(self.sys_perf_text, 0, 1, 1, 1)
+        self.horizontalLayout_12.addWidget(self.sys_perf_text)
 
-        self.constr_style_text = QPlainTextEdit(self.scrollAreaWidgetContents)
+
+        self.horizontalLayout_13.addWidget(self.frame_12)
+
+        self.frame_11 = QFrame(self.frame_13)
+        self.frame_11.setObjectName(u"frame_11")
+        self.frame_11.setFrameShape(QFrame.StyledPanel)
+        self.frame_11.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_11 = QHBoxLayout(self.frame_11)
+        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
+        self.constr_style_label = QLabel(self.frame_11)
+        self.constr_style_label.setObjectName(u"constr_style_label")
+        self.constr_style_label.setMinimumSize(QSize(0, 30))
+        self.constr_style_label.setMaximumSize(QSize(16777215, 30))
+        self.constr_style_label.setFont(font)
+
+        self.horizontalLayout_11.addWidget(self.constr_style_label)
+
+        self.constr_style_text = QPlainTextEdit(self.frame_11)
         self.constr_style_text.setObjectName(u"constr_style_text")
         self.constr_style_text.setMinimumSize(QSize(0, 30))
         self.constr_style_text.setMaximumSize(QSize(16777215, 30))
 
-        self.gridLayout_10.addWidget(self.constr_style_text, 0, 4, 1, 1)
+        self.horizontalLayout_11.addWidget(self.constr_style_text)
 
-        self.sys_perf_label = QLabel(self.scrollAreaWidgetContents)
-        self.sys_perf_label.setObjectName(u"sys_perf_label")
-        self.sys_perf_label.setMinimumSize(QSize(0, 30))
-        self.sys_perf_label.setMaximumSize(QSize(16777215, 30))
-        self.sys_perf_label.setFont(font3)
 
-        self.gridLayout_10.addWidget(self.sys_perf_label, 0, 0, 1, 1)
+        self.horizontalLayout_13.addWidget(self.frame_11)
 
-        self.horizontalSpacer_2 = QSpacerItem(10, 20, QSizePolicy.MinimumExpanding, QSizePolicy.Minimum)
 
-        self.gridLayout_10.addItem(self.horizontalSpacer_2, 0, 2, 1, 1)
+        self.gridLayout_2.addWidget(self.frame_13, 4, 0, 1, 1)
 
-        self.gridLayout_10.setColumnMinimumWidth(0, 50)
-        self.gridLayout_10.setColumnMinimumWidth(1, 50)
-        self.gridLayout_10.setColumnMinimumWidth(3, 50)
-        self.gridLayout_10.setColumnMinimumWidth(4, 350)
-
-        self.verticalLayout_3.addLayout(self.gridLayout_10)
-
-        self.verticalLayout_4 = QVBoxLayout()
-        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.azimuth_head_label = QLabel(self.scrollAreaWidgetContents)
+        self.frame_9 = QFrame(self.frame1)
+        self.frame_9.setObjectName(u"frame_9")
+        self.frame_9.setFrameShape(QFrame.StyledPanel)
+        self.frame_9.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_2 = QVBoxLayout(self.frame_9)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.azimuth_head_label = QLabel(self.frame_9)
         self.azimuth_head_label.setObjectName(u"azimuth_head_label")
-        self.azimuth_head_label.setFont(font3)
+        self.azimuth_head_label.setFont(font)
 
-        self.verticalLayout_4.addWidget(self.azimuth_head_label)
+        self.verticalLayout_2.addWidget(self.azimuth_head_label)
 
-        self.horizontalLayout_3 = QHBoxLayout()
-        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.bool_consist_azimuth_label = QLabel(self.scrollAreaWidgetContents)
+        self.frame_10 = QFrame(self.frame_9)
+        self.frame_10.setObjectName(u"frame_10")
+        self.frame_10.setFrameShape(QFrame.StyledPanel)
+        self.frame_10.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_4 = QVBoxLayout(self.frame_10)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.frame_14 = QFrame(self.frame_10)
+        self.frame_14.setObjectName(u"frame_14")
+        self.frame_14.setFrameShape(QFrame.StyledPanel)
+        self.frame_14.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_14 = QHBoxLayout(self.frame_14)
+        self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
+        self.bool_consist_azimuth_label = QLabel(self.frame_14)
         self.bool_consist_azimuth_label.setObjectName(u"bool_consist_azimuth_label")
         self.bool_consist_azimuth_label.setMinimumSize(QSize(0, 30))
         self.bool_consist_azimuth_label.setMaximumSize(QSize(16777215, 30))
 
-        self.horizontalLayout_3.addWidget(self.bool_consist_azimuth_label)
+        self.horizontalLayout_14.addWidget(self.bool_consist_azimuth_label)
 
-        self.bool_consist_azimuth_text = QPlainTextEdit(self.scrollAreaWidgetContents)
+        self.bool_consist_azimuth_text = QPlainTextEdit(self.frame_14)
         self.bool_consist_azimuth_text.setObjectName(u"bool_consist_azimuth_text")
-        sizePolicy4 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
-        sizePolicy4.setHorizontalStretch(0)
-        sizePolicy4.setVerticalStretch(0)
-        sizePolicy4.setHeightForWidth(self.bool_consist_azimuth_text.sizePolicy().hasHeightForWidth())
-        self.bool_consist_azimuth_text.setSizePolicy(sizePolicy4)
+        sizePolicy.setHeightForWidth(self.bool_consist_azimuth_text.sizePolicy().hasHeightForWidth())
+        self.bool_consist_azimuth_text.setSizePolicy(sizePolicy)
         self.bool_consist_azimuth_text.setMinimumSize(QSize(0, 30))
         self.bool_consist_azimuth_text.setMaximumSize(QSize(16777215, 30))
 
-        self.horizontalLayout_3.addWidget(self.bool_consist_azimuth_text)
+        self.horizontalLayout_14.addWidget(self.bool_consist_azimuth_text)
 
 
-        self.verticalLayout_4.addLayout(self.horizontalLayout_3)
+        self.verticalLayout_4.addWidget(self.frame_14)
 
-        self.gridLayout_12 = QGridLayout()
-        self.gridLayout_12.setObjectName(u"gridLayout_12")
-        self.maj_tilt_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.maj_tilt_text.setObjectName(u"maj_tilt_text")
+        self.frame_15 = QFrame(self.frame_10)
+        self.frame_15.setObjectName(u"frame_15")
+        self.frame_15.setFrameShape(QFrame.StyledPanel)
+        self.frame_15.setFrameShadow(QFrame.Raised)
+        self.gridLayout_7 = QGridLayout(self.frame_15)
+        self.gridLayout_7.setObjectName(u"gridLayout_7")
+        self.min_tilt_text = QPlainTextEdit(self.frame_15)
+        self.min_tilt_text.setObjectName(u"min_tilt_text")
         sizePolicy5 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
         sizePolicy5.setHorizontalStretch(0)
         sizePolicy5.setVerticalStretch(0)
-        sizePolicy5.setHeightForWidth(self.maj_tilt_text.sizePolicy().hasHeightForWidth())
-        self.maj_tilt_text.setSizePolicy(sizePolicy5)
-        self.maj_tilt_text.setMinimumSize(QSize(0, 30))
-        self.maj_tilt_text.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_12.addWidget(self.maj_tilt_text, 3, 1, 1, 1)
-
-        self.min_tilt_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.min_tilt_text.setObjectName(u"min_tilt_text")
         sizePolicy5.setHeightForWidth(self.min_tilt_text.sizePolicy().hasHeightForWidth())
         self.min_tilt_text.setSizePolicy(sizePolicy5)
         self.min_tilt_text.setMinimumSize(QSize(0, 30))
         self.min_tilt_text.setMaximumSize(QSize(16777215, 30))
 
-        self.gridLayout_12.addWidget(self.min_tilt_text, 3, 4, 1, 1)
+        self.gridLayout_7.addWidget(self.min_tilt_text, 2, 4, 1, 1)
 
-        self.min_azimuth_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.min_azimuth_text.setObjectName(u"min_azimuth_text")
-        self.min_azimuth_text.setMinimumSize(QSize(0, 30))
-        self.min_azimuth_text.setMaximumSize(QSize(16777215, 30))
+        self.maj_card_point_label = QLabel(self.frame_15)
+        self.maj_card_point_label.setObjectName(u"maj_card_point_label")
 
-        self.gridLayout_12.addWidget(self.min_azimuth_text, 1, 1, 1, 1)
+        self.gridLayout_7.addWidget(self.maj_card_point_label, 0, 3, 1, 1)
 
-        self.min_tilt_label = QLabel(self.scrollAreaWidgetContents)
+        self.min_azimuth_label = QLabel(self.frame_15)
+        self.min_azimuth_label.setObjectName(u"min_azimuth_label")
+        self.min_azimuth_label.setMinimumSize(QSize(0, 30))
+        self.min_azimuth_label.setMaximumSize(QSize(16777215, 30))
+
+        self.gridLayout_7.addWidget(self.min_azimuth_label, 1, 0, 1, 1)
+
+        self.min_tilt_label = QLabel(self.frame_15)
         self.min_tilt_label.setObjectName(u"min_tilt_label")
         sizePolicy6 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
         sizePolicy6.setHorizontalStretch(0)
@@ -479,88 +865,88 @@ class Ui_MainWindow(object):
         self.min_tilt_label.setMinimumSize(QSize(0, 30))
         self.min_tilt_label.setMaximumSize(QSize(16777215, 30))
 
-        self.gridLayout_12.addWidget(self.min_tilt_label, 3, 3, 1, 1)
+        self.gridLayout_7.addWidget(self.min_tilt_label, 2, 3, 1, 1)
 
-        self.maj_azimuth_label = QLabel(self.scrollAreaWidgetContents)
-        self.maj_azimuth_label.setObjectName(u"maj_azimuth_label")
-        self.maj_azimuth_label.setMinimumSize(QSize(0, 30))
-        self.maj_azimuth_label.setMaximumSize(QSize(16777215, 30))
+        self.maj_tilt_text = QPlainTextEdit(self.frame_15)
+        self.maj_tilt_text.setObjectName(u"maj_tilt_text")
+        sizePolicy5.setHeightForWidth(self.maj_tilt_text.sizePolicy().hasHeightForWidth())
+        self.maj_tilt_text.setSizePolicy(sizePolicy5)
+        self.maj_tilt_text.setMinimumSize(QSize(0, 30))
+        self.maj_tilt_text.setMaximumSize(QSize(16777215, 30))
 
-        self.gridLayout_12.addWidget(self.maj_azimuth_label, 0, 0, 1, 1)
+        self.gridLayout_7.addWidget(self.maj_tilt_text, 2, 2, 1, 1)
 
-        self.min_card_point_text = QPlainTextEdit(self.scrollAreaWidgetContents)
+        self.min_card_point_text = QPlainTextEdit(self.frame_15)
         self.min_card_point_text.setObjectName(u"min_card_point_text")
         self.min_card_point_text.setMinimumSize(QSize(0, 30))
         self.min_card_point_text.setMaximumSize(QSize(16777215, 30))
 
-        self.gridLayout_12.addWidget(self.min_card_point_text, 1, 4, 1, 1)
+        self.gridLayout_7.addWidget(self.min_card_point_text, 1, 4, 1, 1)
 
-        self.horizontalSpacer_3 = QSpacerItem(10, 20, QSizePolicy.MinimumExpanding, QSizePolicy.Minimum)
+        self.min_card_point_label = QLabel(self.frame_15)
+        self.min_card_point_label.setObjectName(u"min_card_point_label")
 
-        self.gridLayout_12.addItem(self.horizontalSpacer_3, 0, 2, 1, 1)
+        self.gridLayout_7.addWidget(self.min_card_point_label, 1, 3, 1, 1)
 
-        self.maj_tilt_label = QLabel(self.scrollAreaWidgetContents)
+        self.maj_azimuth_text = QPlainTextEdit(self.frame_15)
+        self.maj_azimuth_text.setObjectName(u"maj_azimuth_text")
+        self.maj_azimuth_text.setMinimumSize(QSize(0, 30))
+        self.maj_azimuth_text.setMaximumSize(QSize(16777215, 30))
+
+        self.gridLayout_7.addWidget(self.maj_azimuth_text, 0, 2, 1, 1)
+
+        self.maj_azimuth_label = QLabel(self.frame_15)
+        self.maj_azimuth_label.setObjectName(u"maj_azimuth_label")
+        self.maj_azimuth_label.setMinimumSize(QSize(0, 30))
+        self.maj_azimuth_label.setMaximumSize(QSize(16777215, 30))
+
+        self.gridLayout_7.addWidget(self.maj_azimuth_label, 0, 0, 1, 1)
+
+        self.min_azimuth_text = QPlainTextEdit(self.frame_15)
+        self.min_azimuth_text.setObjectName(u"min_azimuth_text")
+        self.min_azimuth_text.setMinimumSize(QSize(0, 30))
+        self.min_azimuth_text.setMaximumSize(QSize(16777215, 30))
+
+        self.gridLayout_7.addWidget(self.min_azimuth_text, 1, 2, 1, 1)
+
+        self.maj_card_point_text = QPlainTextEdit(self.frame_15)
+        self.maj_card_point_text.setObjectName(u"maj_card_point_text")
+        self.maj_card_point_text.setMinimumSize(QSize(0, 30))
+        self.maj_card_point_text.setMaximumSize(QSize(16777215, 30))
+
+        self.gridLayout_7.addWidget(self.maj_card_point_text, 0, 4, 1, 1)
+
+        self.maj_tilt_label = QLabel(self.frame_15)
         self.maj_tilt_label.setObjectName(u"maj_tilt_label")
         sizePolicy6.setHeightForWidth(self.maj_tilt_label.sizePolicy().hasHeightForWidth())
         self.maj_tilt_label.setSizePolicy(sizePolicy6)
         self.maj_tilt_label.setMinimumSize(QSize(0, 30))
         self.maj_tilt_label.setMaximumSize(QSize(16777215, 30))
 
-        self.gridLayout_12.addWidget(self.maj_tilt_label, 3, 0, 1, 1)
-
-        self.maj_card_point_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.maj_card_point_text.setObjectName(u"maj_card_point_text")
-        self.maj_card_point_text.setMinimumSize(QSize(0, 30))
-        self.maj_card_point_text.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_12.addWidget(self.maj_card_point_text, 0, 4, 1, 1)
-
-        self.maj_card_point_label = QLabel(self.scrollAreaWidgetContents)
-        self.maj_card_point_label.setObjectName(u"maj_card_point_label")
-
-        self.gridLayout_12.addWidget(self.maj_card_point_label, 0, 3, 1, 1)
-
-        self.min_card_point_label = QLabel(self.scrollAreaWidgetContents)
-        self.min_card_point_label.setObjectName(u"min_card_point_label")
-
-        self.gridLayout_12.addWidget(self.min_card_point_label, 1, 3, 1, 1)
-
-        self.min_azimuth_label = QLabel(self.scrollAreaWidgetContents)
-        self.min_azimuth_label.setObjectName(u"min_azimuth_label")
-        self.min_azimuth_label.setMinimumSize(QSize(0, 30))
-        self.min_azimuth_label.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_12.addWidget(self.min_azimuth_label, 1, 0, 1, 1)
-
-        self.maj_azimuth_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.maj_azimuth_text.setObjectName(u"maj_azimuth_text")
-        self.maj_azimuth_text.setMinimumSize(QSize(0, 30))
-        self.maj_azimuth_text.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_12.addWidget(self.maj_azimuth_text, 0, 1, 1, 1)
-
-        self.verticalSpacer_5 = QSpacerItem(20, 10, QSizePolicy.Minimum, QSizePolicy.MinimumExpanding)
-
-        self.gridLayout_12.addItem(self.verticalSpacer_5, 2, 1, 1, 1)
+        self.gridLayout_7.addWidget(self.maj_tilt_label, 2, 0, 1, 1)
 
 
-        self.verticalLayout_4.addLayout(self.gridLayout_12)
+        self.verticalLayout_4.addWidget(self.frame_15)
 
 
-        self.verticalLayout_3.addLayout(self.verticalLayout_4)
+        self.verticalLayout_2.addWidget(self.frame_10)
 
-        self.headline_02 = QLabel(self.scrollAreaWidgetContents)
+
+        self.gridLayout_2.addWidget(self.frame_9, 5, 0, 1, 1)
+
+
+        self.verticalLayout_3.addWidget(self.frame1)
+
+        self.headline_02 = QLabel(self.frame0221)
         self.headline_02.setObjectName(u"headline_02")
-        font4 = QFont()
-        font4.setPointSize(12)
-        font4.setBold(True)
-        self.headline_02.setFont(font4)
+        self.headline_02.setMinimumSize(QSize(250, 50))
+        self.headline_02.setFont(font)
         self.headline_02.setFrameShape(QFrame.StyledPanel)
         self.headline_02.setFrameShadow(QFrame.Sunken)
 
         self.verticalLayout_3.addWidget(self.headline_02)
 
-        self.PV_modules_list = QTableWidget(self.scrollAreaWidgetContents)
+        self.PV_modules_list = QTableWidget(self.frame0221)
         if (self.PV_modules_list.columnCount() < 6):
             self.PV_modules_list.setColumnCount(6)
         __qtablewidgetitem4 = QTableWidgetItem()
@@ -601,79 +987,103 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.PV_modules_list)
 
-        self.move_none_PV_modules_to_blacklist = QPushButton(self.scrollAreaWidgetContents)
+        self.frame_4 = QFrame(self.frame0221)
+        self.frame_4.setObjectName(u"frame_4")
+        self.frame_4.setFrameShape(QFrame.StyledPanel)
+        self.frame_4.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_8 = QVBoxLayout(self.frame_4)
+        self.verticalLayout_8.setObjectName(u"verticalLayout_8")
+        self.move_none_PV_modules_to_blacklist = QPushButton(self.frame_4)
         self.move_none_PV_modules_to_blacklist.setObjectName(u"move_none_PV_modules_to_blacklist")
+        self.move_none_PV_modules_to_blacklist.setMinimumSize(QSize(100, 30))
 
-        self.verticalLayout_3.addWidget(self.move_none_PV_modules_to_blacklist)
+        self.verticalLayout_8.addWidget(self.move_none_PV_modules_to_blacklist)
 
-        self.gridLayout_13 = QGridLayout()
-        self.gridLayout_13.setObjectName(u"gridLayout_13")
-        self.module_count_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.module_count_text.setObjectName(u"module_count_text")
-        sizePolicy5.setHeightForWidth(self.module_count_text.sizePolicy().hasHeightForWidth())
-        self.module_count_text.setSizePolicy(sizePolicy5)
-        self.module_count_text.setMinimumSize(QSize(0, 30))
-        self.module_count_text.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_13.addWidget(self.module_count_text, 0, 1, 1, 1)
-
-        self.module_count_label = QLabel(self.scrollAreaWidgetContents)
+        self.frame_16 = QFrame(self.frame_4)
+        self.frame_16.setObjectName(u"frame_16")
+        self.frame_16.setFrameShape(QFrame.StyledPanel)
+        self.frame_16.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_3 = QHBoxLayout(self.frame_16)
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.module_count_label = QLabel(self.frame_16)
         self.module_count_label.setObjectName(u"module_count_label")
         sizePolicy6.setHeightForWidth(self.module_count_label.sizePolicy().hasHeightForWidth())
         self.module_count_label.setSizePolicy(sizePolicy6)
-        self.module_count_label.setMinimumSize(QSize(0, 30))
-        self.module_count_label.setMaximumSize(QSize(16777215, 30))
+        self.module_count_label.setMinimumSize(QSize(150, 30))
+        self.module_count_label.setMaximumSize(QSize(250, 30))
 
-        self.gridLayout_13.addWidget(self.module_count_label, 0, 0, 1, 1)
+        self.horizontalLayout_3.addWidget(self.module_count_label)
 
-        self.mounting_type_label = QLabel(self.scrollAreaWidgetContents)
-        self.mounting_type_label.setObjectName(u"mounting_type_label")
-        sizePolicy6.setHeightForWidth(self.mounting_type_label.sizePolicy().hasHeightForWidth())
-        self.mounting_type_label.setSizePolicy(sizePolicy6)
-        self.mounting_type_label.setMinimumSize(QSize(0, 30))
-        self.mounting_type_label.setMaximumSize(QSize(16777215, 30))
+        self.module_count_text = QPlainTextEdit(self.frame_16)
+        self.module_count_text.setObjectName(u"module_count_text")
+        sizePolicy.setHeightForWidth(self.module_count_text.sizePolicy().hasHeightForWidth())
+        self.module_count_text.setSizePolicy(sizePolicy)
+        self.module_count_text.setMinimumSize(QSize(0, 30))
+        self.module_count_text.setMaximumSize(QSize(75, 30))
 
-        self.gridLayout_13.addWidget(self.mounting_type_label, 4, 0, 1, 1)
+        self.horizontalLayout_3.addWidget(self.module_count_text)
 
-        self.module_type_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.module_type_text.setObjectName(u"module_type_text")
-        sizePolicy5.setHeightForWidth(self.module_type_text.sizePolicy().hasHeightForWidth())
-        self.module_type_text.setSizePolicy(sizePolicy5)
-        self.module_type_text.setMinimumSize(QSize(0, 30))
-        self.module_type_text.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_13.addWidget(self.module_type_text, 2, 1, 1, 1)
-
-        self.module_type_label = QLabel(self.scrollAreaWidgetContents)
+        self.module_type_label = QLabel(self.frame_16)
         self.module_type_label.setObjectName(u"module_type_label")
         sizePolicy6.setHeightForWidth(self.module_type_label.sizePolicy().hasHeightForWidth())
         self.module_type_label.setSizePolicy(sizePolicy6)
         self.module_type_label.setMinimumSize(QSize(0, 30))
         self.module_type_label.setMaximumSize(QSize(16777215, 30))
 
-        self.gridLayout_13.addWidget(self.module_type_label, 2, 0, 1, 1)
+        self.horizontalLayout_3.addWidget(self.module_type_label)
 
-        self.mounting_type_text = QPlainTextEdit(self.scrollAreaWidgetContents)
+        self.module_type_text = QPlainTextEdit(self.frame_16)
+        self.module_type_text.setObjectName(u"module_type_text")
+        sizePolicy5.setHeightForWidth(self.module_type_text.sizePolicy().hasHeightForWidth())
+        self.module_type_text.setSizePolicy(sizePolicy5)
+        self.module_type_text.setMinimumSize(QSize(0, 30))
+        self.module_type_text.setMaximumSize(QSize(16777215, 30))
+
+        self.horizontalLayout_3.addWidget(self.module_type_text)
+
+
+        self.verticalLayout_8.addWidget(self.frame_16)
+
+        self.frame_17 = QFrame(self.frame_4)
+        self.frame_17.setObjectName(u"frame_17")
+        self.frame_17.setFrameShape(QFrame.StyledPanel)
+        self.frame_17.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_16 = QHBoxLayout(self.frame_17)
+        self.horizontalLayout_16.setObjectName(u"horizontalLayout_16")
+        self.mounting_type_label = QLabel(self.frame_17)
+        self.mounting_type_label.setObjectName(u"mounting_type_label")
+        sizePolicy6.setHeightForWidth(self.mounting_type_label.sizePolicy().hasHeightForWidth())
+        self.mounting_type_label.setSizePolicy(sizePolicy6)
+        self.mounting_type_label.setMinimumSize(QSize(0, 30))
+        self.mounting_type_label.setMaximumSize(QSize(16777215, 30))
+
+        self.horizontalLayout_16.addWidget(self.mounting_type_label)
+
+        self.mounting_type_text = QPlainTextEdit(self.frame_17)
         self.mounting_type_text.setObjectName(u"mounting_type_text")
         sizePolicy5.setHeightForWidth(self.mounting_type_text.sizePolicy().hasHeightForWidth())
         self.mounting_type_text.setSizePolicy(sizePolicy5)
         self.mounting_type_text.setMinimumSize(QSize(0, 30))
         self.mounting_type_text.setMaximumSize(QSize(16777215, 30))
 
-        self.gridLayout_13.addWidget(self.mounting_type_text, 4, 1, 1, 1)
+        self.horizontalLayout_16.addWidget(self.mounting_type_text)
 
 
-        self.verticalLayout_3.addLayout(self.gridLayout_13)
+        self.verticalLayout_8.addWidget(self.frame_17)
 
-        self.headline_03 = QLabel(self.scrollAreaWidgetContents)
+
+        self.verticalLayout_3.addWidget(self.frame_4)
+
+        self.headline_03 = QLabel(self.frame0221)
         self.headline_03.setObjectName(u"headline_03")
-        self.headline_03.setFont(font4)
+        self.headline_03.setMinimumSize(QSize(250, 50))
+        self.headline_03.setFont(font)
         self.headline_03.setFrameShape(QFrame.StyledPanel)
         self.headline_03.setFrameShadow(QFrame.Sunken)
 
         self.verticalLayout_3.addWidget(self.headline_03)
 
-        self.PV_inverters_list = QTableWidget(self.scrollAreaWidgetContents)
+        self.PV_inverters_list = QTableWidget(self.frame0221)
         if (self.PV_inverters_list.columnCount() < 6):
             self.PV_inverters_list.setColumnCount(6)
         __qtablewidgetitem10 = QTableWidgetItem()
@@ -711,126 +1121,145 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.PV_inverters_list)
 
-        self.move_none_PV_inverters_to_blacklist = QPushButton(self.scrollAreaWidgetContents)
+        self.frame_18 = QFrame(self.frame0221)
+        self.frame_18.setObjectName(u"frame_18")
+        sizePolicy.setHeightForWidth(self.frame_18.sizePolicy().hasHeightForWidth())
+        self.frame_18.setSizePolicy(sizePolicy)
+        self.frame_18.setFrameShape(QFrame.StyledPanel)
+        self.frame_18.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_9 = QVBoxLayout(self.frame_18)
+        self.verticalLayout_9.setObjectName(u"verticalLayout_9")
+        self.move_none_PV_inverters_to_blacklist = QPushButton(self.frame_18)
         self.move_none_PV_inverters_to_blacklist.setObjectName(u"move_none_PV_inverters_to_blacklist")
+        self.move_none_PV_inverters_to_blacklist.setMinimumSize(QSize(100, 30))
 
-        self.verticalLayout_3.addWidget(self.move_none_PV_inverters_to_blacklist)
+        self.verticalLayout_9.addWidget(self.move_none_PV_inverters_to_blacklist)
 
-        self.horizontalLayout_4 = QHBoxLayout()
-        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.hybrid_inverter_bool_label = QLabel(self.scrollAreaWidgetContents)
+        self.frame_19 = QFrame(self.frame_18)
+        self.frame_19.setObjectName(u"frame_19")
+        sizePolicy.setHeightForWidth(self.frame_19.sizePolicy().hasHeightForWidth())
+        self.frame_19.setSizePolicy(sizePolicy)
+        self.frame_19.setFrameShape(QFrame.StyledPanel)
+        self.frame_19.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_15 = QHBoxLayout(self.frame_19)
+        self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
+        self.splitter = QSplitter(self.frame_19)
+        self.splitter.setObjectName(u"splitter")
+        self.splitter.setOrientation(Qt.Horizontal)
+        self.hybrid_inverter_bool_label = QLabel(self.splitter)
         self.hybrid_inverter_bool_label.setObjectName(u"hybrid_inverter_bool_label")
-        sizePolicy8 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.MinimumExpanding)
-        sizePolicy8.setHorizontalStretch(0)
-        sizePolicy8.setVerticalStretch(0)
-        sizePolicy8.setHeightForWidth(self.hybrid_inverter_bool_label.sizePolicy().hasHeightForWidth())
-        self.hybrid_inverter_bool_label.setSizePolicy(sizePolicy8)
-        self.hybrid_inverter_bool_label.setMinimumSize(QSize(0, 30))
-        self.hybrid_inverter_bool_label.setMaximumSize(QSize(16777215, 30))
-
-        self.horizontalLayout_4.addWidget(self.hybrid_inverter_bool_label)
-
-        self.hybrid_inverter_bool_text = QPlainTextEdit(self.scrollAreaWidgetContents)
+        sizePolicy.setHeightForWidth(self.hybrid_inverter_bool_label.sizePolicy().hasHeightForWidth())
+        self.hybrid_inverter_bool_label.setSizePolicy(sizePolicy)
+        self.hybrid_inverter_bool_label.setMinimumSize(QSize(250, 30))
+        self.hybrid_inverter_bool_label.setMaximumSize(QSize(350, 30))
+        self.splitter.addWidget(self.hybrid_inverter_bool_label)
+        self.hybrid_inverter_bool_text = QPlainTextEdit(self.splitter)
         self.hybrid_inverter_bool_text.setObjectName(u"hybrid_inverter_bool_text")
         sizePolicy7.setHeightForWidth(self.hybrid_inverter_bool_text.sizePolicy().hasHeightForWidth())
         self.hybrid_inverter_bool_text.setSizePolicy(sizePolicy7)
         self.hybrid_inverter_bool_text.setMinimumSize(QSize(0, 30))
-        self.hybrid_inverter_bool_text.setMaximumSize(QSize(16777215, 30))
+        self.hybrid_inverter_bool_text.setMaximumSize(QSize(100, 30))
+        self.splitter.addWidget(self.hybrid_inverter_bool_text)
 
-        self.horizontalLayout_4.addWidget(self.hybrid_inverter_bool_text)
+        self.horizontalLayout_15.addWidget(self.splitter)
 
 
-        self.verticalLayout_3.addLayout(self.horizontalLayout_4)
+        self.verticalLayout_9.addWidget(self.frame_19, 0, Qt.AlignLeft|Qt.AlignVCenter)
 
-        self.gridLayout_14 = QGridLayout()
-        self.gridLayout_14.setObjectName(u"gridLayout_14")
-        self.inverter_SN_label = QLabel(self.scrollAreaWidgetContents)
-        self.inverter_SN_label.setObjectName(u"inverter_SN_label")
-        sizePolicy9 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
-        sizePolicy9.setHorizontalStretch(0)
-        sizePolicy9.setVerticalStretch(0)
-        sizePolicy9.setHeightForWidth(self.inverter_SN_label.sizePolicy().hasHeightForWidth())
-        self.inverter_SN_label.setSizePolicy(sizePolicy9)
-        self.inverter_SN_label.setMinimumSize(QSize(0, 30))
-        self.inverter_SN_label.setMaximumSize(QSize(16777215, 45))
-
-        self.gridLayout_14.addWidget(self.inverter_SN_label, 0, 2, 1, 1)
-
-        self.inverter_SN_text = QPlainTextEdit(self.scrollAreaWidgetContents)
+        self.frame_20 = QFrame(self.frame_18)
+        self.frame_20.setObjectName(u"frame_20")
+        self.frame_20.setFrameShape(QFrame.StyledPanel)
+        self.frame_20.setFrameShadow(QFrame.Raised)
+        self.gridLayout_10 = QGridLayout(self.frame_20)
+        self.gridLayout_10.setObjectName(u"gridLayout_10")
+        self.inverter_SN_text = QPlainTextEdit(self.frame_20)
         self.inverter_SN_text.setObjectName(u"inverter_SN_text")
-        sizePolicy7.setHeightForWidth(self.inverter_SN_text.sizePolicy().hasHeightForWidth())
-        self.inverter_SN_text.setSizePolicy(sizePolicy7)
-        self.inverter_SN_text.setMinimumSize(QSize(0, 30))
-        self.inverter_SN_text.setMaximumSize(QSize(16777215, 16777215))
+        sizePolicy1.setHeightForWidth(self.inverter_SN_text.sizePolicy().hasHeightForWidth())
+        self.inverter_SN_text.setSizePolicy(sizePolicy1)
+        self.inverter_SN_text.setMinimumSize(QSize(150, 30))
+        self.inverter_SN_text.setMaximumSize(QSize(300, 60))
 
-        self.gridLayout_14.addWidget(self.inverter_SN_text, 0, 3, 1, 1)
+        self.gridLayout_10.addWidget(self.inverter_SN_text, 0, 5, 1, 1)
 
-        self.inverter_type_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.inverter_type_text.setObjectName(u"inverter_type_text")
-        sizePolicy7.setHeightForWidth(self.inverter_type_text.sizePolicy().hasHeightForWidth())
-        self.inverter_type_text.setSizePolicy(sizePolicy7)
-        self.inverter_type_text.setMinimumSize(QSize(0, 30))
-        self.inverter_type_text.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_14.addWidget(self.inverter_type_text, 0, 1, 1, 1)
-
-        self.commiss_date_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.commiss_date_text.setObjectName(u"commiss_date_text")
-        sizePolicy7.setHeightForWidth(self.commiss_date_text.sizePolicy().hasHeightForWidth())
-        self.commiss_date_text.setSizePolicy(sizePolicy7)
-        self.commiss_date_text.setMinimumSize(QSize(0, 30))
-        self.commiss_date_text.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_14.addWidget(self.commiss_date_text, 1, 3, 1, 1)
-
-        self.commiss_date_label = QLabel(self.scrollAreaWidgetContents)
+        self.commiss_date_label = QLabel(self.frame_20)
         self.commiss_date_label.setObjectName(u"commiss_date_label")
-        sizePolicy8.setHeightForWidth(self.commiss_date_label.sizePolicy().hasHeightForWidth())
-        self.commiss_date_label.setSizePolicy(sizePolicy8)
-        self.commiss_date_label.setMinimumSize(QSize(0, 30))
-        self.commiss_date_label.setMaximumSize(QSize(16777215, 30))
+        sizePolicy.setHeightForWidth(self.commiss_date_label.sizePolicy().hasHeightForWidth())
+        self.commiss_date_label.setSizePolicy(sizePolicy)
+        self.commiss_date_label.setMinimumSize(QSize(150, 30))
+        self.commiss_date_label.setMaximumSize(QSize(300, 60))
 
-        self.gridLayout_14.addWidget(self.commiss_date_label, 1, 2, 1, 1)
+        self.gridLayout_10.addWidget(self.commiss_date_label, 1, 4, 1, 1)
 
-        self.inverter_power_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.inverter_power_text.setObjectName(u"inverter_power_text")
-        sizePolicy7.setHeightForWidth(self.inverter_power_text.sizePolicy().hasHeightForWidth())
-        self.inverter_power_text.setSizePolicy(sizePolicy7)
-        self.inverter_power_text.setMinimumSize(QSize(0, 30))
-        self.inverter_power_text.setMaximumSize(QSize(16777215, 30))
+        self.commiss_date_text = QPlainTextEdit(self.frame_20)
+        self.commiss_date_text.setObjectName(u"commiss_date_text")
+        sizePolicy1.setHeightForWidth(self.commiss_date_text.sizePolicy().hasHeightForWidth())
+        self.commiss_date_text.setSizePolicy(sizePolicy1)
+        self.commiss_date_text.setMinimumSize(QSize(150, 30))
+        self.commiss_date_text.setMaximumSize(QSize(300, 60))
 
-        self.gridLayout_14.addWidget(self.inverter_power_text, 1, 1, 1, 1)
+        self.gridLayout_10.addWidget(self.commiss_date_text, 1, 5, 1, 1)
 
-        self.inverter_power_label = QLabel(self.scrollAreaWidgetContents)
+        self.inverter_SN_label = QLabel(self.frame_20)
+        self.inverter_SN_label.setObjectName(u"inverter_SN_label")
+        sizePolicy3.setHeightForWidth(self.inverter_SN_label.sizePolicy().hasHeightForWidth())
+        self.inverter_SN_label.setSizePolicy(sizePolicy3)
+        self.inverter_SN_label.setMinimumSize(QSize(150, 30))
+        self.inverter_SN_label.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_10.addWidget(self.inverter_SN_label, 0, 4, 1, 1)
+
+        self.inverter_type_text = QPlainTextEdit(self.frame_20)
+        self.inverter_type_text.setObjectName(u"inverter_type_text")
+        sizePolicy1.setHeightForWidth(self.inverter_type_text.sizePolicy().hasHeightForWidth())
+        self.inverter_type_text.setSizePolicy(sizePolicy1)
+        self.inverter_type_text.setMinimumSize(QSize(150, 30))
+        self.inverter_type_text.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_10.addWidget(self.inverter_type_text, 0, 1, 1, 1)
+
+        self.inverter_power_label = QLabel(self.frame_20)
         self.inverter_power_label.setObjectName(u"inverter_power_label")
-        sizePolicy8.setHeightForWidth(self.inverter_power_label.sizePolicy().hasHeightForWidth())
-        self.inverter_power_label.setSizePolicy(sizePolicy8)
-        self.inverter_power_label.setMinimumSize(QSize(0, 30))
-        self.inverter_power_label.setMaximumSize(QSize(16777215, 30))
+        sizePolicy.setHeightForWidth(self.inverter_power_label.sizePolicy().hasHeightForWidth())
+        self.inverter_power_label.setSizePolicy(sizePolicy)
+        self.inverter_power_label.setMinimumSize(QSize(150, 30))
+        self.inverter_power_label.setMaximumSize(QSize(300, 60))
 
-        self.gridLayout_14.addWidget(self.inverter_power_label, 1, 0, 1, 1)
+        self.gridLayout_10.addWidget(self.inverter_power_label, 1, 0, 1, 1)
 
-        self.inverter_type_label = QLabel(self.scrollAreaWidgetContents)
+        self.inverter_power_text = QPlainTextEdit(self.frame_20)
+        self.inverter_power_text.setObjectName(u"inverter_power_text")
+        sizePolicy1.setHeightForWidth(self.inverter_power_text.sizePolicy().hasHeightForWidth())
+        self.inverter_power_text.setSizePolicy(sizePolicy1)
+        self.inverter_power_text.setMinimumSize(QSize(150, 30))
+        self.inverter_power_text.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_10.addWidget(self.inverter_power_text, 1, 1, 1, 1)
+
+        self.inverter_type_label = QLabel(self.frame_20)
         self.inverter_type_label.setObjectName(u"inverter_type_label")
-        sizePolicy8.setHeightForWidth(self.inverter_type_label.sizePolicy().hasHeightForWidth())
-        self.inverter_type_label.setSizePolicy(sizePolicy8)
-        self.inverter_type_label.setMinimumSize(QSize(0, 30))
-        self.inverter_type_label.setMaximumSize(QSize(16777215, 30))
+        sizePolicy.setHeightForWidth(self.inverter_type_label.sizePolicy().hasHeightForWidth())
+        self.inverter_type_label.setSizePolicy(sizePolicy)
+        self.inverter_type_label.setMinimumSize(QSize(150, 30))
+        self.inverter_type_label.setMaximumSize(QSize(300, 60))
 
-        self.gridLayout_14.addWidget(self.inverter_type_label, 0, 0, 1, 1)
+        self.gridLayout_10.addWidget(self.inverter_type_label, 0, 0, 1, 1)
 
 
-        self.verticalLayout_3.addLayout(self.gridLayout_14)
+        self.verticalLayout_9.addWidget(self.frame_20, 0, Qt.AlignLeft)
 
-        self.headline_04 = QLabel(self.scrollAreaWidgetContents)
+
+        self.verticalLayout_3.addWidget(self.frame_18)
+
+        self.headline_04 = QLabel(self.frame0221)
         self.headline_04.setObjectName(u"headline_04")
-        self.headline_04.setFont(font4)
+        self.headline_04.setMinimumSize(QSize(250, 50))
+        self.headline_04.setFont(font)
         self.headline_04.setFrameShape(QFrame.StyledPanel)
         self.headline_04.setFrameShadow(QFrame.Sunken)
 
         self.verticalLayout_3.addWidget(self.headline_04)
 
-        self.BAT_inverters_list = QTableWidget(self.scrollAreaWidgetContents)
+        self.BAT_inverters_list = QTableWidget(self.frame0221)
         if (self.BAT_inverters_list.columnCount() < 7):
             self.BAT_inverters_list.setColumnCount(7)
         __qtablewidgetitem16 = QTableWidgetItem()
@@ -870,89 +1299,113 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.BAT_inverters_list)
 
-        self.move_none_BAT_inverters_to_blacklist = QPushButton(self.scrollAreaWidgetContents)
+        self.frame_21 = QFrame(self.frame0221)
+        self.frame_21.setObjectName(u"frame_21")
+        self.frame_21.setFrameShape(QFrame.StyledPanel)
+        self.frame_21.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_10 = QVBoxLayout(self.frame_21)
+        self.verticalLayout_10.setObjectName(u"verticalLayout_10")
+        self.move_none_BAT_inverters_to_blacklist = QPushButton(self.frame_21)
         self.move_none_BAT_inverters_to_blacklist.setObjectName(u"move_none_BAT_inverters_to_blacklist")
+        self.move_none_BAT_inverters_to_blacklist.setMinimumSize(QSize(100, 30))
 
-        self.verticalLayout_3.addWidget(self.move_none_BAT_inverters_to_blacklist)
+        self.verticalLayout_10.addWidget(self.move_none_BAT_inverters_to_blacklist)
 
-        self.gridLayout_16 = QGridLayout()
-        self.gridLayout_16.setObjectName(u"gridLayout_16")
-        self.bat_inverter_type_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.bat_inverter_type_text.setObjectName(u"bat_inverter_type_text")
-        sizePolicy7.setHeightForWidth(self.bat_inverter_type_text.sizePolicy().hasHeightForWidth())
-        self.bat_inverter_type_text.setSizePolicy(sizePolicy7)
-        self.bat_inverter_type_text.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_16.addWidget(self.bat_inverter_type_text, 0, 1, 1, 1)
-
-        self.bat_inverter_type_label = QLabel(self.scrollAreaWidgetContents)
+        self.frame_22 = QFrame(self.frame_21)
+        self.frame_22.setObjectName(u"frame_22")
+        self.frame_22.setFrameShape(QFrame.StyledPanel)
+        self.frame_22.setFrameShadow(QFrame.Raised)
+        self.gridLayout_12 = QGridLayout(self.frame_22)
+        self.gridLayout_12.setObjectName(u"gridLayout_12")
+        self.bat_inverter_type_label = QLabel(self.frame_22)
         self.bat_inverter_type_label.setObjectName(u"bat_inverter_type_label")
-        sizePolicy8.setHeightForWidth(self.bat_inverter_type_label.sizePolicy().hasHeightForWidth())
-        self.bat_inverter_type_label.setSizePolicy(sizePolicy8)
-        self.bat_inverter_type_label.setMinimumSize(QSize(0, 30))
+        sizePolicy.setHeightForWidth(self.bat_inverter_type_label.sizePolicy().hasHeightForWidth())
+        self.bat_inverter_type_label.setSizePolicy(sizePolicy)
+        self.bat_inverter_type_label.setMinimumSize(QSize(100, 30))
+        self.bat_inverter_type_label.setMaximumSize(QSize(300, 60))
 
-        self.gridLayout_16.addWidget(self.bat_inverter_type_label, 0, 0, 1, 1)
+        self.gridLayout_12.addWidget(self.bat_inverter_type_label, 0, 0, 1, 1)
 
-        self.bat_inverter_SN_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.bat_inverter_SN_text.setObjectName(u"bat_inverter_SN_text")
-        sizePolicy7.setHeightForWidth(self.bat_inverter_SN_text.sizePolicy().hasHeightForWidth())
-        self.bat_inverter_SN_text.setSizePolicy(sizePolicy7)
-        self.bat_inverter_SN_text.setMinimumSize(QSize(0, 30))
+        self.bat_inverter_type_text = QPlainTextEdit(self.frame_22)
+        self.bat_inverter_type_text.setObjectName(u"bat_inverter_type_text")
+        sizePolicy.setHeightForWidth(self.bat_inverter_type_text.sizePolicy().hasHeightForWidth())
+        self.bat_inverter_type_text.setSizePolicy(sizePolicy)
+        self.bat_inverter_type_text.setMinimumSize(QSize(100, 30))
+        self.bat_inverter_type_text.setMaximumSize(QSize(300, 60))
 
-        self.gridLayout_16.addWidget(self.bat_inverter_SN_text, 0, 3, 1, 1)
+        self.gridLayout_12.addWidget(self.bat_inverter_type_text, 0, 1, 1, 1)
 
-        self.coupling_type_label = QLabel(self.scrollAreaWidgetContents)
-        self.coupling_type_label.setObjectName(u"coupling_type_label")
-        sizePolicy8.setHeightForWidth(self.coupling_type_label.sizePolicy().hasHeightForWidth())
-        self.coupling_type_label.setSizePolicy(sizePolicy8)
-        self.coupling_type_label.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_16.addWidget(self.coupling_type_label, 1, 2, 1, 1)
-
-        self.bat_inverter_power_label = QLabel(self.scrollAreaWidgetContents)
-        self.bat_inverter_power_label.setObjectName(u"bat_inverter_power_label")
-        sizePolicy8.setHeightForWidth(self.bat_inverter_power_label.sizePolicy().hasHeightForWidth())
-        self.bat_inverter_power_label.setSizePolicy(sizePolicy8)
-        self.bat_inverter_power_label.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_16.addWidget(self.bat_inverter_power_label, 1, 0, 1, 1)
-
-        self.bat_inverter_power_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.bat_inverter_power_text.setObjectName(u"bat_inverter_power_text")
-        sizePolicy7.setHeightForWidth(self.bat_inverter_power_text.sizePolicy().hasHeightForWidth())
-        self.bat_inverter_power_text.setSizePolicy(sizePolicy7)
-        self.bat_inverter_power_text.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_16.addWidget(self.bat_inverter_power_text, 1, 1, 1, 1)
-
-        self.bat_inverter_SN_label = QLabel(self.scrollAreaWidgetContents)
+        self.bat_inverter_SN_label = QLabel(self.frame_22)
         self.bat_inverter_SN_label.setObjectName(u"bat_inverter_SN_label")
-        sizePolicy8.setHeightForWidth(self.bat_inverter_SN_label.sizePolicy().hasHeightForWidth())
-        self.bat_inverter_SN_label.setSizePolicy(sizePolicy8)
-        self.bat_inverter_SN_label.setMinimumSize(QSize(0, 30))
+        sizePolicy.setHeightForWidth(self.bat_inverter_SN_label.sizePolicy().hasHeightForWidth())
+        self.bat_inverter_SN_label.setSizePolicy(sizePolicy)
+        self.bat_inverter_SN_label.setMinimumSize(QSize(100, 30))
+        self.bat_inverter_SN_label.setMaximumSize(QSize(300, 60))
 
-        self.gridLayout_16.addWidget(self.bat_inverter_SN_label, 0, 2, 1, 1)
+        self.gridLayout_12.addWidget(self.bat_inverter_SN_label, 0, 2, 1, 1)
 
-        self.coupling_type_text = QPlainTextEdit(self.scrollAreaWidgetContents)
+        self.bat_inverter_SN_text = QPlainTextEdit(self.frame_22)
+        self.bat_inverter_SN_text.setObjectName(u"bat_inverter_SN_text")
+        sizePolicy.setHeightForWidth(self.bat_inverter_SN_text.sizePolicy().hasHeightForWidth())
+        self.bat_inverter_SN_text.setSizePolicy(sizePolicy)
+        self.bat_inverter_SN_text.setMinimumSize(QSize(100, 30))
+        self.bat_inverter_SN_text.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_12.addWidget(self.bat_inverter_SN_text, 0, 3, 1, 1)
+
+        self.bat_inverter_power_label = QLabel(self.frame_22)
+        self.bat_inverter_power_label.setObjectName(u"bat_inverter_power_label")
+        sizePolicy.setHeightForWidth(self.bat_inverter_power_label.sizePolicy().hasHeightForWidth())
+        self.bat_inverter_power_label.setSizePolicy(sizePolicy)
+        self.bat_inverter_power_label.setMinimumSize(QSize(100, 30))
+        self.bat_inverter_power_label.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_12.addWidget(self.bat_inverter_power_label, 1, 0, 1, 1)
+
+        self.bat_inverter_power_text = QPlainTextEdit(self.frame_22)
+        self.bat_inverter_power_text.setObjectName(u"bat_inverter_power_text")
+        sizePolicy.setHeightForWidth(self.bat_inverter_power_text.sizePolicy().hasHeightForWidth())
+        self.bat_inverter_power_text.setSizePolicy(sizePolicy)
+        self.bat_inverter_power_text.setMinimumSize(QSize(100, 30))
+        self.bat_inverter_power_text.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_12.addWidget(self.bat_inverter_power_text, 1, 1, 1, 1)
+
+        self.coupling_type_label = QLabel(self.frame_22)
+        self.coupling_type_label.setObjectName(u"coupling_type_label")
+        sizePolicy.setHeightForWidth(self.coupling_type_label.sizePolicy().hasHeightForWidth())
+        self.coupling_type_label.setSizePolicy(sizePolicy)
+        self.coupling_type_label.setMinimumSize(QSize(100, 30))
+        self.coupling_type_label.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_12.addWidget(self.coupling_type_label, 1, 2, 1, 1)
+
+        self.coupling_type_text = QPlainTextEdit(self.frame_22)
         self.coupling_type_text.setObjectName(u"coupling_type_text")
-        sizePolicy7.setHeightForWidth(self.coupling_type_text.sizePolicy().hasHeightForWidth())
-        self.coupling_type_text.setSizePolicy(sizePolicy7)
-        self.coupling_type_text.setMinimumSize(QSize(0, 30))
+        sizePolicy.setHeightForWidth(self.coupling_type_text.sizePolicy().hasHeightForWidth())
+        self.coupling_type_text.setSizePolicy(sizePolicy)
+        self.coupling_type_text.setMinimumSize(QSize(100, 30))
+        self.coupling_type_text.setMaximumSize(QSize(300, 60))
+        self.coupling_type_text.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
 
-        self.gridLayout_16.addWidget(self.coupling_type_text, 1, 3, 1, 1)
+        self.gridLayout_12.addWidget(self.coupling_type_text, 1, 3, 1, 1)
 
 
-        self.verticalLayout_3.addLayout(self.gridLayout_16)
+        self.verticalLayout_10.addWidget(self.frame_22)
 
-        self.headline_05 = QLabel(self.scrollAreaWidgetContents)
+
+        self.verticalLayout_3.addWidget(self.frame_21)
+
+        self.headline_05 = QLabel(self.frame0221)
         self.headline_05.setObjectName(u"headline_05")
-        self.headline_05.setFont(font4)
+        self.headline_05.setMinimumSize(QSize(250, 50))
+        self.headline_05.setFont(font)
         self.headline_05.setFrameShape(QFrame.StyledPanel)
         self.headline_05.setFrameShadow(QFrame.Sunken)
 
         self.verticalLayout_3.addWidget(self.headline_05)
 
-        self.BAT_storage_list = QTableWidget(self.scrollAreaWidgetContents)
+        self.BAT_storage_list = QTableWidget(self.frame0221)
         if (self.BAT_storage_list.columnCount() < 8):
             self.BAT_storage_list.setColumnCount(8)
         __qtablewidgetitem23 = QTableWidgetItem()
@@ -994,153 +1447,186 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.BAT_storage_list)
 
-        self.move_none_BAT_storage_to_blacklist = QPushButton(self.scrollAreaWidgetContents)
+        self.frame_24 = QFrame(self.frame0221)
+        self.frame_24.setObjectName(u"frame_24")
+        self.frame_24.setFrameShape(QFrame.StyledPanel)
+        self.frame_24.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_11 = QVBoxLayout(self.frame_24)
+        self.verticalLayout_11.setObjectName(u"verticalLayout_11")
+        self.move_none_BAT_storage_to_blacklist = QPushButton(self.frame_24)
         self.move_none_BAT_storage_to_blacklist.setObjectName(u"move_none_BAT_storage_to_blacklist")
+        self.move_none_BAT_storage_to_blacklist.setMinimumSize(QSize(100, 30))
 
-        self.verticalLayout_3.addWidget(self.move_none_BAT_storage_to_blacklist)
+        self.verticalLayout_11.addWidget(self.move_none_BAT_storage_to_blacklist)
 
-        self.gridLayout_15 = QGridLayout()
-        self.gridLayout_15.setObjectName(u"gridLayout_15")
-        self.bat_storage_SN_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.bat_storage_SN_text.setObjectName(u"bat_storage_SN_text")
-        sizePolicy7.setHeightForWidth(self.bat_storage_SN_text.sizePolicy().hasHeightForWidth())
-        self.bat_storage_SN_text.setSizePolicy(sizePolicy7)
-        self.bat_storage_SN_text.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.bat_storage_SN_text, 1, 3, 1, 1)
-
-        self.max_discharge_pow_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.max_discharge_pow_text.setObjectName(u"max_discharge_pow_text")
-        sizePolicy7.setHeightForWidth(self.max_discharge_pow_text.sizePolicy().hasHeightForWidth())
-        self.max_discharge_pow_text.setSizePolicy(sizePolicy7)
-        self.max_discharge_pow_text.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.max_discharge_pow_text, 3, 1, 1, 1)
-
-        self.em_pow_ability_bool_label = QLabel(self.scrollAreaWidgetContents)
-        self.em_pow_ability_bool_label.setObjectName(u"em_pow_ability_bool_label")
-        sizePolicy8.setHeightForWidth(self.em_pow_ability_bool_label.sizePolicy().hasHeightForWidth())
-        self.em_pow_ability_bool_label.setSizePolicy(sizePolicy8)
-        self.em_pow_ability_bool_label.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.em_pow_ability_bool_label, 3, 2, 1, 1)
-
-        self.bat_storage_cap_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.bat_storage_cap_text.setObjectName(u"bat_storage_cap_text")
-        sizePolicy7.setHeightForWidth(self.bat_storage_cap_text.sizePolicy().hasHeightForWidth())
-        self.bat_storage_cap_text.setSizePolicy(sizePolicy7)
-        self.bat_storage_cap_text.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.bat_storage_cap_text, 2, 1, 1, 1)
-
-        self.energy_storage_type_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.energy_storage_type_text.setObjectName(u"energy_storage_type_text")
-        sizePolicy7.setHeightForWidth(self.energy_storage_type_text.sizePolicy().hasHeightForWidth())
-        self.energy_storage_type_text.setSizePolicy(sizePolicy7)
-        self.energy_storage_type_text.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.energy_storage_type_text, 4, 1, 1, 1)
-
-        self.bat_storage_SN_label = QLabel(self.scrollAreaWidgetContents)
-        self.bat_storage_SN_label.setObjectName(u"bat_storage_SN_label")
-        sizePolicy8.setHeightForWidth(self.bat_storage_SN_label.sizePolicy().hasHeightForWidth())
-        self.bat_storage_SN_label.setSizePolicy(sizePolicy8)
-        self.bat_storage_SN_label.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.bat_storage_SN_label, 1, 2, 1, 1)
-
-        self.bat_storage_cap_label = QLabel(self.scrollAreaWidgetContents)
-        self.bat_storage_cap_label.setObjectName(u"bat_storage_cap_label")
-        sizePolicy8.setHeightForWidth(self.bat_storage_cap_label.sizePolicy().hasHeightForWidth())
-        self.bat_storage_cap_label.setSizePolicy(sizePolicy8)
-        self.bat_storage_cap_label.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.bat_storage_cap_label, 2, 0, 1, 1)
-
-        self.bat_storage_type_label = QLabel(self.scrollAreaWidgetContents)
+        self.frame_23 = QFrame(self.frame_24)
+        self.frame_23.setObjectName(u"frame_23")
+        sizePolicy.setHeightForWidth(self.frame_23.sizePolicy().hasHeightForWidth())
+        self.frame_23.setSizePolicy(sizePolicy)
+        self.frame_23.setFrameShape(QFrame.StyledPanel)
+        self.frame_23.setFrameShadow(QFrame.Raised)
+        self.gridLayout_13 = QGridLayout(self.frame_23)
+        self.gridLayout_13.setObjectName(u"gridLayout_13")
+        self.bat_storage_type_label = QLabel(self.frame_23)
         self.bat_storage_type_label.setObjectName(u"bat_storage_type_label")
-        sizePolicy8.setHeightForWidth(self.bat_storage_type_label.sizePolicy().hasHeightForWidth())
-        self.bat_storage_type_label.setSizePolicy(sizePolicy8)
-        self.bat_storage_type_label.setMinimumSize(QSize(0, 30))
+        sizePolicy.setHeightForWidth(self.bat_storage_type_label.sizePolicy().hasHeightForWidth())
+        self.bat_storage_type_label.setSizePolicy(sizePolicy)
+        self.bat_storage_type_label.setMinimumSize(QSize(150, 30))
+        self.bat_storage_type_label.setMaximumSize(QSize(300, 60))
 
-        self.gridLayout_15.addWidget(self.bat_storage_type_label, 1, 0, 1, 1)
+        self.gridLayout_13.addWidget(self.bat_storage_type_label, 0, 0, 1, 1)
 
-        self.bat_technology_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.bat_technology_text.setObjectName(u"bat_technology_text")
-        sizePolicy7.setHeightForWidth(self.bat_technology_text.sizePolicy().hasHeightForWidth())
-        self.bat_technology_text.setSizePolicy(sizePolicy7)
-        self.bat_technology_text.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.bat_technology_text, 4, 3, 1, 1)
-
-        self.bat_commiss_date_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.bat_commiss_date_text.setObjectName(u"bat_commiss_date_text")
-        sizePolicy7.setHeightForWidth(self.bat_commiss_date_text.sizePolicy().hasHeightForWidth())
-        self.bat_commiss_date_text.setSizePolicy(sizePolicy7)
-        self.bat_commiss_date_text.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.bat_commiss_date_text, 2, 3, 1, 1)
-
-        self.bat_commiss_date_label = QLabel(self.scrollAreaWidgetContents)
-        self.bat_commiss_date_label.setObjectName(u"bat_commiss_date_label")
-        sizePolicy8.setHeightForWidth(self.bat_commiss_date_label.sizePolicy().hasHeightForWidth())
-        self.bat_commiss_date_label.setSizePolicy(sizePolicy8)
-        self.bat_commiss_date_label.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.bat_commiss_date_label, 2, 2, 1, 1)
-
-        self.energy_storage_type_label = QLabel(self.scrollAreaWidgetContents)
-        self.energy_storage_type_label.setObjectName(u"energy_storage_type_label")
-        sizePolicy8.setHeightForWidth(self.energy_storage_type_label.sizePolicy().hasHeightForWidth())
-        self.energy_storage_type_label.setSizePolicy(sizePolicy8)
-        self.energy_storage_type_label.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.energy_storage_type_label, 4, 0, 1, 1)
-
-        self.bat_technology_label = QLabel(self.scrollAreaWidgetContents)
-        self.bat_technology_label.setObjectName(u"bat_technology_label")
-        sizePolicy8.setHeightForWidth(self.bat_technology_label.sizePolicy().hasHeightForWidth())
-        self.bat_technology_label.setSizePolicy(sizePolicy8)
-        self.bat_technology_label.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.bat_technology_label, 4, 2, 1, 1)
-
-        self.em_pow_ability_bool_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.em_pow_ability_bool_text.setObjectName(u"em_pow_ability_bool_text")
-        sizePolicy7.setHeightForWidth(self.em_pow_ability_bool_text.sizePolicy().hasHeightForWidth())
-        self.em_pow_ability_bool_text.setSizePolicy(sizePolicy7)
-        self.em_pow_ability_bool_text.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.em_pow_ability_bool_text, 3, 3, 1, 1)
-
-        self.max_discharge_pow_label = QLabel(self.scrollAreaWidgetContents)
-        self.max_discharge_pow_label.setObjectName(u"max_discharge_pow_label")
-        sizePolicy8.setHeightForWidth(self.max_discharge_pow_label.sizePolicy().hasHeightForWidth())
-        self.max_discharge_pow_label.setSizePolicy(sizePolicy8)
-        self.max_discharge_pow_label.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_15.addWidget(self.max_discharge_pow_label, 3, 0, 1, 1)
-
-        self.bat_storage_type_text = QPlainTextEdit(self.scrollAreaWidgetContents)
+        self.bat_storage_type_text = QPlainTextEdit(self.frame_23)
         self.bat_storage_type_text.setObjectName(u"bat_storage_type_text")
-        sizePolicy7.setHeightForWidth(self.bat_storage_type_text.sizePolicy().hasHeightForWidth())
-        self.bat_storage_type_text.setSizePolicy(sizePolicy7)
-        self.bat_storage_type_text.setMinimumSize(QSize(0, 30))
+        sizePolicy.setHeightForWidth(self.bat_storage_type_text.sizePolicy().hasHeightForWidth())
+        self.bat_storage_type_text.setSizePolicy(sizePolicy)
+        self.bat_storage_type_text.setMinimumSize(QSize(150, 30))
+        self.bat_storage_type_text.setMaximumSize(QSize(300, 60))
 
-        self.gridLayout_15.addWidget(self.bat_storage_type_text, 1, 1, 1, 1)
+        self.gridLayout_13.addWidget(self.bat_storage_type_text, 0, 1, 1, 1)
+
+        self.bat_storage_SN_label = QLabel(self.frame_23)
+        self.bat_storage_SN_label.setObjectName(u"bat_storage_SN_label")
+        sizePolicy.setHeightForWidth(self.bat_storage_SN_label.sizePolicy().hasHeightForWidth())
+        self.bat_storage_SN_label.setSizePolicy(sizePolicy)
+        self.bat_storage_SN_label.setMinimumSize(QSize(150, 30))
+        self.bat_storage_SN_label.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_13.addWidget(self.bat_storage_SN_label, 0, 2, 1, 1)
+
+        self.bat_storage_SN_text = QPlainTextEdit(self.frame_23)
+        self.bat_storage_SN_text.setObjectName(u"bat_storage_SN_text")
+        sizePolicy.setHeightForWidth(self.bat_storage_SN_text.sizePolicy().hasHeightForWidth())
+        self.bat_storage_SN_text.setSizePolicy(sizePolicy)
+        self.bat_storage_SN_text.setMinimumSize(QSize(150, 30))
+        self.bat_storage_SN_text.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_13.addWidget(self.bat_storage_SN_text, 0, 3, 1, 1)
+
+        self.bat_storage_cap_label = QLabel(self.frame_23)
+        self.bat_storage_cap_label.setObjectName(u"bat_storage_cap_label")
+        sizePolicy.setHeightForWidth(self.bat_storage_cap_label.sizePolicy().hasHeightForWidth())
+        self.bat_storage_cap_label.setSizePolicy(sizePolicy)
+        self.bat_storage_cap_label.setMinimumSize(QSize(150, 30))
+        self.bat_storage_cap_label.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_13.addWidget(self.bat_storage_cap_label, 1, 0, 1, 1)
+
+        self.bat_storage_cap_text = QPlainTextEdit(self.frame_23)
+        self.bat_storage_cap_text.setObjectName(u"bat_storage_cap_text")
+        sizePolicy.setHeightForWidth(self.bat_storage_cap_text.sizePolicy().hasHeightForWidth())
+        self.bat_storage_cap_text.setSizePolicy(sizePolicy)
+        self.bat_storage_cap_text.setMinimumSize(QSize(150, 30))
+        self.bat_storage_cap_text.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_13.addWidget(self.bat_storage_cap_text, 1, 1, 1, 1)
+
+        self.bat_commiss_date_label = QLabel(self.frame_23)
+        self.bat_commiss_date_label.setObjectName(u"bat_commiss_date_label")
+        sizePolicy.setHeightForWidth(self.bat_commiss_date_label.sizePolicy().hasHeightForWidth())
+        self.bat_commiss_date_label.setSizePolicy(sizePolicy)
+        self.bat_commiss_date_label.setMinimumSize(QSize(150, 30))
+        self.bat_commiss_date_label.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_13.addWidget(self.bat_commiss_date_label, 1, 2, 1, 1)
+
+        self.bat_commiss_date_text = QPlainTextEdit(self.frame_23)
+        self.bat_commiss_date_text.setObjectName(u"bat_commiss_date_text")
+        sizePolicy.setHeightForWidth(self.bat_commiss_date_text.sizePolicy().hasHeightForWidth())
+        self.bat_commiss_date_text.setSizePolicy(sizePolicy)
+        self.bat_commiss_date_text.setMinimumSize(QSize(150, 30))
+        self.bat_commiss_date_text.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_13.addWidget(self.bat_commiss_date_text, 1, 3, 1, 1)
+
+        self.max_discharge_pow_label = QLabel(self.frame_23)
+        self.max_discharge_pow_label.setObjectName(u"max_discharge_pow_label")
+        sizePolicy.setHeightForWidth(self.max_discharge_pow_label.sizePolicy().hasHeightForWidth())
+        self.max_discharge_pow_label.setSizePolicy(sizePolicy)
+        self.max_discharge_pow_label.setMinimumSize(QSize(150, 30))
+        self.max_discharge_pow_label.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_13.addWidget(self.max_discharge_pow_label, 2, 0, 1, 1)
+
+        self.max_discharge_pow_text = QPlainTextEdit(self.frame_23)
+        self.max_discharge_pow_text.setObjectName(u"max_discharge_pow_text")
+        sizePolicy.setHeightForWidth(self.max_discharge_pow_text.sizePolicy().hasHeightForWidth())
+        self.max_discharge_pow_text.setSizePolicy(sizePolicy)
+        self.max_discharge_pow_text.setMinimumSize(QSize(150, 30))
+        self.max_discharge_pow_text.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_13.addWidget(self.max_discharge_pow_text, 2, 1, 1, 1)
+
+        self.em_pow_ability_bool_label = QLabel(self.frame_23)
+        self.em_pow_ability_bool_label.setObjectName(u"em_pow_ability_bool_label")
+        sizePolicy.setHeightForWidth(self.em_pow_ability_bool_label.sizePolicy().hasHeightForWidth())
+        self.em_pow_ability_bool_label.setSizePolicy(sizePolicy)
+        self.em_pow_ability_bool_label.setMinimumSize(QSize(150, 30))
+        self.em_pow_ability_bool_label.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_13.addWidget(self.em_pow_ability_bool_label, 2, 2, 1, 1)
+
+        self.em_pow_ability_bool_text = QPlainTextEdit(self.frame_23)
+        self.em_pow_ability_bool_text.setObjectName(u"em_pow_ability_bool_text")
+        sizePolicy.setHeightForWidth(self.em_pow_ability_bool_text.sizePolicy().hasHeightForWidth())
+        self.em_pow_ability_bool_text.setSizePolicy(sizePolicy)
+        self.em_pow_ability_bool_text.setMinimumSize(QSize(150, 30))
+        self.em_pow_ability_bool_text.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_13.addWidget(self.em_pow_ability_bool_text, 2, 3, 1, 1)
+
+        self.energy_storage_type_label = QLabel(self.frame_23)
+        self.energy_storage_type_label.setObjectName(u"energy_storage_type_label")
+        sizePolicy.setHeightForWidth(self.energy_storage_type_label.sizePolicy().hasHeightForWidth())
+        self.energy_storage_type_label.setSizePolicy(sizePolicy)
+        self.energy_storage_type_label.setMinimumSize(QSize(150, 30))
+        self.energy_storage_type_label.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_13.addWidget(self.energy_storage_type_label, 3, 0, 1, 1)
+
+        self.energy_storage_type_text = QPlainTextEdit(self.frame_23)
+        self.energy_storage_type_text.setObjectName(u"energy_storage_type_text")
+        sizePolicy.setHeightForWidth(self.energy_storage_type_text.sizePolicy().hasHeightForWidth())
+        self.energy_storage_type_text.setSizePolicy(sizePolicy)
+        self.energy_storage_type_text.setMinimumSize(QSize(150, 30))
+        self.energy_storage_type_text.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_13.addWidget(self.energy_storage_type_text, 3, 1, 1, 1)
+
+        self.bat_technology_label = QLabel(self.frame_23)
+        self.bat_technology_label.setObjectName(u"bat_technology_label")
+        sizePolicy.setHeightForWidth(self.bat_technology_label.sizePolicy().hasHeightForWidth())
+        self.bat_technology_label.setSizePolicy(sizePolicy)
+        self.bat_technology_label.setMinimumSize(QSize(150, 30))
+        self.bat_technology_label.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_13.addWidget(self.bat_technology_label, 3, 2, 1, 1)
+
+        self.bat_technology_text = QPlainTextEdit(self.frame_23)
+        self.bat_technology_text.setObjectName(u"bat_technology_text")
+        sizePolicy.setHeightForWidth(self.bat_technology_text.sizePolicy().hasHeightForWidth())
+        self.bat_technology_text.setSizePolicy(sizePolicy)
+        self.bat_technology_text.setMinimumSize(QSize(150, 30))
+        self.bat_technology_text.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_13.addWidget(self.bat_technology_text, 3, 3, 1, 1)
 
 
-        self.verticalLayout_3.addLayout(self.gridLayout_15)
+        self.verticalLayout_11.addWidget(self.frame_23)
 
-        self.headline_06 = QLabel(self.scrollAreaWidgetContents)
+
+        self.verticalLayout_3.addWidget(self.frame_24)
+
+        self.headline_06 = QLabel(self.frame0221)
         self.headline_06.setObjectName(u"headline_06")
-        self.headline_06.setFont(font4)
+        self.headline_06.setMinimumSize(QSize(250, 50))
+        self.headline_06.setFont(font)
         self.headline_06.setFrameShape(QFrame.StyledPanel)
         self.headline_06.setFrameShadow(QFrame.Sunken)
 
         self.verticalLayout_3.addWidget(self.headline_06)
 
-        self.CHG_point_list = QTableWidget(self.scrollAreaWidgetContents)
+        self.CHG_point_list = QTableWidget(self.frame0221)
         if (self.CHG_point_list.columnCount() < 5):
             self.CHG_point_list.setColumnCount(5)
         __qtablewidgetitem31 = QTableWidgetItem()
@@ -1176,308 +1662,410 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.CHG_point_list)
 
-        self.move_none_CHG_point_to_blacklist = QPushButton(self.scrollAreaWidgetContents)
+        self.frame_26 = QFrame(self.frame0221)
+        self.frame_26.setObjectName(u"frame_26")
+        self.frame_26.setFrameShape(QFrame.StyledPanel)
+        self.frame_26.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_12 = QVBoxLayout(self.frame_26)
+        self.verticalLayout_12.setObjectName(u"verticalLayout_12")
+        self.move_none_CHG_point_to_blacklist = QPushButton(self.frame_26)
         self.move_none_CHG_point_to_blacklist.setObjectName(u"move_none_CHG_point_to_blacklist")
+        self.move_none_CHG_point_to_blacklist.setMinimumSize(QSize(100, 30))
 
-        self.verticalLayout_3.addWidget(self.move_none_CHG_point_to_blacklist)
+        self.verticalLayout_12.addWidget(self.move_none_CHG_point_to_blacklist)
 
-        self.gridLayout_17 = QGridLayout()
-        self.gridLayout_17.setObjectName(u"gridLayout_17")
-        self.charging_point_type_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.charging_point_type_text.setObjectName(u"charging_point_type_text")
-        sizePolicy7.setHeightForWidth(self.charging_point_type_text.sizePolicy().hasHeightForWidth())
-        self.charging_point_type_text.setSizePolicy(sizePolicy7)
-        self.charging_point_type_text.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_17.addWidget(self.charging_point_type_text, 0, 1, 1, 1)
-
-        self.charging_point_SN_text = QTextEdit(self.scrollAreaWidgetContents)
-        self.charging_point_SN_text.setObjectName(u"charging_point_SN_text")
-        sizePolicy7.setHeightForWidth(self.charging_point_SN_text.sizePolicy().hasHeightForWidth())
-        self.charging_point_SN_text.setSizePolicy(sizePolicy7)
-        self.charging_point_SN_text.setMinimumSize(QSize(0, 30))
-
-        self.gridLayout_17.addWidget(self.charging_point_SN_text, 0, 3, 1, 1)
-
-        self.charging_point_type_label = QLabel(self.scrollAreaWidgetContents)
+        self.frame_25 = QFrame(self.frame_26)
+        self.frame_25.setObjectName(u"frame_25")
+        self.frame_25.setFrameShape(QFrame.StyledPanel)
+        self.frame_25.setFrameShadow(QFrame.Raised)
+        self.gridLayout_14 = QGridLayout(self.frame_25)
+        self.gridLayout_14.setObjectName(u"gridLayout_14")
+        self.charging_point_type_label = QLabel(self.frame_25)
         self.charging_point_type_label.setObjectName(u"charging_point_type_label")
-        sizePolicy8.setHeightForWidth(self.charging_point_type_label.sizePolicy().hasHeightForWidth())
-        self.charging_point_type_label.setSizePolicy(sizePolicy8)
-        self.charging_point_type_label.setMinimumSize(QSize(0, 30))
+        sizePolicy.setHeightForWidth(self.charging_point_type_label.sizePolicy().hasHeightForWidth())
+        self.charging_point_type_label.setSizePolicy(sizePolicy)
+        self.charging_point_type_label.setMinimumSize(QSize(150, 30))
+        self.charging_point_type_label.setMaximumSize(QSize(300, 60))
 
-        self.gridLayout_17.addWidget(self.charging_point_type_label, 0, 0, 1, 1)
+        self.gridLayout_14.addWidget(self.charging_point_type_label, 0, 0, 1, 1)
 
-        self.charging_point_SN_label = QLabel(self.scrollAreaWidgetContents)
+        self.charging_point_type_text = QPlainTextEdit(self.frame_25)
+        self.charging_point_type_text.setObjectName(u"charging_point_type_text")
+        sizePolicy.setHeightForWidth(self.charging_point_type_text.sizePolicy().hasHeightForWidth())
+        self.charging_point_type_text.setSizePolicy(sizePolicy)
+        self.charging_point_type_text.setMinimumSize(QSize(150, 30))
+        self.charging_point_type_text.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_14.addWidget(self.charging_point_type_text, 0, 1, 1, 1)
+
+        self.charging_point_SN_label = QLabel(self.frame_25)
         self.charging_point_SN_label.setObjectName(u"charging_point_SN_label")
-        sizePolicy8.setHeightForWidth(self.charging_point_SN_label.sizePolicy().hasHeightForWidth())
-        self.charging_point_SN_label.setSizePolicy(sizePolicy8)
-        self.charging_point_SN_label.setMinimumSize(QSize(0, 30))
+        sizePolicy.setHeightForWidth(self.charging_point_SN_label.sizePolicy().hasHeightForWidth())
+        self.charging_point_SN_label.setSizePolicy(sizePolicy)
+        self.charging_point_SN_label.setMinimumSize(QSize(150, 30))
+        self.charging_point_SN_label.setMaximumSize(QSize(300, 60))
 
-        self.gridLayout_17.addWidget(self.charging_point_SN_label, 0, 2, 1, 1)
+        self.gridLayout_14.addWidget(self.charging_point_SN_label, 0, 2, 1, 1)
+
+        self.charging_point_SN_text = QTextEdit(self.frame_25)
+        self.charging_point_SN_text.setObjectName(u"charging_point_SN_text")
+        sizePolicy.setHeightForWidth(self.charging_point_SN_text.sizePolicy().hasHeightForWidth())
+        self.charging_point_SN_text.setSizePolicy(sizePolicy)
+        self.charging_point_SN_text.setMinimumSize(QSize(150, 30))
+        self.charging_point_SN_text.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_14.addWidget(self.charging_point_SN_text, 0, 3, 1, 1)
 
 
-        self.verticalLayout_3.addLayout(self.gridLayout_17)
+        self.verticalLayout_12.addWidget(self.frame_25)
 
-        self.headline_07 = QLabel(self.scrollAreaWidgetContents)
+
+        self.verticalLayout_3.addWidget(self.frame_26)
+
+        self.headline_07 = QLabel(self.frame0221)
         self.headline_07.setObjectName(u"headline_07")
-        self.headline_07.setFont(font4)
+        sizePolicy.setHeightForWidth(self.headline_07.sizePolicy().hasHeightForWidth())
+        self.headline_07.setSizePolicy(sizePolicy)
+        self.headline_07.setMinimumSize(QSize(250, 50))
+        self.headline_07.setFont(font)
         self.headline_07.setFrameShape(QFrame.StyledPanel)
         self.headline_07.setFrameShadow(QFrame.Sunken)
 
         self.verticalLayout_3.addWidget(self.headline_07)
 
-        self.gridLayout_18 = QGridLayout()
-        self.gridLayout_18.setObjectName(u"gridLayout_18")
-        self.feeding_type_label = QLabel(self.scrollAreaWidgetContents)
+        self.frame_27 = QFrame(self.frame0221)
+        self.frame_27.setObjectName(u"frame_27")
+        sizePolicy.setHeightForWidth(self.frame_27.sizePolicy().hasHeightForWidth())
+        self.frame_27.setSizePolicy(sizePolicy)
+        self.frame_27.setFrameShape(QFrame.StyledPanel)
+        self.frame_27.setFrameShadow(QFrame.Raised)
+        self.gridLayout_15 = QGridLayout(self.frame_27)
+        self.gridLayout_15.setObjectName(u"gridLayout_15")
+        self.feeding_type_label = QLabel(self.frame_27)
         self.feeding_type_label.setObjectName(u"feeding_type_label")
-        sizePolicy10 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.MinimumExpanding)
-        sizePolicy10.setHorizontalStretch(0)
-        sizePolicy10.setVerticalStretch(0)
-        sizePolicy10.setHeightForWidth(self.feeding_type_label.sizePolicy().hasHeightForWidth())
-        self.feeding_type_label.setSizePolicy(sizePolicy10)
-        self.feeding_type_label.setMinimumSize(QSize(0, 30))
-        self.feeding_type_label.setMaximumSize(QSize(16777215, 30))
+        sizePolicy8 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.MinimumExpanding)
+        sizePolicy8.setHorizontalStretch(0)
+        sizePolicy8.setVerticalStretch(30)
+        sizePolicy8.setHeightForWidth(self.feeding_type_label.sizePolicy().hasHeightForWidth())
+        self.feeding_type_label.setSizePolicy(sizePolicy8)
+        self.feeding_type_label.setMinimumSize(QSize(200, 60))
+        self.feeding_type_label.setMaximumSize(QSize(400, 30))
 
-        self.gridLayout_18.addWidget(self.feeding_type_label, 1, 0, 1, 1)
+        self.gridLayout_15.addWidget(self.feeding_type_label, 0, 0, 1, 1)
 
-        self.feeding_type_text = QPlainTextEdit(self.scrollAreaWidgetContents)
+        self.feeding_type_text = QPlainTextEdit(self.frame_27)
         self.feeding_type_text.setObjectName(u"feeding_type_text")
-        sizePolicy4.setHeightForWidth(self.feeding_type_text.sizePolicy().hasHeightForWidth())
-        self.feeding_type_text.setSizePolicy(sizePolicy4)
-        self.feeding_type_text.setMinimumSize(QSize(0, 30))
+        sizePolicy9 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
+        sizePolicy9.setHorizontalStretch(0)
+        sizePolicy9.setVerticalStretch(30)
+        sizePolicy9.setHeightForWidth(self.feeding_type_text.sizePolicy().hasHeightForWidth())
+        self.feeding_type_text.setSizePolicy(sizePolicy9)
+        self.feeding_type_text.setMinimumSize(QSize(400, 60))
         self.feeding_type_text.setMaximumSize(QSize(16777215, 30))
 
-        self.gridLayout_18.addWidget(self.feeding_type_text, 1, 1, 1, 1)
+        self.gridLayout_15.addWidget(self.feeding_type_text, 0, 1, 1, 1)
 
 
-        self.verticalLayout_3.addLayout(self.gridLayout_18)
+        self.verticalLayout_3.addWidget(self.frame_27)
 
-        self.headline_08 = QLabel(self.scrollAreaWidgetContents)
+        self.headline_08 = QLabel(self.frame0221)
         self.headline_08.setObjectName(u"headline_08")
-        self.headline_08.setFont(font4)
+        self.headline_08.setMinimumSize(QSize(250, 50))
+        self.headline_08.setFont(font)
         self.headline_08.setFrameShape(QFrame.StyledPanel)
         self.headline_08.setFrameShadow(QFrame.Sunken)
 
         self.verticalLayout_3.addWidget(self.headline_08)
 
-        self.gridLayout_19 = QGridLayout()
-        self.gridLayout_19.setSpacing(10)
-        self.gridLayout_19.setObjectName(u"gridLayout_19")
-        self.rmt_drct_mrktr_bool_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.rmt_drct_mrktr_bool_text.setObjectName(u"rmt_drct_mrktr_bool_text")
-        sizePolicy5.setHeightForWidth(self.rmt_drct_mrktr_bool_text.sizePolicy().hasHeightForWidth())
-        self.rmt_drct_mrktr_bool_text.setSizePolicy(sizePolicy5)
-        self.rmt_drct_mrktr_bool_text.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_19.addWidget(self.rmt_drct_mrktr_bool_text, 2, 1, 1, 1)
-
-        self.pow_limit_bool_label = QLabel(self.scrollAreaWidgetContents)
+        self.frame_28 = QFrame(self.frame0221)
+        self.frame_28.setObjectName(u"frame_28")
+        sizePolicy.setHeightForWidth(self.frame_28.sizePolicy().hasHeightForWidth())
+        self.frame_28.setSizePolicy(sizePolicy)
+        self.frame_28.setFrameShape(QFrame.StyledPanel)
+        self.frame_28.setFrameShadow(QFrame.Raised)
+        self.gridLayout_16 = QGridLayout(self.frame_28)
+        self.gridLayout_16.setObjectName(u"gridLayout_16")
+        self.pow_limit_bool_label = QLabel(self.frame_28)
         self.pow_limit_bool_label.setObjectName(u"pow_limit_bool_label")
-        sizePolicy5.setHeightForWidth(self.pow_limit_bool_label.sizePolicy().hasHeightForWidth())
-        self.pow_limit_bool_label.setSizePolicy(sizePolicy5)
-        self.pow_limit_bool_label.setMaximumSize(QSize(16777215, 30))
+        sizePolicy.setHeightForWidth(self.pow_limit_bool_label.sizePolicy().hasHeightForWidth())
+        self.pow_limit_bool_label.setSizePolicy(sizePolicy)
+        self.pow_limit_bool_label.setMinimumSize(QSize(100, 30))
+        self.pow_limit_bool_label.setMaximumSize(QSize(300, 90))
 
-        self.gridLayout_19.addWidget(self.pow_limit_bool_label, 0, 0, 1, 1)
+        self.gridLayout_16.addWidget(self.pow_limit_bool_label, 0, 0, 1, 1)
 
-        self.rmt_drct_mrktr_bool_label = QLabel(self.scrollAreaWidgetContents)
-        self.rmt_drct_mrktr_bool_label.setObjectName(u"rmt_drct_mrktr_bool_label")
-        sizePolicy5.setHeightForWidth(self.rmt_drct_mrktr_bool_label.sizePolicy().hasHeightForWidth())
-        self.rmt_drct_mrktr_bool_label.setSizePolicy(sizePolicy5)
-        self.rmt_drct_mrktr_bool_label.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_19.addWidget(self.rmt_drct_mrktr_bool_label, 2, 0, 1, 1)
-
-        self.pow_limit_bool_text = QPlainTextEdit(self.scrollAreaWidgetContents)
+        self.pow_limit_bool_text = QPlainTextEdit(self.frame_28)
         self.pow_limit_bool_text.setObjectName(u"pow_limit_bool_text")
-        sizePolicy5.setHeightForWidth(self.pow_limit_bool_text.sizePolicy().hasHeightForWidth())
-        self.pow_limit_bool_text.setSizePolicy(sizePolicy5)
-        self.pow_limit_bool_text.setMaximumSize(QSize(16777215, 30))
+        sizePolicy.setHeightForWidth(self.pow_limit_bool_text.sizePolicy().hasHeightForWidth())
+        self.pow_limit_bool_text.setSizePolicy(sizePolicy)
+        self.pow_limit_bool_text.setMinimumSize(QSize(50, 30))
+        self.pow_limit_bool_text.setMaximumSize(QSize(75, 30))
 
-        self.gridLayout_19.addWidget(self.pow_limit_bool_text, 0, 1, 1, 1)
+        self.gridLayout_16.addWidget(self.pow_limit_bool_text, 0, 1, 1, 1)
 
-        self.tendering_bool_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.tendering_bool_text.setObjectName(u"tendering_bool_text")
-        sizePolicy5.setHeightForWidth(self.tendering_bool_text.sizePolicy().hasHeightForWidth())
-        self.tendering_bool_text.setSizePolicy(sizePolicy5)
-        self.tendering_bool_text.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_19.addWidget(self.tendering_bool_text, 6, 1, 1, 1)
-
-        self.prequali_bool_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.prequali_bool_text.setObjectName(u"prequali_bool_text")
-        sizePolicy5.setHeightForWidth(self.prequali_bool_text.sizePolicy().hasHeightForWidth())
-        self.prequali_bool_text.setSizePolicy(sizePolicy5)
-        self.prequali_bool_text.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_19.addWidget(self.prequali_bool_text, 4, 1, 1, 1)
-
-        self.tendering_bool_label = QLabel(self.scrollAreaWidgetContents)
-        self.tendering_bool_label.setObjectName(u"tendering_bool_label")
-        sizePolicy5.setHeightForWidth(self.tendering_bool_label.sizePolicy().hasHeightForWidth())
-        self.tendering_bool_label.setSizePolicy(sizePolicy5)
-        self.tendering_bool_label.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_19.addWidget(self.tendering_bool_label, 6, 0, 1, 1)
-
-        self.prequali_bool_label = QLabel(self.scrollAreaWidgetContents)
-        self.prequali_bool_label.setObjectName(u"prequali_bool_label")
-        sizePolicy5.setHeightForWidth(self.prequali_bool_label.sizePolicy().hasHeightForWidth())
-        self.prequali_bool_label.setSizePolicy(sizePolicy5)
-        self.prequali_bool_label.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_19.addWidget(self.prequali_bool_label, 4, 0, 1, 1)
-
-        self.rmt_grd_op_bool_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.rmt_grd_op_bool_text.setObjectName(u"rmt_grd_op_bool_text")
-        sizePolicy5.setHeightForWidth(self.rmt_grd_op_bool_text.sizePolicy().hasHeightForWidth())
-        self.rmt_grd_op_bool_text.setSizePolicy(sizePolicy5)
-        self.rmt_grd_op_bool_text.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_19.addWidget(self.rmt_grd_op_bool_text, 0, 3, 1, 1)
-
-        self.rmt_grd_op_bool_label = QLabel(self.scrollAreaWidgetContents)
+        self.rmt_grd_op_bool_label = QLabel(self.frame_28)
         self.rmt_grd_op_bool_label.setObjectName(u"rmt_grd_op_bool_label")
+        sizePolicy3.setHeightForWidth(self.rmt_grd_op_bool_label.sizePolicy().hasHeightForWidth())
+        self.rmt_grd_op_bool_label.setSizePolicy(sizePolicy3)
+        self.rmt_grd_op_bool_label.setMinimumSize(QSize(100, 30))
+        self.rmt_grd_op_bool_label.setMaximumSize(QSize(300, 90))
 
-        self.gridLayout_19.addWidget(self.rmt_grd_op_bool_label, 0, 2, 1, 1)
+        self.gridLayout_16.addWidget(self.rmt_grd_op_bool_label, 0, 2, 1, 1)
 
-        self.rmt_3rd_prt_bool_text = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.rmt_3rd_prt_bool_text.setObjectName(u"rmt_3rd_prt_bool_text")
-        sizePolicy5.setHeightForWidth(self.rmt_3rd_prt_bool_text.sizePolicy().hasHeightForWidth())
-        self.rmt_3rd_prt_bool_text.setSizePolicy(sizePolicy5)
-        self.rmt_3rd_prt_bool_text.setMaximumSize(QSize(16777215, 30))
+        self.rmt_grd_op_bool_text = QPlainTextEdit(self.frame_28)
+        self.rmt_grd_op_bool_text.setObjectName(u"rmt_grd_op_bool_text")
+        sizePolicy.setHeightForWidth(self.rmt_grd_op_bool_text.sizePolicy().hasHeightForWidth())
+        self.rmt_grd_op_bool_text.setSizePolicy(sizePolicy)
+        self.rmt_grd_op_bool_text.setMinimumSize(QSize(50, 30))
+        self.rmt_grd_op_bool_text.setMaximumSize(QSize(75, 30))
 
-        self.gridLayout_19.addWidget(self.rmt_3rd_prt_bool_text, 2, 3, 1, 1)
+        self.gridLayout_16.addWidget(self.rmt_grd_op_bool_text, 0, 3, 1, 1)
 
-        self.rmt_3rd_prt_bool_label = QLabel(self.scrollAreaWidgetContents)
+        self.rmt_drct_mrktr_bool_label = QLabel(self.frame_28)
+        self.rmt_drct_mrktr_bool_label.setObjectName(u"rmt_drct_mrktr_bool_label")
+        sizePolicy.setHeightForWidth(self.rmt_drct_mrktr_bool_label.sizePolicy().hasHeightForWidth())
+        self.rmt_drct_mrktr_bool_label.setSizePolicy(sizePolicy)
+        self.rmt_drct_mrktr_bool_label.setMinimumSize(QSize(100, 30))
+        self.rmt_drct_mrktr_bool_label.setMaximumSize(QSize(300, 90))
+        self.rmt_drct_mrktr_bool_label.setMouseTracking(False)
+
+        self.gridLayout_16.addWidget(self.rmt_drct_mrktr_bool_label, 1, 0, 1, 1)
+
+        self.rmt_drct_mrktr_bool_text = QPlainTextEdit(self.frame_28)
+        self.rmt_drct_mrktr_bool_text.setObjectName(u"rmt_drct_mrktr_bool_text")
+        sizePolicy.setHeightForWidth(self.rmt_drct_mrktr_bool_text.sizePolicy().hasHeightForWidth())
+        self.rmt_drct_mrktr_bool_text.setSizePolicy(sizePolicy)
+        self.rmt_drct_mrktr_bool_text.setMinimumSize(QSize(50, 30))
+        self.rmt_drct_mrktr_bool_text.setMaximumSize(QSize(75, 30))
+
+        self.gridLayout_16.addWidget(self.rmt_drct_mrktr_bool_text, 1, 1, 1, 1)
+
+        self.rmt_3rd_prt_bool_label = QLabel(self.frame_28)
         self.rmt_3rd_prt_bool_label.setObjectName(u"rmt_3rd_prt_bool_label")
-        sizePolicy5.setHeightForWidth(self.rmt_3rd_prt_bool_label.sizePolicy().hasHeightForWidth())
-        self.rmt_3rd_prt_bool_label.setSizePolicy(sizePolicy5)
-        self.rmt_3rd_prt_bool_label.setMaximumSize(QSize(16777215, 30))
+        sizePolicy.setHeightForWidth(self.rmt_3rd_prt_bool_label.sizePolicy().hasHeightForWidth())
+        self.rmt_3rd_prt_bool_label.setSizePolicy(sizePolicy)
+        self.rmt_3rd_prt_bool_label.setMinimumSize(QSize(100, 30))
+        self.rmt_3rd_prt_bool_label.setMaximumSize(QSize(300, 90))
 
-        self.gridLayout_19.addWidget(self.rmt_3rd_prt_bool_label, 2, 2, 1, 1)
+        self.gridLayout_16.addWidget(self.rmt_3rd_prt_bool_label, 1, 2, 1, 1)
 
-        self.citizen_corp_bool_label = QLabel(self.scrollAreaWidgetContents)
+        self.rmt_3rd_prt_bool_text = QPlainTextEdit(self.frame_28)
+        self.rmt_3rd_prt_bool_text.setObjectName(u"rmt_3rd_prt_bool_text")
+        sizePolicy.setHeightForWidth(self.rmt_3rd_prt_bool_text.sizePolicy().hasHeightForWidth())
+        self.rmt_3rd_prt_bool_text.setSizePolicy(sizePolicy)
+        self.rmt_3rd_prt_bool_text.setMinimumSize(QSize(50, 30))
+        self.rmt_3rd_prt_bool_text.setMaximumSize(QSize(75, 30))
+
+        self.gridLayout_16.addWidget(self.rmt_3rd_prt_bool_text, 1, 3, 1, 1)
+
+        self.prequali_bool_label = QLabel(self.frame_28)
+        self.prequali_bool_label.setObjectName(u"prequali_bool_label")
+        sizePolicy.setHeightForWidth(self.prequali_bool_label.sizePolicy().hasHeightForWidth())
+        self.prequali_bool_label.setSizePolicy(sizePolicy)
+        self.prequali_bool_label.setMinimumSize(QSize(100, 30))
+        self.prequali_bool_label.setMaximumSize(QSize(300, 90))
+
+        self.gridLayout_16.addWidget(self.prequali_bool_label, 2, 0, 1, 1)
+
+        self.prequali_bool_text = QPlainTextEdit(self.frame_28)
+        self.prequali_bool_text.setObjectName(u"prequali_bool_text")
+        sizePolicy.setHeightForWidth(self.prequali_bool_text.sizePolicy().hasHeightForWidth())
+        self.prequali_bool_text.setSizePolicy(sizePolicy)
+        self.prequali_bool_text.setMinimumSize(QSize(50, 30))
+        self.prequali_bool_text.setMaximumSize(QSize(75, 30))
+
+        self.gridLayout_16.addWidget(self.prequali_bool_text, 2, 1, 1, 1)
+
+        self.citizen_corp_bool_label = QLabel(self.frame_28)
         self.citizen_corp_bool_label.setObjectName(u"citizen_corp_bool_label")
-        sizePolicy5.setHeightForWidth(self.citizen_corp_bool_label.sizePolicy().hasHeightForWidth())
-        self.citizen_corp_bool_label.setSizePolicy(sizePolicy5)
-        self.citizen_corp_bool_label.setMaximumSize(QSize(16777215, 30))
+        sizePolicy.setHeightForWidth(self.citizen_corp_bool_label.sizePolicy().hasHeightForWidth())
+        self.citizen_corp_bool_label.setSizePolicy(sizePolicy)
+        self.citizen_corp_bool_label.setMinimumSize(QSize(100, 30))
+        self.citizen_corp_bool_label.setMaximumSize(QSize(300, 90))
 
-        self.gridLayout_19.addWidget(self.citizen_corp_bool_label, 4, 2, 1, 1)
+        self.gridLayout_16.addWidget(self.citizen_corp_bool_label, 2, 2, 1, 1)
 
-        self.citizen_corp_bool_text = QPlainTextEdit(self.scrollAreaWidgetContents)
+        self.citizen_corp_bool_text = QPlainTextEdit(self.frame_28)
         self.citizen_corp_bool_text.setObjectName(u"citizen_corp_bool_text")
-        sizePolicy5.setHeightForWidth(self.citizen_corp_bool_text.sizePolicy().hasHeightForWidth())
-        self.citizen_corp_bool_text.setSizePolicy(sizePolicy5)
-        self.citizen_corp_bool_text.setMaximumSize(QSize(16777215, 30))
+        sizePolicy.setHeightForWidth(self.citizen_corp_bool_text.sizePolicy().hasHeightForWidth())
+        self.citizen_corp_bool_text.setSizePolicy(sizePolicy)
+        self.citizen_corp_bool_text.setMinimumSize(QSize(50, 30))
+        self.citizen_corp_bool_text.setMaximumSize(QSize(75, 30))
 
-        self.gridLayout_19.addWidget(self.citizen_corp_bool_text, 4, 3, 1, 1)
+        self.gridLayout_16.addWidget(self.citizen_corp_bool_text, 2, 3, 1, 1, Qt.AlignLeft|Qt.AlignVCenter)
+
+        self.tendering_bool_label = QLabel(self.frame_28)
+        self.tendering_bool_label.setObjectName(u"tendering_bool_label")
+        sizePolicy.setHeightForWidth(self.tendering_bool_label.sizePolicy().hasHeightForWidth())
+        self.tendering_bool_label.setSizePolicy(sizePolicy)
+        self.tendering_bool_label.setMinimumSize(QSize(100, 30))
+        self.tendering_bool_label.setMaximumSize(QSize(300, 90))
+
+        self.gridLayout_16.addWidget(self.tendering_bool_label, 3, 0, 1, 1)
+
+        self.tendering_bool_text = QPlainTextEdit(self.frame_28)
+        self.tendering_bool_text.setObjectName(u"tendering_bool_text")
+        sizePolicy.setHeightForWidth(self.tendering_bool_text.sizePolicy().hasHeightForWidth())
+        self.tendering_bool_text.setSizePolicy(sizePolicy)
+        self.tendering_bool_text.setMinimumSize(QSize(50, 30))
+        self.tendering_bool_text.setMaximumSize(QSize(75, 30))
+
+        self.gridLayout_16.addWidget(self.tendering_bool_text, 3, 1, 1, 1)
 
 
-        self.verticalLayout_3.addLayout(self.gridLayout_19)
+        self.verticalLayout_3.addWidget(self.frame_28)
 
-        self.headline_09 = QLabel(self.scrollAreaWidgetContents)
+        self.headline_09 = QLabel(self.frame0221)
         self.headline_09.setObjectName(u"headline_09")
-        self.headline_09.setFont(font4)
+        self.headline_09.setMinimumSize(QSize(250, 50))
+        self.headline_09.setFont(font)
         self.headline_09.setFrameShape(QFrame.StyledPanel)
         self.headline_09.setFrameShadow(QFrame.Sunken)
 
         self.verticalLayout_3.addWidget(self.headline_09)
 
-        self.gridLayout_20 = QGridLayout()
-        self.gridLayout_20.setObjectName(u"gridLayout_20")
-        self.meter_box_type_label = QLabel(self.scrollAreaWidgetContents)
-        self.meter_box_type_label.setObjectName(u"meter_box_type_label")
-        sizePolicy6.setHeightForWidth(self.meter_box_type_label.sizePolicy().hasHeightForWidth())
-        self.meter_box_type_label.setSizePolicy(sizePolicy6)
-        self.meter_box_type_label.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_20.addWidget(self.meter_box_type_label, 1, 0, 1, 1)
-
-        self.meter_cabinet_label = QLabel(self.scrollAreaWidgetContents)
-        self.meter_cabinet_label.setObjectName(u"meter_cabinet_label")
-        sizePolicy6.setHeightForWidth(self.meter_cabinet_label.sizePolicy().hasHeightForWidth())
-        self.meter_cabinet_label.setSizePolicy(sizePolicy6)
-        self.meter_cabinet_label.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_20.addWidget(self.meter_cabinet_label, 0, 0, 1, 1)
-
-        self.meter_cabinet_text = QPlainTextEdit(self.scrollAreaWidgetContents)
+        self.frame_29 = QFrame(self.frame0221)
+        self.frame_29.setObjectName(u"frame_29")
+        sizePolicy.setHeightForWidth(self.frame_29.sizePolicy().hasHeightForWidth())
+        self.frame_29.setSizePolicy(sizePolicy)
+        self.frame_29.setFrameShape(QFrame.StyledPanel)
+        self.frame_29.setFrameShadow(QFrame.Raised)
+        self.gridLayout_17 = QGridLayout(self.frame_29)
+        self.gridLayout_17.setObjectName(u"gridLayout_17")
+        self.meter_cabinet_text = QPlainTextEdit(self.frame_29)
         self.meter_cabinet_text.setObjectName(u"meter_cabinet_text")
-        sizePolicy5.setHeightForWidth(self.meter_cabinet_text.sizePolicy().hasHeightForWidth())
-        self.meter_cabinet_text.setSizePolicy(sizePolicy5)
-        self.meter_cabinet_text.setMaximumSize(QSize(16777215, 30))
+        sizePolicy.setHeightForWidth(self.meter_cabinet_text.sizePolicy().hasHeightForWidth())
+        self.meter_cabinet_text.setSizePolicy(sizePolicy)
+        self.meter_cabinet_text.setMinimumSize(QSize(0, 30))
+        self.meter_cabinet_text.setMaximumSize(QSize(16777215, 60))
 
-        self.gridLayout_20.addWidget(self.meter_cabinet_text, 0, 1, 1, 1)
+        self.gridLayout_17.addWidget(self.meter_cabinet_text, 0, 1, 1, 1)
 
-        self.meter_box_type_text = QPlainTextEdit(self.scrollAreaWidgetContents)
+        self.meter_box_type_label = QLabel(self.frame_29)
+        self.meter_box_type_label.setObjectName(u"meter_box_type_label")
+        sizePolicy.setHeightForWidth(self.meter_box_type_label.sizePolicy().hasHeightForWidth())
+        self.meter_box_type_label.setSizePolicy(sizePolicy)
+        self.meter_box_type_label.setMinimumSize(QSize(100, 30))
+        self.meter_box_type_label.setMaximumSize(QSize(200, 60))
+
+        self.gridLayout_17.addWidget(self.meter_box_type_label, 1, 0, 1, 1)
+
+        self.meter_box_type_text = QPlainTextEdit(self.frame_29)
         self.meter_box_type_text.setObjectName(u"meter_box_type_text")
-        sizePolicy5.setHeightForWidth(self.meter_box_type_text.sizePolicy().hasHeightForWidth())
-        self.meter_box_type_text.setSizePolicy(sizePolicy5)
-        self.meter_box_type_text.setMaximumSize(QSize(16777215, 30))
+        sizePolicy.setHeightForWidth(self.meter_box_type_text.sizePolicy().hasHeightForWidth())
+        self.meter_box_type_text.setSizePolicy(sizePolicy)
+        self.meter_box_type_text.setMinimumSize(QSize(0, 30))
+        self.meter_box_type_text.setMaximumSize(QSize(16777215, 60))
 
-        self.gridLayout_20.addWidget(self.meter_box_type_text, 1, 1, 1, 1)
+        self.gridLayout_17.addWidget(self.meter_box_type_text, 1, 1, 1, 1)
+
+        self.meter_cabinet_label = QLabel(self.frame_29)
+        self.meter_cabinet_label.setObjectName(u"meter_cabinet_label")
+        sizePolicy.setHeightForWidth(self.meter_cabinet_label.sizePolicy().hasHeightForWidth())
+        self.meter_cabinet_label.setSizePolicy(sizePolicy)
+        self.meter_cabinet_label.setMinimumSize(QSize(100, 30))
+        self.meter_cabinet_label.setMaximumSize(QSize(200, 60))
+
+        self.gridLayout_17.addWidget(self.meter_cabinet_label, 0, 0, 1, 1)
 
 
-        self.verticalLayout_3.addLayout(self.gridLayout_20)
+        self.verticalLayout_3.addWidget(self.frame_29)
 
-        self.headline_10 = QLabel(self.scrollAreaWidgetContents)
+        self.frame_31 = QFrame(self.frame0221)
+        self.frame_31.setObjectName(u"frame_31")
+        self.frame_31.setFrameShape(QFrame.StyledPanel)
+        self.frame_31.setFrameShadow(QFrame.Raised)
+        self.gridLayout_19 = QGridLayout(self.frame_31)
+        self.gridLayout_19.setObjectName(u"gridLayout_19")
+
+        self.verticalLayout_3.addWidget(self.frame_31)
+
+        self.headline_10 = QLabel(self.frame0221)
         self.headline_10.setObjectName(u"headline_10")
-        self.headline_10.setFont(font4)
+        self.headline_10.setMinimumSize(QSize(250, 50))
+        self.headline_10.setFont(font)
         self.headline_10.setFrameShape(QFrame.StyledPanel)
         self.headline_10.setFrameShadow(QFrame.Sunken)
 
         self.verticalLayout_3.addWidget(self.headline_10)
 
-        self.gridLayout_21 = QGridLayout()
-        self.gridLayout_21.setObjectName(u"gridLayout_21")
-        self.dl_connect_ext_label = QLabel(self.scrollAreaWidgetContents)
-        self.dl_connect_ext_label.setObjectName(u"dl_connect_ext_label")
-        sizePolicy6.setHeightForWidth(self.dl_connect_ext_label.sizePolicy().hasHeightForWidth())
-        self.dl_connect_ext_label.setSizePolicy(sizePolicy6)
-        self.dl_connect_ext_label.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_21.addWidget(self.dl_connect_ext_label, 2, 0, 1, 1)
-
-        self.dl_type_label = QLabel(self.scrollAreaWidgetContents)
-        self.dl_type_label.setObjectName(u"dl_type_label")
-        sizePolicy6.setHeightForWidth(self.dl_type_label.sizePolicy().hasHeightForWidth())
-        self.dl_type_label.setSizePolicy(sizePolicy6)
-        self.dl_type_label.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_21.addWidget(self.dl_type_label, 0, 0, 1, 1)
-
-        self.dl_connect_ext_text = QPlainTextEdit(self.scrollAreaWidgetContents)
+        self.frame_30 = QFrame(self.frame0221)
+        self.frame_30.setObjectName(u"frame_30")
+        sizePolicy.setHeightForWidth(self.frame_30.sizePolicy().hasHeightForWidth())
+        self.frame_30.setSizePolicy(sizePolicy)
+        self.frame_30.setFrameShape(QFrame.StyledPanel)
+        self.frame_30.setFrameShadow(QFrame.Raised)
+        self.gridLayout_18 = QGridLayout(self.frame_30)
+        self.gridLayout_18.setObjectName(u"gridLayout_18")
+        self.dl_connect_ext_text = QPlainTextEdit(self.frame_30)
         self.dl_connect_ext_text.setObjectName(u"dl_connect_ext_text")
-        sizePolicy5.setHeightForWidth(self.dl_connect_ext_text.sizePolicy().hasHeightForWidth())
-        self.dl_connect_ext_text.setSizePolicy(sizePolicy5)
-        self.dl_connect_ext_text.setMaximumSize(QSize(16777215, 30))
+        sizePolicy.setHeightForWidth(self.dl_connect_ext_text.sizePolicy().hasHeightForWidth())
+        self.dl_connect_ext_text.setSizePolicy(sizePolicy)
+        self.dl_connect_ext_text.setMinimumSize(QSize(200, 30))
+        self.dl_connect_ext_text.setMaximumSize(QSize(16777215, 60))
 
-        self.gridLayout_21.addWidget(self.dl_connect_ext_text, 2, 1, 1, 1)
+        self.gridLayout_18.addWidget(self.dl_connect_ext_text, 2, 1, 1, 1)
 
-        self.dl_type_text = QPlainTextEdit(self.scrollAreaWidgetContents)
+        self.dl_type_label = QLabel(self.frame_30)
+        self.dl_type_label.setObjectName(u"dl_type_label")
+        sizePolicy.setHeightForWidth(self.dl_type_label.sizePolicy().hasHeightForWidth())
+        self.dl_type_label.setSizePolicy(sizePolicy)
+        self.dl_type_label.setMinimumSize(QSize(150, 30))
+        self.dl_type_label.setMaximumSize(QSize(200, 60))
+        self.dl_type_label.setIndent(-1)
+
+        self.gridLayout_18.addWidget(self.dl_type_label, 0, 0, 1, 1)
+
+        self.dl_type_text = QPlainTextEdit(self.frame_30)
         self.dl_type_text.setObjectName(u"dl_type_text")
-        sizePolicy5.setHeightForWidth(self.dl_type_text.sizePolicy().hasHeightForWidth())
-        self.dl_type_text.setSizePolicy(sizePolicy5)
-        self.dl_type_text.setMaximumSize(QSize(16777215, 30))
+        sizePolicy.setHeightForWidth(self.dl_type_text.sizePolicy().hasHeightForWidth())
+        self.dl_type_text.setSizePolicy(sizePolicy)
+        self.dl_type_text.setMinimumSize(QSize(200, 30))
+        self.dl_type_text.setMaximumSize(QSize(16777215, 60))
 
-        self.gridLayout_21.addWidget(self.dl_type_text, 0, 1, 1, 1)
+        self.gridLayout_18.addWidget(self.dl_type_text, 0, 1, 1, 1)
+
+        self.dl_connect_ext_label = QLabel(self.frame_30)
+        self.dl_connect_ext_label.setObjectName(u"dl_connect_ext_label")
+        sizePolicy.setHeightForWidth(self.dl_connect_ext_label.sizePolicy().hasHeightForWidth())
+        self.dl_connect_ext_label.setSizePolicy(sizePolicy)
+        self.dl_connect_ext_label.setMinimumSize(QSize(150, 30))
+        self.dl_connect_ext_label.setMaximumSize(QSize(200, 60))
+
+        self.gridLayout_18.addWidget(self.dl_connect_ext_label, 2, 0, 1, 1)
 
 
-        self.verticalLayout_3.addLayout(self.gridLayout_21)
+        self.verticalLayout_3.addWidget(self.frame_30)
 
 
-        self.gridLayout_5.addLayout(self.verticalLayout_3, 1, 0, 1, 1)
+        self.verticalLayout_5.addLayout(self.verticalLayout_3)
+
+
+        self.gridLayout_5.addWidget(self.frame0221, 0, 0, 1, 1)
 
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
-        self.verticalLayout_2.addWidget(self.scrollArea)
+        self.frame0220.addWidget(self.scrollArea)
 
-        self.horizontalLayout_2 = QHBoxLayout()
-        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.load_data_to_device_lists_btn = QPushButton(self.tab_2)
+        self.frame_32 = QFrame(self.layoutWidget)
+        self.frame_32.setObjectName(u"frame_32")
+        sizePolicy.setHeightForWidth(self.frame_32.sizePolicy().hasHeightForWidth())
+        self.frame_32.setSizePolicy(sizePolicy)
+        self.frame_32.setFrameShape(QFrame.StyledPanel)
+        self.frame_32.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_13 = QVBoxLayout(self.frame_32)
+        self.verticalLayout_13.setObjectName(u"verticalLayout_13")
+        self.verticalLayout_13.setSizeConstraint(QLayout.SetDefaultConstraint)
+        self.frame_34 = QFrame(self.frame_32)
+        self.frame_34.setObjectName(u"frame_34")
+        self.frame_34.setFrameShape(QFrame.StyledPanel)
+        self.frame_34.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_4 = QHBoxLayout(self.frame_34)
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.load_data_to_device_lists_btn = QPushButton(self.frame_34)
         self.load_data_to_device_lists_btn.setObjectName(u"load_data_to_device_lists_btn")
-        self.load_data_to_device_lists_btn.setMinimumSize(QSize(300, 40))
-        self.load_data_to_device_lists_btn.setMaximumSize(QSize(200, 16777215))
+        self.load_data_to_device_lists_btn.setMinimumSize(QSize(200, 40))
+        self.load_data_to_device_lists_btn.setMaximumSize(QSize(350, 16777215))
         self.load_data_to_device_lists_btn.setMouseTracking(True)
         self.load_data_to_device_lists_btn.setFocusPolicy(Qt.StrongFocus)
         self.load_data_to_device_lists_btn.setContextMenuPolicy(Qt.NoContextMenu)
@@ -1486,12 +2074,12 @@ class Ui_MainWindow(object):
         self.load_data_to_device_lists_btn.setCheckable(False)
         self.load_data_to_device_lists_btn.setChecked(False)
 
-        self.horizontalLayout_2.addWidget(self.load_data_to_device_lists_btn)
+        self.horizontalLayout_4.addWidget(self.load_data_to_device_lists_btn)
 
-        self.fill_fields_btn = QPushButton(self.tab_2)
+        self.fill_fields_btn = QPushButton(self.frame_34)
         self.fill_fields_btn.setObjectName(u"fill_fields_btn")
-        self.fill_fields_btn.setMinimumSize(QSize(300, 40))
-        self.fill_fields_btn.setMaximumSize(QSize(300, 16777215))
+        self.fill_fields_btn.setMinimumSize(QSize(200, 40))
+        self.fill_fields_btn.setMaximumSize(QSize(350, 16777215))
         self.fill_fields_btn.setMouseTracking(True)
         self.fill_fields_btn.setFocusPolicy(Qt.StrongFocus)
         self.fill_fields_btn.setContextMenuPolicy(Qt.NoContextMenu)
@@ -1502,102 +2090,117 @@ class Ui_MainWindow(object):
         self.fill_fields_btn.setAutoDefault(False)
         self.fill_fields_btn.setFlat(False)
 
-        self.horizontalLayout_2.addWidget(self.fill_fields_btn)
+        self.horizontalLayout_4.addWidget(self.fill_fields_btn)
 
-        self.store_device_specs_btn = QPushButton(self.tab_2)
+        self.store_device_specs_btn = QPushButton(self.frame_34)
         self.store_device_specs_btn.setObjectName(u"store_device_specs_btn")
-        self.store_device_specs_btn.setMinimumSize(QSize(0, 40))
-        self.store_device_specs_btn.setMaximumSize(QSize(300, 16777215))
+        self.store_device_specs_btn.setMinimumSize(QSize(200, 40))
+        self.store_device_specs_btn.setMaximumSize(QSize(350, 16777215))
         self.store_device_specs_btn.setStyleSheet(u"")
 
-        self.horizontalLayout_2.addWidget(self.store_device_specs_btn)
+        self.horizontalLayout_4.addWidget(self.store_device_specs_btn)
 
 
-        self.verticalLayout_2.addLayout(self.horizontalLayout_2)
+        self.verticalLayout_13.addWidget(self.frame_34, 0, Qt.AlignLeft|Qt.AlignVCenter)
 
-        self.gridLayout_6 = QGridLayout()
-        self.gridLayout_6.setObjectName(u"gridLayout_6")
-        self.gridLayout_6.setSizeConstraint(QLayout.SetNoConstraint)
-        self.gridLayout_6.setHorizontalSpacing(5)
-        self.gridLayout_6.setVerticalSpacing(0)
-        self.gridLayout_6.setContentsMargins(5, 0, 5, 5)
-        self.target_path_btn_2 = QPushButton(self.tab_2)
-        self.target_path_btn_2.setObjectName(u"target_path_btn_2")
-        sizePolicy.setHeightForWidth(self.target_path_btn_2.sizePolicy().hasHeightForWidth())
-        self.target_path_btn_2.setSizePolicy(sizePolicy)
-        self.target_path_btn_2.setMinimumSize(QSize(250, 30))
-        self.target_path_btn_2.setMaximumSize(QSize(150, 30))
-        self.target_path_btn_2.setAutoDefault(False)
-        self.target_path_btn_2.setFlat(False)
-
-        self.gridLayout_6.addWidget(self.target_path_btn_2, 5, 0, 1, 1)
-
-        self.create_doc1_btn = QPushButton(self.tab_2)
-        self.create_doc1_btn.setObjectName(u"create_doc1_btn")
-        sizePolicy.setHeightForWidth(self.create_doc1_btn.sizePolicy().hasHeightForWidth())
-        self.create_doc1_btn.setSizePolicy(sizePolicy)
-        self.create_doc1_btn.setMinimumSize(QSize(250, 30))
-        self.create_doc1_btn.setMaximumSize(QSize(150, 30))
-        self.create_doc1_btn.setFont(font1)
-        self.create_doc1_btn.setAutoDefault(True)
-        self.create_doc1_btn.setFlat(False)
-
-        self.gridLayout_6.addWidget(self.create_doc1_btn, 7, 0, 1, 1)
-
-        self.source_path_text_docu = QPlainTextEdit(self.tab_2)
+        self.frame_33 = QFrame(self.frame_32)
+        self.frame_33.setObjectName(u"frame_33")
+        sizePolicy.setHeightForWidth(self.frame_33.sizePolicy().hasHeightForWidth())
+        self.frame_33.setSizePolicy(sizePolicy)
+        self.frame_33.setFrameShape(QFrame.StyledPanel)
+        self.frame_33.setFrameShadow(QFrame.Raised)
+        self.gridLayout_20 = QGridLayout(self.frame_33)
+        self.gridLayout_20.setObjectName(u"gridLayout_20")
+        self.source_path_text_docu = QPlainTextEdit(self.frame_33)
         self.source_path_text_docu.setObjectName(u"source_path_text_docu")
         self.source_path_text_docu.setMinimumSize(QSize(0, 30))
         self.source_path_text_docu.setMaximumSize(QSize(16777215, 30))
 
-        self.gridLayout_6.addWidget(self.source_path_text_docu, 3, 2, 1, 1)
+        self.gridLayout_20.addWidget(self.source_path_text_docu, 1, 1, 1, 1)
 
-        self.target_path_text_2 = QPlainTextEdit(self.tab_2)
+        self.source_btn_docu = QPushButton(self.frame_33)
+        self.source_btn_docu.setObjectName(u"source_btn_docu")
+        sizePolicy.setHeightForWidth(self.source_btn_docu.sizePolicy().hasHeightForWidth())
+        self.source_btn_docu.setSizePolicy(sizePolicy)
+        self.source_btn_docu.setMinimumSize(QSize(250, 40))
+        self.source_btn_docu.setMaximumSize(QSize(300, 30))
+
+        self.gridLayout_20.addWidget(self.source_btn_docu, 1, 0, 1, 1, Qt.AlignVCenter)
+
+        self.source_btn_matstr = QPushButton(self.frame_33)
+        self.source_btn_matstr.setObjectName(u"source_btn_matstr")
+        sizePolicy.setHeightForWidth(self.source_btn_matstr.sizePolicy().hasHeightForWidth())
+        self.source_btn_matstr.setSizePolicy(sizePolicy)
+        self.source_btn_matstr.setMinimumSize(QSize(250, 40))
+        self.source_btn_matstr.setMaximumSize(QSize(300, 30))
+
+        self.gridLayout_20.addWidget(self.source_btn_matstr, 0, 0, 1, 1, Qt.AlignVCenter)
+
+        self.target_path_text_2 = QPlainTextEdit(self.frame_33)
         self.target_path_text_2.setObjectName(u"target_path_text_2")
         self.target_path_text_2.setMinimumSize(QSize(0, 30))
         self.target_path_text_2.setMaximumSize(QSize(16777215, 30))
 
-        self.gridLayout_6.addWidget(self.target_path_text_2, 5, 2, 1, 1)
+        self.gridLayout_20.addWidget(self.target_path_text_2, 2, 1, 1, 1)
 
-        self.source_path_text_matstr = QPlainTextEdit(self.tab_2)
+        self.target_path_btn_2 = QPushButton(self.frame_33)
+        self.target_path_btn_2.setObjectName(u"target_path_btn_2")
+        sizePolicy.setHeightForWidth(self.target_path_btn_2.sizePolicy().hasHeightForWidth())
+        self.target_path_btn_2.setSizePolicy(sizePolicy)
+        self.target_path_btn_2.setMinimumSize(QSize(250, 40))
+        self.target_path_btn_2.setMaximumSize(QSize(300, 30))
+        self.target_path_btn_2.setAutoDefault(False)
+        self.target_path_btn_2.setFlat(False)
+
+        self.gridLayout_20.addWidget(self.target_path_btn_2, 2, 0, 1, 1, Qt.AlignVCenter)
+
+        self.source_path_text_matstr = QPlainTextEdit(self.frame_33)
         self.source_path_text_matstr.setObjectName(u"source_path_text_matstr")
         self.source_path_text_matstr.setMinimumSize(QSize(0, 30))
         self.source_path_text_matstr.setMaximumSize(QSize(16777215, 30))
 
-        self.gridLayout_6.addWidget(self.source_path_text_matstr, 1, 2, 1, 1)
+        self.gridLayout_20.addWidget(self.source_path_text_matstr, 0, 1, 1, 1, Qt.AlignVCenter)
 
-        self.source_btn_docu = QPushButton(self.tab_2)
-        self.source_btn_docu.setObjectName(u"source_btn_docu")
-        self.source_btn_docu.setMinimumSize(QSize(250, 30))
-        self.source_btn_docu.setMaximumSize(QSize(150, 30))
 
-        self.gridLayout_6.addWidget(self.source_btn_docu, 3, 0, 1, 1)
+        self.verticalLayout_13.addWidget(self.frame_33, 0, Qt.AlignVCenter)
 
-        self.source_btn_matstr = QPushButton(self.tab_2)
-        self.source_btn_matstr.setObjectName(u"source_btn_matstr")
-        self.source_btn_matstr.setMinimumSize(QSize(250, 30))
-        self.source_btn_matstr.setMaximumSize(QSize(150, 30))
+        self.frame_35 = QFrame(self.frame_32)
+        self.frame_35.setObjectName(u"frame_35")
+        self.frame_35.setFrameShape(QFrame.StyledPanel)
+        self.frame_35.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_17 = QHBoxLayout(self.frame_35)
+        self.horizontalLayout_17.setObjectName(u"horizontalLayout_17")
+        self.create_doc1_btn = QPushButton(self.frame_35)
+        self.create_doc1_btn.setObjectName(u"create_doc1_btn")
+        sizePolicy2.setHeightForWidth(self.create_doc1_btn.sizePolicy().hasHeightForWidth())
+        self.create_doc1_btn.setSizePolicy(sizePolicy2)
+        self.create_doc1_btn.setMinimumSize(QSize(250, 50))
+        self.create_doc1_btn.setMaximumSize(QSize(400, 100))
+        self.create_doc1_btn.setFont(font2)
+        self.create_doc1_btn.setAutoDefault(True)
+        self.create_doc1_btn.setFlat(False)
 
-        self.gridLayout_6.addWidget(self.source_btn_matstr, 1, 0, 1, 1)
+        self.horizontalLayout_17.addWidget(self.create_doc1_btn)
 
-        self.create_doc2_btn = QPushButton(self.tab_2)
+        self.create_doc2_btn = QPushButton(self.frame_35)
         self.create_doc2_btn.setObjectName(u"create_doc2_btn")
-        sizePolicy.setHeightForWidth(self.create_doc2_btn.sizePolicy().hasHeightForWidth())
-        self.create_doc2_btn.setSizePolicy(sizePolicy)
-        self.create_doc2_btn.setMinimumSize(QSize(250, 30))
-        self.create_doc2_btn.setMaximumSize(QSize(150, 30))
-        self.create_doc2_btn.setFont(font1)
+        sizePolicy2.setHeightForWidth(self.create_doc2_btn.sizePolicy().hasHeightForWidth())
+        self.create_doc2_btn.setSizePolicy(sizePolicy2)
+        self.create_doc2_btn.setMinimumSize(QSize(250, 50))
+        self.create_doc2_btn.setMaximumSize(QSize(400, 100))
+        self.create_doc2_btn.setFont(font2)
         self.create_doc2_btn.setAutoDefault(True)
         self.create_doc2_btn.setFlat(False)
 
-        self.gridLayout_6.addWidget(self.create_doc2_btn, 7, 2, 1, 1)
+        self.horizontalLayout_17.addWidget(self.create_doc2_btn)
 
 
-        self.verticalLayout_2.addLayout(self.gridLayout_6)
+        self.verticalLayout_13.addWidget(self.frame_35)
 
 
-        self.gridLayout_7.addLayout(self.verticalLayout_2, 9, 0, 1, 1)
+        self.frame0220.addWidget(self.frame_32)
 
-        self.tabWidget.addTab(self.tab_2, "")
+        self.tabWidget.addTab(self.tab2, "")
         self.tab0 = QWidget()
         self.tab0.setObjectName(u"tab0")
         self.tab0.setMaximumSize(QSize(16777215, 500))
@@ -1607,33 +2210,33 @@ class Ui_MainWindow(object):
         self.scrollArea_2 = QScrollArea(self.tab0)
         self.scrollArea_2.setObjectName(u"scrollArea_2")
         self.scrollArea_2.setWidgetResizable(True)
-        self.scrollAreaWidgetContents_2 = QWidget()
-        self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 1826, 480))
-        self.gridLayout_9 = QGridLayout(self.scrollAreaWidgetContents_2)
+        self.scrollAreaWidgetContents2 = QWidget()
+        self.scrollAreaWidgetContents2.setObjectName(u"scrollAreaWidgetContents2")
+        self.scrollAreaWidgetContents2.setGeometry(QRect(0, 0, 1798, 480))
+        self.gridLayout_9 = QGridLayout(self.scrollAreaWidgetContents2)
         self.gridLayout_9.setObjectName(u"gridLayout_9")
         self.formLayout = QFormLayout()
         self.formLayout.setObjectName(u"formLayout")
-        self.server_sttings_headline_label = QLabel(self.scrollAreaWidgetContents_2)
+        self.server_sttings_headline_label = QLabel(self.scrollAreaWidgetContents2)
         self.server_sttings_headline_label.setObjectName(u"server_sttings_headline_label")
-        sizePolicy.setHeightForWidth(self.server_sttings_headline_label.sizePolicy().hasHeightForWidth())
-        self.server_sttings_headline_label.setSizePolicy(sizePolicy)
+        sizePolicy2.setHeightForWidth(self.server_sttings_headline_label.sizePolicy().hasHeightForWidth())
+        self.server_sttings_headline_label.setSizePolicy(sizePolicy2)
         self.server_sttings_headline_label.setMinimumSize(QSize(250, 30))
         self.server_sttings_headline_label.setMaximumSize(QSize(16777215, 25))
         self.server_sttings_headline_label.setSizeIncrement(QSize(5, 0))
-        self.server_sttings_headline_label.setFont(font4)
+        self.server_sttings_headline_label.setFont(font)
         self.server_sttings_headline_label.setFrameShape(QFrame.StyledPanel)
         self.server_sttings_headline_label.setFrameShadow(QFrame.Sunken)
         self.server_sttings_headline_label.setTextFormat(Qt.AutoText)
 
         self.formLayout.setWidget(1, QFormLayout.SpanningRole, self.server_sttings_headline_label)
 
-        self.label = QLabel(self.scrollAreaWidgetContents_2)
+        self.label = QLabel(self.scrollAreaWidgetContents2)
         self.label.setObjectName(u"label")
 
         self.formLayout.setWidget(2, QFormLayout.LabelRole, self.label)
 
-        self.db_type = QComboBox(self.scrollAreaWidgetContents_2)
+        self.db_type = QComboBox(self.scrollAreaWidgetContents2)
         self.db_type.addItem("")
         self.db_type.addItem("")
         self.db_type.setObjectName(u"db_type")
@@ -1641,78 +2244,78 @@ class Ui_MainWindow(object):
 
         self.formLayout.setWidget(2, QFormLayout.FieldRole, self.db_type)
 
-        self.db_name_label = QLabel(self.scrollAreaWidgetContents_2)
+        self.db_name_label = QLabel(self.scrollAreaWidgetContents2)
         self.db_name_label.setObjectName(u"db_name_label")
 
         self.formLayout.setWidget(3, QFormLayout.LabelRole, self.db_name_label)
 
-        self.db_name = QPlainTextEdit(self.scrollAreaWidgetContents_2)
+        self.db_name = QPlainTextEdit(self.scrollAreaWidgetContents2)
         self.db_name.setObjectName(u"db_name")
         self.db_name.setMaximumSize(QSize(16777215, 25))
 
         self.formLayout.setWidget(3, QFormLayout.FieldRole, self.db_name)
 
-        self.db_server_label = QLabel(self.scrollAreaWidgetContents_2)
+        self.db_server_label = QLabel(self.scrollAreaWidgetContents2)
         self.db_server_label.setObjectName(u"db_server_label")
 
         self.formLayout.setWidget(4, QFormLayout.LabelRole, self.db_server_label)
 
-        self.db_server = QPlainTextEdit(self.scrollAreaWidgetContents_2)
+        self.db_server = QPlainTextEdit(self.scrollAreaWidgetContents2)
         self.db_server.setObjectName(u"db_server")
         self.db_server.setMaximumSize(QSize(16777215, 25))
 
         self.formLayout.setWidget(4, QFormLayout.FieldRole, self.db_server)
 
-        self.user_label = QLabel(self.scrollAreaWidgetContents_2)
+        self.user_label = QLabel(self.scrollAreaWidgetContents2)
         self.user_label.setObjectName(u"user_label")
 
         self.formLayout.setWidget(5, QFormLayout.LabelRole, self.user_label)
 
-        self.user = QPlainTextEdit(self.scrollAreaWidgetContents_2)
+        self.user = QPlainTextEdit(self.scrollAreaWidgetContents2)
         self.user.setObjectName(u"user")
         self.user.setMaximumSize(QSize(16777215, 25))
 
         self.formLayout.setWidget(5, QFormLayout.FieldRole, self.user)
 
-        self.pw_label = QLabel(self.scrollAreaWidgetContents_2)
+        self.pw_label = QLabel(self.scrollAreaWidgetContents2)
         self.pw_label.setObjectName(u"pw_label")
 
         self.formLayout.setWidget(6, QFormLayout.LabelRole, self.pw_label)
 
-        self.pw = QPlainTextEdit(self.scrollAreaWidgetContents_2)
+        self.pw = QPlainTextEdit(self.scrollAreaWidgetContents2)
         self.pw.setObjectName(u"pw")
         self.pw.setMaximumSize(QSize(16777215, 25))
 
         self.formLayout.setWidget(6, QFormLayout.FieldRole, self.pw)
 
-        self.server_sttings_headline_label_2 = QLabel(self.scrollAreaWidgetContents_2)
+        self.server_sttings_headline_label_2 = QLabel(self.scrollAreaWidgetContents2)
         self.server_sttings_headline_label_2.setObjectName(u"server_sttings_headline_label_2")
-        sizePolicy.setHeightForWidth(self.server_sttings_headline_label_2.sizePolicy().hasHeightForWidth())
-        self.server_sttings_headline_label_2.setSizePolicy(sizePolicy)
+        sizePolicy2.setHeightForWidth(self.server_sttings_headline_label_2.sizePolicy().hasHeightForWidth())
+        self.server_sttings_headline_label_2.setSizePolicy(sizePolicy2)
         self.server_sttings_headline_label_2.setMinimumSize(QSize(250, 30))
         self.server_sttings_headline_label_2.setMaximumSize(QSize(16777215, 0))
         self.server_sttings_headline_label_2.setSizeIncrement(QSize(5, 0))
-        self.server_sttings_headline_label_2.setFont(font4)
+        self.server_sttings_headline_label_2.setFont(font)
         self.server_sttings_headline_label_2.setFrameShape(QFrame.StyledPanel)
         self.server_sttings_headline_label_2.setFrameShadow(QFrame.Sunken)
         self.server_sttings_headline_label_2.setTextFormat(Qt.AutoText)
 
         self.formLayout.setWidget(7, QFormLayout.SpanningRole, self.server_sttings_headline_label_2)
 
-        self.sql_query_btn = QPushButton(self.scrollAreaWidgetContents_2)
+        self.sql_query_btn = QPushButton(self.scrollAreaWidgetContents2)
         self.sql_query_btn.setObjectName(u"sql_query_btn")
         self.sql_query_btn.setMinimumSize(QSize(0, 25))
 
         self.formLayout.setWidget(8, QFormLayout.SpanningRole, self.sql_query_btn)
 
-        self.query_input = QPlainTextEdit(self.scrollAreaWidgetContents_2)
+        self.query_input = QPlainTextEdit(self.scrollAreaWidgetContents2)
         self.query_input.setObjectName(u"query_input")
         self.query_input.setEnabled(True)
-        sizePolicy11 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Minimum)
-        sizePolicy11.setHorizontalStretch(0)
-        sizePolicy11.setVerticalStretch(0)
-        sizePolicy11.setHeightForWidth(self.query_input.sizePolicy().hasHeightForWidth())
-        self.query_input.setSizePolicy(sizePolicy11)
+        sizePolicy10 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Minimum)
+        sizePolicy10.setHorizontalStretch(0)
+        sizePolicy10.setVerticalStretch(0)
+        sizePolicy10.setHeightForWidth(self.query_input.sizePolicy().hasHeightForWidth())
+        self.query_input.setSizePolicy(sizePolicy10)
         self.query_input.setMinimumSize(QSize(0, 10))
         self.query_input.setMaximumSize(QSize(16777215, 60))
         self.query_input.setSizeIncrement(QSize(0, 500))
@@ -1724,13 +2327,13 @@ class Ui_MainWindow(object):
 
         self.formLayout.setWidget(9, QFormLayout.SpanningRole, self.query_input)
 
-        self.sql_query_2_btn = QPushButton(self.scrollAreaWidgetContents_2)
+        self.sql_query_2_btn = QPushButton(self.scrollAreaWidgetContents2)
         self.sql_query_2_btn.setObjectName(u"sql_query_2_btn")
         self.sql_query_2_btn.setMinimumSize(QSize(0, 25))
 
         self.formLayout.setWidget(10, QFormLayout.SpanningRole, self.sql_query_2_btn)
 
-        self.query_2_input = QPlainTextEdit(self.scrollAreaWidgetContents_2)
+        self.query_2_input = QPlainTextEdit(self.scrollAreaWidgetContents2)
         self.query_2_input.setObjectName(u"query_2_input")
         self.query_2_input.setEnabled(True)
         self.query_2_input.setMinimumSize(QSize(0, 40))
@@ -1749,22 +2352,22 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.save_btn = QPushButton(self.scrollAreaWidgetContents_2)
+        self.save_btn = QPushButton(self.scrollAreaWidgetContents2)
         self.save_btn.setObjectName(u"save_btn")
-        sizePolicy12 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Expanding)
-        sizePolicy12.setHorizontalStretch(0)
-        sizePolicy12.setVerticalStretch(0)
-        sizePolicy12.setHeightForWidth(self.save_btn.sizePolicy().hasHeightForWidth())
-        self.save_btn.setSizePolicy(sizePolicy12)
+        sizePolicy11 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Expanding)
+        sizePolicy11.setHorizontalStretch(0)
+        sizePolicy11.setVerticalStretch(0)
+        sizePolicy11.setHeightForWidth(self.save_btn.sizePolicy().hasHeightForWidth())
+        self.save_btn.setSizePolicy(sizePolicy11)
         self.save_btn.setMinimumSize(QSize(0, 0))
         self.save_btn.setMaximumSize(QSize(150, 30))
 
         self.horizontalLayout.addWidget(self.save_btn)
 
-        self.load_btn = QPushButton(self.scrollAreaWidgetContents_2)
+        self.load_btn = QPushButton(self.scrollAreaWidgetContents2)
         self.load_btn.setObjectName(u"load_btn")
-        sizePolicy12.setHeightForWidth(self.load_btn.sizePolicy().hasHeightForWidth())
-        self.load_btn.setSizePolicy(sizePolicy12)
+        sizePolicy11.setHeightForWidth(self.load_btn.sizePolicy().hasHeightForWidth())
+        self.load_btn.setSizePolicy(sizePolicy11)
         self.load_btn.setMinimumSize(QSize(0, 0))
         self.load_btn.setMaximumSize(QSize(150, 30))
 
@@ -1777,66 +2380,46 @@ class Ui_MainWindow(object):
 
         self.gridLayout_9.addLayout(self.horizontalLayout, 1, 0, 1, 1)
 
-        self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_2)
+        self.scrollArea_2.setWidget(self.scrollAreaWidgetContents2)
 
         self.gridLayout_8.addWidget(self.scrollArea_2, 0, 0, 1, 1)
 
         self.tabWidget.addTab(self.tab0, "")
-        self.project = QTextEdit(self.centralwidget)
-        self.project.setObjectName(u"project")
-        self.project.setGeometry(QRect(220, 10, 181, 41))
-        font5 = QFont()
-        font5.setPointSize(12)
-        font5.setBold(False)
-        self.project.setFont(font5)
-        self.project_name_label = QLabel(self.centralwidget)
-        self.project_name_label.setObjectName(u"project_name_label")
-        self.project_name_label.setGeometry(QRect(11, 69, 150, 30))
-        sizePolicy.setHeightForWidth(self.project_name_label.sizePolicy().hasHeightForWidth())
-        self.project_name_label.setSizePolicy(sizePolicy)
-        self.project_name_label.setMinimumSize(QSize(150, 30))
-        self.project_name_label.setMaximumSize(QSize(150, 25))
-        self.project_name_label.setSizeIncrement(QSize(0, 0))
-        self.project_name_label.setFont(font4)
-        self.project_label = QLabel(self.centralwidget)
-        self.project_label.setObjectName(u"project_label")
-        self.project_label.setGeometry(QRect(11, 13, 150, 30))
-        sizePolicy.setHeightForWidth(self.project_label.sizePolicy().hasHeightForWidth())
-        self.project_label.setSizePolicy(sizePolicy)
-        self.project_label.setMinimumSize(QSize(150, 30))
-        self.project_label.setMaximumSize(QSize(200, 25))
-        self.project_label.setSizeIncrement(QSize(0, 0))
-        self.project_label.setFont(font4)
-        self.textEdit = QTextEdit(self.centralwidget)
-        self.textEdit.setObjectName(u"textEdit")
-        self.textEdit.setEnabled(False)
-        self.textEdit.setGeometry(QRect(219, 57, 1661, 50))
-        self.textEdit.setMaximumSize(QSize(16777215, 50))
+
+        self.gridLayout_22.addWidget(self.tabWidget, 0, 0, 1, 1)
+
+
+        self.gridLayout_4.addWidget(self.frame02, 1, 0, 1, 1)
+
+
+        self.formLayout_3.setWidget(0, QFormLayout.LabelRole, self.frame0)
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1900, 21))
+        self.menubar.setGeometry(QRect(0, 0, 1890, 22))
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
         MainWindow.setStatusBar(self.statusbar)
         self.toolBar = QToolBar(MainWindow)
         self.toolBar.setObjectName(u"toolBar")
-        sizePolicy13 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Maximum)
-        sizePolicy13.setHorizontalStretch(0)
-        sizePolicy13.setVerticalStretch(0)
-        sizePolicy13.setHeightForWidth(self.toolBar.sizePolicy().hasHeightForWidth())
-        self.toolBar.setSizePolicy(sizePolicy13)
+        sizePolicy12 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Maximum)
+        sizePolicy12.setHorizontalStretch(0)
+        sizePolicy12.setVerticalStretch(0)
+        sizePolicy12.setHeightForWidth(self.toolBar.sizePolicy().hasHeightForWidth())
+        self.toolBar.setSizePolicy(sizePolicy12)
+        self.toolBar.setStyleSheet(u"")
         MainWindow.addToolBar(Qt.TopToolBarArea, self.toolBar)
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(2)
         self.load_articles_db_btn.setDefault(True)
         self.load_articles_file_btn.setDefault(True)
-        self.paste_docs_btn.setDefault(True)
-        self.target_path_btn.setDefault(True)
         self.source_path_btn.setDefault(True)
+        self.target_path_btn.setDefault(True)
+        self.paste_docs_btn.setDefault(True)
         self.fill_fields_btn.setDefault(False)
         self.target_path_btn_2.setDefault(False)
         self.create_doc1_btn.setDefault(False)
@@ -1850,6 +2433,10 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        self.project_label.setText(QCoreApplication.translate("MainWindow", u"Projektnummer:", None))
+        self.project.setPlainText(QCoreApplication.translate("MainWindow", u"SUN 20-000", None))
+        self.project_name_label.setText(QCoreApplication.translate("MainWindow", u"Projektname:", None))
+        self.project_name.setPlainText("")
         self.load_articles_db_btn.setText(QCoreApplication.translate("MainWindow", u"Lade Artikelliste aus DB", None))
         self.load_articles_file_btn.setText(QCoreApplication.translate("MainWindow", u"Lade Artikelliste aus Datei", None))
         ___qtablewidgetitem = self.articles_list.horizontalHeaderItem(0)
@@ -1860,34 +2447,33 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"Artikelbezeichnung", None));
         ___qtablewidgetitem3 = self.articles_list.horizontalHeaderItem(3)
         ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"Menge verbraucht [Stk.]", None));
-        self.paste_docs_btn.setText(QCoreApplication.translate("MainWindow", u"Dokumente \u00fcbertragen", None))
-        self.target_path_btn.setText(QCoreApplication.translate("MainWindow", u"Zielpfad festlegen", None))
-        self.source_path_text.setPlainText("")
         self.source_path_btn.setText(QCoreApplication.translate("MainWindow", u"Quellpfad festlegen", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab1), QCoreApplication.translate("MainWindow", u"\u00dcbertragung von Dokumenten", None))
+        self.source_path_text.setPlainText("")
+        self.target_path_btn.setText(QCoreApplication.translate("MainWindow", u"Zielpfad festlegen", None))
+        self.paste_docs_btn.setText(QCoreApplication.translate("MainWindow", u"Dokumente \u00fcbertragen", None))
         self.headline_01.setText(QCoreApplication.translate("MainWindow", u"Anlagen\u00fcbersicht", None))
-        self.loc_adress_1_label.setText(QCoreApplication.translate("MainWindow", u"Stra\u00dfe:", None))
-        self.op_adress_2_label.setText(QCoreApplication.translate("MainWindow", u"PLZ:", None))
-        self.loc_head_label.setText(QCoreApplication.translate("MainWindow", u"Standort:", None))
         self.op_adress_3_label.setText(QCoreApplication.translate("MainWindow", u"Anlagenbetreiber:", None))
-        self.loc_adress_2_label.setText(QCoreApplication.translate("MainWindow", u"PLZ:", None))
         self.op_adress_1_label.setText(QCoreApplication.translate("MainWindow", u"Stra\u00dfe:", None))
-        self.loc_adress_3_label.setText(QCoreApplication.translate("MainWindow", u"Ort:", None))
+        self.op_adress_2_label.setText(QCoreApplication.translate("MainWindow", u"PLZ:", None))
         self.op_adress_3_label_2.setText(QCoreApplication.translate("MainWindow", u"Ort:", None))
+        self.loc_head_label.setText(QCoreApplication.translate("MainWindow", u"Standort:", None))
+        self.loc_adress_1_label.setText(QCoreApplication.translate("MainWindow", u"Stra\u00dfe:", None))
+        self.loc_adress_2_label.setText(QCoreApplication.translate("MainWindow", u"PLZ:", None))
+        self.loc_adress_3_label.setText(QCoreApplication.translate("MainWindow", u"Ort:", None))
+        self.sys_perf_label.setText(QCoreApplication.translate("MainWindow", u"Bruttoleistung PV [kWp]:", None))
         self.constr_style_label.setText(QCoreApplication.translate("MainWindow", u"Errichtungsort:", None))
         self.constr_style_text.setPlainText(QCoreApplication.translate("MainWindow", u"Bauliche Anlage (Hausdach)", None))
-        self.sys_perf_label.setText(QCoreApplication.translate("MainWindow", u"Bruttoleistung PV [kWp]:", None))
         self.azimuth_head_label.setText(QCoreApplication.translate("MainWindow", u"Ausrichtung:", None))
         self.bool_consist_azimuth_label.setText(QCoreApplication.translate("MainWindow", u"Ausrichtung einheitlich?", None))
         self.bool_consist_azimuth_text.setPlainText(QCoreApplication.translate("MainWindow", u"Ja", None))
-        self.min_tilt_label.setText(QCoreApplication.translate("MainWindow", u"Neigungswinkel weitere:", None))
-        self.maj_azimuth_label.setText(QCoreApplication.translate("MainWindow", u"Ausrichtung \u00fcberwiegend:", None))
-        self.min_card_point_text.setPlainText(QCoreApplication.translate("MainWindow", u"West", None))
-        self.maj_tilt_label.setText(QCoreApplication.translate("MainWindow", u"Neigungswinkel \u00fcberwiegend:", None))
-        self.maj_card_point_text.setPlainText(QCoreApplication.translate("MainWindow", u"Ost", None))
         self.maj_card_point_label.setText(QCoreApplication.translate("MainWindow", u"\u00dcberwiegend:", None))
-        self.min_card_point_label.setText(QCoreApplication.translate("MainWindow", u"Weitere:", None))
         self.min_azimuth_label.setText(QCoreApplication.translate("MainWindow", u"Ausrichtung weitere:", None))
+        self.min_tilt_label.setText(QCoreApplication.translate("MainWindow", u"Neigungswinkel weitere:", None))
+        self.min_card_point_text.setPlainText(QCoreApplication.translate("MainWindow", u"West", None))
+        self.min_card_point_label.setText(QCoreApplication.translate("MainWindow", u"Weitere:", None))
+        self.maj_azimuth_label.setText(QCoreApplication.translate("MainWindow", u"Ausrichtung \u00fcberwiegend:", None))
+        self.maj_card_point_text.setPlainText(QCoreApplication.translate("MainWindow", u"Ost", None))
+        self.maj_tilt_label.setText(QCoreApplication.translate("MainWindow", u"Neigungswinkel \u00fcberwiegend:", None))
         self.headline_02.setText(QCoreApplication.translate("MainWindow", u"Solargenerator", None))
         ___qtablewidgetitem4 = self.PV_modules_list.horizontalHeaderItem(0)
         ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"<>", None));
@@ -1903,8 +2489,9 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"Modulleistung [kWp]", None));
         self.move_none_PV_modules_to_blacklist.setText(QCoreApplication.translate("MainWindow", u"Entferne die markierten Artikel", None))
         self.module_count_label.setText(QCoreApplication.translate("MainWindow", u"Anzahl der Module:", None))
-        self.mounting_type_label.setText(QCoreApplication.translate("MainWindow", u"Montagesystem:", None))
+        self.module_count_text.setPlainText("")
         self.module_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
+        self.mounting_type_label.setText(QCoreApplication.translate("MainWindow", u"Montagesystem:", None))
         self.mounting_type_text.setPlainText(QCoreApplication.translate("MainWindow", u"PMT EVO 2.0 Ost-West", None))
         self.headline_03.setText(QCoreApplication.translate("MainWindow", u"PV-Wechselrichter", None))
         ___qtablewidgetitem10 = self.PV_inverters_list.horizontalHeaderItem(0)
@@ -1921,12 +2508,11 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem15.setText(QCoreApplication.translate("MainWindow", u"Zugeordnete \n"
 "WR-Leistung [kW]", None));
         self.move_none_PV_inverters_to_blacklist.setText(QCoreApplication.translate("MainWindow", u"Entferne die markierten Artikel", None))
-        self.hybrid_inverter_bool_label.setText(QCoreApplication.translate("MainWindow", u"Gemeinsamer PV-Batterie-\n"
-"Wechselricher:", None))
+        self.hybrid_inverter_bool_label.setText(QCoreApplication.translate("MainWindow", u"Gemeinsamer PV-Batterie-Wechselricher:", None))
         self.hybrid_inverter_bool_text.setPlainText(QCoreApplication.translate("MainWindow", u"Ja/Nein", None))
-        self.inverter_SN_label.setText(QCoreApplication.translate("MainWindow", u"Seriennummer:", None))
         self.commiss_date_label.setText(QCoreApplication.translate("MainWindow", u"Datum erstmalige\n"
 "Inbetriebnahme:", None))
+        self.inverter_SN_label.setText(QCoreApplication.translate("MainWindow", u"Seriennummer:", None))
         self.inverter_power_label.setText(QCoreApplication.translate("MainWindow", u"Zugeordnete\n"
 "Wechselrichterleistung [kW]:", None))
         self.inverter_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
@@ -1948,10 +2534,10 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem22.setText(QCoreApplication.translate("MainWindow", u"Art der Kopplung", None));
         self.move_none_BAT_inverters_to_blacklist.setText(QCoreApplication.translate("MainWindow", u"Entferne die markierten Artikel", None))
         self.bat_inverter_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
-        self.coupling_type_label.setText(QCoreApplication.translate("MainWindow", u"Art der Kopplung:", None))
+        self.bat_inverter_SN_label.setText(QCoreApplication.translate("MainWindow", u"Seriennummer:", None))
         self.bat_inverter_power_label.setText(QCoreApplication.translate("MainWindow", u"Zugeordnete\n"
 "Wechselrichterleistung [kW]:", None))
-        self.bat_inverter_SN_label.setText(QCoreApplication.translate("MainWindow", u"Seriennummer:", None))
+        self.coupling_type_label.setText(QCoreApplication.translate("MainWindow", u"Art der Kopplung:", None))
         self.coupling_type_text.setPlainText(QCoreApplication.translate("MainWindow", u"AC gekoppeltes System", None))
         self.headline_05.setText(QCoreApplication.translate("MainWindow", u"Speicher", None))
         ___qtablewidgetitem23 = self.BAT_storage_list.horizontalHeaderItem(0)
@@ -1974,20 +2560,20 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem30 = self.BAT_storage_list.horizontalHeaderItem(7)
         ___qtablewidgetitem30.setText(QCoreApplication.translate("MainWindow", u"Batterietechnologie", None));
         self.move_none_BAT_storage_to_blacklist.setText(QCoreApplication.translate("MainWindow", u"Entferne die markierten Artikel", None))
-        self.em_pow_ability_bool_label.setText(QCoreApplication.translate("MainWindow", u"Notstromf\u00e4higkeit\n"
-"bei Netzst\u00f6rungen: ", None))
+        self.bat_storage_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
         self.bat_storage_SN_label.setText(QCoreApplication.translate("MainWindow", u"Seriennummer:", None))
         self.bat_storage_cap_label.setText(QCoreApplication.translate("MainWindow", u"Nutzbare\n"
 "Speicherkapazit\u00e4t:", None))
-        self.bat_storage_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
         self.bat_commiss_date_label.setText(QCoreApplication.translate("MainWindow", u"Datum erstmalige\n"
 "Inbetriebnahme:", None))
+        self.max_discharge_pow_label.setText(QCoreApplication.translate("MainWindow", u"Maximale Entladeleistung \n"
+"im Dauerbetrieb:", None))
+        self.em_pow_ability_bool_label.setText(QCoreApplication.translate("MainWindow", u"Notstromf\u00e4higkeit\n"
+"bei Netzst\u00f6rungen: ", None))
+        self.em_pow_ability_bool_text.setPlainText(QCoreApplication.translate("MainWindow", u"Ja/Nein", None))
         self.energy_storage_type_label.setText(QCoreApplication.translate("MainWindow", u"Technologie der \n"
 "Stromspeicherung:", None))
         self.bat_technology_label.setText(QCoreApplication.translate("MainWindow", u"Batterietechnologie:", None))
-        self.em_pow_ability_bool_text.setPlainText(QCoreApplication.translate("MainWindow", u"Ja/Nein", None))
-        self.max_discharge_pow_label.setText(QCoreApplication.translate("MainWindow", u"Maximale Entladeleistung \n"
-"im Dauerbetrieb:", None))
         self.headline_06.setText(QCoreApplication.translate("MainWindow", u"Ladestation", None))
         ___qtablewidgetitem31 = self.CHG_point_list.horizontalHeaderItem(0)
         ___qtablewidgetitem31.setText(QCoreApplication.translate("MainWindow", u"<>", None));
@@ -2006,44 +2592,44 @@ class Ui_MainWindow(object):
         self.feeding_type_label.setText(QCoreApplication.translate("MainWindow", u"Einspeisung:", None))
         self.feeding_type_text.setPlainText(QCoreApplication.translate("MainWindow", u"Volleinspeisung / Teileinspeisung (einschlie\u00dflich Eigenverbrauch) ", None))
         self.headline_08.setText(QCoreApplication.translate("MainWindow", u"Weitere Anlageneigenschaften", None))
-        self.rmt_drct_mrktr_bool_text.setPlainText(QCoreApplication.translate("MainWindow", u"Nein", None))
         self.pow_limit_bool_label.setText(QCoreApplication.translate("MainWindow", u"Leistungsbegrenzung:", None))
-        self.rmt_drct_mrktr_bool_label.setText(QCoreApplication.translate("MainWindow", u"Fernsteuerbarkeit\n"
-"durch Direktvermarkter:", None))
         self.pow_limit_bool_text.setPlainText(QCoreApplication.translate("MainWindow", u"Nein", None))
-        self.tendering_bool_text.setPlainText(QCoreApplication.translate("MainWindow", u"Nein", None))
-        self.prequali_bool_text.setPlainText(QCoreApplication.translate("MainWindow", u"Nein", None))
-        self.tendering_bool_label.setText(QCoreApplication.translate("MainWindow", u"Erlangung der PV-Anlage \u00fcber \n"
-"Zuschlag in einer Ausschreibung:", None))
-        self.prequali_bool_label.setText(QCoreApplication.translate("MainWindow", u"Pr\u00e4qualifikation\n"
-"f\u00fcr Regelenergie:", None))
-        self.rmt_grd_op_bool_text.setPlainText(QCoreApplication.translate("MainWindow", u"Nein", None))
         self.rmt_grd_op_bool_label.setText(QCoreApplication.translate("MainWindow", u"Fernsteuerbarkeit\n"
 "durch Netzbetreiber:", None))
-        self.rmt_3rd_prt_bool_text.setPlainText(QCoreApplication.translate("MainWindow", u"Nein", None))
+        self.rmt_grd_op_bool_text.setPlainText(QCoreApplication.translate("MainWindow", u"Nein", None))
+        self.rmt_drct_mrktr_bool_label.setText(QCoreApplication.translate("MainWindow", u"Fernsteuerbarkeit\n"
+"durch Direktvermarkter:", None))
+        self.rmt_drct_mrktr_bool_text.setPlainText(QCoreApplication.translate("MainWindow", u"Nein", None))
         self.rmt_3rd_prt_bool_label.setText(QCoreApplication.translate("MainWindow", u"Fernsteuerbarkeit\n"
 "durch Dritte:", None))
+        self.rmt_3rd_prt_bool_text.setPlainText(QCoreApplication.translate("MainWindow", u"Nein", None))
+        self.prequali_bool_label.setText(QCoreApplication.translate("MainWindow", u"Pr\u00e4qualifikation\n"
+"f\u00fcr Regelenergie:", None))
+        self.prequali_bool_text.setPlainText(QCoreApplication.translate("MainWindow", u"Nein", None))
         self.citizen_corp_bool_label.setText(QCoreApplication.translate("MainWindow", u"Anlagenbetreiber ist eine \n"
 "B\u00fcrgerenergiegesellschaft:", None))
         self.citizen_corp_bool_text.setPlainText(QCoreApplication.translate("MainWindow", u"Nein", None))
+        self.tendering_bool_label.setText(QCoreApplication.translate("MainWindow", u"Erlangung der PV-Anlage \u00fcber \n"
+"Zuschlag in einer Ausschreibung:", None))
+        self.tendering_bool_text.setPlainText(QCoreApplication.translate("MainWindow", u"Nein", None))
         self.headline_09.setText(QCoreApplication.translate("MainWindow", u"AC-seitige Komponenten", None))
         self.meter_box_type_label.setText(QCoreApplication.translate("MainWindow", u"Energiez\u00e4hler:", None))
         self.meter_cabinet_label.setText(QCoreApplication.translate("MainWindow", u"Z\u00e4hlerschrank:", None))
         self.headline_10.setText(QCoreApplication.translate("MainWindow", u"Kommunikation und Anlagen\u00fcberwachung", None))
-        self.dl_connect_ext_label.setText(QCoreApplication.translate("MainWindow", u"Externer Zugriff:", None))
         self.dl_type_label.setText(QCoreApplication.translate("MainWindow", u"Datenlogger:", None))
+        self.dl_connect_ext_label.setText(QCoreApplication.translate("MainWindow", u"Externer Zugriff:", None))
 #if QT_CONFIG(tooltip)
         self.load_data_to_device_lists_btn.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Module, Wechselrichter, </p><p>Batteriewechselrichter, Speicher, Ladestation</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.load_data_to_device_lists_btn.setText(QCoreApplication.translate("MainWindow", u"1. Lade Ger\u00e4telisten", None))
         self.fill_fields_btn.setText(QCoreApplication.translate("MainWindow", u"2. F\u00fclle  Formularfelder", None))
         self.store_device_specs_btn.setText(QCoreApplication.translate("MainWindow", u"Hinterlege technische Daten", None))
-        self.target_path_btn_2.setText(QCoreApplication.translate("MainWindow", u"Ablagepfad f\u00fcr Dokumente ausw\u00e4hlen", None))
-        self.create_doc1_btn.setText(QCoreApplication.translate("MainWindow", u"Doku gem\u00e4\u00df MaStR erzeugen", None))
         self.source_btn_docu.setText(QCoreApplication.translate("MainWindow", u"Template Dokumentation", None))
         self.source_btn_matstr.setText(QCoreApplication.translate("MainWindow", u"Template gem. MatStR", None))
+        self.target_path_btn_2.setText(QCoreApplication.translate("MainWindow", u"Ablagepfad f\u00fcr Dokumente ausw\u00e4hlen", None))
+        self.create_doc1_btn.setText(QCoreApplication.translate("MainWindow", u"Doku gem\u00e4\u00df MaStR erzeugen", None))
         self.create_doc2_btn.setText(QCoreApplication.translate("MainWindow", u"SUN-Doku erzeugen", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Doku gem. MatStR", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab2), QCoreApplication.translate("MainWindow", u"Doku gem. MatStR", None))
         self.server_sttings_headline_label.setText(QCoreApplication.translate("MainWindow", u"Servereinstellungen", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Datenbanktyp:", None))
         self.db_type.setItemText(0, QCoreApplication.translate("MainWindow", u"PostgreSQL", None))
@@ -2061,16 +2647,6 @@ class Ui_MainWindow(object):
         self.save_btn.setText(QCoreApplication.translate("MainWindow", u"Speichern", None))
         self.load_btn.setText(QCoreApplication.translate("MainWindow", u"Laden", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab0), QCoreApplication.translate("MainWindow", u"Settings", None))
-        self.project.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"hr { height: 1px; border-width: 0; }\n"
-"li.unchecked::marker { content: \"\\2610\"; }\n"
-"li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:'Segoe UI'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt;\">SUN 24-001</span></p></body></html>", None))
-        self.project_name_label.setText(QCoreApplication.translate("MainWindow", u"Projektname:", None))
-        self.project_label.setText(QCoreApplication.translate("MainWindow", u"Projektnummer:", None))
         self.toolBar.setWindowTitle(QCoreApplication.translate("MainWindow", u"toolBar", None))
     # retranslateUi
 

@@ -6,7 +6,7 @@ from odf.opendocument import load
 
 import logs_and_config
 
-from _tables.row_colour import customize_table_row
+from _tables.customize_row import customize_table_row
 import _ui_fields_Handler.ui_fields
 
 

@@ -23,7 +23,7 @@ def customize_table_row(func):
 
                     change_foreground_if_zero(
                         count, table, row, column)
-                    change_background_colour(table, row, column)
+                    # change_background_colour(table, row, column)
         else:
             # Wenn table None ist, gebe eine Fehlermeldung aus
             QMessageBox.information(
@@ -41,11 +41,11 @@ def change_foreground_if_zero(count, table, row, column):
                 QtGui.QColor("#e20000"))
 
 
-def change_background_colour(table, row, column):
-    if row % 2 == 0:
-        table.item(row, column).setBackground(QtGui.QColor(
-            "#F6A4A4"))  # Hintergrundfarbe für gerade Zeilen
-    else:
-        # Hintergrundfarbe für ungerade Zeilen
-        table.item(row, column).setBackground(
-            QtGui.QColor("#BAE290"))
+# def change_background_colour(table, row, column):
+#     if row % 2 == 0:
+#         table.item(row, column).setBackground(QtGui.QColor(
+#             "#F6A4A4"))  # Hintergrundfarbe für gerade Zeilen
+#     else:
+#         # Hintergrundfarbe für ungerade Zeilen
+#         table.item(row, column).setBackground(
+#             QtGui.QColor("#BAE290"))
