@@ -14,39 +14,53 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1890, 952)
+        MainWindow.resize(1896, 952)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
-        MainWindow.setAutoFillBackground(True)
+        MainWindow.setAutoFillBackground(False)
         MainWindow.setStyleSheet("/* Allgemeine Stile */\n"
 "\n"
 "/* Setzt die Standardschrift für alle Elemente */\n"
 "* {\n"
 "    font: 12pt \"Sitka Heading\";\n"
+"    background-color: transparent\n"
+"}\n"
+"QWidget#centralwidget {\n"
+"    background-color: #13213b; /* Hintergrundfarbe */\n"
+"    border-radius: 5px; /* Abgerundete Ecken */\n"
 "}\n"
 "\n"
 "/* Stil für verschiedene Elemente */\n"
 "\n"
 "/* QLabel */\n"
 "QLabel {\n"
-"    padding-left: 10px;\n"
+"    padding-left: 5px;\n"
 "    color: #13213b; /* Textfarbe */\n"
-"    background-color: none; /* Hintergrundfarbe */\n"
-"    border-radius: 5px; /* Abgerundete Ecken */\n"
+"}\n"
+"\n"
+"QLabel#headline_01,\n"
+"QLabel#headline_02,\n"
+"QLabel#headline_03,\n"
+"QLabel#headline_04,\n"
+"QLabel#headline_05,\n"
+"QLabel#headline_06,\n"
+"QLabel#headline_07,\n"
+"QLabel#headline_08,\n"
+"QLabel#headline_09,\n"
+"QLabel#headline_10\n"
+"{\n"
+"    color: #13213b; /* Textfarbe */\n"
+"    background-color: none;\n"
+"    font: 14pt;\n"
+"    border: none;\n"
+"    border-bottom: 2px solid #13213b \n"
 "}\n"
 "\n"
 "/* QTextEdit */\n"
-"QTextEdit {\n"
-"    color: #13213b; /* Textfarbe */\n"
-"    border-radius: 5px; /* Abgerundete Ecken */\n"
-"    background-color: rgb(255, 255, 255); /* Hintergrundfarbe */\n"
-"    font: 12pt \"Sitka Heading\"; /* Schriftart */\n"
-"    text-align: left;\n"
-"}\n"
-"\n"
+"QTextEdit,\n"
 "QPlainTextEdit {\n"
 "    color: #13213b; /* Textfarbe */\n"
 "    border-radius: 5px; /* Abgerundete Ecken */\n"
@@ -70,8 +84,30 @@ class Ui_MainWindow(object):
 "\n"
 "/* QPushButton beim Überfahren mit der Maus */\n"
 "QPushButton::hover {\n"
-"    background-color: rgb(170, 18, 43); /* Hintergrundfarbe */\n"
-"    color: rgb(71, 71, 71); /* Textfarbe */\n"
+"    background-color: rgba(226, 24, 57, 150); /* Hintergrundfarbe */\n"
+"    color: rgba(19, 33, 59, 150); /* Textfarbe */\n"
+"}\n"
+"\n"
+"/* QPushButton beim Klicken */\n"
+"QPushButton:pressed {\n"
+"    background-color: rgb(0, 170, 255); /* Hintergrundfarbe */\n"
+"    color: white; /* Textfarbe */\n"
+"}\n"
+"\n"
+"/* QPushButton */\n"
+"QPushButton#store_device_specs_btn,\n"
+"QPushButton#load_data_to_device_lists_btn,\n"
+"QPushButton#fill_fields_btn {\n"
+"    color: #e21839;\n"
+"    background-color: #13213b;\n"
+"}\n"
+"\n"
+"/* QPushButton beim Überfahren mit der Maus */\n"
+"QPushButton#store_device_specs_btn::hover ,\n"
+"QPushButton#load_data_to_device_lists_btn::hover ,\n"
+"QPushButton#fill_fields_btn::hover {\n"
+"    color: rgba(226, 24, 57, 150);\n"
+"    background-color: rgba(19, 33, 59, 150);\n"
 "}\n"
 "\n"
 "/* QPushButton beim Klicken */\n"
@@ -81,14 +117,6 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "/* QFrame und QTabWidget-Panels (Inhalt) */\n"
-"\n"
-"QFrame#frame0\n"
-"{\n"
-"    background-color: #13213b; /* Hintergrundfarbe */\n"
-"    border-radius: 5px; /* Abgerundete Ecken */\n"
-"}\n"
-"\n"
-"\n"
 "\n"
 "QFrame#frame010,\n"
 "QFrame#frame011\n"
@@ -110,7 +138,7 @@ class Ui_MainWindow(object):
 "QTabBar::tab,\n"
 "QTabBar::tab:selected,\n"
 "QTabBar:tab:!selected {\n"
-"    margin: 0.5px; /* Margin */\n"
+"    margin: 1px; /* Margin */\n"
 "    width: 30px; /* Breite */\n"
 "    min-height: 50px; /* Mindesthöhe */\n"
 "    max-height: 250px; /* Maximale Höhe */\n"
@@ -160,6 +188,10 @@ class Ui_MainWindow(object):
 "\n"
 "QHeaderView::section{\n"
 "    background-color: rgb(220, 255, 255);\n"
+"}\n"
+"\n"
+"QScrollArea{\n"
+"background-color: transparent;\n"
 "}\n"
 "")
         MainWindow.setAnimated(False)
@@ -576,7 +608,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, -411, 1781, 4892))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 1781, 5012))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.gridLayout_5 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_5.setSpacing(9)
@@ -595,7 +627,7 @@ class Ui_MainWindow(object):
         self.headline_01.setMinimumSize(QtCore.QSize(250, 50))
         font = QtGui.QFont()
         font.setFamily("Sitka Heading")
-        font.setPointSize(12)
+        font.setPointSize(14)
         font.setBold(False)
         font.setItalic(False)
         font.setUnderline(False)
@@ -613,73 +645,133 @@ class Ui_MainWindow(object):
         self.gridLayout_2 = QtWidgets.QGridLayout(self.frame1)
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.frame_7 = QtWidgets.QFrame(self.frame1)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_7.sizePolicy().hasHeightForWidth())
+        self.frame_7.setSizePolicy(sizePolicy)
         self.frame_7.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_7.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_7.setObjectName("frame_7")
         self.formLayout_2 = QtWidgets.QFormLayout(self.frame_7)
         self.formLayout_2.setObjectName("formLayout_2")
         self.frame_8 = QtWidgets.QFrame(self.frame_7)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_8.sizePolicy().hasHeightForWidth())
+        self.frame_8.setSizePolicy(sizePolicy)
         self.frame_8.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_8.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_8.setObjectName("frame_8")
         self.gridLayout_11 = QtWidgets.QGridLayout(self.frame_8)
         self.gridLayout_11.setObjectName("gridLayout_11")
-        self.op_adress_3_label = QtWidgets.QLabel(self.frame_8)
-        self.op_adress_3_label.setMinimumSize(QtCore.QSize(0, 30))
-        self.op_adress_3_label.setMaximumSize(QtCore.QSize(16777209, 30))
+        self.operator_label = QtWidgets.QLabel(self.frame_8)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.operator_label.sizePolicy().hasHeightForWidth())
+        self.operator_label.setSizePolicy(sizePolicy)
+        self.operator_label.setMinimumSize(QtCore.QSize(100, 30))
+        self.operator_label.setMaximumSize(QtCore.QSize(150, 30))
         font = QtGui.QFont()
         font.setFamily("Sitka Heading")
         font.setPointSize(12)
         font.setBold(False)
         font.setItalic(False)
-        self.op_adress_3_label.setFont(font)
-        self.op_adress_3_label.setObjectName("op_adress_3_label")
-        self.gridLayout_11.addWidget(self.op_adress_3_label, 0, 0, 1, 1)
+        self.operator_label.setFont(font)
+        self.operator_label.setObjectName("operator_label")
+        self.gridLayout_11.addWidget(self.operator_label, 0, 0, 1, 1)
         self.operator_text = QtWidgets.QPlainTextEdit(self.frame_8)
-        self.operator_text.setMinimumSize(QtCore.QSize(0, 30))
-        self.operator_text.setMaximumSize(QtCore.QSize(16777215, 30))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.operator_text.sizePolicy().hasHeightForWidth())
+        self.operator_text.setSizePolicy(sizePolicy)
+        self.operator_text.setMinimumSize(QtCore.QSize(500, 30))
+        self.operator_text.setMaximumSize(QtCore.QSize(800, 60))
         self.operator_text.setObjectName("operator_text")
         self.gridLayout_11.addWidget(self.operator_text, 0, 1, 1, 1)
         self.op_adress_1_label = QtWidgets.QLabel(self.frame_8)
-        self.op_adress_1_label.setMinimumSize(QtCore.QSize(0, 30))
-        self.op_adress_1_label.setMaximumSize(QtCore.QSize(16777215, 30))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.op_adress_1_label.sizePolicy().hasHeightForWidth())
+        self.op_adress_1_label.setSizePolicy(sizePolicy)
+        self.op_adress_1_label.setMinimumSize(QtCore.QSize(100, 30))
+        self.op_adress_1_label.setMaximumSize(QtCore.QSize(150, 30))
         self.op_adress_1_label.setObjectName("op_adress_1_label")
         self.gridLayout_11.addWidget(self.op_adress_1_label, 1, 0, 1, 1)
         self.op_adress_1_text = QtWidgets.QPlainTextEdit(self.frame_8)
-        self.op_adress_1_text.setMinimumSize(QtCore.QSize(0, 30))
-        self.op_adress_1_text.setMaximumSize(QtCore.QSize(16777215, 30))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.op_adress_1_text.sizePolicy().hasHeightForWidth())
+        self.op_adress_1_text.setSizePolicy(sizePolicy)
+        self.op_adress_1_text.setMinimumSize(QtCore.QSize(500, 30))
+        self.op_adress_1_text.setMaximumSize(QtCore.QSize(800, 60))
         self.op_adress_1_text.setObjectName("op_adress_1_text")
-        self.gridLayout_11.addWidget(self.op_adress_1_text, 1, 1, 1, 1)
+        self.gridLayout_11.addWidget(self.op_adress_1_text, 1, 1, 1, 1, QtCore.Qt.AlignLeft)
         self.op_adress_2_label = QtWidgets.QLabel(self.frame_8)
-        self.op_adress_2_label.setMinimumSize(QtCore.QSize(0, 30))
-        self.op_adress_2_label.setMaximumSize(QtCore.QSize(16777215, 30))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.op_adress_2_label.sizePolicy().hasHeightForWidth())
+        self.op_adress_2_label.setSizePolicy(sizePolicy)
+        self.op_adress_2_label.setMinimumSize(QtCore.QSize(100, 30))
+        self.op_adress_2_label.setMaximumSize(QtCore.QSize(150, 30))
         self.op_adress_2_label.setObjectName("op_adress_2_label")
         self.gridLayout_11.addWidget(self.op_adress_2_label, 2, 0, 1, 1)
         self.op_adress_3_text = QtWidgets.QPlainTextEdit(self.frame_8)
-        self.op_adress_3_text.setMinimumSize(QtCore.QSize(0, 30))
-        self.op_adress_3_text.setMaximumSize(QtCore.QSize(16777215, 30))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.op_adress_3_text.sizePolicy().hasHeightForWidth())
+        self.op_adress_3_text.setSizePolicy(sizePolicy)
+        self.op_adress_3_text.setMinimumSize(QtCore.QSize(500, 30))
+        self.op_adress_3_text.setMaximumSize(QtCore.QSize(800, 60))
         self.op_adress_3_text.setObjectName("op_adress_3_text")
         self.gridLayout_11.addWidget(self.op_adress_3_text, 2, 1, 1, 1)
-        self.op_adress_3_label_2 = QtWidgets.QLabel(self.frame_8)
-        self.op_adress_3_label_2.setMinimumSize(QtCore.QSize(0, 30))
-        self.op_adress_3_label_2.setMaximumSize(QtCore.QSize(16777215, 30))
-        self.op_adress_3_label_2.setObjectName("op_adress_3_label_2")
-        self.gridLayout_11.addWidget(self.op_adress_3_label_2, 3, 0, 1, 1)
+        self.op_adress_3_label = QtWidgets.QLabel(self.frame_8)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.op_adress_3_label.sizePolicy().hasHeightForWidth())
+        self.op_adress_3_label.setSizePolicy(sizePolicy)
+        self.op_adress_3_label.setMinimumSize(QtCore.QSize(100, 30))
+        self.op_adress_3_label.setMaximumSize(QtCore.QSize(150, 30))
+        self.op_adress_3_label.setObjectName("op_adress_3_label")
+        self.gridLayout_11.addWidget(self.op_adress_3_label, 3, 0, 1, 1)
         self.op_adress_2_text = QtWidgets.QPlainTextEdit(self.frame_8)
-        self.op_adress_2_text.setMinimumSize(QtCore.QSize(0, 30))
-        self.op_adress_2_text.setMaximumSize(QtCore.QSize(16777215, 30))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.op_adress_2_text.sizePolicy().hasHeightForWidth())
+        self.op_adress_2_text.setSizePolicy(sizePolicy)
+        self.op_adress_2_text.setMinimumSize(QtCore.QSize(500, 30))
+        self.op_adress_2_text.setMaximumSize(QtCore.QSize(800, 60))
         self.op_adress_2_text.setObjectName("op_adress_2_text")
         self.gridLayout_11.addWidget(self.op_adress_2_text, 3, 1, 1, 1)
         self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.frame_8)
         self.frame_5 = QtWidgets.QFrame(self.frame_7)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_5.sizePolicy().hasHeightForWidth())
+        self.frame_5.setSizePolicy(sizePolicy)
         self.frame_5.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_5.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_5.setObjectName("frame_5")
         self.gridLayout_23 = QtWidgets.QGridLayout(self.frame_5)
         self.gridLayout_23.setObjectName("gridLayout_23")
         self.loc_head_label = QtWidgets.QLabel(self.frame_5)
-        self.loc_head_label.setMinimumSize(QtCore.QSize(0, 30))
-        self.loc_head_label.setMaximumSize(QtCore.QSize(16777215, 30))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.loc_head_label.sizePolicy().hasHeightForWidth())
+        self.loc_head_label.setSizePolicy(sizePolicy)
+        self.loc_head_label.setMinimumSize(QtCore.QSize(100, 30))
+        self.loc_head_label.setMaximumSize(QtCore.QSize(150, 30))
         font = QtGui.QFont()
         font.setFamily("Sitka Heading")
         font.setPointSize(12)
@@ -689,53 +781,98 @@ class Ui_MainWindow(object):
         self.loc_head_label.setObjectName("loc_head_label")
         self.gridLayout_23.addWidget(self.loc_head_label, 0, 0, 1, 1)
         self.loc_adress_1_label = QtWidgets.QLabel(self.frame_5)
-        self.loc_adress_1_label.setMinimumSize(QtCore.QSize(0, 30))
-        self.loc_adress_1_label.setMaximumSize(QtCore.QSize(16777215, 30))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.loc_adress_1_label.sizePolicy().hasHeightForWidth())
+        self.loc_adress_1_label.setSizePolicy(sizePolicy)
+        self.loc_adress_1_label.setMinimumSize(QtCore.QSize(100, 30))
+        self.loc_adress_1_label.setMaximumSize(QtCore.QSize(150, 30))
         self.loc_adress_1_label.setObjectName("loc_adress_1_label")
         self.gridLayout_23.addWidget(self.loc_adress_1_label, 1, 0, 1, 1)
         self.loc_adress_1_text = QtWidgets.QPlainTextEdit(self.frame_5)
-        self.loc_adress_1_text.setMinimumSize(QtCore.QSize(0, 30))
-        self.loc_adress_1_text.setMaximumSize(QtCore.QSize(16777215, 30))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.loc_adress_1_text.sizePolicy().hasHeightForWidth())
+        self.loc_adress_1_text.setSizePolicy(sizePolicy)
+        self.loc_adress_1_text.setMinimumSize(QtCore.QSize(500, 30))
+        self.loc_adress_1_text.setMaximumSize(QtCore.QSize(800, 60))
         self.loc_adress_1_text.setObjectName("loc_adress_1_text")
-        self.gridLayout_23.addWidget(self.loc_adress_1_text, 1, 1, 1, 1)
+        self.gridLayout_23.addWidget(self.loc_adress_1_text, 1, 1, 1, 1, QtCore.Qt.AlignLeft)
         self.loc_adress_2_label = QtWidgets.QLabel(self.frame_5)
-        self.loc_adress_2_label.setMinimumSize(QtCore.QSize(0, 30))
-        self.loc_adress_2_label.setMaximumSize(QtCore.QSize(16777215, 30))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.loc_adress_2_label.sizePolicy().hasHeightForWidth())
+        self.loc_adress_2_label.setSizePolicy(sizePolicy)
+        self.loc_adress_2_label.setMinimumSize(QtCore.QSize(100, 30))
+        self.loc_adress_2_label.setMaximumSize(QtCore.QSize(150, 30))
         self.loc_adress_2_label.setObjectName("loc_adress_2_label")
         self.gridLayout_23.addWidget(self.loc_adress_2_label, 2, 0, 1, 1)
         self.loc_adress_2_text = QtWidgets.QPlainTextEdit(self.frame_5)
-        self.loc_adress_2_text.setMinimumSize(QtCore.QSize(0, 30))
-        self.loc_adress_2_text.setMaximumSize(QtCore.QSize(16777215, 30))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.loc_adress_2_text.sizePolicy().hasHeightForWidth())
+        self.loc_adress_2_text.setSizePolicy(sizePolicy)
+        self.loc_adress_2_text.setMinimumSize(QtCore.QSize(500, 30))
+        self.loc_adress_2_text.setMaximumSize(QtCore.QSize(800, 60))
         self.loc_adress_2_text.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.loc_adress_2_text.setObjectName("loc_adress_2_text")
         self.gridLayout_23.addWidget(self.loc_adress_2_text, 2, 1, 1, 1)
         self.loc_adress_3_label = QtWidgets.QLabel(self.frame_5)
-        self.loc_adress_3_label.setMinimumSize(QtCore.QSize(0, 30))
-        self.loc_adress_3_label.setMaximumSize(QtCore.QSize(16777215, 30))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.loc_adress_3_label.sizePolicy().hasHeightForWidth())
+        self.loc_adress_3_label.setSizePolicy(sizePolicy)
+        self.loc_adress_3_label.setMinimumSize(QtCore.QSize(100, 30))
+        self.loc_adress_3_label.setMaximumSize(QtCore.QSize(150, 30))
         self.loc_adress_3_label.setObjectName("loc_adress_3_label")
         self.gridLayout_23.addWidget(self.loc_adress_3_label, 3, 0, 1, 1)
         self.loc_adress_3_text = QtWidgets.QPlainTextEdit(self.frame_5)
-        self.loc_adress_3_text.setMinimumSize(QtCore.QSize(0, 30))
-        self.loc_adress_3_text.setMaximumSize(QtCore.QSize(16777215, 30))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.loc_adress_3_text.sizePolicy().hasHeightForWidth())
+        self.loc_adress_3_text.setSizePolicy(sizePolicy)
+        self.loc_adress_3_text.setMinimumSize(QtCore.QSize(500, 30))
+        self.loc_adress_3_text.setMaximumSize(QtCore.QSize(800, 60))
         self.loc_adress_3_text.setObjectName("loc_adress_3_text")
         self.gridLayout_23.addWidget(self.loc_adress_3_text, 3, 1, 1, 1)
         self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.frame_5)
         self.gridLayout_2.addWidget(self.frame_7, 2, 0, 2, 1)
         self.frame_13 = QtWidgets.QFrame(self.frame1)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_13.sizePolicy().hasHeightForWidth())
+        self.frame_13.setSizePolicy(sizePolicy)
         self.frame_13.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_13.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_13.setObjectName("frame_13")
         self.horizontalLayout_13 = QtWidgets.QHBoxLayout(self.frame_13)
         self.horizontalLayout_13.setObjectName("horizontalLayout_13")
         self.frame_12 = QtWidgets.QFrame(self.frame_13)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_12.sizePolicy().hasHeightForWidth())
+        self.frame_12.setSizePolicy(sizePolicy)
         self.frame_12.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_12.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_12.setObjectName("frame_12")
         self.horizontalLayout_12 = QtWidgets.QHBoxLayout(self.frame_12)
         self.horizontalLayout_12.setObjectName("horizontalLayout_12")
         self.sys_perf_label = QtWidgets.QLabel(self.frame_12)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.sys_perf_label.sizePolicy().hasHeightForWidth())
+        self.sys_perf_label.setSizePolicy(sizePolicy)
         self.sys_perf_label.setMinimumSize(QtCore.QSize(0, 30))
-        self.sys_perf_label.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.sys_perf_label.setMaximumSize(QtCore.QSize(200, 30))
         font = QtGui.QFont()
         font.setFamily("Sitka Heading")
         font.setPointSize(12)
@@ -745,11 +882,16 @@ class Ui_MainWindow(object):
         self.sys_perf_label.setObjectName("sys_perf_label")
         self.horizontalLayout_12.addWidget(self.sys_perf_label)
         self.sys_perf_text = QtWidgets.QPlainTextEdit(self.frame_12)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.sys_perf_text.sizePolicy().hasHeightForWidth())
+        self.sys_perf_text.setSizePolicy(sizePolicy)
         self.sys_perf_text.setMinimumSize(QtCore.QSize(0, 30))
-        self.sys_perf_text.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.sys_perf_text.setMaximumSize(QtCore.QSize(100, 30))
         self.sys_perf_text.setObjectName("sys_perf_text")
         self.horizontalLayout_12.addWidget(self.sys_perf_text)
-        self.horizontalLayout_13.addWidget(self.frame_12)
+        self.horizontalLayout_13.addWidget(self.frame_12, 0, QtCore.Qt.AlignLeft)
         self.frame_11 = QtWidgets.QFrame(self.frame_13)
         self.frame_11.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_11.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -796,12 +938,23 @@ class Ui_MainWindow(object):
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.frame_10)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.frame_14 = QtWidgets.QFrame(self.frame_10)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_14.sizePolicy().hasHeightForWidth())
+        self.frame_14.setSizePolicy(sizePolicy)
+        self.frame_14.setMaximumSize(QtCore.QSize(300, 16777215))
         self.frame_14.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_14.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_14.setObjectName("frame_14")
         self.horizontalLayout_14 = QtWidgets.QHBoxLayout(self.frame_14)
         self.horizontalLayout_14.setObjectName("horizontalLayout_14")
         self.bool_consist_azimuth_label = QtWidgets.QLabel(self.frame_14)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bool_consist_azimuth_label.sizePolicy().hasHeightForWidth())
+        self.bool_consist_azimuth_label.setSizePolicy(sizePolicy)
         self.bool_consist_azimuth_label.setMinimumSize(QtCore.QSize(0, 30))
         self.bool_consist_azimuth_label.setMaximumSize(QtCore.QSize(16777215, 30))
         self.bool_consist_azimuth_label.setObjectName("bool_consist_azimuth_label")
@@ -813,7 +966,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.bool_consist_azimuth_text.sizePolicy().hasHeightForWidth())
         self.bool_consist_azimuth_text.setSizePolicy(sizePolicy)
         self.bool_consist_azimuth_text.setMinimumSize(QtCore.QSize(0, 30))
-        self.bool_consist_azimuth_text.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.bool_consist_azimuth_text.setMaximumSize(QtCore.QSize(75, 30))
         self.bool_consist_azimuth_text.setObjectName("bool_consist_azimuth_text")
         self.horizontalLayout_14.addWidget(self.bool_consist_azimuth_text)
         self.verticalLayout_4.addWidget(self.frame_14)
@@ -902,12 +1055,12 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.addWidget(self.frame_15)
         self.verticalLayout_2.addWidget(self.frame_10)
         self.gridLayout_2.addWidget(self.frame_9, 5, 0, 1, 1)
-        self.verticalLayout_3.addWidget(self.frame1)
+        self.verticalLayout_3.addWidget(self.frame1, 0, QtCore.Qt.AlignLeft)
         self.headline_02 = QtWidgets.QLabel(self.frame0221)
         self.headline_02.setMinimumSize(QtCore.QSize(250, 50))
         font = QtGui.QFont()
         font.setFamily("Sitka Heading")
-        font.setPointSize(12)
+        font.setPointSize(14)
         font.setBold(False)
         font.setItalic(False)
         self.headline_02.setFont(font)
@@ -1043,7 +1196,7 @@ class Ui_MainWindow(object):
         self.headline_03.setMinimumSize(QtCore.QSize(250, 50))
         font = QtGui.QFont()
         font.setFamily("Sitka Heading")
-        font.setPointSize(12)
+        font.setPointSize(14)
         font.setBold(False)
         font.setItalic(False)
         self.headline_03.setFont(font)
@@ -1230,7 +1383,7 @@ class Ui_MainWindow(object):
         self.headline_04.setMinimumSize(QtCore.QSize(250, 50))
         font = QtGui.QFont()
         font.setFamily("Sitka Heading")
-        font.setPointSize(12)
+        font.setPointSize(14)
         font.setBold(False)
         font.setItalic(False)
         self.headline_04.setFont(font)
@@ -1381,7 +1534,7 @@ class Ui_MainWindow(object):
         self.headline_05.setMinimumSize(QtCore.QSize(250, 50))
         font = QtGui.QFont()
         font.setFamily("Sitka Heading")
-        font.setPointSize(12)
+        font.setPointSize(14)
         font.setBold(False)
         font.setItalic(False)
         self.headline_05.setFont(font)
@@ -1618,7 +1771,7 @@ class Ui_MainWindow(object):
         self.headline_06.setMinimumSize(QtCore.QSize(250, 50))
         font = QtGui.QFont()
         font.setFamily("Sitka Heading")
-        font.setPointSize(12)
+        font.setPointSize(14)
         font.setBold(False)
         font.setItalic(False)
         self.headline_06.setFont(font)
@@ -1729,7 +1882,7 @@ class Ui_MainWindow(object):
         self.headline_07.setMinimumSize(QtCore.QSize(250, 50))
         font = QtGui.QFont()
         font.setFamily("Sitka Heading")
-        font.setPointSize(12)
+        font.setPointSize(14)
         font.setBold(False)
         font.setItalic(False)
         self.headline_07.setFont(font)
@@ -1773,7 +1926,7 @@ class Ui_MainWindow(object):
         self.headline_08.setMinimumSize(QtCore.QSize(250, 50))
         font = QtGui.QFont()
         font.setFamily("Sitka Heading")
-        font.setPointSize(12)
+        font.setPointSize(14)
         font.setBold(False)
         font.setItalic(False)
         self.headline_08.setFont(font)
@@ -1938,7 +2091,7 @@ class Ui_MainWindow(object):
         self.headline_09.setMinimumSize(QtCore.QSize(250, 50))
         font = QtGui.QFont()
         font.setFamily("Sitka Heading")
-        font.setPointSize(12)
+        font.setPointSize(14)
         font.setBold(False)
         font.setItalic(False)
         self.headline_09.setFont(font)
@@ -2009,7 +2162,7 @@ class Ui_MainWindow(object):
         self.headline_10.setMinimumSize(QtCore.QSize(250, 50))
         font = QtGui.QFont()
         font.setFamily("Sitka Heading")
-        font.setPointSize(12)
+        font.setPointSize(14)
         font.setBold(False)
         font.setItalic(False)
         self.headline_10.setFont(font)
@@ -2185,7 +2338,7 @@ class Ui_MainWindow(object):
         self.source_path_text_matstr.setMaximumSize(QtCore.QSize(16777215, 30))
         self.source_path_text_matstr.setObjectName("source_path_text_matstr")
         self.gridLayout_20.addWidget(self.source_path_text_matstr, 0, 1, 1, 1, QtCore.Qt.AlignVCenter)
-        self.verticalLayout_13.addWidget(self.frame_33, 0, QtCore.Qt.AlignVCenter)
+        self.verticalLayout_13.addWidget(self.frame_33)
         self.frame_35 = QtWidgets.QFrame(self.frame_32)
         self.frame_35.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_35.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -2402,13 +2555,6 @@ class Ui_MainWindow(object):
         self.gridLayout_4.addWidget(self.frame02, 1, 0, 1, 1)
         self.formLayout_3.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.frame0)
         MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1890, 22))
-        self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
         self.toolBar = QtWidgets.QToolBar(MainWindow)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
@@ -2420,7 +2566,7 @@ class Ui_MainWindow(object):
         MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -2444,10 +2590,10 @@ class Ui_MainWindow(object):
         self.target_path_btn.setText(_translate("MainWindow", "Zielpfad festlegen"))
         self.paste_docs_btn.setText(_translate("MainWindow", "Dokumente übertragen"))
         self.headline_01.setText(_translate("MainWindow", "Anlagenübersicht"))
-        self.op_adress_3_label.setText(_translate("MainWindow", "Anlagenbetreiber:"))
+        self.operator_label.setText(_translate("MainWindow", "Anlagenbetreiber:"))
         self.op_adress_1_label.setText(_translate("MainWindow", "Straße:"))
         self.op_adress_2_label.setText(_translate("MainWindow", "PLZ:"))
-        self.op_adress_3_label_2.setText(_translate("MainWindow", "Ort:"))
+        self.op_adress_3_label.setText(_translate("MainWindow", "Ort:"))
         self.loc_head_label.setText(_translate("MainWindow", "Standort:"))
         self.loc_adress_1_label.setText(_translate("MainWindow", "Straße:"))
         self.loc_adress_2_label.setText(_translate("MainWindow", "PLZ:"))

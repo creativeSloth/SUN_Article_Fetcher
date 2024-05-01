@@ -89,5 +89,5 @@ config - Kopie.ini
 vsc_venv/
 logs/
 .data/
-
-
+ui/icons/
+ui/Icons/

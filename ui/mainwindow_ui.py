@@ -18,59 +18,75 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplication, QComboBox,
     QFormLayout, QFrame, QGridLayout, QHBoxLayout,
     QHeaderView, QLabel, QLayout, QMainWindow,
-    QMenuBar, QPlainTextEdit, QPushButton, QScrollArea,
-    QSizePolicy, QSpacerItem, QSplitter, QStatusBar,
-    QTabWidget, QTableWidget, QTableWidgetItem, QTextEdit,
-    QToolBar, QVBoxLayout, QWidget)
+    QPlainTextEdit, QPushButton, QScrollArea, QSizePolicy,
+    QSpacerItem, QSplitter, QTabWidget, QTableWidget,
+    QTableWidgetItem, QTextEdit, QToolBar, QVBoxLayout,
+    QWidget)
+import icons_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1890, 952)
+        MainWindow.resize(1898, 952)
         sizePolicy = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
-        MainWindow.setAutoFillBackground(True)
+        MainWindow.setAutoFillBackground(False)
         MainWindow.setStyleSheet(u"/* Allgemeine Stile */\n"
 "\n"
 "/* Setzt die Standardschrift f\u00fcr alle Elemente */\n"
 "* {\n"
 "    font: 12pt \"Sitka Heading\";\n"
+"	background-color: transparent\n"
+"}\n"
+"QWidget#centralwidget {\n"
+"    background-color: #13213b; /* Hintergrundfarbe */\n"
+"    border-radius: 5px; /* Abgerundete Ecken */\n"
 "}\n"
 "\n"
 "/* Stil f\u00fcr verschiedene Elemente */\n"
 "\n"
 "/* QLabel */\n"
 "QLabel {\n"
-"    padding-left: 10px;\n"
+"    padding-left: 5px;\n"
 "    color: #13213b; /* Textfarbe */\n"
-"    background-color: none; /* Hintergrundfarbe */\n"
-"    border-radius: 5px; /* Abgerundete Ecken */\n"
+"}\n"
+"\n"
+"QLabel#headline_01,\n"
+"QLabel#headline_02,\n"
+"QLabel#headline_03,\n"
+"QLabel#headline_04,\n"
+"QLabel#headline_05,\n"
+"QLabel#headline_06,\n"
+"QLabel#headline_07,\n"
+"QLabel#headline_08,\n"
+"QLabel#headline_09,\n"
+"QLabel#headline_10\n"
+"{\n"
+"    color: #13213b; /* Textfarbe */\n"
+"    background-color: none;\n"
+"	font: 14pt;\n"
+"	border: none;\n"
+"	border-bottom: 2px solid #13213b;\n"
+"	border-top: 2px solid #13213b \n"
 "}\n"
 "\n"
 "/* QTextEdit */\n"
-"QTextEdit {\n"
-"    color: #13213b; /* Textfarbe */\n"
-"    border-radius: 5px; /* Abgerundete Ecken */\n"
-"    background-color: rgb(255, 255, 255); /* Hintergrundfarbe */\n"
-"    font: 12pt \"Sitka Heading\"; /* Schriftart */\n"
-"	text-align: left;\n"
-"}\n"
-"\n"
+"QTextEdit,\n"
 "QPlainTextEdit {\n"
 "    color: #13213b; /* Textfarbe */\n"
-"    border-radius: 5px; /* Abgerundete Ecken */\n"
+"    "
+                        "border-radius: 5px; /* Abgerundete Ecken */\n"
 "    background-color: rgb(255, 255, 255); /* Hintergrundfarbe */\n"
 "    font: 12pt \"Sitka Heading\"; /* Schriftart */\n"
 "	text-align: left;\n"
 "}\n"
 "\n"
 "/* Deaktivierte QTextEdit */\n"
-"QPlainTextEdit::disa"
-                        "bled {\n"
+"QPlainTextEdit::disabled {\n"
 "    color: #13213b; /* Textfarbe */\n"
 "    border-radius: 5px; /* Abgerundete Ecken */\n"
 "    background-color: rgb(144, 216, 216); /* Hintergrundfarbe */\n"
@@ -84,8 +100,31 @@ class Ui_MainWindow(object):
 "\n"
 "/* QPushButton beim \u00dcberfahren mit der Maus */\n"
 "QPushButton::hover {\n"
-"    background-color: rgb(170, 18, 43); /* Hintergrundfarbe */\n"
-"    color: rgb(71, 71, 71); /* Textfarbe */\n"
+"    background-color: rgba(226, 24, 57, 150); /* Hintergrundfarbe */\n"
+"    color: rgba(19, 33, 59, 150); /* Textfarbe */\n"
+"}\n"
+"\n"
+"/* QPushButton beim Klicken */\n"
+"QPushButton:pressed {\n"
+"    background-color: rgb(0, 170, 255); /* Hintergrundfarbe */\n"
+"    color: white; /* Textfarbe */\n"
+"}\n"
+"\n"
+"/* QPushButton */\n"
+"QPus"
+                        "hButton#store_device_specs_btn,\n"
+"QPushButton#load_data_to_device_lists_btn,\n"
+"QPushButton#fill_fields_btn {\n"
+"    color: #e21839;\n"
+"	background-color: #13213b;\n"
+"}\n"
+"\n"
+"/* QPushButton beim \u00dcberfahren mit der Maus */\n"
+"QPushButton#store_device_specs_btn::hover ,\n"
+"QPushButton#load_data_to_device_lists_btn::hover ,\n"
+"QPushButton#fill_fields_btn::hover {\n"
+"    color: rgba(226, 24, 57, 150);\n"
+"    background-color: rgba(19, 33, 59, 150);\n"
 "}\n"
 "\n"
 "/* QPushButton beim Klicken */\n"
@@ -96,19 +135,10 @@ class Ui_MainWindow(object):
 "\n"
 "/* QFrame und QTabWidget-Panels (Inhalt) */\n"
 "\n"
-"QFrame#frame0\n"
-"{\n"
-"    background-color: #13213b; /* Hintergrundfarbe */\n"
-"    border-radius: 5px; /* Abgerundete Ecken */\n"
-"}\n"
-"\n"
-"\n"
-"\n"
 "QFrame#frame010,\n"
 "QFrame#frame011\n"
 "{\n"
-"    background-color: rgb(170, 255, 255); "
-                        "/* Hintergrundfarbe */\n"
+"    background-color: rgb(170, 255, 255); /* Hintergrundfarbe */\n"
 "    border-radius: 5px; /* Abgerundete Ecken */\n"
 "}\n"
 "\n"
@@ -116,7 +146,8 @@ class Ui_MainWindow(object):
 "QTabWidget::pane \n"
 "{\n"
 "    background-color: rgb(170, 255, 255); /* Hintergrundfarbe */\n"
-"    border-top-right-radius: 5px; /* Abgerundete Ecken */\n"
+"    border-top-right"
+                        "-radius: 5px; /* Abgerundete Ecken */\n"
 "    border-bottom-left-radius: 5px; /* Abgerundete Ecken */\n"
 "    border-bottom-right-radius: 5px; /* Abgerundete Ecken */\n"
 "}\n"
@@ -125,7 +156,7 @@ class Ui_MainWindow(object):
 "QTabBar::tab,\n"
 "QTabBar::tab:selected,\n"
 "QTabBar:tab:!selected {\n"
-"    margin: 0.5px; /* Margin */\n"
+"    margin: 1px; /* Margin */\n"
 "    width: 30px; /* Breite */\n"
 "    min-height: 50px; /* Mindesth\u00f6he */\n"
 "    max-height: 250px; /* Maximale H\u00f6he */\n"
@@ -136,15 +167,15 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "/* Ausgew\u00e4hlte Registerkarten */\n"
-"QTabBar::tab:sel"
-                        "ected {\n"
+"QTabBar::tab:selected {\n"
 "    background-color: rgb(0, 170, 255); /* Hintergrundfarbe */\n"
 "    color: rgb(0, 0, 0); /* Textfarbe */\n"
 "}\n"
 "\n"
 "/* Nicht ausgew\u00e4hlte Registerkarten */\n"
 "QTabBar:tab:!selected {\n"
-"    background-color: rgb(210, 255, 255); /* Hintergrundfarbe */\n"
+"    background"
+                        "-color: rgb(210, 255, 255); /* Hintergrundfarbe */\n"
 "    color: rgb(170, 170, 255); /* Textfarbe */\n"
 "}\n"
 "\n"
@@ -169,14 +200,18 @@ class Ui_MainWindow(object):
 "	color: #13213b;\n"
 "}\n"
 "\n"
-"QTableW"
-                        "idget::item::selected {\n"
+"QTableWidget::item::selected {\n"
 "    background-color: rgb(200, 255, 255); /* Beispielhintergrundfarbe f\u00fcr alternative Zeilen */\n"
 "	color: #13213b;\n"
 "}\n"
 "\n"
 "QHeaderView::section{\n"
-"	background-color: rgb(220, 255, 255);\n"
+"	background-color: rgb(220, 255, 2"
+                        "55);\n"
+"}\n"
+"\n"
+"QScrollArea{\n"
+"background-color: transparent;\n"
 "}\n"
 "")
         MainWindow.setAnimated(False)
@@ -360,6 +395,8 @@ class Ui_MainWindow(object):
         font1.setUnderline(False)
         self.load_articles_db_btn.setFont(font1)
         self.load_articles_db_btn.setStyleSheet(u"")
+        icon = QIcon(QIcon.fromTheme(u"document-print"))
+        self.load_articles_db_btn.setIcon(icon)
         self.load_articles_db_btn.setAutoDefault(False)
 
         self.horizontalLayout_7.addWidget(self.load_articles_db_btn)
@@ -559,7 +596,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, -411, 1781, 4892))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 1781, 5012))
         self.gridLayout_5 = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_5.setSpacing(9)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
@@ -576,7 +613,13 @@ class Ui_MainWindow(object):
         self.headline_01 = QLabel(self.frame0221)
         self.headline_01.setObjectName(u"headline_01")
         self.headline_01.setMinimumSize(QSize(250, 50))
-        self.headline_01.setFont(font1)
+        font3 = QFont()
+        font3.setFamilies([u"Sitka Heading"])
+        font3.setPointSize(14)
+        font3.setBold(False)
+        font3.setItalic(False)
+        font3.setUnderline(False)
+        self.headline_01.setFont(font3)
         self.headline_01.setLayoutDirection(Qt.LeftToRight)
         self.headline_01.setAutoFillBackground(False)
         self.headline_01.setFrameShape(QFrame.StyledPanel)
@@ -592,70 +635,90 @@ class Ui_MainWindow(object):
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.frame_7 = QFrame(self.frame1)
         self.frame_7.setObjectName(u"frame_7")
+        sizePolicy.setHeightForWidth(self.frame_7.sizePolicy().hasHeightForWidth())
+        self.frame_7.setSizePolicy(sizePolicy)
         self.frame_7.setFrameShape(QFrame.StyledPanel)
         self.frame_7.setFrameShadow(QFrame.Raised)
         self.formLayout_2 = QFormLayout(self.frame_7)
         self.formLayout_2.setObjectName(u"formLayout_2")
         self.frame_8 = QFrame(self.frame_7)
         self.frame_8.setObjectName(u"frame_8")
+        sizePolicy.setHeightForWidth(self.frame_8.sizePolicy().hasHeightForWidth())
+        self.frame_8.setSizePolicy(sizePolicy)
         self.frame_8.setFrameShape(QFrame.StyledPanel)
         self.frame_8.setFrameShadow(QFrame.Raised)
         self.gridLayout_11 = QGridLayout(self.frame_8)
         self.gridLayout_11.setObjectName(u"gridLayout_11")
-        self.op_adress_3_label = QLabel(self.frame_8)
-        self.op_adress_3_label.setObjectName(u"op_adress_3_label")
-        self.op_adress_3_label.setMinimumSize(QSize(0, 30))
-        self.op_adress_3_label.setMaximumSize(QSize(16777209, 30))
-        self.op_adress_3_label.setFont(font)
+        self.operator_label = QLabel(self.frame_8)
+        self.operator_label.setObjectName(u"operator_label")
+        sizePolicy.setHeightForWidth(self.operator_label.sizePolicy().hasHeightForWidth())
+        self.operator_label.setSizePolicy(sizePolicy)
+        self.operator_label.setMinimumSize(QSize(100, 30))
+        self.operator_label.setMaximumSize(QSize(150, 30))
+        self.operator_label.setFont(font)
 
-        self.gridLayout_11.addWidget(self.op_adress_3_label, 0, 0, 1, 1)
+        self.gridLayout_11.addWidget(self.operator_label, 0, 0, 1, 1)
 
         self.operator_text = QPlainTextEdit(self.frame_8)
         self.operator_text.setObjectName(u"operator_text")
-        self.operator_text.setMinimumSize(QSize(0, 30))
-        self.operator_text.setMaximumSize(QSize(16777215, 30))
+        sizePolicy.setHeightForWidth(self.operator_text.sizePolicy().hasHeightForWidth())
+        self.operator_text.setSizePolicy(sizePolicy)
+        self.operator_text.setMinimumSize(QSize(500, 30))
+        self.operator_text.setMaximumSize(QSize(800, 60))
 
         self.gridLayout_11.addWidget(self.operator_text, 0, 1, 1, 1)
 
         self.op_adress_1_label = QLabel(self.frame_8)
         self.op_adress_1_label.setObjectName(u"op_adress_1_label")
-        self.op_adress_1_label.setMinimumSize(QSize(0, 30))
-        self.op_adress_1_label.setMaximumSize(QSize(16777215, 30))
+        sizePolicy.setHeightForWidth(self.op_adress_1_label.sizePolicy().hasHeightForWidth())
+        self.op_adress_1_label.setSizePolicy(sizePolicy)
+        self.op_adress_1_label.setMinimumSize(QSize(100, 30))
+        self.op_adress_1_label.setMaximumSize(QSize(150, 30))
 
         self.gridLayout_11.addWidget(self.op_adress_1_label, 1, 0, 1, 1)
 
         self.op_adress_1_text = QPlainTextEdit(self.frame_8)
         self.op_adress_1_text.setObjectName(u"op_adress_1_text")
-        self.op_adress_1_text.setMinimumSize(QSize(0, 30))
-        self.op_adress_1_text.setMaximumSize(QSize(16777215, 30))
+        sizePolicy.setHeightForWidth(self.op_adress_1_text.sizePolicy().hasHeightForWidth())
+        self.op_adress_1_text.setSizePolicy(sizePolicy)
+        self.op_adress_1_text.setMinimumSize(QSize(500, 30))
+        self.op_adress_1_text.setMaximumSize(QSize(800, 60))
 
-        self.gridLayout_11.addWidget(self.op_adress_1_text, 1, 1, 1, 1)
+        self.gridLayout_11.addWidget(self.op_adress_1_text, 1, 1, 1, 1, Qt.AlignLeft)
 
         self.op_adress_2_label = QLabel(self.frame_8)
         self.op_adress_2_label.setObjectName(u"op_adress_2_label")
-        self.op_adress_2_label.setMinimumSize(QSize(0, 30))
-        self.op_adress_2_label.setMaximumSize(QSize(16777215, 30))
+        sizePolicy.setHeightForWidth(self.op_adress_2_label.sizePolicy().hasHeightForWidth())
+        self.op_adress_2_label.setSizePolicy(sizePolicy)
+        self.op_adress_2_label.setMinimumSize(QSize(100, 30))
+        self.op_adress_2_label.setMaximumSize(QSize(150, 30))
 
         self.gridLayout_11.addWidget(self.op_adress_2_label, 2, 0, 1, 1)
 
         self.op_adress_3_text = QPlainTextEdit(self.frame_8)
         self.op_adress_3_text.setObjectName(u"op_adress_3_text")
-        self.op_adress_3_text.setMinimumSize(QSize(0, 30))
-        self.op_adress_3_text.setMaximumSize(QSize(16777215, 30))
+        sizePolicy.setHeightForWidth(self.op_adress_3_text.sizePolicy().hasHeightForWidth())
+        self.op_adress_3_text.setSizePolicy(sizePolicy)
+        self.op_adress_3_text.setMinimumSize(QSize(500, 30))
+        self.op_adress_3_text.setMaximumSize(QSize(800, 60))
 
         self.gridLayout_11.addWidget(self.op_adress_3_text, 2, 1, 1, 1)
 
-        self.op_adress_3_label_2 = QLabel(self.frame_8)
-        self.op_adress_3_label_2.setObjectName(u"op_adress_3_label_2")
-        self.op_adress_3_label_2.setMinimumSize(QSize(0, 30))
-        self.op_adress_3_label_2.setMaximumSize(QSize(16777215, 30))
+        self.op_adress_3_label = QLabel(self.frame_8)
+        self.op_adress_3_label.setObjectName(u"op_adress_3_label")
+        sizePolicy.setHeightForWidth(self.op_adress_3_label.sizePolicy().hasHeightForWidth())
+        self.op_adress_3_label.setSizePolicy(sizePolicy)
+        self.op_adress_3_label.setMinimumSize(QSize(100, 30))
+        self.op_adress_3_label.setMaximumSize(QSize(150, 30))
 
-        self.gridLayout_11.addWidget(self.op_adress_3_label_2, 3, 0, 1, 1)
+        self.gridLayout_11.addWidget(self.op_adress_3_label, 3, 0, 1, 1)
 
         self.op_adress_2_text = QPlainTextEdit(self.frame_8)
         self.op_adress_2_text.setObjectName(u"op_adress_2_text")
-        self.op_adress_2_text.setMinimumSize(QSize(0, 30))
-        self.op_adress_2_text.setMaximumSize(QSize(16777215, 30))
+        sizePolicy.setHeightForWidth(self.op_adress_2_text.sizePolicy().hasHeightForWidth())
+        self.op_adress_2_text.setSizePolicy(sizePolicy)
+        self.op_adress_2_text.setMinimumSize(QSize(500, 30))
+        self.op_adress_2_text.setMaximumSize(QSize(800, 60))
 
         self.gridLayout_11.addWidget(self.op_adress_2_text, 3, 1, 1, 1)
 
@@ -664,58 +727,74 @@ class Ui_MainWindow(object):
 
         self.frame_5 = QFrame(self.frame_7)
         self.frame_5.setObjectName(u"frame_5")
+        sizePolicy.setHeightForWidth(self.frame_5.sizePolicy().hasHeightForWidth())
+        self.frame_5.setSizePolicy(sizePolicy)
         self.frame_5.setFrameShape(QFrame.StyledPanel)
         self.frame_5.setFrameShadow(QFrame.Raised)
         self.gridLayout_23 = QGridLayout(self.frame_5)
         self.gridLayout_23.setObjectName(u"gridLayout_23")
         self.loc_head_label = QLabel(self.frame_5)
         self.loc_head_label.setObjectName(u"loc_head_label")
-        self.loc_head_label.setMinimumSize(QSize(0, 30))
-        self.loc_head_label.setMaximumSize(QSize(16777215, 30))
+        sizePolicy.setHeightForWidth(self.loc_head_label.sizePolicy().hasHeightForWidth())
+        self.loc_head_label.setSizePolicy(sizePolicy)
+        self.loc_head_label.setMinimumSize(QSize(100, 30))
+        self.loc_head_label.setMaximumSize(QSize(150, 30))
         self.loc_head_label.setFont(font)
 
         self.gridLayout_23.addWidget(self.loc_head_label, 0, 0, 1, 1)
 
         self.loc_adress_1_label = QLabel(self.frame_5)
         self.loc_adress_1_label.setObjectName(u"loc_adress_1_label")
-        self.loc_adress_1_label.setMinimumSize(QSize(0, 30))
-        self.loc_adress_1_label.setMaximumSize(QSize(16777215, 30))
+        sizePolicy.setHeightForWidth(self.loc_adress_1_label.sizePolicy().hasHeightForWidth())
+        self.loc_adress_1_label.setSizePolicy(sizePolicy)
+        self.loc_adress_1_label.setMinimumSize(QSize(100, 30))
+        self.loc_adress_1_label.setMaximumSize(QSize(150, 30))
 
         self.gridLayout_23.addWidget(self.loc_adress_1_label, 1, 0, 1, 1)
 
         self.loc_adress_1_text = QPlainTextEdit(self.frame_5)
         self.loc_adress_1_text.setObjectName(u"loc_adress_1_text")
-        self.loc_adress_1_text.setMinimumSize(QSize(0, 30))
-        self.loc_adress_1_text.setMaximumSize(QSize(16777215, 30))
+        sizePolicy.setHeightForWidth(self.loc_adress_1_text.sizePolicy().hasHeightForWidth())
+        self.loc_adress_1_text.setSizePolicy(sizePolicy)
+        self.loc_adress_1_text.setMinimumSize(QSize(500, 30))
+        self.loc_adress_1_text.setMaximumSize(QSize(800, 60))
 
-        self.gridLayout_23.addWidget(self.loc_adress_1_text, 1, 1, 1, 1)
+        self.gridLayout_23.addWidget(self.loc_adress_1_text, 1, 1, 1, 1, Qt.AlignLeft)
 
         self.loc_adress_2_label = QLabel(self.frame_5)
         self.loc_adress_2_label.setObjectName(u"loc_adress_2_label")
-        self.loc_adress_2_label.setMinimumSize(QSize(0, 30))
-        self.loc_adress_2_label.setMaximumSize(QSize(16777215, 30))
+        sizePolicy.setHeightForWidth(self.loc_adress_2_label.sizePolicy().hasHeightForWidth())
+        self.loc_adress_2_label.setSizePolicy(sizePolicy)
+        self.loc_adress_2_label.setMinimumSize(QSize(100, 30))
+        self.loc_adress_2_label.setMaximumSize(QSize(150, 30))
 
         self.gridLayout_23.addWidget(self.loc_adress_2_label, 2, 0, 1, 1)
 
         self.loc_adress_2_text = QPlainTextEdit(self.frame_5)
         self.loc_adress_2_text.setObjectName(u"loc_adress_2_text")
-        self.loc_adress_2_text.setMinimumSize(QSize(0, 30))
-        self.loc_adress_2_text.setMaximumSize(QSize(16777215, 30))
+        sizePolicy.setHeightForWidth(self.loc_adress_2_text.sizePolicy().hasHeightForWidth())
+        self.loc_adress_2_text.setSizePolicy(sizePolicy)
+        self.loc_adress_2_text.setMinimumSize(QSize(500, 30))
+        self.loc_adress_2_text.setMaximumSize(QSize(800, 60))
         self.loc_adress_2_text.setFrameShape(QFrame.StyledPanel)
 
         self.gridLayout_23.addWidget(self.loc_adress_2_text, 2, 1, 1, 1)
 
         self.loc_adress_3_label = QLabel(self.frame_5)
         self.loc_adress_3_label.setObjectName(u"loc_adress_3_label")
-        self.loc_adress_3_label.setMinimumSize(QSize(0, 30))
-        self.loc_adress_3_label.setMaximumSize(QSize(16777215, 30))
+        sizePolicy.setHeightForWidth(self.loc_adress_3_label.sizePolicy().hasHeightForWidth())
+        self.loc_adress_3_label.setSizePolicy(sizePolicy)
+        self.loc_adress_3_label.setMinimumSize(QSize(100, 30))
+        self.loc_adress_3_label.setMaximumSize(QSize(150, 30))
 
         self.gridLayout_23.addWidget(self.loc_adress_3_label, 3, 0, 1, 1)
 
         self.loc_adress_3_text = QPlainTextEdit(self.frame_5)
         self.loc_adress_3_text.setObjectName(u"loc_adress_3_text")
-        self.loc_adress_3_text.setMinimumSize(QSize(0, 30))
-        self.loc_adress_3_text.setMaximumSize(QSize(16777215, 30))
+        sizePolicy.setHeightForWidth(self.loc_adress_3_text.sizePolicy().hasHeightForWidth())
+        self.loc_adress_3_text.setSizePolicy(sizePolicy)
+        self.loc_adress_3_text.setMinimumSize(QSize(500, 30))
+        self.loc_adress_3_text.setMaximumSize(QSize(800, 60))
 
         self.gridLayout_23.addWidget(self.loc_adress_3_text, 3, 1, 1, 1)
 
@@ -727,33 +806,41 @@ class Ui_MainWindow(object):
 
         self.frame_13 = QFrame(self.frame1)
         self.frame_13.setObjectName(u"frame_13")
+        sizePolicy.setHeightForWidth(self.frame_13.sizePolicy().hasHeightForWidth())
+        self.frame_13.setSizePolicy(sizePolicy)
         self.frame_13.setFrameShape(QFrame.StyledPanel)
         self.frame_13.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_13 = QHBoxLayout(self.frame_13)
         self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
         self.frame_12 = QFrame(self.frame_13)
         self.frame_12.setObjectName(u"frame_12")
+        sizePolicy.setHeightForWidth(self.frame_12.sizePolicy().hasHeightForWidth())
+        self.frame_12.setSizePolicy(sizePolicy)
         self.frame_12.setFrameShape(QFrame.StyledPanel)
         self.frame_12.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_12 = QHBoxLayout(self.frame_12)
         self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
         self.sys_perf_label = QLabel(self.frame_12)
         self.sys_perf_label.setObjectName(u"sys_perf_label")
+        sizePolicy.setHeightForWidth(self.sys_perf_label.sizePolicy().hasHeightForWidth())
+        self.sys_perf_label.setSizePolicy(sizePolicy)
         self.sys_perf_label.setMinimumSize(QSize(0, 30))
-        self.sys_perf_label.setMaximumSize(QSize(16777215, 30))
+        self.sys_perf_label.setMaximumSize(QSize(200, 30))
         self.sys_perf_label.setFont(font)
 
         self.horizontalLayout_12.addWidget(self.sys_perf_label)
 
         self.sys_perf_text = QPlainTextEdit(self.frame_12)
         self.sys_perf_text.setObjectName(u"sys_perf_text")
+        sizePolicy.setHeightForWidth(self.sys_perf_text.sizePolicy().hasHeightForWidth())
+        self.sys_perf_text.setSizePolicy(sizePolicy)
         self.sys_perf_text.setMinimumSize(QSize(0, 30))
-        self.sys_perf_text.setMaximumSize(QSize(16777215, 30))
+        self.sys_perf_text.setMaximumSize(QSize(100, 30))
 
         self.horizontalLayout_12.addWidget(self.sys_perf_text)
 
 
-        self.horizontalLayout_13.addWidget(self.frame_12)
+        self.horizontalLayout_13.addWidget(self.frame_12, 0, Qt.AlignLeft)
 
         self.frame_11 = QFrame(self.frame_13)
         self.frame_11.setObjectName(u"frame_11")
@@ -802,12 +889,17 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.frame_14 = QFrame(self.frame_10)
         self.frame_14.setObjectName(u"frame_14")
+        sizePolicy.setHeightForWidth(self.frame_14.sizePolicy().hasHeightForWidth())
+        self.frame_14.setSizePolicy(sizePolicy)
+        self.frame_14.setMaximumSize(QSize(300, 16777215))
         self.frame_14.setFrameShape(QFrame.StyledPanel)
         self.frame_14.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_14 = QHBoxLayout(self.frame_14)
         self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
         self.bool_consist_azimuth_label = QLabel(self.frame_14)
         self.bool_consist_azimuth_label.setObjectName(u"bool_consist_azimuth_label")
+        sizePolicy.setHeightForWidth(self.bool_consist_azimuth_label.sizePolicy().hasHeightForWidth())
+        self.bool_consist_azimuth_label.setSizePolicy(sizePolicy)
         self.bool_consist_azimuth_label.setMinimumSize(QSize(0, 30))
         self.bool_consist_azimuth_label.setMaximumSize(QSize(16777215, 30))
 
@@ -818,7 +910,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.bool_consist_azimuth_text.sizePolicy().hasHeightForWidth())
         self.bool_consist_azimuth_text.setSizePolicy(sizePolicy)
         self.bool_consist_azimuth_text.setMinimumSize(QSize(0, 30))
-        self.bool_consist_azimuth_text.setMaximumSize(QSize(16777215, 30))
+        self.bool_consist_azimuth_text.setMaximumSize(QSize(75, 30))
 
         self.horizontalLayout_14.addWidget(self.bool_consist_azimuth_text)
 
@@ -935,12 +1027,17 @@ class Ui_MainWindow(object):
         self.gridLayout_2.addWidget(self.frame_9, 5, 0, 1, 1)
 
 
-        self.verticalLayout_3.addWidget(self.frame1)
+        self.verticalLayout_3.addWidget(self.frame1, 0, Qt.AlignLeft)
 
         self.headline_02 = QLabel(self.frame0221)
         self.headline_02.setObjectName(u"headline_02")
         self.headline_02.setMinimumSize(QSize(250, 50))
-        self.headline_02.setFont(font)
+        font4 = QFont()
+        font4.setFamilies([u"Sitka Heading"])
+        font4.setPointSize(14)
+        font4.setBold(False)
+        font4.setItalic(False)
+        self.headline_02.setFont(font4)
         self.headline_02.setFrameShape(QFrame.StyledPanel)
         self.headline_02.setFrameShadow(QFrame.Sunken)
 
@@ -1077,7 +1174,7 @@ class Ui_MainWindow(object):
         self.headline_03 = QLabel(self.frame0221)
         self.headline_03.setObjectName(u"headline_03")
         self.headline_03.setMinimumSize(QSize(250, 50))
-        self.headline_03.setFont(font)
+        self.headline_03.setFont(font4)
         self.headline_03.setFrameShape(QFrame.StyledPanel)
         self.headline_03.setFrameShadow(QFrame.Sunken)
 
@@ -1253,7 +1350,7 @@ class Ui_MainWindow(object):
         self.headline_04 = QLabel(self.frame0221)
         self.headline_04.setObjectName(u"headline_04")
         self.headline_04.setMinimumSize(QSize(250, 50))
-        self.headline_04.setFont(font)
+        self.headline_04.setFont(font4)
         self.headline_04.setFrameShape(QFrame.StyledPanel)
         self.headline_04.setFrameShadow(QFrame.Sunken)
 
@@ -1399,7 +1496,7 @@ class Ui_MainWindow(object):
         self.headline_05 = QLabel(self.frame0221)
         self.headline_05.setObjectName(u"headline_05")
         self.headline_05.setMinimumSize(QSize(250, 50))
-        self.headline_05.setFont(font)
+        self.headline_05.setFont(font4)
         self.headline_05.setFrameShape(QFrame.StyledPanel)
         self.headline_05.setFrameShadow(QFrame.Sunken)
 
@@ -1620,7 +1717,7 @@ class Ui_MainWindow(object):
         self.headline_06 = QLabel(self.frame0221)
         self.headline_06.setObjectName(u"headline_06")
         self.headline_06.setMinimumSize(QSize(250, 50))
-        self.headline_06.setFont(font)
+        self.headline_06.setFont(font4)
         self.headline_06.setFrameShape(QFrame.StyledPanel)
         self.headline_06.setFrameShadow(QFrame.Sunken)
 
@@ -1727,7 +1824,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.headline_07.sizePolicy().hasHeightForWidth())
         self.headline_07.setSizePolicy(sizePolicy)
         self.headline_07.setMinimumSize(QSize(250, 50))
-        self.headline_07.setFont(font)
+        self.headline_07.setFont(font4)
         self.headline_07.setFrameShape(QFrame.StyledPanel)
         self.headline_07.setFrameShadow(QFrame.Sunken)
 
@@ -1771,7 +1868,7 @@ class Ui_MainWindow(object):
         self.headline_08 = QLabel(self.frame0221)
         self.headline_08.setObjectName(u"headline_08")
         self.headline_08.setMinimumSize(QSize(250, 50))
-        self.headline_08.setFont(font)
+        self.headline_08.setFont(font4)
         self.headline_08.setFrameShape(QFrame.StyledPanel)
         self.headline_08.setFrameShadow(QFrame.Sunken)
 
@@ -1918,7 +2015,7 @@ class Ui_MainWindow(object):
         self.headline_09 = QLabel(self.frame0221)
         self.headline_09.setObjectName(u"headline_09")
         self.headline_09.setMinimumSize(QSize(250, 50))
-        self.headline_09.setFont(font)
+        self.headline_09.setFont(font4)
         self.headline_09.setFrameShape(QFrame.StyledPanel)
         self.headline_09.setFrameShadow(QFrame.Sunken)
 
@@ -1983,7 +2080,7 @@ class Ui_MainWindow(object):
         self.headline_10 = QLabel(self.frame0221)
         self.headline_10.setObjectName(u"headline_10")
         self.headline_10.setMinimumSize(QSize(250, 50))
-        self.headline_10.setFont(font)
+        self.headline_10.setFont(font4)
         self.headline_10.setFrameShape(QFrame.StyledPanel)
         self.headline_10.setFrameShadow(QFrame.Sunken)
 
@@ -2162,7 +2259,7 @@ class Ui_MainWindow(object):
         self.gridLayout_20.addWidget(self.source_path_text_matstr, 0, 1, 1, 1, Qt.AlignVCenter)
 
 
-        self.verticalLayout_13.addWidget(self.frame_33, 0, Qt.AlignVCenter)
+        self.verticalLayout_13.addWidget(self.frame_33)
 
         self.frame_35 = QFrame(self.frame_32)
         self.frame_35.setObjectName(u"frame_35")
@@ -2395,13 +2492,6 @@ class Ui_MainWindow(object):
         self.formLayout_3.setWidget(0, QFormLayout.LabelRole, self.frame0)
 
         MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QMenuBar(MainWindow)
-        self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1890, 22))
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QStatusBar(MainWindow)
-        self.statusbar.setObjectName(u"statusbar")
-        MainWindow.setStatusBar(self.statusbar)
         self.toolBar = QToolBar(MainWindow)
         self.toolBar.setObjectName(u"toolBar")
         sizePolicy12 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Maximum)
@@ -2414,7 +2504,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(0)
         self.load_articles_db_btn.setDefault(True)
         self.load_articles_file_btn.setDefault(True)
         self.source_path_btn.setDefault(True)
@@ -2452,10 +2542,10 @@ class Ui_MainWindow(object):
         self.target_path_btn.setText(QCoreApplication.translate("MainWindow", u"Zielpfad festlegen", None))
         self.paste_docs_btn.setText(QCoreApplication.translate("MainWindow", u"Dokumente \u00fcbertragen", None))
         self.headline_01.setText(QCoreApplication.translate("MainWindow", u"Anlagen\u00fcbersicht", None))
-        self.op_adress_3_label.setText(QCoreApplication.translate("MainWindow", u"Anlagenbetreiber:", None))
+        self.operator_label.setText(QCoreApplication.translate("MainWindow", u"Anlagenbetreiber:", None))
         self.op_adress_1_label.setText(QCoreApplication.translate("MainWindow", u"Stra\u00dfe:", None))
         self.op_adress_2_label.setText(QCoreApplication.translate("MainWindow", u"PLZ:", None))
-        self.op_adress_3_label_2.setText(QCoreApplication.translate("MainWindow", u"Ort:", None))
+        self.op_adress_3_label.setText(QCoreApplication.translate("MainWindow", u"Ort:", None))
         self.loc_head_label.setText(QCoreApplication.translate("MainWindow", u"Standort:", None))
         self.loc_adress_1_label.setText(QCoreApplication.translate("MainWindow", u"Stra\u00dfe:", None))
         self.loc_adress_2_label.setText(QCoreApplication.translate("MainWindow", u"PLZ:", None))
