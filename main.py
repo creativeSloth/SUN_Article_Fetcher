@@ -35,13 +35,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.map_ui_buttons()
 
     def initialize(self):
-        self.previous_project_text = self.ui.project.toPlainText()
-        _tables.search_bar.set_all_table_headers(self)
+
+        directory_Handler.set_directories(self)
         logs_and_config.create_device_related_storage_list(
             self, storage_file='blacklist_path')
         logs_and_config.create_device_related_storage_list(
             self, storage_file='device_specs_list_path')
         _ui_fields_Handler.ui_fields.config_to_fields(self)
+
+        _tables.search_bar.set_all_table_headers(self)
+
+        self.previous_project_text = self.ui.project.toPlainText()
 
         # query_input-Box verstecken
         self.ui.query_input.hide()
@@ -236,7 +240,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 # * * * * * * * * * * * * * * * * * Settings * * * * * * * * * * * * * * * *
-
 
     def on_save_btn_click(self):
         file_path = logs_and_config.create_save_file(self)
