@@ -14,12 +14,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1896, 952)
+        MainWindow.resize(1898, 952)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
+        MainWindow.setAcceptDrops(True)
         MainWindow.setAutoFillBackground(False)
         MainWindow.setStyleSheet("/* Allgemeine Stile */\n"
 "\n"
@@ -31,6 +32,15 @@ class Ui_MainWindow(object):
 "QWidget#centralwidget {\n"
 "    background-color: #13213b; /* Hintergrundfarbe */\n"
 "    border-radius: 5px; /* Abgerundete Ecken */\n"
+"}\n"
+"\n"
+"QMessageBox {\n"
+"    background-color: rgb(220, 255, 255);\n"
+"    border-radius: 5px; /* Abgerundete Ecken */\n"
+"}\n"
+"\n"
+"QMessageBox QPushButton {\n"
+"    padding: 10px;\n"
 "}\n"
 "\n"
 "/* Stil für verschiedene Elemente */\n"
@@ -56,7 +66,8 @@ class Ui_MainWindow(object):
 "    background-color: none;\n"
 "    font: 14pt;\n"
 "    border: none;\n"
-"    border-bottom: 2px solid #13213b \n"
+"    border-bottom: 2px solid #13213b;\n"
+"    border-top: 2px solid #13213b \n"
 "}\n"
 "\n"
 "/* QTextEdit */\n"
@@ -85,9 +96,8 @@ class Ui_MainWindow(object):
 "/* QPushButton beim Überfahren mit der Maus */\n"
 "QPushButton::hover {\n"
 "    background-color: rgba(226, 24, 57, 150); /* Hintergrundfarbe */\n"
-"    color: rgba(19, 33, 59, 150); /* Textfarbe */\n"
+"    color: rgba(19, 33, 59, 150); /* Textfarbe */    \n"
 "}\n"
-"\n"
 "/* QPushButton beim Klicken */\n"
 "QPushButton:pressed {\n"
 "    background-color: rgb(0, 170, 255); /* Hintergrundfarbe */\n"
@@ -108,12 +118,6 @@ class Ui_MainWindow(object):
 "QPushButton#fill_fields_btn::hover {\n"
 "    color: rgba(226, 24, 57, 150);\n"
 "    background-color: rgba(19, 33, 59, 150);\n"
-"}\n"
-"\n"
-"/* QPushButton beim Klicken */\n"
-"QPushButton:pressed {\n"
-"    background-color: rgb(0, 170, 255); /* Hintergrundfarbe */\n"
-"    color: white; /* Textfarbe */\n"
 "}\n"
 "\n"
 "/* QFrame und QTabWidget-Panels (Inhalt) */\n"
@@ -191,7 +195,7 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "QScrollArea{\n"
-"background-color: transparent;\n"
+"    background-color: transparent;\n"
 "}\n"
 "")
         MainWindow.setAnimated(False)
@@ -269,6 +273,7 @@ class Ui_MainWindow(object):
         font.setBold(False)
         font.setItalic(False)
         self.project.setFont(font)
+        self.project.setInputMethodHints(QtCore.Qt.ImhMultiLine)
         self.project.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.project.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.project.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
@@ -405,9 +410,16 @@ class Ui_MainWindow(object):
         font.setItalic(False)
         font.setUnderline(False)
         self.load_articles_db_btn.setFont(font)
+        self.load_articles_db_btn.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.load_articles_db_btn.setStyleSheet("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("d:\\3441\\Documents\\Familie\\Edgar\\Weiterbildungen\\Kurse\\Python Bootcamp\\Projekte\\SUN_Article_Fetcher/ui\\icons/database_48dp_#13213B.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.load_articles_db_btn.setIcon(icon)
+        self.load_articles_db_btn.setIconSize(QtCore.QSize(32, 32))
+        self.load_articles_db_btn.setCheckable(False)
+        self.load_articles_db_btn.setChecked(False)
         self.load_articles_db_btn.setAutoDefault(False)
-        self.load_articles_db_btn.setDefault(True)
+        self.load_articles_db_btn.setDefault(False)
         self.load_articles_db_btn.setObjectName("load_articles_db_btn")
         self.horizontalLayout_7.addWidget(self.load_articles_db_btn)
         self.load_articles_file_btn = QtWidgets.QPushButton(self.frame_6)
@@ -425,6 +437,10 @@ class Ui_MainWindow(object):
         font.setItalic(False)
         font.setUnderline(False)
         self.load_articles_file_btn.setFont(font)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("d:\\3441\\Documents\\Familie\\Edgar\\Weiterbildungen\\Kurse\\Python Bootcamp\\Projekte\\SUN_Article_Fetcher/ui\\icons/home_storage_48dp_#13213B.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.load_articles_file_btn.setIcon(icon1)
+        self.load_articles_file_btn.setIconSize(QtCore.QSize(32, 32))
         self.load_articles_file_btn.setCheckable(False)
         self.load_articles_file_btn.setChecked(False)
         self.load_articles_file_btn.setAutoDefault(False)
@@ -2429,6 +2445,8 @@ class Ui_MainWindow(object):
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.label)
         self.db_type = QtWidgets.QComboBox(self.scrollAreaWidgetContents2)
         self.db_type.setMaximumSize(QtCore.QSize(100, 16777215))
+        self.db_type.setFrame(True)
+        self.db_type.setModelColumn(0)
         self.db_type.setObjectName("db_type")
         self.db_type.addItem("")
         self.db_type.addItem("")
@@ -2566,7 +2584,7 @@ class Ui_MainWindow(object):
         MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

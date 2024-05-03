@@ -6,16 +6,19 @@ import pandas as pd
 
 from qtpy import QtCore, QtWidgets
 from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtGui import QFont
+
+
+import _tables.customize_row
+from ui.mainwindow import Ui_MainWindow
 
 import _data_Handler.data
 import _save_and_load.load
 import _save_and_load.save
 import _tables.interactions
 import _tables.search_bar
-from ui.mainwindow import Ui_MainWindow
 import directory_Handler
 import logs_and_config
-import _tables
 import _save_and_load
 import _ui_fields_Handler.ui_fields
 
@@ -171,15 +174,21 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Holen Sie sich alle ausgewählten Dateien im Table Widget
         selected_files = []
-        df = pd.DataFrame(columns=['article_no', 'article_name', 'count'])
-        for row in range(self.ui.articles_list.rowCount()):
 
-            checkbox_item = self.ui.articles_list.item(row, 0)
-            article_no = self.ui.articles_list.item(row, 1).text()
-            article_name = self.ui.articles_list.item(row, 2).text()
-            # ? count = self.ui.articles_list.item(row, 3).text()
+        # Datframe für Log-File
+        df = pd.DataFrame(columns=['article_no', 'article_name', 'count'])
+
+        table = self.ui.articles_list
+
+        for row in range(table.rowCount()):
+
+            checkbox_item = table.item(row, 0)
+            article_no = table.item(row, 1).text()
+            article_name = table.item(row, 2).text()
+            # ? count = table.item(row, 3).text()
             # Erstelle ein DataFrame mit den neuen Daten
 
+            # Datframe für Log-File
             new_data = pd.DataFrame(
                 {'article_no': [article_no],
                  'article_name': [article_name]
@@ -203,7 +212,21 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Iteriere über alle übereinstimmenden Dateinamen
         count = 0
+
         for matching_filename in matching_files:
+            # iteriere durch die Tabelle, um die Artikelnummer Fett zu machen
+            for row in range(table.rowCount()):
+                article_no_item = table.item(row, 1)  # Item in Spalte 1
+                article_no = article_no_item.text()
+
+                print(article_no + "   ----   " + matching_filename)
+
+                if article_no in matching_filename:
+                    # Fett markieren
+                    font = QFont()
+                    font.setBold(True)
+                    article_no_item.setFont(font)
+
             # Konstruiere den vollständigen Pfad zur Quelldatei
             source_file_path = os.path.join(source_path, matching_filename)
 
@@ -240,6 +263,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 # * * * * * * * * * * * * * * * * * Settings * * * * * * * * * * * * * * * *
+
 
     def on_save_btn_click(self):
         file_path = logs_and_config.create_save_file(self)

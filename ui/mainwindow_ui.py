@@ -22,7 +22,6 @@ from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplicat
     QSpacerItem, QSplitter, QTabWidget, QTableWidget,
     QTableWidgetItem, QTextEdit, QToolBar, QVBoxLayout,
     QWidget)
-import icons_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -34,6 +33,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
+        MainWindow.setAcceptDrops(True)
         MainWindow.setAutoFillBackground(False)
         MainWindow.setStyleSheet(u"/* Allgemeine Stile */\n"
 "\n"
@@ -45,6 +45,15 @@ class Ui_MainWindow(object):
 "QWidget#centralwidget {\n"
 "    background-color: #13213b; /* Hintergrundfarbe */\n"
 "    border-radius: 5px; /* Abgerundete Ecken */\n"
+"}\n"
+"\n"
+"QMessageBox {\n"
+"	background-color: rgb(220, 255, 255);\n"
+"	border-radius: 5px; /* Abgerundete Ecken */\n"
+"}\n"
+"\n"
+"QMessageBox QPushButton {\n"
+"	padding: 10px;\n"
 "}\n"
 "\n"
 "/* Stil f\u00fcr verschiedene Elemente */\n"
@@ -70,7 +79,8 @@ class Ui_MainWindow(object):
 "    background-color: none;\n"
 "	font: 14pt;\n"
 "	border: none;\n"
-"	border-bottom: 2px solid #13213b;\n"
+"	bor"
+                        "der-bottom: 2px solid #13213b;\n"
 "	border-top: 2px solid #13213b \n"
 "}\n"
 "\n"
@@ -78,8 +88,7 @@ class Ui_MainWindow(object):
 "QTextEdit,\n"
 "QPlainTextEdit {\n"
 "    color: #13213b; /* Textfarbe */\n"
-"    "
-                        "border-radius: 5px; /* Abgerundete Ecken */\n"
+"    border-radius: 5px; /* Abgerundete Ecken */\n"
 "    background-color: rgb(255, 255, 255); /* Hintergrundfarbe */\n"
 "    font: 12pt \"Sitka Heading\"; /* Schriftart */\n"
 "	text-align: left;\n"
@@ -101,18 +110,17 @@ class Ui_MainWindow(object):
 "/* QPushButton beim \u00dcberfahren mit der Maus */\n"
 "QPushButton::hover {\n"
 "    background-color: rgba(226, 24, 57, 150); /* Hintergrundfarbe */\n"
-"    color: rgba(19, 33, 59, 150); /* Textfarbe */\n"
+"    color: rgba(19, 33, 59, 150); /* Textfarbe */	\n"
 "}\n"
-"\n"
-"/* QPushButton beim Klicken */\n"
+"/* QPushButton beim Klick"
+                        "en */\n"
 "QPushButton:pressed {\n"
 "    background-color: rgb(0, 170, 255); /* Hintergrundfarbe */\n"
 "    color: white; /* Textfarbe */\n"
 "}\n"
 "\n"
 "/* QPushButton */\n"
-"QPus"
-                        "hButton#store_device_specs_btn,\n"
+"QPushButton#store_device_specs_btn,\n"
 "QPushButton#load_data_to_device_lists_btn,\n"
 "QPushButton#fill_fields_btn {\n"
 "    color: #e21839;\n"
@@ -125,12 +133,6 @@ class Ui_MainWindow(object):
 "QPushButton#fill_fields_btn::hover {\n"
 "    color: rgba(226, 24, 57, 150);\n"
 "    background-color: rgba(19, 33, 59, 150);\n"
-"}\n"
-"\n"
-"/* QPushButton beim Klicken */\n"
-"QPushButton:pressed {\n"
-"    background-color: rgb(0, 170, 255); /* Hintergrundfarbe */\n"
-"    color: white; /* Textfarbe */\n"
 "}\n"
 "\n"
 "/* QFrame und QTabWidget-Panels (Inhalt) */\n"
@@ -146,8 +148,8 @@ class Ui_MainWindow(object):
 "QTabWidget::pane \n"
 "{\n"
 "    background-color: rgb(170, 255, 255); /* Hintergrundfarbe */\n"
-"    border-top-right"
-                        "-radius: 5px; /* Abgerundete Ecken */\n"
+"    border-top-righ"
+                        "t-radius: 5px; /* Abgerundete Ecken */\n"
 "    border-bottom-left-radius: 5px; /* Abgerundete Ecken */\n"
 "    border-bottom-right-radius: 5px; /* Abgerundete Ecken */\n"
 "}\n"
@@ -174,8 +176,8 @@ class Ui_MainWindow(object):
 "\n"
 "/* Nicht ausgew\u00e4hlte Registerkarten */\n"
 "QTabBar:tab:!selected {\n"
-"    background"
-                        "-color: rgb(210, 255, 255); /* Hintergrundfarbe */\n"
+"    backgroun"
+                        "d-color: rgb(210, 255, 255); /* Hintergrundfarbe */\n"
 "    color: rgb(170, 170, 255); /* Textfarbe */\n"
 "}\n"
 "\n"
@@ -206,12 +208,12 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "QHeaderView::section{\n"
-"	background-color: rgb(220, 255, 2"
-                        "55);\n"
+"	background-color: rgb(220, 255, "
+                        "255);\n"
 "}\n"
 "\n"
 "QScrollArea{\n"
-"background-color: transparent;\n"
+"	background-color: transparent;\n"
 "}\n"
 "")
         MainWindow.setAnimated(False)
@@ -275,6 +277,7 @@ class Ui_MainWindow(object):
         self.project.setMinimumSize(QSize(150, 30))
         self.project.setMaximumSize(QSize(200, 30))
         self.project.setFont(font)
+        self.project.setInputMethodHints(Qt.ImhMultiLine)
         self.project.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.project.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.project.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
@@ -394,9 +397,14 @@ class Ui_MainWindow(object):
         font1.setItalic(False)
         font1.setUnderline(False)
         self.load_articles_db_btn.setFont(font1)
+        self.load_articles_db_btn.setFocusPolicy(Qt.StrongFocus)
         self.load_articles_db_btn.setStyleSheet(u"")
-        icon = QIcon(QIcon.fromTheme(u"document-print"))
+        icon = QIcon()
+        icon.addFile(u"icons/database_48dp_#13213B.png", QSize(), QIcon.Normal, QIcon.Off)
         self.load_articles_db_btn.setIcon(icon)
+        self.load_articles_db_btn.setIconSize(QSize(32, 32))
+        self.load_articles_db_btn.setCheckable(False)
+        self.load_articles_db_btn.setChecked(False)
         self.load_articles_db_btn.setAutoDefault(False)
 
         self.horizontalLayout_7.addWidget(self.load_articles_db_btn)
@@ -411,6 +419,10 @@ class Ui_MainWindow(object):
         self.load_articles_file_btn.setMinimumSize(QSize(300, 40))
         self.load_articles_file_btn.setMaximumSize(QSize(300, 40))
         self.load_articles_file_btn.setFont(font1)
+        icon1 = QIcon()
+        icon1.addFile(u"icons/home_storage_48dp_#13213B.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.load_articles_file_btn.setIcon(icon1)
+        self.load_articles_file_btn.setIconSize(QSize(32, 32))
         self.load_articles_file_btn.setCheckable(False)
         self.load_articles_file_btn.setChecked(False)
         self.load_articles_file_btn.setAutoDefault(False)
@@ -2338,6 +2350,8 @@ class Ui_MainWindow(object):
         self.db_type.addItem("")
         self.db_type.setObjectName(u"db_type")
         self.db_type.setMaximumSize(QSize(100, 16777215))
+        self.db_type.setFrame(True)
+        self.db_type.setModelColumn(0)
 
         self.formLayout.setWidget(2, QFormLayout.FieldRole, self.db_type)
 
@@ -2504,8 +2518,8 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(0)
-        self.load_articles_db_btn.setDefault(True)
+        self.tabWidget.setCurrentIndex(2)
+        self.load_articles_db_btn.setDefault(False)
         self.load_articles_file_btn.setDefault(True)
         self.source_path_btn.setDefault(True)
         self.target_path_btn.setDefault(True)
