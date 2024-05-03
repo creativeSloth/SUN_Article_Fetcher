@@ -4,19 +4,20 @@ from qtpy import QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 
 
-import files_Handler.copy_files as copy_files
-import tables_Handler.customize_row
+import files.copy_files as copy_files
+import tables.customize_row
 from ui.mainwindow import Ui_MainWindow
 
-import data_Handler.data
-import save_file_Handler.load
-import save_file_Handler.save
-import tables_Handler.interactions
-import tables_Handler.search_bar
-import directory_Handler.directory_base as directory_base
-import files_Handler.logs_and_config as logs_and_config
-import save_file_Handler
-import ui_fields_Handler.ui_fields
+import data_sources.data_base
+import save_file.load
+import save_file.save
+import tables.tables_base
+import tables.search_bar
+import directories.directory_base as directory_base
+import files.logs_and_config as logs_and_config
+import save_file
+import ui_fields.ui_fields_base
+from styles.styles_Handler import initUI
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -35,14 +36,15 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def initialize(self):
 
+        initUI(self)
         directory_base.set_directories(self)
         logs_and_config.create_device_related_storage_list(
             self, storage_file='blacklist_path')
         logs_and_config.create_device_related_storage_list(
             self, storage_file='device_specs_list_path')
-        ui_fields_Handler.ui_fields.config_to_fields(self)
+        ui_fields.ui_fields_base.config_to_fields(self)
 
-        tables_Handler.search_bar.set_all_table_headers(self)
+        tables.search_bar.set_all_table_headers(self)
 
         self.previous_project_text = self.ui.project.toPlainText()
 
@@ -67,7 +69,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.ui.project.textChanged.connect(self.on_project_text_changed)
 
-        tables_Handler.interactions.connect_sort_indicator_changed(self)
+        tables.tables_base.connect_sort_indicator_changed(self)
 
         #  *********************************** Settings- module *****************************************
         self.ui.save_btn.clicked.connect(
@@ -126,21 +128,21 @@ class MainWindow(QtWidgets.QMainWindow):
             # Überprüfen Sie zusätzlich, ob file_path nicht leer ist
             if file_path:
                 # Lösche die vorhandenen Daten und fülle die Tabelle mit Daten aus der Datei
-                df = data_Handler.data.read_data_from_file(file_path)
-                tables_Handler.interactions.fill_article_table(
+                df = data_sources.data_base.read_data_from_file(file_path)
+                tables.tables_base.fill_article_table(
                     table=self.ui.articles_list, df=df)
 
     def on_load_articles_from_db_btn_click(self):
         # Lese Daten aus der MySQL-Datenbank und speichere sie in der Instanzvariable df
-        df = data_Handler.data.execute_query(self, query='sql1')
+        df = data_sources.data_base.execute_query(self, query='sql1')
         logs_and_config.update_config_file(self, 'Abfrage', 'sql1',
-                                           data_Handler.data.get_sql_query(self)['sql1'])
+                                           data_sources.data_base.get_sql_query(self)['sql1'])
         # Lösche die vorhandenen Daten und fülle die Tabelle mit den Daten aus der Datenbank
-        tables_Handler.interactions.fill_article_table(
+        tables.tables_base.fill_article_table(
             self, table=self.ui.articles_list, df=df)
 
     def on_project_text_changed(self):
-        ui_fields_Handler.ui_fields.char_validation(self)
+        ui_fields.ui_fields_base.char_validation(self)
 
     @directory_base.get_folder_path
     def on_source_path_btn_click(self, folder_path):
@@ -158,7 +160,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def on_copy_files_btn_click(self, *args, **kwargs):
         source_path, target_path, log_sub2folder_path = copy_files.get_paths(
             self)
-        source_files = data_Handler.data.get_files_in_source_path(
+        source_files = data_sources.data_base.get_files_in_source_path(
             self, source_path)
         selected_files, df = copy_files.get_selected_files_and_df(
             self)
@@ -177,14 +179,14 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def on_save_btn_click(self):
         file_path = logs_and_config.create_save_file(self)
-        save_file_Handler.save.save_fields_text(self, file_path)
-        save_file_Handler.save.save_tables_content(self, file_path)
+        save_file.save.save_fields_text(self, file_path)
+        save_file.save.save_tables_content(self, file_path)
 
     def on_load_btn_click(self):
         file_path = directory_base.get_save_file_dir(self)
         if file_path != '':
-            save_file_Handler.load.load_fields_text(self, file_path)
-            save_file_Handler.load.load_tables_content(self, file_path)
+            save_file.load.load_fields_text(self, file_path)
+            save_file.load.load_tables_content(self, file_path)
 
     def on_sql_query_btn_click(self):
 
@@ -202,50 +204,50 @@ class MainWindow(QtWidgets.QMainWindow):
 # * * * * * * * * * * * * * * * * * Documentation-module * * * * * * * * * * * * * * * *
 
     def on_btn_create_doc1_clicked(self):
-        ui_fields_Handler.ui_fields.replace_fields_in_doc(
+        ui_fields.ui_fields_base.replace_fields_in_doc(
             self, doc_path='doc1_path', template_path='template1_path')
 
     def on_btn_create_doc2_clicked(self):
-        ui_fields_Handler.ui_fields.replace_fields_in_doc(
+        ui_fields.ui_fields_base.replace_fields_in_doc(
             self, doc_path='doc2_path', template_path='template2_path')
 
     def on_load_data_to_device_list_btn_click(self):
-        ui_fields_Handler.ui_fields.clear_docu_fields(self)
-        df = data_Handler.data.execute_query(self, query='sql1')
+        ui_fields.ui_fields_base.clear_docu_fields(self)
+        df = data_sources.data_base.execute_query(self, query='sql1')
         logs_and_config.update_config_file(self, 'Abfrage', 'sql1',
-                                           data_Handler.data.get_sql_query(self)['sql1'])
-        tables_Handler.interactions.fill_device_lists(self, df)
+                                           data_sources.data_base.get_sql_query(self)['sql1'])
+        tables.tables_base.fill_device_lists(self, df)
 
     def on_move_none_PV_modules_to_blacklist_click(self):
-        tables_Handler.interactions.remove_articles_from_list(
+        tables.tables_base.remove_articles_from_list(
             self, list=self.ui.PV_modules_list)
 
     def on_move_none_PV_inverters_to_blacklist_click(self):
-        tables_Handler.interactions.remove_articles_from_list(
+        tables.tables_base.remove_articles_from_list(
             self, list=self.ui.PV_inverters_list)
 
     def on_move_none_BAT_inverters_to_blacklist_click(self):
-        tables_Handler.interactions.remove_articles_from_list(
+        tables.tables_base.remove_articles_from_list(
             self, list=self.ui.BAT_inverters_list)
 
     def on_move_none_BAT_storage_to_blacklist_click(self):
-        tables_Handler.interactions.remove_articles_from_list(
+        tables.tables_base.remove_articles_from_list(
             self, list=self.ui.BAT_storage_list)
 
     def on_move_none_CHG_point_to_blacklist_click(self):
-        tables_Handler.interactions.remove_articles_from_list(
+        tables.tables_base.remove_articles_from_list(
             self, list=self.ui.CHG_point_list)
 
     def on_fill_fields_btn_click(self):
 
-        df = data_Handler.data.execute_query(self, query='sql2')
+        df = data_sources.data_base.execute_query(self, query='sql2')
         logs_and_config.update_config_file(self, 'Abfrage', 'sql2',
-                                           data_Handler.data.get_sql_query(self)['sql2'])
-        ui_fields_Handler.ui_fields.clear_docu_fields(self)
-        ui_fields_Handler.ui_fields.fill_docu_fields(self)
+                                           data_sources.data_base.get_sql_query(self)['sql2'])
+        ui_fields.ui_fields_base.clear_docu_fields(self)
+        ui_fields.ui_fields_base.fill_docu_fields(self)
 
     def on_store_device_specs_btn_click(self):
-        tables_Handler.interactions.check_specs_in_device_tables(self)
+        tables.tables_base.check_specs_in_device_tables(self)
 
     @directory_base.get_file_path
     def on_source_btn_matstr_click(self, file_path):

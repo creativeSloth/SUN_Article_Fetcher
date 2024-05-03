@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'd:\3441\Documents\Familie\Edgar\Weiterbildungen\Kurse\Python Bootcamp\Projekte\SUN_Article_Fetcher/ui\mainwindow.ui'
+# Form implementation generated from reading ui file 'd:\3441\Documents\Familie\Edgar\Weiterbildungen\Kurse\Python Bootcamp\Projekte\SUN_Article_Fetcher\src/ui\mainwindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #
@@ -22,184 +22,17 @@ class Ui_MainWindow(object):
         MainWindow.setSizePolicy(sizePolicy)
         MainWindow.setAcceptDrops(True)
         MainWindow.setAutoFillBackground(False)
-        MainWindow.setStyleSheet("/* Allgemeine Stile */\n"
-"\n"
-"/* Setzt die Standardschrift für alle Elemente */\n"
-"* {\n"
-"    font: 12pt \"Sitka Heading\";\n"
-"    background-color: transparent\n"
-"}\n"
-"QWidget#centralwidget {\n"
-"    background-color: #13213b; /* Hintergrundfarbe */\n"
-"    border-radius: 5px; /* Abgerundete Ecken */\n"
-"}\n"
-"\n"
-"QMessageBox {\n"
-"    background-color: rgb(220, 255, 255);\n"
-"    border-radius: 5px; /* Abgerundete Ecken */\n"
-"}\n"
-"\n"
-"QMessageBox QPushButton {\n"
-"    padding: 10px;\n"
-"}\n"
-"\n"
-"/* Stil für verschiedene Elemente */\n"
-"\n"
-"/* QLabel */\n"
-"QLabel {\n"
-"    padding-left: 5px;\n"
-"    color: #13213b; /* Textfarbe */\n"
-"}\n"
-"\n"
-"QLabel#headline_01,\n"
-"QLabel#headline_02,\n"
-"QLabel#headline_03,\n"
-"QLabel#headline_04,\n"
-"QLabel#headline_05,\n"
-"QLabel#headline_06,\n"
-"QLabel#headline_07,\n"
-"QLabel#headline_08,\n"
-"QLabel#headline_09,\n"
-"QLabel#headline_10\n"
-"{\n"
-"    color: #13213b; /* Textfarbe */\n"
-"    background-color: none;\n"
-"    font: 14pt;\n"
-"    border: none;\n"
-"    border-bottom: 2px solid #13213b;\n"
-"    border-top: 2px solid #13213b \n"
-"}\n"
-"\n"
-"/* QTextEdit */\n"
-"QTextEdit,\n"
-"QPlainTextEdit {\n"
-"    color: #13213b; /* Textfarbe */\n"
-"    border-radius: 5px; /* Abgerundete Ecken */\n"
-"    background-color: rgb(255, 255, 255); /* Hintergrundfarbe */\n"
-"    font: 12pt \"Sitka Heading\"; /* Schriftart */\n"
-"    text-align: left;\n"
-"}\n"
-"\n"
-"/* Deaktivierte QTextEdit */\n"
-"QPlainTextEdit::disabled {\n"
-"    color: #13213b; /* Textfarbe */\n"
-"    border-radius: 5px; /* Abgerundete Ecken */\n"
-"    background-color: rgb(144, 216, 216); /* Hintergrundfarbe */\n"
-"}\n"
-"\n"
-"/* QPushButton */\n"
-"QPushButton {\n"
-"    background-color: #e21839; /* Hintergrundfarbe */\n"
-"    border-radius: 5px; /* Abgerundete Ecken */\n"
-"}\n"
-"\n"
-"/* QPushButton beim Überfahren mit der Maus */\n"
-"QPushButton::hover {\n"
-"    background-color: rgba(226, 24, 57, 150); /* Hintergrundfarbe */\n"
-"    color: rgba(19, 33, 59, 150); /* Textfarbe */    \n"
-"}\n"
-"/* QPushButton beim Klicken */\n"
-"QPushButton:pressed {\n"
-"    background-color: rgb(0, 170, 255); /* Hintergrundfarbe */\n"
-"    color: white; /* Textfarbe */\n"
-"}\n"
-"\n"
-"/* QPushButton */\n"
-"QPushButton#store_device_specs_btn,\n"
-"QPushButton#load_data_to_device_lists_btn,\n"
-"QPushButton#fill_fields_btn {\n"
-"    color: #e21839;\n"
-"    background-color: #13213b;\n"
-"}\n"
-"\n"
-"/* QPushButton beim Überfahren mit der Maus */\n"
-"QPushButton#store_device_specs_btn::hover ,\n"
-"QPushButton#load_data_to_device_lists_btn::hover ,\n"
-"QPushButton#fill_fields_btn::hover {\n"
-"    color: rgba(226, 24, 57, 150);\n"
-"    background-color: rgba(19, 33, 59, 150);\n"
-"}\n"
-"\n"
-"/* QFrame und QTabWidget-Panels (Inhalt) */\n"
-"\n"
-"QFrame#frame010,\n"
-"QFrame#frame011\n"
-"{\n"
-"    background-color: rgb(170, 255, 255); /* Hintergrundfarbe */\n"
-"    border-radius: 5px; /* Abgerundete Ecken */\n"
-"}\n"
-"\n"
-"QTabWidget,\n"
-"QTabWidget::pane \n"
-"{\n"
-"    background-color: rgb(170, 255, 255); /* Hintergrundfarbe */\n"
-"    border-top-right-radius: 5px; /* Abgerundete Ecken */\n"
-"    border-bottom-left-radius: 5px; /* Abgerundete Ecken */\n"
-"    border-bottom-right-radius: 5px; /* Abgerundete Ecken */\n"
-"}\n"
-"\n"
-"/* Registerkarten im TabBar und deren Ableitungen */\n"
-"QTabBar::tab,\n"
-"QTabBar::tab:selected,\n"
-"QTabBar:tab:!selected {\n"
-"    margin: 1px; /* Margin */\n"
-"    width: 30px; /* Breite */\n"
-"    min-height: 50px; /* Mindesthöhe */\n"
-"    max-height: 250px; /* Maximale Höhe */\n"
-"    padding-top: 10px; /* Padding nur oben */\n"
-"    padding-bottom: 10px; /* Padding nur unten */\n"
-"    border-top-left-radius: 5px; /* Obere linke Ecke abgerundet */\n"
-"    border-bottom-left-radius: 5px; /* Untere linke Ecke abgerundet */\n"
-"}\n"
-"\n"
-"/* Ausgewählte Registerkarten */\n"
-"QTabBar::tab:selected {\n"
-"    background-color: rgb(0, 170, 255); /* Hintergrundfarbe */\n"
-"    color: rgb(0, 0, 0); /* Textfarbe */\n"
-"}\n"
-"\n"
-"/* Nicht ausgewählte Registerkarten */\n"
-"QTabBar:tab:!selected {\n"
-"    background-color: rgb(210, 255, 255); /* Hintergrundfarbe */\n"
-"    color: rgb(170, 170, 255); /* Textfarbe */\n"
-"}\n"
-"\n"
-"/* Hover-Effekt für nicht ausgewählte Registerkarten */\n"
-"QTabBar:tab:!selected::hover {\n"
-"    alignment: top; \n"
-"    background-color: rgb(0, 255, 255); \n"
-"    color: rgb(0, 85, 255); \n"
-"}\n"
-"\n"
-"QTableWidget{\n"
-"    background-color: rgb(220, 255, 255);\n"
-"    border-radius: 5px; /* Abgerundete Ecken */\n"
-"}\n"
-"\n"
-"QTableWidget::item:alternate {\n"
-"    background-color: rgb(240, 255, 255); /* Beispielhintergrundfarbe für alternative Zeilen */\n"
-"}\n"
-"\n"
-"QTableWidget::item:alternate::selected {\n"
-"    background-color: rgb(200, 255, 255); /* Beispielhintergrundfarbe für alternative Zeilen */\n"
-"    color: #13213b;\n"
-"}\n"
-"\n"
-"QTableWidget::item::selected {\n"
-"    background-color: rgb(200, 255, 255); /* Beispielhintergrundfarbe für alternative Zeilen */\n"
-"    color: #13213b;\n"
-"}\n"
-"\n"
-"QHeaderView::section{\n"
-"    background-color: rgb(220, 255, 255);\n"
-"}\n"
-"\n"
-"QScrollArea{\n"
-"    background-color: transparent;\n"
-"}\n"
-"")
-        MainWindow.setAnimated(False)
+        MainWindow.setStyleSheet("")
+        MainWindow.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
+        MainWindow.setAnimated(True)
+        MainWindow.setDocumentMode(False)
+        MainWindow.setTabShape(QtWidgets.QTabWidget.Rounded)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.centralwidget.sizePolicy().hasHeightForWidth())
+        self.centralwidget.setSizePolicy(sizePolicy)
         self.centralwidget.setObjectName("centralwidget")
         self.formLayout_3 = QtWidgets.QFormLayout(self.centralwidget)
         self.formLayout_3.setObjectName("formLayout_3")
@@ -351,7 +184,7 @@ class Ui_MainWindow(object):
         self.gridLayout_22.setSpacing(5)
         self.gridLayout_22.setObjectName("gridLayout_22")
         self.tabWidget = QtWidgets.QTabWidget(self.frame02)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.tabWidget.sizePolicy().hasHeightForWidth())
@@ -413,7 +246,7 @@ class Ui_MainWindow(object):
         self.load_articles_db_btn.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.load_articles_db_btn.setStyleSheet("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("d:\\3441\\Documents\\Familie\\Edgar\\Weiterbildungen\\Kurse\\Python Bootcamp\\Projekte\\SUN_Article_Fetcher/ui\\icons/database_48dp_#13213B.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("d:\\3441\\Documents\\Familie\\Edgar\\Weiterbildungen\\Kurse\\Python Bootcamp\\Projekte\\SUN_Article_Fetcher\\src/ui\\icons/database_48dp_#13213B.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.load_articles_db_btn.setIcon(icon)
         self.load_articles_db_btn.setIconSize(QtCore.QSize(32, 32))
         self.load_articles_db_btn.setCheckable(False)
@@ -438,7 +271,7 @@ class Ui_MainWindow(object):
         font.setUnderline(False)
         self.load_articles_file_btn.setFont(font)
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("d:\\3441\\Documents\\Familie\\Edgar\\Weiterbildungen\\Kurse\\Python Bootcamp\\Projekte\\SUN_Article_Fetcher/ui\\icons/home_storage_48dp_#13213B.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("d:\\3441\\Documents\\Familie\\Edgar\\Weiterbildungen\\Kurse\\Python Bootcamp\\Projekte\\SUN_Article_Fetcher\\src/ui\\icons/home_storage_48dp_#13213B.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.load_articles_file_btn.setIcon(icon1)
         self.load_articles_file_btn.setIconSize(QtCore.QSize(32, 32))
         self.load_articles_file_btn.setCheckable(False)
@@ -460,7 +293,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.articles_list.sizePolicy().hasHeightForWidth())
         self.articles_list.setSizePolicy(sizePolicy)
-        self.articles_list.setMinimumSize(QtCore.QSize(1000, 100))
+        self.articles_list.setMinimumSize(QtCore.QSize(500, 100))
         self.articles_list.setMaximumSize(QtCore.QSize(16777215, 550))
         self.articles_list.setAutoFillBackground(True)
         self.articles_list.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
@@ -613,23 +446,41 @@ class Ui_MainWindow(object):
         self.tab2.setMinimumSize(QtCore.QSize(1200, 0))
         self.tab2.setObjectName("tab2")
         self.layoutWidget = QtWidgets.QWidget(self.tab2)
-        self.layoutWidget.setGeometry(QtCore.QRect(0, 0, 1802, 826))
+        self.layoutWidget.setGeometry(QtCore.QRect(0, 0, 1902, 826))
         self.layoutWidget.setObjectName("layoutWidget")
         self.frame0220 = QtWidgets.QVBoxLayout(self.layoutWidget)
         self.frame0220.setContentsMargins(0, 0, 0, 0)
         self.frame0220.setSpacing(10)
         self.frame0220.setObjectName("frame0220")
         self.scrollArea = QtWidgets.QScrollArea(self.layoutWidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.scrollArea.sizePolicy().hasHeightForWidth())
+        self.scrollArea.setSizePolicy(sizePolicy)
         self.scrollArea.setMinimumSize(QtCore.QSize(1800, 500))
+        self.scrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
+        self.scrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.scrollArea.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 1781, 5012))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, -3038, 1781, 5226))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.scrollAreaWidgetContents.sizePolicy().hasHeightForWidth())
+        self.scrollAreaWidgetContents.setSizePolicy(sizePolicy)
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.gridLayout_5 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_5.setSpacing(9)
         self.gridLayout_5.setObjectName("gridLayout_5")
         self.frame0221 = QtWidgets.QFrame(self.scrollAreaWidgetContents)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame0221.sizePolicy().hasHeightForWidth())
+        self.frame0221.setSizePolicy(sizePolicy)
         self.frame0221.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame0221.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame0221.setObjectName("frame0221")
@@ -1123,13 +974,19 @@ class Ui_MainWindow(object):
         self.PV_modules_list.verticalHeader().setHighlightSections(False)
         self.verticalLayout_3.addWidget(self.PV_modules_list)
         self.frame_4 = QtWidgets.QFrame(self.frame0221)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_4.sizePolicy().hasHeightForWidth())
+        self.frame_4.setSizePolicy(sizePolicy)
         self.frame_4.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_4.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_4.setObjectName("frame_4")
         self.verticalLayout_8 = QtWidgets.QVBoxLayout(self.frame_4)
         self.verticalLayout_8.setObjectName("verticalLayout_8")
         self.move_none_PV_modules_to_blacklist = QtWidgets.QPushButton(self.frame_4)
-        self.move_none_PV_modules_to_blacklist.setMinimumSize(QtCore.QSize(100, 30))
+        self.move_none_PV_modules_to_blacklist.setMinimumSize(QtCore.QSize(100, 50))
+        self.move_none_PV_modules_to_blacklist.setMaximumSize(QtCore.QSize(250, 16777215))
         self.move_none_PV_modules_to_blacklist.setObjectName("move_none_PV_modules_to_blacklist")
         self.verticalLayout_8.addWidget(self.move_none_PV_modules_to_blacklist)
         self.frame_16 = QtWidgets.QFrame(self.frame_4)
@@ -1270,7 +1127,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.frame_18)
         self.verticalLayout_9.setObjectName("verticalLayout_9")
         self.move_none_PV_inverters_to_blacklist = QtWidgets.QPushButton(self.frame_18)
-        self.move_none_PV_inverters_to_blacklist.setMinimumSize(QtCore.QSize(100, 30))
+        self.move_none_PV_inverters_to_blacklist.setMinimumSize(QtCore.QSize(100, 50))
+        self.move_none_PV_inverters_to_blacklist.setMaximumSize(QtCore.QSize(250, 16777215))
         self.move_none_PV_inverters_to_blacklist.setObjectName("move_none_PV_inverters_to_blacklist")
         self.verticalLayout_9.addWidget(self.move_none_PV_inverters_to_blacklist)
         self.frame_19 = QtWidgets.QFrame(self.frame_18)
@@ -1454,10 +1312,16 @@ class Ui_MainWindow(object):
         self.verticalLayout_10 = QtWidgets.QVBoxLayout(self.frame_21)
         self.verticalLayout_10.setObjectName("verticalLayout_10")
         self.move_none_BAT_inverters_to_blacklist = QtWidgets.QPushButton(self.frame_21)
-        self.move_none_BAT_inverters_to_blacklist.setMinimumSize(QtCore.QSize(100, 30))
+        self.move_none_BAT_inverters_to_blacklist.setMinimumSize(QtCore.QSize(100, 50))
+        self.move_none_BAT_inverters_to_blacklist.setMaximumSize(QtCore.QSize(250, 16777215))
         self.move_none_BAT_inverters_to_blacklist.setObjectName("move_none_BAT_inverters_to_blacklist")
         self.verticalLayout_10.addWidget(self.move_none_BAT_inverters_to_blacklist)
         self.frame_22 = QtWidgets.QFrame(self.frame_21)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_22.sizePolicy().hasHeightForWidth())
+        self.frame_22.setSizePolicy(sizePolicy)
         self.frame_22.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_22.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_22.setObjectName("frame_22")
@@ -1607,7 +1471,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_11 = QtWidgets.QVBoxLayout(self.frame_24)
         self.verticalLayout_11.setObjectName("verticalLayout_11")
         self.move_none_BAT_storage_to_blacklist = QtWidgets.QPushButton(self.frame_24)
-        self.move_none_BAT_storage_to_blacklist.setMinimumSize(QtCore.QSize(100, 30))
+        self.move_none_BAT_storage_to_blacklist.setMinimumSize(QtCore.QSize(100, 50))
+        self.move_none_BAT_storage_to_blacklist.setMaximumSize(QtCore.QSize(250, 16777215))
         self.move_none_BAT_storage_to_blacklist.setObjectName("move_none_BAT_storage_to_blacklist")
         self.verticalLayout_11.addWidget(self.move_none_BAT_storage_to_blacklist)
         self.frame_23 = QtWidgets.QFrame(self.frame_24)
@@ -1832,61 +1697,94 @@ class Ui_MainWindow(object):
         self.CHG_point_list.verticalHeader().setHighlightSections(False)
         self.verticalLayout_3.addWidget(self.CHG_point_list)
         self.frame_26 = QtWidgets.QFrame(self.frame0221)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_26.sizePolicy().hasHeightForWidth())
+        self.frame_26.setSizePolicy(sizePolicy)
         self.frame_26.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_26.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_26.setObjectName("frame_26")
         self.verticalLayout_12 = QtWidgets.QVBoxLayout(self.frame_26)
         self.verticalLayout_12.setObjectName("verticalLayout_12")
         self.move_none_CHG_point_to_blacklist = QtWidgets.QPushButton(self.frame_26)
-        self.move_none_CHG_point_to_blacklist.setMinimumSize(QtCore.QSize(100, 30))
+        self.move_none_CHG_point_to_blacklist.setMinimumSize(QtCore.QSize(100, 50))
+        self.move_none_CHG_point_to_blacklist.setMaximumSize(QtCore.QSize(250, 16777215))
         self.move_none_CHG_point_to_blacklist.setObjectName("move_none_CHG_point_to_blacklist")
         self.verticalLayout_12.addWidget(self.move_none_CHG_point_to_blacklist)
         self.frame_25 = QtWidgets.QFrame(self.frame_26)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_25.sizePolicy().hasHeightForWidth())
+        self.frame_25.setSizePolicy(sizePolicy)
+        self.frame_25.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.frame_25.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_25.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_25.setObjectName("frame_25")
-        self.gridLayout_14 = QtWidgets.QGridLayout(self.frame_25)
-        self.gridLayout_14.setObjectName("gridLayout_14")
-        self.charging_point_type_label = QtWidgets.QLabel(self.frame_25)
+        self.horizontalLayout_18 = QtWidgets.QHBoxLayout(self.frame_25)
+        self.horizontalLayout_18.setObjectName("horizontalLayout_18")
+        self.frame_36 = QtWidgets.QFrame(self.frame_25)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_36.sizePolicy().hasHeightForWidth())
+        self.frame_36.setSizePolicy(sizePolicy)
+        self.frame_36.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_36.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_36.setObjectName("frame_36")
+        self.horizontalLayout_19 = QtWidgets.QHBoxLayout(self.frame_36)
+        self.horizontalLayout_19.setContentsMargins(0, -1, -1, -1)
+        self.horizontalLayout_19.setObjectName("horizontalLayout_19")
+        self.charging_point_type_label = QtWidgets.QLabel(self.frame_36)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.charging_point_type_label.sizePolicy().hasHeightForWidth())
         self.charging_point_type_label.setSizePolicy(sizePolicy)
-        self.charging_point_type_label.setMinimumSize(QtCore.QSize(150, 30))
-        self.charging_point_type_label.setMaximumSize(QtCore.QSize(300, 60))
+        self.charging_point_type_label.setMinimumSize(QtCore.QSize(150, 60))
+        self.charging_point_type_label.setMaximumSize(QtCore.QSize(300, 80))
         self.charging_point_type_label.setObjectName("charging_point_type_label")
-        self.gridLayout_14.addWidget(self.charging_point_type_label, 0, 0, 1, 1)
-        self.charging_point_type_text = QtWidgets.QPlainTextEdit(self.frame_25)
+        self.horizontalLayout_19.addWidget(self.charging_point_type_label)
+        self.charging_point_type_text = QtWidgets.QPlainTextEdit(self.frame_36)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.charging_point_type_text.sizePolicy().hasHeightForWidth())
         self.charging_point_type_text.setSizePolicy(sizePolicy)
-        self.charging_point_type_text.setMinimumSize(QtCore.QSize(150, 30))
-        self.charging_point_type_text.setMaximumSize(QtCore.QSize(300, 60))
+        self.charging_point_type_text.setMinimumSize(QtCore.QSize(150, 60))
+        self.charging_point_type_text.setMaximumSize(QtCore.QSize(300, 80))
         self.charging_point_type_text.setObjectName("charging_point_type_text")
-        self.gridLayout_14.addWidget(self.charging_point_type_text, 0, 1, 1, 1)
-        self.charging_point_SN_label = QtWidgets.QLabel(self.frame_25)
+        self.horizontalLayout_19.addWidget(self.charging_point_type_text)
+        self.horizontalLayout_18.addWidget(self.frame_36)
+        self.frame_37 = QtWidgets.QFrame(self.frame_25)
+        self.frame_37.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_37.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_37.setObjectName("frame_37")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.frame_37)
+        self.horizontalLayout_2.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.charging_point_SN_label = QtWidgets.QLabel(self.frame_37)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.charging_point_SN_label.sizePolicy().hasHeightForWidth())
         self.charging_point_SN_label.setSizePolicy(sizePolicy)
-        self.charging_point_SN_label.setMinimumSize(QtCore.QSize(150, 30))
-        self.charging_point_SN_label.setMaximumSize(QtCore.QSize(300, 60))
+        self.charging_point_SN_label.setMinimumSize(QtCore.QSize(150, 60))
+        self.charging_point_SN_label.setMaximumSize(QtCore.QSize(300, 80))
         self.charging_point_SN_label.setObjectName("charging_point_SN_label")
-        self.gridLayout_14.addWidget(self.charging_point_SN_label, 0, 2, 1, 1)
-        self.charging_point_SN_text = QtWidgets.QTextEdit(self.frame_25)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        self.horizontalLayout_2.addWidget(self.charging_point_SN_label)
+        self.charging_point_SN_text = QtWidgets.QTextEdit(self.frame_37)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.charging_point_SN_text.sizePolicy().hasHeightForWidth())
         self.charging_point_SN_text.setSizePolicy(sizePolicy)
-        self.charging_point_SN_text.setMinimumSize(QtCore.QSize(150, 30))
-        self.charging_point_SN_text.setMaximumSize(QtCore.QSize(300, 60))
+        self.charging_point_SN_text.setMinimumSize(QtCore.QSize(150, 60))
+        self.charging_point_SN_text.setMaximumSize(QtCore.QSize(300, 80))
         self.charging_point_SN_text.setObjectName("charging_point_SN_text")
-        self.gridLayout_14.addWidget(self.charging_point_SN_text, 0, 3, 1, 1)
+        self.horizontalLayout_2.addWidget(self.charging_point_SN_text)
+        self.horizontalLayout_18.addWidget(self.frame_37)
         self.verticalLayout_12.addWidget(self.frame_25)
         self.verticalLayout_3.addWidget(self.frame_26)
         self.headline_07 = QtWidgets.QLabel(self.frame0221)
@@ -2168,6 +2066,11 @@ class Ui_MainWindow(object):
         self.gridLayout_17.addWidget(self.meter_cabinet_label, 0, 0, 1, 1)
         self.verticalLayout_3.addWidget(self.frame_29)
         self.frame_31 = QtWidgets.QFrame(self.frame0221)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_31.sizePolicy().hasHeightForWidth())
+        self.frame_31.setSizePolicy(sizePolicy)
         self.frame_31.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_31.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_31.setObjectName("frame_31")
@@ -2306,32 +2209,12 @@ class Ui_MainWindow(object):
         self.frame_33.setObjectName("frame_33")
         self.gridLayout_20 = QtWidgets.QGridLayout(self.frame_33)
         self.gridLayout_20.setObjectName("gridLayout_20")
-        self.source_path_text_docu = QtWidgets.QPlainTextEdit(self.frame_33)
-        self.source_path_text_docu.setMinimumSize(QtCore.QSize(0, 30))
-        self.source_path_text_docu.setMaximumSize(QtCore.QSize(16777215, 30))
-        self.source_path_text_docu.setObjectName("source_path_text_docu")
-        self.gridLayout_20.addWidget(self.source_path_text_docu, 1, 1, 1, 1)
-        self.source_btn_docu = QtWidgets.QPushButton(self.frame_33)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.source_btn_docu.sizePolicy().hasHeightForWidth())
-        self.source_btn_docu.setSizePolicy(sizePolicy)
-        self.source_btn_docu.setMinimumSize(QtCore.QSize(250, 40))
-        self.source_btn_docu.setMaximumSize(QtCore.QSize(300, 30))
-        self.source_btn_docu.setObjectName("source_btn_docu")
-        self.gridLayout_20.addWidget(self.source_btn_docu, 1, 0, 1, 1, QtCore.Qt.AlignVCenter)
-        self.source_btn_matstr = QtWidgets.QPushButton(self.frame_33)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.source_btn_matstr.sizePolicy().hasHeightForWidth())
-        self.source_btn_matstr.setSizePolicy(sizePolicy)
-        self.source_btn_matstr.setMinimumSize(QtCore.QSize(250, 40))
-        self.source_btn_matstr.setMaximumSize(QtCore.QSize(300, 30))
-        self.source_btn_matstr.setObjectName("source_btn_matstr")
-        self.gridLayout_20.addWidget(self.source_btn_matstr, 0, 0, 1, 1, QtCore.Qt.AlignVCenter)
         self.target_path_text_2 = QtWidgets.QPlainTextEdit(self.frame_33)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.target_path_text_2.sizePolicy().hasHeightForWidth())
+        self.target_path_text_2.setSizePolicy(sizePolicy)
         self.target_path_text_2.setMinimumSize(QtCore.QSize(0, 30))
         self.target_path_text_2.setMaximumSize(QtCore.QSize(16777215, 30))
         self.target_path_text_2.setObjectName("target_path_text_2")
@@ -2349,11 +2232,48 @@ class Ui_MainWindow(object):
         self.target_path_btn_2.setFlat(False)
         self.target_path_btn_2.setObjectName("target_path_btn_2")
         self.gridLayout_20.addWidget(self.target_path_btn_2, 2, 0, 1, 1, QtCore.Qt.AlignVCenter)
+        self.source_btn_matstr = QtWidgets.QPushButton(self.frame_33)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.source_btn_matstr.sizePolicy().hasHeightForWidth())
+        self.source_btn_matstr.setSizePolicy(sizePolicy)
+        self.source_btn_matstr.setMinimumSize(QtCore.QSize(250, 40))
+        self.source_btn_matstr.setMaximumSize(QtCore.QSize(300, 30))
+        self.source_btn_matstr.setObjectName("source_btn_matstr")
+        self.gridLayout_20.addWidget(self.source_btn_matstr, 0, 0, 1, 1, QtCore.Qt.AlignVCenter)
         self.source_path_text_matstr = QtWidgets.QPlainTextEdit(self.frame_33)
+        self.source_path_text_matstr.setEnabled(False)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.source_path_text_matstr.sizePolicy().hasHeightForWidth())
+        self.source_path_text_matstr.setSizePolicy(sizePolicy)
         self.source_path_text_matstr.setMinimumSize(QtCore.QSize(0, 30))
         self.source_path_text_matstr.setMaximumSize(QtCore.QSize(16777215, 30))
         self.source_path_text_matstr.setObjectName("source_path_text_matstr")
         self.gridLayout_20.addWidget(self.source_path_text_matstr, 0, 1, 1, 1, QtCore.Qt.AlignVCenter)
+        self.source_btn_docu = QtWidgets.QPushButton(self.frame_33)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.source_btn_docu.sizePolicy().hasHeightForWidth())
+        self.source_btn_docu.setSizePolicy(sizePolicy)
+        self.source_btn_docu.setMinimumSize(QtCore.QSize(250, 40))
+        self.source_btn_docu.setMaximumSize(QtCore.QSize(300, 30))
+        self.source_btn_docu.setObjectName("source_btn_docu")
+        self.gridLayout_20.addWidget(self.source_btn_docu, 1, 0, 1, 1, QtCore.Qt.AlignVCenter)
+        self.source_path_text_docu = QtWidgets.QPlainTextEdit(self.frame_33)
+        self.source_path_text_docu.setEnabled(False)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.source_path_text_docu.sizePolicy().hasHeightForWidth())
+        self.source_path_text_docu.setSizePolicy(sizePolicy)
+        self.source_path_text_docu.setMinimumSize(QtCore.QSize(0, 30))
+        self.source_path_text_docu.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.source_path_text_docu.setObjectName("source_path_text_docu")
+        self.gridLayout_20.addWidget(self.source_path_text_docu, 1, 1, 1, 1)
         self.verticalLayout_13.addWidget(self.frame_33)
         self.frame_35 = QtWidgets.QFrame(self.frame_32)
         self.frame_35.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -2573,18 +2493,9 @@ class Ui_MainWindow(object):
         self.gridLayout_4.addWidget(self.frame02, 1, 0, 1, 1)
         self.formLayout_3.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.frame0)
         MainWindow.setCentralWidget(self.centralwidget)
-        self.toolBar = QtWidgets.QToolBar(MainWindow)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.toolBar.sizePolicy().hasHeightForWidth())
-        self.toolBar.setSizePolicy(sizePolicy)
-        self.toolBar.setStyleSheet("")
-        self.toolBar.setObjectName("toolBar")
-        MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -2782,9 +2693,9 @@ class Ui_MainWindow(object):
         self.load_data_to_device_lists_btn.setText(_translate("MainWindow", "1. Lade Gerätelisten"))
         self.fill_fields_btn.setText(_translate("MainWindow", "2. Fülle  Formularfelder"))
         self.store_device_specs_btn.setText(_translate("MainWindow", "Hinterlege technische Daten"))
-        self.source_btn_docu.setText(_translate("MainWindow", "Template Dokumentation"))
-        self.source_btn_matstr.setText(_translate("MainWindow", "Template gem. MatStR"))
         self.target_path_btn_2.setText(_translate("MainWindow", "Ablagepfad für Dokumente auswählen"))
+        self.source_btn_matstr.setText(_translate("MainWindow", "Template gem. MatStR"))
+        self.source_btn_docu.setText(_translate("MainWindow", "Template Dokumentation"))
         self.create_doc1_btn.setText(_translate("MainWindow", "Doku gemäß MaStR erzeugen"))
         self.create_doc2_btn.setText(_translate("MainWindow", "SUN-Doku erzeugen"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab2), _translate("MainWindow", "Doku gem. MatStR"))
@@ -2802,4 +2713,3 @@ class Ui_MainWindow(object):
         self.save_btn.setText(_translate("MainWindow", "Speichern"))
         self.load_btn.setText(_translate("MainWindow", "Laden"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab0), _translate("MainWindow", "Settings"))
-        self.toolBar.setWindowTitle(_translate("MainWindow", "toolBar"))

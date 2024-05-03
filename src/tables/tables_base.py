@@ -4,14 +4,14 @@ from qtpy import QtCore, QtWidgets, QtGui
 
 from odf.opendocument import load
 
-import files_Handler.logs_and_config as logs_and_config
+import files.logs_and_config as logs_and_config
 
-from tables_Handler.customize_row import customize_table_row
-import ui_fields_Handler.ui_fields
+from tables.customize_row import customize_table_row
+import ui_fields.ui_fields_base
 
 
 def connect_sort_indicator_changed(self):
-    tables = ui_fields_Handler.ui_fields.get_all_tables(self)
+    tables = ui_fields.ui_fields_base.get_all_tables(self)
     for table in tables:
         # Verwendung von lambda-Funktion, um das Argument "table" zu übergeben
         table.horizontalHeader().sortIndicatorChanged.connect(
@@ -66,7 +66,7 @@ def fill_article_table(self, table, df=None):
 
 
 def fill_device_lists(self, df):
-    tables = ui_fields_Handler.ui_fields.get_device_tables(self)
+    tables = ui_fields.ui_fields_base.get_device_tables(self)
     for table in tables:
         fill_specific_device_list(self, table=table, df=df)
 
@@ -114,7 +114,7 @@ def fill_specific_device_list(self, table, df):
                 # Spalte 5 (dynamisch) mit den Werten aus der Spalte 3 des DataFrames
                 table.setItem(
                     tw_row, 4, QtWidgets.QTableWidgetItem(str(df_row.iloc[3])))
-                ui_list_to_df_mapping(self, table, tw_row, df_row)
+                adding_specific_columns(self, table, tw_row, df_row)
 
     # Anzahl der Spalten ist flexibel, muss später angepasst hinzugefügt werden
     fill_device_specs_in_device_tables(self, table)
@@ -122,7 +122,7 @@ def fill_specific_device_list(self, table, df):
     disable_colums_edit(table, firstcol=1, lastcol=5)
 
 
-def ui_list_to_df_mapping(self, table, tw_row=None, df_row=None):
+def adding_specific_columns(self, table, tw_row=None, df_row=None):
     if table == self.ui.PV_modules_list:
         # Spalte 6 (dynamisch) mit den Werten aus der Spalte 4 des DataFrames
         table.setItem(
@@ -243,7 +243,7 @@ def get_fixed_val_columns():
 
 def check_specs_in_device_tables(self):
 
-    device_tables = ui_fields_Handler.ui_fields.get_device_tables(self)
+    device_tables = ui_fields.ui_fields_base.get_device_tables(self)
     fixed_val_columns = get_fixed_val_columns()
 
     data_set = set()
@@ -291,7 +291,7 @@ def fill_device_specs_in_device_tables(self, table):
 
 def fill_tables_content(self, saved_tables_content):
     # Alle Tabellen holen
-    tables = ui_fields_Handler.ui_fields.get_all_tables(self)
+    tables = ui_fields.ui_fields_base.get_all_tables(self)
     for table in tables:
         clear_table(table)
 

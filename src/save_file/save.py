@@ -1,10 +1,10 @@
-import files_Handler.logs_and_config as logs_and_config
-import ui_fields_Handler.ui_fields
+import files.logs_and_config as logs_and_config
+import ui_fields.ui_fields_base
 
 
 def save_fields_text(self, file_path):
 
-    mapped_values = ui_fields_Handler.ui_fields.get_mapped_context(
+    mapped_values = ui_fields.ui_fields_base.get_mapped_context(
         self).values()
     field_map = [(field[0].objectName(), field[0].toPlainText())
                  for field in mapped_values]
@@ -13,7 +13,7 @@ def save_fields_text(self, file_path):
 
 
 def save_tables_content(self, file_path):
-    tables = ui_fields_Handler.ui_fields.get_all_tables(self)
+    tables = ui_fields.ui_fields_base.get_all_tables(self)
     field_map = []
     for table in tables:
         for row in range(table.rowCount()):

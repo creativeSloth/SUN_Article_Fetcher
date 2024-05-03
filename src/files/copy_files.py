@@ -5,8 +5,8 @@ import pandas as pd
 from PyQt5.QtGui import QFont
 from qtpy import QtCore, QtWidgets
 
-import directory_Handler.directory_base as directory_base
-import files_Handler.logs_and_config as logs_and_config
+import directories.directory_base as directory_base
+import files.logs_and_config as logs_and_config
 
 
 def get_paths(self):

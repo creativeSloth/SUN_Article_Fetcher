@@ -1,0 +1,174 @@
+/* Allgemeine Stile */
+
+/* Setzt die Standardschrift für alle Elemente */
+* {
+    font: 12pt "Sitka Heading";
+	background-color: transparent
+}
+QWidget#centralwidget {    
+    
+    background-color: #13213b; /* Hintergrundfarbe */
+    border-radius: 5px; /* Abgerundete Ecken */
+}
+
+QMessageBox {
+	background-color: rgb(220, 255, 255);
+	border-radius: 5px; /* Abgerundete Ecken */
+}
+
+QMessageBox QPushButton {
+	padding: 10px;
+}
+
+/* Stil für verschiedene Elemente */
+
+/* QLabel */
+QLabel {
+    padding-left: 5px;
+    color: #13213b; /* Textfarbe */
+}
+
+QLabel#headline_01,
+QLabel#headline_02,
+QLabel#headline_03,
+QLabel#headline_04,
+QLabel#headline_05,
+QLabel#headline_06,
+QLabel#headline_07,
+QLabel#headline_08,
+QLabel#headline_09,
+QLabel#headline_10
+{
+    color: rgb(19, 33, 59); /* Textfarbe */
+    background-color: none;
+	font: 14pt;
+	border: none;
+	border-bottom: 2px solid rgb(19, 33, 59);
+	border-top: 2px solid rgba(19, 33, 59, 255)
+}
+
+/* QTextEdit */
+QTextEdit,
+QPlainTextEdit {
+    color: rgb(19, 33, 59); /* Textfarbe */
+    border-radius: 5px; /* Abgerundete Ecken */
+    background-color: rgba(255, 255, 255, 255); /* Hintergrundfarbe */
+    font: 12pt "Sitka Heading"; /* Schriftart */
+	text-align: left;
+}
+
+/* Deaktivierte QTextEdit */
+QPlainTextEdit::disabled {
+    color: rgb(19, 33, 59); /* Textfarbe */
+    border-radius: 5px; /* Abgerundete Ecken */
+    background-color: rgb(144, 216, 216); /* Hintergrundfarbe */
+}
+
+/* QPushButton */
+QPushButton {
+    background-color: rgb(226, 24, 57); /* Hintergrundfarbe */
+    border-radius: 5px; /* Abgerundete Ecken */
+}
+
+/* QPushButton beim Überfahren mit der Maus */
+QPushButton::hover {
+    background-color: rgba(226, 24, 57, 150); /* Hintergrundfarbe */
+    color: rgba(19, 33, 59, 150); /* Textfarbe */	
+}
+/* QPushButton beim Klicken */
+QPushButton:pressed {
+    background-color: rgb(0, 170, 255); /* Hintergrundfarbe */
+    color: white; /* Textfarbe */
+}
+
+/* QPushButton */
+QPushButton#store_device_specs_btn,
+QPushButton#load_data_to_device_lists_btn,
+QPushButton#fill_fields_btn {
+    color: rgba(226, 24, 57, 255);
+	background-color: rgba(19, 33, 59, 255);
+}
+
+/* QPushButton beim Überfahren mit der Maus */
+QPushButton#store_device_specs_btn::hover ,
+QPushButton#load_data_to_device_lists_btn::hover ,
+QPushButton#fill_fields_btn::hover {
+    color: rgba(226, 24, 57, 150);
+    background-color: rgba(19, 33, 59, 150);
+}
+
+/* QFrame und QTabWidget-Panels (Inhalt) */
+
+QFrame#frame010,
+QFrame#frame011
+{
+    background-color: rgb(170, 255, 255); /* Hintergrundfarbe */
+    border-radius: 5px; /* Abgerundete Ecken */
+}
+
+QTabWidget,
+QTabWidget::pane 
+{
+    background-color: rgb(170, 255, 255); /* Hintergrundfarbe */
+    border-top-right-radius: 5px; /* Abgerundete Ecken */
+    border-bottom-left-radius: 5px; /* Abgerundete Ecken */
+    border-bottom-right-radius: 5px; /* Abgerundete Ecken */
+}
+
+/* Registerkarten im TabBar und deren Ableitungen */
+QTabBar::tab,
+QTabBar::tab:selected,
+QTabBar:tab:!selected {
+    margin: 1px; /* Margin */
+    width: 30px; /* Breite */
+    min-height: 50px; /* Mindesthöhe */
+    max-height: 250px; /* Maximale Höhe */
+    padding-top: 10px; /* Padding nur oben */
+    padding-bottom: 10px; /* Padding nur unten */
+    border-top-left-radius: 5px; /* Obere linke Ecke abgerundet */
+    border-bottom-left-radius: 5px; /* Untere linke Ecke abgerundet */
+}
+
+/* Ausgewählte Registerkarten */
+QTabBar::tab:selected {
+    background-color: rgb(0, 170, 255); /* Hintergrundfarbe */
+    color: rgb(0, 0, 0); /* Textfarbe */
+}
+
+/* Nicht ausgewählte Registerkarten */
+QTabBar:tab:!selected {
+    background-color: rgb(210, 255, 255); /* Hintergrundfarbe */
+    color: rgb(170, 170, 255); /* Textfarbe */
+}
+
+/* Hover-Effekt für nicht ausgewählte Registerkarten */
+QTabBar:tab:!selected::hover {
+    alignment: top; 
+    background-color: rgb(0, 255, 255); 
+    color: rgb(0, 85, 255); 
+}
+
+QTableWidget{
+	background-color: rgb(220, 255, 255);
+    border-radius: 5px; /* Abgerundete Ecken */
+}
+
+QTableWidget::item:alternate {
+    background-color: rgb(240, 255, 255); /* Beispielhintergrundfarbe für alternative Zeilen */
+}
+
+QTableWidget::item:alternate::selected {
+    background-color: rgb(200, 255, 255); /* Beispielhintergrundfarbe für alternative Zeilen */
+	color: #13213b;
+}
+
+QTableWidget::item::selected {
+    background-color: rgb(200, 255, 255); /* Beispielhintergrundfarbe für alternative Zeilen */
+	color: #13213b;
+}
+
+QHeaderView::section{
+	background-color: rgb(220, 255, 255);
+}
+
+

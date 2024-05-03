@@ -3,7 +3,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 from qtpy import QtWidgets
 
-import files_Handler.logs_and_config as logs_and_config
+import files.logs_and_config as logs_and_config
 
 
 def get_server_info(self):

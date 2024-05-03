@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 from qtpy import QtWidgets
 
-import directory_Handler.directory_base as directory_base
+import directories.directory_base as directory_base
 
 
 def create_config_file(self):

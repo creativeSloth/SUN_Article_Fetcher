@@ -5,8 +5,8 @@ from odf.opendocument import load
 from odf import text, teletype
 from odf.table import Table, TableRow, TableCell
 
-import files_Handler.logs_and_config as logs_and_config
-import directory_Handler.directory_base as directory_base
+import files.logs_and_config as logs_and_config
+import directories.directory_base as directory_base
 
 
 def config_to_fields(self):

@@ -21,6 +21,8 @@ def get_directories(self):
     else:
         # Skript wird normal ausgeführt
         script_dir = main_script_dir
+    # ************************************ Styles  ***************************************************
+    stylesheet_path = os.path.join(script_dir, 'styles', 'stylesheet.qss')
     # **************************  Article Fetcher module  ********************************************
 
     source_path = self.ui.source_path_text.toPlainText()
@@ -45,7 +47,7 @@ def get_directories(self):
 
     # Pfad zum Unterordner "logs"
     log_subfolder_path = os.path.join(script_dir, "logs")
-    log_sub2folder_path = os.path.join(
+    log_subfolder2_path = os.path.join(
         log_subfolder_path, "hist")
     # Pfad zur Config
     config_path = os.path.join(log_subfolder_path, 'config.ini')
@@ -65,10 +67,11 @@ def get_directories(self):
         'template2_path': template2_path,
         'doc2_path': doc2_path,
         'log_subfolder_path': log_subfolder_path,
-        'log_sub2folder_path': log_sub2folder_path,
+        'log_sub2folder_path': log_subfolder2_path,
         'config_path': config_path,
         'blacklist_path': blacklist_path,
-        'device_specs_list_path': device_specs_list_path
+        'device_specs_list_path': device_specs_list_path,
+        'stylesheet_path': stylesheet_path
     }
 
     return paths_dict
