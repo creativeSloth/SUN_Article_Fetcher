@@ -783,7 +783,7 @@
                    </item>
                   </layout>
                  </item>
-                 <item>
+                 <item alignment="Qt::AlignLeft">
                   <widget class="QFrame" name="frame">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -888,21 +888,24 @@
                        </item>
                        <item>
                         <widget class="QPlainTextEdit" name="source_path_text">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
                          <property name="sizePolicy">
-                          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+                          <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                            <horstretch>0</horstretch>
                            <verstretch>0</verstretch>
                           </sizepolicy>
                          </property>
                          <property name="minimumSize">
                           <size>
-                           <width>0</width>
+                           <width>1500</width>
                            <height>30</height>
                           </size>
                          </property>
                          <property name="maximumSize">
                           <size>
-                           <width>4556</width>
+                           <width>16777215</width>
                            <height>40</height>
                           </size>
                          </property>
@@ -980,21 +983,24 @@
                        </item>
                        <item>
                         <widget class="QPlainTextEdit" name="target_path_text">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
                          <property name="sizePolicy">
-                          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+                          <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                            <horstretch>0</horstretch>
                            <verstretch>0</verstretch>
                           </sizepolicy>
                          </property>
                          <property name="minimumSize">
                           <size>
-                           <width>0</width>
+                           <width>1500</width>
                            <height>30</height>
                           </size>
                          </property>
                          <property name="maximumSize">
                           <size>
-                           <width>4556</width>
+                           <width>16777215</width>
                            <height>40</height>
                           </size>
                          </property>
@@ -1069,8 +1075,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>1902</width>
-                <height>826</height>
+                <width>2904</width>
+                <height>942</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="frame0220" stretch="0,0">
@@ -1107,9 +1113,9 @@
                   <property name="geometry">
                    <rect>
                     <x>0</x>
-                    <y>-3038</y>
+                    <y>-2555</y>
                     <width>1781</width>
-                    <height>5226</height>
+                    <height>5258</height>
                    </rect>
                   </property>
                   <property name="sizePolicy">
@@ -3005,8 +3011,14 @@ WR-Leistung [kW]</string>
                           </column>
                          </widget>
                         </item>
-                        <item>
+                        <item alignment="Qt::AlignLeft">
                          <widget class="QFrame" name="frame_21">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
                           <property name="frameShape">
                            <enum>QFrame::StyledPanel</enum>
                           </property>
@@ -3386,7 +3398,7 @@ im Dauerbetrieb</string>
                           </column>
                          </widget>
                         </item>
-                        <item>
+                        <item alignment="Qt::AlignLeft">
                          <widget class="QFrame" name="frame_24">
                           <property name="frameShape">
                            <enum>QFrame::StyledPanel</enum>
@@ -3414,7 +3426,7 @@ im Dauerbetrieb</string>
                              </property>
                             </widget>
                            </item>
-                           <item>
+                           <item alignment="Qt::AlignLeft">
                             <widget class="QFrame" name="frame_23">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -3454,7 +3466,7 @@ im Dauerbetrieb</string>
                                 </property>
                                </widget>
                               </item>
-                              <item row="0" column="1">
+                              <item row="0" column="1" alignment="Qt::AlignLeft">
                                <widget class="QPlainTextEdit" name="bat_storage_type_text">
                                 <property name="sizePolicy">
                                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -3464,13 +3476,13 @@ im Dauerbetrieb</string>
                                 </property>
                                 <property name="minimumSize">
                                  <size>
-                                  <width>150</width>
+                                  <width>300</width>
                                   <height>30</height>
                                  </size>
                                 </property>
                                 <property name="maximumSize">
                                  <size>
-                                  <width>300</width>
+                                  <width>500</width>
                                   <height>60</height>
                                  </size>
                                 </property>
@@ -3501,7 +3513,7 @@ im Dauerbetrieb</string>
                                 </property>
                                </widget>
                               </item>
-                              <item row="0" column="3">
+                              <item row="0" column="3" alignment="Qt::AlignLeft">
                                <widget class="QPlainTextEdit" name="bat_storage_SN_text">
                                 <property name="sizePolicy">
                                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -3511,13 +3523,13 @@ im Dauerbetrieb</string>
                                 </property>
                                 <property name="minimumSize">
                                  <size>
-                                  <width>150</width>
+                                  <width>300</width>
                                   <height>30</height>
                                  </size>
                                 </property>
                                 <property name="maximumSize">
                                  <size>
-                                  <width>300</width>
+                                  <width>500</width>
                                   <height>60</height>
                                  </size>
                                 </property>
@@ -3549,7 +3561,7 @@ Speicherkapazität:</string>
                                 </property>
                                </widget>
                               </item>
-                              <item row="1" column="1">
+                              <item row="1" column="1" alignment="Qt::AlignLeft">
                                <widget class="QPlainTextEdit" name="bat_storage_cap_text">
                                 <property name="sizePolicy">
                                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -3559,13 +3571,13 @@ Speicherkapazität:</string>
                                 </property>
                                 <property name="minimumSize">
                                  <size>
-                                  <width>150</width>
+                                  <width>300</width>
                                   <height>30</height>
                                  </size>
                                 </property>
                                 <property name="maximumSize">
                                  <size>
-                                  <width>300</width>
+                                  <width>500</width>
                                   <height>60</height>
                                  </size>
                                 </property>
@@ -3607,13 +3619,13 @@ Inbetriebnahme:</string>
                                 </property>
                                 <property name="minimumSize">
                                  <size>
-                                  <width>150</width>
+                                  <width>300</width>
                                   <height>30</height>
                                  </size>
                                 </property>
                                 <property name="maximumSize">
                                  <size>
-                                  <width>300</width>
+                                  <width>500</width>
                                   <height>60</height>
                                  </size>
                                 </property>
@@ -3645,7 +3657,7 @@ im Dauerbetrieb:</string>
                                 </property>
                                </widget>
                               </item>
-                              <item row="2" column="1">
+                              <item row="2" column="1" alignment="Qt::AlignLeft">
                                <widget class="QPlainTextEdit" name="max_discharge_pow_text">
                                 <property name="sizePolicy">
                                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -3655,13 +3667,13 @@ im Dauerbetrieb:</string>
                                 </property>
                                 <property name="minimumSize">
                                  <size>
-                                  <width>150</width>
+                                  <width>300</width>
                                   <height>30</height>
                                  </size>
                                 </property>
                                 <property name="maximumSize">
                                  <size>
-                                  <width>300</width>
+                                  <width>500</width>
                                   <height>60</height>
                                  </size>
                                 </property>
@@ -3693,7 +3705,7 @@ bei Netzstörungen: </string>
                                 </property>
                                </widget>
                               </item>
-                              <item row="2" column="3">
+                              <item row="2" column="3" alignment="Qt::AlignLeft|Qt::AlignVCenter">
                                <widget class="QPlainTextEdit" name="em_pow_ability_bool_text">
                                 <property name="sizePolicy">
                                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -3703,13 +3715,13 @@ bei Netzstörungen: </string>
                                 </property>
                                 <property name="minimumSize">
                                  <size>
-                                  <width>150</width>
+                                  <width>300</width>
                                   <height>30</height>
                                  </size>
                                 </property>
                                 <property name="maximumSize">
                                  <size>
-                                  <width>300</width>
+                                  <width>500</width>
                                   <height>60</height>
                                  </size>
                                 </property>
@@ -3744,7 +3756,7 @@ Stromspeicherung:</string>
                                 </property>
                                </widget>
                               </item>
-                              <item row="3" column="1">
+                              <item row="3" column="1" alignment="Qt::AlignLeft">
                                <widget class="QPlainTextEdit" name="energy_storage_type_text">
                                 <property name="sizePolicy">
                                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -3754,13 +3766,13 @@ Stromspeicherung:</string>
                                 </property>
                                 <property name="minimumSize">
                                  <size>
-                                  <width>150</width>
+                                  <width>300</width>
                                   <height>30</height>
                                  </size>
                                 </property>
                                 <property name="maximumSize">
                                  <size>
-                                  <width>300</width>
+                                  <width>500</width>
                                   <height>60</height>
                                  </size>
                                 </property>
@@ -3791,7 +3803,7 @@ Stromspeicherung:</string>
                                 </property>
                                </widget>
                               </item>
-                              <item row="3" column="3">
+                              <item row="3" column="3" alignment="Qt::AlignLeft">
                                <widget class="QPlainTextEdit" name="bat_technology_text">
                                 <property name="sizePolicy">
                                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -3801,13 +3813,13 @@ Stromspeicherung:</string>
                                 </property>
                                 <property name="minimumSize">
                                  <size>
-                                  <width>150</width>
+                                  <width>300</width>
                                   <height>30</height>
                                  </size>
                                 </property>
                                 <property name="maximumSize">
                                  <size>
-                                  <width>300</width>
+                                  <width>500</width>
                                   <height>60</height>
                                  </size>
                                 </property>
@@ -3938,7 +3950,7 @@ Stromspeicherung:</string>
                           </column>
                          </widget>
                         </item>
-                        <item>
+                        <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
                          <widget class="QFrame" name="frame_26">
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -4011,7 +4023,7 @@ Stromspeicherung:</string>
                                  <property name="leftMargin">
                                   <number>0</number>
                                  </property>
-                                 <item>
+                                 <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
                                   <widget class="QLabel" name="charging_point_type_label">
                                    <property name="sizePolicy">
                                     <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -4021,13 +4033,13 @@ Stromspeicherung:</string>
                                    </property>
                                    <property name="minimumSize">
                                     <size>
-                                     <width>150</width>
+                                     <width>50</width>
                                      <height>60</height>
                                     </size>
                                    </property>
                                    <property name="maximumSize">
                                     <size>
-                                     <width>300</width>
+                                     <width>100</width>
                                      <height>80</height>
                                     </size>
                                    </property>
@@ -4036,7 +4048,7 @@ Stromspeicherung:</string>
                                    </property>
                                   </widget>
                                  </item>
-                                 <item>
+                                 <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
                                   <widget class="QPlainTextEdit" name="charging_point_type_text">
                                    <property name="sizePolicy">
                                     <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -4073,7 +4085,7 @@ Stromspeicherung:</string>
                                  <property name="sizeConstraint">
                                   <enum>QLayout::SetDefaultConstraint</enum>
                                  </property>
-                                 <item>
+                                 <item alignment="Qt::AlignLeft">
                                   <widget class="QLabel" name="charging_point_SN_label">
                                    <property name="sizePolicy">
                                     <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -4098,7 +4110,7 @@ Stromspeicherung:</string>
                                    </property>
                                   </widget>
                                  </item>
-                                 <item>
+                                 <item alignment="Qt::AlignVCenter">
                                   <widget class="QTextEdit" name="charging_point_SN_text">
                                    <property name="sizePolicy">
                                     <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
@@ -4162,7 +4174,7 @@ Stromspeicherung:</string>
                           </property>
                          </widget>
                         </item>
-                        <item>
+                        <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
                          <widget class="QFrame" name="frame_27">
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -4177,7 +4189,7 @@ Stromspeicherung:</string>
                            <enum>QFrame::Raised</enum>
                           </property>
                           <layout class="QGridLayout" name="gridLayout_15">
-                           <item row="0" column="0">
+                           <item row="0" column="0" alignment="Qt::AlignVCenter">
                             <widget class="QLabel" name="feeding_type_label">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Maximum" vsizetype="MinimumExpanding">
@@ -4202,7 +4214,7 @@ Stromspeicherung:</string>
                              </property>
                             </widget>
                            </item>
-                           <item row="0" column="1">
+                           <item row="0" column="1" alignment="Qt::AlignLeft|Qt::AlignVCenter">
                             <widget class="QPlainTextEdit" name="feeding_type_text">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -4257,7 +4269,7 @@ Stromspeicherung:</string>
                           </property>
                          </widget>
                         </item>
-                        <item>
+                        <item alignment="Qt::AlignLeft">
                          <widget class="QFrame" name="frame_28">
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -4272,56 +4284,6 @@ Stromspeicherung:</string>
                            <enum>QFrame::Raised</enum>
                           </property>
                           <layout class="QGridLayout" name="gridLayout_16">
-                           <item row="0" column="0">
-                            <widget class="QLabel" name="pow_limit_bool_label">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="minimumSize">
-                              <size>
-                               <width>100</width>
-                               <height>30</height>
-                              </size>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>300</width>
-                               <height>90</height>
-                              </size>
-                             </property>
-                             <property name="text">
-                              <string>Leistungsbegrenzung:</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="0" column="1">
-                            <widget class="QPlainTextEdit" name="pow_limit_bool_text">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="minimumSize">
-                              <size>
-                               <width>50</width>
-                               <height>30</height>
-                              </size>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>75</width>
-                               <height>30</height>
-                              </size>
-                             </property>
-                             <property name="plainText">
-                              <string>Nein</string>
-                             </property>
-                            </widget>
-                           </item>
                            <item row="0" column="2">
                             <widget class="QLabel" name="rmt_grd_op_bool_label">
                              <property name="sizePolicy">
@@ -4333,7 +4295,7 @@ Stromspeicherung:</string>
                              <property name="minimumSize">
                               <size>
                                <width>100</width>
-                               <height>30</height>
+                               <height>40</height>
                               </size>
                              </property>
                              <property name="maximumSize">
@@ -4348,8 +4310,8 @@ durch Netzbetreiber:</string>
                              </property>
                             </widget>
                            </item>
-                           <item row="0" column="3">
-                            <widget class="QPlainTextEdit" name="rmt_grd_op_bool_text">
+                           <item row="2" column="3" alignment="Qt::AlignVCenter">
+                            <widget class="QPlainTextEdit" name="citizen_corp_bool_text">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                                <horstretch>0</horstretch>
@@ -4365,11 +4327,37 @@ durch Netzbetreiber:</string>
                              <property name="maximumSize">
                               <size>
                                <width>75</width>
-                               <height>30</height>
+                               <height>40</height>
                               </size>
                              </property>
                              <property name="plainText">
                               <string>Nein</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="2" column="2">
+                            <widget class="QLabel" name="citizen_corp_bool_label">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="minimumSize">
+                              <size>
+                               <width>100</width>
+                               <height>40</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>300</width>
+                               <height>90</height>
+                              </size>
+                             </property>
+                             <property name="text">
+                              <string>Anlagenbetreiber ist eine 
+Bürgerenergiegesellschaft:</string>
                              </property>
                             </widget>
                            </item>
@@ -4384,7 +4372,7 @@ durch Netzbetreiber:</string>
                              <property name="minimumSize">
                               <size>
                                <width>100</width>
-                               <height>30</height>
+                               <height>40</height>
                               </size>
                              </property>
                              <property name="maximumSize">
@@ -4402,58 +4390,7 @@ durch Direktvermarkter:</string>
                              </property>
                             </widget>
                            </item>
-                           <item row="1" column="1">
-                            <widget class="QPlainTextEdit" name="rmt_drct_mrktr_bool_text">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="minimumSize">
-                              <size>
-                               <width>50</width>
-                               <height>30</height>
-                              </size>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>75</width>
-                               <height>30</height>
-                              </size>
-                             </property>
-                             <property name="plainText">
-                              <string>Nein</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="1" column="2">
-                            <widget class="QLabel" name="rmt_3rd_prt_bool_label">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="minimumSize">
-                              <size>
-                               <width>100</width>
-                               <height>30</height>
-                              </size>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>300</width>
-                               <height>90</height>
-                              </size>
-                             </property>
-                             <property name="text">
-                              <string>Fernsteuerbarkeit
-durch Dritte:</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="1" column="3">
+                           <item row="1" column="3" alignment="Qt::AlignVCenter">
                             <widget class="QPlainTextEdit" name="rmt_3rd_prt_bool_text">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -4470,7 +4407,7 @@ durch Dritte:</string>
                              <property name="maximumSize">
                               <size>
                                <width>75</width>
-                               <height>30</height>
+                               <height>40</height>
                               </size>
                              </property>
                              <property name="plainText">
@@ -4489,7 +4426,7 @@ durch Dritte:</string>
                              <property name="minimumSize">
                               <size>
                                <width>100</width>
-                               <height>30</height>
+                               <height>40</height>
                               </size>
                              </property>
                              <property name="maximumSize">
@@ -4501,6 +4438,183 @@ durch Dritte:</string>
                              <property name="text">
                               <string>Präqualifikation
 für Regelenergie:</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="1" column="2">
+                            <widget class="QLabel" name="rmt_3rd_prt_bool_label">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="minimumSize">
+                              <size>
+                               <width>100</width>
+                               <height>40</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>300</width>
+                               <height>90</height>
+                              </size>
+                             </property>
+                             <property name="text">
+                              <string>Fernsteuerbarkeit
+durch Dritte:</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="0" column="1" alignment="Qt::AlignVCenter">
+                            <widget class="QPlainTextEdit" name="pow_limit_bool_text">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="minimumSize">
+                              <size>
+                               <width>50</width>
+                               <height>30</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>75</width>
+                               <height>40</height>
+                              </size>
+                             </property>
+                             <property name="plainText">
+                              <string>Nein</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="0" column="3" alignment="Qt::AlignVCenter">
+                            <widget class="QPlainTextEdit" name="rmt_grd_op_bool_text">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="minimumSize">
+                              <size>
+                               <width>50</width>
+                               <height>30</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>75</width>
+                               <height>40</height>
+                              </size>
+                             </property>
+                             <property name="plainText">
+                              <string>Nein</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="1" column="1" alignment="Qt::AlignVCenter">
+                            <widget class="QPlainTextEdit" name="rmt_drct_mrktr_bool_text">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="minimumSize">
+                              <size>
+                               <width>50</width>
+                               <height>30</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>75</width>
+                               <height>40</height>
+                              </size>
+                             </property>
+                             <property name="plainText">
+                              <string>Nein</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="3" column="1" alignment="Qt::AlignVCenter">
+                            <widget class="QPlainTextEdit" name="tendering_bool_text">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="minimumSize">
+                              <size>
+                               <width>50</width>
+                               <height>30</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>75</width>
+                               <height>40</height>
+                              </size>
+                             </property>
+                             <property name="plainText">
+                              <string>Nein</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="0" column="0">
+                            <widget class="QLabel" name="pow_limit_bool_label">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="minimumSize">
+                              <size>
+                               <width>100</width>
+                               <height>40</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>300</width>
+                               <height>90</height>
+                              </size>
+                             </property>
+                             <property name="text">
+                              <string>Leistungsbegrenzung:</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="3" column="0">
+                            <widget class="QLabel" name="tendering_bool_label">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="minimumSize">
+                              <size>
+                               <width>100</width>
+                               <height>40</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>300</width>
+                               <height>90</height>
+                              </size>
+                             </property>
+                             <property name="text">
+                              <string>Erlangung der PV-Anlage über 
+Zuschlag in einer Ausschreibung:</string>
                              </property>
                             </widget>
                            </item>
@@ -4521,109 +4635,7 @@ für Regelenergie:</string>
                              <property name="maximumSize">
                               <size>
                                <width>75</width>
-                               <height>30</height>
-                              </size>
-                             </property>
-                             <property name="plainText">
-                              <string>Nein</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="2" column="2">
-                            <widget class="QLabel" name="citizen_corp_bool_label">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="minimumSize">
-                              <size>
-                               <width>100</width>
-                               <height>30</height>
-                              </size>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>300</width>
-                               <height>90</height>
-                              </size>
-                             </property>
-                             <property name="text">
-                              <string>Anlagenbetreiber ist eine 
-Bürgerenergiegesellschaft:</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="2" column="3" alignment="Qt::AlignLeft|Qt::AlignVCenter">
-                            <widget class="QPlainTextEdit" name="citizen_corp_bool_text">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="minimumSize">
-                              <size>
-                               <width>50</width>
-                               <height>30</height>
-                              </size>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>75</width>
-                               <height>30</height>
-                              </size>
-                             </property>
-                             <property name="plainText">
-                              <string>Nein</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="3" column="0">
-                            <widget class="QLabel" name="tendering_bool_label">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="minimumSize">
-                              <size>
-                               <width>100</width>
-                               <height>30</height>
-                              </size>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>300</width>
-                               <height>90</height>
-                              </size>
-                             </property>
-                             <property name="text">
-                              <string>Erlangung der PV-Anlage über 
-Zuschlag in einer Ausschreibung:</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="3" column="1">
-                            <widget class="QPlainTextEdit" name="tendering_bool_text">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="minimumSize">
-                              <size>
-                               <width>50</width>
-                               <height>30</height>
-                              </size>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>75</width>
-                               <height>30</height>
+                               <height>40</height>
                               </size>
                              </property>
                              <property name="plainText">
@@ -4941,7 +4953,7 @@ Zuschlag in einer Ausschreibung:</string>
                  </widget>
                 </widget>
                </item>
-               <item>
+               <item alignment="Qt::AlignLeft|Qt::AlignTop">
                 <widget class="QFrame" name="frame_32">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -5099,9 +5111,12 @@ Zuschlag in einer Ausschreibung:</string>
                     <property name="frameShadow">
                      <enum>QFrame::Raised</enum>
                     </property>
-                    <layout class="QGridLayout" name="gridLayout_20">
-                     <item row="2" column="1">
+                    <layout class="QGridLayout" name="gridLayout">
+                     <item row="2" column="2" alignment="Qt::AlignVCenter">
                       <widget class="QPlainTextEdit" name="target_path_text_2">
+                       <property name="enabled">
+                        <bool>false</bool>
+                       </property>
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                          <horstretch>0</horstretch>
@@ -5110,20 +5125,20 @@ Zuschlag in einer Ausschreibung:</string>
                        </property>
                        <property name="minimumSize">
                         <size>
-                         <width>0</width>
+                         <width>1300</width>
                          <height>30</height>
                         </size>
                        </property>
                        <property name="maximumSize">
                         <size>
-                         <width>16777215</width>
+                         <width>1500</width>
                          <height>30</height>
                         </size>
                        </property>
                       </widget>
                      </item>
-                     <item row="2" column="0" alignment="Qt::AlignVCenter">
-                      <widget class="QPushButton" name="target_path_btn_2">
+                     <item row="0" column="0" alignment="Qt::AlignLeft|Qt::AlignVCenter">
+                      <widget class="QPushButton" name="source_btn_matstr">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                          <horstretch>0</horstretch>
@@ -5133,7 +5148,110 @@ Zuschlag in einer Ausschreibung:</string>
                        <property name="minimumSize">
                         <size>
                          <width>250</width>
-                         <height>40</height>
+                         <height>30</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>300</width>
+                         <height>30</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>Template gem. MatStR</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="0" alignment="Qt::AlignVCenter">
+                      <widget class="QPushButton" name="source_btn_docu">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>250</width>
+                         <height>30</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>300</width>
+                         <height>30</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>Template Dokumentation</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="0" column="2" alignment="Qt::AlignVCenter">
+                      <widget class="QPlainTextEdit" name="source_path_text_matstr">
+                       <property name="enabled">
+                        <bool>false</bool>
+                       </property>
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>1300</width>
+                         <height>30</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>1500</width>
+                         <height>30</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="2" alignment="Qt::AlignVCenter">
+                      <widget class="QPlainTextEdit" name="source_path_text_docu">
+                       <property name="enabled">
+                        <bool>false</bool>
+                       </property>
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>1300</width>
+                         <height>30</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>1500</width>
+                         <height>30</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="2" column="0" alignment="Qt::AlignVCenter">
+                      <widget class="QPushButton" name="target_path_btn_2">
+                       <property name="enabled">
+                        <bool>true</bool>
+                       </property>
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>250</width>
+                         <height>30</height>
                         </size>
                        </property>
                        <property name="maximumSize">
@@ -5156,111 +5274,17 @@ Zuschlag in einer Ausschreibung:</string>
                        </property>
                       </widget>
                      </item>
-                     <item row="0" column="0" alignment="Qt::AlignVCenter">
-                      <widget class="QPushButton" name="source_btn_matstr">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>250</width>
-                         <height>40</height>
-                        </size>
-                       </property>
-                       <property name="maximumSize">
-                        <size>
-                         <width>300</width>
-                         <height>30</height>
-                        </size>
-                       </property>
-                       <property name="text">
-                        <string>Template gem. MatStR</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="0" column="1" alignment="Qt::AlignVCenter">
-                      <widget class="QPlainTextEdit" name="source_path_text_matstr">
-                       <property name="enabled">
-                        <bool>false</bool>
-                       </property>
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>0</width>
-                         <height>30</height>
-                        </size>
-                       </property>
-                       <property name="maximumSize">
-                        <size>
-                         <width>16777215</width>
-                         <height>30</height>
-                        </size>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="1" column="0" alignment="Qt::AlignVCenter">
-                      <widget class="QPushButton" name="source_btn_docu">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>250</width>
-                         <height>40</height>
-                        </size>
-                       </property>
-                       <property name="maximumSize">
-                        <size>
-                         <width>300</width>
-                         <height>30</height>
-                        </size>
-                       </property>
-                       <property name="text">
-                        <string>Template Dokumentation</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="1" column="1">
-                      <widget class="QPlainTextEdit" name="source_path_text_docu">
-                       <property name="enabled">
-                        <bool>false</bool>
-                       </property>
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>0</width>
-                         <height>30</height>
-                        </size>
-                       </property>
-                       <property name="maximumSize">
-                        <size>
-                         <width>16777215</width>
-                         <height>30</height>
-                        </size>
-                       </property>
-                      </widget>
-                     </item>
                     </layout>
                    </widget>
                   </item>
-                  <item>
+                  <item alignment="Qt::AlignTop">
                    <widget class="QFrame" name="frame_35">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
                     <property name="frameShape">
                      <enum>QFrame::StyledPanel</enum>
                     </property>
@@ -5268,7 +5292,7 @@ Zuschlag in einer Ausschreibung:</string>
                      <enum>QFrame::Raised</enum>
                     </property>
                     <layout class="QHBoxLayout" name="horizontalLayout_17">
-                     <item>
+                     <item alignment="Qt::AlignLeft">
                       <widget class="QPushButton" name="create_doc1_btn">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -5311,7 +5335,7 @@ Zuschlag in einer Ausschreibung:</string>
                        </property>
                       </widget>
                      </item>
-                     <item>
+                     <item alignment="Qt::AlignLeft">
                       <widget class="QPushButton" name="create_doc2_btn">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -5390,7 +5414,7 @@ Zuschlag in einer Ausschreibung:</string>
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>1798</width>
+                   <width>1801</width>
                    <height>480</height>
                   </rect>
                  </property>
