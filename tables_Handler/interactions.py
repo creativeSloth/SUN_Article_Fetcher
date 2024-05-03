@@ -122,40 +122,40 @@ def fill_specific_device_list(self, table, df):
     disable_colums_edit(table, firstcol=1, lastcol=5)
 
 
-def ui_list_to_df_mapping(self, ui_list, tw_row=None, df_row=None):
-    if ui_list == self.ui.PV_modules_list:
+def ui_list_to_df_mapping(self, table, tw_row=None, df_row=None):
+    if table == self.ui.PV_modules_list:
         # Spalte 6 (dynamisch) mit den Werten aus der Spalte 4 des DataFrames
-        ui_list.setItem(
+        table.setItem(
             tw_row, 5, QtWidgets.QTableWidgetItem(''))
 
-    if ui_list == self.ui.PV_inverters_list:
+    if table == self.ui.PV_inverters_list:
         # Spalte 6 (dynamisch) mit den Werten aus der Spalte 4 des DataFrames
-        ui_list.setItem(
+        table.setItem(
             tw_row, 5, QtWidgets.QTableWidgetItem(''))
 
-    if ui_list == self.ui.BAT_inverters_list:
+    if table == self.ui.BAT_inverters_list:
         # Spalte 6 (dynamisch) mit den Werten aus der Spalte 4 des DataFrames
-        ui_list.setItem(
+        table.setItem(
             tw_row, 5, QtWidgets.QTableWidgetItem(''))
         # Spalte 7 (dynamisch) mit den Werten aus der Spalte 5 des DataFrames
-        ui_list.setItem(
+        table.setItem(
             tw_row, 6, QtWidgets.QTableWidgetItem(''))
 
-    if ui_list == self.ui.BAT_storage_list:
+    if table == self.ui.BAT_storage_list:
         # Spalte 6 (dynamisch) mit den Werten aus der Spalte 4 des DataFrames
-        ui_list.setItem(
+        table.setItem(
             tw_row, 5, QtWidgets.QTableWidgetItem(''))
         # Spalte 7 (dynamisch) mit den Werten aus der Spalte 5 des DataFrames
-        ui_list.setItem(
+        table.setItem(
             tw_row, 6, QtWidgets.QTableWidgetItem(''))
         # Spalte 8 (dynamisch) mit den Werten aus der Spalte 6 des DataFrames
-        ui_list.setItem(
+        table.setItem(
             tw_row, 7, QtWidgets.QTableWidgetItem(''))
         # Spalte 9 (dynamisch) mit den Werten aus der Spalte 7 des DataFrames
-        ui_list.setItem(
+        table.setItem(
             tw_row, 8, QtWidgets.QTableWidgetItem(''))
 
-    if ui_list == self.ui.CHG_point_list:
+    if table == self.ui.CHG_point_list:
         pass
 
 
@@ -269,23 +269,23 @@ def check_specs_in_device_tables(self):
     )
 
 
-def fill_device_specs_in_device_tables(self, ui_list):
+def fill_device_specs_in_device_tables(self, table):
 
     fixed_val_columns = get_fixed_val_columns()
 
     # Finde Spaltenindex der Artikelnummer
     article_no_col_index = get_column_index(
-        ui_list, 'Artikelnummer')
+        table, 'Artikelnummer')
 
-    for row in range(0, ui_list.rowCount()):
-        for column in range(5, ui_list.columnCount()):
-            column_header = ui_list.horizontalHeaderItem(column).text()
+    for row in range(0, table.rowCount()):
+        for column in range(5, table.columnCount()):
+            column_header = table.horizontalHeaderItem(column).text()
             if column_header not in fixed_val_columns:
-                article_no = ui_list.item(row, article_no_col_index).text()
+                article_no = table.item(row, article_no_col_index).text()
                 value = logs_and_config.read_device_related_storage_list(
                     self, 'device_specs_list_path', article_no, column_header)
                 if value is not None:
-                    ui_list.setItem(
+                    table.setItem(
                         row, column, QtWidgets.QTableWidgetItem(value))
 
 
