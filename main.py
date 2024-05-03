@@ -1,26 +1,22 @@
 import sys
-import os
-import shutil
 
-import pandas as pd
-
-from qtpy import QtCore, QtWidgets
+from qtpy import QtWidgets
 from PyQt5.QtWidgets import QFileDialog
-from PyQt5.QtGui import QFont
 
 
-import _tables.customize_row
+import files_Handler.copy_files as copy_files
+import tables_Handler.customize_row
 from ui.mainwindow import Ui_MainWindow
 
-import _data_Handler.data
-import _save_and_load.load
-import _save_and_load.save
-import _tables.interactions
-import _tables.search_bar
-import directory_Handler
-import logs_and_config
-import _save_and_load
-import _ui_fields_Handler.ui_fields
+import data_Handler.data
+import save_file_Handler.load
+import save_file_Handler.save
+import tables_Handler.interactions
+import tables_Handler.search_bar
+import directory_Handler.directory_base as directory_base
+import files_Handler.logs_and_config as logs_and_config
+import save_file_Handler
+import ui_fields_Handler.ui_fields
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -39,14 +35,14 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def initialize(self):
 
-        directory_Handler.set_directories(self)
+        directory_base.set_directories(self)
         logs_and_config.create_device_related_storage_list(
             self, storage_file='blacklist_path')
         logs_and_config.create_device_related_storage_list(
             self, storage_file='device_specs_list_path')
-        _ui_fields_Handler.ui_fields.config_to_fields(self)
+        ui_fields_Handler.ui_fields.config_to_fields(self)
 
-        _tables.search_bar.set_all_table_headers(self)
+        tables_Handler.search_bar.set_all_table_headers(self)
 
         self.previous_project_text = self.ui.project.toPlainText()
 
@@ -71,7 +67,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.ui.project.textChanged.connect(self.on_project_text_changed)
 
-        _tables.interactions.connect_sort_indicator_changed(self)
+        tables_Handler.interactions.connect_sort_indicator_changed(self)
 
         #  *********************************** Settings- module *****************************************
         self.ui.save_btn.clicked.connect(
@@ -130,134 +126,50 @@ class MainWindow(QtWidgets.QMainWindow):
             # Überprüfen Sie zusätzlich, ob file_path nicht leer ist
             if file_path:
                 # Lösche die vorhandenen Daten und fülle die Tabelle mit Daten aus der Datei
-                df = _data_Handler.data.read_data_from_file(file_path)
-                _tables.interactions.fill_article_table(
+                df = data_Handler.data.read_data_from_file(file_path)
+                tables_Handler.interactions.fill_article_table(
                     table=self.ui.articles_list, df=df)
 
     def on_load_articles_from_db_btn_click(self):
         # Lese Daten aus der MySQL-Datenbank und speichere sie in der Instanzvariable df
-        df = _data_Handler.data.execute_query(self, query='sql1')
+        df = data_Handler.data.execute_query(self, query='sql1')
         logs_and_config.update_config_file(self, 'Abfrage', 'sql1',
-                                           _data_Handler.data.get_sql_query(self)['sql1'])
+                                           data_Handler.data.get_sql_query(self)['sql1'])
         # Lösche die vorhandenen Daten und fülle die Tabelle mit den Daten aus der Datenbank
-        _tables.interactions.fill_article_table(
+        tables_Handler.interactions.fill_article_table(
             self, table=self.ui.articles_list, df=df)
 
     def on_project_text_changed(self):
-        _ui_fields_Handler.ui_fields.char_validation(self)
+        ui_fields_Handler.ui_fields.char_validation(self)
 
-    @directory_Handler.get_folder_path
+    @directory_base.get_folder_path
     def on_source_path_btn_click(self, folder_path):
         self.ui.source_path_text.setPlainText(folder_path)
         logs_and_config.update_config_file(
             self, 'Pfade', 'source_path', folder_path)
 
-    @directory_Handler.get_folder_path
+    @directory_base.get_folder_path
     def on_target_path_btn_click(self, folder_path):
         self.ui.target_path_text.setPlainText(folder_path)
         logs_and_config.update_config_file(
             self, 'Pfade', 'target_path', folder_path)
 
-    @directory_Handler.check_path_existence(modus=0)
+    @directory_base.check_path_existence(modus=0)
     def on_copy_files_btn_click(self, *args, **kwargs):
-        # Holen Sie sich Pfade für Quell- und Zielordner aus den Textfeldern
-        source_path = directory_Handler.get_directories(self)[
-            'source_path']
-        target_path = directory_Handler.get_directories(self)[
-            'target_path_1']
-        log_sub2folder_path = directory_Handler.get_directories(self)[
-            'log_sub2folder_path']
-
-        # Holen Sie sich alle Dateinamen im source_path
-        source_files = _data_Handler.data.get_files_in_source_path(
+        source_path, target_path, log_sub2folder_path = copy_files.get_paths(
+            self)
+        source_files = data_Handler.data.get_files_in_source_path(
             self, source_path)
+        selected_files, df = copy_files.get_selected_files_and_df(
+            self)
+        matching_files = copy_files.get_matching_files(
+            source_files, selected_files)
+        copy_files.mark_matching_files(self, matching_files)
+        count = copy_files.copy_files(self,
+                                      matching_files, source_path, target_path)
 
-        # Holen Sie sich alle ausgewählten Dateien im Table Widget
-        selected_files = []
-
-        # Datframe für Log-File
-        df = pd.DataFrame(columns=['article_no', 'article_name', 'count'])
-
-        table = self.ui.articles_list
-
-        for row in range(table.rowCount()):
-
-            checkbox_item = table.item(row, 0)
-            article_no = table.item(row, 1).text()
-            article_name = table.item(row, 2).text()
-            # ? count = table.item(row, 3).text()
-            # Erstelle ein DataFrame mit den neuen Daten
-
-            # Datframe für Log-File
-            new_data = pd.DataFrame(
-                {'article_no': [article_no],
-                 'article_name': [article_name]
-                 # ? ,'count': [count]
-                 })
-
-            # Füge die neuen Daten zum vorhandenen DataFrame hinzu
-            df = pd.concat([df, new_data], ignore_index=True)
-
-            # Überprüfe, ob die Checkbox in der aktuellen Zeile angehakt ist
-            if checkbox_item and checkbox_item.checkState() == QtCore.Qt.Checked:
-
-                selected_files.append(article_no)
-
-        selected_files = list(set(selected_files))
-
-        # Holen Sie sich alle Dateinamen im Quellordner, die den ausgewählten Dateien entsprechen
-        matching_files = []
-        matching_files = [file for file in source_files if
-                          any(selected_file in file for selected_file in selected_files)]
-
-        # Iteriere über alle übereinstimmenden Dateinamen
-        count = 0
-
-        for matching_filename in matching_files:
-            # iteriere durch die Tabelle, um die Artikelnummer Fett zu machen
-            for row in range(table.rowCount()):
-                article_no_item = table.item(row, 1)  # Item in Spalte 1
-                article_no = article_no_item.text()
-
-                if article_no in matching_filename:
-                    # Fett markieren
-                    font = QFont()
-                    font.setBold(True)
-                    article_no_item.setFont(font)
-
-            # Konstruiere den vollständigen Pfad zur Quelldatei
-            source_file_path = os.path.join(source_path, matching_filename)
-
-            # Konstruiere den vollständigen Pfad zum Ziel
-            target_file_path = os.path.join(target_path, matching_filename)
-            target_file_path_ext = os.path.dirname(target_file_path)
-            try:
-                if not os.path.exists(target_file_path_ext):
-                    os.makedirs(target_file_path_ext)
-
-            except Exception as e:
-                QtWidgets.QMessageBox.warning(
-                    self, "Fehler", f"Fehler beim Erstellen des Verzeichnisses {target_file_path.root()}.\n\n"
-                                    f"Fehler: {e}")
-
-            # Kopiere die Datei
-            try:
-                shutil.copy(source_file_path, target_file_path)
-                count += 1
-            except Exception as e:
-                QtWidgets.QMessageBox.warning(
-                    self, "Fehler", f"Fehler beim Kopieren der Datei {source_file_path} zu {target_file_path}.\n\n"
-                                    f"Fehler: {e}")
-
-        # Rufen Sie die separate Funktion für das Logging auf
-        logs_and_config.log_copy_details(self, source_path, target_path,
-                                         source_files, matching_files, df)
-
-        # Gib eine Erfolgsmeldung aus
-        QtWidgets.QMessageBox.information(self, "Erfolg!",
-                                          f"Das Kopieren der Dateien wurde beendet.\n"
-                                          f"Es wurden insgesamt {count} Dateien übertragen.\n\n"
-                                          f"Es wurde eine Logdatei im log-Ordner:\n\n {log_sub2folder_path}\n\n erstellt.")
+        copy_files.log_and_show_result(self,
+                                       source_path, target_path, source_files, matching_files, df, count, log_sub2folder_path)
 
 
 # * * * * * * * * * * * * * * * * * Settings * * * * * * * * * * * * * * * *
@@ -265,14 +177,14 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def on_save_btn_click(self):
         file_path = logs_and_config.create_save_file(self)
-        _save_and_load.save.save_fields_text(self, file_path)
-        _save_and_load.save.save_tables_content(self, file_path)
+        save_file_Handler.save.save_fields_text(self, file_path)
+        save_file_Handler.save.save_tables_content(self, file_path)
 
     def on_load_btn_click(self):
-        file_path = directory_Handler.get_save_file_dir(self)
+        file_path = directory_base.get_save_file_dir(self)
         if file_path != '':
-            _save_and_load.load.load_fields_text(self, file_path)
-            _save_and_load.load.load_tables_content(self, file_path)
+            save_file_Handler.load.load_fields_text(self, file_path)
+            save_file_Handler.load.load_tables_content(self, file_path)
 
     def on_sql_query_btn_click(self):
 
@@ -290,64 +202,64 @@ class MainWindow(QtWidgets.QMainWindow):
 # * * * * * * * * * * * * * * * * * Documentation-module * * * * * * * * * * * * * * * *
 
     def on_btn_create_doc1_clicked(self):
-        _ui_fields_Handler.ui_fields.replace_fields_in_doc(
+        ui_fields_Handler.ui_fields.replace_fields_in_doc(
             self, doc_path='doc1_path', template_path='template1_path')
 
     def on_btn_create_doc2_clicked(self):
-        _ui_fields_Handler.ui_fields.replace_fields_in_doc(
+        ui_fields_Handler.ui_fields.replace_fields_in_doc(
             self, doc_path='doc2_path', template_path='template2_path')
 
     def on_load_data_to_device_list_btn_click(self):
-        _ui_fields_Handler.ui_fields.clear_docu_fields(self)
-        df = _data_Handler.data.execute_query(self, query='sql1')
+        ui_fields_Handler.ui_fields.clear_docu_fields(self)
+        df = data_Handler.data.execute_query(self, query='sql1')
         logs_and_config.update_config_file(self, 'Abfrage', 'sql1',
-                                           _data_Handler.data.get_sql_query(self)['sql1'])
-        _tables.interactions.fill_device_lists(self, df)
+                                           data_Handler.data.get_sql_query(self)['sql1'])
+        tables_Handler.interactions.fill_device_lists(self, df)
 
     def on_move_none_PV_modules_to_blacklist_click(self):
-        _tables.interactions.remove_articles_from_list(
+        tables_Handler.interactions.remove_articles_from_list(
             self, list=self.ui.PV_modules_list)
 
     def on_move_none_PV_inverters_to_blacklist_click(self):
-        _tables.interactions.remove_articles_from_list(
+        tables_Handler.interactions.remove_articles_from_list(
             self, list=self.ui.PV_inverters_list)
 
     def on_move_none_BAT_inverters_to_blacklist_click(self):
-        _tables.interactions.remove_articles_from_list(
+        tables_Handler.interactions.remove_articles_from_list(
             self, list=self.ui.BAT_inverters_list)
 
     def on_move_none_BAT_storage_to_blacklist_click(self):
-        _tables.interactions.remove_articles_from_list(
+        tables_Handler.interactions.remove_articles_from_list(
             self, list=self.ui.BAT_storage_list)
 
     def on_move_none_CHG_point_to_blacklist_click(self):
-        _tables.interactions.remove_articles_from_list(
+        tables_Handler.interactions.remove_articles_from_list(
             self, list=self.ui.CHG_point_list)
 
     def on_fill_fields_btn_click(self):
 
-        df = _data_Handler.data.execute_query(self, query='sql2')
+        df = data_Handler.data.execute_query(self, query='sql2')
         logs_and_config.update_config_file(self, 'Abfrage', 'sql2',
-                                           _data_Handler.data.get_sql_query(self)['sql2'])
-        _ui_fields_Handler.ui_fields.clear_docu_fields(self)
-        _ui_fields_Handler.ui_fields.fill_docu_fields(self)
+                                           data_Handler.data.get_sql_query(self)['sql2'])
+        ui_fields_Handler.ui_fields.clear_docu_fields(self)
+        ui_fields_Handler.ui_fields.fill_docu_fields(self)
 
     def on_store_device_specs_btn_click(self):
-        _tables.interactions.check_specs_in_device_tables(self)
+        tables_Handler.interactions.check_specs_in_device_tables(self)
 
-    @directory_Handler.get_file_path
+    @directory_base.get_file_path
     def on_source_btn_matstr_click(self, file_path):
         self.ui.source_path_text_matstr.setPlainText(file_path)
         logs_and_config.update_config_file(
             self, 'Pfade', 'template1_path', file_path)
 
-    @directory_Handler.get_file_path
+    @directory_base.get_file_path
     def on_source_btn_docu_click(self, file_path):
         self.ui.source_path_text_docu.setPlainText(file_path)
         logs_and_config.update_config_file(
             self, 'Pfade', 'template2_path', file_path)
 
-    @directory_Handler.get_folder_path
+    @directory_base.get_folder_path
     def on_target_path_btn_2_click(self, folder_path):
         self.ui.target_path_text_2.setPlainText(folder_path)
         logs_and_config.update_config_file(

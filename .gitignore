@@ -89,6 +89,7 @@ config - Kopie.ini
 vsc_venv/
 logs/
 .data/
+SQL/
 ui/icons/
 ui/Icons/
 build-ui-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/

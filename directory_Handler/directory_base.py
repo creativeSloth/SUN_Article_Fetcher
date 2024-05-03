@@ -1,8 +1,7 @@
 import os
 import sys
 from datetime import datetime
-
-from functools import wraps
+import inspect
 
 from PyQt5.QtWidgets import QFileDialog
 from qtpy import QtWidgets
@@ -10,13 +9,18 @@ from qtpy import QtWidgets
 
 def get_directories(self):
     project = self.ui.project.toPlainText()
-    # Setze den dynamischen Pfad zur Log-Datei relativ zum Skript
+
+    # Finde das Verzeichnis, in dem main.py liegt
+    main_script_path = inspect.getsourcefile(sys.modules['__main__'])
+    main_script_dir = os.path.dirname(main_script_path)
+
+    # Setze den dynamischen Pfad zur Log-Datei relativ zum Verzeichnis von main.py
     if getattr(sys, 'frozen', False):
         # Skript wird im gepackten Zustand ausgeführt
         script_dir = os.path.dirname(sys.executable)
     else:
         # Skript wird normal ausgeführt
-        script_dir = os.path.dirname(os.path.abspath(__file__))
+        script_dir = main_script_dir
     # **************************  Article Fetcher module  ********************************************
 
     source_path = self.ui.source_path_text.toPlainText()
@@ -94,7 +98,6 @@ def get_save_file_dir(self):
 
 
 def get_file_path(func):
-    @wraps(func)
     def wrapper(self):
         file_path, _ = QFileDialog.getOpenFileName(
             self, "Wähle die Datei aus!")
@@ -104,7 +107,6 @@ def get_file_path(func):
 
 
 def get_folder_path(func):
-    @wraps(func)
     def wrapper(self):
         folder_path = QFileDialog.getExistingDirectory(
             self, "Wähle den Ordner aus!")

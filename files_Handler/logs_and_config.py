@@ -3,12 +3,12 @@ import os
 from datetime import datetime
 from qtpy import QtWidgets
 
-import directory_Handler
+import directory_Handler.directory_base as directory_base
 
 
 def create_config_file(self):
-    directory_Handler.set_directories(self)
-    config_path = directory_Handler.get_directories(self)['config_path']
+    directory_base.set_directories(self)
+    config_path = directory_base.get_directories(self)['config_path']
 
     if os.path.exists(config_path):
         return
@@ -42,7 +42,7 @@ def create_config_file(self):
 
 
 def create_save_file(self):
-    file_path = directory_Handler.set_save_file_dir(self)
+    file_path = directory_base.set_save_file_dir(self)
 
     if file_path != '':
         save_file = configparser.ConfigParser()
@@ -80,7 +80,7 @@ def load_save_file(file_path, section):
 
 
 def update_config_file(self, section, option, value):
-    config_path = directory_Handler.get_directories(self)['config_path']
+    config_path = directory_base.get_directories(self)['config_path']
     config = configparser.ConfigParser()
     config.read(config_path)
     config[section][option] = value
@@ -90,7 +90,7 @@ def update_config_file(self, section, option, value):
 
 
 def read_config_value(self, section, option):
-    config_path = directory_Handler.get_directories(self)['config_path']
+    config_path = directory_base.get_directories(self)['config_path']
     config = configparser.ConfigParser()
     config.read(config_path)
     value = config[section][option]
@@ -103,9 +103,9 @@ def log_copy_details(self, source_path, target_path, source_files, matching_file
     log_source_file_name = f"datalog_{timestamp}.txt"
 
     # Erstelle den Unterordner, falls er noch nicht existiert
-    directory_Handler.set_directories(self)
+    directory_base.set_directories(self)
 
-    log_sub2folder_path = directory_Handler.get_directories(self)[
+    log_sub2folder_path = directory_base.get_directories(self)[
         'log_sub2folder_path']
 
     # Pfad zur Log-Datei im Unterordner "logs"
@@ -153,7 +153,7 @@ def log_copy_details(self, source_path, target_path, source_files, matching_file
 
 
 def update_blacklist(self, df, list):
-    blacklist_path = directory_Handler.get_directories(self)['blacklist_path']
+    blacklist_path = directory_base.get_directories(self)['blacklist_path']
 
     config = configparser.ConfigParser()
 
@@ -180,7 +180,7 @@ def update_blacklist(self, df, list):
 
 
 def read_blacklist_article_numbers(self, table_name):
-    blacklist_path = directory_Handler.get_directories(self)['blacklist_path']
+    blacklist_path = directory_base.get_directories(self)['blacklist_path']
     config = configparser.ConfigParser()
     config.read(blacklist_path)
     # Überprüfen Sie, ob die angegebene Sektion vorhanden ist
@@ -193,7 +193,7 @@ def read_blacklist_article_numbers(self, table_name):
 
 
 def create_device_related_storage_list(self, storage_file=None):
-    related_path = directory_Handler.get_directories(self)[storage_file]
+    related_path = directory_base.get_directories(self)[storage_file]
 
     if os.path.exists(related_path):
         return
@@ -205,7 +205,7 @@ def create_device_related_storage_list(self, storage_file=None):
 
 
 def update_device_related_storage_list(self, storage_file, data_set):
-    file_path = directory_Handler.get_directories(self)[storage_file]
+    file_path = directory_base.get_directories(self)[storage_file]
     store_file = configparser.ConfigParser()
 
     # Lade vorhandene Konfiguration, wenn die Datei vorhanden ist
@@ -227,7 +227,7 @@ def update_device_related_storage_list(self, storage_file, data_set):
 
 
 def read_device_related_storage_list(self, storage_file, section, option):
-    file_path = directory_Handler.get_directories(
+    file_path = directory_base.get_directories(
         self)[storage_file]
 
     stored_file = configparser.ConfigParser()

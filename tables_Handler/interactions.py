@@ -4,14 +4,14 @@ from qtpy import QtCore, QtWidgets, QtGui
 
 from odf.opendocument import load
 
-import logs_and_config
+import files_Handler.logs_and_config as logs_and_config
 
-from _tables.customize_row import customize_table_row
-import _ui_fields_Handler.ui_fields
+from tables_Handler.customize_row import customize_table_row
+import ui_fields_Handler.ui_fields
 
 
 def connect_sort_indicator_changed(self):
-    tables = _ui_fields_Handler.ui_fields.get_all_tables(self)
+    tables = ui_fields_Handler.ui_fields.get_all_tables(self)
     for table in tables:
         # Verwendung von lambda-Funktion, um das Argument "table" zu übergeben
         table.horizontalHeader().sortIndicatorChanged.connect(
@@ -66,7 +66,7 @@ def fill_article_table(self, table, df=None):
 
 
 def fill_device_lists(self, df):
-    tables = _ui_fields_Handler.ui_fields.get_device_tables(self)
+    tables = ui_fields_Handler.ui_fields.get_device_tables(self)
     for table in tables:
         fill_specific_device_list(self, table=table, df=df)
 
@@ -243,7 +243,7 @@ def get_fixed_val_columns():
 
 def check_specs_in_device_tables(self):
 
-    device_tables = _ui_fields_Handler.ui_fields.get_device_tables(self)
+    device_tables = ui_fields_Handler.ui_fields.get_device_tables(self)
     fixed_val_columns = get_fixed_val_columns()
 
     data_set = set()
@@ -291,7 +291,7 @@ def fill_device_specs_in_device_tables(self, ui_list):
 
 def fill_tables_content(self, saved_tables_content):
     # Alle Tabellen holen
-    tables = _ui_fields_Handler.ui_fields.get_all_tables(self)
+    tables = ui_fields_Handler.ui_fields.get_all_tables(self)
     for table in tables:
         clear_table(table)
 

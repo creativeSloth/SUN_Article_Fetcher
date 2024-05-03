@@ -1,10 +1,10 @@
 
 from PyQt5.QtWidgets import QTextEdit, QHBoxLayout, QVBoxLayout, QSizePolicy, QPushButton
-import _ui_fields_Handler.ui_fields
+import ui_fields_Handler.ui_fields
 
 
 def set_all_table_headers(self):
-    tables = _ui_fields_Handler.ui_fields.get_device_tables(self)
+    tables = ui_fields_Handler.ui_fields.get_device_tables(self)
 
     for table in tables:
         button, text_edit = add_table_header_search_box(
@@ -13,7 +13,7 @@ def set_all_table_headers(self):
                                         button=button,
                                         text_edit=text_edit)
 
-    tables = _ui_fields_Handler.ui_fields.get_articles_table(self)
+    tables = ui_fields_Handler.ui_fields.get_articles_table(self)
     for table in tables:
         button, text_edit = add_table_header_search_box(
             table=table, layout=self.ui.verticalLayout)

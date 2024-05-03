@@ -5,8 +5,8 @@ from odf.opendocument import load
 from odf import text, teletype
 from odf.table import Table, TableRow, TableCell
 
-import logs_and_config
-import directory_Handler
+import files_Handler.logs_and_config as logs_and_config
+import directory_Handler.directory_base as directory_base
 
 
 def config_to_fields(self):
@@ -37,7 +37,7 @@ def config_to_fields(self):
         QtWidgets.QMessageBox.warning(
             self, "Fehler", f"Konfigurationsdaten konnten nicht geladen werden, daher wurde eine neue Konfigurationsdatei erstellt.\n\n"
             f"Fehlermeldung:\n {e}")
-        config_path = directory_Handler.get_directories(self)['config_path']
+        config_path = directory_base.get_directories(self)['config_path']
         if os.path.exists(config_path):
             os.remove(config_path)
         logs_and_config.create_config_file(self)
@@ -170,12 +170,12 @@ def aggr_dev_list(device_list, column_index):
     return value
 
 
-@directory_Handler.check_path_existence(modus=1)
+@directory_base.check_path_existence(modus=1)
 def replace_fields_in_doc(self, doc_path, template_path):
     # Rufe get_directories auf, um die Pfade zu erhalten
-    template = directory_Handler.get_directories(self)[
+    template = directory_base.get_directories(self)[
         template_path]
-    doc = directory_Handler.get_directories(self)[
+    doc = directory_base.get_directories(self)[
         doc_path]
 
     try:
