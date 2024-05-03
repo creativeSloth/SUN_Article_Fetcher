@@ -219,8 +219,6 @@ class MainWindow(QtWidgets.QMainWindow):
                 article_no_item = table.item(row, 1)  # Item in Spalte 1
                 article_no = article_no_item.text()
 
-                print(article_no + "   ----   " + matching_filename)
-
                 if article_no in matching_filename:
                     # Fett markieren
                     font = QFont()
