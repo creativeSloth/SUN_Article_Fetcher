@@ -60,13 +60,12 @@ QPlainTextEdit {
 	text-align: left;
 }
 
-QTextEdit,
-QPlainTextEdit {
+QTextEdit::hover,
+QPlainTextEdit::hover {
 	color: rgba(19, 33, 59, 220); /* Textfarbe */
-	border-radius: 5px; /* Abgerundete Ecken */
 	background-color: rgba(240, 255, 255, 255); /* Hintergrundfarbe */
-	font: 12pt "Sitka Heading"; /* Schriftart */
 	text-align: left;
+	border: 1px solid rgba(19, 33, 59, 100)
 }
 
 /* Deaktivierte QTextEdit */
