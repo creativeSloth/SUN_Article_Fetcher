@@ -1,4 +1,3 @@
-from email import utils
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5 import QtGui
 
@@ -40,13 +39,3 @@ def change_foreground_if_zero(count, table, row, column):
         for column in range(1, table.columnCount()):
             table.item(row, column).setForeground(
                 QtGui.QColor("#e20000"))
-
-
-# def change_background_colour(table, row, column):
-#     if row % 2 == 0:
-#         table.item(row, column).setBackground(QtGui.QColor(
-#             "#F6A4A4"))  # Hintergrundfarbe für gerade Zeilen
-#     else:
-#         # Hintergrundfarbe für ungerade Zeilen
-#         table.item(row, column).setBackground(
-#             QtGui.QColor("#BAE290"))
