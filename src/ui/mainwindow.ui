@@ -444,7 +444,7 @@
              <enum>QTabWidget::West</enum>
             </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>2</number>
             </property>
             <property name="iconSize">
              <size>
@@ -1113,7 +1113,7 @@
                   <property name="geometry">
                    <rect>
                     <x>0</x>
-                    <y>-2555</y>
+                    <y>0</y>
                     <width>1781</width>
                     <height>5258</height>
                    </rect>
@@ -5830,6 +5830,53 @@ Zuschlag in einer Ausschreibung:</string>
     </item>
    </layout>
   </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1898</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>Settings</string>
+    </property>
+    <addaction name="actionConnection"/>
+    <addaction name="actionPaths"/>
+   </widget>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionSave"/>
+    <addaction name="actionLoad"/>
+    <addaction name="separator"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuSettings"/>
+  </widget>
+  <action name="actionConnection">
+   <property name="text">
+    <string>Connection</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionLoad">
+   <property name="text">
+    <string>Load</string>
+   </property>
+  </action>
+  <action name="actionPaths">
+   <property name="text">
+    <string>Paths</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

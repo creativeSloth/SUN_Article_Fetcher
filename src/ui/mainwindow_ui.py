@@ -11,16 +11,18 @@
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
     QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
+    QCursor, QFont, QFontDatabase, QGradient,
+    QIcon, QImage, QKeySequence, QLinearGradient,
+    QPainter, QPalette, QPixmap, QRadialGradient,
+    QTransform)
 from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplication, QComboBox,
     QFormLayout, QFrame, QGridLayout, QHBoxLayout,
     QHeaderView, QLabel, QLayout, QMainWindow,
-    QPlainTextEdit, QPushButton, QScrollArea, QSizePolicy,
-    QSpacerItem, QSplitter, QTabWidget, QTableWidget,
-    QTableWidgetItem, QTextEdit, QVBoxLayout, QWidget)
+    QMenu, QMenuBar, QPlainTextEdit, QPushButton,
+    QScrollArea, QSizePolicy, QSpacerItem, QSplitter,
+    QTabWidget, QTableWidget, QTableWidgetItem, QTextEdit,
+    QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -39,6 +41,14 @@ class Ui_MainWindow(object):
         MainWindow.setAnimated(True)
         MainWindow.setDocumentMode(False)
         MainWindow.setTabShape(QTabWidget.Rounded)
+        self.actionConnection = QAction(MainWindow)
+        self.actionConnection.setObjectName(u"actionConnection")
+        self.actionSave = QAction(MainWindow)
+        self.actionSave.setObjectName(u"actionSave")
+        self.actionLoad = QAction(MainWindow)
+        self.actionLoad.setObjectName(u"actionLoad")
+        self.actionPaths = QAction(MainWindow)
+        self.actionPaths.setObjectName(u"actionPaths")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         sizePolicy.setHeightForWidth(self.centralwidget.sizePolicy().hasHeightForWidth())
@@ -442,7 +452,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, -2555, 1781, 5258))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 1781, 5258))
         sizePolicy3.setHeightForWidth(self.scrollAreaWidgetContents.sizePolicy().hasHeightForWidth())
         self.scrollAreaWidgetContents.setSizePolicy(sizePolicy3)
         self.gridLayout_5 = QGridLayout(self.scrollAreaWidgetContents)
@@ -2396,10 +2406,26 @@ class Ui_MainWindow(object):
         self.formLayout_3.setWidget(0, QFormLayout.LabelRole, self.frame0)
 
         MainWindow.setCentralWidget(self.centralwidget)
+        self.menuBar = QMenuBar(MainWindow)
+        self.menuBar.setObjectName(u"menuBar")
+        self.menuBar.setGeometry(QRect(0, 0, 1898, 22))
+        self.menuSettings = QMenu(self.menuBar)
+        self.menuSettings.setObjectName(u"menuSettings")
+        self.menuFile = QMenu(self.menuBar)
+        self.menuFile.setObjectName(u"menuFile")
+        MainWindow.setMenuBar(self.menuBar)
+
+        self.menuBar.addAction(self.menuFile.menuAction())
+        self.menuBar.addAction(self.menuSettings.menuAction())
+        self.menuSettings.addAction(self.actionConnection)
+        self.menuSettings.addAction(self.actionPaths)
+        self.menuFile.addAction(self.actionSave)
+        self.menuFile.addAction(self.actionLoad)
+        self.menuFile.addSeparator()
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(2)
         self.load_articles_db_btn.setDefault(False)
         self.load_articles_file_btn.setDefault(True)
         self.source_path_btn.setDefault(True)
@@ -2418,6 +2444,10 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        self.actionConnection.setText(QCoreApplication.translate("MainWindow", u"Connection", None))
+        self.actionSave.setText(QCoreApplication.translate("MainWindow", u"Save", None))
+        self.actionLoad.setText(QCoreApplication.translate("MainWindow", u"Load", None))
+        self.actionPaths.setText(QCoreApplication.translate("MainWindow", u"Paths", None))
         self.project_label.setText(QCoreApplication.translate("MainWindow", u"Projektnummer:", None))
         self.project.setPlainText(QCoreApplication.translate("MainWindow", u"SUN 20-000", None))
         self.project_name_label.setText(QCoreApplication.translate("MainWindow", u"Projektname:", None))
@@ -2632,5 +2662,7 @@ class Ui_MainWindow(object):
         self.save_btn.setText(QCoreApplication.translate("MainWindow", u"Speichern", None))
         self.load_btn.setText(QCoreApplication.translate("MainWindow", u"Laden", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab0), QCoreApplication.translate("MainWindow", u"Settings", None))
+        self.menuSettings.setTitle(QCoreApplication.translate("MainWindow", u"Settings", None))
+        self.menuFile.setTitle(QCoreApplication.translate("MainWindow", u"File", None))
     # retranslateUi
 

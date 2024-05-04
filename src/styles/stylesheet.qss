@@ -212,7 +212,47 @@ QHeaderView::section {
 /* QComboBox */
 /* -------------------------------------- */
 QComboBox QAbstractItemView {
+	color: #13213b;
+	background-color: #fff; /* Hintergrundfarbe */
 	border: 2px solid #ccc; /* Randstil */
 	border-radius: 5px; /* Abgerundete Ecken */
+}
+
+/* QMenuBar */
+/* -------------------------------------- */
+QMenuBar {
+	color: #13213b;
 	background-color: #fff; /* Hintergrundfarbe */
+	border: 1px solid #ccc; /* Randstil */
+	border-radius: 5px; /* Abgerundete Ecken */	
+}
+
+/* QMenu */
+/* -------------------------------------- */
+QMenu {
+	color: #13213b;
+	background-color: #fff; /* Hintergrundfarbe */
+	border: 1px solid #ccc; /* Randstil */
+	border-radius: 5px; /* Abgerundete Ecken */
+	padding: 10px;
+}
+
+QMenu::hover {
+	color: rgba(19, 33, 59, 200);
+	background-color: rgba(19, 33, 59, 100); /* Hintergrundfarbe */
+	
+}
+
+/* QAction */
+/* -------------------------------------- */
+QMenu::item {
+	color: #13213b;
+	background-color: rgb(255, 255, 255); /* Hintergrundfarbe */
+	border-radius: 5px; /* Abgerundete Ecken */
+	padding: 10px;
+}
+
+QMenu::item::selected {
+	color: rgba(19, 33, 59, 200);
+	background-color: rgba(19, 33, 59, 50); /* Hintergrundfarbe */
 }

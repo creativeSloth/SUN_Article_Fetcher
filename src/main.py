@@ -72,8 +72,10 @@ class MainWindow(QtWidgets.QMainWindow):
         tables.tables_base.connect_sort_indicator_changed(self)
 
         #  *********************************** Settings- module *****************************************
+        self.ui.actionSave.triggered.connect(self.on_save_btn_click)
         self.ui.save_btn.clicked.connect(
             self.on_save_btn_click)
+        self.ui.actionLoad.triggered.connect(self.on_load_btn_click)
         self.ui.load_btn.clicked.connect(
             self.on_load_btn_click)
         self.ui.sql_query_btn.clicked.connect(
