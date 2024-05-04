@@ -1,5 +1,5 @@
 import os
-from qtpy import QtCore, QtWidgets
+from qtpy import QtWidgets
 
 from odf.opendocument import load
 from odf import text, teletype
@@ -11,20 +11,25 @@ import directories.directory_base as directory_base
 
 def config_to_fields(self):
     try:
-        self.ui.db_server.setPlainText(
+        #!################ Settings_Connection_Dialog ###########################
+
+        self.ui_sett_con_dlg.ui.db_server.setPlainText(
             logs_and_config.read_config_value(self, 'Server', 'server'))
-        self.ui.user.setPlainText(
+        self.ui_sett_con_dlg.ui.user.setPlainText(
             logs_and_config.read_config_value(self, 'Server', 'user'))
-        self.ui.pw.setPlainText(
+        self.ui_sett_con_dlg.ui.pw.setPlainText(
             logs_and_config.read_config_value(self, 'Server', 'password'))
-        self.ui.db_name.setPlainText(
+        self.ui_sett_con_dlg.ui.db_name.setPlainText(
             logs_and_config.read_config_value(self, 'Server', 'dB_name'))
-        self.ui.query_input.setPlainText(
+        self.ui_sett_con_dlg.ui.query_input.setPlainText(
             logs_and_config.read_config_value(self, 'Abfrage', 'sql1'))
-        self.ui.query_2_input.setPlainText(
+        self.ui_sett_con_dlg.ui.query_2_input.setPlainText(
             logs_and_config.read_config_value(self, 'Abfrage', 'sql2'))
+
+        #!################ MainWindow ###########################
         self.ui.source_path_text.setPlainText(
             logs_and_config.read_config_value(self, 'Pfade', 'source_path'))
+
         self.ui.target_path_text.setPlainText(
             logs_and_config.read_config_value(self, 'Pfade', 'target_path'))
         self.ui.target_path_text_2.setPlainText(

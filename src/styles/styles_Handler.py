@@ -1,7 +1,7 @@
 from directories.directory_base import get_directories
 
 
-def initUI(self):
+def init_ui(self):
     # Pfad zur .qss-Datei
     stylesheet_path = get_directories(self)['stylesheet_path']
 

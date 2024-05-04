@@ -3,21 +3,20 @@ import sys
 from qtpy import QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 
-
-import files.copy_files as copy_files
-import tables.customize_row
 from ui.mainwindow import Ui_MainWindow
 
 import data_sources.data_base
-import save_file.load
-import save_file.save
-import tables.tables_base
+import tables.customize_row
 import tables.search_bar
+import tables.tables_base
 import directories.directory_base as directory_base
 import files.logs_and_config as logs_and_config
 import save_file
 import ui_fields.ui_fields_base
-from styles.styles_Handler import initUI
+from styles.styles_Handler import init_ui
+import files.copy_files as copy_files
+
+from menus import menus_base
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -36,21 +35,22 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def initialize(self):
 
-        initUI(self)
+        menus_base.initialize_all_menus(self)
+        init_ui(self)
+
         directory_base.set_directories(self)
+
+        logs_and_config.create_config_file(self)
         logs_and_config.create_device_related_storage_list(
             self, storage_file='blacklist_path')
         logs_and_config.create_device_related_storage_list(
             self, storage_file='device_specs_list_path')
+
         ui_fields.ui_fields_base.config_to_fields(self)
 
         tables.search_bar.set_all_table_headers(self)
 
         self.previous_project_text = self.ui.project.toPlainText()
-
-        # query_input-Box verstecken
-        self.ui.query_input.hide()
-        self.ui.query_2_input.hide()
 
     def map_ui_buttons(self):
 
@@ -72,16 +72,7 @@ class MainWindow(QtWidgets.QMainWindow):
         tables.tables_base.connect_sort_indicator_changed(self)
 
         #  *********************************** Settings- module *****************************************
-        self.ui.actionSave.triggered.connect(self.on_save_btn_click)
-        self.ui.save_btn.clicked.connect(
-            self.on_save_btn_click)
-        self.ui.actionLoad.triggered.connect(self.on_load_btn_click)
-        self.ui.load_btn.clicked.connect(
-            self.on_load_btn_click)
-        self.ui.sql_query_btn.clicked.connect(
-            self.on_sql_query_btn_click)
-        self.ui.sql_query_2_btn.clicked.connect(
-            self.on_sql_query_2_btn_click)
+        menus_base.map_menu_buttons(self)
 
         #  *********************************** Mapping buttons for "Documentation"- module *****************************************
         self.ui.load_data_to_device_lists_btn.clicked.connect(
@@ -146,19 +137,19 @@ class MainWindow(QtWidgets.QMainWindow):
     def on_project_text_changed(self):
         ui_fields.ui_fields_base.char_validation(self)
 
-    @directory_base.get_folder_path
+    @ directory_base.get_folder_path
     def on_source_path_btn_click(self, folder_path):
         self.ui.source_path_text.setPlainText(folder_path)
         logs_and_config.update_config_file(
             self, 'Pfade', 'source_path', folder_path)
 
-    @directory_base.get_folder_path
+    @ directory_base.get_folder_path
     def on_target_path_btn_click(self, folder_path):
         self.ui.target_path_text.setPlainText(folder_path)
         logs_and_config.update_config_file(
             self, 'Pfade', 'target_path', folder_path)
 
-    @directory_base.check_path_existence(modus=0)
+    @ directory_base.check_path_existence(modus=0)
     def on_copy_files_btn_click(self, *args, **kwargs):
         source_path, target_path, log_sub2folder_path = copy_files.get_paths(
             self)
@@ -181,8 +172,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def on_save_btn_click(self):
         file_path = logs_and_config.create_save_file(self)
-        save_file.save.save_fields_text(self, file_path)
-        save_file.save.save_tables_content(self, file_path)
+        if file_path != '':
+            save_file.save.save_fields_text(self, file_path)
+            save_file.save.save_tables_content(self, file_path)
 
     def on_load_btn_click(self):
         file_path = directory_base.get_save_file_dir(self)
@@ -190,20 +182,9 @@ class MainWindow(QtWidgets.QMainWindow):
             save_file.load.load_fields_text(self, file_path)
             save_file.load.load_tables_content(self, file_path)
 
-    def on_sql_query_btn_click(self):
-
-        if self.ui.query_input.isHidden():
-            self.ui.query_input.show()
-        else:
-            self.ui.query_input.hide()
-
-    def on_sql_query_2_btn_click(self):
-        if self.ui.query_2_input.isHidden():
-            self.ui.query_2_input.show()
-        else:
-            self.ui.query_2_input.hide()
 
 # * * * * * * * * * * * * * * * * * Documentation-module * * * * * * * * * * * * * * * *
+
 
     def on_btn_create_doc1_clicked(self):
         ui_fields.ui_fields_base.replace_fields_in_doc(
@@ -251,19 +232,19 @@ class MainWindow(QtWidgets.QMainWindow):
     def on_store_device_specs_btn_click(self):
         tables.tables_base.check_specs_in_device_tables(self)
 
-    @directory_base.get_file_path
+    @ directory_base.get_file_path
     def on_source_btn_matstr_click(self, file_path):
         self.ui.source_path_text_matstr.setPlainText(file_path)
         logs_and_config.update_config_file(
             self, 'Pfade', 'template1_path', file_path)
 
-    @directory_base.get_file_path
+    @ directory_base.get_file_path
     def on_source_btn_docu_click(self, file_path):
         self.ui.source_path_text_docu.setPlainText(file_path)
         logs_and_config.update_config_file(
             self, 'Pfade', 'template2_path', file_path)
 
-    @directory_base.get_folder_path
+    @ directory_base.get_folder_path
     def on_target_path_btn_2_click(self, folder_path):
         self.ui.target_path_text_2.setPlainText(folder_path)
         logs_and_config.update_config_file(

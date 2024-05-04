@@ -8,11 +8,11 @@ import files.logs_and_config as logs_and_config
 
 def get_server_info(self):
 
-    server = self.ui.db_server.toPlainText()
-    user = self.ui.user.toPlainText()
-    password = self.ui.pw.toPlainText()
-    dB_name = self.ui.db_name.toPlainText()
-    db_type = self.ui.db_type.currentText()
+    server = self.ui_sett_con_dlg.ui.db_server.toPlainText()
+    user = self.ui_sett_con_dlg.ui.user.toPlainText()
+    password = self.ui_sett_con_dlg.ui.pw.toPlainText()
+    dB_name = self.ui_sett_con_dlg.ui.db_name.toPlainText()
+    db_type = self.ui_sett_con_dlg.ui.db_type.currentText()
     server_info = {
         'server': server,
         'user': user,
@@ -86,9 +86,9 @@ def execute_query(self, query):
 
 
 def get_sql_query(self):
-    sql_query = {'sql1': self.ui.query_input.toPlainText(),
+    sql_query = {'sql1': self.ui_sett_con_dlg.ui.query_input.toPlainText(),
 
-                 'sql2': self.ui.query_2_input.toPlainText()}
+                 'sql2': self.ui_sett_con_dlg.ui.query_2_input.toPlainText()}
     return sql_query
 
 
