@@ -60,8 +60,6 @@ class MainWindow(QtWidgets.QMainWindow):
             self.on_load_articles_from_file_btn_click)
         self.ui.load_articles_db_btn.clicked.connect(
             self.on_load_articles_from_db_btn_click)
-        self.ui.source_path_btn.clicked.connect(
-            self.on_source_path_btn_click)
         self.ui.target_path_btn.clicked.connect(
             self.on_target_path_btn_click)
         self.ui.paste_docs_btn.clicked.connect(
@@ -93,10 +91,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.move_none_CHG_point_to_blacklist.clicked.connect(
             self.on_move_none_CHG_point_to_blacklist_click)
 
-        self.ui.source_btn_matstr.clicked.connect(
-            self.on_source_btn_matstr_click)
-        self.ui.source_btn_docu.clicked.connect(
-            self.on_source_btn_docu_click)
         self.ui.target_path_btn_2.clicked.connect(
             self.on_target_path_btn_2_click)
         self.ui.create_doc1_btn.clicked.connect(
@@ -138,12 +132,6 @@ class MainWindow(QtWidgets.QMainWindow):
         ui_fields.ui_fields_base.char_validation(self)
 
     @ directory_base.get_folder_path
-    def on_source_path_btn_click(self, folder_path):
-        self.ui.source_path_text.setPlainText(folder_path)
-        logs_and_config.update_config_file(
-            self, 'Pfade', 'source_path', folder_path)
-
-    @ directory_base.get_folder_path
     def on_target_path_btn_click(self, folder_path):
         self.ui.target_path_text.setPlainText(folder_path)
         logs_and_config.update_config_file(
@@ -169,7 +157,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
 # * * * * * * * * * * * * * * * * * Settings * * * * * * * * * * * * * * * *
 
-
     def on_save_btn_click(self):
         file_path = logs_and_config.create_save_file(self)
         if file_path != '':
@@ -184,7 +171,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 # * * * * * * * * * * * * * * * * * Documentation-module * * * * * * * * * * * * * * * *
-
 
     def on_btn_create_doc1_clicked(self):
         ui_fields.ui_fields_base.replace_fields_in_doc(
@@ -231,18 +217,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def on_store_device_specs_btn_click(self):
         tables.tables_base.check_specs_in_device_tables(self)
-
-    @ directory_base.get_file_path
-    def on_source_btn_matstr_click(self, file_path):
-        self.ui.source_path_text_matstr.setPlainText(file_path)
-        logs_and_config.update_config_file(
-            self, 'Pfade', 'template1_path', file_path)
-
-    @ directory_base.get_file_path
-    def on_source_btn_docu_click(self, file_path):
-        self.ui.source_path_text_docu.setPlainText(file_path)
-        logs_and_config.update_config_file(
-            self, 'Pfade', 'template2_path', file_path)
 
     @ directory_base.get_folder_path
     def on_target_path_btn_2_click(self, folder_path):

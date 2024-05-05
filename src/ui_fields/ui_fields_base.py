@@ -13,31 +13,35 @@ def config_to_fields(self):
     try:
         #!################ Settings_Connection_Dialog ###########################
 
-        self.ui_sett_con_dlg.ui.db_server.setPlainText(
+        self.sett_con_dlg.ui.db_server.setPlainText(
             logs_and_config.read_config_value(self, 'Server', 'server'))
-        self.ui_sett_con_dlg.ui.user.setPlainText(
+        self.sett_con_dlg.ui.user.setPlainText(
             logs_and_config.read_config_value(self, 'Server', 'user'))
-        self.ui_sett_con_dlg.ui.pw.setPlainText(
+        self.sett_con_dlg.ui.pw.setPlainText(
             logs_and_config.read_config_value(self, 'Server', 'password'))
-        self.ui_sett_con_dlg.ui.db_name.setPlainText(
+        self.sett_con_dlg.ui.db_name.setPlainText(
             logs_and_config.read_config_value(self, 'Server', 'dB_name'))
-        self.ui_sett_con_dlg.ui.query_input.setPlainText(
+        self.sett_con_dlg.ui.query_input.setPlainText(
             logs_and_config.read_config_value(self, 'Abfrage', 'sql1'))
-        self.ui_sett_con_dlg.ui.query_2_input.setPlainText(
+        self.sett_con_dlg.ui.query_2_input.setPlainText(
             logs_and_config.read_config_value(self, 'Abfrage', 'sql2'))
 
-        #!################ MainWindow ###########################
-        self.ui.source_path_text.setPlainText(
+        #!################ Settings_Paths_Dialog ###########################
+
+        self.sett_paths_dlg.ui.source_path_text.setPlainText(
             logs_and_config.read_config_value(self, 'Pfade', 'source_path'))
+        self.sett_paths_dlg.ui.source_path_text_matstr.setPlainText(
+            logs_and_config.read_config_value(self, 'Pfade', 'template1_path'))
+        self.sett_paths_dlg.ui.source_path_text_docu.setPlainText(
+            logs_and_config.read_config_value(self, 'Pfade', 'template2_path'))
+
+        #!################ MainWindow ###########################
 
         self.ui.target_path_text.setPlainText(
             logs_and_config.read_config_value(self, 'Pfade', 'target_path'))
         self.ui.target_path_text_2.setPlainText(
             logs_and_config.read_config_value(self, 'Pfade', 'target_path_2'))
-        self.ui.source_path_text_matstr.setPlainText(
-            logs_and_config.read_config_value(self, 'Pfade', 'template1_path'))
-        self.ui.source_path_text_docu.setPlainText(
-            logs_and_config.read_config_value(self, 'Pfade', 'template2_path'))
+
     except Exception as e:
         QtWidgets.QMessageBox.warning(
             self, "Fehler", f"Konfigurationsdaten konnten nicht geladen werden, daher wurde eine neue Konfigurationsdatei erstellt.\n\n"

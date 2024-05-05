@@ -25,7 +25,7 @@ def get_directories(self):
     stylesheet_path = os.path.join(script_dir, 'styles', 'stylesheet.qss')
     # **************************  Article Fetcher module  ********************************************
 
-    source_path = self.ui.source_path_text.toPlainText()
+    source_path = self.sett_paths_dlg.ui.source_path_text.toPlainText()
     target_path_1 = self.ui.target_path_text.toPlainText()
 
     # **************************  Documentation module  **********************************************
@@ -37,10 +37,10 @@ def get_directories(self):
 
     # ? **********************************************************************************************
     # Ziehen der Dateipfade aus den Textfeldern
-    template1_path = self.ui.source_path_text_matstr.toPlainText()
+    template1_path = self.sett_paths_dlg.ui.source_path_text_matstr.toPlainText()
     doc1_path = os.path.join(target_path_2, doc1_name)
 
-    template2_path = self.ui.source_path_text_docu.toPlainText()
+    template2_path = self.sett_paths_dlg.ui.source_path_text_docu.toPlainText()
     doc2_path = os.path.join(target_path_2, doc2_name)
 
     # ***************************  Config and LOGGING  **********************************************************

@@ -16,13 +16,12 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplication, QComboBox,
-    QFormLayout, QFrame, QGridLayout, QHBoxLayout,
-    QHeaderView, QLabel, QLayout, QMainWindow,
-    QMenu, QMenuBar, QPlainTextEdit, QPushButton,
-    QScrollArea, QSizePolicy, QSpacerItem, QSplitter,
-    QTabWidget, QTableWidget, QTableWidgetItem, QTextEdit,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplication, QFormLayout,
+    QFrame, QGridLayout, QHBoxLayout, QHeaderView,
+    QLabel, QLayout, QMainWindow, QMenu,
+    QMenuBar, QPlainTextEdit, QPushButton, QScrollArea,
+    QSizePolicy, QSplitter, QTabWidget, QTableWidget,
+    QTableWidgetItem, QTextEdit, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -332,39 +331,6 @@ class Ui_MainWindow(object):
         self.verticalLayout_6.setSpacing(5)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.verticalLayout_6.setContentsMargins(5, 5, 5, 5)
-        self.frame_2 = QFrame(self.frame)
-        self.frame_2.setObjectName(u"frame_2")
-        sizePolicy.setHeightForWidth(self.frame_2.sizePolicy().hasHeightForWidth())
-        self.frame_2.setSizePolicy(sizePolicy)
-        self.frame_2.setFrameShape(QFrame.StyledPanel)
-        self.frame_2.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_8 = QHBoxLayout(self.frame_2)
-        self.horizontalLayout_8.setSpacing(5)
-        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
-        self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
-        self.source_path_btn = QPushButton(self.frame_2)
-        self.source_path_btn.setObjectName(u"source_path_btn")
-        sizePolicy3.setHeightForWidth(self.source_path_btn.sizePolicy().hasHeightForWidth())
-        self.source_path_btn.setSizePolicy(sizePolicy3)
-        self.source_path_btn.setMinimumSize(QSize(135, 30))
-        self.source_path_btn.setMaximumSize(QSize(300, 40))
-        self.source_path_btn.setAutoDefault(False)
-
-        self.horizontalLayout_8.addWidget(self.source_path_btn)
-
-        self.source_path_text = QPlainTextEdit(self.frame_2)
-        self.source_path_text.setObjectName(u"source_path_text")
-        self.source_path_text.setEnabled(False)
-        sizePolicy.setHeightForWidth(self.source_path_text.sizePolicy().hasHeightForWidth())
-        self.source_path_text.setSizePolicy(sizePolicy)
-        self.source_path_text.setMinimumSize(QSize(1500, 30))
-        self.source_path_text.setMaximumSize(QSize(16777215, 40))
-
-        self.horizontalLayout_8.addWidget(self.source_path_text)
-
-
-        self.verticalLayout_6.addWidget(self.frame_2)
-
         self.frame_3 = QFrame(self.frame)
         self.frame_3.setObjectName(u"frame_3")
         sizePolicy.setHeightForWidth(self.frame_3.sizePolicy().hasHeightForWidth())
@@ -2116,45 +2082,7 @@ class Ui_MainWindow(object):
         self.target_path_text_2.setMinimumSize(QSize(1300, 30))
         self.target_path_text_2.setMaximumSize(QSize(1500, 30))
 
-        self.gridLayout.addWidget(self.target_path_text_2, 2, 2, 1, 1, Qt.AlignVCenter)
-
-        self.source_btn_matstr = QPushButton(self.frame_33)
-        self.source_btn_matstr.setObjectName(u"source_btn_matstr")
-        sizePolicy.setHeightForWidth(self.source_btn_matstr.sizePolicy().hasHeightForWidth())
-        self.source_btn_matstr.setSizePolicy(sizePolicy)
-        self.source_btn_matstr.setMinimumSize(QSize(250, 30))
-        self.source_btn_matstr.setMaximumSize(QSize(300, 30))
-
-        self.gridLayout.addWidget(self.source_btn_matstr, 0, 0, 1, 1, Qt.AlignLeft|Qt.AlignVCenter)
-
-        self.source_btn_docu = QPushButton(self.frame_33)
-        self.source_btn_docu.setObjectName(u"source_btn_docu")
-        sizePolicy.setHeightForWidth(self.source_btn_docu.sizePolicy().hasHeightForWidth())
-        self.source_btn_docu.setSizePolicy(sizePolicy)
-        self.source_btn_docu.setMinimumSize(QSize(250, 30))
-        self.source_btn_docu.setMaximumSize(QSize(300, 30))
-
-        self.gridLayout.addWidget(self.source_btn_docu, 1, 0, 1, 1, Qt.AlignVCenter)
-
-        self.source_path_text_matstr = QPlainTextEdit(self.frame_33)
-        self.source_path_text_matstr.setObjectName(u"source_path_text_matstr")
-        self.source_path_text_matstr.setEnabled(False)
-        sizePolicy.setHeightForWidth(self.source_path_text_matstr.sizePolicy().hasHeightForWidth())
-        self.source_path_text_matstr.setSizePolicy(sizePolicy)
-        self.source_path_text_matstr.setMinimumSize(QSize(1300, 30))
-        self.source_path_text_matstr.setMaximumSize(QSize(1500, 30))
-
-        self.gridLayout.addWidget(self.source_path_text_matstr, 0, 2, 1, 1, Qt.AlignVCenter)
-
-        self.source_path_text_docu = QPlainTextEdit(self.frame_33)
-        self.source_path_text_docu.setObjectName(u"source_path_text_docu")
-        self.source_path_text_docu.setEnabled(False)
-        sizePolicy.setHeightForWidth(self.source_path_text_docu.sizePolicy().hasHeightForWidth())
-        self.source_path_text_docu.setSizePolicy(sizePolicy)
-        self.source_path_text_docu.setMinimumSize(QSize(1300, 30))
-        self.source_path_text_docu.setMaximumSize(QSize(1500, 30))
-
-        self.gridLayout.addWidget(self.source_path_text_docu, 1, 2, 1, 1, Qt.AlignVCenter)
+        self.gridLayout.addWidget(self.target_path_text_2, 0, 2, 1, 1, Qt.AlignVCenter)
 
         self.target_path_btn_2 = QPushButton(self.frame_33)
         self.target_path_btn_2.setObjectName(u"target_path_btn_2")
@@ -2166,7 +2094,7 @@ class Ui_MainWindow(object):
         self.target_path_btn_2.setAutoDefault(False)
         self.target_path_btn_2.setFlat(False)
 
-        self.gridLayout.addWidget(self.target_path_btn_2, 2, 0, 1, 1, Qt.AlignVCenter)
+        self.gridLayout.addWidget(self.target_path_btn_2, 0, 0, 1, 1, Qt.AlignVCenter)
 
 
         self.verticalLayout_13.addWidget(self.frame_33)
@@ -2210,192 +2138,6 @@ class Ui_MainWindow(object):
         self.frame0220.addWidget(self.frame_32, 0, Qt.AlignLeft|Qt.AlignTop)
 
         self.tabWidget.addTab(self.tab2, "")
-        self.tab0 = QWidget()
-        self.tab0.setObjectName(u"tab0")
-        self.tab0.setMaximumSize(QSize(16777215, 500))
-        self.tab0.setSizeIncrement(QSize(0, 0))
-        self.gridLayout_8 = QGridLayout(self.tab0)
-        self.gridLayout_8.setObjectName(u"gridLayout_8")
-        self.scrollArea_2 = QScrollArea(self.tab0)
-        self.scrollArea_2.setObjectName(u"scrollArea_2")
-        self.scrollArea_2.setWidgetResizable(True)
-        self.scrollAreaWidgetContents2 = QWidget()
-        self.scrollAreaWidgetContents2.setObjectName(u"scrollAreaWidgetContents2")
-        self.scrollAreaWidgetContents2.setGeometry(QRect(0, 0, 1801, 480))
-        self.gridLayout_9 = QGridLayout(self.scrollAreaWidgetContents2)
-        self.gridLayout_9.setObjectName(u"gridLayout_9")
-        self.formLayout = QFormLayout()
-        self.formLayout.setObjectName(u"formLayout")
-        self.server_sttings_headline_label = QLabel(self.scrollAreaWidgetContents2)
-        self.server_sttings_headline_label.setObjectName(u"server_sttings_headline_label")
-        sizePolicy3.setHeightForWidth(self.server_sttings_headline_label.sizePolicy().hasHeightForWidth())
-        self.server_sttings_headline_label.setSizePolicy(sizePolicy3)
-        self.server_sttings_headline_label.setMinimumSize(QSize(250, 30))
-        self.server_sttings_headline_label.setMaximumSize(QSize(16777215, 25))
-        self.server_sttings_headline_label.setSizeIncrement(QSize(5, 0))
-        self.server_sttings_headline_label.setFont(font)
-        self.server_sttings_headline_label.setFrameShape(QFrame.StyledPanel)
-        self.server_sttings_headline_label.setFrameShadow(QFrame.Sunken)
-        self.server_sttings_headline_label.setTextFormat(Qt.AutoText)
-
-        self.formLayout.setWidget(1, QFormLayout.SpanningRole, self.server_sttings_headline_label)
-
-        self.label = QLabel(self.scrollAreaWidgetContents2)
-        self.label.setObjectName(u"label")
-
-        self.formLayout.setWidget(2, QFormLayout.LabelRole, self.label)
-
-        self.db_type = QComboBox(self.scrollAreaWidgetContents2)
-        self.db_type.addItem("")
-        self.db_type.addItem("")
-        self.db_type.setObjectName(u"db_type")
-        self.db_type.setMaximumSize(QSize(100, 16777215))
-        self.db_type.setFrame(True)
-        self.db_type.setModelColumn(0)
-
-        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.db_type)
-
-        self.db_name_label = QLabel(self.scrollAreaWidgetContents2)
-        self.db_name_label.setObjectName(u"db_name_label")
-
-        self.formLayout.setWidget(3, QFormLayout.LabelRole, self.db_name_label)
-
-        self.db_name = QPlainTextEdit(self.scrollAreaWidgetContents2)
-        self.db_name.setObjectName(u"db_name")
-        self.db_name.setMaximumSize(QSize(16777215, 25))
-
-        self.formLayout.setWidget(3, QFormLayout.FieldRole, self.db_name)
-
-        self.db_server_label = QLabel(self.scrollAreaWidgetContents2)
-        self.db_server_label.setObjectName(u"db_server_label")
-
-        self.formLayout.setWidget(4, QFormLayout.LabelRole, self.db_server_label)
-
-        self.db_server = QPlainTextEdit(self.scrollAreaWidgetContents2)
-        self.db_server.setObjectName(u"db_server")
-        self.db_server.setMaximumSize(QSize(16777215, 25))
-
-        self.formLayout.setWidget(4, QFormLayout.FieldRole, self.db_server)
-
-        self.user_label = QLabel(self.scrollAreaWidgetContents2)
-        self.user_label.setObjectName(u"user_label")
-
-        self.formLayout.setWidget(5, QFormLayout.LabelRole, self.user_label)
-
-        self.user = QPlainTextEdit(self.scrollAreaWidgetContents2)
-        self.user.setObjectName(u"user")
-        self.user.setMaximumSize(QSize(16777215, 25))
-
-        self.formLayout.setWidget(5, QFormLayout.FieldRole, self.user)
-
-        self.pw_label = QLabel(self.scrollAreaWidgetContents2)
-        self.pw_label.setObjectName(u"pw_label")
-
-        self.formLayout.setWidget(6, QFormLayout.LabelRole, self.pw_label)
-
-        self.pw = QPlainTextEdit(self.scrollAreaWidgetContents2)
-        self.pw.setObjectName(u"pw")
-        self.pw.setMaximumSize(QSize(16777215, 25))
-
-        self.formLayout.setWidget(6, QFormLayout.FieldRole, self.pw)
-
-        self.server_sttings_headline_label_2 = QLabel(self.scrollAreaWidgetContents2)
-        self.server_sttings_headline_label_2.setObjectName(u"server_sttings_headline_label_2")
-        sizePolicy3.setHeightForWidth(self.server_sttings_headline_label_2.sizePolicy().hasHeightForWidth())
-        self.server_sttings_headline_label_2.setSizePolicy(sizePolicy3)
-        self.server_sttings_headline_label_2.setMinimumSize(QSize(250, 30))
-        self.server_sttings_headline_label_2.setMaximumSize(QSize(16777215, 0))
-        self.server_sttings_headline_label_2.setSizeIncrement(QSize(5, 0))
-        self.server_sttings_headline_label_2.setFont(font)
-        self.server_sttings_headline_label_2.setFrameShape(QFrame.StyledPanel)
-        self.server_sttings_headline_label_2.setFrameShadow(QFrame.Sunken)
-        self.server_sttings_headline_label_2.setTextFormat(Qt.AutoText)
-
-        self.formLayout.setWidget(7, QFormLayout.SpanningRole, self.server_sttings_headline_label_2)
-
-        self.sql_query_btn = QPushButton(self.scrollAreaWidgetContents2)
-        self.sql_query_btn.setObjectName(u"sql_query_btn")
-        self.sql_query_btn.setMinimumSize(QSize(0, 25))
-
-        self.formLayout.setWidget(8, QFormLayout.SpanningRole, self.sql_query_btn)
-
-        self.query_input = QPlainTextEdit(self.scrollAreaWidgetContents2)
-        self.query_input.setObjectName(u"query_input")
-        self.query_input.setEnabled(True)
-        sizePolicy11 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Minimum)
-        sizePolicy11.setHorizontalStretch(0)
-        sizePolicy11.setVerticalStretch(0)
-        sizePolicy11.setHeightForWidth(self.query_input.sizePolicy().hasHeightForWidth())
-        self.query_input.setSizePolicy(sizePolicy11)
-        self.query_input.setMinimumSize(QSize(0, 10))
-        self.query_input.setMaximumSize(QSize(16777215, 60))
-        self.query_input.setSizeIncrement(QSize(0, 500))
-        self.query_input.setAutoFillBackground(True)
-        self.query_input.setFrameShadow(QFrame.Raised)
-        self.query_input.setTabChangesFocus(False)
-        self.query_input.setUndoRedoEnabled(True)
-        self.query_input.setTextInteractionFlags(Qt.TextEditorInteraction)
-
-        self.formLayout.setWidget(9, QFormLayout.SpanningRole, self.query_input)
-
-        self.sql_query_2_btn = QPushButton(self.scrollAreaWidgetContents2)
-        self.sql_query_2_btn.setObjectName(u"sql_query_2_btn")
-        self.sql_query_2_btn.setMinimumSize(QSize(0, 25))
-
-        self.formLayout.setWidget(10, QFormLayout.SpanningRole, self.sql_query_2_btn)
-
-        self.query_2_input = QPlainTextEdit(self.scrollAreaWidgetContents2)
-        self.query_2_input.setObjectName(u"query_2_input")
-        self.query_2_input.setEnabled(True)
-        self.query_2_input.setMinimumSize(QSize(0, 40))
-        self.query_2_input.setMaximumSize(QSize(16777215, 50))
-        self.query_2_input.setSizeIncrement(QSize(0, 500))
-        self.query_2_input.setAutoFillBackground(True)
-        self.query_2_input.setFrameShadow(QFrame.Raised)
-        self.query_2_input.setTabChangesFocus(False)
-        self.query_2_input.setUndoRedoEnabled(True)
-        self.query_2_input.setTextInteractionFlags(Qt.TextEditorInteraction)
-
-        self.formLayout.setWidget(11, QFormLayout.SpanningRole, self.query_2_input)
-
-
-        self.gridLayout_9.addLayout(self.formLayout, 0, 0, 1, 1)
-
-        self.horizontalLayout = QHBoxLayout()
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.save_btn = QPushButton(self.scrollAreaWidgetContents2)
-        self.save_btn.setObjectName(u"save_btn")
-        sizePolicy12 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Expanding)
-        sizePolicy12.setHorizontalStretch(0)
-        sizePolicy12.setVerticalStretch(0)
-        sizePolicy12.setHeightForWidth(self.save_btn.sizePolicy().hasHeightForWidth())
-        self.save_btn.setSizePolicy(sizePolicy12)
-        self.save_btn.setMinimumSize(QSize(0, 0))
-        self.save_btn.setMaximumSize(QSize(150, 30))
-
-        self.horizontalLayout.addWidget(self.save_btn)
-
-        self.load_btn = QPushButton(self.scrollAreaWidgetContents2)
-        self.load_btn.setObjectName(u"load_btn")
-        sizePolicy12.setHeightForWidth(self.load_btn.sizePolicy().hasHeightForWidth())
-        self.load_btn.setSizePolicy(sizePolicy12)
-        self.load_btn.setMinimumSize(QSize(0, 0))
-        self.load_btn.setMaximumSize(QSize(150, 30))
-
-        self.horizontalLayout.addWidget(self.load_btn)
-
-        self.horizontalSpacer_4 = QSpacerItem(0, 20, QSizePolicy.Minimum, QSizePolicy.Minimum)
-
-        self.horizontalLayout.addItem(self.horizontalSpacer_4)
-
-
-        self.gridLayout_9.addLayout(self.horizontalLayout, 1, 0, 1, 1)
-
-        self.scrollArea_2.setWidget(self.scrollAreaWidgetContents2)
-
-        self.gridLayout_8.addWidget(self.scrollArea_2, 0, 0, 1, 1)
-
-        self.tabWidget.addTab(self.tab0, "")
 
         self.gridLayout_22.addWidget(self.tabWidget, 0, 0, 1, 1)
 
@@ -2425,18 +2167,15 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(1)
         self.load_articles_db_btn.setDefault(False)
         self.load_articles_file_btn.setDefault(True)
-        self.source_path_btn.setDefault(True)
         self.target_path_btn.setDefault(True)
         self.paste_docs_btn.setDefault(True)
         self.fill_fields_btn.setDefault(False)
         self.target_path_btn_2.setDefault(False)
         self.create_doc1_btn.setDefault(False)
         self.create_doc2_btn.setDefault(False)
-        self.sql_query_btn.setDefault(True)
-        self.sql_query_2_btn.setDefault(True)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -2462,8 +2201,6 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"Artikelbezeichnung", None));
         ___qtablewidgetitem3 = self.articles_list.horizontalHeaderItem(3)
         ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"Menge verbraucht [Stk.]", None));
-        self.source_path_btn.setText(QCoreApplication.translate("MainWindow", u"Quellpfad festlegen", None))
-        self.source_path_text.setPlainText("")
         self.target_path_btn.setText(QCoreApplication.translate("MainWindow", u"Zielpfad festlegen", None))
         self.paste_docs_btn.setText(QCoreApplication.translate("MainWindow", u"Dokumente \u00fcbertragen", None))
         self.headline_01.setText(QCoreApplication.translate("MainWindow", u"Anlagen\u00fcbersicht", None))
@@ -2639,29 +2376,10 @@ class Ui_MainWindow(object):
         self.load_data_to_device_lists_btn.setText(QCoreApplication.translate("MainWindow", u"1. Lade Ger\u00e4telisten", None))
         self.fill_fields_btn.setText(QCoreApplication.translate("MainWindow", u"2. F\u00fclle  Formularfelder", None))
         self.store_device_specs_btn.setText(QCoreApplication.translate("MainWindow", u"Hinterlege technische Daten", None))
-        self.source_btn_matstr.setText(QCoreApplication.translate("MainWindow", u"Template gem. MatStR", None))
-        self.source_btn_docu.setText(QCoreApplication.translate("MainWindow", u"Template Dokumentation", None))
         self.target_path_btn_2.setText(QCoreApplication.translate("MainWindow", u"Ablagepfad f\u00fcr Dokumente ausw\u00e4hlen", None))
         self.create_doc1_btn.setText(QCoreApplication.translate("MainWindow", u"Doku gem\u00e4\u00df MaStR erzeugen", None))
         self.create_doc2_btn.setText(QCoreApplication.translate("MainWindow", u"SUN-Doku erzeugen", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab2), QCoreApplication.translate("MainWindow", u"Doku gem. MatStR", None))
-        self.server_sttings_headline_label.setText(QCoreApplication.translate("MainWindow", u"Servereinstellungen", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"Datenbanktyp:", None))
-        self.db_type.setItemText(0, QCoreApplication.translate("MainWindow", u"PostgreSQL", None))
-        self.db_type.setItemText(1, QCoreApplication.translate("MainWindow", u"MySQL", None))
-
-        self.db_name_label.setText(QCoreApplication.translate("MainWindow", u"Datenbankname:", None))
-        self.db_server_label.setText(QCoreApplication.translate("MainWindow", u"Server:Port:", None))
-        self.user_label.setText(QCoreApplication.translate("MainWindow", u"User:", None))
-        self.pw_label.setText(QCoreApplication.translate("MainWindow", u"Passwort:", None))
-        self.server_sttings_headline_label_2.setText(QCoreApplication.translate("MainWindow", u"Queries zur Abfrage von Datenbank", None))
-        self.sql_query_btn.setText(QCoreApplication.translate("MainWindow", u"Datenbank-Abfrage eingeben (\u00dcbertragung von Doklumenten)", None))
-        self.query_input.setPlainText("")
-        self.sql_query_2_btn.setText(QCoreApplication.translate("MainWindow", u"Datenbank-Abfrage eingeben (Doku gem. MatStR)", None))
-        self.query_2_input.setPlainText("")
-        self.save_btn.setText(QCoreApplication.translate("MainWindow", u"Speichern", None))
-        self.load_btn.setText(QCoreApplication.translate("MainWindow", u"Laden", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab0), QCoreApplication.translate("MainWindow", u"Settings", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab2), QCoreApplication.translate("MainWindow", u"Erstellung der Dokumentation", None))
         self.menuSettings.setTitle(QCoreApplication.translate("MainWindow", u"Settings", None))
         self.menuFile.setTitle(QCoreApplication.translate("MainWindow", u"File", None))
     # retranslateUi
