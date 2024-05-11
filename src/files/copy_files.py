@@ -9,11 +9,11 @@ import directories.directory_base as directory_base
 import files.logs_and_config as logs_and_config
 
 
-def get_paths(self):
-    source_path = directory_base.get_directories(self)['source_path']
-    target_path = directory_base.get_directories(self)['target_path_1']
-    log_sub2folder_path = directory_base.get_directories(self)[
-        'log_sub2folder_path']
+def get_paths():
+    source_path = directory_base.MAIN_PATHS.dict['source_path']
+    target_path = directory_base.MAIN_PATHS.dict['target_1_path']
+    log_sub2folder_path = directory_base.MAIN_PATHS.dict[
+        'log_subfolder_2_path']
     return source_path, target_path, log_sub2folder_path
 
 
@@ -60,7 +60,6 @@ def mark_matching_files(self, matching_files):
 
 def copy_files(self, matching_files, source_path, target_path):
     count = 0
-    table = self.ui.articles_list
 
     for matching_filename in matching_files:
         source_file_path = os.path.join(source_path, matching_filename)

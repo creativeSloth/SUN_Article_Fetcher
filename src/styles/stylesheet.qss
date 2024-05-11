@@ -40,7 +40,11 @@ QLabel#headline_06,
 QLabel#headline_07,
 QLabel#headline_08,
 QLabel#headline_09,
-QLabel#headline_10 {
+QLabel#headline_10,
+QLabel#server_settings_headline_label ,
+QLabel#server_settings_headline_label_2 ,
+QLabel#source_paths_Doc_Fetcher_headline_label ,
+QLabel#templates_paths_headline_label_2  {
 	color: rgb(19, 33, 59); /* Textfarbe */
 	background-color: none;
 	font: 14pt;
@@ -49,10 +53,11 @@ QLabel#headline_10 {
 	border-top: 2px solid rgba(19, 33, 59, 255);
 }
 
-/* QTextEdit und QPlainTextEdit */
+/* QTextEdit, QPlainTextEdit, QLineEdit */
 /* -------------------------------------- */
 QTextEdit,
-QPlainTextEdit {
+QPlainTextEdit,
+QLineEdit {
 	color: rgb(19, 33, 59); /* Textfarbe */
 	border-radius: 5px; /* Abgerundete Ecken */
 	background-color: rgba(255, 255, 255, 255); /* Hintergrundfarbe */
@@ -81,6 +86,8 @@ QPushButton {
 	background-color: rgb(226, 24, 57); /* Hintergrundfarbe */
 	color: rgb(19, 33, 59); /* Textfarbe */
 	border-radius: 5px; /* Abgerundete Ecken */
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 /* QPushButton Hover */
@@ -209,15 +216,6 @@ QHeaderView::section {
 	background-color: rgb(220, 255, 255);
 }
 
-/* QComboBox */
-/* -------------------------------------- */
-QComboBox QAbstractItemView {
-	color: #13213b;
-	background-color: #fff; /* Hintergrundfarbe */
-	border: 2px solid #ccc; /* Randstil */
-	border-radius: 5px; /* Abgerundete Ecken */
-}
-
 /* QMenuBar */
 /* -------------------------------------- */
 QMenuBar {
@@ -255,4 +253,38 @@ QMenu::item {
 QMenu::item::selected {
 	color: rgba(19, 33, 59, 200);
 	background-color: rgba(19, 33, 59, 50); /* Hintergrundfarbe */
+}
+
+/* QDialog */
+/* -------------------------------------- */
+QDialog {
+	color: #13213b;
+	background-color: rgb(170, 255, 255); /* Hintergrundfarbe */
+	border: 1px solid #13213b; /* Randstil */
+	border-radius: 5px; /* Abgerundete Ecken */
+	padding: 10px;
+}
+
+
+/* QDialogButtonBox */
+/* -------------------------------------- */
+QDialogButtonBox QPushButton {
+	padding: 10px;
+}
+
+/* QComboBox */
+/* -------------------------------------- */
+
+QComboBox {
+	color: #13213b;
+	background-color: #fff; /* Hintergrundfarbe */
+	border: 2px solid #ccc; /* Randstil */
+	border-radius: 5px; /* Abgerundete Ecken */
+}
+
+QComboBox QAbstractItemView {
+	color: #13213b;
+	background-color: #fff; /* Hintergrundfarbe */
+	border: 2px solid #ccc; /* Randstil */
+	border-radius: 5px; /* Abgerundete Ecken */
 }

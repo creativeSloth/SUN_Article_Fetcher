@@ -1,8 +1,10 @@
 from qtpy import QtWidgets
 
+from directories import directory_base
 from ui import settingsConnectionWindow, settingsPathsWindow
 from directories.directory_base import get_folder_path, get_file_path
 import files.logs_and_config as logs_and_config
+from styles.styles_Handler import init_ui
 
 
 class SettConDlg(QtWidgets.QDialog):
@@ -17,6 +19,7 @@ class SettConDlg(QtWidgets.QDialog):
         self.map_ui_buttons()
 
     def initialize(self):
+        init_ui(self)
         # query_input-Box verstecken
         self.ui.query_input.hide()
         self.ui.query_2_input.hide()
@@ -53,7 +56,7 @@ class SettPathsDlg(QtWidgets.QDialog):
         self.map_ui_buttons()
 
     def initialize(self):
-        pass
+        init_ui(self)
 
     def map_ui_buttons(self):
         self.ui.source_path_btn.clicked.connect(
@@ -66,17 +69,21 @@ class SettPathsDlg(QtWidgets.QDialog):
     @ get_folder_path
     def on_source_path_btn_click(self, folder_path):
         self.ui.source_path_text.setPlainText(folder_path)
-        logs_and_config.update_config_file(
-            self, 'Pfade', 'source_path', folder_path)
+        directory_base.set_source_dir(dir=folder_path)
+        logs_and_config.update_config_file('Pfade', 'source_path', folder_path)
 
     @ get_file_path
     def on_source_btn_matstr_click(self, file_path):
         self.ui.source_path_text_matstr.setPlainText(file_path)
+        directory_base.set_template_dir(
+            template="template_1_path", dir=file_path)
         logs_and_config.update_config_file(
-            self, 'Pfade', 'template1_path', file_path)
+            'Pfade', 'template_1_path', file_path)
 
     @ get_file_path
     def on_source_btn_docu_click(self, file_path):
         self.ui.source_path_text_docu.setPlainText(file_path)
+        directory_base.set_template_dir(
+            template="template_2_path", dir=file_path)
         logs_and_config.update_config_file(
-            self, 'Pfade', 'template2_path', file_path)
+            'Pfade', 'template_2_path', file_path)

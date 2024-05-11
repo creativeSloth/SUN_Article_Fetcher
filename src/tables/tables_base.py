@@ -81,7 +81,7 @@ def fill_specific_device_list(self, table, df):
 
     # Laden Sie die Artikelnummern aus der Blacklist
     blacklist_article_numbers = logs_and_config.read_blacklist_article_numbers(
-        self, table_name=table.objectName())
+        table_name=table.objectName())
 
     if df is not None:
         for _, df_row in df.iterrows():
@@ -117,7 +117,7 @@ def fill_specific_device_list(self, table, df):
                 adding_specific_columns(self, table, tw_row, df_row)
 
     # Anzahl der Spalten ist flexibel, muss später angepasst hinzugefügt werden
-    fill_device_specs_in_device_tables(self, table)
+    fill_device_specs_in_device_tables(table)
     resize_columns_to_contents(list=table, columns=table.columnCount())
     disable_colums_edit(table, firstcol=1, lastcol=5)
 
@@ -182,7 +182,7 @@ def remove_articles_from_list(self, list):
     for row in reversed(rows_to_remove):
         list.removeRow(row)
 
-    logs_and_config.update_blacklist(self, df, list.objectName())
+    logs_and_config.update_blacklist(df, list.objectName())
 
 
 def clear_table(table):
@@ -265,11 +265,10 @@ def check_specs_in_device_tables(self):
 
     # Aktualisiere die Gerätespezifikationsliste
     logs_and_config.update_device_related_storage_list(
-        self, 'device_specs_list_path', sorted_data_set
-    )
+        'device_specs_list_path', sorted_data_set)
 
 
-def fill_device_specs_in_device_tables(self, table):
+def fill_device_specs_in_device_tables(table):
 
     fixed_val_columns = get_fixed_val_columns()
 
@@ -283,7 +282,7 @@ def fill_device_specs_in_device_tables(self, table):
             if column_header not in fixed_val_columns:
                 article_no = table.item(row, article_no_col_index).text()
                 value = logs_and_config.read_device_related_storage_list(
-                    self, 'device_specs_list_path', article_no, column_header)
+                    'device_specs_list_path', article_no, column_header)
                 if value is not None:
                     table.setItem(
                         row, column, QtWidgets.QTableWidgetItem(value))

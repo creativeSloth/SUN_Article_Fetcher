@@ -13,43 +13,56 @@ def config_to_fields(self):
     try:
         #!################ Settings_Connection_Dialog ###########################
 
-        self.sett_con_dlg.ui.db_server.setPlainText(
-            logs_and_config.read_config_value(self, 'Server', 'server'))
-        self.sett_con_dlg.ui.user.setPlainText(
-            logs_and_config.read_config_value(self, 'Server', 'user'))
-        self.sett_con_dlg.ui.pw.setPlainText(
-            logs_and_config.read_config_value(self, 'Server', 'password'))
-        self.sett_con_dlg.ui.db_name.setPlainText(
-            logs_and_config.read_config_value(self, 'Server', 'dB_name'))
+        self.sett_con_dlg.ui.db_server.setText(
+            logs_and_config.read_config_value('Server', 'server'))
+        self.sett_con_dlg.ui.user.setText(
+            logs_and_config.read_config_value('Server', 'user'))
+        self.sett_con_dlg.ui.pw.setText(
+            logs_and_config.read_config_value('Server', 'password'))
+        self.sett_con_dlg.ui.db_name.setText(
+            logs_and_config.read_config_value('Server', 'dB_name'))
         self.sett_con_dlg.ui.query_input.setPlainText(
-            logs_and_config.read_config_value(self, 'Abfrage', 'sql1'))
+            logs_and_config.read_config_value('Abfrage', 'sql1'))
         self.sett_con_dlg.ui.query_2_input.setPlainText(
-            logs_and_config.read_config_value(self, 'Abfrage', 'sql2'))
+            logs_and_config.read_config_value('Abfrage', 'sql2'))
 
         #!################ Settings_Paths_Dialog ###########################
-
+        source_path = logs_and_config.read_config_value('Pfade', 'source_path')
         self.sett_paths_dlg.ui.source_path_text.setPlainText(
-            logs_and_config.read_config_value(self, 'Pfade', 'source_path'))
+            source_path)
+        directory_base.MAIN_PATHS.dict['source_path'] = source_path
+
+        template_1_path = logs_and_config.read_config_value(
+            'Pfade', 'template_1_path')
         self.sett_paths_dlg.ui.source_path_text_matstr.setPlainText(
-            logs_and_config.read_config_value(self, 'Pfade', 'template1_path'))
+            template_1_path)
+        directory_base.MAIN_PATHS.dict['template_1_path'] = template_1_path
+
+        template_2_path = logs_and_config.read_config_value(
+            'Pfade', 'template_2_path')
         self.sett_paths_dlg.ui.source_path_text_docu.setPlainText(
-            logs_and_config.read_config_value(self, 'Pfade', 'template2_path'))
+            template_2_path)
+        directory_base.MAIN_PATHS.dict['template_2_path'] = template_2_path
 
         #!################ MainWindow ###########################
+        target_1_path = logs_and_config.read_config_value(
+            'Pfade', 'target_1_path')
+        self.ui.target_path_text.setPlainText(target_1_path)
+        directory_base.MAIN_PATHS.dict['target_1_path'] = target_1_path
 
-        self.ui.target_path_text.setPlainText(
-            logs_and_config.read_config_value(self, 'Pfade', 'target_path'))
-        self.ui.target_path_text_2.setPlainText(
-            logs_and_config.read_config_value(self, 'Pfade', 'target_path_2'))
+        target_2_path = logs_and_config.read_config_value(
+            'Pfade', 'target_2_path')
+        self.ui.target_path_text_2.setPlainText(target_2_path)
+        directory_base.MAIN_PATHS.dict['target_2_path'] = target_2_path
 
     except Exception as e:
         QtWidgets.QMessageBox.warning(
             self, "Fehler", f"Konfigurationsdaten konnten nicht geladen werden, daher wurde eine neue Konfigurationsdatei erstellt.\n\n"
             f"Fehlermeldung:\n {e}")
-        config_path = directory_base.get_directories(self)['config_path']
+        config_path = directory_base.MAIN_PATHS.dict['config_path']
         if os.path.exists(config_path):
             os.remove(config_path)
-        logs_and_config.create_config_file(self)
+        logs_and_config.create_config_file()
 
 
 def char_validation(self):
@@ -179,12 +192,12 @@ def aggr_dev_list(device_list, column_index):
     return value
 
 
-@directory_base.check_path_existence(modus=1)
+@ directory_base.check_path_existence(modus=1)
 def replace_fields_in_doc(self, doc_path, template_path):
     # Rufe get_directories auf, um die Pfade zu erhalten
-    template = directory_base.get_directories(self)[
+    template = directory_base.MAIN_PATHS.dict[
         template_path]
-    doc = directory_base.get_directories(self)[
+    doc = directory_base.MAIN_PATHS.dict[
         doc_path]
 
     try:

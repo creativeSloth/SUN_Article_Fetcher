@@ -6,9 +6,8 @@ from qtpy import QtWidgets
 import directories.directory_base as directory_base
 
 
-def create_config_file(self):
-    directory_base.set_directories(self)
-    config_path = directory_base.get_directories(self)['config_path']
+def create_config_file():
+    config_path = directory_base.MAIN_PATHS.dict['config_path']
 
     if os.path.exists(config_path):
         return
@@ -18,10 +17,10 @@ def create_config_file(self):
     # Fülle die Konfiguration mit Standardwerten
     config['Pfade'] = {
         'source_path': '',
-        'target_path': '',
-        'template1_path': '',
-        'template2_path': '',
-        'target_path_2': '',
+        'target_1_path': '',
+        'template_1_path': '',
+        'template_2_path': '',
+        'target_2_path': '',
         'config_path': config_path
     }
 
@@ -79,8 +78,8 @@ def load_save_file(file_path, section):
     return saved_field_values
 
 
-def update_config_file(self, section, option, value):
-    config_path = directory_base.get_directories(self)['config_path']
+def update_config_file(section, option, value):
+    config_path = directory_base.MAIN_PATHS.dict['config_path']
     config = configparser.ConfigParser()
     config.read(config_path)
     config[section][option] = value
@@ -89,8 +88,8 @@ def update_config_file(self, section, option, value):
         config.write(configfile)
 
 
-def read_config_value(self, section, option):
-    config_path = directory_base.get_directories(self)['config_path']
+def read_config_value(section, option):
+    config_path = directory_base.MAIN_PATHS.dict['config_path']
     config = configparser.ConfigParser()
     config.read(config_path)
     value = config[section][option]
@@ -102,15 +101,12 @@ def log_copy_details(self, source_path, target_path, source_files, matching_file
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
     log_source_file_name = f"datalog_{timestamp}.txt"
 
-    # Erstelle den Unterordner, falls er noch nicht existiert
-    directory_base.set_directories(self)
-
-    log_sub2folder_path = directory_base.get_directories(self)[
-        'log_sub2folder_path']
+    log_subfolder_2_path = directory_base.MAIN_PATHS.dict[
+        'log_subfolder_2_path']
 
     # Pfad zur Log-Datei im Unterordner "logs"
     log_file_path = os.path.join(
-        log_sub2folder_path, log_source_file_name)
+        log_subfolder_2_path, log_source_file_name)
 
     # Öffne die Log-Datei für das Schreiben
     with open(log_file_path, 'w', encoding='utf-8') as log_file:
@@ -152,8 +148,8 @@ def log_copy_details(self, source_path, target_path, source_files, matching_file
 #! Vllt die folgende Funktion mit "update_device_related_storage_list()" vereinen?
 
 
-def update_blacklist(self, df, list):
-    blacklist_path = directory_base.get_directories(self)['blacklist_path']
+def update_blacklist(df, list):
+    blacklist_path = directory_base.MAIN_PATHS.dict['blacklist_path']
 
     config = configparser.ConfigParser()
 
@@ -179,8 +175,8 @@ def update_blacklist(self, df, list):
         config.write(blacklist_file)
 
 
-def read_blacklist_article_numbers(self, table_name):
-    blacklist_path = directory_base.get_directories(self)['blacklist_path']
+def read_blacklist_article_numbers(table_name):
+    blacklist_path = directory_base.MAIN_PATHS.dict['blacklist_path']
     config = configparser.ConfigParser()
     config.read(blacklist_path)
     # Überprüfen Sie, ob die angegebene Sektion vorhanden ist
@@ -192,8 +188,8 @@ def read_blacklist_article_numbers(self, table_name):
     return article_numbers
 
 
-def create_device_related_storage_list(self, storage_file=None):
-    related_path = directory_base.get_directories(self)[storage_file]
+def create_device_related_storage_list(storage_file=None):
+    related_path = directory_base.MAIN_PATHS.dict[storage_file]
 
     if os.path.exists(related_path):
         return
@@ -204,8 +200,8 @@ def create_device_related_storage_list(self, storage_file=None):
         config.write(related_file)
 
 
-def update_device_related_storage_list(self, storage_file, data_set):
-    file_path = directory_base.get_directories(self)[storage_file]
+def update_device_related_storage_list(storage_file, data_set):
+    file_path = directory_base.MAIN_PATHS.dict[storage_file]
     store_file = configparser.ConfigParser()
 
     # Lade vorhandene Konfiguration, wenn die Datei vorhanden ist
@@ -226,9 +222,8 @@ def update_device_related_storage_list(self, storage_file, data_set):
         store_file.write(file)
 
 
-def read_device_related_storage_list(self, storage_file, section, option):
-    file_path = directory_base.get_directories(
-        self)[storage_file]
+def read_device_related_storage_list(storage_file, section, option):
+    file_path = directory_base.MAIN_PATHS.dict[storage_file]
 
     stored_file = configparser.ConfigParser()
     stored_file.read(file_path)

@@ -232,8 +232,10 @@ class Ui_Dialog(object):
         self.verticalLayout_2.addWidget(self.frame_2, 0, QtCore.Qt.AlignTop)
         self.verticalLayout_6.addWidget(self.frame_8, 0, QtCore.Qt.AlignTop)
         self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
+        self.buttonBox.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setCenterButtons(False)
         self.buttonBox.setObjectName("buttonBox")
         self.verticalLayout_6.addWidget(self.buttonBox, 0, QtCore.Qt.AlignLeft)
 

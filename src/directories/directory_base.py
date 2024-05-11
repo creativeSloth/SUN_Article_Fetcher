@@ -7,8 +7,43 @@ from PyQt5.QtWidgets import QFileDialog
 from qtpy import QtWidgets
 
 
-def get_directories(self):
-    project = self.ui.project.toPlainText()
+class Paths():
+    def __init__(self):
+        self.dict = {
+            'source_path': '',
+            'target_1_path': '',
+            'template_1_path': '',
+            'doc_1_path': '',
+            'target_2_path': '',
+            'template_2_path': '',
+            'doc_2_path': '',
+            'log_subfolder_path': '',
+            'log_subfolder_2_path': '',
+            'config_path': '',
+            'blacklist_path': '',
+            'device_specs_list_path': '',
+            'stylesheet_path': ''
+        }
+
+
+MAIN_PATHS = Paths()
+
+
+def set_static_directories():
+
+    log_subfolder_path, log_subfolder_2_path, config_path, blacklist_path, device_specs_list_path, stylesheet_path = create_static_dirs()
+    # **************************  Article Fetcher module  ********************************************
+
+    # Setze die Pfade direkt im dict-Attribut der _main_paths Instanz
+    MAIN_PATHS.dict['log_subfolder_path'] = log_subfolder_path
+    MAIN_PATHS.dict['log_subfolder_2_path'] = log_subfolder_2_path
+    MAIN_PATHS.dict['config_path'] = config_path
+    MAIN_PATHS.dict['blacklist_path'] = blacklist_path
+    MAIN_PATHS.dict['device_specs_list_path'] = device_specs_list_path
+    MAIN_PATHS.dict['stylesheet_path'] = stylesheet_path
+
+
+def get_main_dir():
 
     # Finde das Verzeichnis, in dem main.py liegt
     main_script_path = inspect.getsourcefile(sys.modules['__main__'])
@@ -21,67 +56,78 @@ def get_directories(self):
     else:
         # Skript wird normal ausgeführt
         script_dir = main_script_dir
-    # ************************************ Styles  ***************************************************
-    stylesheet_path = os.path.join(script_dir, 'styles', 'stylesheet.qss')
-    # **************************  Article Fetcher module  ********************************************
 
-    source_path = self.sett_paths_dlg.ui.source_path_text.toPlainText()
-    target_path_1 = self.ui.target_path_text.toPlainText()
+    return script_dir
 
-    # **************************  Documentation module  **********************************************
 
-    current_date = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-    doc1_name = f"{project} Doku - Anlagendaten für MaStR {current_date}.odt"
-    doc2_name = f"{project} Doku NIO - SQL Adressen V1.0 {current_date}.odt"
-    target_path_2 = self.ui.target_path_text_2.toPlainText()
+def create_static_dirs():
+    log_subfolder_path, log_subfolder_2_path = create_log_subfolders()
+    config_path, blacklist_path, device_specs_list_path, stylesheet_path = create_storage_files(
+        log_subfolder_path)
+    return log_subfolder_path, log_subfolder_2_path, config_path, blacklist_path, device_specs_list_path, stylesheet_path
 
-    # ? **********************************************************************************************
-    # Ziehen der Dateipfade aus den Textfeldern
-    template1_path = self.sett_paths_dlg.ui.source_path_text_matstr.toPlainText()
-    doc1_path = os.path.join(target_path_2, doc1_name)
 
-    template2_path = self.sett_paths_dlg.ui.source_path_text_docu.toPlainText()
-    doc2_path = os.path.join(target_path_2, doc2_name)
-
-    # ***************************  Config and LOGGING  **********************************************************
-
+def create_log_subfolders():
+    script_dir = get_main_dir()
     # Pfad zum Unterordner "logs"
     log_subfolder_path = os.path.join(script_dir, "logs")
-    log_subfolder2_path = os.path.join(
+    os.makedirs(log_subfolder_path, exist_ok=True)
+    log_subfolder_2_path = os.path.join(
         log_subfolder_path, "hist")
+    os.makedirs(log_subfolder_2_path, exist_ok=True)
+    return log_subfolder_path, log_subfolder_2_path
+
+
+def create_storage_files(log_path):
+    script_dir = get_main_dir()
     # Pfad zur Config
-    config_path = os.path.join(log_subfolder_path, 'config.ini')
-    # Pfad zur Config
-    blacklist_path = os.path.join(log_subfolder_path, 'blacklist.ini')
+    config_path = os.path.join(log_path, 'config.ini')
+    # Pfad zur blacklist
+    blacklist_path = os.path.join(log_path, 'blacklist.ini')
     device_specs_list_path = os.path.join(
-        log_subfolder_path, 'device_specs_list.ini')
+        log_path, 'device_specs_list.ini')
+    stylesheet_path = os.path.join(script_dir, 'styles', 'stylesheet.qss')
+    return config_path, blacklist_path, device_specs_list_path, stylesheet_path
+
+
+def set_source_dir(dir):
+    MAIN_PATHS.dict['source_path'] = dir
+
+
+def set_target_1_dir(dir):
+    MAIN_PATHS.dict['target_1_path'] = dir
+
+
+def set_target_2_dir(dir):
+    MAIN_PATHS.dict['target_2_path'] = dir
+
+
+def set_template_dir(template, dir):
+    MAIN_PATHS.dict[template] = dir
+
+
+def set_doc_1_dir(self):
+    doc_1, _ = get_docs_paths(
+        project=self.ui.project.toPlainText())
+    MAIN_PATHS.dict['doc_1_path'] = doc_1
+
+
+def set_doc_2_dir(self):
+    doc_2, _ = get_docs_paths(
+        project=self.ui.project.toPlainText())
+    MAIN_PATHS.dict['doc_2_path'] = doc_2
+
+
+def get_docs_paths(project):
+    target_2_path = MAIN_PATHS.dict['target_2_path']
+    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    doc1_name = f"{project} - Doku - Anlagendaten für MaStR - {timestamp}.odt"
+    doc2_name = f"{project} - Doku NIO - SQL Adressen V1.0 - {timestamp}.odt"
+    doc_1 = os.path.join(target_2_path, doc1_name)
+    doc_2 = os.path.join(target_2_path, doc2_name)
+    return doc_1, doc_2
 
     # ************************************************************************************************
-
-    paths_dict = {
-        'source_path': source_path,
-        'target_path_1': target_path_1,
-        'template1_path': template1_path,
-        'doc1_path': doc1_path,
-        'target_path_2': target_path_2,
-        'template2_path': template2_path,
-        'doc2_path': doc2_path,
-        'log_subfolder_path': log_subfolder_path,
-        'log_sub2folder_path': log_subfolder2_path,
-        'config_path': config_path,
-        'blacklist_path': blacklist_path,
-        'device_specs_list_path': device_specs_list_path,
-        'stylesheet_path': stylesheet_path
-    }
-
-    return paths_dict
-
-
-def set_directories(self):
-    log_subfolder_path = get_directories(self)['log_subfolder_path']
-    log_sub2folder_path = get_directories(self)['log_sub2folder_path']
-    os.makedirs(log_subfolder_path, exist_ok=True)
-    os.makedirs(log_sub2folder_path, exist_ok=True)
 
 
 def set_save_file_dir(self):
@@ -122,24 +168,24 @@ def check_path_existence(modus):
     def sub_check_path_existence(func):
         def wrapper(self, *args, **kwargs):
 
-            paths_dict = get_directories(self)
-            source_path = paths_dict['source_path']
-            target_path_1 = paths_dict['target_path_1']
-            template1_path = paths_dict['template1_path']
-            target_path_2 = paths_dict['target_path_2']
-            template2_path = paths_dict['template2_path']
+            source_path = MAIN_PATHS.dict['source_path']
+            target_1_path = MAIN_PATHS.dict['target_1_path']
+            template_1_path = MAIN_PATHS.dict['template_1_path']
+            target_2_path = MAIN_PATHS.dict['target_2_path']
+            template_2_path = MAIN_PATHS.dict['template_2_path']
 
             paths_and_messages = [
                 (source_path, "Quellpfad existiert nicht."),
-                (target_path_1, "Zielpfad existiert nicht."),
-                (template1_path, "Template (Anlagendatenblatt gem. MatStR) existiert nicht unter angegebenen Pfad."),
-                (target_path_2, "Ablagepfad existiert nicht oder wurde nicht ausgewählt."),
-                (template2_path, "Template (Dokumentation) existiert nicht unter angegebenen Pfad.")
+                (target_1_path, "Zielpfad existiert nicht."),
+                (template_1_path, "Template (Anlagendatenblatt gem. MatStR) existiert nicht unter angegebenen Pfad."),
+                (target_2_path, "Ablagepfad existiert nicht oder wurde nicht ausgewählt."),
+                (template_2_path,
+                 "Template (Dokumentation) existiert nicht unter angegebenen Pfad.")
             ]
 
             files_and_messages = [
-                (template1_path, "Es ist kein Template (Anlagendatenblatt gem. MatStR) ausgewählt worden."),
-                (template2_path, "Es ist kein Template (Dokumentation) ausgewählt worden."),
+                (template_1_path, "Es ist kein Template (Anlagendatenblatt gem. MatStR) ausgewählt worden."),
+                (template_2_path, "Es ist kein Template (Dokumentation) ausgewählt worden."),
             ]
 
             if modus == 0:

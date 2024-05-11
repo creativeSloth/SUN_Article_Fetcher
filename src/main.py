@@ -35,16 +35,15 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def initialize(self):
 
+        directory_base.set_static_directories()
         menus_base.initialize_all_menus(self)
         init_ui(self)
 
-        directory_base.set_directories(self)
-
-        logs_and_config.create_config_file(self)
+        logs_and_config.create_config_file()
         logs_and_config.create_device_related_storage_list(
-            self, storage_file='blacklist_path')
+            storage_file='blacklist_path')
         logs_and_config.create_device_related_storage_list(
-            self, storage_file='device_specs_list_path')
+            storage_file='device_specs_list_path')
 
         ui_fields.ui_fields_base.config_to_fields(self)
 
@@ -122,7 +121,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def on_load_articles_from_db_btn_click(self):
         # Lese Daten aus der MySQL-Datenbank und speichere sie in der Instanzvariable df
         df = data_sources.data_base.execute_query(self, query='sql1')
-        logs_and_config.update_config_file(self, 'Abfrage', 'sql1',
+        logs_and_config.update_config_file('Abfrage', 'sql1',
                                            data_sources.data_base.get_sql_query(self)['sql1'])
         # Lösche die vorhandenen Daten und fülle die Tabelle mit den Daten aus der Datenbank
         tables.tables_base.fill_article_table(
@@ -134,13 +133,13 @@ class MainWindow(QtWidgets.QMainWindow):
     @ directory_base.get_folder_path
     def on_target_path_btn_click(self, folder_path):
         self.ui.target_path_text.setPlainText(folder_path)
+        directory_base.set_target_1_dir(folder_path)
         logs_and_config.update_config_file(
-            self, 'Pfade', 'target_path', folder_path)
+            'Pfade', 'target_1_path', folder_path)
 
     @ directory_base.check_path_existence(modus=0)
     def on_copy_files_btn_click(self, *args, **kwargs):
-        source_path, target_path, log_sub2folder_path = copy_files.get_paths(
-            self)
+        source_path, target_path, log_subfolder_2_path = copy_files.get_paths()
         source_files = data_sources.data_base.get_files_in_source_path(
             self, source_path)
         selected_files, df = copy_files.get_selected_files_and_df(
@@ -152,38 +151,27 @@ class MainWindow(QtWidgets.QMainWindow):
                                       matching_files, source_path, target_path)
 
         copy_files.log_and_show_result(self,
-                                       source_path, target_path, source_files, matching_files, df, count, log_sub2folder_path)
-
-
-# * * * * * * * * * * * * * * * * * Settings * * * * * * * * * * * * * * * *
-
-    def on_save_btn_click(self):
-        file_path = logs_and_config.create_save_file(self)
-        if file_path != '':
-            save_file.save.save_fields_text(self, file_path)
-            save_file.save.save_tables_content(self, file_path)
-
-    def on_load_btn_click(self):
-        file_path = directory_base.get_save_file_dir(self)
-        if file_path != '':
-            save_file.load.load_fields_text(self, file_path)
-            save_file.load.load_tables_content(self, file_path)
+                                       source_path, target_path, source_files, matching_files, df, count, log_subfolder_2_path)
 
 
 # * * * * * * * * * * * * * * * * * Documentation-module * * * * * * * * * * * * * * * *
 
     def on_btn_create_doc1_clicked(self):
+        directory_base.set_doc_1_dir(self)
         ui_fields.ui_fields_base.replace_fields_in_doc(
-            self, doc_path='doc1_path', template_path='template1_path')
+            self, doc_path='doc_1_path', template_path='template_1_path')
 
     def on_btn_create_doc2_clicked(self):
+        _, doc_2 = directory_base.get_docs_paths(
+            self.ui.project.toPlainText())
+        directory_base.MAIN_PATHS.dict['doc_2_path'] = doc_2
         ui_fields.ui_fields_base.replace_fields_in_doc(
-            self, doc_path='doc2_path', template_path='template2_path')
+            self, doc_path='doc_2_path', template_path='template_2_path')
 
     def on_load_data_to_device_list_btn_click(self):
         ui_fields.ui_fields_base.clear_docu_fields(self)
         df = data_sources.data_base.execute_query(self, query='sql1')
-        logs_and_config.update_config_file(self, 'Abfrage', 'sql1',
+        logs_and_config.update_config_file('Abfrage', 'sql1',
                                            data_sources.data_base.get_sql_query(self)['sql1'])
         tables.tables_base.fill_device_lists(self, df)
 
@@ -210,7 +198,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def on_fill_fields_btn_click(self):
 
         df = data_sources.data_base.execute_query(self, query='sql2')
-        logs_and_config.update_config_file(self, 'Abfrage', 'sql2',
+        logs_and_config.update_config_file('Abfrage', 'sql2',
                                            data_sources.data_base.get_sql_query(self)['sql2'])
         ui_fields.ui_fields_base.clear_docu_fields(self)
         ui_fields.ui_fields_base.fill_docu_fields(self)
@@ -221,8 +209,23 @@ class MainWindow(QtWidgets.QMainWindow):
     @ directory_base.get_folder_path
     def on_target_path_btn_2_click(self, folder_path):
         self.ui.target_path_text_2.setPlainText(folder_path)
+        directory_base.set_target_2_dir(folder_path)
         logs_and_config.update_config_file(
-            self, 'Pfade', 'target_path_2', folder_path)
+            'Pfade', 'target_2_path', folder_path)
+
+# * * * * * * * * * * * * * * * * * Settings * * * * * * * * * * * * * * * *
+
+    def on_save_btn_click(self):
+        file_path = logs_and_config.create_save_file(self)
+        if file_path != '':
+            save_file.save.save_fields_text(self, file_path)
+            save_file.save.save_tables_content(self, file_path)
+
+    def on_load_btn_click(self):
+        file_path = directory_base.get_save_file_dir(self)
+        if file_path != '':
+            save_file.load.load_fields_text(self, file_path)
+            save_file.load.load_tables_content(self, file_path)
 
 
 # Führe das Programm aus, wenn es direkt gestartet wird

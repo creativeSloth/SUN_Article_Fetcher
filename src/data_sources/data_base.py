@@ -8,10 +8,10 @@ import files.logs_and_config as logs_and_config
 
 def get_server_info(self):
 
-    server = self.sett_con_dlg.ui.db_server.toPlainText()
-    user = self.sett_con_dlg.ui.user.toPlainText()
-    password = self.sett_con_dlg.ui.pw.toPlainText()
-    dB_name = self.sett_con_dlg.ui.db_name.toPlainText()
+    server = self.sett_con_dlg.ui.db_server.text()
+    user = self.sett_con_dlg.ui.user.text()
+    password = self.sett_con_dlg.ui.pw.text()
+    dB_name = self.sett_con_dlg.ui.db_name.text()
     db_type = self.sett_con_dlg.ui.db_type.currentText()
     server_info = {
         'server': server,
@@ -35,10 +35,10 @@ def execute_query(self, query):
     dB_name = server_info['dB_name']
     db_type = server_info['db_type']
 
-    logs_and_config.update_config_file(self, 'Server', 'server', server)
-    logs_and_config.update_config_file(self, 'Server', 'user', user)
-    logs_and_config.update_config_file(self, 'Server', 'password', pw)
-    logs_and_config.update_config_file(self, 'Server', 'dB_name', dB_name)
+    logs_and_config.update_config_file('Server', 'server', server)
+    logs_and_config.update_config_file('Server', 'user', user)
+    logs_and_config.update_config_file('Server', 'password', pw)
+    logs_and_config.update_config_file('Server', 'dB_name', dB_name)
     try:
 
         if db_type == "MySQL":
