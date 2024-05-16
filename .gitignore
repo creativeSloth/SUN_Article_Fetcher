@@ -87,6 +87,7 @@ config - Kopie.ini
 # folders
 .vscode/
 vsc_venv/
+EXE/
 logs/
 .data/
 SQL/
