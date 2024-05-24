@@ -399,7 +399,7 @@ class Ui_MainWindow(object):
         self.tab2.setMinimumSize(QSize(1200, 0))
         self.layoutWidget = QWidget(self.tab2)
         self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(0, 0, 2904, 942))
+        self.layoutWidget.setGeometry(QRect(0, 0, 1802, 724))
         self.frame0220 = QVBoxLayout(self.layoutWidget)
         self.frame0220.setSpacing(10)
         self.frame0220.setObjectName(u"frame0220")
@@ -418,7 +418,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 1781, 5258))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, -1514, 1781, 5378))
         sizePolicy3.setHeightForWidth(self.scrollAreaWidgetContents.sizePolicy().hasHeightForWidth())
         self.scrollAreaWidgetContents.setSizePolicy(sizePolicy3)
         self.gridLayout_5 = QGridLayout(self.scrollAreaWidgetContents)
@@ -684,7 +684,7 @@ class Ui_MainWindow(object):
 
         self.constr_style_text = QPlainTextEdit(self.frame_11)
         self.constr_style_text.setObjectName(u"constr_style_text")
-        self.constr_style_text.setMinimumSize(QSize(0, 30))
+        self.constr_style_text.setMinimumSize(QSize(100, 30))
         self.constr_style_text.setMaximumSize(QSize(16777215, 30))
 
         self.horizontalLayout_11.addWidget(self.constr_style_text)
@@ -907,6 +907,29 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.PV_modules_list)
 
+        self.frame_2 = QFrame(self.frame0221)
+        self.frame_2.setObjectName(u"frame_2")
+        self.frame_2.setFrameShape(QFrame.StyledPanel)
+        self.frame_2.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout = QHBoxLayout(self.frame_2)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.move_none_PV_modules_to_blacklist = QPushButton(self.frame_2)
+        self.move_none_PV_modules_to_blacklist.setObjectName(u"move_none_PV_modules_to_blacklist")
+        self.move_none_PV_modules_to_blacklist.setMinimumSize(QSize(100, 50))
+        self.move_none_PV_modules_to_blacklist.setMaximumSize(QSize(250, 16777215))
+
+        self.horizontalLayout.addWidget(self.move_none_PV_modules_to_blacklist)
+
+        self.open_PV_modules_blacklist = QPushButton(self.frame_2)
+        self.open_PV_modules_blacklist.setObjectName(u"open_PV_modules_blacklist")
+        self.open_PV_modules_blacklist.setMinimumSize(QSize(100, 50))
+        self.open_PV_modules_blacklist.setMaximumSize(QSize(250, 16777215))
+
+        self.horizontalLayout.addWidget(self.open_PV_modules_blacklist)
+
+
+        self.verticalLayout_3.addWidget(self.frame_2, 0, Qt.AlignLeft)
+
         self.frame_4 = QFrame(self.frame0221)
         self.frame_4.setObjectName(u"frame_4")
         sizePolicy.setHeightForWidth(self.frame_4.sizePolicy().hasHeightForWidth())
@@ -915,13 +938,6 @@ class Ui_MainWindow(object):
         self.frame_4.setFrameShadow(QFrame.Raised)
         self.verticalLayout_8 = QVBoxLayout(self.frame_4)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
-        self.move_none_PV_modules_to_blacklist = QPushButton(self.frame_4)
-        self.move_none_PV_modules_to_blacklist.setObjectName(u"move_none_PV_modules_to_blacklist")
-        self.move_none_PV_modules_to_blacklist.setMinimumSize(QSize(100, 50))
-        self.move_none_PV_modules_to_blacklist.setMaximumSize(QSize(250, 16777215))
-
-        self.verticalLayout_8.addWidget(self.move_none_PV_modules_to_blacklist)
-
         self.frame_16 = QFrame(self.frame_4)
         self.frame_16.setObjectName(u"frame_16")
         self.frame_16.setFrameShape(QFrame.StyledPanel)
@@ -1044,6 +1060,29 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.PV_inverters_list)
 
+        self.frame_38 = QFrame(self.frame0221)
+        self.frame_38.setObjectName(u"frame_38")
+        self.frame_38.setFrameShape(QFrame.StyledPanel)
+        self.frame_38.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_8 = QHBoxLayout(self.frame_38)
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.move_none_PV_inverters_to_blacklist = QPushButton(self.frame_38)
+        self.move_none_PV_inverters_to_blacklist.setObjectName(u"move_none_PV_inverters_to_blacklist")
+        self.move_none_PV_inverters_to_blacklist.setMinimumSize(QSize(100, 50))
+        self.move_none_PV_inverters_to_blacklist.setMaximumSize(QSize(250, 16777215))
+
+        self.horizontalLayout_8.addWidget(self.move_none_PV_inverters_to_blacklist)
+
+        self.open_PV_inverters_blacklist = QPushButton(self.frame_38)
+        self.open_PV_inverters_blacklist.setObjectName(u"open_PV_inverters_blacklist")
+        self.open_PV_inverters_blacklist.setMinimumSize(QSize(100, 50))
+        self.open_PV_inverters_blacklist.setMaximumSize(QSize(250, 16777215))
+
+        self.horizontalLayout_8.addWidget(self.open_PV_inverters_blacklist)
+
+
+        self.verticalLayout_3.addWidget(self.frame_38, 0, Qt.AlignLeft)
+
         self.frame_18 = QFrame(self.frame0221)
         self.frame_18.setObjectName(u"frame_18")
         sizePolicy.setHeightForWidth(self.frame_18.sizePolicy().hasHeightForWidth())
@@ -1052,13 +1091,6 @@ class Ui_MainWindow(object):
         self.frame_18.setFrameShadow(QFrame.Raised)
         self.verticalLayout_9 = QVBoxLayout(self.frame_18)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
-        self.move_none_PV_inverters_to_blacklist = QPushButton(self.frame_18)
-        self.move_none_PV_inverters_to_blacklist.setObjectName(u"move_none_PV_inverters_to_blacklist")
-        self.move_none_PV_inverters_to_blacklist.setMinimumSize(QSize(100, 50))
-        self.move_none_PV_inverters_to_blacklist.setMaximumSize(QSize(250, 16777215))
-
-        self.verticalLayout_9.addWidget(self.move_none_PV_inverters_to_blacklist)
-
         self.frame_19 = QFrame(self.frame_18)
         self.frame_19.setObjectName(u"frame_19")
         sizePolicy.setHeightForWidth(self.frame_19.sizePolicy().hasHeightForWidth())
@@ -1096,32 +1128,14 @@ class Ui_MainWindow(object):
         self.frame_20.setFrameShadow(QFrame.Raised)
         self.gridLayout_10 = QGridLayout(self.frame_20)
         self.gridLayout_10.setObjectName(u"gridLayout_10")
-        self.inverter_SN_text = QPlainTextEdit(self.frame_20)
-        self.inverter_SN_text.setObjectName(u"inverter_SN_text")
-        sizePolicy1.setHeightForWidth(self.inverter_SN_text.sizePolicy().hasHeightForWidth())
-        self.inverter_SN_text.setSizePolicy(sizePolicy1)
-        self.inverter_SN_text.setMinimumSize(QSize(150, 30))
-        self.inverter_SN_text.setMaximumSize(QSize(300, 60))
+        self.inverter_type_label = QLabel(self.frame_20)
+        self.inverter_type_label.setObjectName(u"inverter_type_label")
+        sizePolicy.setHeightForWidth(self.inverter_type_label.sizePolicy().hasHeightForWidth())
+        self.inverter_type_label.setSizePolicy(sizePolicy)
+        self.inverter_type_label.setMinimumSize(QSize(150, 30))
+        self.inverter_type_label.setMaximumSize(QSize(300, 60))
 
-        self.gridLayout_10.addWidget(self.inverter_SN_text, 0, 5, 1, 1)
-
-        self.commiss_date_label = QLabel(self.frame_20)
-        self.commiss_date_label.setObjectName(u"commiss_date_label")
-        sizePolicy.setHeightForWidth(self.commiss_date_label.sizePolicy().hasHeightForWidth())
-        self.commiss_date_label.setSizePolicy(sizePolicy)
-        self.commiss_date_label.setMinimumSize(QSize(150, 30))
-        self.commiss_date_label.setMaximumSize(QSize(300, 60))
-
-        self.gridLayout_10.addWidget(self.commiss_date_label, 1, 4, 1, 1)
-
-        self.commiss_date_text = QPlainTextEdit(self.frame_20)
-        self.commiss_date_text.setObjectName(u"commiss_date_text")
-        sizePolicy1.setHeightForWidth(self.commiss_date_text.sizePolicy().hasHeightForWidth())
-        self.commiss_date_text.setSizePolicy(sizePolicy1)
-        self.commiss_date_text.setMinimumSize(QSize(150, 30))
-        self.commiss_date_text.setMaximumSize(QSize(300, 60))
-
-        self.gridLayout_10.addWidget(self.commiss_date_text, 1, 5, 1, 1)
+        self.gridLayout_10.addWidget(self.inverter_type_label, 0, 0, 1, 1)
 
         self.inverter_SN_label = QLabel(self.frame_20)
         self.inverter_SN_label.setObjectName(u"inverter_SN_label")
@@ -1133,7 +1147,16 @@ class Ui_MainWindow(object):
         self.inverter_SN_label.setMinimumSize(QSize(150, 30))
         self.inverter_SN_label.setMaximumSize(QSize(300, 60))
 
-        self.gridLayout_10.addWidget(self.inverter_SN_label, 0, 4, 1, 1)
+        self.gridLayout_10.addWidget(self.inverter_SN_label, 0, 6, 1, 1)
+
+        self.commiss_date_label = QLabel(self.frame_20)
+        self.commiss_date_label.setObjectName(u"commiss_date_label")
+        sizePolicy.setHeightForWidth(self.commiss_date_label.sizePolicy().hasHeightForWidth())
+        self.commiss_date_label.setSizePolicy(sizePolicy)
+        self.commiss_date_label.setMinimumSize(QSize(150, 30))
+        self.commiss_date_label.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_10.addWidget(self.commiss_date_label, 1, 6, 1, 1)
 
         self.inverter_type_text = QPlainTextEdit(self.frame_20)
         self.inverter_type_text.setObjectName(u"inverter_type_text")
@@ -1142,7 +1165,25 @@ class Ui_MainWindow(object):
         self.inverter_type_text.setMinimumSize(QSize(150, 30))
         self.inverter_type_text.setMaximumSize(QSize(300, 60))
 
-        self.gridLayout_10.addWidget(self.inverter_type_text, 0, 1, 1, 1)
+        self.gridLayout_10.addWidget(self.inverter_type_text, 0, 3, 1, 1)
+
+        self.inverter_SN_text = QPlainTextEdit(self.frame_20)
+        self.inverter_SN_text.setObjectName(u"inverter_SN_text")
+        sizePolicy1.setHeightForWidth(self.inverter_SN_text.sizePolicy().hasHeightForWidth())
+        self.inverter_SN_text.setSizePolicy(sizePolicy1)
+        self.inverter_SN_text.setMinimumSize(QSize(150, 30))
+        self.inverter_SN_text.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_10.addWidget(self.inverter_SN_text, 0, 7, 1, 1)
+
+        self.commiss_date_text = QPlainTextEdit(self.frame_20)
+        self.commiss_date_text.setObjectName(u"commiss_date_text")
+        sizePolicy1.setHeightForWidth(self.commiss_date_text.sizePolicy().hasHeightForWidth())
+        self.commiss_date_text.setSizePolicy(sizePolicy1)
+        self.commiss_date_text.setMinimumSize(QSize(150, 30))
+        self.commiss_date_text.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_10.addWidget(self.commiss_date_text, 1, 7, 1, 1)
 
         self.inverter_power_label = QLabel(self.frame_20)
         self.inverter_power_label.setObjectName(u"inverter_power_label")
@@ -1160,16 +1201,7 @@ class Ui_MainWindow(object):
         self.inverter_power_text.setMinimumSize(QSize(150, 30))
         self.inverter_power_text.setMaximumSize(QSize(300, 60))
 
-        self.gridLayout_10.addWidget(self.inverter_power_text, 1, 1, 1, 1)
-
-        self.inverter_type_label = QLabel(self.frame_20)
-        self.inverter_type_label.setObjectName(u"inverter_type_label")
-        sizePolicy.setHeightForWidth(self.inverter_type_label.sizePolicy().hasHeightForWidth())
-        self.inverter_type_label.setSizePolicy(sizePolicy)
-        self.inverter_type_label.setMinimumSize(QSize(150, 30))
-        self.inverter_type_label.setMaximumSize(QSize(300, 60))
-
-        self.gridLayout_10.addWidget(self.inverter_type_label, 0, 0, 1, 1)
+        self.gridLayout_10.addWidget(self.inverter_power_text, 1, 3, 1, 1)
 
 
         self.verticalLayout_9.addWidget(self.frame_20, 0, Qt.AlignLeft)
@@ -1226,6 +1258,29 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.BAT_inverters_list)
 
+        self.frame_39 = QFrame(self.frame0221)
+        self.frame_39.setObjectName(u"frame_39")
+        self.frame_39.setFrameShape(QFrame.StyledPanel)
+        self.frame_39.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_20 = QHBoxLayout(self.frame_39)
+        self.horizontalLayout_20.setObjectName(u"horizontalLayout_20")
+        self.move_none_BAT_inverters_to_blacklist = QPushButton(self.frame_39)
+        self.move_none_BAT_inverters_to_blacklist.setObjectName(u"move_none_BAT_inverters_to_blacklist")
+        self.move_none_BAT_inverters_to_blacklist.setMinimumSize(QSize(100, 50))
+        self.move_none_BAT_inverters_to_blacklist.setMaximumSize(QSize(250, 16777215))
+
+        self.horizontalLayout_20.addWidget(self.move_none_BAT_inverters_to_blacklist)
+
+        self.open_BAT_inverters_blacklist = QPushButton(self.frame_39)
+        self.open_BAT_inverters_blacklist.setObjectName(u"open_BAT_inverters_blacklist")
+        self.open_BAT_inverters_blacklist.setMinimumSize(QSize(100, 50))
+        self.open_BAT_inverters_blacklist.setMaximumSize(QSize(250, 16777215))
+
+        self.horizontalLayout_20.addWidget(self.open_BAT_inverters_blacklist)
+
+
+        self.verticalLayout_3.addWidget(self.frame_39, 0, Qt.AlignLeft)
+
         self.frame_21 = QFrame(self.frame0221)
         self.frame_21.setObjectName(u"frame_21")
         sizePolicy.setHeightForWidth(self.frame_21.sizePolicy().hasHeightForWidth())
@@ -1234,13 +1289,6 @@ class Ui_MainWindow(object):
         self.frame_21.setFrameShadow(QFrame.Raised)
         self.verticalLayout_10 = QVBoxLayout(self.frame_21)
         self.verticalLayout_10.setObjectName(u"verticalLayout_10")
-        self.move_none_BAT_inverters_to_blacklist = QPushButton(self.frame_21)
-        self.move_none_BAT_inverters_to_blacklist.setObjectName(u"move_none_BAT_inverters_to_blacklist")
-        self.move_none_BAT_inverters_to_blacklist.setMinimumSize(QSize(100, 50))
-        self.move_none_BAT_inverters_to_blacklist.setMaximumSize(QSize(250, 16777215))
-
-        self.verticalLayout_10.addWidget(self.move_none_BAT_inverters_to_blacklist)
-
         self.frame_22 = QFrame(self.frame_21)
         self.frame_22.setObjectName(u"frame_22")
         sizePolicy.setHeightForWidth(self.frame_22.sizePolicy().hasHeightForWidth())
@@ -1249,32 +1297,15 @@ class Ui_MainWindow(object):
         self.frame_22.setFrameShadow(QFrame.Raised)
         self.gridLayout_12 = QGridLayout(self.frame_22)
         self.gridLayout_12.setObjectName(u"gridLayout_12")
-        self.bat_inverter_type_label = QLabel(self.frame_22)
-        self.bat_inverter_type_label.setObjectName(u"bat_inverter_type_label")
-        sizePolicy.setHeightForWidth(self.bat_inverter_type_label.sizePolicy().hasHeightForWidth())
-        self.bat_inverter_type_label.setSizePolicy(sizePolicy)
-        self.bat_inverter_type_label.setMinimumSize(QSize(100, 30))
-        self.bat_inverter_type_label.setMaximumSize(QSize(300, 60))
+        self.coupling_type_text = QPlainTextEdit(self.frame_22)
+        self.coupling_type_text.setObjectName(u"coupling_type_text")
+        sizePolicy.setHeightForWidth(self.coupling_type_text.sizePolicy().hasHeightForWidth())
+        self.coupling_type_text.setSizePolicy(sizePolicy)
+        self.coupling_type_text.setMinimumSize(QSize(100, 30))
+        self.coupling_type_text.setMaximumSize(QSize(300, 60))
+        self.coupling_type_text.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
 
-        self.gridLayout_12.addWidget(self.bat_inverter_type_label, 0, 0, 1, 1)
-
-        self.bat_inverter_type_text = QPlainTextEdit(self.frame_22)
-        self.bat_inverter_type_text.setObjectName(u"bat_inverter_type_text")
-        sizePolicy.setHeightForWidth(self.bat_inverter_type_text.sizePolicy().hasHeightForWidth())
-        self.bat_inverter_type_text.setSizePolicy(sizePolicy)
-        self.bat_inverter_type_text.setMinimumSize(QSize(100, 30))
-        self.bat_inverter_type_text.setMaximumSize(QSize(300, 60))
-
-        self.gridLayout_12.addWidget(self.bat_inverter_type_text, 0, 1, 1, 1)
-
-        self.bat_inverter_SN_label = QLabel(self.frame_22)
-        self.bat_inverter_SN_label.setObjectName(u"bat_inverter_SN_label")
-        sizePolicy.setHeightForWidth(self.bat_inverter_SN_label.sizePolicy().hasHeightForWidth())
-        self.bat_inverter_SN_label.setSizePolicy(sizePolicy)
-        self.bat_inverter_SN_label.setMinimumSize(QSize(100, 30))
-        self.bat_inverter_SN_label.setMaximumSize(QSize(300, 60))
-
-        self.gridLayout_12.addWidget(self.bat_inverter_SN_label, 0, 2, 1, 1)
+        self.gridLayout_12.addWidget(self.coupling_type_text, 1, 5, 1, 1)
 
         self.bat_inverter_SN_text = QPlainTextEdit(self.frame_22)
         self.bat_inverter_SN_text.setObjectName(u"bat_inverter_SN_text")
@@ -1283,7 +1314,16 @@ class Ui_MainWindow(object):
         self.bat_inverter_SN_text.setMinimumSize(QSize(100, 30))
         self.bat_inverter_SN_text.setMaximumSize(QSize(300, 60))
 
-        self.gridLayout_12.addWidget(self.bat_inverter_SN_text, 0, 3, 1, 1)
+        self.gridLayout_12.addWidget(self.bat_inverter_SN_text, 0, 5, 1, 1)
+
+        self.bat_inverter_type_label = QLabel(self.frame_22)
+        self.bat_inverter_type_label.setObjectName(u"bat_inverter_type_label")
+        sizePolicy.setHeightForWidth(self.bat_inverter_type_label.sizePolicy().hasHeightForWidth())
+        self.bat_inverter_type_label.setSizePolicy(sizePolicy)
+        self.bat_inverter_type_label.setMinimumSize(QSize(100, 30))
+        self.bat_inverter_type_label.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_12.addWidget(self.bat_inverter_type_label, 0, 0, 1, 1)
 
         self.bat_inverter_power_label = QLabel(self.frame_22)
         self.bat_inverter_power_label.setObjectName(u"bat_inverter_power_label")
@@ -1294,15 +1334,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout_12.addWidget(self.bat_inverter_power_label, 1, 0, 1, 1)
 
-        self.bat_inverter_power_text = QPlainTextEdit(self.frame_22)
-        self.bat_inverter_power_text.setObjectName(u"bat_inverter_power_text")
-        sizePolicy.setHeightForWidth(self.bat_inverter_power_text.sizePolicy().hasHeightForWidth())
-        self.bat_inverter_power_text.setSizePolicy(sizePolicy)
-        self.bat_inverter_power_text.setMinimumSize(QSize(100, 30))
-        self.bat_inverter_power_text.setMaximumSize(QSize(300, 60))
-
-        self.gridLayout_12.addWidget(self.bat_inverter_power_text, 1, 1, 1, 1)
-
         self.coupling_type_label = QLabel(self.frame_22)
         self.coupling_type_label.setObjectName(u"coupling_type_label")
         sizePolicy.setHeightForWidth(self.coupling_type_label.sizePolicy().hasHeightForWidth())
@@ -1310,17 +1341,34 @@ class Ui_MainWindow(object):
         self.coupling_type_label.setMinimumSize(QSize(100, 30))
         self.coupling_type_label.setMaximumSize(QSize(300, 60))
 
-        self.gridLayout_12.addWidget(self.coupling_type_label, 1, 2, 1, 1)
+        self.gridLayout_12.addWidget(self.coupling_type_label, 1, 4, 1, 1)
 
-        self.coupling_type_text = QPlainTextEdit(self.frame_22)
-        self.coupling_type_text.setObjectName(u"coupling_type_text")
-        sizePolicy.setHeightForWidth(self.coupling_type_text.sizePolicy().hasHeightForWidth())
-        self.coupling_type_text.setSizePolicy(sizePolicy)
-        self.coupling_type_text.setMinimumSize(QSize(100, 30))
-        self.coupling_type_text.setMaximumSize(QSize(300, 60))
-        self.coupling_type_text.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
+        self.bat_inverter_power_text = QPlainTextEdit(self.frame_22)
+        self.bat_inverter_power_text.setObjectName(u"bat_inverter_power_text")
+        sizePolicy.setHeightForWidth(self.bat_inverter_power_text.sizePolicy().hasHeightForWidth())
+        self.bat_inverter_power_text.setSizePolicy(sizePolicy)
+        self.bat_inverter_power_text.setMinimumSize(QSize(100, 30))
+        self.bat_inverter_power_text.setMaximumSize(QSize(300, 60))
 
-        self.gridLayout_12.addWidget(self.coupling_type_text, 1, 3, 1, 1)
+        self.gridLayout_12.addWidget(self.bat_inverter_power_text, 1, 3, 1, 1)
+
+        self.bat_inverter_SN_label = QLabel(self.frame_22)
+        self.bat_inverter_SN_label.setObjectName(u"bat_inverter_SN_label")
+        sizePolicy.setHeightForWidth(self.bat_inverter_SN_label.sizePolicy().hasHeightForWidth())
+        self.bat_inverter_SN_label.setSizePolicy(sizePolicy)
+        self.bat_inverter_SN_label.setMinimumSize(QSize(100, 30))
+        self.bat_inverter_SN_label.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_12.addWidget(self.bat_inverter_SN_label, 0, 4, 1, 1)
+
+        self.bat_inverter_type_text = QPlainTextEdit(self.frame_22)
+        self.bat_inverter_type_text.setObjectName(u"bat_inverter_type_text")
+        sizePolicy.setHeightForWidth(self.bat_inverter_type_text.sizePolicy().hasHeightForWidth())
+        self.bat_inverter_type_text.setSizePolicy(sizePolicy)
+        self.bat_inverter_type_text.setMinimumSize(QSize(100, 30))
+        self.bat_inverter_type_text.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_12.addWidget(self.bat_inverter_type_text, 0, 3, 1, 1)
 
 
         self.verticalLayout_10.addWidget(self.frame_22)
@@ -1379,19 +1427,35 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.BAT_storage_list)
 
+        self.frame_40 = QFrame(self.frame0221)
+        self.frame_40.setObjectName(u"frame_40")
+        self.frame_40.setFrameShape(QFrame.StyledPanel)
+        self.frame_40.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_21 = QHBoxLayout(self.frame_40)
+        self.horizontalLayout_21.setObjectName(u"horizontalLayout_21")
+        self.move_none_BAT_storage_to_blacklist = QPushButton(self.frame_40)
+        self.move_none_BAT_storage_to_blacklist.setObjectName(u"move_none_BAT_storage_to_blacklist")
+        self.move_none_BAT_storage_to_blacklist.setMinimumSize(QSize(100, 50))
+        self.move_none_BAT_storage_to_blacklist.setMaximumSize(QSize(250, 16777215))
+
+        self.horizontalLayout_21.addWidget(self.move_none_BAT_storage_to_blacklist)
+
+        self.open_BAT_storage_blacklist = QPushButton(self.frame_40)
+        self.open_BAT_storage_blacklist.setObjectName(u"open_BAT_storage_blacklist")
+        self.open_BAT_storage_blacklist.setMinimumSize(QSize(100, 50))
+        self.open_BAT_storage_blacklist.setMaximumSize(QSize(250, 16777215))
+
+        self.horizontalLayout_21.addWidget(self.open_BAT_storage_blacklist)
+
+
+        self.verticalLayout_3.addWidget(self.frame_40, 0, Qt.AlignLeft)
+
         self.frame_24 = QFrame(self.frame0221)
         self.frame_24.setObjectName(u"frame_24")
         self.frame_24.setFrameShape(QFrame.StyledPanel)
         self.frame_24.setFrameShadow(QFrame.Raised)
         self.verticalLayout_11 = QVBoxLayout(self.frame_24)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
-        self.move_none_BAT_storage_to_blacklist = QPushButton(self.frame_24)
-        self.move_none_BAT_storage_to_blacklist.setObjectName(u"move_none_BAT_storage_to_blacklist")
-        self.move_none_BAT_storage_to_blacklist.setMinimumSize(QSize(100, 50))
-        self.move_none_BAT_storage_to_blacklist.setMaximumSize(QSize(250, 16777215))
-
-        self.verticalLayout_11.addWidget(self.move_none_BAT_storage_to_blacklist)
-
         self.frame_23 = QFrame(self.frame_24)
         self.frame_23.setObjectName(u"frame_23")
         sizePolicy.setHeightForWidth(self.frame_23.sizePolicy().hasHeightForWidth())
@@ -1400,14 +1464,14 @@ class Ui_MainWindow(object):
         self.frame_23.setFrameShadow(QFrame.Raised)
         self.gridLayout_13 = QGridLayout(self.frame_23)
         self.gridLayout_13.setObjectName(u"gridLayout_13")
-        self.bat_storage_type_label = QLabel(self.frame_23)
-        self.bat_storage_type_label.setObjectName(u"bat_storage_type_label")
-        sizePolicy.setHeightForWidth(self.bat_storage_type_label.sizePolicy().hasHeightForWidth())
-        self.bat_storage_type_label.setSizePolicy(sizePolicy)
-        self.bat_storage_type_label.setMinimumSize(QSize(150, 30))
-        self.bat_storage_type_label.setMaximumSize(QSize(300, 60))
+        self.bat_technology_label = QLabel(self.frame_23)
+        self.bat_technology_label.setObjectName(u"bat_technology_label")
+        sizePolicy.setHeightForWidth(self.bat_technology_label.sizePolicy().hasHeightForWidth())
+        self.bat_technology_label.setSizePolicy(sizePolicy)
+        self.bat_technology_label.setMinimumSize(QSize(150, 30))
+        self.bat_technology_label.setMaximumSize(QSize(300, 60))
 
-        self.gridLayout_13.addWidget(self.bat_storage_type_label, 0, 0, 1, 1)
+        self.gridLayout_13.addWidget(self.bat_technology_label, 3, 3, 1, 1)
 
         self.bat_storage_type_text = QPlainTextEdit(self.frame_23)
         self.bat_storage_type_text.setObjectName(u"bat_storage_type_text")
@@ -1416,34 +1480,7 @@ class Ui_MainWindow(object):
         self.bat_storage_type_text.setMinimumSize(QSize(300, 30))
         self.bat_storage_type_text.setMaximumSize(QSize(500, 60))
 
-        self.gridLayout_13.addWidget(self.bat_storage_type_text, 0, 1, 1, 1, Qt.AlignLeft)
-
-        self.bat_storage_SN_label = QLabel(self.frame_23)
-        self.bat_storage_SN_label.setObjectName(u"bat_storage_SN_label")
-        sizePolicy.setHeightForWidth(self.bat_storage_SN_label.sizePolicy().hasHeightForWidth())
-        self.bat_storage_SN_label.setSizePolicy(sizePolicy)
-        self.bat_storage_SN_label.setMinimumSize(QSize(150, 30))
-        self.bat_storage_SN_label.setMaximumSize(QSize(300, 60))
-
-        self.gridLayout_13.addWidget(self.bat_storage_SN_label, 0, 2, 1, 1)
-
-        self.bat_storage_SN_text = QPlainTextEdit(self.frame_23)
-        self.bat_storage_SN_text.setObjectName(u"bat_storage_SN_text")
-        sizePolicy.setHeightForWidth(self.bat_storage_SN_text.sizePolicy().hasHeightForWidth())
-        self.bat_storage_SN_text.setSizePolicy(sizePolicy)
-        self.bat_storage_SN_text.setMinimumSize(QSize(300, 30))
-        self.bat_storage_SN_text.setMaximumSize(QSize(500, 60))
-
-        self.gridLayout_13.addWidget(self.bat_storage_SN_text, 0, 3, 1, 1, Qt.AlignLeft)
-
-        self.bat_storage_cap_label = QLabel(self.frame_23)
-        self.bat_storage_cap_label.setObjectName(u"bat_storage_cap_label")
-        sizePolicy.setHeightForWidth(self.bat_storage_cap_label.sizePolicy().hasHeightForWidth())
-        self.bat_storage_cap_label.setSizePolicy(sizePolicy)
-        self.bat_storage_cap_label.setMinimumSize(QSize(150, 30))
-        self.bat_storage_cap_label.setMaximumSize(QSize(300, 60))
-
-        self.gridLayout_13.addWidget(self.bat_storage_cap_label, 1, 0, 1, 1)
+        self.gridLayout_13.addWidget(self.bat_storage_type_text, 0, 2, 1, 1, Qt.AlignLeft)
 
         self.bat_storage_cap_text = QPlainTextEdit(self.frame_23)
         self.bat_storage_cap_text.setObjectName(u"bat_storage_cap_text")
@@ -1452,25 +1489,25 @@ class Ui_MainWindow(object):
         self.bat_storage_cap_text.setMinimumSize(QSize(300, 30))
         self.bat_storage_cap_text.setMaximumSize(QSize(500, 60))
 
-        self.gridLayout_13.addWidget(self.bat_storage_cap_text, 1, 1, 1, 1, Qt.AlignLeft)
+        self.gridLayout_13.addWidget(self.bat_storage_cap_text, 1, 2, 1, 1, Qt.AlignLeft)
 
-        self.bat_commiss_date_label = QLabel(self.frame_23)
-        self.bat_commiss_date_label.setObjectName(u"bat_commiss_date_label")
-        sizePolicy.setHeightForWidth(self.bat_commiss_date_label.sizePolicy().hasHeightForWidth())
-        self.bat_commiss_date_label.setSizePolicy(sizePolicy)
-        self.bat_commiss_date_label.setMinimumSize(QSize(150, 30))
-        self.bat_commiss_date_label.setMaximumSize(QSize(300, 60))
+        self.em_pow_ability_bool_label = QLabel(self.frame_23)
+        self.em_pow_ability_bool_label.setObjectName(u"em_pow_ability_bool_label")
+        sizePolicy.setHeightForWidth(self.em_pow_ability_bool_label.sizePolicy().hasHeightForWidth())
+        self.em_pow_ability_bool_label.setSizePolicy(sizePolicy)
+        self.em_pow_ability_bool_label.setMinimumSize(QSize(150, 30))
+        self.em_pow_ability_bool_label.setMaximumSize(QSize(300, 60))
 
-        self.gridLayout_13.addWidget(self.bat_commiss_date_label, 1, 2, 1, 1)
+        self.gridLayout_13.addWidget(self.em_pow_ability_bool_label, 2, 3, 1, 1)
 
-        self.bat_commiss_date_text = QPlainTextEdit(self.frame_23)
-        self.bat_commiss_date_text.setObjectName(u"bat_commiss_date_text")
-        sizePolicy.setHeightForWidth(self.bat_commiss_date_text.sizePolicy().hasHeightForWidth())
-        self.bat_commiss_date_text.setSizePolicy(sizePolicy)
-        self.bat_commiss_date_text.setMinimumSize(QSize(300, 30))
-        self.bat_commiss_date_text.setMaximumSize(QSize(500, 60))
+        self.bat_technology_text = QPlainTextEdit(self.frame_23)
+        self.bat_technology_text.setObjectName(u"bat_technology_text")
+        sizePolicy.setHeightForWidth(self.bat_technology_text.sizePolicy().hasHeightForWidth())
+        self.bat_technology_text.setSizePolicy(sizePolicy)
+        self.bat_technology_text.setMinimumSize(QSize(300, 30))
+        self.bat_technology_text.setMaximumSize(QSize(500, 60))
 
-        self.gridLayout_13.addWidget(self.bat_commiss_date_text, 1, 3, 1, 1)
+        self.gridLayout_13.addWidget(self.bat_technology_text, 3, 4, 1, 1, Qt.AlignLeft)
 
         self.max_discharge_pow_label = QLabel(self.frame_23)
         self.max_discharge_pow_label.setObjectName(u"max_discharge_pow_label")
@@ -1481,6 +1518,42 @@ class Ui_MainWindow(object):
 
         self.gridLayout_13.addWidget(self.max_discharge_pow_label, 2, 0, 1, 1)
 
+        self.bat_storage_SN_text = QPlainTextEdit(self.frame_23)
+        self.bat_storage_SN_text.setObjectName(u"bat_storage_SN_text")
+        sizePolicy.setHeightForWidth(self.bat_storage_SN_text.sizePolicy().hasHeightForWidth())
+        self.bat_storage_SN_text.setSizePolicy(sizePolicy)
+        self.bat_storage_SN_text.setMinimumSize(QSize(300, 30))
+        self.bat_storage_SN_text.setMaximumSize(QSize(500, 60))
+
+        self.gridLayout_13.addWidget(self.bat_storage_SN_text, 0, 4, 1, 1, Qt.AlignLeft)
+
+        self.bat_commiss_date_label = QLabel(self.frame_23)
+        self.bat_commiss_date_label.setObjectName(u"bat_commiss_date_label")
+        sizePolicy.setHeightForWidth(self.bat_commiss_date_label.sizePolicy().hasHeightForWidth())
+        self.bat_commiss_date_label.setSizePolicy(sizePolicy)
+        self.bat_commiss_date_label.setMinimumSize(QSize(150, 30))
+        self.bat_commiss_date_label.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_13.addWidget(self.bat_commiss_date_label, 1, 3, 1, 1)
+
+        self.bat_storage_SN_label = QLabel(self.frame_23)
+        self.bat_storage_SN_label.setObjectName(u"bat_storage_SN_label")
+        sizePolicy.setHeightForWidth(self.bat_storage_SN_label.sizePolicy().hasHeightForWidth())
+        self.bat_storage_SN_label.setSizePolicy(sizePolicy)
+        self.bat_storage_SN_label.setMinimumSize(QSize(150, 30))
+        self.bat_storage_SN_label.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_13.addWidget(self.bat_storage_SN_label, 0, 3, 1, 1)
+
+        self.energy_storage_type_text = QPlainTextEdit(self.frame_23)
+        self.energy_storage_type_text.setObjectName(u"energy_storage_type_text")
+        sizePolicy.setHeightForWidth(self.energy_storage_type_text.sizePolicy().hasHeightForWidth())
+        self.energy_storage_type_text.setSizePolicy(sizePolicy)
+        self.energy_storage_type_text.setMinimumSize(QSize(300, 30))
+        self.energy_storage_type_text.setMaximumSize(QSize(500, 60))
+
+        self.gridLayout_13.addWidget(self.energy_storage_type_text, 3, 2, 1, 1, Qt.AlignLeft)
+
         self.max_discharge_pow_text = QPlainTextEdit(self.frame_23)
         self.max_discharge_pow_text.setObjectName(u"max_discharge_pow_text")
         sizePolicy.setHeightForWidth(self.max_discharge_pow_text.sizePolicy().hasHeightForWidth())
@@ -1488,16 +1561,7 @@ class Ui_MainWindow(object):
         self.max_discharge_pow_text.setMinimumSize(QSize(300, 30))
         self.max_discharge_pow_text.setMaximumSize(QSize(500, 60))
 
-        self.gridLayout_13.addWidget(self.max_discharge_pow_text, 2, 1, 1, 1, Qt.AlignLeft)
-
-        self.em_pow_ability_bool_label = QLabel(self.frame_23)
-        self.em_pow_ability_bool_label.setObjectName(u"em_pow_ability_bool_label")
-        sizePolicy.setHeightForWidth(self.em_pow_ability_bool_label.sizePolicy().hasHeightForWidth())
-        self.em_pow_ability_bool_label.setSizePolicy(sizePolicy)
-        self.em_pow_ability_bool_label.setMinimumSize(QSize(150, 30))
-        self.em_pow_ability_bool_label.setMaximumSize(QSize(300, 60))
-
-        self.gridLayout_13.addWidget(self.em_pow_ability_bool_label, 2, 2, 1, 1)
+        self.gridLayout_13.addWidget(self.max_discharge_pow_text, 2, 2, 1, 1, Qt.AlignLeft)
 
         self.em_pow_ability_bool_text = QPlainTextEdit(self.frame_23)
         self.em_pow_ability_bool_text.setObjectName(u"em_pow_ability_bool_text")
@@ -1506,7 +1570,16 @@ class Ui_MainWindow(object):
         self.em_pow_ability_bool_text.setMinimumSize(QSize(300, 30))
         self.em_pow_ability_bool_text.setMaximumSize(QSize(500, 60))
 
-        self.gridLayout_13.addWidget(self.em_pow_ability_bool_text, 2, 3, 1, 1, Qt.AlignLeft|Qt.AlignVCenter)
+        self.gridLayout_13.addWidget(self.em_pow_ability_bool_text, 2, 4, 1, 1, Qt.AlignLeft|Qt.AlignVCenter)
+
+        self.bat_storage_cap_label = QLabel(self.frame_23)
+        self.bat_storage_cap_label.setObjectName(u"bat_storage_cap_label")
+        sizePolicy.setHeightForWidth(self.bat_storage_cap_label.sizePolicy().hasHeightForWidth())
+        self.bat_storage_cap_label.setSizePolicy(sizePolicy)
+        self.bat_storage_cap_label.setMinimumSize(QSize(150, 30))
+        self.bat_storage_cap_label.setMaximumSize(QSize(300, 60))
+
+        self.gridLayout_13.addWidget(self.bat_storage_cap_label, 1, 0, 1, 1)
 
         self.energy_storage_type_label = QLabel(self.frame_23)
         self.energy_storage_type_label.setObjectName(u"energy_storage_type_label")
@@ -1517,32 +1590,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_13.addWidget(self.energy_storage_type_label, 3, 0, 1, 1)
 
-        self.energy_storage_type_text = QPlainTextEdit(self.frame_23)
-        self.energy_storage_type_text.setObjectName(u"energy_storage_type_text")
-        sizePolicy.setHeightForWidth(self.energy_storage_type_text.sizePolicy().hasHeightForWidth())
-        self.energy_storage_type_text.setSizePolicy(sizePolicy)
-        self.energy_storage_type_text.setMinimumSize(QSize(300, 30))
-        self.energy_storage_type_text.setMaximumSize(QSize(500, 60))
+        self.bat_commiss_date_text = QPlainTextEdit(self.frame_23)
+        self.bat_commiss_date_text.setObjectName(u"bat_commiss_date_text")
+        sizePolicy.setHeightForWidth(self.bat_commiss_date_text.sizePolicy().hasHeightForWidth())
+        self.bat_commiss_date_text.setSizePolicy(sizePolicy)
+        self.bat_commiss_date_text.setMinimumSize(QSize(300, 30))
+        self.bat_commiss_date_text.setMaximumSize(QSize(500, 60))
 
-        self.gridLayout_13.addWidget(self.energy_storage_type_text, 3, 1, 1, 1, Qt.AlignLeft)
+        self.gridLayout_13.addWidget(self.bat_commiss_date_text, 1, 4, 1, 1)
 
-        self.bat_technology_label = QLabel(self.frame_23)
-        self.bat_technology_label.setObjectName(u"bat_technology_label")
-        sizePolicy.setHeightForWidth(self.bat_technology_label.sizePolicy().hasHeightForWidth())
-        self.bat_technology_label.setSizePolicy(sizePolicy)
-        self.bat_technology_label.setMinimumSize(QSize(150, 30))
-        self.bat_technology_label.setMaximumSize(QSize(300, 60))
+        self.bat_storage_type_label = QLabel(self.frame_23)
+        self.bat_storage_type_label.setObjectName(u"bat_storage_type_label")
+        sizePolicy.setHeightForWidth(self.bat_storage_type_label.sizePolicy().hasHeightForWidth())
+        self.bat_storage_type_label.setSizePolicy(sizePolicy)
+        self.bat_storage_type_label.setMinimumSize(QSize(150, 30))
+        self.bat_storage_type_label.setMaximumSize(QSize(300, 60))
 
-        self.gridLayout_13.addWidget(self.bat_technology_label, 3, 2, 1, 1)
-
-        self.bat_technology_text = QPlainTextEdit(self.frame_23)
-        self.bat_technology_text.setObjectName(u"bat_technology_text")
-        sizePolicy.setHeightForWidth(self.bat_technology_text.sizePolicy().hasHeightForWidth())
-        self.bat_technology_text.setSizePolicy(sizePolicy)
-        self.bat_technology_text.setMinimumSize(QSize(300, 30))
-        self.bat_technology_text.setMaximumSize(QSize(500, 60))
-
-        self.gridLayout_13.addWidget(self.bat_technology_text, 3, 3, 1, 1, Qt.AlignLeft)
+        self.gridLayout_13.addWidget(self.bat_storage_type_label, 0, 0, 1, 1)
 
 
         self.verticalLayout_11.addWidget(self.frame_23, 0, Qt.AlignLeft)
@@ -1595,6 +1659,29 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.CHG_point_list)
 
+        self.frame_41 = QFrame(self.frame0221)
+        self.frame_41.setObjectName(u"frame_41")
+        self.frame_41.setFrameShape(QFrame.StyledPanel)
+        self.frame_41.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_22 = QHBoxLayout(self.frame_41)
+        self.horizontalLayout_22.setObjectName(u"horizontalLayout_22")
+        self.move_none_CHG_point_to_blacklist = QPushButton(self.frame_41)
+        self.move_none_CHG_point_to_blacklist.setObjectName(u"move_none_CHG_point_to_blacklist")
+        self.move_none_CHG_point_to_blacklist.setMinimumSize(QSize(100, 50))
+        self.move_none_CHG_point_to_blacklist.setMaximumSize(QSize(250, 16777215))
+
+        self.horizontalLayout_22.addWidget(self.move_none_CHG_point_to_blacklist)
+
+        self.open_CHG_point_blacklist = QPushButton(self.frame_41)
+        self.open_CHG_point_blacklist.setObjectName(u"open_CHG_point_blacklist")
+        self.open_CHG_point_blacklist.setMinimumSize(QSize(100, 50))
+        self.open_CHG_point_blacklist.setMaximumSize(QSize(250, 16777215))
+
+        self.horizontalLayout_22.addWidget(self.open_CHG_point_blacklist)
+
+
+        self.verticalLayout_3.addWidget(self.frame_41, 0, Qt.AlignLeft)
+
         self.frame_26 = QFrame(self.frame0221)
         self.frame_26.setObjectName(u"frame_26")
         sizePolicy.setHeightForWidth(self.frame_26.sizePolicy().hasHeightForWidth())
@@ -1603,13 +1690,6 @@ class Ui_MainWindow(object):
         self.frame_26.setFrameShadow(QFrame.Raised)
         self.verticalLayout_12 = QVBoxLayout(self.frame_26)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
-        self.move_none_CHG_point_to_blacklist = QPushButton(self.frame_26)
-        self.move_none_CHG_point_to_blacklist.setObjectName(u"move_none_CHG_point_to_blacklist")
-        self.move_none_CHG_point_to_blacklist.setMinimumSize(QSize(100, 50))
-        self.move_none_CHG_point_to_blacklist.setMaximumSize(QSize(250, 16777215))
-
-        self.verticalLayout_12.addWidget(self.move_none_CHG_point_to_blacklist)
-
         self.frame_25 = QFrame(self.frame_26)
         self.frame_25.setObjectName(u"frame_25")
         sizePolicy.setHeightForWidth(self.frame_25.sizePolicy().hasHeightForWidth())
@@ -2132,7 +2212,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_17.addWidget(self.create_doc2_btn, 0, Qt.AlignLeft)
 
 
-        self.verticalLayout_13.addWidget(self.frame_35, 0, Qt.AlignTop)
+        self.verticalLayout_13.addWidget(self.frame_35)
 
 
         self.frame0220.addWidget(self.frame_32, 0, Qt.AlignLeft|Qt.AlignTop)
@@ -2240,6 +2320,7 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem9 = self.PV_modules_list.horizontalHeaderItem(5)
         ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"Modulleistung [kWp]", None));
         self.move_none_PV_modules_to_blacklist.setText(QCoreApplication.translate("MainWindow", u"Entferne die markierten Artikel", None))
+        self.open_PV_modules_blacklist.setText(QCoreApplication.translate("MainWindow", u"\u00d6ffne Blacklist", None))
         self.module_count_label.setText(QCoreApplication.translate("MainWindow", u"Anzahl der Module:", None))
         self.module_count_text.setPlainText("")
         self.module_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
@@ -2260,14 +2341,15 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem15.setText(QCoreApplication.translate("MainWindow", u"Zugeordnete \n"
 "WR-Leistung [kW]", None));
         self.move_none_PV_inverters_to_blacklist.setText(QCoreApplication.translate("MainWindow", u"Entferne die markierten Artikel", None))
+        self.open_PV_inverters_blacklist.setText(QCoreApplication.translate("MainWindow", u"\u00d6ffne Blacklist", None))
         self.hybrid_inverter_bool_label.setText(QCoreApplication.translate("MainWindow", u"Gemeinsamer PV-Batterie-Wechselricher:", None))
         self.hybrid_inverter_bool_text.setPlainText(QCoreApplication.translate("MainWindow", u"Ja/Nein", None))
+        self.inverter_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
+        self.inverter_SN_label.setText(QCoreApplication.translate("MainWindow", u"Seriennummer:", None))
         self.commiss_date_label.setText(QCoreApplication.translate("MainWindow", u"Datum erstmalige\n"
 "Inbetriebnahme:", None))
-        self.inverter_SN_label.setText(QCoreApplication.translate("MainWindow", u"Seriennummer:", None))
         self.inverter_power_label.setText(QCoreApplication.translate("MainWindow", u"Zugeordnete\n"
 "Wechselrichterleistung [kW]:", None))
-        self.inverter_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
         self.headline_04.setText(QCoreApplication.translate("MainWindow", u"Batteriewechselrichter", None))
         ___qtablewidgetitem16 = self.BAT_inverters_list.horizontalHeaderItem(0)
         ___qtablewidgetitem16.setText(QCoreApplication.translate("MainWindow", u"<>", None));
@@ -2285,12 +2367,13 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem22 = self.BAT_inverters_list.horizontalHeaderItem(6)
         ___qtablewidgetitem22.setText(QCoreApplication.translate("MainWindow", u"Art der Kopplung", None));
         self.move_none_BAT_inverters_to_blacklist.setText(QCoreApplication.translate("MainWindow", u"Entferne die markierten Artikel", None))
+        self.open_BAT_inverters_blacklist.setText(QCoreApplication.translate("MainWindow", u"\u00d6ffne Blacklist", None))
+        self.coupling_type_text.setPlainText(QCoreApplication.translate("MainWindow", u"AC gekoppeltes System", None))
         self.bat_inverter_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
-        self.bat_inverter_SN_label.setText(QCoreApplication.translate("MainWindow", u"Seriennummer:", None))
         self.bat_inverter_power_label.setText(QCoreApplication.translate("MainWindow", u"Zugeordnete\n"
 "Wechselrichterleistung [kW]:", None))
         self.coupling_type_label.setText(QCoreApplication.translate("MainWindow", u"Art der Kopplung:", None))
-        self.coupling_type_text.setPlainText(QCoreApplication.translate("MainWindow", u"AC gekoppeltes System", None))
+        self.bat_inverter_SN_label.setText(QCoreApplication.translate("MainWindow", u"Seriennummer:", None))
         self.headline_05.setText(QCoreApplication.translate("MainWindow", u"Speicher", None))
         ___qtablewidgetitem23 = self.BAT_storage_list.horizontalHeaderItem(0)
         ___qtablewidgetitem23.setText(QCoreApplication.translate("MainWindow", u"<>", None));
@@ -2312,20 +2395,21 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem30 = self.BAT_storage_list.horizontalHeaderItem(7)
         ___qtablewidgetitem30.setText(QCoreApplication.translate("MainWindow", u"Batterietechnologie", None));
         self.move_none_BAT_storage_to_blacklist.setText(QCoreApplication.translate("MainWindow", u"Entferne die markierten Artikel", None))
-        self.bat_storage_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
-        self.bat_storage_SN_label.setText(QCoreApplication.translate("MainWindow", u"Seriennummer:", None))
-        self.bat_storage_cap_label.setText(QCoreApplication.translate("MainWindow", u"Nutzbare\n"
-"Speicherkapazit\u00e4t:", None))
-        self.bat_commiss_date_label.setText(QCoreApplication.translate("MainWindow", u"Datum erstmalige\n"
-"Inbetriebnahme:", None))
-        self.max_discharge_pow_label.setText(QCoreApplication.translate("MainWindow", u"Maximale Entladeleistung \n"
-"im Dauerbetrieb:", None))
+        self.open_BAT_storage_blacklist.setText(QCoreApplication.translate("MainWindow", u"\u00d6ffne Blacklist", None))
+        self.bat_technology_label.setText(QCoreApplication.translate("MainWindow", u"Batterietechnologie:", None))
         self.em_pow_ability_bool_label.setText(QCoreApplication.translate("MainWindow", u"Notstromf\u00e4higkeit\n"
 "bei Netzst\u00f6rungen: ", None))
+        self.max_discharge_pow_label.setText(QCoreApplication.translate("MainWindow", u"Maximale Entladeleistung \n"
+"im Dauerbetrieb:", None))
+        self.bat_commiss_date_label.setText(QCoreApplication.translate("MainWindow", u"Datum erstmalige\n"
+"Inbetriebnahme:", None))
+        self.bat_storage_SN_label.setText(QCoreApplication.translate("MainWindow", u"Seriennummer:", None))
         self.em_pow_ability_bool_text.setPlainText(QCoreApplication.translate("MainWindow", u"Ja/Nein", None))
+        self.bat_storage_cap_label.setText(QCoreApplication.translate("MainWindow", u"Nutzbare\n"
+"Speicherkapazit\u00e4t:", None))
         self.energy_storage_type_label.setText(QCoreApplication.translate("MainWindow", u"Technologie der \n"
 "Stromspeicherung:", None))
-        self.bat_technology_label.setText(QCoreApplication.translate("MainWindow", u"Batterietechnologie:", None))
+        self.bat_storage_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
         self.headline_06.setText(QCoreApplication.translate("MainWindow", u"Ladestation", None))
         ___qtablewidgetitem31 = self.CHG_point_list.horizontalHeaderItem(0)
         ___qtablewidgetitem31.setText(QCoreApplication.translate("MainWindow", u"<>", None));
@@ -2338,6 +2422,7 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem35 = self.CHG_point_list.horizontalHeaderItem(4)
         ___qtablewidgetitem35.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
         self.move_none_CHG_point_to_blacklist.setText(QCoreApplication.translate("MainWindow", u"Entferne die markierten Artikel", None))
+        self.open_CHG_point_blacklist.setText(QCoreApplication.translate("MainWindow", u"\u00d6ffne Blacklist", None))
         self.charging_point_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
         self.charging_point_SN_label.setText(QCoreApplication.translate("MainWindow", u"Seriennummer:", None))
         self.headline_07.setText(QCoreApplication.translate("MainWindow", u"Anschlussart", None))

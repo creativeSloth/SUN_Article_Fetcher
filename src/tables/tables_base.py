@@ -1,13 +1,34 @@
 import pandas as pd
 
-from qtpy import QtCore, QtWidgets, QtGui
+from qtpy import QtCore, QtWidgets
 
-from odf.opendocument import load
-
-import files.logs_and_config as logs_and_config
+from files import blacklist_handler, logs_and_config
 
 from tables.customize_row import customize_table_row
+from tables import search_bar
+
 import ui_fields.ui_fields_base
+from files import blacklist_handler
+
+
+def connect_table_buttons(self):
+    tables = ui_fields.ui_fields_base.get_device_tables(self)
+
+    for table in tables:
+        button, text_edit = search_bar.add_table_header_search_box(
+            table=table, layout=self.ui.verticalLayout_3)
+        search_bar.init_search_button_click_signal(table=table,
+                                                   button=button,
+                                                   text_edit=text_edit)
+        blacklist_handler.init_blacklist_button_click_signal(self, table=table)
+
+    tables = ui_fields.ui_fields_base.get_articles_table(self)
+    for table in tables:
+        button, text_edit = search_bar.add_table_header_search_box(
+            table=table, layout=self.ui.verticalLayout)
+        search_bar.init_search_button_click_signal(table=table,
+                                                   button=button,
+                                                   text_edit=text_edit)
 
 
 def connect_sort_indicator_changed(self):
@@ -78,10 +99,10 @@ def fill_device_lists(self, df):
 def fill_specific_device_list(self, table, df):
 
     clear_table(table)
-
+    table_name = table.objectName()
     # Laden Sie die Artikelnummern aus der Blacklist
-    blacklist_article_numbers = logs_and_config.read_blacklist_article_numbers(
-        table_name=table.objectName())
+    blacklist_article_numbers = [number for number, _ in blacklist_handler.read_blacklist_articles(
+        table_name=table_name)]
 
     if df is not None:
         for _, df_row in df.iterrows():
@@ -159,14 +180,14 @@ def adding_specific_columns(self, table, tw_row=None, df_row=None):
         pass
 
 
-def remove_articles_from_list(self, list):
+def remove_articles_from_table(table):
     # Holen Sie sich alle ausgewählten Dateien im Table Widget
     df = pd.DataFrame(columns=['article_no', 'article_name'])
     rows_to_remove = []
-    for row in range(list.rowCount()):
-        checkbox_item = list.item(row, 0)
-        article_no = list.item(row, 1).text()
-        article_name = list.item(row, 2).text()
+    for row in range(table.rowCount()):
+        checkbox_item = table.item(row, 0)
+        article_no = table.item(row, 1).text()
+        article_name = table.item(row, 2).text()
 
         # Überprüfe, ob die Checkbox in der aktuellen Zeile angehakt ist
         if checkbox_item and checkbox_item.checkState() == QtCore.Qt.Checked:
@@ -180,9 +201,9 @@ def remove_articles_from_list(self, list):
             rows_to_remove.append(row)
     # Entfernen Sie die ausgewählten Zeilen
     for row in reversed(rows_to_remove):
-        list.removeRow(row)
+        table.removeRow(row)
 
-    logs_and_config.update_blacklist(df, list.objectName())
+    blacklist_handler.update_blacklist(df, table.objectName())
 
 
 def clear_table(table):

@@ -145,48 +145,6 @@ def log_copy_details(self, source_path, target_path, source_files, matching_file
         if df is not None:
             log_file.write(df.to_csv(index=False))
 
-#! Vllt die folgende Funktion mit "update_device_related_storage_list()" vereinen?
-
-
-def update_blacklist(df, list):
-    blacklist_path = directory_base.MAIN_PATHS.dict['blacklist_path']
-
-    config = configparser.ConfigParser()
-
-    # Lade vorhandene Konfiguration, wenn die Datei vorhanden ist
-    if os.path.exists(blacklist_path):
-        config.read(blacklist_path)
-
-    # Erstellen Sie die Sektion, wenn sie noch nicht existiert
-    if not config.has_section(list):
-        config.add_section(list)
-
-    # Überprüfen, ob Artikel bereits vorhanden sind, und nur neue hinzufügen
-    existing_articles = set(config.options(list))
-    for _, row in df.iterrows():
-        article_no = row['article_no']
-        article_name = row['article_name']
-        if article_no not in existing_articles:
-            # Fügen Sie die Daten als Optionen unter der gegebenen Sektion hinzu
-            config.set(list, article_no, article_name)
-
-    # Schreibe die aktualisierte Konfiguration in die Datei
-    with open(blacklist_path, 'w') as blacklist_file:
-        config.write(blacklist_file)
-
-
-def read_blacklist_article_numbers(table_name):
-    blacklist_path = directory_base.MAIN_PATHS.dict['blacklist_path']
-    config = configparser.ConfigParser()
-    config.read(blacklist_path)
-    # Überprüfen Sie, ob die angegebene Sektion vorhanden ist
-    article_numbers = []
-    if config.has_section(table_name):
-        # Holen Sie sich alle Schlüssel-Wert-Paare in der Sektion
-        article_numbers = [str(key) for key, _ in config.items(table_name)]
-
-    return article_numbers
-
 
 def create_device_related_storage_list(storage_file=None):
     related_path = directory_base.MAIN_PATHS.dict[storage_file]

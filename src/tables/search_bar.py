@@ -1,25 +1,5 @@
 
 from PyQt5.QtWidgets import QTextEdit, QHBoxLayout, QVBoxLayout, QSizePolicy, QPushButton
-import ui_fields.ui_fields_base
-
-
-def set_all_table_headers(self):
-    tables = ui_fields.ui_fields_base.get_device_tables(self)
-
-    for table in tables:
-        button, text_edit = add_table_header_search_box(
-            table=table, layout=self.ui.verticalLayout_3)
-        init_search_button_click_signal(table=table,
-                                        button=button,
-                                        text_edit=text_edit)
-
-    tables = ui_fields.ui_fields_base.get_articles_table(self)
-    for table in tables:
-        button, text_edit = add_table_header_search_box(
-            table=table, layout=self.ui.verticalLayout)
-        init_search_button_click_signal(table=table,
-                                        button=button,
-                                        text_edit=text_edit)
 
 
 def add_table_header_search_box(table, layout):

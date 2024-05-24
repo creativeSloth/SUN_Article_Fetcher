@@ -47,7 +47,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         ui_fields.ui_fields_base.config_to_fields(self)
 
-        tables.search_bar.set_all_table_headers(self)
+        tables.tables_base.connect_table_buttons(self)
 
         self.previous_project_text = self.ui.project.toPlainText()
 
@@ -176,24 +176,24 @@ class MainWindow(QtWidgets.QMainWindow):
         tables.tables_base.fill_device_lists(self, df)
 
     def on_move_none_PV_modules_to_blacklist_click(self):
-        tables.tables_base.remove_articles_from_list(
-            self, list=self.ui.PV_modules_list)
+        tables.tables_base.remove_articles_from_table(
+            self, table=self.ui.PV_modules_list)
 
     def on_move_none_PV_inverters_to_blacklist_click(self):
-        tables.tables_base.remove_articles_from_list(
-            self, list=self.ui.PV_inverters_list)
+        tables.tables_base.remove_articles_from_table(
+            self, table=self.ui.PV_inverters_list)
 
     def on_move_none_BAT_inverters_to_blacklist_click(self):
-        tables.tables_base.remove_articles_from_list(
-            self, list=self.ui.BAT_inverters_list)
+        tables.tables_base.remove_articles_from_table(
+            self, table=self.ui.BAT_inverters_list)
 
     def on_move_none_BAT_storage_to_blacklist_click(self):
-        tables.tables_base.remove_articles_from_list(
-            self, list=self.ui.BAT_storage_list)
+        tables.tables_base.remove_articles_from_table(
+            self, table=self.ui.BAT_storage_list)
 
     def on_move_none_CHG_point_to_blacklist_click(self):
-        tables.tables_base.remove_articles_from_list(
-            self, list=self.ui.CHG_point_list)
+        tables.tables_base.remove_articles_from_table(
+            self, table=self.ui.CHG_point_list)
 
     def on_fill_fields_btn_click(self):
 
