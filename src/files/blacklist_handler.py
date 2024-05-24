@@ -20,8 +20,6 @@ class Blacklist(QtWidgets.QDialog):
 
         self.table_name = table_name
 
-        self.table_name_map = self.table_name
-
         self.setWindowTitle(table_name_ger)
 
         self.initialize()
