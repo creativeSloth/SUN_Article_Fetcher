@@ -7,7 +7,6 @@ from qtpy import QtWidgets
 
 from directories import directory_base
 from ui import blacklistWindow
-
 from styles.styles_Handler import init_ui
 
 
@@ -46,6 +45,18 @@ def get_blacklist_map(self):
     return button_dict
 
 
+def initialize_blacklist_dialogs(self):
+    tables_dict = get_blacklist_map(self)
+
+    for key, value in tables_dict.items():
+        table_name, table_name_ger = key, value[1]
+        table_name_ger = f"{table_name_ger} - Blacklist"
+
+        # Erstelle dynamisch ein Attribut für jede Tabelle
+        setattr(self, f"{table_name}_blacklist_dlg", Blacklist(
+            table_name, table_name_ger))
+
+
 def init_blacklist_button_click_signal(self, table):
     table_name = table.objectName()
     button = get_blacklist_map(self)[table_name][0]
@@ -55,10 +66,13 @@ def init_blacklist_button_click_signal(self, table):
 
 
 def on_blacklist_button_click(self, table_name):
-    table_name_ger = f"{get_blacklist_map(self)[table_name][1]} - Blacklist"
-    self.blacklist_dlg = Blacklist(table_name, table_name_ger)
 
-    self.blacklist_dlg.show()
+    # Zugriff auf die entsprechende Instanz des Blacklist-Dialogs
+    dialog_instance = getattr(self, f"{table_name}_blacklist_dlg", None)
+
+    # Überprüfe, ob die Instanz existiert, bevor du die Methode aufrufst
+    if dialog_instance is not None:
+        dialog_instance.show()
 
     read_blacklist_articles(table_name=table_name)
 

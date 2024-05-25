@@ -3,6 +3,7 @@ import sys
 from qtpy import QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 
+from files import blacklist_base
 from ui.mainwindow import Ui_MainWindow
 
 import data_sources.data_base
@@ -36,7 +37,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def initialize(self):
 
         directory_base.set_static_directories()
-        menus_base.initialize_all_menus(self)
+        menus_base.initialize_menu_dialogs(self)
+        blacklist_base.initialize_blacklist_dialogs(self)
         init_ui(self)
 
         logs_and_config.create_config_file()

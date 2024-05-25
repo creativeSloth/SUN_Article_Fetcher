@@ -2,13 +2,13 @@ import pandas as pd
 
 from qtpy import QtCore, QtWidgets
 
-from files import blacklist_handler, logs_and_config
+from files import blacklist_base, logs_and_config
 
 from tables.customize_row import customize_table_row
 from tables import search_bar
 
 import ui_fields.ui_fields_base
-from files import blacklist_handler
+from files import blacklist_base
 
 
 def connect_table_buttons(self):
@@ -20,7 +20,7 @@ def connect_table_buttons(self):
         search_bar.init_search_button_click_signal(table=table,
                                                    button=button,
                                                    text_edit=text_edit)
-        blacklist_handler.init_blacklist_button_click_signal(self, table=table)
+        blacklist_base.init_blacklist_button_click_signal(self, table=table)
 
     tables = ui_fields.ui_fields_base.get_articles_table(self)
     for table in tables:
@@ -101,7 +101,7 @@ def fill_specific_device_list(self, table, df):
     clear_table(table)
     table_name = table.objectName()
     # Laden Sie die Artikelnummern aus der Blacklist
-    blacklist_article_numbers = [number for number, _ in blacklist_handler.read_blacklist_articles(
+    blacklist_article_numbers = [number for number, _ in blacklist_base.read_blacklist_articles(
         table_name=table_name)]
 
     if df is not None:
@@ -203,7 +203,7 @@ def remove_articles_from_table(table):
     for row in reversed(rows_to_remove):
         table.removeRow(row)
 
-    blacklist_handler.update_blacklist(df, table.objectName())
+    blacklist_base.update_blacklist(df, table.objectName())
 
 
 def clear_table(table):

@@ -1,7 +1,7 @@
 import menus.menu_settings as menu_settings
 
 
-def initialize_all_menus(self):
+def initialize_menu_dialogs(self):
     self.sett_con_dlg = menu_settings.SettConDlg()
     self.sett_paths_dlg = menu_settings.SettPathsDlg()
 
