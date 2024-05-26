@@ -117,8 +117,8 @@ class MainWindow(QtWidgets.QMainWindow):
             if file_path:
                 # Lösche die vorhandenen Daten und fülle die Tabelle mit Daten aus der Datei
                 df = data_sources.data_base.read_data_from_file(file_path)
-                tables.tables_base.fill_article_table(
-                    table=self.ui.articles_list, df=df)
+                tables.tables_base.fill_article_table(self,
+                                                      table=self.ui.articles_list, df=df)
 
     def on_load_articles_from_db_btn_click(self):
         # Lese Daten aus der MySQL-Datenbank und speichere sie in der Instanzvariable df
@@ -157,6 +157,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 # * * * * * * * * * * * * * * * * * Documentation-module * * * * * * * * * * * * * * * *
+
 
     def on_btn_create_doc1_clicked(self):
         directory_base.set_doc_1_dir(self)

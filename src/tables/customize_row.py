@@ -6,7 +6,6 @@ def customize_table_row(func):
     def wrapper(self, *args, **kwargs):
 
         table = kwargs['table']
-        # table = None --> Für Entwicklertests
 
         if table is not None:
             table.setSortingEnabled(False)
@@ -17,13 +16,7 @@ def customize_table_row(func):
             table.setSortingEnabled(True)
 
             # Führe die Anpassung der Zeilenfarben durch
-            for row in range(table.rowCount()):
-                count = table.item(row, 3).text()
-                for column in range(table.columnCount()):
-
-                    change_foreground_if_zero(
-                        count, table, row, column)
-                    # change_background_colour(table, row, column)
+            change_foreground_if_zero(table)
         else:
             # Wenn table None ist, gebe eine Fehlermeldung aus
             QMessageBox.information(
@@ -34,8 +27,12 @@ def customize_table_row(func):
     return wrapper
 
 
-def change_foreground_if_zero(count, table, row, column):
-    if float(count) == 0:
-        for column in range(1, table.columnCount()):
-            table.item(row, column).setForeground(
-                QtGui.QColor("#e20000"))
+def change_foreground_if_zero(table):
+    for row in range(table.rowCount()):
+        count = table.item(row, 3).text()
+        if float(count) == 0:
+
+            for column in range(1, table.columnCount()):
+                if table.item(row, column) is not None:
+                    table.item(row, column).setForeground(
+                        QtGui.QColor("#e20000"))

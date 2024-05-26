@@ -50,40 +50,10 @@ def fill_article_table(self, table, df=None):
 
     if df is not None:
         for _, df_row in df.iterrows():
-
-            tw_row = table.rowCount()
-            table.insertRow(tw_row)
-
-            # Spalte 1 (statisch) mit einer Checkbox
-            checkbox_item = QtWidgets.QTableWidgetItem()
-            checkbox_item.setFlags(
-                QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
-            checkbox_item.setCheckState(QtCore.Qt.Checked)
-
-            # Spalte 1 mit der CheckBox
-            table.setItem(tw_row, 0, checkbox_item)
-
-            # Spalte 2 (dynamisch) mit den Werten aus der Spalte 0 des DataFrames
-            item_col1 = QtWidgets.QTableWidgetItem(str(df_row.iloc[0]))
-            table.setItem(tw_row, 1, item_col1)
-
-            # Spalte 3 (dynamisch) mit den Werten aus der Spalte 1 des DataFrames
-            item_col2 = QtWidgets.QTableWidgetItem(str(df_row.iloc[1]))
-            table.setItem(tw_row, 2, item_col2)
-            # Spalte 4 (dynamisch) mit den Werten aus der Spalte 2 des DataFrames
-            if df_row.shape[0] >= 3:  # !!!!!!!!
-                item_col3 = QtWidgets.QTableWidgetItem(str(df_row.iloc[2]))
-                table.setItem(tw_row, 3, item_col3)
-
-    # Iteriere über alle Zellen im Table Widget
-    for row in range(table.rowCount()):
-        for col in range(table.columnCount()):
-            item = table.item(row, col)
-            if item:
-                # Deaktiviere die Editierbarkeit für die Zelle
-                item.setFlags(item.flags() & ~QtCore.Qt.ItemIsEditable)
+            import_from_df_row(table, df_row=df_row, import_column_count=3)
 
     resize_columns_to_contents(list=table, columns=table.columnCount())
+    disable_colums_edit(table, firstcol=1, lastcol=4)
 
 
 def fill_device_lists(self, df):
@@ -98,49 +68,45 @@ def fill_device_lists(self, df):
 @customize_table_row
 def fill_specific_device_list(self, table, df):
 
-    clear_table(table)
     table_name = table.objectName()
     # Laden Sie die Artikelnummern aus der Blacklist
     blacklist_article_numbers = [number for number, _ in blacklist_base.read_blacklist_articles(
         table_name=table_name)]
-
+    clear_table(table)
     if df is not None:
         for _, df_row in df.iterrows():
             # Überprüfen Sie, ob die Artikelnummer nicht in der Blacklist enthalten ist
             if str(df_row.iloc[0]) not in blacklist_article_numbers:
-                tw_row = table.rowCount()
-                table.insertRow(tw_row)
-
-                # Spalte 1 (statisch) mit einer Checkbox
-                checkbox_item = QtWidgets.QTableWidgetItem()
-                checkbox_item.setFlags(
-                    QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
-                checkbox_item.setCheckState(QtCore.Qt.Checked)
-
-                # Spalte 1 mit der CheckBox
-                table.setItem(tw_row, 0, checkbox_item)
-
-                # Spalte 2 (dynamisch) mit den Werten aus der Spalte 0 des DataFrames
-                table.setItem(
-                    tw_row, 1, QtWidgets.QTableWidgetItem(str(df_row.iloc[0])))
-
-                # Spalte 3 (dynamisch) mit den Werten aus der Spalte 1 des DataFrames
-                table.setItem(
-                    tw_row, 2, QtWidgets.QTableWidgetItem(str(df_row.iloc[1])))
-
-                # Spalte 4 (dynamisch) mit den Werten aus der Spalte 2 des DataFrames
-                table.setItem(
-                    tw_row, 3, QtWidgets.QTableWidgetItem(str(df_row.iloc[2])))
-
-                # Spalte 5 (dynamisch) mit den Werten aus der Spalte 3 des DataFrames
-                table.setItem(
-                    tw_row, 4, QtWidgets.QTableWidgetItem(str(df_row.iloc[3])))
-                adding_specific_columns(self, table, tw_row, df_row)
+                import_from_df_row(table, df_row=df_row,
+                                   import_column_count=4)
 
     # Anzahl der Spalten ist flexibel, muss später angepasst hinzugefügt werden
     fill_device_specs_in_device_tables(table)
     resize_columns_to_contents(list=table, columns=table.columnCount())
     disable_colums_edit(table, firstcol=1, lastcol=5)
+
+
+def import_from_df_row(table, df_row=None, import_column_count=None):
+    tw_row = table.rowCount()
+    table.insertRow(tw_row)
+
+    # Spalte 1 (statisch) mit einer Checkbox
+    checkbox_item = QtWidgets.QTableWidgetItem()
+    checkbox_item.setFlags(
+        QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
+    checkbox_item.setCheckState(QtCore.Qt.Checked)
+
+    # Spalte 1 mit der CheckBox
+    table.setItem(tw_row, 0, checkbox_item)
+
+    for index in range(import_column_count):
+        if isinstance(df_row, pd.Series):
+            item_col = QtWidgets.QTableWidgetItem(str(df_row.iloc[index]))
+
+        elif isinstance(df_row, tuple):
+            item_col = QtWidgets.QTableWidgetItem(str(df_row[index]))
+
+        table.setItem(tw_row, index + 1, item_col)
 
 
 def adding_specific_columns(self, table, tw_row=None, df_row=None):

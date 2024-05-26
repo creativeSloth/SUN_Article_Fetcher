@@ -6,6 +6,7 @@ import directories.directory_base as directory_base
 from qtpy import QtWidgets
 
 from directories import directory_base
+from tables.tables_base import import_from_df_row
 from ui import blacklistWindow
 from styles.styles_Handler import init_ui
 
@@ -62,19 +63,26 @@ def init_blacklist_button_click_signal(self, table):
     button = get_blacklist_map(self)[table_name][0]
     if button:
         button.clicked.connect(
-            lambda: on_blacklist_button_click(self, table_name=table_name))
+            lambda: on_blacklist_button_click(self, table=table))
 
 
-def on_blacklist_button_click(self, table_name):
-
+def on_blacklist_button_click(self, table):
+    table_name = table.objectName()
     # Zugriff auf die entsprechende Instanz des Blacklist-Dialogs
     dialog_instance = getattr(self, f"{table_name}_blacklist_dlg", None)
+    bl_table = dialog_instance.ui.blacklist
 
     # Überprüfe, ob die Instanz existiert, bevor du die Methode aufrufst
     if dialog_instance is not None:
         dialog_instance.show()
 
-    read_blacklist_articles(table_name=table_name)
+    bl_articles = read_blacklist_articles(table_name=table_name)
+
+    # Zum SIcherstellen dass bl__articles eine Instanz von List ist und ein Element hat
+    if isinstance(bl_articles, list) and bl_articles:
+        for article in bl_articles:
+            # Import data from each row of the blacklist articles
+            import_from_df_row(bl_table, df_row=article, import_column_count=2)
 
 
 def update_blacklist(df, table_name):
