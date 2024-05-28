@@ -3,7 +3,7 @@ import sys
 from qtpy import QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 
-from files import blacklist_base
+from files import blacklist
 from ui.mainwindow import Ui_MainWindow
 
 import data_sources.data_base
@@ -15,7 +15,7 @@ import files.logs_and_config as logs_and_config
 import save_file
 import ui_fields.ui_fields_base
 from styles.styles_Handler import init_ui
-import files.copy_files as copy_files
+import files.copy_paste_files as copy_paste_files
 
 from menus import menus_base
 
@@ -38,7 +38,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         directory_base.set_static_directories()
         menus_base.initialize_menu_dialogs(self)
-        blacklist_base.initialize_blacklist_dialogs(self)
+        blacklist.initialize_blacklist_dialogs(self)
         init_ui(self)
 
         logs_and_config.create_config_file()
@@ -141,23 +141,22 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @ directory_base.check_path_existence(modus=0)
     def on_copy_files_btn_click(self, *args, **kwargs):
-        source_path, target_path, log_subfolder_2_path = copy_files.get_paths()
+        source_path, target_path, log_subfolder_2_path = copy_paste_files.get_paths()
         source_files = data_sources.data_base.get_files_in_source_path(
             self, source_path)
-        selected_files, df = copy_files.get_selected_files_and_df(
+        selected_files, df = copy_paste_files.get_selected_files_and_df(
             self)
-        matching_files = copy_files.get_matching_files(
+        matching_files = copy_paste_files.get_matching_files(
             source_files, selected_files)
-        copy_files.mark_matching_files(self, matching_files)
-        count = copy_files.copy_files(self,
-                                      matching_files, source_path, target_path)
+        copy_paste_files.mark_matching_files(self, matching_files)
+        count = copy_paste_files.copy_files(self,
+                                            matching_files, source_path, target_path)
 
-        copy_files.log_and_show_result(self,
-                                       source_path, target_path, source_files, matching_files, df, count, log_subfolder_2_path)
+        copy_paste_files.log_and_show_result(self,
+                                             source_path, target_path, source_files, matching_files, df, count, log_subfolder_2_path)
 
 
 # * * * * * * * * * * * * * * * * * Documentation-module * * * * * * * * * * * * * * * *
-
 
     def on_btn_create_doc1_clicked(self):
         directory_base.set_doc_1_dir(self)

@@ -1,3 +1,6 @@
+from PyQt5 import QtWidgets
+from styles.styles_Handler import init_ui
+from ui import blacklistWindow
 import configparser
 import os
 
@@ -6,11 +9,7 @@ import directories.directory_base as directory_base
 from qtpy import QtWidgets
 
 from directories import directory_base
-from tables import tables_base
-from tables.tables_base import import_from_df_row
-from ui import blacklistWindow
-from styles.styles_Handler import init_ui
-from PyQt5 import QtWidgets
+from tables.tables_base import import_from_df_row, clear_table, resize_columns_to_contents, disable_colums_edit
 
 
 class Blacklist(QtWidgets.QDialog):
@@ -74,7 +73,7 @@ def on_blacklist_button_click(self, table):
     # Zugriff auf die entsprechende Instanz des Blacklist-Dialogs
     dialog_instance = getattr(self, f"{table_name}_blacklist_dlg", None)
     bl_table: QtWidgets.QTableWidget = dialog_instance.ui.blacklist
-    tables_base.clear_table(bl_table)
+    clear_table(bl_table)
 
     # Überprüfe, ob die Instanz existiert, bevor du die Methode aufrufst
     if dialog_instance is not None:
@@ -89,8 +88,8 @@ def on_blacklist_button_click(self, table):
             import_from_df_row(bl_table, data_row=article,
                                import_column_count=2)
     place_button_into_cell(self, table_name, bl_table, 3, "[X]")
-    tables_base.resize_columns_to_contents(bl_table)
-    tables_base.disable_colums_edit(bl_table)
+    resize_columns_to_contents(bl_table)
+    disable_colums_edit(bl_table)
 
 
 def place_button_into_cell(self, table_name: str, bl_table: QtWidgets.QTableWidget, column: int, text: str = ""):

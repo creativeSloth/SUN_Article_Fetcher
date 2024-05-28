@@ -2,13 +2,13 @@ import pandas as pd
 
 from qtpy import QtCore, QtWidgets
 
-from files import blacklist_base, logs_and_config
+from files import blacklist, logs_and_config
 
 from tables.customize_row import customize_table_row
 from tables import search_bar
 
 import ui_fields.ui_fields_base
-from files import blacklist_base
+from files import blacklist
 
 
 def connect_table_buttons(self):
@@ -20,7 +20,7 @@ def connect_table_buttons(self):
         search_bar.init_search_button_click_signal(table=table,
                                                    button=button,
                                                    text_edit=text_edit)
-        blacklist_base.init_blacklist_button_click_signal(self, table=table)
+        blacklist.init_blacklist_button_click_signal(self, table=table)
 
     tables = ui_fields.ui_fields_base.get_articles_table(self)
     for table in tables:
@@ -70,7 +70,7 @@ def fill_specific_device_list(self, table, df):
 
     table_name = table.objectName()
     # Laden Sie die Artikelnummern aus der Blacklist
-    blacklist_article_numbers = [number for number, _ in blacklist_base.read_blacklist_articles(
+    blacklist_article_numbers = [number for number, _ in blacklist.read_blacklist_articles(
         table_name=table_name)]
     clear_table(table)
     if df is not None:
@@ -169,7 +169,8 @@ def remove_articles_from_table(table):
     for row in reversed(rows_to_remove):
         table.removeRow(row)
 
-    blacklist_base.update_blacklist(df, table.objectName())
+    blacklist.update_blacklist(df, table.objectName())
+
 
 def clear_table(table):
     # Setze die Anzahl der Zeilen auf 0, um alle Zeilen zu entfernen
@@ -214,7 +215,7 @@ def collect_data_from_table(table, article_no_col_index, discard_columns):
 def disable_colums_edit(table: QtWidgets.QTableWidget, firstcol=0, lastcol: int = None):
     if lastcol is None:
         lastcol = table.columnCount()
-        
+
     for row in range(table.rowCount()):
         for col in range(firstcol, lastcol):
             # Das vorhandene QTableWidgetItem abrufen
