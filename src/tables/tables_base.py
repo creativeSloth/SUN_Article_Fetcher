@@ -50,9 +50,9 @@ def fill_article_table(self, table, df=None):
 
     if df is not None:
         for _, df_row in df.iterrows():
-            import_from_df_row(table, df_row=df_row, import_column_count=3)
+            import_from_df_row(table, data_row=df_row, import_column_count=3)
 
-    resize_columns_to_contents(list=table, columns=table.columnCount())
+    resize_columns_to_contents(table=table)
     disable_colums_edit(table, firstcol=1, lastcol=4)
 
 
@@ -77,16 +77,16 @@ def fill_specific_device_list(self, table, df):
         for _, df_row in df.iterrows():
             # Überprüfen Sie, ob die Artikelnummer nicht in der Blacklist enthalten ist
             if str(df_row.iloc[0]) not in blacklist_article_numbers:
-                import_from_df_row(table, df_row=df_row,
+                import_from_df_row(table, data_row=df_row,
                                    import_column_count=4)
 
     # Anzahl der Spalten ist flexibel, muss später angepasst hinzugefügt werden
     fill_device_specs_in_device_tables(table)
-    resize_columns_to_contents(list=table, columns=table.columnCount())
+    resize_columns_to_contents(table=table)
     disable_colums_edit(table, firstcol=1, lastcol=5)
 
 
-def import_from_df_row(table, df_row=None, import_column_count=None):
+def import_from_df_row(table, data_row=None, import_column_count=None):
     tw_row = table.rowCount()
     table.insertRow(tw_row)
 
@@ -100,11 +100,11 @@ def import_from_df_row(table, df_row=None, import_column_count=None):
     table.setItem(tw_row, 0, checkbox_item)
 
     for index in range(import_column_count):
-        if isinstance(df_row, pd.Series):
-            item_col = QtWidgets.QTableWidgetItem(str(df_row.iloc[index]))
+        if isinstance(data_row, pd.Series):
+            item_col = QtWidgets.QTableWidgetItem(str(data_row.iloc[index]))
 
-        elif isinstance(df_row, tuple):
-            item_col = QtWidgets.QTableWidgetItem(str(df_row[index]))
+        elif isinstance(data_row, tuple):
+            item_col = QtWidgets.QTableWidgetItem(str(data_row[index]))
 
         table.setItem(tw_row, index + 1, item_col)
 
@@ -171,23 +171,23 @@ def remove_articles_from_table(table):
 
     blacklist_base.update_blacklist(df, table.objectName())
 
-
 def clear_table(table):
     # Setze die Anzahl der Zeilen auf 0, um alle Zeilen zu entfernen
     table.setRowCount(0)
 
 
-def resize_columns_to_contents(list, columns):
-    header = list.horizontalHeader()
+def resize_columns_to_contents(table):
+    columns = table.columnCount()
+    header = table.horizontalHeader()
     for i in range(columns):
         header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
 
 
-def get_column_index(list, column):
+def get_column_index(table, column):
     """Suche den Index der 'Artikelnummer'-Spalte in der Tabelle."""
     column_index = None
-    for column_index in range(list.columnCount()):
-        if list.horizontalHeaderItem(column_index).text() == column:
+    for column_index in range(table.columnCount()):
+        if table.horizontalHeaderItem(column_index).text() == column:
             return column_index
     return None
 
@@ -211,13 +211,17 @@ def collect_data_from_table(table, article_no_col_index, discard_columns):
     return data_set
 
 
-def disable_colums_edit(ui_list, firstcol, lastcol):
-    for row in range(ui_list.rowCount()):
+def disable_colums_edit(table: QtWidgets.QTableWidget, firstcol=0, lastcol: int = None):
+    if lastcol is None:
+        lastcol = table.columnCount()
+        
+    for row in range(table.rowCount()):
         for col in range(firstcol, lastcol):
             # Das vorhandene QTableWidgetItem abrufen
-            item = ui_list.item(row, col)
-            # Entfernt das Bearbeitungsflag für die 2. Spaltess
-            item.setFlags(item.flags() & ~QtCore.Qt.ItemIsEditable)
+            item = table.item(row, col)
+            # Entfernt das Bearbeitungsflag für die Zelle
+            if item is not None:
+                item.setFlags(item.flags() & ~QtCore.Qt.ItemIsEditable)
 
 
 def get_fixed_val_columns():

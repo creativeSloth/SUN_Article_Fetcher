@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'd:\3441\Documents\Familie\Edgar\Weiterbildungen\Kurse\Python Bootcamp\Projekte\SUN_Article_Fetcher\src/ui\blacklist_dialog.ui'
+# Form implementation generated from reading ui file 'd:\3441\Documents\Familie\Edgar\Weiterbildungen\Kurse\Python Bootcamp\Projekte\SUN_Article_Fetcher\src/ui\blacklistWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #
@@ -44,7 +44,7 @@ class Ui_blacklist_dialog(object):
         self.blacklist.setWordWrap(False)
         self.blacklist.setCornerButtonEnabled(True)
         self.blacklist.setObjectName("blacklist")
-        self.blacklist.setColumnCount(3)
+        self.blacklist.setColumnCount(4)
         self.blacklist.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.blacklist.setHorizontalHeaderItem(0, item)
@@ -52,6 +52,8 @@ class Ui_blacklist_dialog(object):
         self.blacklist.setHorizontalHeaderItem(1, item)
         item = QtWidgets.QTableWidgetItem()
         self.blacklist.setHorizontalHeaderItem(2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.blacklist.setHorizontalHeaderItem(3, item)
         self.blacklist.horizontalHeader().setVisible(True)
         self.blacklist.horizontalHeader().setCascadingSectionResizes(True)
         self.blacklist.horizontalHeader().setDefaultSectionSize(180)
@@ -100,4 +102,6 @@ class Ui_blacklist_dialog(object):
         item.setText(_translate("blacklist_dialog", "Artikelnummer"))
         item = self.blacklist.horizontalHeaderItem(2)
         item.setText(_translate("blacklist_dialog", "Artikelbezeichnung"))
+        item = self.blacklist.horizontalHeaderItem(3)
+        item.setText(_translate("blacklist_dialog", "-->"))
         self.remove_article_from_blacklist.setText(_translate("blacklist_dialog", "Entferne Artikel von Blacklist"))

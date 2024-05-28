@@ -132,6 +132,11 @@
             <string>Artikelbezeichnung</string>
            </property>
           </column>
+          <column>
+           <property name="text">
+            <string>--&gt;</string>
+           </property>
+          </column>
          </widget>
         </item>
        </layout>

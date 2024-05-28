@@ -36,14 +36,16 @@ class Ui_blacklist_dialog(object):
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.blacklist = QTableWidget(self.frame_2)
-        if (self.blacklist.columnCount() < 3):
-            self.blacklist.setColumnCount(3)
+        if (self.blacklist.columnCount() < 4):
+            self.blacklist.setColumnCount(4)
         __qtablewidgetitem = QTableWidgetItem()
         self.blacklist.setHorizontalHeaderItem(0, __qtablewidgetitem)
         __qtablewidgetitem1 = QTableWidgetItem()
         self.blacklist.setHorizontalHeaderItem(1, __qtablewidgetitem1)
         __qtablewidgetitem2 = QTableWidgetItem()
         self.blacklist.setHorizontalHeaderItem(2, __qtablewidgetitem2)
+        __qtablewidgetitem3 = QTableWidgetItem()
+        self.blacklist.setHorizontalHeaderItem(3, __qtablewidgetitem3)
         self.blacklist.setObjectName(u"blacklist")
         self.blacklist.setEnabled(True)
         sizePolicy = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
@@ -123,6 +125,8 @@ class Ui_blacklist_dialog(object):
         ___qtablewidgetitem1.setText(QCoreApplication.translate("blacklist_dialog", u"Artikelnummer", None));
         ___qtablewidgetitem2 = self.blacklist.horizontalHeaderItem(2)
         ___qtablewidgetitem2.setText(QCoreApplication.translate("blacklist_dialog", u"Artikelbezeichnung", None));
+        ___qtablewidgetitem3 = self.blacklist.horizontalHeaderItem(3)
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("blacklist_dialog", u"-->", None));
         self.remove_article_from_blacklist.setText(QCoreApplication.translate("blacklist_dialog", u"Entferne Artikel von Blacklist", None))
     # retranslateUi
 
