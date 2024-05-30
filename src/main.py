@@ -158,6 +158,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 # * * * * * * * * * * * * * * * * * Documentation-module * * * * * * * * * * * * * * * *
 
+
     def on_btn_create_doc1_clicked(self):
         directory_base.set_doc_1_dir(self)
         ui_fields.ui_fields_base.replace_fields_in_doc(
@@ -179,23 +180,23 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def on_move_none_PV_modules_to_blacklist_click(self):
         tables.tables_base.remove_articles_from_table(
-            self, table=self.ui.PV_modules_list)
+            table=self.ui.PV_modules_list)
 
     def on_move_none_PV_inverters_to_blacklist_click(self):
         tables.tables_base.remove_articles_from_table(
-            self, table=self.ui.PV_inverters_list)
+            table=self.ui.PV_inverters_list)
 
     def on_move_none_BAT_inverters_to_blacklist_click(self):
         tables.tables_base.remove_articles_from_table(
-            self, table=self.ui.BAT_inverters_list)
+            table=self.ui.BAT_inverters_list)
 
     def on_move_none_BAT_storage_to_blacklist_click(self):
         tables.tables_base.remove_articles_from_table(
-            self, table=self.ui.BAT_storage_list)
+            table=self.ui.BAT_storage_list)
 
     def on_move_none_CHG_point_to_blacklist_click(self):
         tables.tables_base.remove_articles_from_table(
-            self, table=self.ui.CHG_point_list)
+            table=self.ui.CHG_point_list)
 
     def on_fill_fields_btn_click(self):
 
