@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>480</height>
+    <width>1120</width>
+    <height>628</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -44,8 +44,8 @@
           </property>
           <property name="maximumSize">
            <size>
-            <width>600</width>
-            <height>300</height>
+            <width>456456</width>
+            <height>4554</height>
            </size>
           </property>
           <property name="autoFillBackground">

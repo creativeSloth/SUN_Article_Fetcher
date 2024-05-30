@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_blacklist_dialog(object):
     def setupUi(self, blacklist_dialog):
         blacklist_dialog.setObjectName("blacklist_dialog")
-        blacklist_dialog.resize(640, 480)
+        blacklist_dialog.resize(1120, 628)
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(blacklist_dialog)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.frame_2 = QtWidgets.QFrame(blacklist_dialog)
@@ -33,7 +33,7 @@ class Ui_blacklist_dialog(object):
         sizePolicy.setHeightForWidth(self.blacklist.sizePolicy().hasHeightForWidth())
         self.blacklist.setSizePolicy(sizePolicy)
         self.blacklist.setMinimumSize(QtCore.QSize(500, 100))
-        self.blacklist.setMaximumSize(QtCore.QSize(600, 300))
+        self.blacklist.setMaximumSize(QtCore.QSize(456456, 4554))
         self.blacklist.setAutoFillBackground(True)
         self.blacklist.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
         self.blacklist.setDragDropOverwriteMode(False)
