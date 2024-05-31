@@ -84,7 +84,7 @@ QPlainTextEdit::disabled {
 /* -------------------------------------- */
 QPushButton {
 	background-color: rgb(226, 24, 57); /* Hintergrundfarbe */
-	color: #ff13213b; /* Textfarbe */
+	color: rgba(19, 33, 59, 255); /* Textfarbe */
 	border-radius: 5px; /* Abgerundete Ecken */
 	padding-left: 10px;
 	padding-right: 10px;
@@ -93,7 +93,7 @@ QPushButton {
 /* QPushButton Hover */
 QPushButton::hover {
 	background-color: rgba(226, 24, 57, 200); /* Hintergrundfarbe */
-	color: #6413213b; /* Textfarbe */
+	color: rgba(19, 33, 59, 100); /* Textfarbe */
 }
 
 /* QPushButton Pressed */
