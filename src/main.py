@@ -50,7 +50,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         ui_fields.ui_fields_base.config_to_fields(self)
 
-        tables.tables_base.connect_table_buttons(self)
+        tables.tables_base.initiate_table_search_function(self)
 
         buttons.customize_push_buttons(self)
 

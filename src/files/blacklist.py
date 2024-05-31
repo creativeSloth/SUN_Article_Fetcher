@@ -12,6 +12,8 @@ from directories import directory_base
 from tables.tables_base import import_from_df_row, clear_table, resize_columns_to_contents, disable_colums_edit
 from tables.search_bar import add_table_header_search_box, init_search_button_click_signal
 
+BLACKLISTS_TABLE_MAP = []
+
 
 class Blacklist(QtWidgets.QDialog):
     def __init__(self, table_name, table_name_ger,
@@ -30,7 +32,7 @@ class Blacklist(QtWidgets.QDialog):
 
     def initialize(self):
         init_ui(self)
-        connect_table_buttons(self)
+        # connect_table_buttons(self)
 
     def map_ui_buttons(self):
         pass
@@ -49,16 +51,16 @@ def get_blacklist_map(self):
     return button_dict
 
 
-def connect_table_buttons(self):
+# def connect_table_buttons(self):
 
-    table = self.ui.blacklist
-    layout = self.ui.verticalLayout
+#     table = self.ui.blacklist
+#     layout = self.ui.verticalLayout
 
-    button, text_edit = add_table_header_search_box(
-        table=table, layout=layout)
-    init_search_button_click_signal(table=table,
-                                    button=button,
-                                    text_edit=text_edit)
+#     button, text_edit = add_table_header_search_box(
+#         table=table, layout=layout)
+#     init_search_button_click_signal(table=table,
+#                                     button=button,
+#                                     text_edit=text_edit)
 
 
 def initialize_blacklist_dialogs(self):
@@ -71,6 +73,10 @@ def initialize_blacklist_dialogs(self):
         # Erstelle dynamisch ein Attribut für jede Tabelle
         setattr(self, f"{table_name}_blacklist_dlg", Blacklist(
             table_name, table_name_ger))
+        dialog_instance: Blacklist = getattr(
+            self, f"{table_name}_blacklist_dlg", None)
+        BLACKLISTS_TABLE_MAP.append((dialog_instance.ui.blacklist,
+                                     dialog_instance.ui.verticalLayout))
 
 
 def init_blacklist_button_click_signal(self, table):
@@ -85,7 +91,8 @@ def on_blacklist_button_click(self, table):
 
     table_name = table.objectName()
     # Zugriff auf die entsprechende Instanz des Blacklist-Dialogs
-    dialog_instance = getattr(self, f"{table_name}_blacklist_dlg", None)
+    dialog_instance: Blacklist = getattr(
+        self, f"{table_name}_blacklist_dlg", None)
     bl_table: QtWidgets.QTableWidget = dialog_instance.ui.blacklist
     clear_table(bl_table)
 
