@@ -99,11 +99,13 @@ QPushButton::hover {
 /* QPushButton Pressed */
 QPushButton::pressed {
 	background-color: rgba(226, 24, 57, 100); /* Hintergrundfarbe */
-	color: rgba(19, 33, 59, 50); /* Textfarbe */
+	color: rgba(19, 33, 59, 30); /* Textfarbe */
 }
 
 /* Spezielle QPushButton */
 /* -------------------------------------- */
+QPushButton#load_articles_db_btn,
+QPushButton#load_articles_file_btn,
 QPushButton#store_device_specs_btn,
 QPushButton#load_data_to_device_lists_btn,
 QPushButton#fill_fields_btn {
@@ -112,19 +114,23 @@ QPushButton#fill_fields_btn {
 }
 
 /* Spezielle QPushButton Hover */
+QPushButton#load_articles_db_btn::hover,
+QPushButton#load_articles_file_btn::hover,
 QPushButton#store_device_specs_btn::hover,
 QPushButton#load_data_to_device_lists_btn::hover,
 QPushButton#fill_fields_btn::hover {
-	color: rgba(226, 24, 58, 220);
-	background-color: rgba(19, 33, 59, 220);
+	color: rgba(226, 24, 58, 100);
+	background-color: rgba(19, 33, 59, 150);
 }
 
 /* Spezielle QPushButton Pressed */
+QPushButton#load_articles_db_btn::pressed,
+QPushButton#load_articles_file_btn::pressed,
 QPushButton#store_device_specs_btn::pressed,
 QPushButton#load_data_to_device_lists_btn::pressed,
 QPushButton#fill_fields_btn::pressed {
-	color: rgba(226, 24, 58, 100);
-	background-color: rgba(19, 33, 59, 100);
+	color: rgba(226, 24, 58, 30);
+	background-color: rgba(19, 33, 59, 50);
 }
 
 /* QFrame und QTabWidget-Panels (Inhalt) */

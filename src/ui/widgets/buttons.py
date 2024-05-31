@@ -22,14 +22,33 @@ def get_paths_of_icons(icon_name: str = None):
 def get_button_icons(self):
 
     PB_MAP = {
-        self.ui.load_articles_db_btn: get_paths_of_icons('database'),
-        self.ui.load_articles_file_btn: get_paths_of_icons('home_storage'),
-        self.ui.target_path_btn: get_paths_of_icons('drive_folder'),
-        self.ui.paste_docs_btn: get_paths_of_icons('file_copy'),
-        self.ui.load_data_to_device_lists_btn: get_paths_of_icons('list_alt')
+        self.ui.load_articles_db_btn: (
+            get_paths_of_icons('database'), get_color_combo('blue')),
+        self.ui.load_articles_file_btn: (
+            get_paths_of_icons('home_storage'), get_color_combo('blue')),
+        self.ui.target_path_btn: (
+            get_paths_of_icons('drive_folder'), get_color_combo('red')),
+        self.ui.paste_docs_btn: (
+            get_paths_of_icons('file_copy'), get_color_combo('red')),
+
+        self.ui.create_doc1_btn: (
+            get_paths_of_icons('quick_reference'), get_color_combo('red')),
+        self.ui.create_doc2_btn: (
+            get_paths_of_icons('description'), get_color_combo('red')),
+        self.ui.target_path_btn_2: (
+            get_paths_of_icons('drive_folder'), get_color_combo('red')),
+        self.ui.load_data_to_device_lists_btn: (
+            get_paths_of_icons('view_list'), get_color_combo('blue')),
+        self.ui.fill_fields_btn: (
+            get_paths_of_icons('variable_insert'), get_color_combo('blue')),
+        self.ui.store_device_specs_btn: (
+            get_paths_of_icons('export_notes'), get_color_combo('blue'))
+
+
     }
+
     for button in SEARCH_BUTTON_LIST:
-        PB_MAP[button] = get_paths_of_icons('search')
+        PB_MAP[button] = (get_paths_of_icons('search'), get_color_combo('red'))
 
     return PB_MAP
 
@@ -56,22 +75,39 @@ def customize_push_buttons(self):
 
 def create_colored_PB_MAP(PB_MAP: dict):
     colored_PB_MAP = {}
-    for button, icon_path in PB_MAP.items():
+    for button, value in PB_MAP.items():
+        icon_path, color_combo = value
         normal_icon, hover_icon, click_icon = create_icon_variaties(
-            icon_path)
+            icon_path, color_combo)
         colored_PB_MAP[button] = (normal_icon, hover_icon, click_icon)
 
     return colored_PB_MAP
 
 
-def create_icon_variaties(icon_path):
+def get_color_combo(buttoncolor=None):
+    combos = {
+        'red':
+            {'normal': QColor(19, 33, 59, 255),
+             'hover': QColor(19, 33, 59, 60),
+             'click': QColor(19, 33, 59, 20)},
+        'blue':
+            {'normal': QColor(226, 24, 57, 255),
+             'hover': QColor(226, 24, 58, 61),
+             'click': QColor(226, 24, 58, 20)}
+    }
+    if buttoncolor is not None and buttoncolor in combos:
+        return combos[buttoncolor]
+
+
+def create_icon_variaties(icon_path, color_combo):
     original_pixmap = QPixmap(icon_path)
-    normal_color = QColor(19, 33, 59, 255)
-    hover_color = QColor(19, 33, 59, 100)
-    click_color = QColor(19, 33, 59, 50)
-    normal_icon = change_color_of_pixmap(original_pixmap, normal_color)
-    hover_icon = change_color_of_pixmap(original_pixmap, hover_color)
-    click_icon = change_color_of_pixmap(original_pixmap, click_color)
+
+    normal_icon = change_color_of_pixmap(
+        original_pixmap, color_combo['normal'])
+    hover_icon = change_color_of_pixmap(
+        original_pixmap, color_combo['hover'])
+    click_icon = change_color_of_pixmap(
+        original_pixmap, color_combo['click'])
 
     return normal_icon, hover_icon, click_icon
 
