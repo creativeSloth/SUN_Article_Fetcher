@@ -22,7 +22,8 @@ class Paths():
             'config_path': '',
             'blacklist_path': '',
             'device_specs_list_path': '',
-            'stylesheet_path': ''
+            'stylesheet_path': '',
+            'icons_folder_path': ''
         }
 
 
@@ -31,7 +32,7 @@ MAIN_PATHS = Paths()
 
 def set_static_directories():
 
-    log_subfolder_path, log_subfolder_2_path, config_path, blacklist_path, device_specs_list_path, stylesheet_path = create_static_dirs()
+    log_subfolder_path, log_subfolder_2_path, config_path, blacklist_path, device_specs_list_path, stylesheet_path, icons_folder_path = create_static_dirs()
     # **************************  Article Fetcher module  ********************************************
 
     # Setze die Pfade direkt im dict-Attribut der _main_paths Instanz
@@ -41,6 +42,7 @@ def set_static_directories():
     MAIN_PATHS.dict['blacklist_path'] = blacklist_path
     MAIN_PATHS.dict['device_specs_list_path'] = device_specs_list_path
     MAIN_PATHS.dict['stylesheet_path'] = stylesheet_path
+    MAIN_PATHS.dict['icons_folder_path'] = icons_folder_path
 
 
 def get_main_dir():
@@ -62,9 +64,9 @@ def get_main_dir():
 
 def create_static_dirs():
     log_subfolder_path, log_subfolder_2_path = create_log_subfolders()
-    config_path, blacklist_path, device_specs_list_path, stylesheet_path = create_storage_files(
+    config_path, blacklist_path, device_specs_list_path, stylesheet_path, icons_folder_path = create_storage_files(
         log_subfolder_path)
-    return log_subfolder_path, log_subfolder_2_path, config_path, blacklist_path, device_specs_list_path, stylesheet_path
+    return log_subfolder_path, log_subfolder_2_path, config_path, blacklist_path, device_specs_list_path, stylesheet_path, icons_folder_path
 
 
 def create_log_subfolders():
@@ -87,7 +89,8 @@ def create_storage_files(log_path):
     device_specs_list_path = os.path.join(
         log_path, 'device_specs_list.ini')
     stylesheet_path = os.path.join(script_dir, 'styles', 'stylesheet.qss')
-    return config_path, blacklist_path, device_specs_list_path, stylesheet_path
+    icons_folder_path = os.path.join(script_dir, 'ui', 'icons')
+    return config_path, blacklist_path, device_specs_list_path, stylesheet_path, icons_folder_path
 
 
 def set_source_dir(dir):

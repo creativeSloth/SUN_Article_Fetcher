@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QFileDialog
 
 from files import blacklist
 from ui.mainwindow import Ui_MainWindow
+from ui.widgets import buttons
 
 import data_sources.data_base
 import tables.customize_row
@@ -51,7 +52,12 @@ class MainWindow(QtWidgets.QMainWindow):
 
         tables.tables_base.connect_table_buttons(self)
 
+        buttons.customize_push_buttons(self)
+
         self.previous_project_text = self.ui.project.toPlainText()
+
+    def eventFilter(self, source, event):
+        return buttons.eventFilter(self, source, event)
 
     def map_ui_buttons(self):
 

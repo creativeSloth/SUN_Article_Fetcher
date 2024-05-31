@@ -84,7 +84,7 @@ QPlainTextEdit::disabled {
 /* -------------------------------------- */
 QPushButton {
 	background-color: rgb(226, 24, 57); /* Hintergrundfarbe */
-	color: rgb(19, 33, 59); /* Textfarbe */
+	color: #ff13213b; /* Textfarbe */
 	border-radius: 5px; /* Abgerundete Ecken */
 	padding-left: 10px;
 	padding-right: 10px;
@@ -93,13 +93,13 @@ QPushButton {
 /* QPushButton Hover */
 QPushButton::hover {
 	background-color: rgba(226, 24, 57, 200); /* Hintergrundfarbe */
-	color: rgba(19, 33, 59, 100); /* Textfarbe */
+	color: #6413213b; /* Textfarbe */
 }
 
 /* QPushButton Pressed */
 QPushButton::pressed {
 	background-color: rgba(226, 24, 57, 100); /* Hintergrundfarbe */
-	color: rgba(19, 33, 59, 100); /* Textfarbe */
+	color: rgba(19, 33, 59, 50); /* Textfarbe */
 }
 
 /* Spezielle QPushButton */
@@ -214,6 +214,14 @@ QTableWidget::item::selected {
 
 QHeaderView::section {
 	background-color: rgb(220, 255, 255);
+}
+
+/* QAbstractScrollArea */
+/* -------------------------------------- */
+QAbstractScrollArea#scrollArea {
+	background-color: rgb(220, 255, 255); /* Hintergrundfarbe */
+	border: 1px solid rgb(19, 33, 59); /* Randstil */
+	border-radius: 5px; /* Abgerundete Ecken */	
 }
 
 /* QMenuBar */

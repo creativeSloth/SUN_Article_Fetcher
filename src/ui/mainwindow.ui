@@ -573,10 +573,6 @@
                       <property name="text">
                        <string>Lade Artikelliste aus DB</string>
                       </property>
-                      <property name="icon">
-                       <iconset>
-                        <normaloff>icons/database_48dp_#13213B.png</normaloff>icons/database_48dp_#13213B.png</iconset>
-                      </property>
                       <property name="iconSize">
                        <size>
                         <width>32</width>
@@ -628,10 +624,6 @@
                       </property>
                       <property name="text">
                        <string>Lade Artikelliste aus Datei</string>
-                      </property>
-                      <property name="icon">
-                       <iconset>
-                        <normaloff>icons/home_storage_48dp_#13213B.png</normaloff>icons/home_storage_48dp_#13213B.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -5377,14 +5369,14 @@ Zuschlag in einer Ausschreibung:</string>
    </property>
    <widget class="QMenu" name="menuSettings">
     <property name="title">
-     <string>Settings</string>
+     <string>Einstellungen</string>
     </property>
     <addaction name="actionConnection"/>
     <addaction name="actionPaths"/>
    </widget>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>File</string>
+     <string>Datei</string>
     </property>
     <addaction name="actionSave"/>
     <addaction name="actionLoad"/>
@@ -5395,22 +5387,25 @@ Zuschlag in einer Ausschreibung:</string>
   </widget>
   <action name="actionConnection">
    <property name="text">
-    <string>Connection</string>
+    <string>Verbindung</string>
    </property>
   </action>
   <action name="actionSave">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="text">
-    <string>Save</string>
+    <string>Speichern</string>
    </property>
   </action>
   <action name="actionLoad">
    <property name="text">
-    <string>Load</string>
+    <string>Laden</string>
    </property>
   </action>
   <action name="actionPaths">
    <property name="text">
-    <string>Paths</string>
+    <string>Pfade</string>
    </property>
   </action>
  </widget>
