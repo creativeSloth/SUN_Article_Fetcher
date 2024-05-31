@@ -6,26 +6,29 @@ import os
 from directories.directory_base import MAIN_PATHS
 
 
-def get_button_icons(self):
+def get_paths_of_icons(icon_name: str = None):
     icon_folder_path = MAIN_PATHS.dict['icons_folder_path']
+
     normal_color_appendix = '_48dp_#13213B.png'
     hover_color_appendix = '_48dp_#13213B95.png'
-    press_color_appendix = '_48dp_#13213B50.png'
+    press_color_appendix = '_48dp_#13213B30.png'
+    if icon_name is not None:
+        button_icon_paths = ((os.path.join(
+            icon_folder_path, f'{icon_name}{normal_color_appendix}'),
+            os.path.join(
+            icon_folder_path, f'{icon_name}{hover_color_appendix}'),
+            os.path.join(
+            icon_folder_path, f'{icon_name}{press_color_appendix}')))
+    return button_icon_paths
+
+
+def get_button_icons(self):
 
     PB_MAP = {
-        self.ui.load_articles_db_btn: (os.path.join(
-            icon_folder_path, f'database{normal_color_appendix}'),
-            os.path.join(
-            icon_folder_path, f'database{hover_color_appendix}'),
-            os.path.join(
-            icon_folder_path, f'database{press_color_appendix}')),
-
-        self.ui.load_articles_file_btn: (os.path.join(
-            icon_folder_path, f'home_storage{normal_color_appendix}'),
-            os.path.join(
-            icon_folder_path, f'home_storage{hover_color_appendix}'),
-            os.path.join(
-            icon_folder_path, f'home_storage{press_color_appendix}')),
+        self.ui.load_articles_db_btn: get_paths_of_icons('database'),
+        self.ui.load_articles_file_btn: get_paths_of_icons('home_storage'),
+        self.ui.target_path_btn: get_paths_of_icons('drive_folder'),
+        self.ui.paste_docs_btn: get_paths_of_icons('file_copy'),
     }
     return PB_MAP
 
