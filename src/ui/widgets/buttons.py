@@ -4,6 +4,7 @@ from PyQt5.QtCore import Qt, QEvent
 import os
 
 from directories.directory_base import MAIN_PATHS
+from tables.search_bar import SEARCH_BUTTON_LIST
 
 
 def get_paths_of_icons(icon_name: str = None):
@@ -30,6 +31,9 @@ def get_button_icons(self):
         self.ui.target_path_btn: get_paths_of_icons('drive_folder'),
         self.ui.paste_docs_btn: get_paths_of_icons('file_copy'),
     }
+    for button in SEARCH_BUTTON_LIST:
+        PB_MAP[button] = get_paths_of_icons('search')
+
     return PB_MAP
 
 

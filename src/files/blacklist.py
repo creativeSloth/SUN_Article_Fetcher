@@ -10,6 +10,7 @@ from qtpy import QtWidgets
 
 from directories import directory_base
 from tables.tables_base import import_from_df_row, clear_table, resize_columns_to_contents, disable_colums_edit
+from tables.search_bar import add_table_header_search_box, init_search_button_click_signal
 
 
 class Blacklist(QtWidgets.QDialog):
@@ -29,6 +30,7 @@ class Blacklist(QtWidgets.QDialog):
 
     def initialize(self):
         init_ui(self)
+        connect_table_buttons(self)
 
     def map_ui_buttons(self):
         pass
@@ -45,6 +47,18 @@ def get_blacklist_map(self):
     }
 
     return button_dict
+
+
+def connect_table_buttons(self):
+
+    table = self.ui.blacklist
+    layout = self.ui.verticalLayout
+
+    button, text_edit = add_table_header_search_box(
+        table=table, layout=layout)
+    init_search_button_click_signal(table=table,
+                                    button=button,
+                                    text_edit=text_edit)
 
 
 def initialize_blacklist_dialogs(self):

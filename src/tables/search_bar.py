@@ -1,19 +1,26 @@
 
 from PyQt5.QtWidgets import QTextEdit, QHBoxLayout, QVBoxLayout, QSizePolicy, QPushButton
 
+SEARCH_BUTTON_LIST = []
+
 
 def add_table_header_search_box(table, layout):
     index = layout.indexOf(table)
 
     # QHBoxLayout erstellen, um die Suchleiste nebeneinander anzuordnen
     search_layout = QHBoxLayout()
-    max_height = 25
+    min_height = 25
+    max_height = 40
+    min_width = 40
+    max_width = 60
 
     # QLabel für die Suchleiste erstellen und hinzufügen
-    button = QPushButton("Suchen")
-    button.setStyleSheet("text-decoration: underline;")
-    button.setMaximumHeight(max_height)  # Maximale Höhe auf 30 setzen
-    button.setMinimumWidth(150)  # Maximale Breite auf
+    button = QPushButton("")
+    # button.setStyleSheet("text-decoration: underline;")
+    button.setMinimumHeight(min_height)
+    button.setMaximumHeight(max_height)
+    button.setMinimumWidth(min_width)
+    button.setMaximumWidth(max_width)
     button.setObjectName(table.objectName() + "_search_button")
     search_layout.addWidget(button)
 
@@ -42,6 +49,9 @@ def add_table_header_search_box(table, layout):
 
     # Kombiniertes Layout an der ursprünglichen Position einfügen
     layout.insertLayout(index, comb_search_layout)
+
+    SEARCH_BUTTON_LIST.append(button)
+
     return button, text_edit
 
 

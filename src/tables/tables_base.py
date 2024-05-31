@@ -2,33 +2,34 @@ import pandas as pd
 
 from qtpy import QtCore, QtWidgets
 
-from files import blacklist, logs_and_config
+from files import logs_and_config
 
 from tables.customize_row import customize_table_row
-from tables import search_bar
+from tables.search_bar import init_search_button_click_signal, add_table_header_search_box
 
 import ui_fields.ui_fields_base
-from files import blacklist
+import files.blacklist as blacklist
 
 
 def connect_table_buttons(self):
     tables = ui_fields.ui_fields_base.get_device_tables(self)
 
     for table in tables:
-        button, text_edit = search_bar.add_table_header_search_box(
+        button, text_edit = add_table_header_search_box(
             table=table, layout=self.ui.verticalLayout_3)
-        search_bar.init_search_button_click_signal(table=table,
-                                                   button=button,
-                                                   text_edit=text_edit)
+        init_search_button_click_signal(table=table,
+                                        button=button,
+                                        text_edit=text_edit)
         blacklist.init_blacklist_button_click_signal(self, table=table)
 
     tables = ui_fields.ui_fields_base.get_articles_table(self)
+
     for table in tables:
-        button, text_edit = search_bar.add_table_header_search_box(
+        button, text_edit = add_table_header_search_box(
             table=table, layout=self.ui.verticalLayout)
-        search_bar.init_search_button_click_signal(table=table,
-                                                   button=button,
-                                                   text_edit=text_edit)
+        init_search_button_click_signal(table=table,
+                                        button=button,
+                                        text_edit=text_edit)
 
 
 def connect_sort_indicator_changed(self):
