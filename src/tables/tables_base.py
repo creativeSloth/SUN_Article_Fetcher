@@ -31,8 +31,6 @@ def initiate_table_search_function(self):
     # Iteriere durch alle Tabellen in der allgemeinen Tabellen-Map
     for item in GENERAL_TABLE_MAP:
         table, layout = item
-        print(table.objectName())
-        print(layout.objectName())
 
         # Füge ein Suchfeld zum Tabellenkopf hinzu
         button, text_edit = add_table_header_search_box(
