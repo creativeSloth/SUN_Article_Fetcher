@@ -1,0 +1,3 @@
+SEARCH_BTN_LIST = []
+
+MOVE_BL_BTN_LIST = []

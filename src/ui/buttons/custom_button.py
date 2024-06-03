@@ -4,7 +4,7 @@ from PyQt5.QtCore import Qt, QEvent
 import os
 
 from directories.directory_base import MAIN_PATHS
-from tables.search_bar import SEARCH_BUTTON_LIST
+from ui.buttons.button_lists import SEARCH_BTN_LIST
 
 
 def get_paths_of_icons(icon_name: str = None):
@@ -47,7 +47,7 @@ def get_button_icons(self):
 
     }
 
-    for button in SEARCH_BUTTON_LIST:
+    for button in SEARCH_BTN_LIST:
         PB_MAP[button] = (get_paths_of_icons('search'), get_color_combo('red'))
 
     return PB_MAP

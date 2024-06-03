@@ -156,7 +156,7 @@
            <enum>QTabWidget::West</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <property name="iconSize">
            <size>
@@ -251,15 +251,15 @@
                    <number>0</number>
                   </property>
                   <property name="topMargin">
-                   <number>5</number>
+                   <number>0</number>
                   </property>
                   <property name="rightMargin">
-                   <number>5</number>
+                   <number>0</number>
                   </property>
                   <property name="bottomMargin">
                    <number>5</number>
                   </property>
-                  <item>
+                  <item alignment="Qt::AlignLeft">
                    <widget class="QFrame" name="frame_35">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -274,12 +274,12 @@
                      <enum>QFrame::Raised</enum>
                     </property>
                     <layout class="QHBoxLayout" name="horizontalLayout_4">
-                     <item>
+                     <item alignment="Qt::AlignLeft|Qt::AlignTop">
                       <widget class="QPushButton" name="load_articles_db_btn">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                         <horstretch>50</horstretch>
-                         <verstretch>50</verstretch>
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
                         </sizepolicy>
                        </property>
                        <property name="minimumSize">
@@ -290,7 +290,7 @@
                        </property>
                        <property name="maximumSize">
                         <size>
-                         <width>16777215</width>
+                         <width>50</width>
                          <height>50</height>
                         </size>
                        </property>
@@ -331,16 +331,16 @@
                         <bool>false</bool>
                        </property>
                        <property name="default">
-                        <bool>true</bool>
+                        <bool>false</bool>
                        </property>
                       </widget>
                      </item>
-                     <item>
+                     <item alignment="Qt::AlignLeft|Qt::AlignTop">
                       <widget class="QPushButton" name="load_articles_file_btn">
                        <property name="sizePolicy">
-                        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
-                         <horstretch>50</horstretch>
-                         <verstretch>50</verstretch>
+                        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
                         </sizepolicy>
                        </property>
                        <property name="minimumSize">
@@ -351,7 +351,7 @@
                        </property>
                        <property name="maximumSize">
                         <size>
-                         <width>16777215</width>
+                         <width>50</width>
                          <height>50</height>
                         </size>
                        </property>
@@ -386,7 +386,7 @@
                         <bool>false</bool>
                        </property>
                        <property name="default">
-                        <bool>true</bool>
+                        <bool>false</bool>
                        </property>
                        <property name="flat">
                         <bool>false</bool>
@@ -495,7 +495,7 @@
                            <bool>false</bool>
                           </property>
                           <property name="default">
-                           <bool>true</bool>
+                           <bool>false</bool>
                           </property>
                           <property name="flat">
                            <bool>false</bool>
@@ -533,50 +533,62 @@
                     </layout>
                    </widget>
                   </item>
-                  <item>
-                   <widget class="QPushButton" name="paste_docs_btn">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                      <horstretch>200</horstretch>
-                      <verstretch>200</verstretch>
-                     </sizepolicy>
+                  <item alignment="Qt::AlignLeft">
+                   <widget class="QFrame" name="frame_45">
+                    <property name="frameShape">
+                     <enum>QFrame::StyledPanel</enum>
                     </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>100</width>
-                      <height>100</height>
-                     </size>
+                    <property name="frameShadow">
+                     <enum>QFrame::Raised</enum>
                     </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>100</width>
-                      <height>100</height>
-                     </size>
-                    </property>
-                    <property name="font">
-                     <font>
-                      <family>Sitka Heading</family>
-                      <pointsize>12</pointsize>
-                      <italic>false</italic>
-                      <bold>false</bold>
-                      <underline>true</underline>
-                     </font>
-                    </property>
-                    <property name="toolTip">
-                     <string>Übertrage Dokumente</string>
-                    </property>
-                    <property name="text">
-                     <string/>
-                    </property>
-                    <property name="autoDefault">
-                     <bool>false</bool>
-                    </property>
-                    <property name="default">
-                     <bool>true</bool>
-                    </property>
-                    <property name="flat">
-                     <bool>false</bool>
-                    </property>
+                    <layout class="QHBoxLayout" name="horizontalLayout_25">
+                     <item>
+                      <widget class="QPushButton" name="paste_docs_btn">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>50</width>
+                         <height>50</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>50</width>
+                         <height>50</height>
+                        </size>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <family>Sitka Heading</family>
+                         <pointsize>12</pointsize>
+                         <italic>false</italic>
+                         <bold>false</bold>
+                         <underline>true</underline>
+                        </font>
+                       </property>
+                       <property name="toolTip">
+                        <string>Übertrage Dokumente</string>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="autoDefault">
+                        <bool>false</bool>
+                       </property>
+                       <property name="default">
+                        <bool>false</bool>
+                       </property>
+                       <property name="flat">
+                        <bool>false</bool>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
                    </widget>
                   </item>
                  </layout>
@@ -732,8 +744,8 @@
              <rect>
               <x>10</x>
               <y>10</y>
-              <width>1840</width>
-              <height>801</height>
+              <width>1801</width>
+              <height>811</height>
              </rect>
             </property>
             <property name="sizePolicy">
@@ -755,8 +767,23 @@
              <enum>QFrame::Raised</enum>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_13">
+             <property name="spacing">
+              <number>0</number>
+             </property>
              <property name="sizeConstraint">
               <enum>QLayout::SetDefaultConstraint</enum>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
              </property>
              <item alignment="Qt::AlignTop">
               <widget class="QFrame" name="frame_42">
@@ -779,146 +806,179 @@
                 <enum>QFrame::Raised</enum>
                </property>
                <layout class="QHBoxLayout" name="horizontalLayout_23">
-                <item>
-                 <widget class="QPushButton" name="load_data_to_device_lists_btn">
+                <property name="spacing">
+                 <number>0</number>
+                </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item alignment="Qt::AlignLeft">
+                 <widget class="QFrame" name="frame_43">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>50</height>
-                   </size>
+                  <property name="frameShape">
+                   <enum>QFrame::StyledPanel</enum>
                   </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>75</width>
-                    <height>50</height>
-                   </size>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
                   </property>
-                  <property name="mouseTracking">
-                   <bool>true</bool>
-                  </property>
-                  <property name="focusPolicy">
-                   <enum>Qt::StrongFocus</enum>
-                  </property>
-                  <property name="contextMenuPolicy">
-                   <enum>Qt::NoContextMenu</enum>
-                  </property>
-                  <property name="acceptDrops">
-                   <bool>false</bool>
-                  </property>
-                  <property name="toolTip">
-                   <string>Lade Gerätelisten:
+                  <layout class="QHBoxLayout" name="horizontalLayout_17">
+                   <item>
+                    <widget class="QPushButton" name="load_data_to_device_lists_btn">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>50</width>
+                       <height>50</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>50</width>
+                       <height>50</height>
+                      </size>
+                     </property>
+                     <property name="mouseTracking">
+                      <bool>true</bool>
+                     </property>
+                     <property name="focusPolicy">
+                      <enum>Qt::StrongFocus</enum>
+                     </property>
+                     <property name="contextMenuPolicy">
+                      <enum>Qt::NoContextMenu</enum>
+                     </property>
+                     <property name="acceptDrops">
+                      <bool>false</bool>
+                     </property>
+                     <property name="toolTip">
+                      <string>Lade Gerätelisten:
 PV-Module, Wechselrichter, Batteriewechselrichter, Speicher, Ladestation</string>
-                  </property>
-                  <property name="toolTipDuration">
-                   <number>-1</number>
-                  </property>
-                  <property name="text">
-                   <string/>
-                  </property>
-                  <property name="checkable">
-                   <bool>false</bool>
-                  </property>
-                  <property name="checked">
-                   <bool>false</bool>
-                  </property>
+                     </property>
+                     <property name="toolTipDuration">
+                      <number>-1</number>
+                     </property>
+                     <property name="text">
+                      <string/>
+                     </property>
+                     <property name="checkable">
+                      <bool>false</bool>
+                     </property>
+                     <property name="checked">
+                      <bool>false</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="fill_fields_btn">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>50</width>
+                       <height>50</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>50</width>
+                       <height>50</height>
+                      </size>
+                     </property>
+                     <property name="mouseTracking">
+                      <bool>true</bool>
+                     </property>
+                     <property name="focusPolicy">
+                      <enum>Qt::StrongFocus</enum>
+                     </property>
+                     <property name="contextMenuPolicy">
+                      <enum>Qt::NoContextMenu</enum>
+                     </property>
+                     <property name="acceptDrops">
+                      <bool>false</bool>
+                     </property>
+                     <property name="toolTip">
+                      <string>Fülle Formularfelder</string>
+                     </property>
+                     <property name="layoutDirection">
+                      <enum>Qt::LeftToRight</enum>
+                     </property>
+                     <property name="text">
+                      <string/>
+                     </property>
+                     <property name="checkable">
+                      <bool>false</bool>
+                     </property>
+                     <property name="checked">
+                      <bool>false</bool>
+                     </property>
+                     <property name="autoDefault">
+                      <bool>false</bool>
+                     </property>
+                     <property name="default">
+                      <bool>false</bool>
+                     </property>
+                     <property name="flat">
+                      <bool>false</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="store_device_specs_btn">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>50</width>
+                       <height>50</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>50</width>
+                       <height>50</height>
+                      </size>
+                     </property>
+                     <property name="toolTip">
+                      <string>Hinterlege technische Daten</string>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true"/>
+                     </property>
+                     <property name="text">
+                      <string/>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </widget>
                 </item>
-                <item>
-                 <widget class="QPushButton" name="fill_fields_btn">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>50</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>75</width>
-                    <height>50</height>
-                   </size>
-                  </property>
-                  <property name="mouseTracking">
-                   <bool>true</bool>
-                  </property>
-                  <property name="focusPolicy">
-                   <enum>Qt::StrongFocus</enum>
-                  </property>
-                  <property name="contextMenuPolicy">
-                   <enum>Qt::NoContextMenu</enum>
-                  </property>
-                  <property name="acceptDrops">
-                   <bool>false</bool>
-                  </property>
-                  <property name="toolTip">
-                   <string>Fülle Formularfelder</string>
-                  </property>
-                  <property name="layoutDirection">
-                   <enum>Qt::LeftToRight</enum>
-                  </property>
-                  <property name="text">
-                   <string/>
-                  </property>
-                  <property name="checkable">
-                   <bool>false</bool>
-                  </property>
-                  <property name="checked">
-                   <bool>false</bool>
-                  </property>
-                  <property name="autoDefault">
-                   <bool>false</bool>
-                  </property>
-                  <property name="default">
-                   <bool>false</bool>
-                  </property>
-                  <property name="flat">
-                   <bool>false</bool>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="store_device_specs_btn">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>50</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>75</width>
-                    <height>50</height>
-                   </size>
-                  </property>
-                  <property name="toolTip">
-                   <string>Hinterlege technische Daten</string>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true"/>
-                  </property>
-                  <property name="text">
-                   <string/>
-                  </property>
-                 </widget>
-                </item>
-                <item alignment="Qt::AlignVCenter">
+                <item alignment="Qt::AlignTop">
                  <widget class="QFrame" name="frame_33">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -1001,102 +1061,120 @@ PV-Module, Wechselrichter, Batteriewechselrichter, Speicher, Ladestation</string
                   </layout>
                  </widget>
                 </item>
-                <item>
-                 <widget class="QPushButton" name="create_doc1_btn">
+                <item alignment="Qt::AlignRight|Qt::AlignTop">
+                 <widget class="QFrame" name="frame_44">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>100</width>
-                    <height>100</height>
-                   </size>
+                  <property name="frameShape">
+                   <enum>QFrame::StyledPanel</enum>
                   </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>100</width>
-                    <height>100</height>
-                   </size>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
                   </property>
-                  <property name="font">
-                   <font>
-                    <family>Sitka Heading</family>
-                    <pointsize>12</pointsize>
-                    <italic>false</italic>
-                    <bold>false</bold>
-                    <underline>true</underline>
-                   </font>
-                  </property>
-                  <property name="toolTip">
-                   <string>Dokument gemäß MaStR erzeugen</string>
-                  </property>
-                  <property name="text">
-                   <string/>
-                  </property>
-                  <property name="autoDefault">
-                   <bool>true</bool>
-                  </property>
-                  <property name="default">
-                   <bool>false</bool>
-                  </property>
-                  <property name="flat">
-                   <bool>false</bool>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="create_doc2_btn">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>100</width>
-                    <height>100</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>100</width>
-                    <height>100</height>
-                   </size>
-                  </property>
-                  <property name="sizeIncrement">
-                   <size>
-                    <width>0</width>
-                    <height>0</height>
-                   </size>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <family>Sitka Heading</family>
-                    <pointsize>12</pointsize>
-                    <italic>false</italic>
-                    <bold>false</bold>
-                    <underline>true</underline>
-                   </font>
-                  </property>
-                  <property name="toolTip">
-                   <string>Dokumentation erstellen</string>
-                  </property>
-                  <property name="text">
-                   <string/>
-                  </property>
-                  <property name="autoDefault">
-                   <bool>true</bool>
-                  </property>
-                  <property name="default">
-                   <bool>false</bool>
-                  </property>
-                  <property name="flat">
-                   <bool>false</bool>
-                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_24">
+                   <item>
+                    <widget class="QPushButton" name="create_doc1_btn">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>50</width>
+                       <height>50</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>50</width>
+                       <height>50</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Sitka Heading</family>
+                       <pointsize>12</pointsize>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                       <underline>true</underline>
+                      </font>
+                     </property>
+                     <property name="toolTip">
+                      <string>Dokument gemäß MaStR erzeugen</string>
+                     </property>
+                     <property name="text">
+                      <string/>
+                     </property>
+                     <property name="autoDefault">
+                      <bool>true</bool>
+                     </property>
+                     <property name="default">
+                      <bool>false</bool>
+                     </property>
+                     <property name="flat">
+                      <bool>false</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="create_doc2_btn">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>50</width>
+                       <height>50</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>50</width>
+                       <height>50</height>
+                      </size>
+                     </property>
+                     <property name="sizeIncrement">
+                      <size>
+                       <width>0</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Sitka Heading</family>
+                       <pointsize>12</pointsize>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                       <underline>true</underline>
+                      </font>
+                     </property>
+                     <property name="toolTip">
+                      <string>Dokumentation erstellen</string>
+                     </property>
+                     <property name="text">
+                      <string/>
+                     </property>
+                     <property name="autoDefault">
+                      <bool>true</bool>
+                     </property>
+                     <property name="default">
+                      <bool>false</bool>
+                     </property>
+                     <property name="flat">
+                      <bool>false</bool>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </widget>
                 </item>
                </layout>
@@ -1153,8 +1231,8 @@ PV-Module, Wechselrichter, Batteriewechselrichter, Speicher, Ladestation</string
                    <property name="geometry">
                     <rect>
                      <x>0</x>
-                     <y>-633</y>
-                     <width>1761</width>
+                     <y>-789</y>
+                     <width>1760</width>
                      <height>5778</height>
                     </rect>
                    </property>
@@ -5211,7 +5289,7 @@ Zuschlag in einer Ausschreibung:</string>
           </property>
           <property name="maximumSize">
            <size>
-            <width>16777215</width>
+            <width>300</width>
             <height>40</height>
            </size>
           </property>

@@ -1,7 +1,7 @@
 
 from PyQt5.QtWidgets import QTextEdit, QHBoxLayout, QVBoxLayout, QSizePolicy, QPushButton
 
-SEARCH_BUTTON_LIST = []
+from ui.buttons.button_lists import SEARCH_BTN_LIST
 
 
 def add_table_header_search_box(table, layout):
@@ -50,7 +50,7 @@ def add_table_header_search_box(table, layout):
     # Kombiniertes Layout an der ursprünglichen Position einfügen
     layout.insertLayout(index, comb_search_layout)
 
-    SEARCH_BUTTON_LIST.append(button)
+    SEARCH_BTN_LIST.append(button)
 
     return button, text_edit
 
