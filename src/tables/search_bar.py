@@ -1,5 +1,10 @@
-
-from PyQt5.QtWidgets import QTextEdit, QHBoxLayout, QVBoxLayout, QSizePolicy, QPushButton
+from PyQt5.QtWidgets import (
+    QHBoxLayout,
+    QPushButton,
+    QSizePolicy,
+    QTextEdit,
+    QVBoxLayout,
+)
 
 from ui.buttons.button_lists import SEARCH_BTN_LIST
 
@@ -57,9 +62,8 @@ def add_table_header_search_box(table, layout):
 
 def init_search_button_click_signal(table, button, text_edit):
     button.clicked.connect(
-        lambda: on_search_button_click(table=table,
-                                       text_edit=text_edit
-                                       ))
+        lambda: on_search_button_click(table=table, text_edit=text_edit)
+    )
 
 
 def on_search_button_click(table, text_edit):
@@ -78,10 +82,16 @@ def hide_rows_without_string(table, search_string):
             item = table.item(row, col)
             if item is not None:
                 # Konvertieren Sie den Text des Elements in Kleinbuchstaben und prüfen Sie auf das Vorhandensein des Suchstrings
-                if isinstance(item.text(), str) and search_string_lower in item.text().lower():
+                if (
+                    isinstance(item.text(), str)
+                    and search_string_lower in item.text().lower()
+                ):
                     found = True
                     break
-                elif isinstance(item.text(), float) and search_string_lower in str(item.text()).lower():
+                elif (
+                    isinstance(item.text(), float)
+                    and search_string_lower in str(item.text()).lower()
+                ):
                     found = True
                     break
         table.setRowHidden(row, not found)
