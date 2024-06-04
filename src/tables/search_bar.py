@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import (
     QVBoxLayout,
 )
 
-from ui.buttons.button_lists import ButtonList
+from ui.buttons.button_lists import ButtonLists
 
 
 def add_table_header_search_box(self, table, layout):
