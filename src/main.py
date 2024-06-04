@@ -9,13 +9,13 @@ import files.copy_paste_files as copy_paste_files
 import files.logs_and_config as logs_and_config
 import save_file
 import tables.customize_row
-import tables.search_bar
-import tables.tables_base
 import ui_fields.ui_fields_base
 from files import blacklist
 from menus import menus_base
-from styles.styles_Handler import init_ui
-from ui.buttons import custom_button
+from styles.styles_Handler import initialize_ui_style
+from tables.tables_base import initialize_table_search
+from ui.buttons.button_lists import initialize_push_buttons
+from ui.buttons.custom_button import customize_push_buttons, eventFilter
 from ui.mainwindow import Ui_MainWindow
 
 
@@ -37,7 +37,9 @@ class MainWindow(QtWidgets.QMainWindow):
         directory_base.set_static_directories()
         menus_base.initialize_menu_dialogs(self)
         blacklist.initialize_blacklist_dialogs(self)
-        init_ui(self)
+        initialize_push_buttons(self)
+        initialize_table_search(self)
+        customize_push_buttons(self)
 
         logs_and_config.create_config_file()
         logs_and_config.create_device_related_storage_list(
@@ -49,14 +51,12 @@ class MainWindow(QtWidgets.QMainWindow):
 
         ui_fields.ui_fields_base.config_to_fields(self)
 
-        tables.tables_base.initiate_table_search_function(self)
-
-        custom_button.customize_push_buttons(self)
+        initialize_ui_style(self)
 
         self.previous_project_text = self.ui.project.toPlainText()
 
     def eventFilter(self, source, event):
-        return custom_button.eventFilter(self, source, event)
+        return eventFilter(self, source, event)
 
     def map_ui_buttons(self):
 

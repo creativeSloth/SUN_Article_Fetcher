@@ -6,10 +6,10 @@ from PyQt5.QtWidgets import (
     QVBoxLayout,
 )
 
-from ui.buttons.button_lists import SEARCH_BTN_LIST
+from ui.buttons.button_lists import ButtonList
 
 
-def add_table_header_search_box(table, layout):
+def add_table_header_search_box(self, table, layout):
     index = layout.indexOf(table)
 
     # QHBoxLayout erstellen, um die Suchleiste nebeneinander anzuordnen
@@ -55,7 +55,7 @@ def add_table_header_search_box(table, layout):
     # Kombiniertes Layout an der ursprünglichen Position einfügen
     layout.insertLayout(index, comb_search_layout)
 
-    SEARCH_BTN_LIST.append(button)
+    self.button_list.add_button(button=button, list=self.button_list.SEARCH_BTN_LIST)
 
     return button, text_edit
 

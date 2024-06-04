@@ -11,7 +11,7 @@ from tables.search_bar import (
 )
 
 
-def initiate_table_search_function(self):
+def initialize_table_search(self):
     # Hole die Artikeltabelle und ihr Layout
     article_table = ui_fields.ui_fields_base.get_articles_table(self)
     article_table_layout = self.ui.verticalLayout
@@ -32,7 +32,9 @@ def initiate_table_search_function(self):
         table, layout = item
 
         # Füge ein Suchfeld zum Tabellenkopf hinzu
-        button, text_edit = add_table_header_search_box(table=table, layout=layout)
+        button, text_edit = add_table_header_search_box(
+            self, table=table, layout=layout
+        )
 
         # Initialisiere das Signal für den Suchbutton-Klick
         init_search_button_click_signal(table=table, button=button, text_edit=text_edit)

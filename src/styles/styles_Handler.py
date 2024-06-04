@@ -1,7 +1,7 @@
 from directories.directory_base import MAIN_PATHS
 
 
-def init_ui(self):
+def initialize_ui_style(self):
     # Pfad zur .qss-Datei
     stylesheet_path = MAIN_PATHS.dict["stylesheet_path"]
 
