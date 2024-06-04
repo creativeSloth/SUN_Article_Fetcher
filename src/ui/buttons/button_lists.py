@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QPushButton
+from PyQt5.QtWidgets import QMainWindow, QPushButton
 
 
 class ButtonLists:
@@ -9,7 +9,7 @@ class ButtonLists:
     def add_search_button(self, button: QPushButton) -> None:
         self._SEARCH_BTN_LIST.append(button)
 
-    def add_move_bl_button(self, window) -> None:
+    def add_move_bl_button(self, window: QMainWindow) -> None:
         self._MOVE_BL_BTN_LIST = [
             window.ui.move_none_PV_modules_to_blacklist,
             window.ui.move_none_PV_inverters_to_blacklist,
