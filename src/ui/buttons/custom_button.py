@@ -65,8 +65,11 @@ def get_button_icons(self):
         ),
     }
 
-    for button in self.button_list.SEARCH_BTN_LIST:
+    for button in self.button_list.get_search_buttons():
         PB_MAP[button] = (get_paths_of_icons("search"), get_color_combo("red"))
+
+    for button in self.button_list.get_move_bl_buttons():
+        PB_MAP[button] = (get_paths_of_icons("delete"), get_color_combo("red"))
 
     return PB_MAP
 
@@ -156,5 +159,10 @@ def eventFilter(self, source, event: QEvent):
             event.type() == QEvent.MouseButtonPress and event.button() == Qt.LeftButton
         ):
             source.setIcon(source.click_icon)
+        elif (
+            event.type() == QEvent.MouseButtonRelease
+            and event.button() == Qt.LeftButton
+        ):
+            source.setIcon(source.normal_icon)
 
     return False

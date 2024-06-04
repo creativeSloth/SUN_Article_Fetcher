@@ -480,7 +480,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, -789, 1760, 5778))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 1760, 5778))
         sizePolicy.setHeightForWidth(self.scrollAreaWidgetContents.sizePolicy().hasHeightForWidth())
         self.scrollAreaWidgetContents.setSizePolicy(sizePolicy)
         self.gridLayout_5 = QGridLayout(self.scrollAreaWidgetContents)
@@ -985,8 +985,10 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.move_none_PV_modules_to_blacklist = QPushButton(self.frame_2)
         self.move_none_PV_modules_to_blacklist.setObjectName(u"move_none_PV_modules_to_blacklist")
-        self.move_none_PV_modules_to_blacklist.setMinimumSize(QSize(100, 50))
-        self.move_none_PV_modules_to_blacklist.setMaximumSize(QSize(250, 16777215))
+        sizePolicy.setHeightForWidth(self.move_none_PV_modules_to_blacklist.sizePolicy().hasHeightForWidth())
+        self.move_none_PV_modules_to_blacklist.setSizePolicy(sizePolicy)
+        self.move_none_PV_modules_to_blacklist.setMinimumSize(QSize(50, 50))
+        self.move_none_PV_modules_to_blacklist.setMaximumSize(QSize(50, 50))
 
         self.horizontalLayout.addWidget(self.move_none_PV_modules_to_blacklist)
 
@@ -1138,8 +1140,10 @@ class Ui_MainWindow(object):
         self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
         self.move_none_PV_inverters_to_blacklist = QPushButton(self.frame_38)
         self.move_none_PV_inverters_to_blacklist.setObjectName(u"move_none_PV_inverters_to_blacklist")
-        self.move_none_PV_inverters_to_blacklist.setMinimumSize(QSize(100, 50))
-        self.move_none_PV_inverters_to_blacklist.setMaximumSize(QSize(250, 16777215))
+        sizePolicy.setHeightForWidth(self.move_none_PV_inverters_to_blacklist.sizePolicy().hasHeightForWidth())
+        self.move_none_PV_inverters_to_blacklist.setSizePolicy(sizePolicy)
+        self.move_none_PV_inverters_to_blacklist.setMinimumSize(QSize(50, 50))
+        self.move_none_PV_inverters_to_blacklist.setMaximumSize(QSize(50, 50))
 
         self.horizontalLayout_8.addWidget(self.move_none_PV_inverters_to_blacklist)
 
@@ -1339,8 +1343,10 @@ class Ui_MainWindow(object):
         self.horizontalLayout_20.setObjectName(u"horizontalLayout_20")
         self.move_none_BAT_inverters_to_blacklist = QPushButton(self.frame_39)
         self.move_none_BAT_inverters_to_blacklist.setObjectName(u"move_none_BAT_inverters_to_blacklist")
-        self.move_none_BAT_inverters_to_blacklist.setMinimumSize(QSize(100, 50))
-        self.move_none_BAT_inverters_to_blacklist.setMaximumSize(QSize(250, 16777215))
+        sizePolicy.setHeightForWidth(self.move_none_BAT_inverters_to_blacklist.sizePolicy().hasHeightForWidth())
+        self.move_none_BAT_inverters_to_blacklist.setSizePolicy(sizePolicy)
+        self.move_none_BAT_inverters_to_blacklist.setMinimumSize(QSize(50, 50))
+        self.move_none_BAT_inverters_to_blacklist.setMaximumSize(QSize(50, 50))
 
         self.horizontalLayout_20.addWidget(self.move_none_BAT_inverters_to_blacklist)
 
@@ -1508,8 +1514,10 @@ class Ui_MainWindow(object):
         self.horizontalLayout_21.setObjectName(u"horizontalLayout_21")
         self.move_none_BAT_storage_to_blacklist = QPushButton(self.frame_40)
         self.move_none_BAT_storage_to_blacklist.setObjectName(u"move_none_BAT_storage_to_blacklist")
-        self.move_none_BAT_storage_to_blacklist.setMinimumSize(QSize(100, 50))
-        self.move_none_BAT_storage_to_blacklist.setMaximumSize(QSize(250, 16777215))
+        sizePolicy.setHeightForWidth(self.move_none_BAT_storage_to_blacklist.sizePolicy().hasHeightForWidth())
+        self.move_none_BAT_storage_to_blacklist.setSizePolicy(sizePolicy)
+        self.move_none_BAT_storage_to_blacklist.setMinimumSize(QSize(50, 50))
+        self.move_none_BAT_storage_to_blacklist.setMaximumSize(QSize(50, 50))
 
         self.horizontalLayout_21.addWidget(self.move_none_BAT_storage_to_blacklist)
 
@@ -1740,8 +1748,10 @@ class Ui_MainWindow(object):
         self.horizontalLayout_22.setObjectName(u"horizontalLayout_22")
         self.move_none_CHG_point_to_blacklist = QPushButton(self.frame_41)
         self.move_none_CHG_point_to_blacklist.setObjectName(u"move_none_CHG_point_to_blacklist")
-        self.move_none_CHG_point_to_blacklist.setMinimumSize(QSize(100, 50))
-        self.move_none_CHG_point_to_blacklist.setMaximumSize(QSize(250, 16777215))
+        sizePolicy.setHeightForWidth(self.move_none_CHG_point_to_blacklist.sizePolicy().hasHeightForWidth())
+        self.move_none_CHG_point_to_blacklist.setSizePolicy(sizePolicy)
+        self.move_none_CHG_point_to_blacklist.setMinimumSize(QSize(50, 50))
+        self.move_none_CHG_point_to_blacklist.setMaximumSize(QSize(50, 50))
 
         self.horizontalLayout_22.addWidget(self.move_none_CHG_point_to_blacklist)
 
@@ -2168,7 +2178,7 @@ class Ui_MainWindow(object):
 
         self.tabWidget.addTab(self.tab2, "")
 
-        self.gridLayout_22.addWidget(self.tabWidget, 0, 0, 1, 1, Qt.AlignLeft|Qt.AlignTop)
+        self.gridLayout_22.addWidget(self.tabWidget, 0, 0, 1, 1)
 
 
         self.gridLayout_4.addWidget(self.frame02, 1, 0, 1, 1)
@@ -2390,7 +2400,7 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem8.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
         ___qtablewidgetitem9 = self.PV_modules_list.horizontalHeaderItem(5)
         ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"Modulleistung [kWp]", None));
-        self.move_none_PV_modules_to_blacklist.setText(QCoreApplication.translate("MainWindow", u"Entferne die markierten Artikel", None))
+        self.move_none_PV_modules_to_blacklist.setText("")
         self.open_PV_modules_blacklist.setText(QCoreApplication.translate("MainWindow", u"\u00d6ffne Blacklist", None))
         self.module_count_label.setText(QCoreApplication.translate("MainWindow", u"Anzahl der Module:", None))
         self.module_count_text.setPlainText("")
@@ -2411,7 +2421,7 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem15 = self.PV_inverters_list.horizontalHeaderItem(5)
         ___qtablewidgetitem15.setText(QCoreApplication.translate("MainWindow", u"Zugeordnete \n"
 "WR-Leistung [kW]", None));
-        self.move_none_PV_inverters_to_blacklist.setText(QCoreApplication.translate("MainWindow", u"Entferne die markierten Artikel", None))
+        self.move_none_PV_inverters_to_blacklist.setText("")
         self.open_PV_inverters_blacklist.setText(QCoreApplication.translate("MainWindow", u"\u00d6ffne Blacklist", None))
         self.hybrid_inverter_bool_label.setText(QCoreApplication.translate("MainWindow", u"Gemeinsamer PV-Batterie-Wechselricher:", None))
         self.hybrid_inverter_bool_text.setPlainText(QCoreApplication.translate("MainWindow", u"Ja/Nein", None))
@@ -2437,7 +2447,7 @@ class Ui_MainWindow(object):
 "WR-Leistung [kW]", None));
         ___qtablewidgetitem22 = self.BAT_inverters_list.horizontalHeaderItem(6)
         ___qtablewidgetitem22.setText(QCoreApplication.translate("MainWindow", u"Art der Kopplung", None));
-        self.move_none_BAT_inverters_to_blacklist.setText(QCoreApplication.translate("MainWindow", u"Entferne die markierten Artikel", None))
+        self.move_none_BAT_inverters_to_blacklist.setText("")
         self.open_BAT_inverters_blacklist.setText(QCoreApplication.translate("MainWindow", u"\u00d6ffne Blacklist", None))
         self.coupling_type_text.setPlainText(QCoreApplication.translate("MainWindow", u"AC gekoppeltes System", None))
         self.bat_inverter_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
@@ -2465,7 +2475,7 @@ class Ui_MainWindow(object):
 "im Dauerbetrieb", None));
         ___qtablewidgetitem30 = self.BAT_storage_list.horizontalHeaderItem(7)
         ___qtablewidgetitem30.setText(QCoreApplication.translate("MainWindow", u"Batterietechnologie", None));
-        self.move_none_BAT_storage_to_blacklist.setText(QCoreApplication.translate("MainWindow", u"Entferne die markierten Artikel", None))
+        self.move_none_BAT_storage_to_blacklist.setText("")
         self.open_BAT_storage_blacklist.setText(QCoreApplication.translate("MainWindow", u"\u00d6ffne Blacklist", None))
         self.bat_technology_label.setText(QCoreApplication.translate("MainWindow", u"Batterietechnologie:", None))
         self.em_pow_ability_bool_label.setText(QCoreApplication.translate("MainWindow", u"Notstromf\u00e4higkeit\n"
@@ -2492,7 +2502,7 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem34.setText(QCoreApplication.translate("MainWindow", u"Menge verbraucht [Stk.]", None));
         ___qtablewidgetitem35 = self.CHG_point_list.horizontalHeaderItem(4)
         ___qtablewidgetitem35.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
-        self.move_none_CHG_point_to_blacklist.setText(QCoreApplication.translate("MainWindow", u"Entferne die markierten Artikel", None))
+        self.move_none_CHG_point_to_blacklist.setText("")
         self.open_CHG_point_blacklist.setText(QCoreApplication.translate("MainWindow", u"\u00d6ffne Blacklist", None))
         self.charging_point_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
         self.charging_point_SN_label.setText(QCoreApplication.translate("MainWindow", u"Seriennummer:", None))

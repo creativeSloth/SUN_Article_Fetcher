@@ -59,7 +59,6 @@ class MainWindow(QtWidgets.QMainWindow):
         return eventFilter(self, source, event)
 
     def map_ui_buttons(self):
-
         #  *********************************** Mapping buttons for "Article Fetcher"-module *****************************************
 
         self.ui.load_articles_file_btn.clicked.connect(
