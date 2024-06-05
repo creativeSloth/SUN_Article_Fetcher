@@ -14,6 +14,7 @@ from tables.tables_base import (
     resize_columns_to_contents,
 )
 from ui import blacklistWindow
+from ui.buttons.custom_button import create_button_into_table_cell
 
 BLACKLISTS_TABLE_MAP = []
 
@@ -85,8 +86,8 @@ def on_blacklist_button_click(self, table):
     table_name = table.objectName()
     # Zugriff auf die entsprechende Instanz des Blacklist-Dialogs
     dialog_instance: Blacklist = getattr(self, f"{table_name}_blacklist_dlg", None)
-    bl_table: QtWidgets.QTableWidget = dialog_instance.ui.blacklist
-    clear_table(bl_table)
+    into_cell_table: QtWidgets.QTableWidget = dialog_instance.ui.blacklist
+    clear_table(into_cell_table)
 
     # Überprüfe, ob die Instanz existiert, bevor du die Methode aufrufst
     if dialog_instance is not None:
@@ -98,36 +99,19 @@ def on_blacklist_button_click(self, table):
     if isinstance(bl_articles, list) and bl_articles:
         for article in bl_articles:
             # Import data from each row of the blacklist articles
-            import_from_df_row(bl_table, data_row=article, import_column_count=2)
-    place_button_into_cell(self, table_name, bl_table, 3, "[X]")
-    resize_columns_to_contents(bl_table)
-    disable_colums_edit(bl_table)
+            import_from_df_row(into_cell_table, data_row=article, import_column_count=2)
+    create_button_into_table_cell(
+        self, into_cell_table, 3, "[X]", on_remove_articles_from_ui_bl
+    )
+    resize_columns_to_contents(into_cell_table)
+    disable_colums_edit(into_cell_table)
 
 
-def place_button_into_cell(
-    self, table_name: str, bl_table: QtWidgets.QTableWidget, column: int, text: str = ""
-):
-
-    row_count = bl_table.rowCount()
-    for row in range(row_count):
-        # Erstelle dynamisch ein Attribut für jede Tabelle
-        setattr(self, f"push_button_{row}", QtWidgets.QPushButton(text))
-        push_button = getattr(self, f"push_button_{row}", None)
-        push_button.setFixedSize(50, 25)
-
-        push_button.clicked.connect(
-            lambda _, table_name=table_name, bl_table=bl_table, push_button=push_button: remove_articles_from_ui_bl(
-                table_name=table_name, bl_table=bl_table, push_button=push_button
-            )
-        )
-        bl_table.setCellWidget(row, column, push_button)
-
-
-def remove_articles_from_ui_bl(
-    table_name: str,
+def on_remove_articles_from_ui_bl(
     bl_table: QtWidgets.QTableWidget = None,
     push_button: QtWidgets.QPushButton = None,
 ):
+    table_name = bl_table.objectName()
     if push_button is not None and bl_table is not None:
         index = bl_table.indexAt(push_button.pos())
         if index.isValid():

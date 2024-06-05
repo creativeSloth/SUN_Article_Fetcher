@@ -1,8 +1,10 @@
 import os
 
+from PyQt5 import QtWidgets
 from PyQt5.QtCore import QEvent, Qt
 from PyQt5.QtGui import QColor, QIcon, QPainter, QPixmap
 from PyQt5.QtWidgets import QPushButton
+from qtpy import QtWidgets
 
 from directories.directory_base import MAIN_PATHS
 
@@ -166,3 +168,26 @@ def eventFilter(self, source, event: QEvent):
             source.setIcon(source.normal_icon)
 
     return False
+
+
+def create_button_into_table_cell(
+    self,
+    into_cell_table: QtWidgets.QTableWidget = None,
+    column: int = 0,
+    text: str = "",
+    on_button_pressed=None,
+):
+
+    row_count = into_cell_table.rowCount()
+    for row in range(row_count):
+        # Erstelle dynamisch ein Attribut für jede Tabelle
+        setattr(self, f"push_button_{row}", QtWidgets.QPushButton(text))
+        push_button = getattr(self, f"push_button_{row}", None)
+        push_button.setFixedSize(50, 25)
+
+        push_button.clicked.connect(
+            lambda _, into_cell_table, push_button: on_button_pressed(
+                into_cell_table, push_button
+            )
+        )
+        into_cell_table.setCellWidget(row, column, push_button)

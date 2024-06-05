@@ -13,19 +13,7 @@ from tables.search_bar import (
 
 def initialize_table_search(self):
     # Hole die Artikeltabelle und ihr Layout
-    article_table = ui_fields.ui_fields_base.get_articles_table(self)
-    article_table_layout = self.ui.verticalLayout
-    ARTICLES_TABLE_MAP = [(table, article_table_layout) for table in article_table]
-
-    # Hole die Gerätetabellen und ihr Layout
-    device_tables = ui_fields.ui_fields_base.get_device_tables(self)
-    device_table_layout = self.ui.verticalLayout_3
-    DEVICE_TABLE_MAP = [(table, device_table_layout) for table in device_tables]
-
-    # Kombiniere die Artikeltabelle, Gerätetabellen und die Blacklist-Tabellen
-    GENERAL_TABLE_MAP = (
-        ARTICLES_TABLE_MAP + DEVICE_TABLE_MAP + blacklist.BLACKLISTS_TABLE_MAP
-    )
+    device_tables, GENERAL_TABLE_MAP = get_all_tables_to_layout_map(self)
 
     # Iteriere durch alle Tabellen in der allgemeinen Tabellen-Map
     for item in GENERAL_TABLE_MAP:
@@ -42,6 +30,22 @@ def initialize_table_search(self):
         # Falls die Tabelle eine Gerätetabelle ist, initialisiere das Signal für den Blacklist-Button-Klick
         if table in device_tables:
             blacklist.init_blacklist_button_click_signal(self, table=table)
+
+
+def get_all_tables_to_layout_map(self):
+    article_table = ui_fields.ui_fields_base.get_articles_table(self)
+    article_table_layout = self.ui.verticalLayout
+    ARTICLES_TABLE_MAP = [(table, article_table_layout) for table in article_table]
+    # Hole die Gerätetabellen und ihr Layout
+    device_tables = ui_fields.ui_fields_base.get_device_tables(self)
+    device_table_layout = self.ui.verticalLayout_3
+    DEVICE_TABLE_MAP = [(table, device_table_layout) for table in device_tables]
+    # Kombiniere die Artikeltabelle, Gerätetabellen und die Blacklist-Tabellen
+    GENERAL_TABLE_MAP = (
+        ARTICLES_TABLE_MAP + DEVICE_TABLE_MAP + blacklist.BLACKLISTS_TABLE_MAP
+    )
+
+    return device_tables, GENERAL_TABLE_MAP
 
 
 def connect_sort_indicator_changed(self):
