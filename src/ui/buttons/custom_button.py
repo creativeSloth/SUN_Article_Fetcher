@@ -172,22 +172,30 @@ def eventFilter(self, source, event: QEvent):
 
 def create_button_into_table_cell(
     self,
-    into_cell_table: QtWidgets.QTableWidget = None,
+    table_of_cell: QtWidgets.QTableWidget = None,
+    row: int = None,
     column: int = 0,
     text: str = "",
     on_button_pressed=None,
 ):
+    print(row)
+    if row is None:
+        row_min = 0
+        row_max = table_of_cell.rowCount()
+    else:
+        row_min = row
+        row_max = row + 1
 
-    row_count = into_cell_table.rowCount()
-    for row in range(row_count):
+    for tw_row in range(row_min, row_max):
         # Erstelle dynamisch ein Attribut für jede Tabelle
-        setattr(self, f"push_button_{row}", QtWidgets.QPushButton(text))
-        push_button = getattr(self, f"push_button_{row}", None)
-        push_button.setFixedSize(50, 25)
+        setattr(self, f"push_button_{tw_row}", QtWidgets.QPushButton(text))
+        push_button = getattr(self, f"push_button_{tw_row}", None)
+        push_button.setFixedSize(25, 25)
 
-        push_button.clicked.connect(
-            lambda _, into_cell_table, push_button: on_button_pressed(
-                into_cell_table, push_button
+        if on_button_pressed:
+            push_button.clicked.connect(
+                lambda _, tbl=table_of_cell, btn=push_button: on_button_pressed(
+                    tbl, btn
+                )
             )
-        )
-        into_cell_table.setCellWidget(row, column, push_button)
+        table_of_cell.setCellWidget(tw_row, column, push_button)

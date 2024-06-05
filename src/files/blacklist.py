@@ -86,8 +86,8 @@ def on_blacklist_button_click(self, table):
     table_name = table.objectName()
     # Zugriff auf die entsprechende Instanz des Blacklist-Dialogs
     dialog_instance: Blacklist = getattr(self, f"{table_name}_blacklist_dlg", None)
-    into_cell_table: QtWidgets.QTableWidget = dialog_instance.ui.blacklist
-    clear_table(into_cell_table)
+    table_of_cell: QtWidgets.QTableWidget = dialog_instance.ui.blacklist
+    clear_table(table_of_cell)
 
     # Überprüfe, ob die Instanz existiert, bevor du die Methode aufrufst
     if dialog_instance is not None:
@@ -99,12 +99,16 @@ def on_blacklist_button_click(self, table):
     if isinstance(bl_articles, list) and bl_articles:
         for article in bl_articles:
             # Import data from each row of the blacklist articles
-            import_from_df_row(into_cell_table, data_row=article, import_column_count=2)
+            import_from_df_row(table_of_cell, data_row=article, import_column_count=2)
     create_button_into_table_cell(
-        self, into_cell_table, 3, "[X]", on_remove_articles_from_ui_bl
+        self,
+        table_of_cell=table_of_cell,
+        column=3,
+        text="[X]",
+        on_button_pressed=on_remove_articles_from_ui_bl,
     )
-    resize_columns_to_contents(into_cell_table)
-    disable_colums_edit(into_cell_table)
+    resize_columns_to_contents(table_of_cell)
+    disable_colums_edit(table_of_cell)
 
 
 def on_remove_articles_from_ui_bl(
