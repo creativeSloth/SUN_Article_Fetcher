@@ -2460,13 +2460,13 @@ class Ui_MainWindow(object):
         self.menuBar.addAction(self.menuSettings.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.load_articles_db_btn.setToolTip(_translate("MainWindow", "Lade aus DB"))
+        self.load_articles_db_btn.setToolTip(_translate("MainWindow", "Lade Artikelliste aus Datenbank"))
         self.load_articles_file_btn.setToolTip(_translate("MainWindow", "Lade aus Datei"))
         self.paste_docs_btn.setToolTip(_translate("MainWindow", "Übertrage Dokumente"))
         self.articles_list.setSortingEnabled(True)

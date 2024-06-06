@@ -73,6 +73,9 @@ def get_button_icons(self):
     for button in self.button_list.get_move_bl_buttons():
         PB_MAP[button] = (get_paths_of_icons("delete"), get_color_combo("red"))
 
+    for button in self.button_list.get_doc_available_buttons():
+        PB_MAP[button] = (get_paths_of_icons("documents"), get_color_combo("red"))
+
     return PB_MAP
 
 
@@ -163,9 +166,16 @@ def eventFilter(self, source, event: QEvent):
             source.setIcon(source.click_icon)
         elif (
             event.type() == QEvent.MouseButtonRelease
+            and event.type() == QEvent.Leave
             and event.button() == Qt.LeftButton
         ):
             source.setIcon(source.normal_icon)
+        elif (
+            event.type() == QEvent.MouseButtonRelease
+            and event.type() != QEvent.Leave
+            and event.button() == Qt.LeftButton
+        ):
+            source.setIcon(source.hover_icon)
 
     return False
 
@@ -178,24 +188,15 @@ def create_button_into_table_cell(
     text: str = "",
     on_button_pressed=None,
 ):
-    print(row)
-    if row is None:
-        row_min = 0
-        row_max = table_of_cell.rowCount()
-    else:
-        row_min = row
-        row_max = row + 1
 
-    for tw_row in range(row_min, row_max):
-        # Erstelle dynamisch ein Attribut für jede Tabelle
-        setattr(self, f"push_button_{tw_row}", QtWidgets.QPushButton(text))
-        push_button = getattr(self, f"push_button_{tw_row}", None)
-        push_button.setFixedSize(25, 25)
+    # Erstelle dynamisch ein Attribut für jede Tabelle
+    setattr(self, f"push_button_{row}", QtWidgets.QPushButton(text))
+    push_button = getattr(self, f"push_button_{row}", None)
+    push_button.setFixedSize(25, 25)
 
-        if on_button_pressed:
-            push_button.clicked.connect(
-                lambda _, tbl=table_of_cell, btn=push_button: on_button_pressed(
-                    tbl, btn
-                )
-            )
-        table_of_cell.setCellWidget(tw_row, column, push_button)
+    if on_button_pressed:
+        push_button.clicked.connect(
+            lambda _, tbl=table_of_cell, btn=push_button: on_button_pressed(tbl, btn)
+        )
+    table_of_cell.setCellWidget(row, column, push_button)
+    return push_button

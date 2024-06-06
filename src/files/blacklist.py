@@ -84,6 +84,7 @@ def init_blacklist_button_click_signal(self, table):
 def on_blacklist_button_click(self, table):
 
     table_name = table.objectName()
+
     # Zugriff auf die entsprechende Instanz des Blacklist-Dialogs
     dialog_instance: Blacklist = getattr(self, f"{table_name}_blacklist_dlg", None)
     table_of_cell: QtWidgets.QTableWidget = dialog_instance.ui.blacklist
@@ -100,13 +101,16 @@ def on_blacklist_button_click(self, table):
         for article in bl_articles:
             # Import data from each row of the blacklist articles
             import_from_df_row(table_of_cell, data_row=article, import_column_count=2)
-    create_button_into_table_cell(
-        self,
-        table_of_cell=table_of_cell,
-        column=3,
-        text="[X]",
-        on_button_pressed=on_remove_articles_from_ui_bl,
-    )
+    row_count = table_of_cell.rowCount()
+    for row in range(row_count):
+        create_button_into_table_cell(
+            self,
+            table_of_cell=table_of_cell,
+            row=row,
+            column=3,
+            text="[X]",
+            on_button_pressed=on_remove_articles_from_ui_bl,
+        )
     resize_columns_to_contents(table_of_cell)
     disable_colums_edit(table_of_cell)
 

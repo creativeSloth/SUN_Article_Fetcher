@@ -10,7 +10,7 @@ from tables.search_bar import (
     add_table_header_search_box,
     init_search_button_click_signal,
 )
-from ui.buttons.custom_button import create_button_into_table_cell
+from ui.buttons.custom_button import create_button_into_table_cell, customize_push_buttons
 
 
 def initialize_table_search(self):
@@ -84,7 +84,7 @@ def mark_documents_availability(self, table):
     for row in range(table.rowCount()):
         has_doc = check_for_documents_in_source_folder(table, row, all_files)
         if has_doc:
-            create_button_into_table_cell(
+            push_button = create_button_into_table_cell(
                 self,
                 table_of_cell=table,
                 row=row,
@@ -92,6 +92,8 @@ def mark_documents_availability(self, table):
                 text="",
                 on_button_pressed=None,
             )
+            self.button_list.add_generic_button(button=push_button, button_type="doc_available")
+    customize_push_buttons(self)
 
 
 def check_for_documents_in_source_folder(

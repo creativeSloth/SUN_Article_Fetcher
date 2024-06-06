@@ -156,7 +156,7 @@
            <enum>QTabWidget::West</enum>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <property name="iconSize">
            <size>
@@ -307,7 +307,7 @@
                         <enum>Qt::StrongFocus</enum>
                        </property>
                        <property name="toolTip">
-                        <string>Lade aus DB</string>
+                        <string>Lade Artikelliste aus Datenbank</string>
                        </property>
                        <property name="styleSheet">
                         <string notr="true"/>

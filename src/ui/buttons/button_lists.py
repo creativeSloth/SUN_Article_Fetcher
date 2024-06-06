@@ -5,9 +5,13 @@ class ButtonLists:
     def __init__(self):
         self._SEARCH_BTN_LIST: list[QPushButton] = []
         self._MOVE_BL_BTN_LIST: list[QPushButton] = []
+        self._DOC_AVAILABLE_BTN_LIST: list[QPushButton] = []
 
-    def add_search_button(self, button: QPushButton) -> None:
-        self._SEARCH_BTN_LIST.append(button)
+    def add_generic_button(self, button: QPushButton, button_type: str) -> None:
+        if button_type=="search":
+            self._SEARCH_BTN_LIST.append(button)
+        elif button_type=="doc_available":
+            self._DOC_AVAILABLE_BTN_LIST.append(button)
 
     def add_move_bl_button(self, window: QMainWindow) -> None:
         self._MOVE_BL_BTN_LIST = [
@@ -23,6 +27,9 @@ class ButtonLists:
 
     def get_move_bl_buttons(self):
         return self._MOVE_BL_BTN_LIST
+    
+    def get_doc_available_buttons(self):
+        return self._DOC_AVAILABLE_BTN_LIST
 
 
 def initialize_push_buttons(self):

@@ -53,7 +53,7 @@ def add_table_header_search_box(self, table, layout):
     # Kombiniertes Layout an der ursprünglichen Position einfügen
     layout.insertLayout(index, comb_search_layout)
 
-    self.button_list.add_search_button(button=button)
+    self.button_list.add_generic_button(button=button, button_type = "search")
 
     return button, text_edit
 
