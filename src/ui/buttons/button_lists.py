@@ -1,5 +1,8 @@
 from PyQt5.QtWidgets import QMainWindow, QPushButton
 
+from files.file_sys_handler import compare_src_docs_with_article_list
+from ui.buttons.custom_button import create_button_into_table_cell
+
 
 class ButtonLists:
     def __init__(self):
@@ -46,3 +49,21 @@ def initialize_push_buttons(self):
     # Erstelle eine PushButton-Instanz
     self.button_list = ButtonLists()
     self.button_list.add_move_bl_button(window=self)
+
+
+def add_doc_avlbl_btns(self, table, all_files):
+    self.button_list.reset_list(list_attr="doc_available")
+    for row in range(table.rowCount()):
+        has_doc = compare_src_docs_with_article_list(table, row, all_files)
+        if has_doc:
+            push_button = create_button_into_table_cell(
+                self,
+                table_of_cell=table,
+                row=row,
+                column=0,
+                text="",
+                on_button_pressed=None,
+            )
+            self.button_list.add_generic_button(
+                button=push_button, button_type="doc_available"
+            )

@@ -5,7 +5,7 @@ from qtpy import QtWidgets
 
 import data_sources.data_base
 import directories.directory_base as directory_base
-import files.copy_paste_files as copy_paste_files
+import files.file_sys_handler as file_sys_handler
 import files.logs_and_config as logs_and_config
 import save_file
 import tables.customize_row
@@ -58,7 +58,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def eventFilter(self, source, event):
         return eventFilter(self, source, event)
 
-    def map_ui_buttons(self):
+    def map_ui_buttons(self) -> None:
         #  *********************************** Mapping buttons for "Article Fetcher"-module *****************************************
 
         self.ui.load_articles_file_btn.clicked.connect(
@@ -149,20 +149,20 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @directory_base.check_path_existence(modus=0)
     def on_copy_files_btn_click(self, *args, **kwargs):
-        source_path, target_path, log_subfolder_2_path = copy_paste_files.get_paths()
+        source_path, target_path, log_subfolder_2_path = file_sys_handler.get_paths()
         source_files = data_sources.data_base.get_files_in_source_path(
             self, source_path
         )
-        selected_files, df = copy_paste_files.get_selected_files_and_df(self)
-        matching_files = copy_paste_files.get_matching_files(
+        selected_files, df = file_sys_handler.get_selected_files_and_df(self)
+        matching_files = file_sys_handler.get_matching_files(
             source_files, selected_files
         )
-        copy_paste_files.mark_matching_files(self, matching_files)
-        count = copy_paste_files.copy_files(
+        file_sys_handler.mark_matching_files(self, matching_files)
+        count = file_sys_handler.copy_files(
             self, matching_files, source_path, target_path
         )
 
-        copy_paste_files.log_and_show_result(
+        file_sys_handler.log_and_show_result(
             self,
             source_path,
             target_path,

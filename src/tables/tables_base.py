@@ -4,16 +4,14 @@ from qtpy import QtCore, QtWidgets
 import files.blacklist as blacklist
 import ui_fields.ui_fields_base
 from files import logs_and_config
-from files.copy_paste_files import get_files_in_source_path, get_paths
+from files.file_sys_handler import get_files_in_source_path, get_paths
 from tables.customize_row import customize_table_row
 from tables.search_bar import (
     add_table_header_search_box,
     init_search_button_click_signal,
 )
-from ui.buttons.custom_button import (
-    create_button_into_table_cell,
-    customize_push_buttons,
-)
+from ui.buttons.button_lists import add_doc_avlbl_btns
+from ui.buttons.custom_button import customize_push_buttons
 
 
 def initialize_table_search(self):
@@ -86,50 +84,8 @@ def mark_documents_availability(self, table):
 
     source_path, _, _ = get_paths()
     all_files = get_files_in_source_path(self, source_path)
-    self.button_list.reset_list(list_attr="doc_available")
-    for row in range(table.rowCount()):
-        has_doc = check_for_documents_in_source_folder(table, row, all_files)
-        if has_doc:
-            push_button = create_button_into_table_cell(
-                self,
-                table_of_cell=table,
-                row=row,
-                column=0,
-                text="",
-                on_button_pressed=None,
-            )
-            self.button_list.add_generic_button(
-                button=push_button, button_type="doc_available"
-            )
+    add_doc_avlbl_btns(self, table, all_files)
     customize_push_buttons(self)
-
-
-def check_for_documents_in_source_folder(
-    table: QtWidgets.QTableWidget, row: int, all_files: list
-) -> bool:
-    """
-    Überprüft, ob eine Artikelnummer in einer Liste von Dateinamen enthalten ist.
-
-    Args:
-        table (QtWidgets.QTableWidget): Die Tabelle, in der sich die Artikelnummer befindet.
-        row (int): Die Zeile, in der sich die Artikelnummer befindet.
-        all_files (list): Liste der Dateinamen, in denen gesucht wird.
-
-    Returns:
-        bool: True, wenn die Artikelnummer in einem der Dateinamen gefunden wurde, sonst False.
-    """
-    # Sicherstellen, dass die Artikelnummer-Zelle existiert
-    article_no_item = table.item(row, 1)
-    if article_no_item is None:
-        return False
-
-    article_no = article_no_item.text()
-
-    # Überprüfen, ob die Artikelnummer in einem der Dateinamen enthalten ist
-    if any(article_no in file_name for file_name in all_files):
-        return True
-    else:
-        return False
 
 
 def fill_device_lists(self, df):

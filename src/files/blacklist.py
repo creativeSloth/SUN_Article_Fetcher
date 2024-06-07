@@ -3,6 +3,7 @@ import os
 
 from PyQt5 import QtWidgets
 from qtpy import QtWidgets
+from sqlalchemy import True_
 
 import directories.directory_base as directory_base
 from directories import directory_base
@@ -69,6 +70,7 @@ def initialize_blacklist_dialogs(self):
             self, f"{table_name}_blacklist_dlg", Blacklist(table_name, table_name_ger)
         )
         dialog_instance: Blacklist = getattr(self, f"{table_name}_blacklist_dlg", None)
+        dialog_instance.setObjectName(f"{table_name}")
         BLACKLISTS_TABLE_MAP.append(
             (dialog_instance.ui.blacklist, dialog_instance.ui.verticalLayout)
         )
@@ -78,15 +80,19 @@ def init_blacklist_button_click_signal(self, table):
     table_name = table.objectName()
     button = get_blacklist_map(self)[table_name][0]
     if button:
-        button.clicked.connect(lambda: on_blacklist_button_click(self, table=table))
+        button.clicked.connect(
+            lambda: on_blacklist_button_click(self, device_table=table)
+        )
 
 
-def on_blacklist_button_click(self, table):
+def on_blacklist_button_click(self, device_table):
 
-    table_name = table.objectName()
+    device_table_name = device_table.objectName()
 
     # Zugriff auf die entsprechende Instanz des Blacklist-Dialogs
-    dialog_instance: Blacklist = getattr(self, f"{table_name}_blacklist_dlg", None)
+    dialog_instance: Blacklist = getattr(
+        self, f"{device_table_name}_blacklist_dlg", None
+    )
     table_of_cell: QtWidgets.QTableWidget = dialog_instance.ui.blacklist
     clear_table(table_of_cell)
 
@@ -94,7 +100,7 @@ def on_blacklist_button_click(self, table):
     if dialog_instance is not None:
         dialog_instance.show()
 
-    bl_articles = read_blacklist_articles(table_name=table_name)
+    bl_articles = read_blacklist_articles(table_name=device_table_name)
 
     # Zum Sicherstellen dass bl__articles eine Instanz von List ist und ein Element hat
     if isinstance(bl_articles, list) and bl_articles:
@@ -116,16 +122,19 @@ def on_blacklist_button_click(self, table):
 
 
 def on_remove_articles_from_ui_bl(
-    bl_table: QtWidgets.QTableWidget = None,
-    push_button: QtWidgets.QPushButton = None,
+    bl_table: QtWidgets.QTableWidget = None, push_button: QtWidgets.QPushButton = None
 ):
-    table_name = bl_table.objectName()
+    device_table = bl_table.parent()
+    while device_table.parent():
+        device_table = device_table.parent()
+
+    device_table_name = device_table.objectName()
     if push_button is not None and bl_table is not None:
         index = bl_table.indexAt(push_button.pos())
         if index.isValid():
             row = index.row()
             art_no = bl_table.item(row, 1).text()
-            remove_articles_from_blacklist(table_name=table_name, art_no=art_no)
+            remove_articles_from_blacklist(table_name=device_table_name, art_no=art_no)
 
             bl_table.removeRow(row)
 
@@ -136,9 +145,12 @@ def remove_articles_from_blacklist(table_name, art_no: str):
 
     # Versuche, die Konfigurationsdatei zu lesen und den Eintrag zu entfernen
     config.read(blacklist_path)
+    print(table_name)
+    print(art_no)
+
     # Überprüfe, ob die angegebene Sektion und Option vorhanden sind
     if config.has_section(table_name) and config.has_option(table_name, art_no):
-        config.remove_option(table_name, art_no)
+        config.remove_option(section=table_name, option=art_no)
 
         # Schreibe die aktualisierte Konfiguration in die Datei
         with open(blacklist_path, "w") as blacklist_file:

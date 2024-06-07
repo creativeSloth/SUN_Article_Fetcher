@@ -137,3 +137,31 @@ def get_files_in_source_path(self, directory):
             "Fehler!",
             f"Die Datei für {directory} konnte nicht gelesen werden.\n\n {e}",
         )
+
+
+def compare_src_docs_with_article_list(
+    table: QtWidgets.QTableWidget, row: int, all_files: list
+) -> bool:
+    """
+    Überprüft, ob eine Artikelnummer in einer Liste von Dateinamen enthalten ist.
+
+    Args:
+        table (QtWidgets.QTableWidget): Die Tabelle, in der sich die Artikelnummer befindet.
+        row (int): Die Zeile, in der sich die Artikelnummer befindet.
+        all_files (list): Liste der Dateinamen, in denen gesucht wird.
+
+    Returns:
+        bool: True, wenn die Artikelnummer in einem der Dateinamen gefunden wurde, sonst False.
+    """
+    # Sicherstellen, dass die Artikelnummer-Zelle existiert
+    article_no_item = table.item(row, 1)
+    if article_no_item is None:
+        return False
+
+    article_no = article_no_item.text()
+
+    # Überprüfen, ob die Artikelnummer in einem der Dateinamen enthalten ist
+    if any(article_no in file_name for file_name in all_files):
+        return True
+    else:
+        return False
