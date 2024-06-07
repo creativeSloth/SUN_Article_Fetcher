@@ -113,7 +113,7 @@ def log_and_show_result(
 
 
 def get_files_in_source_path(self, directory):
-    all_files = []
+    all_files: list[str] = []
 
     try:
         for root, _, files in os.walk(directory):

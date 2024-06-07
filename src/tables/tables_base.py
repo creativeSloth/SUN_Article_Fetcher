@@ -71,7 +71,7 @@ def on_sort_indicator_changed(self, table):
 
 
 @customize_table_row
-def fill_article_table(self, table: QtWidgets.QTableWidgetItem = None, df=None):
+def fill_article_table(self, table: QtWidgets.QTableWidget, df=None):
     clear_table(table=table)
 
     if df is not None:
@@ -105,9 +105,7 @@ def mark_documents_availability(self, table):
 
 
 def check_for_documents_in_source_folder(
-    table: QtWidgets.QTableWidget,
-    row: int,
-    all_files: list,
+    table: QtWidgets.QTableWidget, row: int, all_files: list
 ) -> bool:
     """
     Überprüft, ob eine Artikelnummer in einer Liste von Dateinamen enthalten ist.
