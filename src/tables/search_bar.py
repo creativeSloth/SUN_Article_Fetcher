@@ -12,10 +12,12 @@ def add_table_header_search_box(self, table, layout):
 
     # QHBoxLayout erstellen, um die Suchleiste nebeneinander anzuordnen
     search_layout = QHBoxLayout()
-    min_height = 50
-    max_height = 50
-    min_width = 50
-    max_width = 50
+    search_layout.setSpacing(5)
+    search_layout.setContentsMargins(0, 0, 0, 5)
+    min_height = 30
+    max_height = 30
+    min_width = 30
+    max_width = 30
 
     # QLabel für die Suchleiste erstellen und hinzufügen
     button = QPushButton("")
@@ -53,7 +55,7 @@ def add_table_header_search_box(self, table, layout):
     # Kombiniertes Layout an der ursprünglichen Position einfügen
     layout.insertLayout(index, comb_search_layout)
 
-    self.button_list.add_generic_button(button=button, button_type = "search")
+    self.button_list.add_generic_button(button=button, button_type="search")
 
     return button, text_edit
 

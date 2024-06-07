@@ -10,7 +10,10 @@ from tables.search_bar import (
     add_table_header_search_box,
     init_search_button_click_signal,
 )
-from ui.buttons.custom_button import create_button_into_table_cell, customize_push_buttons
+from ui.buttons.custom_button import (
+    create_button_into_table_cell,
+    customize_push_buttons,
+)
 
 
 def initialize_table_search(self):
@@ -22,6 +25,7 @@ def initialize_table_search(self):
         table, layout = item
 
         # Füge ein Suchfeld zum Tabellenkopf hinzu
+
         button, text_edit = add_table_header_search_box(
             self, table=table, layout=layout
         )
@@ -79,8 +83,10 @@ def fill_article_table(self, table: QtWidgets.QTableWidgetItem = None, df=None):
 
 
 def mark_documents_availability(self, table):
+
     source_path, _, _ = get_paths()
     all_files = get_files_in_source_path(self, source_path)
+    self.button_list.reset_list(list_attr="doc_available")
     for row in range(table.rowCount()):
         has_doc = check_for_documents_in_source_folder(table, row, all_files)
         if has_doc:
@@ -92,7 +98,9 @@ def mark_documents_availability(self, table):
                 text="",
                 on_button_pressed=None,
             )
-            self.button_list.add_generic_button(button=push_button, button_type="doc_available")
+            self.button_list.add_generic_button(
+                button=push_button, button_type="doc_available"
+            )
     customize_push_buttons(self)
 
 

@@ -128,7 +128,7 @@ def get_color_combo(buttoncolor=None):
         return combos[buttoncolor]
 
 
-def create_icon_variaties(icon_path, color_combo):
+def create_icon_variaties(icon_path: str, color_combo):
     original_pixmap = QPixmap(icon_path)
 
     normal_icon = change_color_of_pixmap(original_pixmap, color_combo["normal"])
