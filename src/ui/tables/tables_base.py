@@ -2,17 +2,24 @@ import pandas as pd
 from qtpy import QtCore, QtWidgets
 
 import files.blacklist as blacklist
-import ui_fields.ui_fields_base
 from files import logs_and_config
 from files.file_sys_handler import get_files_in_source_path, get_paths
 from ui.buttons.button_lists import add_doc_avlbl_btns
 from ui.buttons.custom_button import customize_push_buttons
+from ui.fields.ui_fields_base import get_all_tables, get_device_tables
 from ui.tables.customize_row import customize_table_row
 from ui.tables.search_bar import (
     add_table_header_search_box,
     init_search_button_click_signal,
 )
-from ui.tables.utils import get_fixed_val_columns
+from ui.tables.utils import (
+    clear_table,
+    disable_colums_edit,
+    get_all_tables_to_layout_map,
+    get_column_index,
+    get_fixed_val_columns,
+    resize_columns_to_contents,
+)
 
 
 def initialize_table_search(self):
@@ -35,33 +42,6 @@ def initialize_table_search(self):
         # Falls die Tabelle eine Gerätetabelle ist, initialisiere das Signal für den Blacklist-Button-Klick
         if table in device_tables:
             blacklist.init_blacklist_button_click_signal(self, table=table)
-
-
-def get_all_tables_to_layout_map(self):
-    article_table = ui_fields.ui_fields_base.get_articles_table(self)
-    article_table_layout = self.ui.verticalLayout
-    ARTICLES_TABLE_MAP = [(table, article_table_layout) for table in article_table]
-    # Hole die Gerätetabellen und ihr Layout
-    device_tables = ui_fields.ui_fields_base.get_device_tables(self)
-    device_table_layout = self.ui.verticalLayout_3
-    DEVICE_TABLE_MAP = [(table, device_table_layout) for table in device_tables]
-    # Kombiniere die Artikeltabelle, Gerätetabellen und die Blacklist-Tabellen
-    GENERAL_TABLE_MAP = (
-        ARTICLES_TABLE_MAP + DEVICE_TABLE_MAP + blacklist.BLACKLISTS_TABLE_MAP
-    )
-
-    return device_tables, GENERAL_TABLE_MAP
-
-
-def connect_sort_indicator_changed(self):
-    tables = ui_fields.ui_fields_base.get_all_tables(self)
-    for table in tables:
-        # Verwendung von lambda-Funktion, um das Argument "table" zu übergeben
-        table.horizontalHeader().sortIndicatorChanged.connect(
-            lambda sortIndex, order, table=table: on_sort_indicator_changed(
-                self, table=table
-            )
-        )
 
 
 @customize_table_row
@@ -90,7 +70,7 @@ def mark_documents_availability(self, table):
 
 
 def fill_device_lists(self, df):
-    tables = ui_fields.ui_fields_base.get_device_tables(self)
+    tables = get_device_tables(self)
     for table in tables:
         fill_specific_device_list(self, table=table, df=df)
 
@@ -199,27 +179,6 @@ def remove_articles_from_table(table):
     blacklist.update_blacklist(df, table.objectName())
 
 
-def clear_table(table):
-    # Setze die Anzahl der Zeilen auf 0, um alle Zeilen zu entfernen
-    table.setRowCount(0)
-
-
-def resize_columns_to_contents(table):
-    columns = table.columnCount()
-    header = table.horizontalHeader()
-    for i in range(columns):
-        header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
-
-
-def get_column_index(table, column):
-    """Suche den Index der 'Artikelnummer'-Spalte in der Tabelle."""
-    column_index = None
-    for column_index in range(table.columnCount()):
-        if table.horizontalHeaderItem(column_index).text() == column:
-            return column_index
-    return None
-
-
 def collect_data_from_table(table, article_no_col_index, discard_columns):
     """Sammle Daten aus der Tabelle."""
     data_set = set()
@@ -241,22 +200,9 @@ def collect_data_from_table(table, article_no_col_index, discard_columns):
     return data_set
 
 
-def disable_colums_edit(table: QtWidgets.QTableWidget, firstcol=0, lastcol: int = None):
-    if lastcol is None:
-        lastcol = table.columnCount()
-
-    for row in range(table.rowCount()):
-        for col in range(firstcol, lastcol):
-            # Das vorhandene QTableWidgetItem abrufen
-            item = table.item(row, col)
-            # Entfernt das Bearbeitungsflag für die Zelle
-            if item is not None:
-                item.setFlags(item.flags() & ~QtCore.Qt.ItemIsEditable)
-
-
 def check_specs_in_device_tables(self):
 
-    device_tables = ui_fields.ui_fields_base.get_device_tables(self)
+    device_tables = get_device_tables(self)
     fixed_val_columns = get_fixed_val_columns()
 
     data_set = set()
@@ -303,7 +249,7 @@ def fill_device_specs_in_device_tables(table):
 
 def fill_tables_content(self, saved_tables_content):
     # Alle Tabellen holen
-    tables = ui_fields.ui_fields_base.get_all_tables(self)
+    tables = get_all_tables(self)
     for table in tables:
         clear_table(table)
 

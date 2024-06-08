@@ -1,12 +1,12 @@
 import files.logs_and_config as logs_and_config
-import ui_fields.ui_fields_base
+from ui.fields.ui_fields_base import get_mapped_context
 from ui.tables.tables_base import fill_tables_content
 
 
 def load_fields_text(self, file_path):
     section = "Fields text"
 
-    field_map = ui_fields.ui_fields_base.get_mapped_context(self)
+    field_map = get_mapped_context(self)
     saved_field_texts = logs_and_config.load_save_file(file_path, section)
     for _, field in field_map.items():
         fill_field_value(field[0], saved_field_texts)

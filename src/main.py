@@ -4,19 +4,35 @@ from PyQt5.QtWidgets import QFileDialog
 from qtpy import QtWidgets
 
 import data_sources.data_base
-import directories.directory_base as directory_base
 import files.file_sys_handler as file_sys_handler
 import files.logs_and_config as logs_and_config
 import save_file
-import ui_fields.ui_fields_base
+from directories.directory_base import (
+    MAIN_PATHS,
+    check_path_existence,
+    get_docs_paths,
+    get_folder_path,
+    get_save_file_dir,
+    set_doc_1_dir,
+    set_static_directories,
+    set_target_1_dir,
+    set_target_2_dir,
+)
 from files import blacklist
 from styles.styles_Handler import initialize_ui_style
 from ui.buttons.button_lists import initialize_push_buttons
 from ui.buttons.custom_button import customize_push_buttons, eventFilter
+from ui.fields.ui_fields_base import (
+    char_validation,
+    clear_docu_fields,
+    config_to_fields,
+    fill_docu_fields,
+    replace_fields_in_doc,
+)
 from ui.menus import menus_base
+from ui.tables.decorators import connect_sort_indicator_changed
 from ui.tables.tables_base import (
     check_specs_in_device_tables,
-    connect_sort_indicator_changed,
     fill_article_table,
     fill_device_lists,
     initialize_table_search,
@@ -40,7 +56,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def initialize(self):
 
-        directory_base.set_static_directories()
+        set_static_directories()
         menus_base.initialize_menu_dialogs(self)
         blacklist.initialize_blacklist_dialogs(self)
         initialize_push_buttons(self)
@@ -55,7 +71,7 @@ class MainWindow(QtWidgets.QMainWindow):
             storage_file="device_specs_list_path"
         )
 
-        ui_fields.ui_fields_base.config_to_fields(self)
+        config_to_fields(self)
 
         initialize_ui_style(self)
 
@@ -143,15 +159,15 @@ class MainWindow(QtWidgets.QMainWindow):
         fill_article_table(self, table=self.ui.articles_list, df=df)
 
     def on_project_text_changed(self):
-        ui_fields.ui_fields_base.char_validation(self)
+        char_validation(self)
 
-    @directory_base.get_folder_path
+    @get_folder_path
     def on_target_path_btn_click(self, folder_path):
         self.ui.target_path_text.setPlainText(folder_path)
-        directory_base.set_target_1_dir(folder_path)
+        set_target_1_dir(folder_path)
         logs_and_config.update_config_file("Pfade", "target_1_path", folder_path)
 
-    @directory_base.check_path_existence(modus=0)
+    @check_path_existence(modus=0)
     def on_copy_files_btn_click(self, *args, **kwargs):
         source_path, target_path, log_subfolder_2_path = file_sys_handler.get_paths()
         source_files = data_sources.data_base.get_files_in_source_path(
@@ -180,20 +196,20 @@ class MainWindow(QtWidgets.QMainWindow):
     # * * * * * * * * * * * * * * * * * Documentation-module * * * * * * * * * * * * * * * *
 
     def on_btn_create_doc1_clicked(self):
-        directory_base.set_doc_1_dir(self)
-        ui_fields.ui_fields_base.replace_fields_in_doc(
+        set_doc_1_dir(self)
+        replace_fields_in_doc(
             self, doc_path="doc_1_path", template_path="template_1_path"
         )
 
     def on_btn_create_doc2_clicked(self):
-        _, doc_2 = directory_base.get_docs_paths(self.ui.project.toPlainText())
-        directory_base.MAIN_PATHS.dict["doc_2_path"] = doc_2
-        ui_fields.ui_fields_base.replace_fields_in_doc(
+        _, doc_2 = get_docs_paths(self.ui.project.toPlainText())
+        MAIN_PATHS.dict["doc_2_path"] = doc_2
+        replace_fields_in_doc(
             self, doc_path="doc_2_path", template_path="template_2_path"
         )
 
     def on_load_data_to_device_list_btn_click(self):
-        ui_fields.ui_fields_base.clear_docu_fields(self)
+        clear_docu_fields(self)
         df = data_sources.data_base.execute_query(self, query="sql1")
         logs_and_config.update_config_file(
             "Abfrage", "sql1", data_sources.data_base.get_sql_query(self)["sql1"]
@@ -221,16 +237,16 @@ class MainWindow(QtWidgets.QMainWindow):
         logs_and_config.update_config_file(
             "Abfrage", "sql2", data_sources.data_base.get_sql_query(self)["sql2"]
         )
-        ui_fields.ui_fields_base.clear_docu_fields(self)
-        ui_fields.ui_fields_base.fill_docu_fields(self)
+        clear_docu_fields(self)
+        fill_docu_fields(self)
 
     def on_store_device_specs_btn_click(self):
         check_specs_in_device_tables(self)
 
-    @directory_base.get_folder_path
+    @get_folder_path
     def on_target_path_btn_2_click(self, folder_path):
         self.ui.target_path_text_2.setPlainText(folder_path)
-        directory_base.set_target_2_dir(folder_path)
+        set_target_2_dir(folder_path)
         logs_and_config.update_config_file("Pfade", "target_2_path", folder_path)
 
     # * * * * * * * * * * * * * * * * * Settings * * * * * * * * * * * * * * * *
@@ -242,7 +258,7 @@ class MainWindow(QtWidgets.QMainWindow):
             save_file.save.save_tables_content(self, file_path)
 
     def on_load_btn_click(self):
-        file_path = directory_base.get_save_file_dir(self)
+        file_path = get_save_file_dir(self)
         if file_path != "":
             save_file.load.load_fields_text(self, file_path)
             save_file.load.load_tables_content(self, file_path)
