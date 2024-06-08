@@ -116,8 +116,6 @@ def import_from_df_row(table, data_row=None, import_column_count=None):
 
         if isinstance(data_row, pd.Series) and index <= import_column_count - 2:
             item_col = QtWidgets.QTableWidgetItem(str(data_row.iloc[int(index)]))
-            print(str(data_row.iloc[int(index)]))
-            print(index)
 
         elif isinstance(data_row, tuple):
             item_col = QtWidgets.QTableWidgetItem(str(data_row[index]))
