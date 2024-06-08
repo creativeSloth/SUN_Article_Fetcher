@@ -3,19 +3,18 @@ import os
 
 from PyQt5 import QtWidgets
 from qtpy import QtWidgets
-from sqlalchemy import True_
 
 import directories.directory_base as directory_base
 from directories import directory_base
 from styles.styles_Handler import initialize_ui_style
-from tables.tables_base import (
+from ui.buttons.custom_button import create_button_into_table_cell
+from ui.tables.tables_base import (
     clear_table,
     disable_colums_edit,
     import_from_df_row,
     resize_columns_to_contents,
 )
-from ui import blacklistWindow
-from ui.buttons.custom_button import create_button_into_table_cell
+from ui.windows import blacklistWindow
 
 BLACKLISTS_TABLE_MAP = []
 

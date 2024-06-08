@@ -1,25 +1,24 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-# Form generated from reading UI file 'blacklistWindow.ui'
+## Form generated from reading UI file 'blacklistWindow.ui'
 ##
-# Created by: Qt User Interface Compiler version 6.6.1
+## Created by: Qt User Interface Compiler version 6.6.1
 ##
-# WARNING! All changes made in this file will be lost when recompiling UI file!
+## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-                            QMetaObject, QObject, QPoint, QRect,
-                            QSize, QTime, QUrl, Qt)
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
 from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-                           QFont, QFontDatabase, QGradient, QIcon,
-                           QImage, QKeySequence, QLinearGradient, QPainter,
-                           QPalette, QPixmap, QRadialGradient, QTransform)
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QAbstractButton, QAbstractItemView, QAbstractScrollArea, QApplication,
-                               QDialog, QDialogButtonBox, QFrame, QHBoxLayout,
-                               QHeaderView, QPushButton, QSizePolicy, QTableWidget,
-                               QTableWidgetItem, QVBoxLayout, QWidget)
-
+    QDialog, QDialogButtonBox, QFrame, QHBoxLayout,
+    QHeaderView, QPushButton, QSizePolicy, QTableWidget,
+    QTableWidgetItem, QVBoxLayout, QWidget)
 
 class Ui_blacklist_dialog(object):
     def setupUi(self, blacklist_dialog):
@@ -49,18 +48,15 @@ class Ui_blacklist_dialog(object):
         self.blacklist.setHorizontalHeaderItem(3, __qtablewidgetitem3)
         self.blacklist.setObjectName(u"blacklist")
         self.blacklist.setEnabled(True)
-        sizePolicy = QSizePolicy(
-            QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
+        sizePolicy = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(
-            self.blacklist.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(self.blacklist.sizePolicy().hasHeightForWidth())
         self.blacklist.setSizePolicy(sizePolicy)
         self.blacklist.setMinimumSize(QSize(500, 100))
         self.blacklist.setMaximumSize(QSize(456456, 4554))
         self.blacklist.setAutoFillBackground(True)
-        self.blacklist.setSizeAdjustPolicy(
-            QAbstractScrollArea.AdjustToContents)
+        self.blacklist.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
         self.blacklist.setDragDropOverwriteMode(False)
         self.blacklist.setDragDropMode(QAbstractItemView.NoDragDrop)
         self.blacklist.setAlternatingRowColors(True)
@@ -85,6 +81,7 @@ class Ui_blacklist_dialog(object):
 
         self.verticalLayout.addWidget(self.blacklist)
 
+
         self.verticalLayout_3.addLayout(self.verticalLayout)
 
         self.frame = QFrame(self.frame_2)
@@ -94,23 +91,24 @@ class Ui_blacklist_dialog(object):
         self.horizontalLayout = QHBoxLayout(self.frame)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.remove_article_from_blacklist = QPushButton(self.frame)
-        self.remove_article_from_blacklist.setObjectName(
-            u"remove_article_from_blacklist")
+        self.remove_article_from_blacklist.setObjectName(u"remove_article_from_blacklist")
         self.remove_article_from_blacklist.setMinimumSize(QSize(0, 40))
 
         self.horizontalLayout.addWidget(self.remove_article_from_blacklist)
 
+
         self.verticalLayout_3.addWidget(self.frame, 0, Qt.AlignLeft)
+
 
         self.verticalLayout_2.addWidget(self.frame_2)
 
         self.buttonBox = QDialogButtonBox(blacklist_dialog)
         self.buttonBox.setObjectName(u"buttonBox")
         self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(
-            QDialogButtonBox.Cancel | QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
 
         self.verticalLayout_2.addWidget(self.buttonBox, 0, Qt.AlignLeft)
+
 
         self.retranslateUi(blacklist_dialog)
         self.buttonBox.accepted.connect(blacklist_dialog.accept)
@@ -120,20 +118,15 @@ class Ui_blacklist_dialog(object):
     # setupUi
 
     def retranslateUi(self, blacklist_dialog):
-        blacklist_dialog.setWindowTitle(
-            QCoreApplication.translate("blacklist_dialog", u"Dialog", None))
+        blacklist_dialog.setWindowTitle(QCoreApplication.translate("blacklist_dialog", u"Dialog", None))
         ___qtablewidgetitem = self.blacklist.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(
-            QCoreApplication.translate("blacklist_dialog", u"<>", None))
+        ___qtablewidgetitem.setText(QCoreApplication.translate("blacklist_dialog", u"<>", None));
         ___qtablewidgetitem1 = self.blacklist.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate(
-            "blacklist_dialog", u"Artikelnummer", None))
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("blacklist_dialog", u"Artikelnummer", None));
         ___qtablewidgetitem2 = self.blacklist.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate(
-            "blacklist_dialog", u"Artikelbezeichnung", None))
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("blacklist_dialog", u"Artikelbezeichnung", None));
         ___qtablewidgetitem3 = self.blacklist.horizontalHeaderItem(3)
-        ___qtablewidgetitem3.setText(
-            QCoreApplication.translate("blacklist_dialog", u"-->", None))
-        self.remove_article_from_blacklist.setText(QCoreApplication.translate(
-            "blacklist_dialog", u"Entferne Artikel von Blacklist", None))
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("blacklist_dialog", u"-->", None));
+        self.remove_article_from_blacklist.setText(QCoreApplication.translate("blacklist_dialog", u"Entferne Artikel von Blacklist", None))
     # retranslateUi
+

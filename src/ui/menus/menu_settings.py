@@ -4,7 +4,7 @@ import files.logs_and_config as logs_and_config
 from directories import directory_base
 from directories.directory_base import get_file_path, get_folder_path
 from styles.styles_Handler import initialize_ui_style
-from ui import settingsConnectionWindow, settingsPathsWindow
+from ui.windows import settingsConnectionWindow, settingsPathsWindow
 
 
 class SettConDlg(QtWidgets.QDialog):

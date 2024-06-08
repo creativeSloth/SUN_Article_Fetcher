@@ -2298,7 +2298,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         self.load_articles_db_btn.setDefault(False)
         self.load_articles_file_btn.setDefault(False)
         self.target_path_btn.setDefault(False)
@@ -2319,7 +2319,7 @@ class Ui_MainWindow(object):
         self.actionLoad.setText(QCoreApplication.translate("MainWindow", u"Laden", None))
         self.actionPaths.setText(QCoreApplication.translate("MainWindow", u"Pfade", None))
 #if QT_CONFIG(tooltip)
-        self.load_articles_db_btn.setToolTip(QCoreApplication.translate("MainWindow", u"Lade aus DB", None))
+        self.load_articles_db_btn.setToolTip(QCoreApplication.translate("MainWindow", u"Lade Artikelliste aus Datenbank", None))
 #endif // QT_CONFIG(tooltip)
         self.load_articles_db_btn.setText("")
 #if QT_CONFIG(tooltip)

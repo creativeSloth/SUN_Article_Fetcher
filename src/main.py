@@ -8,15 +8,21 @@ import directories.directory_base as directory_base
 import files.file_sys_handler as file_sys_handler
 import files.logs_and_config as logs_and_config
 import save_file
-import tables.customize_row
 import ui_fields.ui_fields_base
 from files import blacklist
-from menus import menus_base
 from styles.styles_Handler import initialize_ui_style
-from tables.tables_base import initialize_table_search
 from ui.buttons.button_lists import initialize_push_buttons
 from ui.buttons.custom_button import customize_push_buttons, eventFilter
-from ui.mainwindow import Ui_MainWindow
+from ui.menus import menus_base
+from ui.tables.tables_base import (
+    check_specs_in_device_tables,
+    connect_sort_indicator_changed,
+    fill_article_table,
+    fill_device_lists,
+    initialize_table_search,
+    remove_articles_from_table,
+)
+from ui.windows.mainwindow import Ui_MainWindow
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -72,7 +78,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.ui.project.textChanged.connect(self.on_project_text_changed)
 
-        tables.tables_base.connect_sort_indicator_changed(self)
+        connect_sort_indicator_changed(self)
 
         #  *********************************** Settings- module *****************************************
         menus_base.map_menu_buttons(self)
@@ -125,9 +131,7 @@ class MainWindow(QtWidgets.QMainWindow):
             if file_path:
                 # Lösche die vorhandenen Daten und fülle die Tabelle mit Daten aus der Datei
                 df = data_sources.data_base.read_data_from_file(file_path)
-                tables.tables_base.fill_article_table(
-                    self, table=self.ui.articles_list, df=df
-                )
+                fill_article_table(self, table=self.ui.articles_list, df=df)
 
     def on_load_articles_from_db_btn_click(self):
         # Lese Daten aus der MySQL-Datenbank und speichere sie in der Instanzvariable df
@@ -136,7 +140,7 @@ class MainWindow(QtWidgets.QMainWindow):
             "Abfrage", "sql1", data_sources.data_base.get_sql_query(self)["sql1"]
         )
         # Lösche die vorhandenen Daten und fülle die Tabelle mit den Daten aus der Datenbank
-        tables.tables_base.fill_article_table(self, table=self.ui.articles_list, df=df)
+        fill_article_table(self, table=self.ui.articles_list, df=df)
 
     def on_project_text_changed(self):
         ui_fields.ui_fields_base.char_validation(self)
@@ -194,22 +198,22 @@ class MainWindow(QtWidgets.QMainWindow):
         logs_and_config.update_config_file(
             "Abfrage", "sql1", data_sources.data_base.get_sql_query(self)["sql1"]
         )
-        tables.tables_base.fill_device_lists(self, df)
+        fill_device_lists(self, df)
 
     def on_move_none_PV_modules_to_blacklist_click(self):
-        tables.tables_base.remove_articles_from_table(table=self.ui.PV_modules_list)
+        remove_articles_from_table(table=self.ui.PV_modules_list)
 
     def on_move_none_PV_inverters_to_blacklist_click(self):
-        tables.tables_base.remove_articles_from_table(table=self.ui.PV_inverters_list)
+        remove_articles_from_table(table=self.ui.PV_inverters_list)
 
     def on_move_none_BAT_inverters_to_blacklist_click(self):
-        tables.tables_base.remove_articles_from_table(table=self.ui.BAT_inverters_list)
+        remove_articles_from_table(table=self.ui.BAT_inverters_list)
 
     def on_move_none_BAT_storage_to_blacklist_click(self):
-        tables.tables_base.remove_articles_from_table(table=self.ui.BAT_storage_list)
+        remove_articles_from_table(table=self.ui.BAT_storage_list)
 
     def on_move_none_CHG_point_to_blacklist_click(self):
-        tables.tables_base.remove_articles_from_table(table=self.ui.CHG_point_list)
+        remove_articles_from_table(table=self.ui.CHG_point_list)
 
     def on_fill_fields_btn_click(self):
 
@@ -221,7 +225,7 @@ class MainWindow(QtWidgets.QMainWindow):
         ui_fields.ui_fields_base.fill_docu_fields(self)
 
     def on_store_device_specs_btn_click(self):
-        tables.tables_base.check_specs_in_device_tables(self)
+        check_specs_in_device_tables(self)
 
     @directory_base.get_folder_path
     def on_target_path_btn_2_click(self, folder_path):

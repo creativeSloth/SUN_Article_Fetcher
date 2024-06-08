@@ -1,4 +1,4 @@
-from menus.menu_settings import SettConDlg, SettPathsDlg
+from ui.menus.menu_settings import SettConDlg, SettPathsDlg
 
 
 def initialize_menu_dialogs(self):

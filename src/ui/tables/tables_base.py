@@ -5,13 +5,14 @@ import files.blacklist as blacklist
 import ui_fields.ui_fields_base
 from files import logs_and_config
 from files.file_sys_handler import get_files_in_source_path, get_paths
-from tables.customize_row import customize_table_row
-from tables.search_bar import (
+from ui.buttons.button_lists import add_doc_avlbl_btns
+from ui.buttons.custom_button import customize_push_buttons
+from ui.tables.customize_row import customize_table_row
+from ui.tables.search_bar import (
     add_table_header_search_box,
     init_search_button_click_signal,
 )
-from ui.buttons.button_lists import add_doc_avlbl_btns
-from ui.buttons.custom_button import customize_push_buttons
+from ui.tables.utils import get_fixed_val_columns
 
 
 def initialize_table_search(self):
@@ -132,8 +133,11 @@ def import_from_df_row(table, data_row=None, import_column_count=None):
     table.setItem(tw_row, 0, checkbox_item)
 
     for index in range(import_column_count):
-        if isinstance(data_row, pd.Series):
-            item_col = QtWidgets.QTableWidgetItem(str(data_row.iloc[index]))
+
+        if isinstance(data_row, pd.Series) and index <= import_column_count - 2:
+            item_col = QtWidgets.QTableWidgetItem(str(data_row.iloc[int(index)]))
+            print(str(data_row.iloc[int(index)]))
+            print(index)
 
         elif isinstance(data_row, tuple):
             item_col = QtWidgets.QTableWidgetItem(str(data_row[index]))
@@ -248,11 +252,6 @@ def disable_colums_edit(table: QtWidgets.QTableWidget, firstcol=0, lastcol: int 
             # Entfernt das Bearbeitungsflag für die Zelle
             if item is not None:
                 item.setFlags(item.flags() & ~QtCore.Qt.ItemIsEditable)
-
-
-def get_fixed_val_columns():
-    discard_columns = ["<>", "Menge verbraucht [Stk.]", "Seriennummer", "Artikelnummer"]
-    return discard_columns
 
 
 def check_specs_in_device_tables(self):
