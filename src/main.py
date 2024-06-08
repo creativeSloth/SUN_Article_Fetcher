@@ -54,7 +54,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # Verbinde die Signale mit den entsprechenden Slots
         self.map_ui_buttons()
 
-    def initialize(self):
+    def initialize(self) -> None:
 
         set_static_directories()
         menus_base.initialize_menu_dialogs(self)
