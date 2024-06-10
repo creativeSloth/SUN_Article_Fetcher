@@ -1,10 +1,12 @@
 import configparser
 import os
 
+import pandas as pd
 from PyQt5 import QtWidgets
 from qtpy import QtWidgets
 
-from directories.directory_base import paths
+from directories.directory_base import dir_paths
+from files.utils import is_on_blacklist
 from styles.styles_Handler import initialize_ui_style
 from ui.buttons.custom_button import create_button_into_table_cell
 from ui.tables.utils import clear_table, disable_colums_edit, resize_columns_to_contents
@@ -69,7 +71,7 @@ def initialize_blacklist_dialogs(self):
         )
 
 
-def init_blacklist_button_click_signal(self, table):
+def init_blacklist_button_click_signal(self, table: QtWidgets.QTableWidget):
     table_name = table.objectName()
     button = get_blacklist_map(self)[table_name][0]
     if button:
@@ -78,10 +80,9 @@ def init_blacklist_button_click_signal(self, table):
         )
 
 
-def on_blacklist_button_click(self, device_table):
-    from ui.tables.tables_base import import_from_df_row
+def on_blacklist_button_click(self, device_table: QtWidgets.QTableWidget) -> None:
 
-    device_table_name = device_table.objectName()
+    device_table_name: str = device_table.objectName()
 
     # Zugriff auf die entsprechende Instanz des Blacklist-Dialogs
     dialog_instance: Blacklist = getattr(
@@ -94,13 +95,13 @@ def on_blacklist_button_click(self, device_table):
     if dialog_instance is not None:
         dialog_instance.show()
 
-    bl_articles = read_blacklist_articles(table_name=device_table_name)
+    fill_bl_tables(device_table_name, table_of_cell)
+    create_remove_from_bl_btn(self, table_of_cell)
+    resize_columns_to_contents(table_of_cell)
+    disable_colums_edit(table_of_cell)
 
-    # Zum Sicherstellen dass bl__articles eine Instanz von List ist und ein Element hat
-    if isinstance(bl_articles, list) and bl_articles:
-        for article in bl_articles:
-            # Import data from each row of the blacklist articles
-            import_from_df_row(table_of_cell, data_row=article, import_column_count=2)
+
+def create_remove_from_bl_btn(self, table_of_cell: QtWidgets.QTableWidget) -> None:
     row_count = table_of_cell.rowCount()
     for row in range(row_count):
         create_button_into_table_cell(
@@ -111,8 +112,20 @@ def on_blacklist_button_click(self, device_table):
             text="[X]",
             on_button_pressed=on_remove_articles_from_ui_bl,
         )
-    resize_columns_to_contents(table_of_cell)
-    disable_colums_edit(table_of_cell)
+
+
+def fill_bl_tables(
+    device_table_name: str, table_of_cell: QtWidgets.QTableWidget
+) -> None:
+    from ui.tables.tables_base import import_from_df_row
+
+    bl_articles = read_blacklist_articles(table_name=device_table_name)
+
+    # Zum Sicherstellen dass bl__articles eine Instanz von List ist und ein Element hat
+    if isinstance(bl_articles, list) and bl_articles:
+        for article in bl_articles:
+            # Import data from each row of the blacklist articles
+            import_from_df_row(table_of_cell, data_row=article, import_column_count=2)
 
 
 def on_remove_articles_from_ui_bl(
@@ -133,17 +146,15 @@ def on_remove_articles_from_ui_bl(
             bl_table.removeRow(row)
 
 
-def remove_articles_from_blacklist(table_name, art_no: str):
-    blacklist_path = paths.dict["blacklist_path"]
+def remove_articles_from_blacklist(table_name: str, art_no: str):
+    blacklist_path = dir_paths.dict["blacklist_path"]
     config = configparser.ConfigParser()
 
     # Versuche, die Konfigurationsdatei zu lesen und den Eintrag zu entfernen
     config.read(blacklist_path)
-    print(table_name)
-    print(art_no)
 
     # Überprüfe, ob die angegebene Sektion und Option vorhanden sind
-    if config.has_section(table_name) and config.has_option(table_name, art_no):
+    if is_on_blacklist(table_name, art_no, config):
         config.remove_option(section=table_name, option=art_no)
 
         # Schreibe die aktualisierte Konfiguration in die Datei
@@ -151,8 +162,8 @@ def remove_articles_from_blacklist(table_name, art_no: str):
             config.write(blacklist_file)
 
 
-def update_blacklist(df, table_name):
-    blacklist_path = paths.dict["blacklist_path"]
+def update_blacklist(df: pd.DataFrame, table_name: str):
+    blacklist_path = dir_paths.dict["blacklist_path"]
 
     blacklist = configparser.ConfigParser()
 
@@ -178,8 +189,8 @@ def update_blacklist(df, table_name):
         blacklist.write(blacklist_file)
 
 
-def read_blacklist_articles(table_name):
-    blacklist_path = paths.dict["blacklist_path"]
+def read_blacklist_articles(table_name: str):
+    blacklist_path = dir_paths.dict["blacklist_path"]
     config = configparser.ConfigParser()
     config.read(blacklist_path)
     # Überprüfe, ob die angegebene Sektion vorhanden ist

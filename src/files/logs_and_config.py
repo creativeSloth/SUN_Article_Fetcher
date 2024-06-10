@@ -8,7 +8,7 @@ import directories.directory_base as directory_base
 
 
 def create_config_file():
-    config_path = directory_base.paths.dict["config_path"]
+    config_path = directory_base.dir_paths.dict["config_path"]
 
     if os.path.exists(config_path):
         return
@@ -71,7 +71,7 @@ def load_save_file(file_path, section):
 
 
 def update_config_file(section, option, value):
-    config_path = directory_base.paths.dict["config_path"]
+    config_path = directory_base.dir_paths.dict["config_path"]
     config = configparser.ConfigParser()
     config.read(config_path)
     config[section][option] = value
@@ -81,7 +81,7 @@ def update_config_file(section, option, value):
 
 
 def read_config_value(section, option):
-    config_path = directory_base.paths.dict["config_path"]
+    config_path = directory_base.dir_paths.dict["config_path"]
     config = configparser.ConfigParser()
     config.read(config_path)
     value = config[section][option]
@@ -93,7 +93,7 @@ def log_copy_details(self, source_path, target_path, source_files, matching_file
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
     log_source_file_name = f"datalog_{timestamp}.txt"
 
-    log_subfolder_2_path = directory_base.paths.dict["log_subfolder_2_path"]
+    log_subfolder_2_path = directory_base.dir_paths.dict["log_subfolder_2_path"]
 
     # Pfad zur Log-Datei im Unterordner "logs"
     log_file_path = os.path.join(log_subfolder_2_path, log_source_file_name)
@@ -141,7 +141,7 @@ def log_copy_details(self, source_path, target_path, source_files, matching_file
 
 
 def create_device_related_storage_list(storage_file=None):
-    related_path = directory_base.paths.dict[storage_file]
+    related_path = directory_base.dir_paths.dict[storage_file]
 
     if os.path.exists(related_path):
         return
@@ -153,7 +153,7 @@ def create_device_related_storage_list(storage_file=None):
 
 
 def update_device_related_storage_list(storage_file, data_set):
-    file_path = directory_base.paths.dict[storage_file]
+    file_path = directory_base.dir_paths.dict[storage_file]
     store_file = configparser.ConfigParser()
 
     # Lade vorhandene Konfiguration, wenn die Datei vorhanden ist
@@ -175,7 +175,7 @@ def update_device_related_storage_list(storage_file, data_set):
 
 
 def read_device_related_storage_list(storage_file, section, option):
-    file_path = directory_base.paths.dict[storage_file]
+    file_path = directory_base.dir_paths.dict[storage_file]
 
     stored_file = configparser.ConfigParser()
     stored_file.read(file_path)

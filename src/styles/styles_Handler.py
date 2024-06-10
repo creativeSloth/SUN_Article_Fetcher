@@ -1,9 +1,9 @@
-from directories.directory_base import paths
+from directories.directory_base import dir_paths
 
 
 def initialize_ui_style(self) -> None:
     # Pfad zur .qss-Datei
-    stylesheet_path = paths.dict["stylesheet_path"]
+    stylesheet_path = dir_paths.dict["stylesheet_path"]
 
     # Stylesheet aus der Datei einlesen
     with open(stylesheet_path, "r") as qss_file:

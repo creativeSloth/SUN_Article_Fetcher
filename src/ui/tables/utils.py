@@ -26,7 +26,7 @@ def get_all_tables_to_layout_map(self):
     return device_tables, GENERAL_TABLE_MAP
 
 
-def clear_table(table):
+def clear_table(table: QtWidgets.QTableWidget):
     # Setze die Anzahl der Zeilen auf 0, um alle Zeilen zu entfernen
     table.setRowCount(0)
 
@@ -63,3 +63,7 @@ def disable_colums_edit(table: QtWidgets.QTableWidget, firstcol=0, lastcol: int 
 @customize_table_row
 def on_sort_indicator_changed(self, table):
     pass
+
+
+def table_name_and_count_are_valid(table, table_name, table_row):
+    return table_name == table.objectName().lower() and table.rowCount() <= table_row

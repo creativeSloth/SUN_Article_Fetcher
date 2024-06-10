@@ -10,9 +10,9 @@ import files.logs_and_config as logs_and_config
 
 
 def get_paths():
-    source_path = directory_base.paths.dict["source_path"]
-    target_path = directory_base.paths.dict["target_1_path"]
-    log_sub2folder_path = directory_base.paths.dict["log_subfolder_2_path"]
+    source_path = directory_base.dir_paths.dict["source_path"]
+    target_path = directory_base.dir_paths.dict["target_1_path"]
+    log_sub2folder_path = directory_base.dir_paths.dict["log_subfolder_2_path"]
     return source_path, target_path, log_sub2folder_path
 
 

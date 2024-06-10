@@ -23,6 +23,7 @@ from ui.tables.utils import (
     get_column_index,
     get_fixed_val_columns,
     resize_columns_to_contents,
+    table_name_and_count_are_valid,
 )
 
 
@@ -49,7 +50,7 @@ def initialize_table_search(self):
 
 
 @customize_table_row
-def fill_article_table(self, table, df=None):
+def fill_article_table(self, table: QtWidgets.QTableWidget, df=None):
     clear_table(table=table)
 
     if df is not None:
@@ -79,7 +80,7 @@ def fill_device_lists(self, df):
 
 
 @customize_table_row
-def fill_specific_device_list(self, table, df):
+def fill_specific_device_list(self, table: QtWidgets.QTableWidget, df: pd.DataFrame):
 
     table_name = table.objectName()
     # Laden Sie die Artikelnummern aus der Blacklist
@@ -100,8 +101,19 @@ def fill_specific_device_list(self, table, df):
 
 
 def import_from_df_row(
-    table: QtWidgets.QTableWidget, data_row, import_column_count: int = None
-):
+    table: QtWidgets.QTableWidget,
+    data_row,
+    import_column_count: int = None,
+) -> None:
+    """Importiert eine Zeile aus einem Datensatz, der Datensatz kann ein DataFrame oder ein Tuple sein
+
+    Args:
+        table (QtWidgets.QTableWidget): Die Tabelle die den Datensatz aufnehmen soll
+        data_row (pd.Series | tuple): Eine Datenzeile, deren Datensätze in eine jeweilige Spalte eingefügt werden soll.
+        Hier soll die 0 Spalte der Tabelle für eine Checkbox, übersprungen werden
+        import_column_count (int, optional): Die Anzahl der Spalten in die eingefügt werden soll.
+    """
+
     tw_row = table.rowCount()
     table.insertRow(tw_row)
 
@@ -115,13 +127,15 @@ def import_from_df_row(
 
     for index in range(import_column_count):
 
-        if isinstance(data_row, pd.Series) and index <= import_column_count - 2:
-            item_col = QtWidgets.QTableWidgetItem(str(data_row.iloc[index]))
-
-        elif isinstance(data_row, tuple):
-            item_col = QtWidgets.QTableWidgetItem(str(data_row[index]))
-
-        table.setItem(tw_row, index + 1, item_col)
+        # Überprüfe die Anzahl der Spalten in data_row
+        col_count_data_row = len(data_row)
+        if col_count_data_row > index:
+            if isinstance(data_row, pd.Series) and data_row.iloc[index] is not None:
+                item_col = QtWidgets.QTableWidgetItem(str(data_row.iloc[index]))
+                table.setItem(tw_row, index + 1, item_col)
+            elif isinstance(data_row, tuple) and data_row[index] is not None:
+                item_col = QtWidgets.QTableWidgetItem(str(data_row[index]))
+                table.setItem(tw_row, index + 1, item_col)
 
 
 def adding_specific_columns(self, table, tw_row=None, df_row=None):
@@ -262,14 +276,13 @@ def fill_tables_content(self, saved_tables_content):
         # Durch jede Qt-Tabelle iterieren
         for table in tables:
 
-            # Wenn der Tabellenname übereinstimmt
-            if table_name == table.objectName().lower():
-                # Wenn die Anzahl der Zeilen kleiner oder gleich der Zielzeile ist
-                if table.rowCount() <= table_row:
-                    # Differenz berechnen und fehlende Zeilen einfügen
-                    diff = table_row - table.rowCount()
-                    for _ in range(diff + 1):
-                        table.insertRow(table.rowCount())
+            # Wenn der Tabellenname übereinstimmt - Wenn die Anzahl der Zeilen kleiner oder gleich der Zielzeile ist
+            if table_name_and_count_are_valid(table, table_name, table_row):
+
+                # Differenz berechnen und fehlende Zeilen einfügen
+                diff = table_row - table.rowCount()
+                for _ in range(diff + 1):
+                    table.insertRow(table.rowCount())
 
                 # Checkbox in Spalte 1 setzen
                 checkbox_item = QtWidgets.QTableWidgetItem()

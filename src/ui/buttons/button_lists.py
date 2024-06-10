@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QMainWindow, QPushButton
+from PyQt5.QtWidgets import QMainWindow, QPushButton, QTableWidget
 
 from files.file_sys_handler import compare_src_docs_with_article_list
 from ui.buttons.custom_button import create_button_into_table_cell
@@ -51,8 +51,8 @@ def initialize_push_buttons(self):
     self.button_list.add_move_bl_button(window=self)
 
 
-def add_doc_avlbl_btns(self, table, all_files):
-    self.button_list: ButtonLists
+def add_doc_avlbl_btns(self, table: QTableWidget, all_files: list = [str]) -> None:
+
     self.button_list.reset_list(list_attr="doc_available")
     for row in range(table.rowCount()):
         has_doc = compare_src_docs_with_article_list(table, row, all_files)

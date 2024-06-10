@@ -2,7 +2,7 @@ from qtpy import QtWidgets
 
 import files.logs_and_config as logs_and_config
 from directories import directory_base
-from directories.directory_base import get_file_path, get_folder_path
+from directories.dirs_decorators import get_file_path, get_folder_path
 from styles.styles_Handler import initialize_ui_style
 from ui.windows import settingsConnectionWindow, settingsPathsWindow
 

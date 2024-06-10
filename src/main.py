@@ -6,15 +6,15 @@ from qtpy import QtWidgets
 from data_sources.data_base import execute_query, get_sql_query, read_data_from_file
 from directories.directory_base import (
     check_path_existence,
+    dir_paths,
     get_docs_paths,
-    get_folder_path,
     get_save_file_dir,
-    paths,
     set_doc_1_dir,
     set_static_directories,
     set_target_1_dir,
     set_target_2_dir,
 )
+from directories.dirs_decorators import get_folder_path
 from files.blacklist import initialize_blacklist_dialogs
 from files.file_sys_handler import (
     copy_files,
@@ -44,7 +44,7 @@ from ui.fields.ui_fields_base import (
     replace_fields_in_doc,
 )
 from ui.menus import menus_base
-from ui.tables.decorators import connect_sort_indicator_changed
+from ui.tables.table_decorators import connect_sort_indicator_changed
 from ui.tables.tables_base import (
     check_specs_in_device_tables,
     fill_article_table,
@@ -206,7 +206,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def on_btn_create_doc2_clicked(self):
         _, doc_2 = get_docs_paths(self.ui.project.toPlainText())
-        paths.dict["doc_2_path"] = doc_2
+        dir_paths.dict["doc_2_path"] = doc_2
         replace_fields_in_doc(
             self, doc_path="doc_2_path", template_path="template_2_path"
         )
