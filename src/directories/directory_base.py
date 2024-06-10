@@ -27,7 +27,7 @@ class Paths:
         }
 
 
-MAIN_PATHS = Paths()
+paths = Paths()
 
 
 def set_static_directories():
@@ -44,13 +44,13 @@ def set_static_directories():
     # **************************  Article Fetcher module  ********************************************
 
     # Setze die Pfade direkt im dict-Attribut der _main_paths Instanz
-    MAIN_PATHS.dict["log_subfolder_path"] = log_subfolder_path
-    MAIN_PATHS.dict["log_subfolder_2_path"] = log_subfolder_2_path
-    MAIN_PATHS.dict["config_path"] = config_path
-    MAIN_PATHS.dict["blacklist_path"] = blacklist_path
-    MAIN_PATHS.dict["device_specs_list_path"] = device_specs_list_path
-    MAIN_PATHS.dict["stylesheet_path"] = stylesheet_path
-    MAIN_PATHS.dict["icons_folder_path"] = icons_folder_path
+    paths.dict["log_subfolder_path"] = log_subfolder_path
+    paths.dict["log_subfolder_2_path"] = log_subfolder_2_path
+    paths.dict["config_path"] = config_path
+    paths.dict["blacklist_path"] = blacklist_path
+    paths.dict["device_specs_list_path"] = device_specs_list_path
+    paths.dict["stylesheet_path"] = stylesheet_path
+    paths.dict["icons_folder_path"] = icons_folder_path
 
 
 def get_main_dir():
@@ -119,33 +119,33 @@ def create_storage_files(log_path):
 
 
 def set_source_dir(dir):
-    MAIN_PATHS.dict["source_path"] = dir
+    paths.dict["source_path"] = dir
 
 
 def set_target_1_dir(dir):
-    MAIN_PATHS.dict["target_1_path"] = dir
+    paths.dict["target_1_path"] = dir
 
 
 def set_target_2_dir(dir):
-    MAIN_PATHS.dict["target_2_path"] = dir
+    paths.dict["target_2_path"] = dir
 
 
 def set_template_dir(template, dir):
-    MAIN_PATHS.dict[template] = dir
+    paths.dict[template] = dir
 
 
 def set_doc_1_dir(self):
     doc_1, _ = get_docs_paths(project=self.ui.project.toPlainText())
-    MAIN_PATHS.dict["doc_1_path"] = doc_1
+    paths.dict["doc_1_path"] = doc_1
 
 
 def set_doc_2_dir(self):
     doc_2, _ = get_docs_paths(project=self.ui.project.toPlainText())
-    MAIN_PATHS.dict["doc_2_path"] = doc_2
+    paths.dict["doc_2_path"] = doc_2
 
 
 def get_docs_paths(project):
-    target_2_path = MAIN_PATHS.dict["target_2_path"]
+    target_2_path = paths.dict["target_2_path"]
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
     doc1_name = f"{project} - Doku - Anlagendaten für MaStR - {timestamp}.odt"
     doc2_name = f"{project} - Doku NIO - SQL Adressen V1.0 - {timestamp}.odt"
@@ -196,11 +196,11 @@ def check_path_existence(modus):
     def sub_check_path_existence(func):
         def wrapper(self, *args, **kwargs):
 
-            source_path = MAIN_PATHS.dict["source_path"]
-            target_1_path = MAIN_PATHS.dict["target_1_path"]
-            template_1_path = MAIN_PATHS.dict["template_1_path"]
-            target_2_path = MAIN_PATHS.dict["target_2_path"]
-            template_2_path = MAIN_PATHS.dict["template_2_path"]
+            source_path = paths.dict["source_path"]
+            target_1_path = paths.dict["target_1_path"]
+            template_1_path = paths.dict["template_1_path"]
+            target_2_path = paths.dict["target_2_path"]
+            template_2_path = paths.dict["template_2_path"]
 
             paths_and_messages = [
                 (source_path, "Quellpfad existiert nicht."),

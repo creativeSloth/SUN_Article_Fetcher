@@ -52,6 +52,7 @@ def initialize_push_buttons(self):
 
 
 def add_doc_avlbl_btns(self, table, all_files):
+    self.button_list: ButtonLists
     self.button_list.reset_list(list_attr="doc_available")
     for row in range(table.rowCount()):
         has_doc = compare_src_docs_with_article_list(table, row, all_files)
@@ -64,6 +65,7 @@ def add_doc_avlbl_btns(self, table, all_files):
                 text="",
                 on_button_pressed=None,
             )
+
             self.button_list.add_generic_button(
                 button=push_button, button_type="doc_available"
             )

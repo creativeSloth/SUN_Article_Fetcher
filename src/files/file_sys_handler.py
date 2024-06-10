@@ -10,9 +10,9 @@ import files.logs_and_config as logs_and_config
 
 
 def get_paths():
-    source_path = directory_base.MAIN_PATHS.dict["source_path"]
-    target_path = directory_base.MAIN_PATHS.dict["target_1_path"]
-    log_sub2folder_path = directory_base.MAIN_PATHS.dict["log_subfolder_2_path"]
+    source_path = directory_base.paths.dict["source_path"]
+    target_path = directory_base.paths.dict["target_1_path"]
+    log_sub2folder_path = directory_base.paths.dict["log_subfolder_2_path"]
     return source_path, target_path, log_sub2folder_path
 
 
@@ -48,6 +48,7 @@ def get_matching_files(source_files, selected_files):
 
 
 def mark_matching_files(self, matching_files):
+
     table = self.ui.articles_list
     for row in range(table.rowCount()):
         article_no_item = table.item(row, 1)

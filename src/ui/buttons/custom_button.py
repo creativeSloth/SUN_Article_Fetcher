@@ -6,11 +6,11 @@ from PyQt5.QtGui import QColor, QIcon, QPainter, QPixmap
 from PyQt5.QtWidgets import QPushButton
 from qtpy import QtWidgets
 
-from directories.directory_base import MAIN_PATHS
+from directories.directory_base import paths
 
 
 def get_paths_of_icons(icon_name: str = None):
-    icon_folder_path = MAIN_PATHS.dict["icons_folder_path"]
+    icon_folder_path = paths.dict["icons_folder_path"]
 
     default_color_appendix = "_48dp_WHITE.png"
 
@@ -198,5 +198,6 @@ def create_button_into_table_cell(
         push_button.clicked.connect(
             lambda _, tbl=table_of_cell, btn=push_button: on_button_pressed(tbl, btn)
         )
+
     table_of_cell.setCellWidget(row, column, push_button)
     return push_button

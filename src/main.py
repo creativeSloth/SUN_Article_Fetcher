@@ -3,22 +3,36 @@ import sys
 from PyQt5.QtWidgets import QFileDialog
 from qtpy import QtWidgets
 
-import data_sources.data_base
-import files.file_sys_handler as file_sys_handler
-import files.logs_and_config as logs_and_config
-import save_file
+from data_sources.data_base import execute_query, get_sql_query, read_data_from_file
 from directories.directory_base import (
-    MAIN_PATHS,
     check_path_existence,
     get_docs_paths,
     get_folder_path,
     get_save_file_dir,
+    paths,
     set_doc_1_dir,
     set_static_directories,
     set_target_1_dir,
     set_target_2_dir,
 )
-from files import blacklist
+from files.blacklist import initialize_blacklist_dialogs
+from files.file_sys_handler import (
+    copy_files,
+    get_files_in_source_path,
+    get_matching_files,
+    get_paths,
+    get_selected_files_and_df,
+    log_and_show_result,
+    mark_matching_files,
+)
+from files.logs_and_config import (
+    create_config_file,
+    create_device_related_storage_list,
+    create_save_file,
+    update_config_file,
+)
+from save_file.load import load_fields_text, load_tables_content
+from save_file.save import save_fields_text, save_tables_content
 from styles.styles_Handler import initialize_ui_style
 from ui.buttons.button_lists import initialize_push_buttons
 from ui.buttons.custom_button import customize_push_buttons, eventFilter
@@ -38,6 +52,7 @@ from ui.tables.tables_base import (
     initialize_table_search,
     remove_articles_from_table,
 )
+from ui.windows import mainwindow
 from ui.windows.mainwindow import Ui_MainWindow
 
 
@@ -54,22 +69,18 @@ class MainWindow(QtWidgets.QMainWindow):
         # Verbinde die Signale mit den entsprechenden Slots
         self.map_ui_buttons()
 
-    def initialize(self) -> None:
+    def initialize(self: Ui_MainWindow) -> None:
 
         set_static_directories()
         menus_base.initialize_menu_dialogs(self)
-        blacklist.initialize_blacklist_dialogs(self)
+        initialize_blacklist_dialogs(self)
         initialize_push_buttons(self)
         initialize_table_search(self)
         customize_push_buttons(self)
 
-        logs_and_config.create_config_file()
-        logs_and_config.create_device_related_storage_list(
-            storage_file="blacklist_path"
-        )
-        logs_and_config.create_device_related_storage_list(
-            storage_file="device_specs_list_path"
-        )
+        create_config_file()
+        create_device_related_storage_list(storage_file="blacklist_path")
+        create_device_related_storage_list(storage_file="device_specs_list_path")
 
         config_to_fields(self)
 
@@ -146,15 +157,13 @@ class MainWindow(QtWidgets.QMainWindow):
             # Überprüfen Sie zusätzlich, ob file_path nicht leer ist
             if file_path:
                 # Lösche die vorhandenen Daten und fülle die Tabelle mit Daten aus der Datei
-                df = data_sources.data_base.read_data_from_file(file_path)
+                df = read_data_from_file(file_path)
                 fill_article_table(self, table=self.ui.articles_list, df=df)
 
     def on_load_articles_from_db_btn_click(self):
         # Lese Daten aus der MySQL-Datenbank und speichere sie in der Instanzvariable df
-        df = data_sources.data_base.execute_query(self, query="sql1")
-        logs_and_config.update_config_file(
-            "Abfrage", "sql1", data_sources.data_base.get_sql_query(self)["sql1"]
-        )
+        df = execute_query(self, query="sql1")
+        update_config_file("Abfrage", "sql1", get_sql_query(self)["sql1"])
         # Lösche die vorhandenen Daten und fülle die Tabelle mit den Daten aus der Datenbank
         fill_article_table(self, table=self.ui.articles_list, df=df)
 
@@ -165,24 +174,18 @@ class MainWindow(QtWidgets.QMainWindow):
     def on_target_path_btn_click(self, folder_path):
         self.ui.target_path_text.setPlainText(folder_path)
         set_target_1_dir(folder_path)
-        logs_and_config.update_config_file("Pfade", "target_1_path", folder_path)
+        update_config_file("Pfade", "target_1_path", folder_path)
 
     @check_path_existence(modus=0)
     def on_copy_files_btn_click(self, *args, **kwargs):
-        source_path, target_path, log_subfolder_2_path = file_sys_handler.get_paths()
-        source_files = data_sources.data_base.get_files_in_source_path(
-            self, source_path
-        )
-        selected_files, df = file_sys_handler.get_selected_files_and_df(self)
-        matching_files = file_sys_handler.get_matching_files(
-            source_files, selected_files
-        )
-        file_sys_handler.mark_matching_files(self, matching_files)
-        count = file_sys_handler.copy_files(
-            self, matching_files, source_path, target_path
-        )
+        source_path, target_path, log_subfolder_2_path = get_paths()
+        source_files = get_files_in_source_path(self, source_path)
+        selected_files, df = get_selected_files_and_df(self)
+        matching_files = get_matching_files(source_files, selected_files)
+        mark_matching_files(self, matching_files)
+        count = copy_files(self, matching_files, source_path, target_path)
 
-        file_sys_handler.log_and_show_result(
+        log_and_show_result(
             self,
             source_path,
             target_path,
@@ -203,17 +206,15 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def on_btn_create_doc2_clicked(self):
         _, doc_2 = get_docs_paths(self.ui.project.toPlainText())
-        MAIN_PATHS.dict["doc_2_path"] = doc_2
+        paths.dict["doc_2_path"] = doc_2
         replace_fields_in_doc(
             self, doc_path="doc_2_path", template_path="template_2_path"
         )
 
     def on_load_data_to_device_list_btn_click(self):
         clear_docu_fields(self)
-        df = data_sources.data_base.execute_query(self, query="sql1")
-        logs_and_config.update_config_file(
-            "Abfrage", "sql1", data_sources.data_base.get_sql_query(self)["sql1"]
-        )
+        df = execute_query(self, query="sql1")
+        update_config_file("Abfrage", "sql1", get_sql_query(self)["sql1"])
         fill_device_lists(self, df)
 
     def on_move_none_PV_modules_to_blacklist_click(self):
@@ -233,10 +234,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def on_fill_fields_btn_click(self):
 
-        df = data_sources.data_base.execute_query(self, query="sql2")
-        logs_and_config.update_config_file(
-            "Abfrage", "sql2", data_sources.data_base.get_sql_query(self)["sql2"]
-        )
+        df = execute_query(self, query="sql2")
+        update_config_file("Abfrage", "sql2", get_sql_query(self)["sql2"])
         clear_docu_fields(self)
         fill_docu_fields(self)
 
@@ -247,21 +246,21 @@ class MainWindow(QtWidgets.QMainWindow):
     def on_target_path_btn_2_click(self, folder_path):
         self.ui.target_path_text_2.setPlainText(folder_path)
         set_target_2_dir(folder_path)
-        logs_and_config.update_config_file("Pfade", "target_2_path", folder_path)
+        update_config_file("Pfade", "target_2_path", folder_path)
 
     # * * * * * * * * * * * * * * * * * Settings * * * * * * * * * * * * * * * *
 
     def on_save_btn_click(self):
-        file_path = logs_and_config.create_save_file(self)
+        file_path = create_save_file(self)
         if file_path != "":
-            save_file.save.save_fields_text(self, file_path)
-            save_file.save.save_tables_content(self, file_path)
+            save_fields_text(self, file_path)
+            save_tables_content(self, file_path)
 
     def on_load_btn_click(self):
         file_path = get_save_file_dir(self)
         if file_path != "":
-            save_file.load.load_fields_text(self, file_path)
-            save_file.load.load_tables_content(self, file_path)
+            load_fields_text(self, file_path)
+            load_tables_content(self, file_path)
 
 
 # Führe das Programm aus, wenn es direkt gestartet wird

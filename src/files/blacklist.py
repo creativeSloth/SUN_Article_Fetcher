@@ -4,11 +4,9 @@ import os
 from PyQt5 import QtWidgets
 from qtpy import QtWidgets
 
-import directories.directory_base as directory_base
-from directories import directory_base
+from directories.directory_base import paths
 from styles.styles_Handler import initialize_ui_style
 from ui.buttons.custom_button import create_button_into_table_cell
-from ui.tables.tables_base import import_from_df_row
 from ui.tables.utils import clear_table, disable_colums_edit, resize_columns_to_contents
 from ui.windows import blacklistWindow
 
@@ -81,6 +79,7 @@ def init_blacklist_button_click_signal(self, table):
 
 
 def on_blacklist_button_click(self, device_table):
+    from ui.tables.tables_base import import_from_df_row
 
     device_table_name = device_table.objectName()
 
@@ -135,7 +134,7 @@ def on_remove_articles_from_ui_bl(
 
 
 def remove_articles_from_blacklist(table_name, art_no: str):
-    blacklist_path = directory_base.MAIN_PATHS.dict["blacklist_path"]
+    blacklist_path = paths.dict["blacklist_path"]
     config = configparser.ConfigParser()
 
     # Versuche, die Konfigurationsdatei zu lesen und den Eintrag zu entfernen
@@ -153,7 +152,7 @@ def remove_articles_from_blacklist(table_name, art_no: str):
 
 
 def update_blacklist(df, table_name):
-    blacklist_path = directory_base.MAIN_PATHS.dict["blacklist_path"]
+    blacklist_path = paths.dict["blacklist_path"]
 
     blacklist = configparser.ConfigParser()
 
@@ -180,7 +179,7 @@ def update_blacklist(df, table_name):
 
 
 def read_blacklist_articles(table_name):
-    blacklist_path = directory_base.MAIN_PATHS.dict["blacklist_path"]
+    blacklist_path = paths.dict["blacklist_path"]
     config = configparser.ConfigParser()
     config.read(blacklist_path)
     # Überprüfe, ob die angegebene Sektion vorhanden ist

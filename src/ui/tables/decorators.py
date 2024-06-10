@@ -1,5 +1,5 @@
 from ui.fields.ui_fields_base import get_all_tables
-from ui.tables.tables_base import on_sort_indicator_changed
+from ui.tables.utils import on_sort_indicator_changed
 
 
 def connect_sort_indicator_changed(self):

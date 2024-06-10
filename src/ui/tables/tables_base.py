@@ -1,8 +1,12 @@
 import pandas as pd
 from qtpy import QtCore, QtWidgets
 
-import files.blacklist as blacklist
 from files import logs_and_config
+from files.blacklist import (
+    init_blacklist_button_click_signal,
+    read_blacklist_articles,
+    update_blacklist,
+)
 from files.file_sys_handler import get_files_in_source_path, get_paths
 from ui.buttons.button_lists import add_doc_avlbl_btns
 from ui.buttons.custom_button import customize_push_buttons
@@ -41,16 +45,11 @@ def initialize_table_search(self):
 
         # Falls die Tabelle eine Gerätetabelle ist, initialisiere das Signal für den Blacklist-Button-Klick
         if table in device_tables:
-            blacklist.init_blacklist_button_click_signal(self, table=table)
+            init_blacklist_button_click_signal(self, table=table)
 
 
 @customize_table_row
-def on_sort_indicator_changed(self, table):
-    pass
-
-
-@customize_table_row
-def fill_article_table(self, table: QtWidgets.QTableWidget, df=None):
+def fill_article_table(self, table, df=None):
     clear_table(table=table)
 
     if df is not None:
@@ -85,7 +84,7 @@ def fill_specific_device_list(self, table, df):
     table_name = table.objectName()
     # Laden Sie die Artikelnummern aus der Blacklist
     blacklist_article_numbers = [
-        number for number, _ in blacklist.read_blacklist_articles(table_name=table_name)
+        number for number, _ in read_blacklist_articles(table_name=table_name)
     ]
     clear_table(table)
     if df is not None:
@@ -100,12 +99,14 @@ def fill_specific_device_list(self, table, df):
     disable_colums_edit(table, firstcol=1, lastcol=5)
 
 
-def import_from_df_row(table, data_row=None, import_column_count=None):
+def import_from_df_row(
+    table: QtWidgets.QTableWidget, data_row, import_column_count: int = None
+):
     tw_row = table.rowCount()
     table.insertRow(tw_row)
 
     # Spalte 1 (statisch) mit einer Checkbox
-    checkbox_item = QtWidgets.QTableWidgetItem()
+    checkbox_item: QtWidgets.QTableWidgetItem = QtWidgets.QTableWidgetItem()
     checkbox_item.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
     checkbox_item.setCheckState(QtCore.Qt.Checked)
 
@@ -115,7 +116,7 @@ def import_from_df_row(table, data_row=None, import_column_count=None):
     for index in range(import_column_count):
 
         if isinstance(data_row, pd.Series) and index <= import_column_count - 2:
-            item_col = QtWidgets.QTableWidgetItem(str(data_row.iloc[int(index)]))
+            item_col = QtWidgets.QTableWidgetItem(str(data_row.iloc[index]))
 
         elif isinstance(data_row, tuple):
             item_col = QtWidgets.QTableWidgetItem(str(data_row[index]))
@@ -174,7 +175,7 @@ def remove_articles_from_table(table):
     for row in reversed(rows_to_remove):
         table.removeRow(row)
 
-    blacklist.update_blacklist(df, table.objectName())
+    update_blacklist(df, table.objectName())
 
 
 def collect_data_from_table(table, article_no_col_index, discard_columns):

@@ -2,6 +2,7 @@ from qtpy import QtCore, QtWidgets
 
 import files.blacklist as blacklist
 from ui.fields.ui_fields_base import get_articles_table, get_device_tables
+from ui.tables.customize_row import customize_table_row
 
 
 def get_fixed_val_columns():
@@ -57,3 +58,8 @@ def disable_colums_edit(table: QtWidgets.QTableWidget, firstcol=0, lastcol: int 
             # Entfernt das Bearbeitungsflag für die Zelle
             if item is not None:
                 item.setFlags(item.flags() & ~QtCore.Qt.ItemIsEditable)
+
+
+@customize_table_row
+def on_sort_indicator_changed(self, table):
+    pass
