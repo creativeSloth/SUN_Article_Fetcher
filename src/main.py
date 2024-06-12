@@ -52,7 +52,6 @@ from ui.tables.tables_base import (
     initialize_table_search,
     remove_articles_from_table,
 )
-from ui.windows import mainwindow
 from ui.windows.mainwindow import Ui_MainWindow
 
 

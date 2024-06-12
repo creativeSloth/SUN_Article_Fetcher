@@ -46,6 +46,7 @@ class ButtonLists:
 
 
 def initialize_push_buttons(self):
+    self.ui.load_articles_file_btn.hide()
     # Erstelle eine PushButton-Instanz
     self.button_list = ButtonLists()
     self.button_list.add_move_bl_button(window=self)

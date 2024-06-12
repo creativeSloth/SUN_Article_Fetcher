@@ -53,6 +53,19 @@ QLabel#templates_paths_headline_label_2  {
 	border-top: 2px solid rgba(19, 33, 59, 255);
 }
 
+QLabel#load_articles_label,
+QLabel#paste_docs_btn_label,
+QLabel#load_data_to_device_lists_label,
+QLabel#fill_fields_label,
+QLabel#store_device_specs_label,
+QLabel#prepare_label,
+QLabel#create_doc1_label,
+QLabel#create_doc2_label,
+QLabel#label
+  {
+	font: 10pt;
+}
+
 /* QTextEdit, QPlainTextEdit, QLineEdit */
 /* -------------------------------------- */
 QTextEdit,

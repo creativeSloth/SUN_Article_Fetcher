@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'd:\3441\Documents\Familie\Edgar\Weiterbildungen\Kurse\Python Bootcamp\Projekte\SUN_Article_Fetcher\src/ui\blacklistWindow.ui'
+# Form implementation generated from reading ui file 'd:\3441\Documents\Familie\Edgar\Weiterbildungen\Kurse\Python Bootcamp\Projekte\SUN_Article_Fetcher\src/ui/windows\blacklistWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #
