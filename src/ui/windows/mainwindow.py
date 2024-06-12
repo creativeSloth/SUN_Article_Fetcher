@@ -345,7 +345,7 @@ class Ui_MainWindow(object):
         self.articles_list.setWordWrap(True)
         self.articles_list.setCornerButtonEnabled(True)
         self.articles_list.setObjectName("articles_list")
-        self.articles_list.setColumnCount(4)
+        self.articles_list.setColumnCount(5)
         self.articles_list.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.articles_list.setHorizontalHeaderItem(0, item)
@@ -355,6 +355,8 @@ class Ui_MainWindow(object):
         self.articles_list.setHorizontalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
         self.articles_list.setHorizontalHeaderItem(3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.articles_list.setHorizontalHeaderItem(4, item)
         self.articles_list.horizontalHeader().setVisible(True)
         self.articles_list.horizontalHeader().setCascadingSectionResizes(True)
         self.articles_list.horizontalHeader().setDefaultSectionSize(180)
@@ -2653,7 +2655,7 @@ class Ui_MainWindow(object):
         self.menuBar.addAction(self.menuSettings.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -2675,6 +2677,8 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Artikelbezeichnung"))
         item = self.articles_list.horizontalHeaderItem(3)
         item.setText(_translate("MainWindow", "Menge verbraucht [Stk.]"))
+        item = self.articles_list.horizontalHeaderItem(4)
+        item.setText(_translate("MainWindow", "x"))
         self.load_data_to_device_lists_btn.setToolTip(_translate("MainWindow", "Lade Gerätelisten:\n"
 "PV-Module, Wechselrichter, Batteriewechselrichter, Speicher, Ladestation"))
         self.load_data_to_device_lists_label.setText(_translate("MainWindow", "Laden"))

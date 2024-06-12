@@ -1,3 +1,4 @@
+from PyQt5 import QtWidgets
 from qtpy import QtCore, QtWidgets
 
 import files.blacklist as blacklist
@@ -67,3 +68,33 @@ def on_sort_indicator_changed(self, table):
 
 def table_name_and_count_are_valid(table, table_name, table_row):
     return table_name == table.objectName().lower() and table.rowCount() <= table_row
+
+
+def remove_row_with_button_from_table(
+    table: QtWidgets.QTableWidget, push_button: QtWidgets.QPushButton
+):
+    if push_button is not None and table is not None:
+        index = table.indexAt(push_button.pos())
+        if index.isValid():
+            row = index.row()
+            article_no = table.item(row, 1).text()
+            article_name = table.item(row, 1).text()
+            table.removeRow(row)
+            removed: bool = True
+    return removed, article_no, article_name
+
+
+def is_not_on_bl(blacklist_article_numbers, df_row):
+    return str(df_row.iloc[0]) not in blacklist_article_numbers
+
+
+def check_article_number_on_bl(table):
+    from files.blacklist import read_blacklist_articles
+
+    table_name = table.objectName()
+    # Laden Sie die Artikelnummern aus der Blacklist
+    blacklist_article_numbers = [
+        number for number, _ in read_blacklist_articles(table_name=table_name)
+    ]
+
+    return blacklist_article_numbers

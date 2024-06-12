@@ -2,13 +2,9 @@ import pandas as pd
 from qtpy import QtCore, QtWidgets
 
 from files import logs_and_config
-from files.blacklist import (
-    init_blacklist_button_click_signal,
-    read_blacklist_articles,
-    update_blacklist,
-)
+from files.blacklist import init_blacklist_button_click_signal, update_blacklist
 from files.file_sys_handler import get_files_in_source_path, get_paths
-from ui.buttons.button_lists import add_doc_avlbl_btns
+from ui.buttons.button_lists import add_doc_avlbl_btns, add_move_to_article_list_bl_btns
 from ui.buttons.custom_button import customize_push_buttons
 from ui.fields.ui_fields_base import get_all_tables, get_device_tables
 from ui.tables.customize_row import customize_table_row
@@ -17,11 +13,14 @@ from ui.tables.search_bar import (
     init_search_button_click_signal,
 )
 from ui.tables.utils import (
+    check_article_number_on_bl,
     clear_table,
     disable_colums_edit,
     get_all_tables_to_layout_map,
     get_column_index,
     get_fixed_val_columns,
+    is_not_on_bl,
+    remove_row_with_button_from_table,
     resize_columns_to_contents,
     table_name_and_count_are_valid,
 )
@@ -50,15 +49,27 @@ def initialize_table_search(self):
 
 
 @customize_table_row
-def fill_article_table(self, table: QtWidgets.QTableWidget, df=None):
-    clear_table(table=table)
-
-    if df is not None:
-        for _, df_row in df.iterrows():
-            import_from_df_row(table, data_row=df_row, import_column_count=3)
+def fill_article_table(self, table: QtWidgets.QTableWidget, df: pd.DataFrame = None):
+    put_non_bl_articles_on_table(table, df, import_column_count=3)
     mark_documents_availability(self, table)
+    add_move_to_article_list_bl_btns(self, table)
     resize_columns_to_contents(table=table)
     disable_colums_edit(table, firstcol=1, lastcol=4)
+
+
+def put_non_bl_articles_on_table(
+    table: QtWidgets.QTableWidget, df: pd.DataFrame, import_column_count: int = 0
+):
+    clear_table(table=table)
+
+    blacklist_article_numbers = check_article_number_on_bl(table)
+    if df is not None:
+        for _, df_row in df.iterrows():
+            # Überprüfen Sie, ob die Artikelnummer nicht in der Blacklist enthalten ist
+            if is_not_on_bl(blacklist_article_numbers, df_row):
+                import_from_df_row(
+                    table, data_row=df_row, import_column_count=import_column_count
+                )
 
 
 def mark_documents_availability(self, table):
@@ -82,19 +93,7 @@ def fill_device_lists(self, df):
 @customize_table_row
 def fill_specific_device_list(self, table: QtWidgets.QTableWidget, df: pd.DataFrame):
 
-    table_name = table.objectName()
-    # Laden Sie die Artikelnummern aus der Blacklist
-    blacklist_article_numbers = [
-        number for number, _ in read_blacklist_articles(table_name=table_name)
-    ]
-    clear_table(table)
-    if df is not None:
-        for _, df_row in df.iterrows():
-            # Überprüfen Sie, ob die Artikelnummer nicht in der Blacklist enthalten ist
-            if str(df_row.iloc[0]) not in blacklist_article_numbers:
-                import_from_df_row(table, data_row=df_row, import_column_count=4)
-
-    # Anzahl der Spalten ist flexibel, muss später angepasst hinzugefügt werden
+    put_non_bl_articles_on_table(table, df, import_column_count=4)
     fill_device_specs_in_device_tables(table)
     resize_columns_to_contents(table=table)
     disable_colums_edit(table, firstcol=1, lastcol=5)
@@ -190,6 +189,26 @@ def remove_articles_from_table(table):
         table.removeRow(row)
 
     update_blacklist(df, table.objectName())
+
+
+def remove_article_from_table_row(
+    table: QtWidgets.QTableWidget = None, push_button: QtWidgets.QPushButton = None
+):
+
+    removed, article_no, article_name = remove_row_with_button_from_table(
+        table, push_button
+    )
+    if removed:
+        # Holen Sie sich alle ausgewählten Dateien im Table Widget
+        df = pd.DataFrame(columns=["article_no", "article_name"])
+
+        new_data = pd.DataFrame(
+            {"article_no": [article_no], "article_name": [article_name]}
+        )
+        # Füge die neuen Daten zum vorhandenen DataFrame hinzu
+        df = pd.concat([df, new_data], ignore_index=True)
+
+        update_blacklist(df, table.objectName())
 
 
 def collect_data_from_table(table, article_no_col_index, discard_columns):

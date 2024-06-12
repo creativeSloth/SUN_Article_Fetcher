@@ -8,8 +8,13 @@ from qtpy import QtWidgets
 from directories.directory_base import dir_paths
 from files.utils import is_on_blacklist
 from styles.styles_Handler import initialize_ui_style
-from ui.buttons.custom_button import create_button_into_table_cell
-from ui.tables.utils import clear_table, disable_colums_edit, resize_columns_to_contents
+from ui.buttons.button_lists import create_remove_from_bl_btn
+from ui.tables.utils import (
+    clear_table,
+    disable_colums_edit,
+    remove_row_with_button_from_table,
+    resize_columns_to_contents,
+)
 from ui.windows import blacklistWindow
 
 BLACKLISTS_TABLE_MAP = []
@@ -101,19 +106,6 @@ def on_blacklist_button_click(self, device_table: QtWidgets.QTableWidget) -> Non
     disable_colums_edit(table_of_cell)
 
 
-def create_remove_from_bl_btn(self, table_of_cell: QtWidgets.QTableWidget) -> None:
-    row_count = table_of_cell.rowCount()
-    for row in range(row_count):
-        create_button_into_table_cell(
-            self,
-            table_of_cell=table_of_cell,
-            row=row,
-            column=3,
-            text="[X]",
-            on_button_pressed=on_remove_articles_from_ui_bl,
-        )
-
-
 def fill_bl_tables(
     device_table_name: str, table_of_cell: QtWidgets.QTableWidget
 ) -> None:
@@ -136,14 +128,12 @@ def on_remove_articles_from_ui_bl(
         device_table = device_table.parent()
 
     device_table_name = device_table.objectName()
-    if push_button is not None and bl_table is not None:
-        index = bl_table.indexAt(push_button.pos())
-        if index.isValid():
-            row = index.row()
-            art_no = bl_table.item(row, 1).text()
-            remove_articles_from_blacklist(table_name=device_table_name, art_no=art_no)
 
-            bl_table.removeRow(row)
+    removed, article_no, _ = remove_row_with_button_from_table(
+        table=bl_table, push_button=push_button
+    )
+    if removed:
+        remove_articles_from_blacklist(table_name=device_table_name, art_no=article_no)
 
 
 def remove_articles_from_blacklist(table_name: str, art_no: str):
