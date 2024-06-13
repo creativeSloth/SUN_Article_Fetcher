@@ -53,6 +53,7 @@ def get_blacklist_map(self):
         ),
         "BAT_storage_list": (self.ui.open_BAT_storage_blacklist, "Batterie-Speicher"),
         "CHG_point_list": (self.ui.open_CHG_point_blacklist, "Ladestation"),
+        "articles_list": (self.ui.open_articles_blacklist, "Allgemeine Artikel"),
     }
 
     return button_dict

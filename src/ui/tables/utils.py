@@ -24,7 +24,7 @@ def get_all_tables_to_layout_map(self):
         ARTICLES_TABLE_MAP + DEVICE_TABLE_MAP + blacklist.BLACKLISTS_TABLE_MAP
     )
 
-    return device_tables, GENERAL_TABLE_MAP
+    return GENERAL_TABLE_MAP
 
 
 def clear_table(table: QtWidgets.QTableWidget):

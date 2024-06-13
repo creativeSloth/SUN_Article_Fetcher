@@ -28,10 +28,12 @@ from ui.tables.utils import (
 
 def initialize_table_search(self):
     # Hole die Artikeltabelle und ihr Layout
-    device_tables, GENERAL_TABLE_MAP = get_all_tables_to_layout_map(self)
+    GENERAL_TABLE_MAP = get_all_tables_to_layout_map(self)
 
     # Iteriere durch alle Tabellen in der allgemeinen Tabellen-Map
     for item in GENERAL_TABLE_MAP:
+        table: QtWidgets.QTableWidget
+        layout: QtWidgets.QLayout
         table, layout = item
 
         # Füge ein Suchfeld zum Tabellenkopf hinzu
@@ -44,7 +46,7 @@ def initialize_table_search(self):
         init_search_button_click_signal(table=table, button=button, text_edit=text_edit)
 
         # Falls die Tabelle eine Gerätetabelle ist, initialisiere das Signal für den Blacklist-Button-Klick
-        if table in device_tables:
+        if table in get_all_tables(self):
             init_blacklist_button_click_signal(self, table=table)
 
 
