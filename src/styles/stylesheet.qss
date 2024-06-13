@@ -61,7 +61,8 @@ QLabel#store_device_specs_label,
 QLabel#prepare_label,
 QLabel#create_doc1_label,
 QLabel#create_doc2_label,
-QLabel#label
+QLabel#create_docs_label,
+QLabel#open_articles_blacklist_label
   {
 	font: 10pt;
 }

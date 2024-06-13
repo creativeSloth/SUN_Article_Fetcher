@@ -487,7 +487,7 @@
                     </layout>
                    </widget>
                   </item>
-                  <item>
+                  <item alignment="Qt::AlignLeft">
                    <widget class="QFrame" name="frame_57">
                     <property name="frameShape">
                      <enum>QFrame::StyledPanel</enum>
@@ -500,65 +500,38 @@
                       <number>0</number>
                      </property>
                      <property name="leftMargin">
-                      <number>10</number>
+                      <number>5</number>
                      </property>
                      <property name="topMargin">
                       <number>0</number>
                      </property>
                      <property name="rightMargin">
-                      <number>10</number>
+                      <number>5</number>
                      </property>
                      <property name="bottomMargin">
                       <number>0</number>
                      </property>
-                     <item alignment="Qt::AlignTop">
-                      <widget class="QFrame" name="frame_58">
-                       <property name="frameShape">
-                        <enum>QFrame::StyledPanel</enum>
+                     <item alignment="Qt::AlignRight">
+                      <widget class="QPushButton" name="open_articles_blacklist">
+                       <property name="minimumSize">
+                        <size>
+                         <width>50</width>
+                         <height>50</height>
+                        </size>
                        </property>
-                       <property name="frameShadow">
-                        <enum>QFrame::Raised</enum>
+                       <property name="maximumSize">
+                        <size>
+                         <width>50</width>
+                         <height>50</height>
+                        </size>
                        </property>
-                       <layout class="QHBoxLayout" name="horizontalLayout_26">
-                        <property name="spacing">
-                         <number>0</number>
-                        </property>
-                        <property name="leftMargin">
-                         <number>0</number>
-                        </property>
-                        <property name="topMargin">
-                         <number>0</number>
-                        </property>
-                        <property name="rightMargin">
-                         <number>0</number>
-                        </property>
-                        <property name="bottomMargin">
-                         <number>0</number>
-                        </property>
-                        <item alignment="Qt::AlignHCenter">
-                         <widget class="QPushButton" name="open_articles_blacklist">
-                          <property name="minimumSize">
-                           <size>
-                            <width>50</width>
-                            <height>50</height>
-                           </size>
-                          </property>
-                          <property name="maximumSize">
-                           <size>
-                            <width>50</width>
-                            <height>50</height>
-                           </size>
-                          </property>
-                          <property name="text">
-                           <string/>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
+                       <property name="text">
+                        <string/>
+                       </property>
                       </widget>
                      </item>
                      <item alignment="Qt::AlignHCenter">
-                      <widget class="QLabel" name="load_articles_label_2">
+                      <widget class="QLabel" name="open_articles_blacklist_label">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                          <horstretch>0</horstretch>
@@ -1783,7 +1756,7 @@ AC-Nennleistung [kW] usw.) i vorgenommen werden.</string>
                        </widget>
                       </item>
                       <item alignment="Qt::AlignHCenter">
-                       <widget class="QLabel" name="label">
+                       <widget class="QLabel" name="create_docs_label">
                         <property name="text">
                          <string>Dokumente erzeugen</string>
                         </property>
@@ -1855,9 +1828,9 @@ AC-Nennleistung [kW] usw.) i vorgenommen werden.</string>
                    <property name="geometry">
                     <rect>
                      <x>0</x>
-                     <y>-1728</y>
+                     <y>-996</y>
                      <width>1759</width>
-                     <height>5778</height>
+                     <height>5378</height>
                     </rect>
                    </property>
                    <property name="sizePolicy">
@@ -2984,6 +2957,11 @@ AC-Nennleistung [kW] usw.) i vorgenommen werden.</string>
                              <string>Modulleistung [kWp]</string>
                             </property>
                            </column>
+                           <column>
+                            <property name="text">
+                             <string>x</string>
+                            </property>
+                           </column>
                           </widget>
                          </item>
                          <item alignment="Qt::AlignLeft">
@@ -2996,13 +2974,7 @@ AC-Nennleistung [kW] usw.) i vorgenommen werden.</string>
                            </property>
                            <layout class="QHBoxLayout" name="horizontalLayout">
                             <item>
-                             <widget class="QPushButton" name="move_none_PV_modules_to_blacklist">
-                              <property name="sizePolicy">
-                               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                                <horstretch>0</horstretch>
-                                <verstretch>0</verstretch>
-                               </sizepolicy>
-                              </property>
+                             <widget class="QPushButton" name="open_PV_modules_blacklist">
                               <property name="minimumSize">
                                <size>
                                 <width>50</width>
@@ -3017,25 +2989,6 @@ AC-Nennleistung [kW] usw.) i vorgenommen werden.</string>
                               </property>
                               <property name="text">
                                <string/>
-                              </property>
-                             </widget>
-                            </item>
-                            <item>
-                             <widget class="QPushButton" name="open_PV_modules_blacklist">
-                              <property name="minimumSize">
-                               <size>
-                                <width>100</width>
-                                <height>50</height>
-                               </size>
-                              </property>
-                              <property name="maximumSize">
-                               <size>
-                                <width>250</width>
-                                <height>16777215</height>
-                               </size>
-                              </property>
-                              <property name="text">
-                               <string>Öffne Blacklist</string>
                               </property>
                              </widget>
                             </item>
@@ -3354,6 +3307,11 @@ AC-Nennleistung [kW] usw.) i vorgenommen werden.</string>
 WR-Leistung [kW]</string>
                             </property>
                            </column>
+                           <column>
+                            <property name="text">
+                             <string>x</string>
+                            </property>
+                           </column>
                           </widget>
                          </item>
                          <item alignment="Qt::AlignLeft">
@@ -3366,13 +3324,7 @@ WR-Leistung [kW]</string>
                            </property>
                            <layout class="QHBoxLayout" name="horizontalLayout_8">
                             <item>
-                             <widget class="QPushButton" name="move_none_PV_inverters_to_blacklist">
-                              <property name="sizePolicy">
-                               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                                <horstretch>0</horstretch>
-                                <verstretch>0</verstretch>
-                               </sizepolicy>
-                              </property>
+                             <widget class="QPushButton" name="open_PV_inverters_blacklist">
                               <property name="minimumSize">
                                <size>
                                 <width>50</width>
@@ -3387,25 +3339,6 @@ WR-Leistung [kW]</string>
                               </property>
                               <property name="text">
                                <string/>
-                              </property>
-                             </widget>
-                            </item>
-                            <item>
-                             <widget class="QPushButton" name="open_PV_inverters_blacklist">
-                              <property name="minimumSize">
-                               <size>
-                                <width>100</width>
-                                <height>50</height>
-                               </size>
-                              </property>
-                              <property name="maximumSize">
-                               <size>
-                                <width>250</width>
-                                <height>16777215</height>
-                               </size>
-                              </property>
-                              <property name="text">
-                               <string>Öffne Blacklist</string>
                               </property>
                              </widget>
                             </item>
@@ -3831,6 +3764,11 @@ WR-Leistung [kW]</string>
                              <string>Art der Kopplung</string>
                             </property>
                            </column>
+                           <column>
+                            <property name="text">
+                             <string>x</string>
+                            </property>
+                           </column>
                           </widget>
                          </item>
                          <item alignment="Qt::AlignLeft">
@@ -3843,13 +3781,7 @@ WR-Leistung [kW]</string>
                            </property>
                            <layout class="QHBoxLayout" name="horizontalLayout_20">
                             <item>
-                             <widget class="QPushButton" name="move_none_BAT_inverters_to_blacklist">
-                              <property name="sizePolicy">
-                               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                                <horstretch>0</horstretch>
-                                <verstretch>0</verstretch>
-                               </sizepolicy>
-                              </property>
+                             <widget class="QPushButton" name="open_BAT_inverters_blacklist">
                               <property name="minimumSize">
                                <size>
                                 <width>50</width>
@@ -3864,25 +3796,6 @@ WR-Leistung [kW]</string>
                               </property>
                               <property name="text">
                                <string/>
-                              </property>
-                             </widget>
-                            </item>
-                            <item>
-                             <widget class="QPushButton" name="open_BAT_inverters_blacklist">
-                              <property name="minimumSize">
-                               <size>
-                                <width>100</width>
-                                <height>50</height>
-                               </size>
-                              </property>
-                              <property name="maximumSize">
-                               <size>
-                                <width>250</width>
-                                <height>16777215</height>
-                               </size>
-                              </property>
-                              <property name="text">
-                               <string>Öffne Blacklist</string>
                               </property>
                              </widget>
                             </item>
@@ -4150,7 +4063,7 @@ Wechselrichterleistung [kW]:</string>
                          <item>
                           <widget class="QTableWidget" name="BAT_storage_list">
                            <property name="sizePolicy">
-                            <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+                            <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                              <horstretch>0</horstretch>
                              <verstretch>0</verstretch>
                             </sizepolicy>
@@ -4158,7 +4071,7 @@ Wechselrichterleistung [kW]:</string>
                            <property name="minimumSize">
                             <size>
                              <width>0</width>
-                             <height>800</height>
+                             <height>400</height>
                             </size>
                            </property>
                            <property name="maximumSize">
@@ -4255,6 +4168,11 @@ im Dauerbetrieb</string>
                              <string>Batterietechnologie</string>
                             </property>
                            </column>
+                           <column>
+                            <property name="text">
+                             <string>x</string>
+                            </property>
+                           </column>
                           </widget>
                          </item>
                          <item alignment="Qt::AlignLeft">
@@ -4267,13 +4185,7 @@ im Dauerbetrieb</string>
                            </property>
                            <layout class="QHBoxLayout" name="horizontalLayout_21">
                             <item>
-                             <widget class="QPushButton" name="move_none_BAT_storage_to_blacklist">
-                              <property name="sizePolicy">
-                               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                                <horstretch>0</horstretch>
-                                <verstretch>0</verstretch>
-                               </sizepolicy>
-                              </property>
+                             <widget class="QPushButton" name="open_BAT_storage_blacklist">
                               <property name="minimumSize">
                                <size>
                                 <width>50</width>
@@ -4288,25 +4200,6 @@ im Dauerbetrieb</string>
                               </property>
                               <property name="text">
                                <string/>
-                              </property>
-                             </widget>
-                            </item>
-                            <item>
-                             <widget class="QPushButton" name="open_BAT_storage_blacklist">
-                              <property name="minimumSize">
-                               <size>
-                                <width>100</width>
-                                <height>50</height>
-                               </size>
-                              </property>
-                              <property name="maximumSize">
-                               <size>
-                                <width>250</width>
-                                <height>16777215</height>
-                               </size>
-                              </property>
-                              <property name="text">
-                               <string>Öffne Blacklist</string>
                               </property>
                              </widget>
                             </item>
@@ -4844,6 +4737,11 @@ Stromspeicherung:</string>
                              <string>Seriennummer</string>
                             </property>
                            </column>
+                           <column>
+                            <property name="text">
+                             <string>x</string>
+                            </property>
+                           </column>
                           </widget>
                          </item>
                          <item alignment="Qt::AlignLeft">
@@ -4856,13 +4754,7 @@ Stromspeicherung:</string>
                            </property>
                            <layout class="QHBoxLayout" name="horizontalLayout_22">
                             <item>
-                             <widget class="QPushButton" name="move_none_CHG_point_to_blacklist">
-                              <property name="sizePolicy">
-                               <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                                <horstretch>0</horstretch>
-                                <verstretch>0</verstretch>
-                               </sizepolicy>
-                              </property>
+                             <widget class="QPushButton" name="open_CHG_point_blacklist">
                               <property name="minimumSize">
                                <size>
                                 <width>50</width>
@@ -4877,25 +4769,6 @@ Stromspeicherung:</string>
                               </property>
                               <property name="text">
                                <string/>
-                              </property>
-                             </widget>
-                            </item>
-                            <item>
-                             <widget class="QPushButton" name="open_CHG_point_blacklist">
-                              <property name="minimumSize">
-                               <size>
-                                <width>100</width>
-                                <height>50</height>
-                               </size>
-                              </property>
-                              <property name="maximumSize">
-                               <size>
-                                <width>250</width>
-                                <height>16777215</height>
-                               </size>
-                              </property>
-                              <property name="text">
-                               <string>Öffne Blacklist</string>
                               </property>
                              </widget>
                             </item>

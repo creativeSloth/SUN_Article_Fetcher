@@ -6,6 +6,7 @@ from PyQt5.QtGui import QColor, QIcon, QPainter, QPixmap
 from PyQt5.QtWidgets import QPushButton
 
 from directories.directory_base import dir_paths
+from ui.fields.ui_fields_base import get_all_tables
 
 
 def get_paths_of_icons(icon_name: str = None):
@@ -66,13 +67,21 @@ def get_button_icons(self):
         ),
     }
 
-    for button in self.button_list.get_search_buttons():
+    for button in self.button_list.get_search_btns():
         PB_MAP[button] = (get_paths_of_icons("search"), get_color_combo("red"))
 
-    for button in self.button_list.get_move_bl_buttons():
-        PB_MAP[button] = (get_paths_of_icons("delete"), get_color_combo("red"))
+    for button in self.button_list.get_open_BL_btns():
+        PB_MAP[button] = (get_paths_of_icons("preview_off"), get_color_combo("red"))
 
-    for button in self.button_list.get_doc_available_buttons():
+    for table in get_all_tables(self):
+        table_name = table.objectName()
+        for button in self.button_list.get_move_to_bl_btns(table_name=table_name):
+            PB_MAP[button] = (
+                get_paths_of_icons("list_remove"),
+                get_color_combo("red"),
+            )
+
+    for button in self.button_list.get_doc_available_btns():
         PB_MAP[button] = (get_paths_of_icons("documents"), get_color_combo("red"))
 
     return PB_MAP
@@ -82,6 +91,7 @@ def customize_push_buttons(self):
     # Setze die Icons und füge Event-Filter hinzu
     PB_MAP = get_button_icons(self)
     colored_PB_MAP = create_colored_PB_MAP(PB_MAP)
+
     for button, icons in colored_PB_MAP.items():
         normal_icon_path, hover_icon_path, click_icon_path = icons
 
@@ -121,6 +131,11 @@ def get_color_combo(buttoncolor=None):
             "normal": QColor(226, 24, 57, 255),
             "hover": QColor(226, 24, 58, 61),
             "click": QColor(226, 24, 58, 20),
+        },
+        "black": {
+            "normal": QColor(0, 0, 0, 255),
+            "hover": QColor(0, 0, 0, 61),
+            "click": QColor(0, 0, 0, 20),
         },
     }
     if buttoncolor is not None and buttoncolor in combos:

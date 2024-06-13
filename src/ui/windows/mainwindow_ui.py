@@ -208,35 +208,24 @@ class Ui_MainWindow(object):
         self.verticalLayout_27 = QVBoxLayout(self.frame_57)
         self.verticalLayout_27.setSpacing(0)
         self.verticalLayout_27.setObjectName(u"verticalLayout_27")
-        self.verticalLayout_27.setContentsMargins(10, 0, 10, 0)
-        self.frame_58 = QFrame(self.frame_57)
-        self.frame_58.setObjectName(u"frame_58")
-        self.frame_58.setFrameShape(QFrame.StyledPanel)
-        self.frame_58.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_26 = QHBoxLayout(self.frame_58)
-        self.horizontalLayout_26.setSpacing(0)
-        self.horizontalLayout_26.setObjectName(u"horizontalLayout_26")
-        self.horizontalLayout_26.setContentsMargins(0, 0, 0, 0)
-        self.open_articles_blacklist = QPushButton(self.frame_58)
+        self.verticalLayout_27.setContentsMargins(5, 0, 5, 0)
+        self.open_articles_blacklist = QPushButton(self.frame_57)
         self.open_articles_blacklist.setObjectName(u"open_articles_blacklist")
         self.open_articles_blacklist.setMinimumSize(QSize(50, 50))
         self.open_articles_blacklist.setMaximumSize(QSize(50, 50))
 
-        self.horizontalLayout_26.addWidget(self.open_articles_blacklist, 0, Qt.AlignHCenter)
+        self.verticalLayout_27.addWidget(self.open_articles_blacklist, 0, Qt.AlignRight)
+
+        self.open_articles_blacklist_label = QLabel(self.frame_57)
+        self.open_articles_blacklist_label.setObjectName(u"open_articles_blacklist_label")
+        sizePolicy.setHeightForWidth(self.open_articles_blacklist_label.sizePolicy().hasHeightForWidth())
+        self.open_articles_blacklist_label.setSizePolicy(sizePolicy)
+        self.open_articles_blacklist_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+
+        self.verticalLayout_27.addWidget(self.open_articles_blacklist_label, 0, Qt.AlignHCenter)
 
 
-        self.verticalLayout_27.addWidget(self.frame_58, 0, Qt.AlignTop)
-
-        self.load_articles_label_2 = QLabel(self.frame_57)
-        self.load_articles_label_2.setObjectName(u"load_articles_label_2")
-        sizePolicy.setHeightForWidth(self.load_articles_label_2.sizePolicy().hasHeightForWidth())
-        self.load_articles_label_2.setSizePolicy(sizePolicy)
-        self.load_articles_label_2.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
-
-        self.verticalLayout_27.addWidget(self.load_articles_label_2, 0, Qt.AlignHCenter)
-
-
-        self.horizontalLayout_7.addWidget(self.frame_57)
+        self.horizontalLayout_7.addWidget(self.frame_57, 0, Qt.AlignLeft)
 
         self.frame = QFrame(self.frame_6)
         self.frame.setObjectName(u"frame")
@@ -692,10 +681,10 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_26.addWidget(self.line_2)
 
-        self.label = QLabel(self.frame_56)
-        self.label.setObjectName(u"label")
+        self.create_docs_label = QLabel(self.frame_56)
+        self.create_docs_label.setObjectName(u"create_docs_label")
 
-        self.verticalLayout_26.addWidget(self.label, 0, Qt.AlignHCenter)
+        self.verticalLayout_26.addWidget(self.create_docs_label, 0, Qt.AlignHCenter)
 
 
         self.verticalLayout_25.addWidget(self.frame_56, 0, Qt.AlignRight|Qt.AlignTop)
@@ -727,7 +716,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, -1728, 1759, 5778))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, -996, 1759, 5378))
         sizePolicy.setHeightForWidth(self.scrollAreaWidgetContents.sizePolicy().hasHeightForWidth())
         self.scrollAreaWidgetContents.setSizePolicy(sizePolicy)
         self.gridLayout_5 = QGridLayout(self.scrollAreaWidgetContents)
@@ -1186,8 +1175,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.addWidget(self.headline_02)
 
         self.PV_modules_list = QTableWidget(self.frame0221)
-        if (self.PV_modules_list.columnCount() < 6):
-            self.PV_modules_list.setColumnCount(6)
+        if (self.PV_modules_list.columnCount() < 7):
+            self.PV_modules_list.setColumnCount(7)
         __qtablewidgetitem5 = QTableWidgetItem()
         self.PV_modules_list.setHorizontalHeaderItem(0, __qtablewidgetitem5)
         __qtablewidgetitem6 = QTableWidgetItem()
@@ -1200,6 +1189,8 @@ class Ui_MainWindow(object):
         self.PV_modules_list.setHorizontalHeaderItem(4, __qtablewidgetitem9)
         __qtablewidgetitem10 = QTableWidgetItem()
         self.PV_modules_list.setHorizontalHeaderItem(5, __qtablewidgetitem10)
+        __qtablewidgetitem11 = QTableWidgetItem()
+        self.PV_modules_list.setHorizontalHeaderItem(6, __qtablewidgetitem11)
         self.PV_modules_list.setObjectName(u"PV_modules_list")
         sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.MinimumExpanding)
         sizePolicy3.setHorizontalStretch(0)
@@ -1232,19 +1223,10 @@ class Ui_MainWindow(object):
         self.frame_2.setFrameShadow(QFrame.Raised)
         self.horizontalLayout = QHBoxLayout(self.frame_2)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.move_none_PV_modules_to_blacklist = QPushButton(self.frame_2)
-        self.move_none_PV_modules_to_blacklist.setObjectName(u"move_none_PV_modules_to_blacklist")
-        sizePolicy.setHeightForWidth(self.move_none_PV_modules_to_blacklist.sizePolicy().hasHeightForWidth())
-        self.move_none_PV_modules_to_blacklist.setSizePolicy(sizePolicy)
-        self.move_none_PV_modules_to_blacklist.setMinimumSize(QSize(50, 50))
-        self.move_none_PV_modules_to_blacklist.setMaximumSize(QSize(50, 50))
-
-        self.horizontalLayout.addWidget(self.move_none_PV_modules_to_blacklist)
-
         self.open_PV_modules_blacklist = QPushButton(self.frame_2)
         self.open_PV_modules_blacklist.setObjectName(u"open_PV_modules_blacklist")
-        self.open_PV_modules_blacklist.setMinimumSize(QSize(100, 50))
-        self.open_PV_modules_blacklist.setMaximumSize(QSize(250, 16777215))
+        self.open_PV_modules_blacklist.setMinimumSize(QSize(50, 50))
+        self.open_PV_modules_blacklist.setMaximumSize(QSize(50, 50))
 
         self.horizontalLayout.addWidget(self.open_PV_modules_blacklist)
 
@@ -1344,20 +1326,22 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.addWidget(self.headline_03)
 
         self.PV_inverters_list = QTableWidget(self.frame0221)
-        if (self.PV_inverters_list.columnCount() < 6):
-            self.PV_inverters_list.setColumnCount(6)
-        __qtablewidgetitem11 = QTableWidgetItem()
-        self.PV_inverters_list.setHorizontalHeaderItem(0, __qtablewidgetitem11)
+        if (self.PV_inverters_list.columnCount() < 7):
+            self.PV_inverters_list.setColumnCount(7)
         __qtablewidgetitem12 = QTableWidgetItem()
-        self.PV_inverters_list.setHorizontalHeaderItem(1, __qtablewidgetitem12)
+        self.PV_inverters_list.setHorizontalHeaderItem(0, __qtablewidgetitem12)
         __qtablewidgetitem13 = QTableWidgetItem()
-        self.PV_inverters_list.setHorizontalHeaderItem(2, __qtablewidgetitem13)
+        self.PV_inverters_list.setHorizontalHeaderItem(1, __qtablewidgetitem13)
         __qtablewidgetitem14 = QTableWidgetItem()
-        self.PV_inverters_list.setHorizontalHeaderItem(3, __qtablewidgetitem14)
+        self.PV_inverters_list.setHorizontalHeaderItem(2, __qtablewidgetitem14)
         __qtablewidgetitem15 = QTableWidgetItem()
-        self.PV_inverters_list.setHorizontalHeaderItem(4, __qtablewidgetitem15)
+        self.PV_inverters_list.setHorizontalHeaderItem(3, __qtablewidgetitem15)
         __qtablewidgetitem16 = QTableWidgetItem()
-        self.PV_inverters_list.setHorizontalHeaderItem(5, __qtablewidgetitem16)
+        self.PV_inverters_list.setHorizontalHeaderItem(4, __qtablewidgetitem16)
+        __qtablewidgetitem17 = QTableWidgetItem()
+        self.PV_inverters_list.setHorizontalHeaderItem(5, __qtablewidgetitem17)
+        __qtablewidgetitem18 = QTableWidgetItem()
+        self.PV_inverters_list.setHorizontalHeaderItem(6, __qtablewidgetitem18)
         self.PV_inverters_list.setObjectName(u"PV_inverters_list")
         sizePolicy3.setHeightForWidth(self.PV_inverters_list.sizePolicy().hasHeightForWidth())
         self.PV_inverters_list.setSizePolicy(sizePolicy3)
@@ -1387,19 +1371,10 @@ class Ui_MainWindow(object):
         self.frame_38.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_8 = QHBoxLayout(self.frame_38)
         self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
-        self.move_none_PV_inverters_to_blacklist = QPushButton(self.frame_38)
-        self.move_none_PV_inverters_to_blacklist.setObjectName(u"move_none_PV_inverters_to_blacklist")
-        sizePolicy.setHeightForWidth(self.move_none_PV_inverters_to_blacklist.sizePolicy().hasHeightForWidth())
-        self.move_none_PV_inverters_to_blacklist.setSizePolicy(sizePolicy)
-        self.move_none_PV_inverters_to_blacklist.setMinimumSize(QSize(50, 50))
-        self.move_none_PV_inverters_to_blacklist.setMaximumSize(QSize(50, 50))
-
-        self.horizontalLayout_8.addWidget(self.move_none_PV_inverters_to_blacklist)
-
         self.open_PV_inverters_blacklist = QPushButton(self.frame_38)
         self.open_PV_inverters_blacklist.setObjectName(u"open_PV_inverters_blacklist")
-        self.open_PV_inverters_blacklist.setMinimumSize(QSize(100, 50))
-        self.open_PV_inverters_blacklist.setMaximumSize(QSize(250, 16777215))
+        self.open_PV_inverters_blacklist.setMinimumSize(QSize(50, 50))
+        self.open_PV_inverters_blacklist.setMaximumSize(QSize(50, 50))
 
         self.horizontalLayout_8.addWidget(self.open_PV_inverters_blacklist)
 
@@ -1545,22 +1520,24 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.addWidget(self.headline_04)
 
         self.BAT_inverters_list = QTableWidget(self.frame0221)
-        if (self.BAT_inverters_list.columnCount() < 7):
-            self.BAT_inverters_list.setColumnCount(7)
-        __qtablewidgetitem17 = QTableWidgetItem()
-        self.BAT_inverters_list.setHorizontalHeaderItem(0, __qtablewidgetitem17)
-        __qtablewidgetitem18 = QTableWidgetItem()
-        self.BAT_inverters_list.setHorizontalHeaderItem(1, __qtablewidgetitem18)
+        if (self.BAT_inverters_list.columnCount() < 8):
+            self.BAT_inverters_list.setColumnCount(8)
         __qtablewidgetitem19 = QTableWidgetItem()
-        self.BAT_inverters_list.setHorizontalHeaderItem(2, __qtablewidgetitem19)
+        self.BAT_inverters_list.setHorizontalHeaderItem(0, __qtablewidgetitem19)
         __qtablewidgetitem20 = QTableWidgetItem()
-        self.BAT_inverters_list.setHorizontalHeaderItem(3, __qtablewidgetitem20)
+        self.BAT_inverters_list.setHorizontalHeaderItem(1, __qtablewidgetitem20)
         __qtablewidgetitem21 = QTableWidgetItem()
-        self.BAT_inverters_list.setHorizontalHeaderItem(4, __qtablewidgetitem21)
+        self.BAT_inverters_list.setHorizontalHeaderItem(2, __qtablewidgetitem21)
         __qtablewidgetitem22 = QTableWidgetItem()
-        self.BAT_inverters_list.setHorizontalHeaderItem(5, __qtablewidgetitem22)
+        self.BAT_inverters_list.setHorizontalHeaderItem(3, __qtablewidgetitem22)
         __qtablewidgetitem23 = QTableWidgetItem()
-        self.BAT_inverters_list.setHorizontalHeaderItem(6, __qtablewidgetitem23)
+        self.BAT_inverters_list.setHorizontalHeaderItem(4, __qtablewidgetitem23)
+        __qtablewidgetitem24 = QTableWidgetItem()
+        self.BAT_inverters_list.setHorizontalHeaderItem(5, __qtablewidgetitem24)
+        __qtablewidgetitem25 = QTableWidgetItem()
+        self.BAT_inverters_list.setHorizontalHeaderItem(6, __qtablewidgetitem25)
+        __qtablewidgetitem26 = QTableWidgetItem()
+        self.BAT_inverters_list.setHorizontalHeaderItem(7, __qtablewidgetitem26)
         self.BAT_inverters_list.setObjectName(u"BAT_inverters_list")
         sizePolicy3.setHeightForWidth(self.BAT_inverters_list.sizePolicy().hasHeightForWidth())
         self.BAT_inverters_list.setSizePolicy(sizePolicy3)
@@ -1590,19 +1567,10 @@ class Ui_MainWindow(object):
         self.frame_39.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_20 = QHBoxLayout(self.frame_39)
         self.horizontalLayout_20.setObjectName(u"horizontalLayout_20")
-        self.move_none_BAT_inverters_to_blacklist = QPushButton(self.frame_39)
-        self.move_none_BAT_inverters_to_blacklist.setObjectName(u"move_none_BAT_inverters_to_blacklist")
-        sizePolicy.setHeightForWidth(self.move_none_BAT_inverters_to_blacklist.sizePolicy().hasHeightForWidth())
-        self.move_none_BAT_inverters_to_blacklist.setSizePolicy(sizePolicy)
-        self.move_none_BAT_inverters_to_blacklist.setMinimumSize(QSize(50, 50))
-        self.move_none_BAT_inverters_to_blacklist.setMaximumSize(QSize(50, 50))
-
-        self.horizontalLayout_20.addWidget(self.move_none_BAT_inverters_to_blacklist)
-
         self.open_BAT_inverters_blacklist = QPushButton(self.frame_39)
         self.open_BAT_inverters_blacklist.setObjectName(u"open_BAT_inverters_blacklist")
-        self.open_BAT_inverters_blacklist.setMinimumSize(QSize(100, 50))
-        self.open_BAT_inverters_blacklist.setMaximumSize(QSize(250, 16777215))
+        self.open_BAT_inverters_blacklist.setMinimumSize(QSize(50, 50))
+        self.open_BAT_inverters_blacklist.setMaximumSize(QSize(50, 50))
 
         self.horizontalLayout_20.addWidget(self.open_BAT_inverters_blacklist)
 
@@ -1714,28 +1682,30 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.addWidget(self.headline_05)
 
         self.BAT_storage_list = QTableWidget(self.frame0221)
-        if (self.BAT_storage_list.columnCount() < 8):
-            self.BAT_storage_list.setColumnCount(8)
-        __qtablewidgetitem24 = QTableWidgetItem()
-        self.BAT_storage_list.setHorizontalHeaderItem(0, __qtablewidgetitem24)
-        __qtablewidgetitem25 = QTableWidgetItem()
-        self.BAT_storage_list.setHorizontalHeaderItem(1, __qtablewidgetitem25)
-        __qtablewidgetitem26 = QTableWidgetItem()
-        self.BAT_storage_list.setHorizontalHeaderItem(2, __qtablewidgetitem26)
+        if (self.BAT_storage_list.columnCount() < 9):
+            self.BAT_storage_list.setColumnCount(9)
         __qtablewidgetitem27 = QTableWidgetItem()
-        self.BAT_storage_list.setHorizontalHeaderItem(3, __qtablewidgetitem27)
+        self.BAT_storage_list.setHorizontalHeaderItem(0, __qtablewidgetitem27)
         __qtablewidgetitem28 = QTableWidgetItem()
-        self.BAT_storage_list.setHorizontalHeaderItem(4, __qtablewidgetitem28)
+        self.BAT_storage_list.setHorizontalHeaderItem(1, __qtablewidgetitem28)
         __qtablewidgetitem29 = QTableWidgetItem()
-        self.BAT_storage_list.setHorizontalHeaderItem(5, __qtablewidgetitem29)
+        self.BAT_storage_list.setHorizontalHeaderItem(2, __qtablewidgetitem29)
         __qtablewidgetitem30 = QTableWidgetItem()
-        self.BAT_storage_list.setHorizontalHeaderItem(6, __qtablewidgetitem30)
+        self.BAT_storage_list.setHorizontalHeaderItem(3, __qtablewidgetitem30)
         __qtablewidgetitem31 = QTableWidgetItem()
-        self.BAT_storage_list.setHorizontalHeaderItem(7, __qtablewidgetitem31)
+        self.BAT_storage_list.setHorizontalHeaderItem(4, __qtablewidgetitem31)
+        __qtablewidgetitem32 = QTableWidgetItem()
+        self.BAT_storage_list.setHorizontalHeaderItem(5, __qtablewidgetitem32)
+        __qtablewidgetitem33 = QTableWidgetItem()
+        self.BAT_storage_list.setHorizontalHeaderItem(6, __qtablewidgetitem33)
+        __qtablewidgetitem34 = QTableWidgetItem()
+        self.BAT_storage_list.setHorizontalHeaderItem(7, __qtablewidgetitem34)
+        __qtablewidgetitem35 = QTableWidgetItem()
+        self.BAT_storage_list.setHorizontalHeaderItem(8, __qtablewidgetitem35)
         self.BAT_storage_list.setObjectName(u"BAT_storage_list")
-        sizePolicy3.setHeightForWidth(self.BAT_storage_list.sizePolicy().hasHeightForWidth())
-        self.BAT_storage_list.setSizePolicy(sizePolicy3)
-        self.BAT_storage_list.setMinimumSize(QSize(0, 800))
+        sizePolicy.setHeightForWidth(self.BAT_storage_list.sizePolicy().hasHeightForWidth())
+        self.BAT_storage_list.setSizePolicy(sizePolicy)
+        self.BAT_storage_list.setMinimumSize(QSize(0, 400))
         self.BAT_storage_list.setMaximumSize(QSize(1750, 16777215))
         self.BAT_storage_list.setAutoFillBackground(False)
         self.BAT_storage_list.setFrameShape(QFrame.StyledPanel)
@@ -1761,19 +1731,10 @@ class Ui_MainWindow(object):
         self.frame_40.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_21 = QHBoxLayout(self.frame_40)
         self.horizontalLayout_21.setObjectName(u"horizontalLayout_21")
-        self.move_none_BAT_storage_to_blacklist = QPushButton(self.frame_40)
-        self.move_none_BAT_storage_to_blacklist.setObjectName(u"move_none_BAT_storage_to_blacklist")
-        sizePolicy.setHeightForWidth(self.move_none_BAT_storage_to_blacklist.sizePolicy().hasHeightForWidth())
-        self.move_none_BAT_storage_to_blacklist.setSizePolicy(sizePolicy)
-        self.move_none_BAT_storage_to_blacklist.setMinimumSize(QSize(50, 50))
-        self.move_none_BAT_storage_to_blacklist.setMaximumSize(QSize(50, 50))
-
-        self.horizontalLayout_21.addWidget(self.move_none_BAT_storage_to_blacklist)
-
         self.open_BAT_storage_blacklist = QPushButton(self.frame_40)
         self.open_BAT_storage_blacklist.setObjectName(u"open_BAT_storage_blacklist")
-        self.open_BAT_storage_blacklist.setMinimumSize(QSize(100, 50))
-        self.open_BAT_storage_blacklist.setMaximumSize(QSize(250, 16777215))
+        self.open_BAT_storage_blacklist.setMinimumSize(QSize(50, 50))
+        self.open_BAT_storage_blacklist.setMaximumSize(QSize(50, 50))
 
         self.horizontalLayout_21.addWidget(self.open_BAT_storage_blacklist)
 
@@ -1954,18 +1915,20 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.addWidget(self.headline_06)
 
         self.CHG_point_list = QTableWidget(self.frame0221)
-        if (self.CHG_point_list.columnCount() < 5):
-            self.CHG_point_list.setColumnCount(5)
-        __qtablewidgetitem32 = QTableWidgetItem()
-        self.CHG_point_list.setHorizontalHeaderItem(0, __qtablewidgetitem32)
-        __qtablewidgetitem33 = QTableWidgetItem()
-        self.CHG_point_list.setHorizontalHeaderItem(1, __qtablewidgetitem33)
-        __qtablewidgetitem34 = QTableWidgetItem()
-        self.CHG_point_list.setHorizontalHeaderItem(2, __qtablewidgetitem34)
-        __qtablewidgetitem35 = QTableWidgetItem()
-        self.CHG_point_list.setHorizontalHeaderItem(3, __qtablewidgetitem35)
+        if (self.CHG_point_list.columnCount() < 6):
+            self.CHG_point_list.setColumnCount(6)
         __qtablewidgetitem36 = QTableWidgetItem()
-        self.CHG_point_list.setHorizontalHeaderItem(4, __qtablewidgetitem36)
+        self.CHG_point_list.setHorizontalHeaderItem(0, __qtablewidgetitem36)
+        __qtablewidgetitem37 = QTableWidgetItem()
+        self.CHG_point_list.setHorizontalHeaderItem(1, __qtablewidgetitem37)
+        __qtablewidgetitem38 = QTableWidgetItem()
+        self.CHG_point_list.setHorizontalHeaderItem(2, __qtablewidgetitem38)
+        __qtablewidgetitem39 = QTableWidgetItem()
+        self.CHG_point_list.setHorizontalHeaderItem(3, __qtablewidgetitem39)
+        __qtablewidgetitem40 = QTableWidgetItem()
+        self.CHG_point_list.setHorizontalHeaderItem(4, __qtablewidgetitem40)
+        __qtablewidgetitem41 = QTableWidgetItem()
+        self.CHG_point_list.setHorizontalHeaderItem(5, __qtablewidgetitem41)
         self.CHG_point_list.setObjectName(u"CHG_point_list")
         sizePolicy3.setHeightForWidth(self.CHG_point_list.sizePolicy().hasHeightForWidth())
         self.CHG_point_list.setSizePolicy(sizePolicy3)
@@ -1995,19 +1958,10 @@ class Ui_MainWindow(object):
         self.frame_41.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_22 = QHBoxLayout(self.frame_41)
         self.horizontalLayout_22.setObjectName(u"horizontalLayout_22")
-        self.move_none_CHG_point_to_blacklist = QPushButton(self.frame_41)
-        self.move_none_CHG_point_to_blacklist.setObjectName(u"move_none_CHG_point_to_blacklist")
-        sizePolicy.setHeightForWidth(self.move_none_CHG_point_to_blacklist.sizePolicy().hasHeightForWidth())
-        self.move_none_CHG_point_to_blacklist.setSizePolicy(sizePolicy)
-        self.move_none_CHG_point_to_blacklist.setMinimumSize(QSize(50, 50))
-        self.move_none_CHG_point_to_blacklist.setMaximumSize(QSize(50, 50))
-
-        self.horizontalLayout_22.addWidget(self.move_none_CHG_point_to_blacklist)
-
         self.open_CHG_point_blacklist = QPushButton(self.frame_41)
         self.open_CHG_point_blacklist.setObjectName(u"open_CHG_point_blacklist")
-        self.open_CHG_point_blacklist.setMinimumSize(QSize(100, 50))
-        self.open_CHG_point_blacklist.setMaximumSize(QSize(250, 16777215))
+        self.open_CHG_point_blacklist.setMinimumSize(QSize(50, 50))
+        self.open_CHG_point_blacklist.setMaximumSize(QSize(50, 50))
 
         self.horizontalLayout_22.addWidget(self.open_CHG_point_blacklist)
 
@@ -2580,7 +2534,7 @@ class Ui_MainWindow(object):
         self.load_articles_file_btn.setText("")
         self.load_articles_label.setText(QCoreApplication.translate("MainWindow", u"Laden", None))
         self.open_articles_blacklist.setText("")
-        self.load_articles_label_2.setText(QCoreApplication.translate("MainWindow", u"Blacklist", None))
+        self.open_articles_blacklist_label.setText(QCoreApplication.translate("MainWindow", u"Blacklist", None))
 #if QT_CONFIG(tooltip)
         self.target_path_btn.setToolTip(QCoreApplication.translate("MainWindow", u"Zielpfad f\u00fcr gew\u00fcnschte artikelbezogene Dokumente ausw\u00e4hlen!", None))
 #endif // QT_CONFIG(tooltip)
@@ -2634,7 +2588,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.create_doc2_btn.setText("")
         self.create_doc2_label.setText(QCoreApplication.translate("MainWindow", u"Dokumentation", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"Dokumente erzeugen", None))
+        self.create_docs_label.setText(QCoreApplication.translate("MainWindow", u"Dokumente erzeugen", None))
         self.headline_01.setText(QCoreApplication.translate("MainWindow", u"Anlagen\u00fcbersicht", None))
         self.operator_label.setText(QCoreApplication.translate("MainWindow", u"Anlagenbetreiber:", None))
         self.op_adress_1_label.setText(QCoreApplication.translate("MainWindow", u"Stra\u00dfe:", None))
@@ -2671,29 +2625,31 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
         ___qtablewidgetitem10 = self.PV_modules_list.horizontalHeaderItem(5)
         ___qtablewidgetitem10.setText(QCoreApplication.translate("MainWindow", u"Modulleistung [kWp]", None));
-        self.move_none_PV_modules_to_blacklist.setText("")
-        self.open_PV_modules_blacklist.setText(QCoreApplication.translate("MainWindow", u"\u00d6ffne Blacklist", None))
+        ___qtablewidgetitem11 = self.PV_modules_list.horizontalHeaderItem(6)
+        ___qtablewidgetitem11.setText(QCoreApplication.translate("MainWindow", u"x", None));
+        self.open_PV_modules_blacklist.setText("")
         self.module_count_label.setText(QCoreApplication.translate("MainWindow", u"Anzahl der Module:", None))
         self.module_count_text.setPlainText("")
         self.module_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
         self.mounting_type_label.setText(QCoreApplication.translate("MainWindow", u"Montagesystem:", None))
         self.mounting_type_text.setPlainText(QCoreApplication.translate("MainWindow", u"PMT EVO 2.0 Ost-West", None))
         self.headline_03.setText(QCoreApplication.translate("MainWindow", u"PV-Wechselrichter", None))
-        ___qtablewidgetitem11 = self.PV_inverters_list.horizontalHeaderItem(0)
-        ___qtablewidgetitem11.setText(QCoreApplication.translate("MainWindow", u"<>", None));
-        ___qtablewidgetitem12 = self.PV_inverters_list.horizontalHeaderItem(1)
-        ___qtablewidgetitem12.setText(QCoreApplication.translate("MainWindow", u"Artikelnummer", None));
-        ___qtablewidgetitem13 = self.PV_inverters_list.horizontalHeaderItem(2)
-        ___qtablewidgetitem13.setText(QCoreApplication.translate("MainWindow", u"Wechselrichter-Typ", None));
-        ___qtablewidgetitem14 = self.PV_inverters_list.horizontalHeaderItem(3)
-        ___qtablewidgetitem14.setText(QCoreApplication.translate("MainWindow", u"Menge verbraucht [Stk.]", None));
-        ___qtablewidgetitem15 = self.PV_inverters_list.horizontalHeaderItem(4)
-        ___qtablewidgetitem15.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
-        ___qtablewidgetitem16 = self.PV_inverters_list.horizontalHeaderItem(5)
-        ___qtablewidgetitem16.setText(QCoreApplication.translate("MainWindow", u"Zugeordnete \n"
+        ___qtablewidgetitem12 = self.PV_inverters_list.horizontalHeaderItem(0)
+        ___qtablewidgetitem12.setText(QCoreApplication.translate("MainWindow", u"<>", None));
+        ___qtablewidgetitem13 = self.PV_inverters_list.horizontalHeaderItem(1)
+        ___qtablewidgetitem13.setText(QCoreApplication.translate("MainWindow", u"Artikelnummer", None));
+        ___qtablewidgetitem14 = self.PV_inverters_list.horizontalHeaderItem(2)
+        ___qtablewidgetitem14.setText(QCoreApplication.translate("MainWindow", u"Wechselrichter-Typ", None));
+        ___qtablewidgetitem15 = self.PV_inverters_list.horizontalHeaderItem(3)
+        ___qtablewidgetitem15.setText(QCoreApplication.translate("MainWindow", u"Menge verbraucht [Stk.]", None));
+        ___qtablewidgetitem16 = self.PV_inverters_list.horizontalHeaderItem(4)
+        ___qtablewidgetitem16.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
+        ___qtablewidgetitem17 = self.PV_inverters_list.horizontalHeaderItem(5)
+        ___qtablewidgetitem17.setText(QCoreApplication.translate("MainWindow", u"Zugeordnete \n"
 "WR-Leistung [kW]", None));
-        self.move_none_PV_inverters_to_blacklist.setText("")
-        self.open_PV_inverters_blacklist.setText(QCoreApplication.translate("MainWindow", u"\u00d6ffne Blacklist", None))
+        ___qtablewidgetitem18 = self.PV_inverters_list.horizontalHeaderItem(6)
+        ___qtablewidgetitem18.setText(QCoreApplication.translate("MainWindow", u"x", None));
+        self.open_PV_inverters_blacklist.setText("")
         self.hybrid_inverter_bool_label.setText(QCoreApplication.translate("MainWindow", u"Gemeinsamer PV-Batterie-Wechselricher:", None))
         self.hybrid_inverter_bool_text.setPlainText(QCoreApplication.translate("MainWindow", u"Ja/Nein", None))
         self.inverter_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
@@ -2703,23 +2659,24 @@ class Ui_MainWindow(object):
         self.inverter_power_label.setText(QCoreApplication.translate("MainWindow", u"Zugeordnete\n"
 "Wechselrichterleistung [kW]:", None))
         self.headline_04.setText(QCoreApplication.translate("MainWindow", u"Batteriewechselrichter", None))
-        ___qtablewidgetitem17 = self.BAT_inverters_list.horizontalHeaderItem(0)
-        ___qtablewidgetitem17.setText(QCoreApplication.translate("MainWindow", u"<>", None));
-        ___qtablewidgetitem18 = self.BAT_inverters_list.horizontalHeaderItem(1)
-        ___qtablewidgetitem18.setText(QCoreApplication.translate("MainWindow", u"Artikelnummer", None));
-        ___qtablewidgetitem19 = self.BAT_inverters_list.horizontalHeaderItem(2)
-        ___qtablewidgetitem19.setText(QCoreApplication.translate("MainWindow", u"Wechselrichter-Typ", None));
-        ___qtablewidgetitem20 = self.BAT_inverters_list.horizontalHeaderItem(3)
-        ___qtablewidgetitem20.setText(QCoreApplication.translate("MainWindow", u"Menge verbraucht [Stk.]", None));
-        ___qtablewidgetitem21 = self.BAT_inverters_list.horizontalHeaderItem(4)
-        ___qtablewidgetitem21.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
-        ___qtablewidgetitem22 = self.BAT_inverters_list.horizontalHeaderItem(5)
-        ___qtablewidgetitem22.setText(QCoreApplication.translate("MainWindow", u"Zugeordnete \n"
+        ___qtablewidgetitem19 = self.BAT_inverters_list.horizontalHeaderItem(0)
+        ___qtablewidgetitem19.setText(QCoreApplication.translate("MainWindow", u"<>", None));
+        ___qtablewidgetitem20 = self.BAT_inverters_list.horizontalHeaderItem(1)
+        ___qtablewidgetitem20.setText(QCoreApplication.translate("MainWindow", u"Artikelnummer", None));
+        ___qtablewidgetitem21 = self.BAT_inverters_list.horizontalHeaderItem(2)
+        ___qtablewidgetitem21.setText(QCoreApplication.translate("MainWindow", u"Wechselrichter-Typ", None));
+        ___qtablewidgetitem22 = self.BAT_inverters_list.horizontalHeaderItem(3)
+        ___qtablewidgetitem22.setText(QCoreApplication.translate("MainWindow", u"Menge verbraucht [Stk.]", None));
+        ___qtablewidgetitem23 = self.BAT_inverters_list.horizontalHeaderItem(4)
+        ___qtablewidgetitem23.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
+        ___qtablewidgetitem24 = self.BAT_inverters_list.horizontalHeaderItem(5)
+        ___qtablewidgetitem24.setText(QCoreApplication.translate("MainWindow", u"Zugeordnete \n"
 "WR-Leistung [kW]", None));
-        ___qtablewidgetitem23 = self.BAT_inverters_list.horizontalHeaderItem(6)
-        ___qtablewidgetitem23.setText(QCoreApplication.translate("MainWindow", u"Art der Kopplung", None));
-        self.move_none_BAT_inverters_to_blacklist.setText("")
-        self.open_BAT_inverters_blacklist.setText(QCoreApplication.translate("MainWindow", u"\u00d6ffne Blacklist", None))
+        ___qtablewidgetitem25 = self.BAT_inverters_list.horizontalHeaderItem(6)
+        ___qtablewidgetitem25.setText(QCoreApplication.translate("MainWindow", u"Art der Kopplung", None));
+        ___qtablewidgetitem26 = self.BAT_inverters_list.horizontalHeaderItem(7)
+        ___qtablewidgetitem26.setText(QCoreApplication.translate("MainWindow", u"x", None));
+        self.open_BAT_inverters_blacklist.setText("")
         self.coupling_type_text.setPlainText(QCoreApplication.translate("MainWindow", u"AC gekoppeltes System", None))
         self.bat_inverter_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
         self.bat_inverter_power_label.setText(QCoreApplication.translate("MainWindow", u"Zugeordnete\n"
@@ -2727,27 +2684,28 @@ class Ui_MainWindow(object):
         self.coupling_type_label.setText(QCoreApplication.translate("MainWindow", u"Art der Kopplung:", None))
         self.bat_inverter_SN_label.setText(QCoreApplication.translate("MainWindow", u"Seriennummer:", None))
         self.headline_05.setText(QCoreApplication.translate("MainWindow", u"Speicher", None))
-        ___qtablewidgetitem24 = self.BAT_storage_list.horizontalHeaderItem(0)
-        ___qtablewidgetitem24.setText(QCoreApplication.translate("MainWindow", u"<>", None));
-        ___qtablewidgetitem25 = self.BAT_storage_list.horizontalHeaderItem(1)
-        ___qtablewidgetitem25.setText(QCoreApplication.translate("MainWindow", u"Artikelnummer", None));
-        ___qtablewidgetitem26 = self.BAT_storage_list.horizontalHeaderItem(2)
-        ___qtablewidgetitem26.setText(QCoreApplication.translate("MainWindow", u"Speicher-Typ", None));
-        ___qtablewidgetitem27 = self.BAT_storage_list.horizontalHeaderItem(3)
-        ___qtablewidgetitem27.setText(QCoreApplication.translate("MainWindow", u"Menge verbraucht [Stk.]", None));
-        ___qtablewidgetitem28 = self.BAT_storage_list.horizontalHeaderItem(4)
-        ___qtablewidgetitem28.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
-        ___qtablewidgetitem29 = self.BAT_storage_list.horizontalHeaderItem(5)
-        ___qtablewidgetitem29.setText(QCoreApplication.translate("MainWindow", u"Nutzbare \n"
+        ___qtablewidgetitem27 = self.BAT_storage_list.horizontalHeaderItem(0)
+        ___qtablewidgetitem27.setText(QCoreApplication.translate("MainWindow", u"<>", None));
+        ___qtablewidgetitem28 = self.BAT_storage_list.horizontalHeaderItem(1)
+        ___qtablewidgetitem28.setText(QCoreApplication.translate("MainWindow", u"Artikelnummer", None));
+        ___qtablewidgetitem29 = self.BAT_storage_list.horizontalHeaderItem(2)
+        ___qtablewidgetitem29.setText(QCoreApplication.translate("MainWindow", u"Speicher-Typ", None));
+        ___qtablewidgetitem30 = self.BAT_storage_list.horizontalHeaderItem(3)
+        ___qtablewidgetitem30.setText(QCoreApplication.translate("MainWindow", u"Menge verbraucht [Stk.]", None));
+        ___qtablewidgetitem31 = self.BAT_storage_list.horizontalHeaderItem(4)
+        ___qtablewidgetitem31.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
+        ___qtablewidgetitem32 = self.BAT_storage_list.horizontalHeaderItem(5)
+        ___qtablewidgetitem32.setText(QCoreApplication.translate("MainWindow", u"Nutzbare \n"
 "Speicherkapazit\u00e4t\n"
 "[kWh]", None));
-        ___qtablewidgetitem30 = self.BAT_storage_list.horizontalHeaderItem(6)
-        ___qtablewidgetitem30.setText(QCoreApplication.translate("MainWindow", u"Max. Entladeleistung\n"
+        ___qtablewidgetitem33 = self.BAT_storage_list.horizontalHeaderItem(6)
+        ___qtablewidgetitem33.setText(QCoreApplication.translate("MainWindow", u"Max. Entladeleistung\n"
 "im Dauerbetrieb", None));
-        ___qtablewidgetitem31 = self.BAT_storage_list.horizontalHeaderItem(7)
-        ___qtablewidgetitem31.setText(QCoreApplication.translate("MainWindow", u"Batterietechnologie", None));
-        self.move_none_BAT_storage_to_blacklist.setText("")
-        self.open_BAT_storage_blacklist.setText(QCoreApplication.translate("MainWindow", u"\u00d6ffne Blacklist", None))
+        ___qtablewidgetitem34 = self.BAT_storage_list.horizontalHeaderItem(7)
+        ___qtablewidgetitem34.setText(QCoreApplication.translate("MainWindow", u"Batterietechnologie", None));
+        ___qtablewidgetitem35 = self.BAT_storage_list.horizontalHeaderItem(8)
+        ___qtablewidgetitem35.setText(QCoreApplication.translate("MainWindow", u"x", None));
+        self.open_BAT_storage_blacklist.setText("")
         self.bat_technology_label.setText(QCoreApplication.translate("MainWindow", u"Batterietechnologie:", None))
         self.em_pow_ability_bool_label.setText(QCoreApplication.translate("MainWindow", u"Notstromf\u00e4higkeit\n"
 "bei Netzst\u00f6rungen: ", None))
@@ -2763,18 +2721,19 @@ class Ui_MainWindow(object):
 "Stromspeicherung:", None))
         self.bat_storage_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
         self.headline_06.setText(QCoreApplication.translate("MainWindow", u"Ladestation", None))
-        ___qtablewidgetitem32 = self.CHG_point_list.horizontalHeaderItem(0)
-        ___qtablewidgetitem32.setText(QCoreApplication.translate("MainWindow", u"<>", None));
-        ___qtablewidgetitem33 = self.CHG_point_list.horizontalHeaderItem(1)
-        ___qtablewidgetitem33.setText(QCoreApplication.translate("MainWindow", u"Artikelnummer", None));
-        ___qtablewidgetitem34 = self.CHG_point_list.horizontalHeaderItem(2)
-        ___qtablewidgetitem34.setText(QCoreApplication.translate("MainWindow", u"Ladestations-Typ", None));
-        ___qtablewidgetitem35 = self.CHG_point_list.horizontalHeaderItem(3)
-        ___qtablewidgetitem35.setText(QCoreApplication.translate("MainWindow", u"Menge verbraucht [Stk.]", None));
-        ___qtablewidgetitem36 = self.CHG_point_list.horizontalHeaderItem(4)
-        ___qtablewidgetitem36.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
-        self.move_none_CHG_point_to_blacklist.setText("")
-        self.open_CHG_point_blacklist.setText(QCoreApplication.translate("MainWindow", u"\u00d6ffne Blacklist", None))
+        ___qtablewidgetitem36 = self.CHG_point_list.horizontalHeaderItem(0)
+        ___qtablewidgetitem36.setText(QCoreApplication.translate("MainWindow", u"<>", None));
+        ___qtablewidgetitem37 = self.CHG_point_list.horizontalHeaderItem(1)
+        ___qtablewidgetitem37.setText(QCoreApplication.translate("MainWindow", u"Artikelnummer", None));
+        ___qtablewidgetitem38 = self.CHG_point_list.horizontalHeaderItem(2)
+        ___qtablewidgetitem38.setText(QCoreApplication.translate("MainWindow", u"Ladestations-Typ", None));
+        ___qtablewidgetitem39 = self.CHG_point_list.horizontalHeaderItem(3)
+        ___qtablewidgetitem39.setText(QCoreApplication.translate("MainWindow", u"Menge verbraucht [Stk.]", None));
+        ___qtablewidgetitem40 = self.CHG_point_list.horizontalHeaderItem(4)
+        ___qtablewidgetitem40.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
+        ___qtablewidgetitem41 = self.CHG_point_list.horizontalHeaderItem(5)
+        ___qtablewidgetitem41.setText(QCoreApplication.translate("MainWindow", u"x", None));
+        self.open_CHG_point_blacklist.setText("")
         self.charging_point_type_label.setText(QCoreApplication.translate("MainWindow", u"Typ:", None))
         self.charging_point_SN_label.setText(QCoreApplication.translate("MainWindow", u"Seriennummer:", None))
         self.headline_07.setText(QCoreApplication.translate("MainWindow", u"Anschlussart", None))

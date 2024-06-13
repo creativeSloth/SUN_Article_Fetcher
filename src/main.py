@@ -118,22 +118,6 @@ class MainWindow(QtWidgets.QMainWindow):
             self.on_store_device_specs_btn_click
         )
 
-        self.ui.move_none_PV_modules_to_blacklist.clicked.connect(
-            self.on_move_none_PV_modules_to_blacklist_click
-        )
-        self.ui.move_none_PV_inverters_to_blacklist.clicked.connect(
-            self.on_move_none_PV_inverters_to_blacklist_click
-        )
-        self.ui.move_none_BAT_inverters_to_blacklist.clicked.connect(
-            self.on_move_none_BAT_inverters_to_blacklist_click
-        )
-        self.ui.move_none_BAT_storage_to_blacklist.clicked.connect(
-            self.on_move_none_BAT_storage_to_blacklist_click
-        )
-        self.ui.move_none_CHG_point_to_blacklist.clicked.connect(
-            self.on_move_none_CHG_point_to_blacklist_click
-        )
-
         self.ui.target_path_btn_2.clicked.connect(self.on_target_path_btn_2_click)
         self.ui.create_doc1_btn.clicked.connect(self.on_btn_create_doc1_clicked)
         self.ui.create_doc2_btn.clicked.connect(self.on_btn_create_doc2_clicked)
@@ -215,21 +199,6 @@ class MainWindow(QtWidgets.QMainWindow):
         df = execute_query(self, query="sql1")
         update_config_file("Abfrage", "sql1", get_sql_query(self)["sql1"])
         fill_device_lists(self, df)
-
-    def on_move_none_PV_modules_to_blacklist_click(self):
-        remove_articles_from_table(table=self.ui.PV_modules_list)
-
-    def on_move_none_PV_inverters_to_blacklist_click(self):
-        remove_articles_from_table(table=self.ui.PV_inverters_list)
-
-    def on_move_none_BAT_inverters_to_blacklist_click(self):
-        remove_articles_from_table(table=self.ui.BAT_inverters_list)
-
-    def on_move_none_BAT_storage_to_blacklist_click(self):
-        remove_articles_from_table(table=self.ui.BAT_storage_list)
-
-    def on_move_none_CHG_point_to_blacklist_click(self):
-        remove_articles_from_table(table=self.ui.CHG_point_list)
 
     def on_fill_fields_btn_click(self):
 
