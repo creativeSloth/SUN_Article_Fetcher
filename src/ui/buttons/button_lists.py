@@ -1,6 +1,6 @@
 from typing import Any, Union
 
-from PyQt5 import QtWidgets
+from PyQt5 import QtCore
 from PyQt5.QtWidgets import QPushButton, QTableWidget
 
 from files.file_sys_handler import compare_src_docs_with_article_list
@@ -32,11 +32,11 @@ class ButtonLists:
         }
 
         self._button_type_map: dict[str, tuple] = {
-            "search": [self._search_btns, QPushButton_search],
-            "doc_available": [self._doc_avlble_btns, QPushButton_doc],
-            "move_from_bl": [self._move_from_BL_btns, QPushButton_del_from_bl],
-            "move_to_bl": [self._move_to_BL_btns, QPushButton_del_to_bl],
-            "open_bl": [self._move_to_BL_btns, QPushButton_open_bl],
+            "search": QPushButton_search,
+            "doc_available": QPushButton_doc,
+            "move_from_bl": QPushButton_del_from_bl,
+            "move_to_bl": QPushButton_del_to_bl,
+            "open_bl": QPushButton_open_bl,
         }
 
     def get_search_btns(self):
@@ -86,39 +86,59 @@ def initialize_push_buttons(self):
 
 
 def change_class_of_open_BL_btns(self):
+    from files.blacklist import on_blacklist_button_click
 
     open_BL_btns = [
-        self.ui.open_articles_blacklist,
-        self.ui.open_PV_modules_blacklist,
-        self.ui.open_PV_inverters_blacklist,
-        self.ui.open_BAT_inverters_blacklist,
-        self.ui.open_BAT_storage_blacklist,
-        self.ui.open_CHG_point_blacklist,
+        (self.ui.open_articles_blacklist, self.ui.articles_list),
+        (self.ui.open_PV_modules_blacklist, self.ui.PV_modules_list),
+        (self.ui.open_PV_inverters_blacklist, self.ui.PV_inverters_list),
+        (self.ui.open_BAT_inverters_blacklist, self.ui.BAT_inverters_list),
+        (self.ui.open_BAT_storage_blacklist, self.ui.BAT_storage_list),
+        (self.ui.open_CHG_point_blacklist, self.ui.CHG_point_list),
     ]
+
     # Ersetzen Sie die vorhandenen QPushButton-Instanzen durch die benutzerdefinierte Klasse
     self._open_BL_btns = [
-        replace_with_custom_class(open_BL_btn, QPushButton_open_bl)
-        for open_BL_btn in open_BL_btns
+        replace_with_custom_class(
+            self,
+            original_button=open_BL_btn,
+            custom_class=QPushButton_open_bl,
+            device_table=device_table,
+            on_btn_click=on_blacklist_button_click,
+        )
+        for open_BL_btn, device_table in open_BL_btns
     ]
 
 
-def replace_with_custom_class(original_button, custom_class):
-    new_button = custom_class(original_button.text())
+def replace_with_custom_class(
+    self,
+    original_button: QPushButton,
+    custom_class: QPushButton_open_bl,
+    device_table: QTableWidget,
+    on_btn_click=None,
+):
+    parent_frame = original_button.parentWidget()
+    new_button: QPushButton_open_bl = custom_class(parent_frame)
     new_button.setObjectName(original_button.objectName())
-    new_button.setGeometry(original_button.geometry())
-    new_button.setFont(original_button.font())
-    new_button.setIcon(original_button.icon())
-    new_button.setIconSize(original_button.iconSize())
+
+    new_button.setMinimumSize(original_button.minimumSize())
+    new_button.setMaximumSize(original_button.maximumSize())
+    new_button.x = original_button.x
+    new_button.y = original_button.y
+    new_button.setFocusPolicy(QtCore.Qt.StrongFocus)
+    new_button.setAutoDefault(False)
+    new_button.setDefault(False)
+
     new_button.setEnabled(original_button.isEnabled())
-    new_button.setVisible(original_button.isVisible())
-    # Weitere Eigenschaften, die kopiert werden müssen, hier hinzufügen
+    new_button.setVisible(True)
 
     # Ersetzen Sie das ursprüngliche Widget in seinem Layout
-    parent_frame = original_button.parentWidget()
     if parent_frame is not None:
-        original_button.setParent(None)
+        # original_button.setParent(None)
         new_button.setParent(parent_frame)
-        new_button.raise_()
+        # new_button.raise_()
+
+    new_button.clicked.connect(lambda: on_btn_click(self, device_table))
 
     return new_button
 
@@ -143,7 +163,7 @@ def add_doc_avlbl_btns(
                 button_type=button_type,
                 on_button_pressed=on_button_pressed,
             )
-        self.button_list.refresh()
+    self.button_list.refresh()
 
 
 def add_btns_into_table_cells(
@@ -163,7 +183,7 @@ def add_btns_into_table_cells(
             button_type=button_type,
             on_button_pressed=on_button_pressed,
         )
-        self.button_list.refresh()
+    self.button_list.refresh()
 
 
 def pick_button_class(
@@ -171,12 +191,12 @@ def pick_button_class(
 ) -> Union[
     QPushButton, QPushButton_del_from_bl, QPushButton_del_to_bl, QPushButton_doc
 ]:
-    return self.button_list._button_type_map[button_type][1]
+    return self.button_list._button_type_map[button_type]
 
 
 def create_button_into_table_cell(
     self,
-    table_of_cell: QtWidgets.QTableWidget = None,
+    table_of_cell: QTableWidget = None,
     row: int = None,
     column: int = 0,
     button_type: str = "",

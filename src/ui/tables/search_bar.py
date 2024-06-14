@@ -1,10 +1,4 @@
-from PyQt5.QtWidgets import (
-    QHBoxLayout,
-    QPushButton,
-    QSizePolicy,
-    QTextEdit,
-    QVBoxLayout,
-)
+from PyQt5.QtWidgets import QHBoxLayout, QSizePolicy, QTextEdit, QVBoxLayout
 
 from ui.buttons.button_subclasses import QPushButton_search
 
