@@ -6,6 +6,8 @@ from PyQt5.QtWidgets import (
     QVBoxLayout,
 )
 
+from ui.buttons.button_subclasses import QPushButton_search
+
 
 def add_table_header_search_box(self, table, layout):
     index = layout.indexOf(table)
@@ -20,7 +22,7 @@ def add_table_header_search_box(self, table, layout):
     max_width = 30
 
     # QLabel für die Suchleiste erstellen und hinzufügen
-    button = QPushButton("")
+    button: QPushButton_search = QPushButton_search("")
     # button.setStyleSheet("text-decoration: underline;")
     button.setMinimumHeight(min_height)
     button.setMaximumHeight(max_height)
@@ -54,8 +56,6 @@ def add_table_header_search_box(self, table, layout):
 
     # Kombiniertes Layout an der ursprünglichen Position einfügen
     layout.insertLayout(index, comb_search_layout)
-
-    self.button_list.add_generic_button(button=button, button_type="search")
 
     return button, text_edit
 

@@ -4,9 +4,9 @@ from qtpy import QtCore, QtWidgets
 from files import logs_and_config
 from files.blacklist import init_blacklist_button_click_signal, update_blacklist
 from files.file_sys_handler import get_files_in_source_path, get_paths
-from ui.buttons.button_lists import add_doc_avlbl_btns, add_move_to_bl_btns
+from ui.buttons.button_lists import add_btns_into_table_cells, add_doc_avlbl_btns
 from ui.buttons.custom_button import customize_push_buttons
-from ui.fields.ui_fields_base import get_all_tables, get_device_tables
+from ui.fields.ui_fields_base import get_all_mainwindow_tables, get_device_tables
 from ui.tables.customize_row import customize_table_row
 from ui.tables.search_bar import (
     add_table_header_search_box,
@@ -46,7 +46,7 @@ def initialize_table_search(self):
         init_search_button_click_signal(table=table, button=button, text_edit=text_edit)
 
         # Falls die Tabelle eine Gerätetabelle ist, initialisiere das Signal für den Blacklist-Button-Klick
-        if table in get_all_tables(self):
+        if table in get_all_mainwindow_tables(self):
             init_blacklist_button_click_signal(self, table=table)
 
 
@@ -54,7 +54,13 @@ def initialize_table_search(self):
 def fill_article_table(self, table: QtWidgets.QTableWidget, df: pd.DataFrame = None):
     put_non_bl_articles_on_table(table, df, import_column_count=3)
     mark_documents_availability(self, table)
-    add_move_to_bl_btns(self, table, column=table.columnCount() - 1)
+    add_btns_into_table_cells(
+        self,
+        table,
+        column=table.columnCount() - 1,
+        button_type="move_to_bl",
+        on_button_pressed=remove_article_from_table_row,
+    )
     customize_push_buttons(self)
     resize_columns_to_contents(table=table)
     disable_colums_edit(table, firstcol=1, lastcol=4)
@@ -79,7 +85,14 @@ def mark_documents_availability(self, table):
 
     source_path, _, _ = get_paths()
     all_files = get_files_in_source_path(self, source_path)
-    add_doc_avlbl_btns(self, table, all_files)
+    add_doc_avlbl_btns(
+        self,
+        table=table,
+        column=0,
+        button_type="doc_available",
+        all_files=all_files,
+        on_button_pressed=None,
+    )
 
 
 def fill_device_lists(self, df):
@@ -96,7 +109,13 @@ def fill_device_lists(self, df):
 def fill_specific_device_list(self, table: QtWidgets.QTableWidget, df: pd.DataFrame):
 
     put_non_bl_articles_on_table(table, df, import_column_count=4)
-    add_move_to_bl_btns(self, table, column=table.columnCount() - 1)
+    add_btns_into_table_cells(
+        self,
+        table,
+        column=table.columnCount() - 1,
+        button_type="move_to_bl",
+        on_button_pressed=remove_article_from_table_row,
+    )
     customize_push_buttons(self)
     fill_device_specs_in_device_tables(table)
     resize_columns_to_contents(table=table)
@@ -285,7 +304,7 @@ def fill_device_specs_in_device_tables(table):
 
 def fill_tables_content(self, saved_tables_content):
     # Alle Tabellen holen
-    tables = get_all_tables(self)
+    tables = get_all_mainwindow_tables(self)
     for table in tables:
         clear_table(table)
 

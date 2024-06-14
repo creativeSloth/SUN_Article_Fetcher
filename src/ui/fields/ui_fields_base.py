@@ -313,7 +313,7 @@ def get_articles_table(self):
     return articles_table
 
 
-def get_all_tables(self) -> list:
+def get_all_mainwindow_tables(self) -> list:
     device_tables: QtWidgets.QTableWidget = get_device_tables(self)
     articles_table: QtWidgets.QTableWidget = get_articles_table(self)
     all_tables: QtWidgets.QTableWidget = device_tables + articles_table

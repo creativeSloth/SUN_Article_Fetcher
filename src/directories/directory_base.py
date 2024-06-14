@@ -27,7 +27,7 @@ class Paths:
         }
 
 
-dir_paths = Paths()
+dir_paths: Paths = Paths()
 
 
 def set_static_directories():

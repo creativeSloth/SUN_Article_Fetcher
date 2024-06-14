@@ -8,7 +8,7 @@ from qtpy import QtWidgets
 from directories.directory_base import dir_paths
 from files.utils import is_on_blacklist
 from styles.styles_Handler import initialize_ui_style
-from ui.buttons.button_lists import create_remove_from_bl_btn
+from ui.buttons.button_lists import add_btns_into_table_cells
 from ui.tables.utils import (
     clear_table,
     disable_colums_edit,
@@ -102,7 +102,14 @@ def on_blacklist_button_click(self, device_table: QtWidgets.QTableWidget) -> Non
         dialog_instance.show()
 
     fill_bl_tables(device_table_name, table_of_cell)
-    create_remove_from_bl_btn(self, table_of_cell)
+    add_btns_into_table_cells(
+        self,
+        table=table_of_cell,
+        column=3,
+        button_type="move_from_bl",
+        on_button_pressed=on_remove_articles_from_ui_bl,
+    )
+
     resize_columns_to_contents(table_of_cell)
     disable_colums_edit(table_of_cell)
 

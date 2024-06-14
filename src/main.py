@@ -50,7 +50,6 @@ from ui.tables.tables_base import (
     fill_article_table,
     fill_device_lists,
     initialize_table_search,
-    remove_articles_from_table,
 )
 from ui.windows.mainwindow import Ui_MainWindow
 

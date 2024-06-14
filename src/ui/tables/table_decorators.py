@@ -1,9 +1,9 @@
-from ui.fields.ui_fields_base import get_all_tables
+from ui.fields.ui_fields_base import get_all_mainwindow_tables
 from ui.tables.utils import on_sort_indicator_changed
 
 
 def connect_sort_indicator_changed(self):
-    tables = get_all_tables(self)
+    tables = get_all_mainwindow_tables(self)
     for table in tables:
         # Verwendung von lambda-Funktion, um das Argument "table" zu übergeben
         table.horizontalHeader().sortIndicatorChanged.connect(

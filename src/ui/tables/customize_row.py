@@ -13,6 +13,7 @@ def customize_table_row(func):
         func(self, *args, **kwargs)  # Rufe die ursprüngliche Funktion auf
 
         if table is not None:
+
             table.setSortingEnabled(True)
 
             # Führe die Anpassung der Zeilenfarben durch

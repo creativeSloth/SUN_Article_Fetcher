@@ -1,5 +1,5 @@
 import files.logs_and_config as logs_and_config
-from ui.fields.ui_fields_base import get_all_tables, get_mapped_context
+from ui.fields.ui_fields_base import get_all_mainwindow_tables, get_mapped_context
 
 
 def save_fields_text(self, file_path):
@@ -14,7 +14,7 @@ def save_fields_text(self, file_path):
 
 
 def save_tables_content(self, file_path):
-    tables = get_all_tables(self)
+    tables = get_all_mainwindow_tables(self)
     field_map = []
     for table in tables:
         for row in range(table.rowCount()):

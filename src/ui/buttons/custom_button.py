@@ -1,12 +1,11 @@
 import os
 
-from PyQt5 import QtWidgets
 from PyQt5.QtCore import QEvent, Qt
 from PyQt5.QtGui import QColor, QIcon, QPainter, QPixmap
 from PyQt5.QtWidgets import QPushButton
 
 from directories.directory_base import dir_paths
-from ui.fields.ui_fields_base import get_all_tables
+from ui.fields.ui_fields_base import get_all_mainwindow_tables
 
 
 def get_paths_of_icons(icon_name: str = None):
@@ -23,7 +22,8 @@ def get_paths_of_icons(icon_name: str = None):
 
 
 def get_button_icons(self):
-
+    PB_MAP: dict = {}
+    PB_MAP.clear()
     PB_MAP = {
         self.ui.load_articles_db_btn: (
             get_paths_of_icons("database"),
@@ -73,7 +73,10 @@ def get_button_icons(self):
     for button in self.button_list.get_open_BL_btns():
         PB_MAP[button] = (get_paths_of_icons("preview_off"), get_color_combo("red"))
 
-    for table in get_all_tables(self):
+    for button in self.button_list.get_doc_available_btns():
+        PB_MAP[button] = (get_paths_of_icons("documents"), get_color_combo("red"))
+
+    for table in get_all_mainwindow_tables(self):
         table_name = table.objectName()
         for button in self.button_list.get_move_to_bl_btns(table_name=table_name):
             PB_MAP[button] = (
@@ -81,20 +84,20 @@ def get_button_icons(self):
                 get_color_combo("red"),
             )
 
-    for button in self.button_list.get_doc_available_btns():
-        PB_MAP[button] = (get_paths_of_icons("documents"), get_color_combo("red"))
+    for button in self.button_list.get_move_from_bl_btns():
+        PB_MAP[button] = (get_paths_of_icons("list_add"), get_color_combo("red"))
 
     return PB_MAP
 
 
 def customize_push_buttons(self):
+    self.button_list.refresh()
     # Setze die Icons und füge Event-Filter hinzu
     PB_MAP = get_button_icons(self)
     colored_PB_MAP = create_colored_PB_MAP(PB_MAP)
 
     for button, icons in colored_PB_MAP.items():
         normal_icon_path, hover_icon_path, click_icon_path = icons
-
         # Standard-Icon setzen
         button.setIcon(QIcon(normal_icon_path))
         button.setIconSize(button.size())
@@ -109,7 +112,7 @@ def customize_push_buttons(self):
 
 
 def create_colored_PB_MAP(PB_MAP: dict):
-    colored_PB_MAP = {}
+    colored_PB_MAP: dict = {}
     for button, value in PB_MAP.items():
         icon_path, color_combo = value
         normal_icon, hover_icon, click_icon = create_icon_variaties(
@@ -192,26 +195,3 @@ def eventFilter(self, source, event: QEvent):
             source.setIcon(source.hover_icon)
 
     return False
-
-
-def create_button_into_table_cell(
-    self,
-    table_of_cell: QtWidgets.QTableWidget = None,
-    row: int = None,
-    column: int = 0,
-    text: str = "",
-    on_button_pressed=None,
-) -> QtWidgets.QPushButton:
-
-    # Erstelle dynamisch ein Attribut für jede Tabelle
-    setattr(self, f"push_button_{row}", QtWidgets.QPushButton(text))
-    push_button = getattr(self, f"push_button_{row}", None)
-    push_button.setFixedSize(25, 25)
-
-    if on_button_pressed:
-        push_button.clicked.connect(
-            lambda _, tbl=table_of_cell, btn=push_button: on_button_pressed(tbl, btn)
-        )
-
-    table_of_cell.setCellWidget(row, column, push_button)
-    return push_button
