@@ -61,6 +61,13 @@ class ButtonLists:
             property_value="search",
             wanted_objs=all_pushbuttons,
         )
+
+        self._open_BL_btns = list_of_property_members(
+            property_type="button_type",
+            property_value="open_bl",
+            wanted_objs=all_pushbuttons,
+        )
+
         self._move_from_BL_btns = list_of_property_members(
             property_type="button_type",
             property_value="move_from_bl",

@@ -5,6 +5,7 @@ from PyQt5.QtGui import QColor, QIcon, QPainter, QPixmap
 from PyQt5.QtWidgets import QPushButton
 
 from directories.directory_base import dir_paths
+from ui.buttons.button_lists import ButtonLists
 from ui.fields.ui_fields_base import get_all_mainwindow_tables
 
 
@@ -66,12 +67,12 @@ def get_button_icons(self):
             get_color_combo("blue"),
         ),
     }
-
     for button in self.button_list.get_search_btns():
         PB_MAP[button] = (get_paths_of_icons("search"), get_color_combo("red"))
 
     for button in self.button_list.get_open_BL_btns():
         PB_MAP[button] = (get_paths_of_icons("preview_off"), get_color_combo("red"))
+        # print(button.objectName())
 
     for button in self.button_list.get_doc_available_btns():
         PB_MAP[button] = (get_paths_of_icons("documents"), get_color_combo("red"))
@@ -98,7 +99,6 @@ def customize_push_buttons(self):
     colored_PB_MAP = create_colored_PB_MAP(PB_MAP)
 
     for button, icons in colored_PB_MAP.items():
-        print(button.objectName())
         normal_icon_path, hover_icon_path, click_icon_path = icons
         # Standard-Icon setzen
         button.setIcon(QIcon(normal_icon_path))
