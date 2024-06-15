@@ -90,12 +90,12 @@ def initialize_push_buttons(self):
 def set_btn_attr_of_open_BL_btns(self):
 
     open_BL_btns = [
-        (self.ui.open_articles_blacklist, self.ui.articles_list),
-        (self.ui.open_PV_modules_blacklist, self.ui.PV_modules_list),
-        (self.ui.open_PV_inverters_blacklist, self.ui.PV_inverters_list),
-        (self.ui.open_BAT_inverters_blacklist, self.ui.BAT_inverters_list),
-        (self.ui.open_BAT_storage_blacklist, self.ui.BAT_storage_list),
-        (self.ui.open_CHG_point_blacklist, self.ui.CHG_point_list),
+        (self.ui.open_articles_blacklist),
+        (self.ui.open_PV_modules_blacklist),
+        (self.ui.open_PV_inverters_blacklist),
+        (self.ui.open_BAT_inverters_blacklist),
+        (self.ui.open_BAT_storage_blacklist),
+        (self.ui.open_CHG_point_blacklist),
     ]
 
     # Ersetzen Sie die vorhandenen QPushButton-Instanzen durch die benutzerdefinierte Klasse
@@ -103,7 +103,7 @@ def set_btn_attr_of_open_BL_btns(self):
         create_and_set_obj_property(
             obj=open_BL_btn, property_type="button_type", property_value="open_bl"
         )
-        for open_BL_btn, _ in open_BL_btns
+        for open_BL_btn in open_BL_btns
     ]
 
 

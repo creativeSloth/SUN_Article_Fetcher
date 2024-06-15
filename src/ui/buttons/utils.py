@@ -13,8 +13,6 @@ def create_and_set_obj_property(
 
 def list_objects_of_class(parent: QWidget, cls: Type) -> List[Type]:
     all_pushbuttons = parent.findChildren(cls)
-    for pb in all_pushbuttons:
-        print(pb.objectName())
     return all_pushbuttons
 
 

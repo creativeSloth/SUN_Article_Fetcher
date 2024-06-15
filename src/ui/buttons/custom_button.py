@@ -92,11 +92,13 @@ def get_button_icons(self):
 
 def customize_push_buttons(self):
     self.button_list.refresh()
+
     # Setze die Icons und füge Event-Filter hinzu
     PB_MAP = get_button_icons(self)
     colored_PB_MAP = create_colored_PB_MAP(PB_MAP)
 
     for button, icons in colored_PB_MAP.items():
+        print(button.objectName())
         normal_icon_path, hover_icon_path, click_icon_path = icons
         # Standard-Icon setzen
         button.setIcon(QIcon(normal_icon_path))
