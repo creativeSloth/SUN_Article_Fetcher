@@ -1,15 +1,12 @@
-from typing import Any, Union
+from typing import Any
 
-from PyQt5 import QtCore
 from PyQt5.QtWidgets import QPushButton, QTableWidget
 
 from files.file_sys_handler import compare_src_docs_with_article_list
-from ui.buttons.button_subclasses import (
-    QPushButton_del_from_bl,
-    QPushButton_del_to_bl,
-    QPushButton_doc,
-    QPushButton_open_bl,
-    QPushButton_search,
+from ui.buttons.utils import (
+    create_and_set_obj_property,
+    list_objects_of_class,
+    list_of_property_members,
 )
 from ui.fields.ui_fields_base import get_all_mainwindow_tables
 
@@ -31,14 +28,6 @@ class ButtonLists:
             "CHG_point_list": [],
         }
 
-        self._button_type_map: dict[str, tuple] = {
-            "search": QPushButton_search,
-            "doc_available": QPushButton_doc,
-            "move_from_bl": QPushButton_del_from_bl,
-            "move_to_bl": QPushButton_del_to_bl,
-            "open_bl": QPushButton_open_bl,
-        }
-
     def get_search_btns(self):
         return self._search_btns
 
@@ -57,22 +46,35 @@ class ButtonLists:
 
     def refresh(self):
 
-        self._doc_avlble_btns = list_objects_of_class(self.parent, QPushButton_doc)
-        self._search_btns = list_objects_of_class(self.parent, QPushButton_search)
-        self._move_from_BL_btns = list_objects_of_class(
-            self.parent, QPushButton_del_from_bl
+        all_pushbuttons = list_objects_of_class(
+            parent=self.parent,
+            cls=QPushButton,
+        )
+
+        self._doc_avlble_btns = list_of_property_members(
+            property_type="button_type",
+            property_value="doc_available",
+            wanted_objs=all_pushbuttons,
+        )
+        self._search_btns = list_of_property_members(
+            property_type="button_type",
+            property_value="search",
+            wanted_objs=all_pushbuttons,
+        )
+        self._move_from_BL_btns = list_of_property_members(
+            property_type="button_type",
+            property_value="move_from_bl",
+            wanted_objs=all_pushbuttons,
         )
 
         self._move_to_BL_btns = {}
         for table in get_all_mainwindow_tables(self.parent):
             table_name = table.objectName()
-            self._move_to_BL_btns[table_name] = list_objects_of_class(
-                self.parent, QPushButton_del_to_bl
+            self._move_to_BL_btns[table_name] = list_of_property_members(
+                property_type="button_type",
+                property_value="move_to_bl",
+                wanted_objs=all_pushbuttons,
             )
-
-
-def list_objects_of_class(parent, cls):
-    return parent.findChildren(cls)
 
 
 def initialize_push_buttons(self):
@@ -81,12 +83,11 @@ def initialize_push_buttons(self):
     # Erstelle eine PushButton-Instanz
     self.button_list = ButtonLists(self)
 
-    change_class_of_open_BL_btns(self)
+    set_btn_attr_of_open_BL_btns(self)
     self.button_list.refresh()
 
 
-def change_class_of_open_BL_btns(self):
-    from files.blacklist import on_blacklist_button_click
+def set_btn_attr_of_open_BL_btns(self):
 
     open_BL_btns = [
         (self.ui.open_articles_blacklist, self.ui.articles_list),
@@ -99,48 +100,11 @@ def change_class_of_open_BL_btns(self):
 
     # Ersetzen Sie die vorhandenen QPushButton-Instanzen durch die benutzerdefinierte Klasse
     self._open_BL_btns = [
-        replace_with_custom_class(
-            self,
-            original_button=open_BL_btn,
-            custom_class=QPushButton_open_bl,
-            device_table=device_table,
-            on_btn_click=on_blacklist_button_click,
+        create_and_set_obj_property(
+            obj=open_BL_btn, property_type="button_type", property_value="open_bl"
         )
-        for open_BL_btn, device_table in open_BL_btns
+        for open_BL_btn, _ in open_BL_btns
     ]
-
-
-def replace_with_custom_class(
-    self,
-    original_button: QPushButton,
-    custom_class: QPushButton_open_bl,
-    device_table: QTableWidget,
-    on_btn_click=None,
-):
-    parent_frame = original_button.parentWidget()
-    new_button: QPushButton_open_bl = custom_class(parent_frame)
-    new_button.setObjectName(original_button.objectName())
-
-    new_button.setMinimumSize(original_button.minimumSize())
-    new_button.setMaximumSize(original_button.maximumSize())
-    new_button.x = original_button.x
-    new_button.y = original_button.y
-    new_button.setFocusPolicy(QtCore.Qt.StrongFocus)
-    new_button.setAutoDefault(False)
-    new_button.setDefault(False)
-
-    new_button.setEnabled(original_button.isEnabled())
-    new_button.setVisible(True)
-
-    # Ersetzen Sie das ursprüngliche Widget in seinem Layout
-    if parent_frame is not None:
-        # original_button.setParent(None)
-        new_button.setParent(parent_frame)
-        # new_button.raise_()
-
-    new_button.clicked.connect(lambda: on_btn_click(self, device_table))
-
-    return new_button
 
 
 def add_doc_avlbl_btns(
@@ -163,7 +127,6 @@ def add_doc_avlbl_btns(
                 button_type=button_type,
                 on_button_pressed=on_button_pressed,
             )
-    self.button_list.refresh()
 
 
 def add_btns_into_table_cells(
@@ -183,15 +146,6 @@ def add_btns_into_table_cells(
             button_type=button_type,
             on_button_pressed=on_button_pressed,
         )
-    self.button_list.refresh()
-
-
-def pick_button_class(
-    self, button_type
-) -> Union[
-    QPushButton, QPushButton_del_from_bl, QPushButton_del_to_bl, QPushButton_doc
-]:
-    return self.button_list._button_type_map[button_type]
 
 
 def create_button_into_table_cell(
@@ -204,11 +158,13 @@ def create_button_into_table_cell(
     on_button_pressed=None,
 ) -> None:
 
-    button_class = pick_button_class(self, button_type)
-
     # Erstelle dynamisch ein Attribut für jede Tabelle
-    setattr(self, f"{table_of_cell}_{row}_push_button", button_class(text))
+    setattr(self, f"{table_of_cell}_{row}_push_button", QPushButton(text))
     push_button = getattr(self, f"{table_of_cell}_{row}_push_button", None)
+
+    create_and_set_obj_property(
+        obj=push_button, property_type="button_type", property_value=button_type
+    )
 
     push_button.setFixedSize(25, 25)
 

@@ -68,9 +68,12 @@ def initialize_blacklist_dialogs(self):
 
         # Erstelle dynamisch ein Attribut für jede Tabelle
         setattr(
-            self, f"{table_name}_blacklist_dlg", Blacklist(table_name, table_name_ger)
+            self,
+            f"{table_name}_blacklist_dlg",
+            Blacklist(table_name=table_name, table_name_ger=table_name_ger),
         )
         dialog_instance: Blacklist = getattr(self, f"{table_name}_blacklist_dlg", None)
+
         dialog_instance.setObjectName(f"{table_name}")
         BLACKLISTS_TABLE_MAP.append(
             (dialog_instance.ui.blacklist, dialog_instance.ui.verticalLayout)

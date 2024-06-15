@@ -1,6 +1,12 @@
-from PyQt5.QtWidgets import QHBoxLayout, QSizePolicy, QTextEdit, QVBoxLayout
+from PyQt5.QtWidgets import (
+    QHBoxLayout,
+    QPushButton,
+    QSizePolicy,
+    QTextEdit,
+    QVBoxLayout,
+)
 
-from ui.buttons.button_subclasses import QPushButton_search
+from ui.buttons.utils import create_and_set_obj_property
 
 
 def add_table_header_search_box(self, table, layout):
@@ -16,8 +22,11 @@ def add_table_header_search_box(self, table, layout):
     max_width = 30
 
     # QLabel für die Suchleiste erstellen und hinzufügen
-    button: QPushButton_search = QPushButton_search("")
+    button: QPushButton = QPushButton("")
     # button.setStyleSheet("text-decoration: underline;")
+    create_and_set_obj_property(
+        obj=button, property_type="button_type", property_value="search"
+    )
     button.setMinimumHeight(min_height)
     button.setMaximumHeight(max_height)
     button.setMinimumWidth(min_width)
