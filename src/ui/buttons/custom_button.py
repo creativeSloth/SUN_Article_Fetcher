@@ -5,7 +5,6 @@ from PyQt5.QtGui import QColor, QIcon, QPainter, QPixmap
 from PyQt5.QtWidgets import QPushButton
 
 from directories.directory_base import dir_paths
-from ui.buttons.button_lists import ButtonLists
 from ui.fields.ui_fields_base import get_all_mainwindow_tables
 
 

@@ -45,10 +45,23 @@ class ButtonLists:
             return self._move_to_BL_btns[table_name]
 
     def refresh(self):
+        from files.blacklist import BLACKLISTS
 
-        all_pushbuttons = list_objects_of_class(
-            parent=self.parent,
-            cls=QPushButton,
+        blacklist_pushbuttons: list[QPushButton] = []
+        all_pushbuttons: list[QPushButton] = []
+
+        for blacklist in BLACKLISTS:
+            blacklist_pushbuttons = list_objects_of_class(
+                parent=blacklist,
+                cls=QPushButton,
+            )
+            all_pushbuttons.extend(blacklist_pushbuttons)
+
+        all_pushbuttons.extend(
+            list_objects_of_class(
+                parent=self.parent,
+                cls=QPushButton,
+            )
         )
 
         self._doc_avlble_btns = list_of_property_members(
@@ -167,7 +180,8 @@ def create_button_into_table_cell(
 
     # Erstelle dynamisch ein Attribut für jede Tabelle
     setattr(self, f"{table_of_cell}_{row}_push_button", QPushButton(text))
-    push_button = getattr(self, f"{table_of_cell}_{row}_push_button", None)
+    push_button: QPushButton = getattr(self, f"{table_of_cell}_{row}_push_button", None)
+    push_button.objectName = f"{table_of_cell}_{row}_push_button"
 
     create_and_set_obj_property(
         obj=push_button, property_type="button_type", property_value=button_type

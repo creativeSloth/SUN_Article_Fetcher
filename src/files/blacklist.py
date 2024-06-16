@@ -9,6 +9,7 @@ from directories.directory_base import dir_paths
 from files.utils import is_on_blacklist
 from styles.styles_Handler import initialize_ui_style
 from ui.buttons.button_lists import add_btns_into_table_cells
+from ui.buttons.custom_button import customize_push_buttons
 from ui.tables.utils import (
     clear_table,
     disable_colums_edit,
@@ -16,8 +17,6 @@ from ui.tables.utils import (
     resize_columns_to_contents,
 )
 from ui.windows import blacklistWindow
-
-BLACKLISTS_TABLE_MAP = []
 
 
 class Blacklist(QtWidgets.QDialog):
@@ -39,7 +38,13 @@ class Blacklist(QtWidgets.QDialog):
         # connect_table_buttons(self)
 
     def map_ui_buttons(self):
-        pass
+        from ui.tables.tables_base import connect_sort_indicator_changed
+
+        connect_sort_indicator_changed(self)
+
+
+BLACKLISTS = []
+BLACKLISTS_TABLE_MAP = []
 
 
 def get_blacklist_map(self):
@@ -72,12 +77,15 @@ def initialize_blacklist_dialogs(self):
             f"{table_name}_blacklist_dlg",
             Blacklist(table_name=table_name, table_name_ger=table_name_ger),
         )
+
         dialog_instance: Blacklist = getattr(self, f"{table_name}_blacklist_dlg", None)
 
         dialog_instance.setObjectName(f"{table_name}")
+
         BLACKLISTS_TABLE_MAP.append(
             (dialog_instance.ui.blacklist, dialog_instance.ui.verticalLayout)
         )
+        BLACKLISTS.append(dialog_instance)
 
 
 def init_blacklist_button_click_signal(self, table: QtWidgets.QTableWidget):
@@ -97,38 +105,28 @@ def on_blacklist_button_click(self, device_table: QtWidgets.QTableWidget) -> Non
     dialog_instance: Blacklist = getattr(
         self, f"{device_table_name}_blacklist_dlg", None
     )
-    table_of_cell: QtWidgets.QTableWidget = dialog_instance.ui.blacklist
-    clear_table(table_of_cell)
+    blacklist_table: QtWidgets.QTableWidget = dialog_instance.ui.blacklist
+    clear_table(blacklist_table)
 
     # Überprüfe, ob die Instanz existiert, bevor du die Methode aufrufst
     if dialog_instance is not None:
         dialog_instance.show()
 
-    fill_bl_tables(device_table_name, table_of_cell)
+    from ui.tables.tables_base import fill_bl_tables
+
+    fill_bl_tables(self, device_table_name=device_table_name, table=blacklist_table)
     add_btns_into_table_cells(
-        self,
-        table=table_of_cell,
+        dialog_instance,
+        table=blacklist_table,
         column=3,
         button_type="move_from_bl",
         on_button_pressed=on_remove_articles_from_ui_bl,
     )
 
-    resize_columns_to_contents(table_of_cell)
-    disable_colums_edit(table_of_cell)
+    customize_push_buttons(self)
 
-
-def fill_bl_tables(
-    device_table_name: str, table_of_cell: QtWidgets.QTableWidget
-) -> None:
-    from ui.tables.tables_base import import_from_df_row
-
-    bl_articles = read_blacklist_articles(table_name=device_table_name)
-
-    # Zum Sicherstellen dass bl__articles eine Instanz von List ist und ein Element hat
-    if isinstance(bl_articles, list) and bl_articles:
-        for article in bl_articles:
-            # Import data from each row of the blacklist articles
-            import_from_df_row(table_of_cell, data_row=article, import_column_count=2)
+    resize_columns_to_contents(blacklist_table)
+    disable_colums_edit(blacklist_table)
 
 
 def on_remove_articles_from_ui_bl(
@@ -143,12 +141,14 @@ def on_remove_articles_from_ui_bl(
     removed, article_no, _ = remove_row_with_button_from_table(
         table=bl_table, push_button=push_button
     )
+
     if removed:
         remove_articles_from_blacklist(table_name=device_table_name, art_no=article_no)
 
 
 def remove_articles_from_blacklist(table_name: str, art_no: str):
     blacklist_path = dir_paths.dict["blacklist_path"]
+
     config = configparser.ConfigParser()
 
     # Versuche, die Konfigurationsdatei zu lesen und den Eintrag zu entfernen

@@ -1,9 +1,10 @@
+import pandas as pd
 from PyQt5 import QtWidgets
 from qtpy import QtCore, QtWidgets
 
 import files.blacklist as blacklist
 from ui.fields.ui_fields_base import get_articles_table, get_device_tables
-from ui.tables.customize_row import customize_table_row
+from ui.tables.table_decorators import customize_table_row
 
 
 def get_fixed_val_columns():
@@ -78,7 +79,7 @@ def remove_row_with_button_from_table(
         if index.isValid():
             row = index.row()
             article_no = table.item(row, 1).text()
-            article_name = table.item(row, 1).text()
+            article_name = table.item(row, 2).text()
             table.removeRow(row)
             removed: bool = True
     return removed, article_no, article_name
@@ -98,3 +99,93 @@ def check_article_number_on_bl(table):
     ]
 
     return blacklist_article_numbers
+
+
+def remove_article_from_table_row(
+    table: QtWidgets.QTableWidget = None, push_button: QtWidgets.QPushButton = None
+):
+    from files.blacklist import update_blacklist
+
+    removed, article_no, article_name = remove_row_with_button_from_table(
+        table, push_button
+    )
+
+    if removed:
+        # Holen Sie sich alle ausgewählten Dateien im Table Widget
+        df = pd.DataFrame(columns=["article_no", "article_name"])
+
+        new_data = pd.DataFrame(
+            {"article_no": [article_no], "article_name": [article_name]}
+        )
+        # Füge die neuen Daten zum vorhandenen DataFrame hinzu
+        df = pd.concat([df, new_data], ignore_index=True)
+
+        update_blacklist(df, table.objectName())
+
+
+def import_from_df_row(
+    table: QtWidgets.QTableWidget,
+    data_row,
+    import_column_count: int = None,
+) -> None:
+    """Importiert eine Zeile aus einem Datensatz, der Datensatz kann ein DataFrame oder ein Tuple sein
+
+    Args:
+        table (QtWidgets.QTableWidget): Die Tabelle die den Datensatz aufnehmen soll
+        data_row (pd.Series | tuple): Eine Datenzeile, deren Datensätze in eine jeweilige Spalte eingefügt werden soll.
+        Hier soll die 0 Spalte der Tabelle für eine Checkbox, übersprungen werden
+        import_column_count (int, optional): Die Anzahl der Spalten in die eingefügt werden soll.
+    """
+
+    tw_row = table.rowCount()
+    table.insertRow(tw_row)
+
+    # Spalte 1 (statisch) mit einer Checkbox
+    checkbox_item: QtWidgets.QTableWidgetItem = QtWidgets.QTableWidgetItem()
+    checkbox_item.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
+    checkbox_item.setCheckState(QtCore.Qt.Checked)
+
+    # Spalte 1 mit der CheckBox
+    table.setItem(tw_row, 0, checkbox_item)
+
+    for index in range(import_column_count):
+
+        # Überprüfe die Anzahl der Spalten in data_row
+        col_count_data_row = len(data_row)
+        if col_count_data_row > index:
+            if isinstance(data_row, pd.Series) and data_row.iloc[index] is not None:
+                item_col = QtWidgets.QTableWidgetItem(str(data_row.iloc[index]))
+                table.setItem(tw_row, index + 1, item_col)
+            elif isinstance(data_row, tuple) and data_row[index] is not None:
+                item_col = QtWidgets.QTableWidgetItem(str(data_row[index]))
+                table.setItem(tw_row, index + 1, item_col)
+
+
+#! Ungenutzt   ##########################################
+
+
+def remove_articles_from_table(table):
+    from files.blacklist import update_blacklist
+
+    # Holen Sie sich alle ausgewählten Dateien im Table Widget
+    df = pd.DataFrame(columns=["article_no", "article_name"])
+    rows_to_remove = []
+    for row in range(table.rowCount()):
+        checkbox_item = table.item(row, 0)
+        article_no = table.item(row, 1).text()
+        article_name = table.item(row, 2).text()
+
+        # Überprüfe, ob die Checkbox in der aktuellen Zeile angehakt ist
+        if checkbox_item and checkbox_item.checkState() == QtCore.Qt.Checked:
+
+            new_data = pd.DataFrame(
+                {"article_no": [article_no], "article_name": [article_name]}
+            )
+            # Füge die neuen Daten zum vorhandenen DataFrame hinzu
+            df = pd.concat([df, new_data], ignore_index=True)
+            rows_to_remove.append(row)
+    # Entfernen Sie die ausgewählten Zeilen
+    for row in reversed(rows_to_remove):
+        table.removeRow(row)
+
+    update_blacklist(df, table.objectName())

@@ -44,9 +44,9 @@ from ui.fields.ui_fields_base import (
     replace_fields_in_doc,
 )
 from ui.menus import menus_base
-from ui.tables.table_decorators import connect_sort_indicator_changed
 from ui.tables.tables_base import (
     check_specs_in_device_tables,
+    connect_sort_indicator_changed,
     fill_article_table,
     fill_device_lists,
     initialize_table_search,
@@ -67,7 +67,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # Verbinde die Signale mit den entsprechenden Slots
         self.map_ui_buttons()
 
-    def initialize(self: Ui_MainWindow) -> None:
+    def initialize(self) -> None:
 
         set_static_directories()
         menus_base.initialize_menu_dialogs(self)

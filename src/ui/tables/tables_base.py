@@ -1,17 +1,20 @@
 import pandas as pd
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QTableWidget
 from qtpy import QtCore, QtWidgets
 
 from files import logs_and_config
-from files.blacklist import init_blacklist_button_click_signal, update_blacklist
+from files.blacklist import init_blacklist_button_click_signal, read_blacklist_articles
 from files.file_sys_handler import get_files_in_source_path, get_paths
 from ui.buttons.button_lists import add_btns_into_table_cells, add_doc_avlbl_btns
 from ui.buttons.custom_button import customize_push_buttons
+from ui.buttons.utils import list_objects_of_class
 from ui.fields.ui_fields_base import get_all_mainwindow_tables, get_device_tables
-from ui.tables.customize_row import customize_table_row
 from ui.tables.search_bar import (
     add_table_header_search_box,
     init_search_button_click_signal,
 )
+from ui.tables.table_decorators import customize_table_row
 from ui.tables.utils import (
     check_article_number_on_bl,
     clear_table,
@@ -19,8 +22,10 @@ from ui.tables.utils import (
     get_all_tables_to_layout_map,
     get_column_index,
     get_fixed_val_columns,
+    import_from_df_row,
     is_not_on_bl,
-    remove_row_with_button_from_table,
+    on_sort_indicator_changed,
+    remove_article_from_table_row,
     resize_columns_to_contents,
     table_name_and_count_are_valid,
 )
@@ -45,6 +50,7 @@ def initialize_table_search(self):
         # Initialisiere das Signal für den Suchbutton-Klick
         init_search_button_click_signal(table=table, button=button, text_edit=text_edit)
 
+        # ? methode passt nicht so richtig hier her
         # Falls die Tabelle eine Gerätetabelle ist, initialisiere das Signal für den Blacklist-Button-Klick
         if table in get_all_mainwindow_tables(self):
             init_blacklist_button_click_signal(self, table=table)
@@ -122,44 +128,6 @@ def fill_specific_device_list(self, table: QtWidgets.QTableWidget, df: pd.DataFr
     disable_colums_edit(table, firstcol=1, lastcol=5)
 
 
-def import_from_df_row(
-    table: QtWidgets.QTableWidget,
-    data_row,
-    import_column_count: int = None,
-) -> None:
-    """Importiert eine Zeile aus einem Datensatz, der Datensatz kann ein DataFrame oder ein Tuple sein
-
-    Args:
-        table (QtWidgets.QTableWidget): Die Tabelle die den Datensatz aufnehmen soll
-        data_row (pd.Series | tuple): Eine Datenzeile, deren Datensätze in eine jeweilige Spalte eingefügt werden soll.
-        Hier soll die 0 Spalte der Tabelle für eine Checkbox, übersprungen werden
-        import_column_count (int, optional): Die Anzahl der Spalten in die eingefügt werden soll.
-    """
-
-    tw_row = table.rowCount()
-    table.insertRow(tw_row)
-
-    # Spalte 1 (statisch) mit einer Checkbox
-    checkbox_item: QtWidgets.QTableWidgetItem = QtWidgets.QTableWidgetItem()
-    checkbox_item.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
-    checkbox_item.setCheckState(QtCore.Qt.Checked)
-
-    # Spalte 1 mit der CheckBox
-    table.setItem(tw_row, 0, checkbox_item)
-
-    for index in range(import_column_count):
-
-        # Überprüfe die Anzahl der Spalten in data_row
-        col_count_data_row = len(data_row)
-        if col_count_data_row > index:
-            if isinstance(data_row, pd.Series) and data_row.iloc[index] is not None:
-                item_col = QtWidgets.QTableWidgetItem(str(data_row.iloc[index]))
-                table.setItem(tw_row, index + 1, item_col)
-            elif isinstance(data_row, tuple) and data_row[index] is not None:
-                item_col = QtWidgets.QTableWidgetItem(str(data_row[index]))
-                table.setItem(tw_row, index + 1, item_col)
-
-
 def adding_specific_columns(self, table, tw_row=None, df_row=None):
     if table == self.ui.PV_modules_list:
         # Spalte 6 (dynamisch) mit den Werten aus der Spalte 4 des DataFrames
@@ -187,51 +155,6 @@ def adding_specific_columns(self, table, tw_row=None, df_row=None):
 
     if table == self.ui.CHG_point_list:
         pass
-
-
-def remove_articles_from_table(table):
-    # Holen Sie sich alle ausgewählten Dateien im Table Widget
-    df = pd.DataFrame(columns=["article_no", "article_name"])
-    rows_to_remove = []
-    for row in range(table.rowCount()):
-        checkbox_item = table.item(row, 0)
-        article_no = table.item(row, 1).text()
-        article_name = table.item(row, 2).text()
-
-        # Überprüfe, ob die Checkbox in der aktuellen Zeile angehakt ist
-        if checkbox_item and checkbox_item.checkState() == QtCore.Qt.Checked:
-
-            new_data = pd.DataFrame(
-                {"article_no": [article_no], "article_name": [article_name]}
-            )
-            # Füge die neuen Daten zum vorhandenen DataFrame hinzu
-            df = pd.concat([df, new_data], ignore_index=True)
-            rows_to_remove.append(row)
-    # Entfernen Sie die ausgewählten Zeilen
-    for row in reversed(rows_to_remove):
-        table.removeRow(row)
-
-    update_blacklist(df, table.objectName())
-
-
-def remove_article_from_table_row(
-    table: QtWidgets.QTableWidget = None, push_button: QtWidgets.QPushButton = None
-):
-
-    removed, article_no, article_name = remove_row_with_button_from_table(
-        table, push_button
-    )
-    if removed:
-        # Holen Sie sich alle ausgewählten Dateien im Table Widget
-        df = pd.DataFrame(columns=["article_no", "article_name"])
-
-        new_data = pd.DataFrame(
-            {"article_no": [article_no], "article_name": [article_name]}
-        )
-        # Füge die neuen Daten zum vorhandenen DataFrame hinzu
-        df = pd.concat([df, new_data], ignore_index=True)
-
-        update_blacklist(df, table.objectName())
 
 
 def collect_data_from_table(table, article_no_col_index, discard_columns):
@@ -340,3 +263,28 @@ def fill_tables_content(self, saved_tables_content):
                 # Hier wird der Wert in ein QTableWidgetItem-Objekt konvertiert
                 value_item = QtWidgets.QTableWidgetItem(str(value))
                 table.setItem(table_row, table_column, value_item)
+
+
+@customize_table_row
+def fill_bl_tables(self, device_table_name: str, table: QtWidgets.QTableWidget) -> None:
+    from ui.tables.utils import import_from_df_row
+
+    bl_articles = read_blacklist_articles(table_name=device_table_name)
+
+    # Zum Sicherstellen dass bl__articles eine Instanz von List ist und ein Element hat
+    if isinstance(bl_articles, list) and bl_articles:
+        for article in bl_articles:
+            # Import data from each row of the blacklist articles
+            import_from_df_row(table, data_row=article, import_column_count=2)
+
+
+def connect_sort_indicator_changed(self):
+    tables = list_objects_of_class(self, QTableWidget)
+    for table in tables:
+        print(table.objectName())
+        # Verwendung von lambda-Funktion, um das Argument "table" zu übergeben
+        table.horizontalHeader().sortIndicatorChanged.connect(
+            lambda sortIndex, order, table=table: on_sort_indicator_changed(
+                self, table=table
+            )
+        )
