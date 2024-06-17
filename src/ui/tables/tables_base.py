@@ -87,7 +87,7 @@ def put_non_bl_articles_on_table(
                 )
 
 
-def mark_documents_availability(self, table):
+def mark_documents_availability(self, table: QTableWidget):
 
     source_path, _, _ = get_paths()
     all_files = get_files_in_source_path(self, source_path)
@@ -281,7 +281,6 @@ def fill_bl_tables(self, device_table_name: str, table: QtWidgets.QTableWidget) 
 def connect_sort_indicator_changed(self):
     tables = list_objects_of_class(self, QTableWidget)
     for table in tables:
-        print(table.objectName())
         # Verwendung von lambda-Funktion, um das Argument "table" zu übergeben
         table.horizontalHeader().sortIndicatorChanged.connect(
             lambda sortIndex, order, table=table: on_sort_indicator_changed(

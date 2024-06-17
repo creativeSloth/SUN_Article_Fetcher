@@ -156,7 +156,7 @@
            <enum>QTabWidget::West</enum>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <property name="iconSize">
            <size>
@@ -1828,7 +1828,7 @@ AC-Nennleistung [kW] usw.) i vorgenommen werden.</string>
                    <property name="geometry">
                     <rect>
                      <x>0</x>
-                     <y>-996</y>
+                     <y>0</y>
                      <width>1759</width>
                      <height>5378</height>
                     </rect>
@@ -5928,7 +5928,7 @@ Zuschlag in einer Ausschreibung:</string>
               <bool>false</bool>
              </property>
              <property name="plainText">
-              <string>SUN 20-000</string>
+              <string>MRS 19-001</string>
              </property>
             </widget>
            </item>

@@ -23,7 +23,7 @@ def add_table_header_search_box(self, table, layout):
 
     # QLabel für die Suchleiste erstellen und hinzufügen
     button: QPushButton = QPushButton("")
-    # button.setStyleSheet("text-decoration: underline;")
+
     create_and_set_obj_property(
         obj=button, property_type="button_type", property_value="search"
     )

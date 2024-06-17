@@ -71,7 +71,6 @@ def get_button_icons(self):
 
     for button in self.button_list.get_open_BL_btns():
         PB_MAP[button] = (get_paths_of_icons("preview_off"), get_color_combo("red"))
-        # print(button.objectName())
 
     for button in self.button_list.get_doc_available_btns():
         PB_MAP[button] = (get_paths_of_icons("documents"), get_color_combo("red"))

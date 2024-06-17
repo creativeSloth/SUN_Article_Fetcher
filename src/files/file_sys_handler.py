@@ -3,6 +3,7 @@ import shutil
 
 import pandas as pd
 from PyQt5.QtGui import QFont
+from PyQt5.QtWidgets import QCheckBox, QWidget
 from qtpy import QtCore, QtWidgets
 
 import directories.directory_base as directory_base
@@ -22,7 +23,13 @@ def get_selected_files_and_df(self):
     table = self.ui.articles_list
 
     for row in range(table.rowCount()):
-        checkbox_item = table.item(row, 0)
+        cell_widget: QWidget = table.cellWidget(row, 0)
+
+        checkbox: QCheckBox = get_child_of_type_in_table_row(
+            obj=cell_widget,
+            cls=QCheckBox,
+        )
+
         article_no = table.item(row, 1).text()
         article_name = table.item(row, 2).text()
 
@@ -31,12 +38,25 @@ def get_selected_files_and_df(self):
         )
 
         df = pd.concat([df, new_data], ignore_index=True)
-
-        if checkbox_item and checkbox_item.checkState() == QtCore.Qt.Checked:
+        if checkbox is not None and checkbox.checkState() == QtCore.Qt.Checked:
             selected_files.append(article_no)
 
     selected_files = list(set(selected_files))
     return selected_files, df
+
+
+def get_child_of_type_in_table_row(
+    obj: QWidget = None,
+    cls: QWidget = None,
+):
+    children = obj.findChildren(cls)
+    child: QWidget
+    for child in children:
+
+        if isinstance(child, cls):
+            return child
+
+    return None
 
 
 def get_matching_files(source_files, selected_files):

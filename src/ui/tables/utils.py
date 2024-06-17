@@ -1,8 +1,17 @@
 import pandas as pd
-from PyQt5 import QtWidgets
-from qtpy import QtCore, QtWidgets
+from PyQt5 import QtCore
+from PyQt5.QtWidgets import (
+    QCheckBox,
+    QHBoxLayout,
+    QHeaderView,
+    QPushButton,
+    QTableWidget,
+    QTableWidgetItem,
+    QWidget,
+)
 
 import files.blacklist as blacklist
+from ui.buttons.utils import create_and_set_obj_property
 from ui.fields.ui_fields_base import get_articles_table, get_device_tables
 from ui.tables.table_decorators import customize_table_row
 
@@ -28,7 +37,7 @@ def get_all_tables_to_layout_map(self):
     return GENERAL_TABLE_MAP
 
 
-def clear_table(table: QtWidgets.QTableWidget):
+def clear_table(table: QTableWidget):
     # Setze die Anzahl der Zeilen auf 0, um alle Zeilen zu entfernen
     table.setRowCount(0)
 
@@ -37,7 +46,7 @@ def resize_columns_to_contents(table):
     columns = table.columnCount()
     header = table.horizontalHeader()
     for i in range(columns):
-        header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(i, QHeaderView.ResizeToContents)
 
 
 def get_column_index(table, column):
@@ -49,7 +58,7 @@ def get_column_index(table, column):
     return None
 
 
-def disable_colums_edit(table: QtWidgets.QTableWidget, firstcol=0, lastcol: int = None):
+def disable_colums_edit(table: QTableWidget, firstcol=0, lastcol: int = None):
     if lastcol is None:
         lastcol = table.columnCount()
 
@@ -71,11 +80,22 @@ def table_name_and_count_are_valid(table, table_name, table_row):
     return table_name == table.objectName().lower() and table.rowCount() <= table_row
 
 
-def remove_row_with_button_from_table(
-    table: QtWidgets.QTableWidget, push_button: QtWidgets.QPushButton
-):
+def remove_row_with_button_from_table(table: QTableWidget, push_button: QPushButton):
+    removed: bool = False
+    article_no: str = ""
+    article_name: str = ""
+
     if push_button is not None and table is not None:
-        index = table.indexAt(push_button.pos())
+        parent = push_button.parent()
+        while parent is not None:
+            if (
+                isinstance(parent, QWidget)
+                and getattr(parent, "cell_widget", None) == "contains_push_button"
+            ):
+                break
+            parent = parent.parent()
+
+        index = table.indexAt(parent.pos())
         if index.isValid():
             row = index.row()
             article_no = table.item(row, 1).text()
@@ -102,7 +122,7 @@ def check_article_number_on_bl(table):
 
 
 def remove_article_from_table_row(
-    table: QtWidgets.QTableWidget = None, push_button: QtWidgets.QPushButton = None
+    table: QTableWidget = None, push_button: QPushButton = None
 ):
     from files.blacklist import update_blacklist
 
@@ -124,7 +144,7 @@ def remove_article_from_table_row(
 
 
 def import_from_df_row(
-    table: QtWidgets.QTableWidget,
+    table: QTableWidget,
     data_row,
     import_column_count: int = None,
 ) -> None:
@@ -140,13 +160,28 @@ def import_from_df_row(
     tw_row = table.rowCount()
     table.insertRow(tw_row)
 
-    # Spalte 1 (statisch) mit einer Checkbox
-    checkbox_item: QtWidgets.QTableWidgetItem = QtWidgets.QTableWidgetItem()
-    checkbox_item.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
-    checkbox_item.setCheckState(QtCore.Qt.Checked)
+    # Spalte 0 (statisch) mit einer Checkbox
+
+    checkbox = QCheckBox()
+    checkbox.setChecked(True)
+    checkbox.setObjectName(f"CheckBox_{table.objectName()}_{tw_row}_0")
+
+    layout = QHBoxLayout()
+    layout.setObjectName(f"Layout_{table.objectName()}_{tw_row}_0")
+    layout.setContentsMargins(0, 0, 0, 0)
+
+    cell_widget = QWidget()
+    cell_widget.setLayout(layout)
+    create_and_set_obj_property(
+        obj=cell_widget,
+        property_type="cell_widget",
+        property_value="contains_checkbox",
+    )
+
+    layout.addWidget(checkbox)
 
     # Spalte 1 mit der CheckBox
-    table.setItem(tw_row, 0, checkbox_item)
+    table.setCellWidget(tw_row, 0, cell_widget)
 
     for index in range(import_column_count):
 
@@ -154,14 +189,14 @@ def import_from_df_row(
         col_count_data_row = len(data_row)
         if col_count_data_row > index:
             if isinstance(data_row, pd.Series) and data_row.iloc[index] is not None:
-                item_col = QtWidgets.QTableWidgetItem(str(data_row.iloc[index]))
+                item_col = QTableWidgetItem(str(data_row.iloc[index]))
                 table.setItem(tw_row, index + 1, item_col)
             elif isinstance(data_row, tuple) and data_row[index] is not None:
-                item_col = QtWidgets.QTableWidgetItem(str(data_row[index]))
+                item_col = QTableWidgetItem(str(data_row[index]))
                 table.setItem(tw_row, index + 1, item_col)
 
 
-#! Ungenutzt   ##########################################
+#! Ungenutzt   ####################################################################################################################
 
 
 def remove_articles_from_table(table):
@@ -189,3 +224,6 @@ def remove_articles_from_table(table):
         table.removeRow(row)
 
     update_blacklist(df, table.objectName())
+
+
+#! ##############################################################################################################################
