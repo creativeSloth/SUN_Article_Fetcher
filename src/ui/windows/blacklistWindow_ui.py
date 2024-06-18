@@ -17,14 +17,14 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QAbstractButton, QAbstractItemView, QAbstractScrollArea, QApplication,
     QDialog, QDialogButtonBox, QFrame, QHBoxLayout,
-    QHeaderView, QPushButton, QSizePolicy, QTableWidget,
-    QTableWidgetItem, QVBoxLayout, QWidget)
+    QHeaderView, QSizePolicy, QTableWidget, QTableWidgetItem,
+    QVBoxLayout, QWidget)
 
 class Ui_blacklist_dialog(object):
     def setupUi(self, blacklist_dialog):
         if not blacklist_dialog.objectName():
             blacklist_dialog.setObjectName(u"blacklist_dialog")
-        blacklist_dialog.resize(1120, 628)
+        blacklist_dialog.resize(1500, 800)
         self.verticalLayout_2 = QVBoxLayout(blacklist_dialog)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.frame_2 = QFrame(blacklist_dialog)
@@ -90,12 +90,6 @@ class Ui_blacklist_dialog(object):
         self.frame.setFrameShadow(QFrame.Raised)
         self.horizontalLayout = QHBoxLayout(self.frame)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.remove_article_from_blacklist = QPushButton(self.frame)
-        self.remove_article_from_blacklist.setObjectName(u"remove_article_from_blacklist")
-        self.remove_article_from_blacklist.setMinimumSize(QSize(0, 40))
-
-        self.horizontalLayout.addWidget(self.remove_article_from_blacklist)
-
 
         self.verticalLayout_3.addWidget(self.frame, 0, Qt.AlignLeft)
 
@@ -127,6 +121,5 @@ class Ui_blacklist_dialog(object):
         ___qtablewidgetitem2.setText(QCoreApplication.translate("blacklist_dialog", u"Artikelbezeichnung", None));
         ___qtablewidgetitem3 = self.blacklist.horizontalHeaderItem(3)
         ___qtablewidgetitem3.setText(QCoreApplication.translate("blacklist_dialog", u"-->", None));
-        self.remove_article_from_blacklist.setText(QCoreApplication.translate("blacklist_dialog", u"Entferne Artikel von Blacklist", None))
     # retranslateUi
 

@@ -47,6 +47,7 @@ def resize_columns_to_contents(table):
     header = table.horizontalHeader()
     for i in range(columns):
         header.setSectionResizeMode(i, QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(i, QHeaderView.Interactive)
 
 
 def get_column_index(table, column):
@@ -168,7 +169,8 @@ def import_from_df_row(
 
     layout = QHBoxLayout()
     layout.setObjectName(f"Layout_{table.objectName()}_{tw_row}_0")
-    layout.setContentsMargins(0, 0, 0, 0)
+    layout.setContentsMargins(7, 2, 7, 2)
+    layout.setSpacing(2)
 
     cell_widget = QWidget()
     cell_widget.setLayout(layout)

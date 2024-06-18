@@ -220,7 +220,8 @@ def create_button_into_table_cell(
         cell_widget = QWidget()
         layout = QHBoxLayout()
         layout.setObjectName(f"Layout_{table_of_cell.objectName()}_{row}_{column}")
-        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setContentsMargins(7, 2, 7, 2)
+        layout.setSpacing(2)
         cell_widget.setLayout(layout)
 
     cell_widget.layout().addWidget(push_button)

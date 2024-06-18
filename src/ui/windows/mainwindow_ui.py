@@ -208,13 +208,13 @@ class Ui_MainWindow(object):
         self.verticalLayout_27 = QVBoxLayout(self.frame_57)
         self.verticalLayout_27.setSpacing(0)
         self.verticalLayout_27.setObjectName(u"verticalLayout_27")
-        self.verticalLayout_27.setContentsMargins(5, 0, 5, 0)
+        self.verticalLayout_27.setContentsMargins(5, 1, 5, 0)
         self.open_articles_blacklist = QPushButton(self.frame_57)
         self.open_articles_blacklist.setObjectName(u"open_articles_blacklist")
         self.open_articles_blacklist.setMinimumSize(QSize(50, 50))
         self.open_articles_blacklist.setMaximumSize(QSize(50, 50))
 
-        self.verticalLayout_27.addWidget(self.open_articles_blacklist, 0, Qt.AlignRight)
+        self.verticalLayout_27.addWidget(self.open_articles_blacklist, 0, Qt.AlignHCenter)
 
         self.open_articles_blacklist_label = QLabel(self.frame_57)
         self.open_articles_blacklist_label.setObjectName(u"open_articles_blacklist_label")
@@ -2405,7 +2405,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.frame010.sizePolicy().hasHeightForWidth())
         self.frame010.setSizePolicy(sizePolicy)
         self.frame010.setMinimumSize(QSize(200, 40))
-        self.frame010.setMaximumSize(QSize(300, 40))
+        self.frame010.setMaximumSize(QSize(500, 40))
         self.frame010.setFrameShape(QFrame.StyledPanel)
         self.frame010.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_5 = QHBoxLayout(self.frame010)
@@ -2416,8 +2416,8 @@ class Ui_MainWindow(object):
         self.project_label.setObjectName(u"project_label")
         sizePolicy.setHeightForWidth(self.project_label.sizePolicy().hasHeightForWidth())
         self.project_label.setSizePolicy(sizePolicy)
-        self.project_label.setMinimumSize(QSize(100, 30))
-        self.project_label.setMaximumSize(QSize(150, 30))
+        self.project_label.setMinimumSize(QSize(200, 30))
+        self.project_label.setMaximumSize(QSize(200, 30))
         self.project_label.setSizeIncrement(QSize(0, 0))
         self.project_label.setFont(font3)
         self.project_label.setWordWrap(False)
@@ -2426,8 +2426,10 @@ class Ui_MainWindow(object):
 
         self.project = QPlainTextEdit(self.frame010)
         self.project.setObjectName(u"project")
-        self.project.setMinimumSize(QSize(150, 30))
-        self.project.setMaximumSize(QSize(200, 30))
+        sizePolicy.setHeightForWidth(self.project.sizePolicy().hasHeightForWidth())
+        self.project.setSizePolicy(sizePolicy)
+        self.project.setMinimumSize(QSize(200, 30))
+        self.project.setMaximumSize(QSize(250, 30))
         self.project.setFont(font3)
         self.project.setInputMethodHints(Qt.ImhMultiLine)
         self.project.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -2457,8 +2459,8 @@ class Ui_MainWindow(object):
         self.project_name_label.setObjectName(u"project_name_label")
         sizePolicy.setHeightForWidth(self.project_name_label.sizePolicy().hasHeightForWidth())
         self.project_name_label.setSizePolicy(sizePolicy)
-        self.project_name_label.setMinimumSize(QSize(0, 0))
-        self.project_name_label.setMaximumSize(QSize(100, 30))
+        self.project_name_label.setMinimumSize(QSize(200, 0))
+        self.project_name_label.setMaximumSize(QSize(200, 30))
         self.project_name_label.setSizeIncrement(QSize(0, 0))
         self.project_name_label.setFont(font3)
 
@@ -2469,7 +2471,7 @@ class Ui_MainWindow(object):
         self.project_name.setEnabled(False)
         sizePolicy.setHeightForWidth(self.project_name.sizePolicy().hasHeightForWidth())
         self.project_name.setSizePolicy(sizePolicy)
-        self.project_name.setMinimumSize(QSize(800, 30))
+        self.project_name.setMinimumSize(QSize(1000, 30))
         self.project_name.setMaximumSize(QSize(16777215, 30))
         self.project_name.setFont(font3)
         self.project_name.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -2479,10 +2481,10 @@ class Ui_MainWindow(object):
         self.horizontalLayout_6.addWidget(self.project_name, 0, Qt.AlignLeft|Qt.AlignVCenter)
 
 
-        self.horizontalLayout_10.addWidget(self.frame011)
+        self.horizontalLayout_10.addWidget(self.frame011, 0, Qt.AlignLeft)
 
 
-        self.gridLayout_4.addWidget(self.frame01, 0, 0, 1, 1)
+        self.gridLayout_4.addWidget(self.frame01, 0, 0, 1, 1, Qt.AlignLeft)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menuBar = QMenuBar(MainWindow)

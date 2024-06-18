@@ -248,7 +248,7 @@ class Ui_Dialog(object):
         self.buttonBox.accepted.connect(Dialog.accept)
         self.buttonBox.rejected.connect(Dialog.reject)
 
-        self.db_type.setCurrentIndex(1)
+        self.db_type.setCurrentIndex(0)
         self.sql_query_btn.setDefault(True)
         self.sql_query_2_btn.setDefault(True)
 

@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_blacklist_dialog(object):
     def setupUi(self, blacklist_dialog):
         blacklist_dialog.setObjectName("blacklist_dialog")
-        blacklist_dialog.resize(1120, 628)
+        blacklist_dialog.resize(1500, 800)
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(blacklist_dialog)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.frame_2 = QtWidgets.QFrame(blacklist_dialog)
@@ -75,10 +75,6 @@ class Ui_blacklist_dialog(object):
         self.frame.setObjectName("frame")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.frame)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.remove_article_from_blacklist = QtWidgets.QPushButton(self.frame)
-        self.remove_article_from_blacklist.setMinimumSize(QtCore.QSize(0, 40))
-        self.remove_article_from_blacklist.setObjectName("remove_article_from_blacklist")
-        self.horizontalLayout.addWidget(self.remove_article_from_blacklist)
         self.verticalLayout_3.addWidget(self.frame, 0, QtCore.Qt.AlignLeft)
         self.verticalLayout_2.addWidget(self.frame_2)
         self.buttonBox = QtWidgets.QDialogButtonBox(blacklist_dialog)
@@ -104,4 +100,3 @@ class Ui_blacklist_dialog(object):
         item.setText(_translate("blacklist_dialog", "Artikelbezeichnung"))
         item = self.blacklist.horizontalHeaderItem(3)
         item.setText(_translate("blacklist_dialog", "-->"))
-        self.remove_article_from_blacklist.setText(_translate("blacklist_dialog", "Entferne Artikel von Blacklist"))

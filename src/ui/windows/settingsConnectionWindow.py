@@ -220,7 +220,7 @@ class Ui_Dialog(object):
         self.verticalLayout.addWidget(self.buttonBox, 0, QtCore.Qt.AlignLeft)
 
         self.retranslateUi(Dialog)
-        self.db_type.setCurrentIndex(1)
+        self.db_type.setCurrentIndex(0)
         self.buttonBox.accepted.connect(Dialog.accept) # type: ignore
         self.buttonBox.rejected.connect(Dialog.reject) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(Dialog)
