@@ -46,11 +46,11 @@ from ui.fields.ui_fields_base import (
 from ui.menus import menus_base
 from ui.tables.tables_base import (
     check_specs_in_device_tables,
-    connect_sort_indicator_changed,
     fill_article_table,
     fill_device_lists,
     initialize_table_search,
 )
+from ui.tables.utils import connect_sort_indicator_changed
 from ui.windows.mainwindow import Ui_MainWindow
 
 

@@ -1,5 +1,8 @@
 import configparser
+import json
 import os
+from datetime import datetime
+from typing import List, Tuple
 
 import pandas as pd
 from PyQt5 import QtWidgets
@@ -35,12 +38,13 @@ class Blacklist(QtWidgets.QDialog):
 
     def initialize(self):
         initialize_ui_style(self)
-        # connect_table_buttons(self)
 
-    def map_ui_buttons(self):
-        from ui.tables.tables_base import connect_sort_indicator_changed
+        from ui.tables.utils import connect_sort_indicator_changed
 
         connect_sort_indicator_changed(self)
+
+    def map_ui_buttons(self):
+        pass
 
 
 BLACKLISTS = []
@@ -118,7 +122,7 @@ def on_blacklist_button_click(self, device_table: QtWidgets.QTableWidget) -> Non
     add_btns_into_table_cells(
         dialog_instance,
         table=blacklist_table,
-        column=3,
+        column=4,
         button_type="move_from_bl",
         on_button_pressed=on_remove_articles_from_ui_bl,
     )
@@ -181,25 +185,50 @@ def update_blacklist(df: pd.DataFrame, table_name: str):
     for _, row in df.iterrows():
         article_no = row["article_no"]
         article_name = row["article_name"]
+        date = datetime.now().strftime("%Y-%m-%d - %H:%M:%S")
+
+        data = json.dumps(
+            {"article_no": article_no, "article_name": article_name, "date": date}
+        )
         if article_no not in existing_articles:
             # Fügen Sie die Daten als Optionen unter der gegebenen Sektion hinzu
-            blacklist.set(table_name, article_no, article_name)
+            blacklist.set(table_name, article_no, data)
 
     # Schreibe die aktualisierte Konfiguration in die Datei
     with open(blacklist_path, "w") as blacklist_file:
         blacklist.write(blacklist_file)
 
 
-def read_blacklist_articles(table_name: str):
+def get_data_of_articles_from_bl(table_name: str) -> List[Tuple[str, str, str]]:
     blacklist_path = dir_paths.dict["blacklist_path"]
     config = configparser.ConfigParser()
     config.read(blacklist_path)
     # Überprüfe, ob die angegebene Sektion vorhanden ist
-    bl_articles = []
+    bl_articles: list = []
+    data: str = ""
     if config.has_section(table_name):
         # Holen Sie sich alle Schlüssel-Wert-Paare in der Sektion
+
         bl_articles = [
-            (str(number), str(value)) for number, value in config.items(table_name)
+            (
+                str(json.loads(data)["article_no"]),
+                str(json.loads(data)["article_name"]),
+                str(json.loads(data)["date"]),
+            )
+            for _, data in config.items(table_name)
         ]
 
     return bl_articles
+
+
+def get_article_nos_on_bl(table):
+    from files.blacklist import get_data_of_articles_from_bl
+
+    table_name = table.objectName()
+    # Laden Sie die Artikelnummern aus der Blacklist
+    bl_article_nos = [
+        article_no
+        for article_no, _, _ in get_data_of_articles_from_bl(table_name=table_name)
+    ]
+
+    return bl_article_nos

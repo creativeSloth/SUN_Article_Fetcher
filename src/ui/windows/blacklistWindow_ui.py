@@ -36,8 +36,8 @@ class Ui_blacklist_dialog(object):
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.blacklist = QTableWidget(self.frame_2)
-        if (self.blacklist.columnCount() < 4):
-            self.blacklist.setColumnCount(4)
+        if (self.blacklist.columnCount() < 5):
+            self.blacklist.setColumnCount(5)
         __qtablewidgetitem = QTableWidgetItem()
         self.blacklist.setHorizontalHeaderItem(0, __qtablewidgetitem)
         __qtablewidgetitem1 = QTableWidgetItem()
@@ -46,6 +46,8 @@ class Ui_blacklist_dialog(object):
         self.blacklist.setHorizontalHeaderItem(2, __qtablewidgetitem2)
         __qtablewidgetitem3 = QTableWidgetItem()
         self.blacklist.setHorizontalHeaderItem(3, __qtablewidgetitem3)
+        __qtablewidgetitem4 = QTableWidgetItem()
+        self.blacklist.setHorizontalHeaderItem(4, __qtablewidgetitem4)
         self.blacklist.setObjectName(u"blacklist")
         self.blacklist.setEnabled(True)
         sizePolicy = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
@@ -99,7 +101,8 @@ class Ui_blacklist_dialog(object):
         self.buttonBox = QDialogButtonBox(blacklist_dialog)
         self.buttonBox.setObjectName(u"buttonBox")
         self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Close)
+        self.buttonBox.setCenterButtons(False)
 
         self.verticalLayout_2.addWidget(self.buttonBox, 0, Qt.AlignLeft)
 
@@ -120,6 +123,8 @@ class Ui_blacklist_dialog(object):
         ___qtablewidgetitem2 = self.blacklist.horizontalHeaderItem(2)
         ___qtablewidgetitem2.setText(QCoreApplication.translate("blacklist_dialog", u"Artikelbezeichnung", None));
         ___qtablewidgetitem3 = self.blacklist.horizontalHeaderItem(3)
-        ___qtablewidgetitem3.setText(QCoreApplication.translate("blacklist_dialog", u"-->", None));
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("blacklist_dialog", u"hinzugef\u00fcgt am", None));
+        ___qtablewidgetitem4 = self.blacklist.horizontalHeaderItem(4)
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("blacklist_dialog", u"-->", None));
     # retranslateUi
 

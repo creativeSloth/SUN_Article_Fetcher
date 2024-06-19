@@ -134,6 +134,11 @@
           </column>
           <column>
            <property name="text">
+            <string>hinzugefügt am</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
             <string>--&gt;</string>
            </property>
           </column>
@@ -161,7 +166,10 @@
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::Close</set>
+     </property>
+     <property name="centerButtons">
+      <bool>false</bool>
      </property>
     </widget>
    </item>

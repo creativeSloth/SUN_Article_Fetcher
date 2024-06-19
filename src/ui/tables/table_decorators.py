@@ -5,13 +5,15 @@ from PyQt5.QtWidgets import QMessageBox
 def change_foreground_if_zero(table):
 
     for row in range(table.rowCount()):
-        if table.item(row, 3) is not None:
-            count: float = table.item(row, 3).text()
-            if float(count) == 0:
+        count: float = table.item(row, 3).text()
+        try:
+            if table.item(row, 3) is not None and float(count) == 0:
 
                 for column in range(1, table.columnCount()):
                     if table.item(row, column) is not None:
                         table.item(row, column).setForeground(QtGui.QColor("#e20000"))
+        except ValueError:
+            pass
 
 
 def customize_table_row(func):
