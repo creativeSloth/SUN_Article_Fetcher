@@ -1,11 +1,10 @@
 import os
 
-from PyQt5.QtCore import QEvent, Qt
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor, QIcon, QPainter, QPixmap
-from PyQt5.QtWidgets import QPushButton
 
 from directories.directory_base import dir_paths
-from ui.fields.ui_fields_base import get_all_mainwindow_tables
+from ui.text_edits.ui_fields_base import get_all_mainwindow_tables
 
 
 def get_paths_of_icons(icon_name: str = None):
@@ -169,29 +168,3 @@ def change_color_of_pixmap(pixmap, new_color):
     painter.end()
 
     return colored_pixmap
-
-
-def eventFilter(self, source, event: QEvent):
-    if isinstance(source, QPushButton):
-        if event.type() == QEvent.Enter:
-            source.setIcon(source.hover_icon)
-        elif event.type() == QEvent.Leave:
-            source.setIcon(source.normal_icon)
-        elif (
-            event.type() == QEvent.MouseButtonPress and event.button() == Qt.LeftButton
-        ):
-            source.setIcon(source.click_icon)
-        elif (
-            event.type() == QEvent.MouseButtonRelease
-            and event.type() == QEvent.Leave
-            and event.button() == Qt.LeftButton
-        ):
-            source.setIcon(source.normal_icon)
-        elif (
-            event.type() == QEvent.MouseButtonRelease
-            and event.type() != QEvent.Leave
-            and event.button() == Qt.LeftButton
-        ):
-            source.setIcon(source.hover_icon)
-
-    return False

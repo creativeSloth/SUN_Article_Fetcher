@@ -12,7 +12,6 @@ from files.blacklist import (
 from files.file_sys_handler import get_files_in_source_path, get_paths
 from ui.buttons.button_lists import add_btns_into_table_cells, add_doc_avlbl_btns
 from ui.buttons.custom_button import customize_push_buttons
-from ui.fields.ui_fields_base import get_all_mainwindow_tables, get_device_tables
 from ui.tables.search_bar import (
     add_table_header_search_box,
     init_search_button_click_signal,
@@ -30,6 +29,7 @@ from ui.tables.utils import (
     resize_columns_to_contents,
     table_name_and_count_are_valid,
 )
+from ui.text_edits.ui_fields_base import get_all_mainwindow_tables, get_device_tables
 
 
 def initialize_table_search(self):

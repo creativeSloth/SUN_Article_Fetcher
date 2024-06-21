@@ -1,5 +1,5 @@
 import files.logs_and_config as logs_and_config
-from ui.fields.ui_fields_base import get_all_mainwindow_tables, get_mapped_context
+from ui.text_edits.ui_fields_base import get_all_mainwindow_tables, get_mapped_context
 
 
 def save_fields_text(self, file_path):

@@ -1,7 +1,10 @@
+from typing import Any
+
 from PyQt5.QtWidgets import (
     QHBoxLayout,
     QPushButton,
     QSizePolicy,
+    QTableWidget,
     QTextEdit,
     QVBoxLayout,
 )
@@ -11,90 +14,78 @@ from ui.buttons.utils import create_and_set_obj_property
 
 def add_table_header_search_box(self, table, layout):
     index = layout.indexOf(table)
-
-    # QHBoxLayout erstellen, um die Suchleiste nebeneinander anzuordnen
     search_layout = QHBoxLayout()
     search_layout.setSpacing(5)
     search_layout.setContentsMargins(0, 0, 0, 5)
-    min_height = 30
-    max_height = 30
-    min_width = 30
-    max_width = 30
 
-    # QLabel für die Suchleiste erstellen und hinzufügen
-    button: QPushButton = QPushButton("")
+    min_height, max_height, min_width, max_width = 30, 30, 30, 30
 
-    create_and_set_obj_property(
-        obj=button, property_type="button_type", property_value="search"
-    )
-    button.setMinimumHeight(min_height)
-    button.setMaximumHeight(max_height)
-    button.setMinimumWidth(min_width)
-    button.setMaximumWidth(max_width)
-    button.setObjectName(table.objectName() + "_search_button")
-    search_layout.addWidget(button)
+    # Erstelle und füge den Such-Button hinzu
+    push_button = QPushButton("")
+    add_search_bar_itms_attrs(push_button, "button_type", table, on_search_button_click)
+    push_button.setMinimumHeight(min_height)
+    push_button.setMaximumHeight(max_height)
+    push_button.setMinimumWidth(min_width)
+    push_button.setMaximumWidth(max_width)
+    push_button.setObjectName(table.objectName() + "_search_button")
+    search_layout.addWidget(push_button)
 
-    # QTextEdit für die Suchleiste erstellen und hinzufügen
+    # Erstelle und füge das Suchfeld hinzu
     text_edit = QTextEdit()
-    text_edit.setMaximumHeight(max_height)  # Maximale Höhe auf 30 setzen
-    # Objektname ableiten und zuweisen
+    add_search_bar_itms_attrs(
+        text_edit, "text_edit_type", table, on_search_button_click
+    )
+
+    text_edit.installEventFilter(self)
+
+    text_edit.setMaximumHeight(max_height)
     text_edit.setObjectName(table.objectName() + "_search_text_edit")
     search_layout.addWidget(text_edit)
 
-    # QHBoxLayout für die Tabelle erstellen und die Tabelle hinzufügen
-    table_layout = QHBoxLayout()
-    table_layout.addWidget(table)
-
-    # QVBoxLayout für die Kombination von Suchleiste und Tabelle erstellen
+    # Kombiniere Suchleiste und Tabelle in einem Layout
     comb_search_layout = QVBoxLayout()
-
-    # Suchleiste in den kombinierten Layout einfügen
     comb_search_layout.insertLayout(0, search_layout)
-
-    # Tabelle in den kombinierten Layout einfügen
-    comb_search_layout.addLayout(table_layout)
-    # Horizontal und Vertikal dehnen
+    comb_search_layout.addWidget(table)
     table.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
     text_edit.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
-    # Kombiniertes Layout an der ursprünglichen Position einfügen
     layout.insertLayout(index, comb_search_layout)
-
-    return button, text_edit
+    return push_button, text_edit
 
 
 def init_search_button_click_signal(table, button, text_edit):
-    button.clicked.connect(
-        lambda: on_search_button_click(table=table, text_edit=text_edit)
-    )
+    button.clicked.connect(lambda: on_search_button_click(table, text_edit))
 
 
 def on_search_button_click(table, text_edit):
-
     search_string = text_edit.toPlainText()
     hide_rows_without_string(table, search_string)
 
 
 def hide_rows_without_string(table, search_string):
-    # Konvertieren Sie den Suchstring in Kleinbuchstaben
     search_string_lower = search_string.lower()
-
     for row in range(table.rowCount()):
         found = False
         for col in range(table.columnCount()):
             item = table.item(row, col)
-            if item is not None:
-                # Konvertieren Sie den Text des Elements in Kleinbuchstaben und prüfen Sie auf das Vorhandensein des Suchstrings
-                if (
-                    isinstance(item.text(), str)
-                    and search_string_lower in item.text().lower()
-                ):
-                    found = True
-                    break
-                elif (
-                    isinstance(item.text(), float)
-                    and search_string_lower in str(item.text()).lower()
-                ):
-                    found = True
-                    break
+            if item is not None and search_string_lower in item.text().lower():
+                found = True
+                break
         table.setRowHidden(row, not found)
+
+
+def add_search_bar_itms_attrs(
+    obj: Any, attr: str = "", table: QTableWidget = None, func: Any = None
+) -> None:
+    create_and_set_obj_property(obj, property_type=attr, property_value="search")
+    if func:
+        create_and_set_obj_property(obj, property_type="func", property_value=func)
+    if table:
+        create_and_set_obj_property(obj, property_type="table", property_value=table)
+
+
+def is_search_box(source):
+    return (
+        isinstance(source, QTextEdit)
+        and getattr(source, "text_edit_type", None) is not None
+    )

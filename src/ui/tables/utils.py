@@ -12,8 +12,8 @@ from PyQt5.QtWidgets import (
 
 import files.blacklist as blacklist
 from ui.buttons.utils import create_and_set_obj_property, list_objects_of_class
-from ui.fields.ui_fields_base import get_articles_table, get_device_tables
 from ui.tables.table_decorators import customize_table_row
+from ui.text_edits.ui_fields_base import get_articles_table, get_device_tables
 
 
 def get_fixed_val_columns():

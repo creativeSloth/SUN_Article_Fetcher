@@ -8,7 +8,7 @@ from ui.buttons.utils import (
     list_objects_of_class,
     list_of_property_members,
 )
-from ui.fields.ui_fields_base import get_all_mainwindow_tables
+from ui.text_edits.ui_fields_base import get_all_mainwindow_tables
 
 
 class ButtonLists:

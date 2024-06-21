@@ -15,6 +15,7 @@ from directories.directory_base import (
     set_target_2_dir,
 )
 from directories.dirs_decorators import get_folder_path
+from event_system.filter import eventFilter
 from files.blacklist import initialize_blacklist_dialogs
 from files.file_sys_handler import (
     copy_files,
@@ -35,14 +36,7 @@ from save_file.load import load_fields_text, load_tables_content
 from save_file.save import save_fields_text, save_tables_content
 from styles.styles_Handler import initialize_ui_style
 from ui.buttons.button_lists import initialize_push_buttons
-from ui.buttons.custom_button import customize_push_buttons, eventFilter
-from ui.fields.ui_fields_base import (
-    char_validation,
-    clear_docu_fields,
-    config_to_fields,
-    fill_docu_fields,
-    replace_fields_in_doc,
-)
+from ui.buttons.custom_button import customize_push_buttons
 from ui.menus import menus_base
 from ui.tables.tables_base import (
     check_specs_in_device_tables,
@@ -51,6 +45,13 @@ from ui.tables.tables_base import (
     initialize_table_search,
 )
 from ui.tables.utils import connect_sort_indicator_changed
+from ui.text_edits.ui_fields_base import (
+    char_validation,
+    clear_docu_fields,
+    config_to_fields,
+    fill_docu_fields,
+    replace_fields_in_doc,
+)
 from ui.windows.mainwindow import Ui_MainWindow
 
 

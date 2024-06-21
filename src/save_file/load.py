@@ -1,6 +1,6 @@
 import files.logs_and_config as logs_and_config
-from ui.fields.ui_fields_base import get_mapped_context
 from ui.tables.tables_base import fill_tables_content
+from ui.text_edits.ui_fields_base import get_mapped_context
 
 
 def load_fields_text(self, file_path):
