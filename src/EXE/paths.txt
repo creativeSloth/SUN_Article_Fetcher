@@ -1,2 +1,2 @@
-D:\3441\Documents\Familie\Edgar\Weiterbildungen\Kurse\Python Bootcamp\Projekte\SUN_Article_Fetcher\src\styles\stylesheet.qss;styles
-D:\3441\Documents\Familie\Edgar\Weiterbildungen\Kurse\Python Bootcamp\Projekte\SUN_Article_Fetcher\src\ui\icons\*.png;icons
+R:\_Projektrealisierung\_Dokumente\Doku\SUN Doc Fetcher\PyProjekt\SUN_Article_Fetcher-main\src\styles\stylesheet.qss;styles
+R:\_Projektrealisierung\_Dokumente\Doku\SUN Doc Fetcher\PyProjekt\SUN_Article_Fetcher-main\src\ui\icons\*.png;ui\icons
