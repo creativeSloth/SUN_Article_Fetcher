@@ -2,7 +2,7 @@ import configparser
 import os
 from datetime import datetime
 
-from qtpy import QtWidgets
+from PyQt5.QtWidgets import QMessageBox
 
 import directories.directory_base as directory_base
 
@@ -112,7 +112,7 @@ def log_copy_details(self, source_path, target_path, source_files, matching_file
                 file_encoded = file.encode("utf-8", errors="ignore").decode("utf-8")
                 log_file.write(f"- {file_encoded}\n")
             except Exception as e:
-                QtWidgets.QMessageBox.warning(
+                QMessageBox.warning(
                     self,
                     "Fehler!",
                     f"Die Datei '{file}' des Quellordners konnte nicht in der log-datei registriert werden.\n\n {e}",
@@ -127,7 +127,7 @@ def log_copy_details(self, source_path, target_path, source_files, matching_file
                 file_encoded = file.encode("utf-8", errors="ignore").decode("utf-8")
                 log_file.write(f"- {file_encoded}\n")
             except Exception as e:
-                QtWidgets.QMessageBox.warning(
+                QMessageBox.warning(
                     self,
                     "Fehler!",
                     f"Die passende Datei '{file}' des Zielordner konnte nicht in der log-datei registriert werden.\n\n {e}",

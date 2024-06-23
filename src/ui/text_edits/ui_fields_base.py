@@ -3,7 +3,7 @@ import os
 from odf import teletype, text
 from odf.opendocument import load
 from odf.table import Table, TableCell, TableRow
-from qtpy import QtWidgets
+from PyQt5.QtWidgets import QMessageBox, QTableWidget
 
 import directories.directory_base as directory_base
 import files.logs_and_config as logs_and_config
@@ -55,7 +55,7 @@ def config_to_fields(self):
         directory_base.dir_paths.dict["target_2_path"] = target_2_path
 
     except Exception as e:
-        QtWidgets.QMessageBox.warning(
+        QMessageBox.warning(
             self,
             "Fehler",
             f"Konfigurationsdaten konnten nicht geladen werden, daher wurde eine neue Konfigurationsdatei erstellt.\n\n"
@@ -283,16 +283,14 @@ def replace_fields_in_doc(self, doc_path, template_path):
                             Flag = False
 
         document.save(doc)
-        QtWidgets.QMessageBox.information(
+        QMessageBox.information(
             self,
             "Abgeschlossen!",
             f"Die Datei wurde unter folgendem Pfad gespeichert:\n" f"{doc}",
         )
 
     except Exception as e:
-        QtWidgets.QMessageBox.warning(
-            self, "Fehler", f"Fehler bei der Feldersetzung: {e}"
-        )
+        QMessageBox.warning(self, "Fehler", f"Fehler bei der Feldersetzung: {e}")
 
 
 def get_device_tables(self):
@@ -314,8 +312,8 @@ def get_articles_table(self):
 
 
 def get_all_mainwindow_tables(self) -> list:
-    device_tables: QtWidgets.QTableWidget = get_device_tables(self)
-    articles_table: QtWidgets.QTableWidget = get_articles_table(self)
-    all_tables: QtWidgets.QTableWidget = device_tables + articles_table
+    device_tables: QTableWidget = get_device_tables(self)
+    articles_table: QTableWidget = get_articles_table(self)
+    all_tables: QTableWidget = device_tables + articles_table
 
     return all_tables

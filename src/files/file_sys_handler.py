@@ -2,9 +2,9 @@ import os
 import shutil
 
 import pandas as pd
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QCheckBox, QWidget
-from qtpy import QtCore, QtWidgets
+from PyQt5.QtWidgets import QCheckBox, QMessageBox, QTableWidget, QWidget
 
 import directories.directory_base as directory_base
 import files.logs_and_config as logs_and_config
@@ -38,7 +38,7 @@ def get_selected_files_and_df(self):
         )
 
         df = pd.concat([df, new_data], ignore_index=True)
-        if checkbox is not None and checkbox.checkState() == QtCore.Qt.Checked:
+        if checkbox is not None and checkbox.checkState() == Qt.Checked:
             selected_files.append(article_no)
 
     selected_files = list(set(selected_files))
@@ -91,7 +91,7 @@ def copy_files(self, matching_files, source_path, target_path):
             if not os.path.exists(target_file_path_ext):
                 os.makedirs(target_file_path_ext)
         except Exception as e:
-            QtWidgets.QMessageBox.warning(
+            QMessageBox.warning(
                 self,
                 "Fehler",
                 f"Fehler beim Erstellen des Verzeichnisses {target_file_path.root()}.\n\n"
@@ -101,7 +101,7 @@ def copy_files(self, matching_files, source_path, target_path):
             shutil.copy(source_file_path, target_file_path)
             count += 1
         except Exception as e:
-            QtWidgets.QMessageBox.warning(
+            QMessageBox.warning(
                 self,
                 "Fehler",
                 f"Fehler beim Kopieren der Datei {source_file_path} zu {target_file_path}.\n\n"
@@ -124,7 +124,7 @@ def log_and_show_result(
         self, source_path, target_path, source_files, matching_files, df
     )
 
-    QtWidgets.QMessageBox.information(
+    QMessageBox.information(
         self,
         "Erfolg!",
         f"Das Kopieren der Dateien wurde beendet.\n"
@@ -144,7 +144,7 @@ def get_files_in_source_path(self, directory):
                     all_files.append(file_path)
 
                 except Exception as e:
-                    QtWidgets.QMessageBox.warning(
+                    QMessageBox.warning(
                         self,
                         "Fehler!",
                         f"Die Datei für {file_path} konnte nicht gelesen werden.\n\n {e}",
@@ -153,7 +153,7 @@ def get_files_in_source_path(self, directory):
         return all_files
 
     except Exception as e:
-        QtWidgets.QMessageBox.warning(
+        QMessageBox.warning(
             self,
             "Fehler!",
             f"Die Datei für {directory} konnte nicht gelesen werden.\n\n {e}",
@@ -161,7 +161,7 @@ def get_files_in_source_path(self, directory):
 
 
 def compare_src_docs_with_article_list(
-    table: QtWidgets.QTableWidget, row: int, all_files: list
+    table: QTableWidget, row: int, all_files: list
 ) -> bool:
     """
     Überprüft, ob eine Artikelnummer in einer Liste von Dateinamen enthalten ist.

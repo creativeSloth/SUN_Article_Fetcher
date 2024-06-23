@@ -1,7 +1,6 @@
 import pandas as pd
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QPushButton, QTableWidget
-from qtpy import QtCore, QtWidgets
 
 from files import logs_and_config
 from files.blacklist import (

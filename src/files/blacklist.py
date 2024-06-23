@@ -5,8 +5,7 @@ from datetime import datetime
 from typing import List, Tuple
 
 import pandas as pd
-from PyQt5 import QtWidgets
-from qtpy import QtWidgets
+from PyQt5.QtWidgets import QDialog, QPushButton, QTableWidget
 
 from directories.directory_base import dir_paths
 from files.utils import is_on_blacklist
@@ -22,7 +21,7 @@ from ui.tables.utils import (
 from ui.windows import blacklistWindow
 
 
-class Blacklist(QtWidgets.QDialog):
+class Blacklist(QDialog):
     def __init__(self, table_name, table_name_ger, parent=None):
         super().__init__(parent)
         self.ui = blacklistWindow.Ui_blacklist_dialog()
@@ -92,7 +91,7 @@ def initialize_blacklist_dialogs(self):
         BLACKLISTS.append(dialog_instance)
 
 
-def init_blacklist_button_click_signal(self, table: QtWidgets.QTableWidget):
+def init_blacklist_button_click_signal(self, table: QTableWidget):
     table_name = table.objectName()
     button = get_blacklist_map(self)[table_name][0]
     if button:
@@ -101,7 +100,7 @@ def init_blacklist_button_click_signal(self, table: QtWidgets.QTableWidget):
         )
 
 
-def on_blacklist_button_click(self, device_table: QtWidgets.QTableWidget) -> None:
+def on_blacklist_button_click(self, device_table: QTableWidget) -> None:
 
     device_table_name: str = device_table.objectName()
 
@@ -109,7 +108,7 @@ def on_blacklist_button_click(self, device_table: QtWidgets.QTableWidget) -> Non
     dialog_instance: Blacklist = getattr(
         self, f"{device_table_name}_blacklist_dlg", None
     )
-    blacklist_table: QtWidgets.QTableWidget = dialog_instance.ui.blacklist
+    blacklist_table: QTableWidget = dialog_instance.ui.blacklist
     clear_table(blacklist_table)
 
     # Überprüfe, ob die Instanz existiert, bevor du die Methode aufrufst
@@ -134,7 +133,7 @@ def on_blacklist_button_click(self, device_table: QtWidgets.QTableWidget) -> Non
 
 
 def on_remove_articles_from_ui_bl(
-    bl_table: QtWidgets.QTableWidget = None, push_button: QtWidgets.QPushButton = None
+    bl_table: QTableWidget = None, push_button: QPushButton = None
 ):
     device_table = bl_table.parent()
     while device_table.parent():

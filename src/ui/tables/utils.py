@@ -1,5 +1,5 @@
 import pandas as pd
-from PyQt5 import QtCore
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
     QCheckBox,
     QHBoxLayout,
@@ -69,7 +69,7 @@ def disable_colums_edit(table: QTableWidget, firstcol=0, lastcol: int = None):
             item = table.item(row, col)
             # Entfernt das Bearbeitungsflag für die Zelle
             if item is not None:
-                item.setFlags(item.flags() & ~QtCore.Qt.ItemIsEditable)
+                item.setFlags(item.flags() & ~Qt.ItemIsEditable)
 
 
 @customize_table_row

@@ -3,8 +3,7 @@ import os
 import sys
 from datetime import datetime
 
-from PyQt5.QtWidgets import QFileDialog
-from qtpy import QtWidgets
+from PyQt5.QtWidgets import QFileDialog, QMessageBox
 
 
 class Paths:
@@ -215,7 +214,7 @@ def check_path_existence(modus):
             if modus == 0:
                 for path, message in paths_and_messages[:2]:
                     if not os.path.exists(path):
-                        QtWidgets.QMessageBox.warning(self, "Fehler", message)
+                        QMessageBox.warning(self, "Fehler", message)
                         return
 
             if modus == 1:
@@ -224,13 +223,13 @@ def check_path_existence(modus):
                     # ! und das Loggen von allen Pfaden in einer zentralen ini-Datei geregelt wird
                     if not os.path.exists(path) and message != paths_and_messages[4][1]:
 
-                        QtWidgets.QMessageBox.warning(self, "Fehler", message)
+                        QMessageBox.warning(self, "Fehler", message)
                         return
 
                 for file, message in files_and_messages:
                     # ! ebenso
                     if not os.path.isfile(file) and message != files_and_messages[1][1]:
-                        QtWidgets.QMessageBox.warning(self, "Fehler", message)
+                        QMessageBox.warning(self, "Fehler", message)
                         return
 
             return func(self, *args, **kwargs)

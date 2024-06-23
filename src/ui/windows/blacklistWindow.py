@@ -82,6 +82,7 @@ class Ui_blacklist_dialog(object):
         self.buttonBox = QtWidgets.QDialogButtonBox(blacklist_dialog)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Close)
+        self.buttonBox.setCenterButtons(False)
         self.buttonBox.setObjectName("buttonBox")
         self.verticalLayout_2.addWidget(self.buttonBox, 0, QtCore.Qt.AlignLeft)
 

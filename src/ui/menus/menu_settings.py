@@ -1,4 +1,4 @@
-from qtpy import QtWidgets
+from PyQt5.QtWidgets import QDialog
 
 import files.logs_and_config as logs_and_config
 from directories import directory_base
@@ -7,7 +7,7 @@ from styles.styles_Handler import initialize_ui_style
 from ui.windows import settingsConnectionWindow, settingsPathsWindow
 
 
-class SettConDlg(QtWidgets.QDialog):
+class SettConDlg(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.ui = settingsConnectionWindow.Ui_Dialog()
@@ -41,7 +41,7 @@ class SettConDlg(QtWidgets.QDialog):
             self.ui.query_2_input.hide()
 
 
-class SettPathsDlg(QtWidgets.QDialog):
+class SettPathsDlg(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.ui = settingsPathsWindow.Ui_Dialog()

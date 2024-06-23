@@ -1,4 +1,4 @@
-from PyQt5 import QtGui
+from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QMessageBox
 
 
@@ -11,7 +11,7 @@ def change_foreground_if_zero(table):
 
                 for column in range(1, table.columnCount()):
                     if table.item(row, column) is not None:
-                        table.item(row, column).setForeground(QtGui.QColor("#e20000"))
+                        table.item(row, column).setForeground(QColor("#e20000"))
         except ValueError:
             pass
 
