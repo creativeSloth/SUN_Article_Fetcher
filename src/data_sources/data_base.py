@@ -1,5 +1,5 @@
 import pandas as pd
-from qtpy import QtWidgets
+from PyQt5.QtWidgets import QMessageBox
 from sqlalchemy import create_engine
 
 import files.logs_and_config as logs_and_config
@@ -75,7 +75,7 @@ def execute_query(self, query):
 
     except Exception as e:
         # Gib eine Erfolgsmeldung aus
-        QtWidgets.QMessageBox.critical(
+        QMessageBox.critical(
             self,
             "Verbindungsfehler zur Datenbank",
             f"Fehler bei der Verbindung zur Datenbank: {e}\n\n"

@@ -147,6 +147,76 @@ QPushButton#fill_fields_btn::pressed {
 	background-color: rgba(19, 33, 59, 50);
 }
 
+
+
+/* Spezielle QPushButton-Groppen-Typen ["search", open_bl, doc_available, move_to_bl, move_from_bl] */
+/* -------------------------------------- */
+
+
+/*rgba(172, 32, 218, 255)*/
+QPushButton[button_type="search"] {
+	background-color: rgba(210, 255, 255, 255);
+}
+/* Spezielle QPushButton Hover */
+QPushButton[button_type="search"]::hover {
+	background-color: rgba(210, 255, 255, 150);
+}
+/* Spezielle QPushButton Pressed */
+QPushButton[button_type="search"]::pressed {
+	background-color: rgba(210, 255, 255, 50);
+}
+/* -------------------------------------- */
+QPushButton[button_type="open_bl"] {
+	background-color: rgba(0, 0, 0, 255);
+}
+/* Spezielle QPushButton Hover */
+QPushButton[button_type="open_bl"]::hover {
+	background-color: rgba(0, 0, 0, 150);
+}
+/* Spezielle QPushButton Pressed */
+QPushButton[button_type="open_bl"]::pressed {
+	background-color: rgba(0, 0, 0, 50);
+}
+/* -------------------------------------- */
+QPushButton[button_type="doc_available"] {
+	background-color: rgba(19, 33, 59, 255);
+}
+/* Spezielle QPushButton Hover */
+QPushButton[button_type="doc_available"]::hover {
+	background-color: rgba(19, 33, 59, 150);
+}
+/* Spezielle QPushButton Pressed */
+QPushButton[button_type="doc_available"]::pressed {
+	background-color: rgba(19, 33, 59, 50);
+}
+/* -------------------------------------- */
+QPushButton[button_type="move_to_bl"] {
+	background-color: rgba(19, 33, 59, 255);
+}
+/* Spezielle QPushButton Hover */
+QPushButton[button_type="move_to_bl"]::hover {
+	background-color: rgba(19, 33, 59, 150);
+}
+/* Spezielle QPushButton Pressed */
+QPushButton[button_type="move_to_bl"]::pressed {
+	background-color: rgba(19, 33, 59, 50);
+}
+/* -------------------------------------- */
+QPushButton[button_type="move_from_bl"] {
+	background-color: rgba(19, 33, 59, 255);
+}
+/* Spezielle QPushButton Hover */
+QPushButton[button_type="move_from_bl"]::hover {
+	background-color: rgba(19, 33, 59, 150);
+}
+
+/* Spezielle QPushButton Pressed */
+QPushButton[button_type="move_from_bl"]::pressed {
+	background-color: rgba(19, 33, 59, 50);
+}
+/* -------------------------------------- */
+
+
 /* QFrame und QTabWidget-Panels (Inhalt) */
 /* -------------------------------------- */
 QFrame#frame010,
@@ -235,14 +305,6 @@ QTableWidget::item::selected {
 QHeaderView::section {
 	background-color: rgb(220, 255, 255);
 }
-/* QCheckBox */
-/* -------------------------------------- */
-/* QCheckBox::indicator
-                               {"
-                               "width :40px;"
-                               "height : 40px;"
-                               "}" */
-
 
 /* QAbstractScrollArea */
 /* -------------------------------------- */

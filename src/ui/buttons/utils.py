@@ -8,6 +8,7 @@ def create_and_set_obj_property(
 ) -> Any:
     if property_type is not None:
         setattr(obj, property_type, property_value)
+        obj.setProperty(property_type, property_value)
     return obj
 
 

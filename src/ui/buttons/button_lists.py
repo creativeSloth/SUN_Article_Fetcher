@@ -210,9 +210,6 @@ def create_button_into_table_cell(
         push_button.clicked.connect(
             lambda _, tbl=table_of_cell, btn=push_button: on_button_pressed(tbl, btn)
         )
-    # print(f"{table_of_cell.objectName()}")
-    # print(f"{row}")
-    # print(f"{column}")
 
     layout: QHBoxLayout
     cell_widget: QWidget = table_of_cell.cellWidget(row, column)

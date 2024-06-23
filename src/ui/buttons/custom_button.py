@@ -20,59 +20,59 @@ def get_paths_of_icons(icon_name: str = None):
     return button_icon_path
 
 
-def get_button_icons(self):
+def get_button_icons_color_connected(self):
     PB_MAP: dict = {}
     PB_MAP.clear()
     PB_MAP = {
         self.ui.load_articles_db_btn: (
             get_paths_of_icons("database"),
-            get_color_combo("blue"),
+            get_color_combo("red"),
         ),
         self.ui.load_articles_file_btn: (
             get_paths_of_icons("home_storage"),
-            get_color_combo("blue"),
+            get_color_combo("red"),
         ),
         self.ui.target_path_btn: (
             get_paths_of_icons("drive_folder"),
-            get_color_combo("red"),
+            get_color_combo("blue"),
         ),
         self.ui.paste_docs_btn: (
             get_paths_of_icons("file_copy"),
-            get_color_combo("red"),
+            get_color_combo("blue"),
         ),
         self.ui.create_doc1_btn: (
             get_paths_of_icons("quick_reference"),
-            get_color_combo("red"),
+            get_color_combo("blue"),
         ),
         self.ui.create_doc2_btn: (
             get_paths_of_icons("description"),
-            get_color_combo("red"),
+            get_color_combo("blue"),
         ),
         self.ui.target_path_btn_2: (
             get_paths_of_icons("drive_folder"),
-            get_color_combo("red"),
+            get_color_combo("blue"),
         ),
         self.ui.load_data_to_device_lists_btn: (
             get_paths_of_icons("view_list"),
-            get_color_combo("blue"),
+            get_color_combo("red"),
         ),
         self.ui.fill_fields_btn: (
             get_paths_of_icons("variable_insert"),
-            get_color_combo("blue"),
+            get_color_combo("red"),
         ),
         self.ui.store_device_specs_btn: (
             get_paths_of_icons("export_notes"),
-            get_color_combo("blue"),
+            get_color_combo("red"),
         ),
     }
     for button in self.button_list.get_search_btns():
-        PB_MAP[button] = (get_paths_of_icons("search"), get_color_combo("red"))
+        PB_MAP[button] = (get_paths_of_icons("search"), get_color_combo("blue"))
 
     for button in self.button_list.get_open_BL_btns():
-        PB_MAP[button] = (get_paths_of_icons("preview_off"), get_color_combo("red"))
+        PB_MAP[button] = (get_paths_of_icons("preview_off"), get_color_combo("yellow"))
 
     for button in self.button_list.get_doc_available_btns():
-        PB_MAP[button] = (get_paths_of_icons("documents"), get_color_combo("red"))
+        PB_MAP[button] = (get_paths_of_icons("documents"), get_color_combo("gold"))
 
     for table in get_all_mainwindow_tables(self):
         table_name = table.objectName()
@@ -83,7 +83,7 @@ def get_button_icons(self):
             )
 
     for button in self.button_list.get_move_from_bl_btns():
-        PB_MAP[button] = (get_paths_of_icons("list_add"), get_color_combo("red"))
+        PB_MAP[button] = (get_paths_of_icons("list_add"), get_color_combo("green"))
 
     return PB_MAP
 
@@ -92,7 +92,7 @@ def customize_push_buttons(self):
     self.button_list.refresh()
 
     # Setze die Icons und füge Event-Filter hinzu
-    PB_MAP = get_button_icons(self)
+    PB_MAP = get_button_icons_color_connected(self)
     colored_PB_MAP = create_colored_PB_MAP(PB_MAP)
 
     for button, icons in colored_PB_MAP.items():
@@ -124,20 +124,50 @@ def create_colored_PB_MAP(PB_MAP: dict):
 
 def get_color_combo(buttoncolor=None):
     combos = {
-        "red": {
+        "blue": {
             "normal": QColor(19, 33, 59, 255),
             "hover": QColor(19, 33, 59, 60),
             "click": QColor(19, 33, 59, 20),
         },
-        "blue": {
+        "red": {
             "normal": QColor(226, 24, 57, 255),
             "hover": QColor(226, 24, 58, 61),
             "click": QColor(226, 24, 58, 20),
+        },
+        "yellow": {
+            "normal": QColor(255, 255, 0, 255),
+            "hover": QColor(255, 255, 0, 60),
+            "click": QColor(255, 255, 0, 20),
+        },
+        "green": {
+            "normal": QColor(0, 255, 0, 255),
+            "hover": QColor(0, 255, 0, 60),
+            "click": QColor(0, 255, 0, 20),
+        },
+        "violet": {
+            "normal": QColor(172, 32, 218, 255),
+            "hover": QColor(172, 32, 218, 60),
+            "click": QColor(172, 32, 218, 20),
         },
         "black": {
             "normal": QColor(0, 0, 0, 255),
             "hover": QColor(0, 0, 0, 61),
             "click": QColor(0, 0, 0, 20),
+        },
+        "white": {
+            "normal": QColor(255, 255, 255, 255),
+            "hover": QColor(255, 255, 255, 60),
+            "click": QColor(255, 255, 255, 20),
+        },
+        "white": {
+            "normal": QColor(255, 255, 255, 255),
+            "hover": QColor(255, 255, 255, 60),
+            "click": QColor(255, 255, 255, 20),
+        },
+        "gold": {
+            "normal": QColor(218, 165, 32, 255),
+            "hover": QColor(218, 165, 32, 60),
+            "click": QColor(218, 165, 32, 20),
         },
     }
     if buttoncolor is not None and buttoncolor in combos:
