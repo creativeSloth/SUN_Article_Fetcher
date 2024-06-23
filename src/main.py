@@ -1,7 +1,6 @@
 import sys
 
-from PyQt5.QtWidgets import QFileDialog
-from qtpy import QtWidgets
+from PyQt5.QtWidgets import QApplication, QFileDialog, QMainWindow
 
 from data_sources.data_base import execute_query, get_sql_query, read_data_from_file
 from directories.directory_base import (
@@ -15,7 +14,7 @@ from directories.directory_base import (
     set_target_2_dir,
 )
 from directories.dirs_decorators import get_folder_path
-from event_system.filter import eventFilter
+from event_system.filter import event_Filter
 from files.blacklist import initialize_blacklist_dialogs
 from files.file_sys_handler import (
     copy_files,
@@ -55,7 +54,7 @@ from ui.text_edits.ui_fields_base import (
 from ui.windows.mainwindow import Ui_MainWindow
 
 
-class MainWindow(QtWidgets.QMainWindow):
+class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
 
@@ -88,7 +87,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.previous_project_text = self.ui.project.toPlainText()
 
     def eventFilter(self, source, event):
-        return eventFilter(self, source, event)
+        return event_Filter(self, source, event)
 
     def map_ui_buttons(self) -> None:
         #  *********************************** Mapping buttons for "Article Fetcher"-module *****************************************
@@ -233,7 +232,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 # Führe das Programm aus, wenn es direkt gestartet wird
 if __name__ == "__main__":
-    app = QtWidgets.QApplication(sys.argv)
+    app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
     sys.exit(app.exec_())

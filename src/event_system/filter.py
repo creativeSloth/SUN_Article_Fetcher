@@ -13,7 +13,7 @@ from event_system.utils import (
 from ui.tables.search_bar import is_search_box
 
 
-def eventFilter(self, source: Any = None, event: QEvent = None):
+def event_Filter(self, source: Any = None, event: QEvent = None):
     if isinstance(source, QPushButton):
         if mouse_enters_pb(event):
             source.setIcon(source.hover_icon)
@@ -34,7 +34,6 @@ def eventFilter(self, source: Any = None, event: QEvent = None):
                 func = getattr(source, "func", None)
                 if func:
                     func(table, source)
-                    print("check")
                     return True
 
     return False
