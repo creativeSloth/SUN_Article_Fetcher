@@ -6,9 +6,12 @@ from typing import List, Tuple
 
 import pandas as pd
 from PyQt5.QtWidgets import QDialog, QPushButton, QTableWidget
+from sqlalchemy import Boolean, Column, Date, Integer, String, create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
+from blacklist.utils import is_on_blacklist
 from directories.directory_base import dir_paths
-from files.utils import is_on_blacklist
 from styles.styles_Handler import initialize_ui_style
 from ui.buttons.button_lists import add_btns_into_table_cells
 from ui.buttons.custom_button import customize_push_buttons
@@ -21,7 +24,7 @@ from ui.tables.utils import (
 from ui.windows import blacklistWindow
 
 
-class Blacklist(QDialog):
+class BlacklistWindow(QDialog):
     def __init__(self, table_name, table_name_ger, parent=None):
         super().__init__(parent)
         self.ui = blacklistWindow.Ui_blacklist_dialog()
@@ -78,10 +81,12 @@ def initialize_blacklist_dialogs(self):
         setattr(
             self,
             f"{table_name}_blacklist_dlg",
-            Blacklist(table_name=table_name, table_name_ger=table_name_ger),
+            BlacklistWindow(table_name=table_name, table_name_ger=table_name_ger),
         )
 
-        dialog_instance: Blacklist = getattr(self, f"{table_name}_blacklist_dlg", None)
+        dialog_instance: BlacklistWindow = getattr(
+            self, f"{table_name}_blacklist_dlg", None
+        )
 
         dialog_instance.setObjectName(f"{table_name}")
 
@@ -105,7 +110,7 @@ def on_blacklist_button_click(self, device_table: QTableWidget) -> None:
     device_table_name: str = device_table.objectName()
 
     # Zugriff auf die entsprechende Instanz des Blacklist-Dialogs
-    dialog_instance: Blacklist = getattr(
+    dialog_instance: BlacklistWindow = getattr(
         self, f"{device_table_name}_blacklist_dlg", None
     )
     blacklist_table: QTableWidget = dialog_instance.ui.blacklist
@@ -221,7 +226,7 @@ def get_data_of_articles_from_bl(table_name: str) -> List[Tuple[str, str, str]]:
 
 
 def get_article_nos_on_bl(table):
-    from files.blacklist import get_data_of_articles_from_bl
+    from blacklist.blacklist import get_data_of_articles_from_bl
 
     table_name = table.objectName()
     # Laden Sie die Artikelnummern aus der Blacklist

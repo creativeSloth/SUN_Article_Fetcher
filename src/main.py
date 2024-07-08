@@ -2,6 +2,7 @@ import sys
 
 from PyQt5.QtWidgets import QApplication, QFileDialog, QMainWindow
 
+from blacklist.blacklist import initialize_blacklist_dialogs
 from data_sources.data_base import execute_query, get_sql_query, read_data_from_file
 from directories.directory_base import (
     check_path_existence,
@@ -14,9 +15,14 @@ from directories.directory_base import (
     set_target_2_dir,
 )
 from directories.dirs_decorators import get_folder_path
-from event_system.filter import event_Filter
-from files.blacklist import initialize_blacklist_dialogs
-from files.file_sys_handler import (
+from events.filter import event_Filter
+from files.logs_and_config import (
+    create_config_file,
+    create_device_related_storage_list,
+    create_save_file,
+    update_config_file,
+)
+from files.sys_files import (
     copy_files,
     get_files_in_source_path,
     get_matching_files,
@@ -24,12 +30,6 @@ from files.file_sys_handler import (
     get_selected_files_and_df,
     log_and_show_result,
     mark_matching_files,
-)
-from files.logs_and_config import (
-    create_config_file,
-    create_device_related_storage_list,
-    create_save_file,
-    update_config_file,
 )
 from save_file.load import load_fields_text, load_tables_content
 from save_file.save import save_fields_text, save_tables_content

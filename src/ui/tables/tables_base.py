@@ -2,13 +2,13 @@ import pandas as pd
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QPushButton, QTableWidget
 
-from files import logs_and_config
-from files.blacklist import (
+from blacklist.blacklist import (
     get_article_nos_on_bl,
     get_data_of_articles_from_bl,
     init_blacklist_button_click_signal,
 )
-from files.file_sys_handler import get_files_in_source_path, get_paths
+from files import logs_and_config
+from files.sys_files import get_files_in_source_path, get_paths
 from ui.buttons.button_lists import add_btns_into_table_cells, add_doc_avlbl_btns
 from ui.buttons.custom_button import customize_push_buttons
 from ui.tables.search_bar import (
@@ -281,7 +281,7 @@ def fill_bl_tables(self, device_table_name: str, table: QtWidgets.QTableWidget) 
 def remove_article_from_table_row(
     table: QTableWidget = None, push_button: QPushButton = None
 ):
-    from files.blacklist import update_blacklist
+    from blacklist.blacklist import update_blacklist
 
     removed, article_no, article_name = remove_row_with_button_from_table(
         table, push_button
@@ -301,7 +301,7 @@ def remove_article_from_table_row(
 
 
 def remove_articles_from_table(table):
-    from files.blacklist import update_blacklist
+    from blacklist.blacklist import update_blacklist
 
     # Holen Sie sich alle ausgewählten Dateien im Table Widget
     df = pd.DataFrame(columns=["article_no", "article_name"])

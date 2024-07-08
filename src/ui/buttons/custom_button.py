@@ -1,4 +1,6 @@
 import os
+from ast import Tuple
+from typing import Dict
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor, QIcon, QPainter, QPixmap
@@ -20,9 +22,17 @@ def get_paths_of_icons(icon_name: str = None):
     return button_icon_path
 
 
-def get_button_icons_color_connected(self):
+def get_button_icons_color_connected(
+    self,
+) -> Dict:
+    """Get the Icon-Color connected to the Pushbutton.
+    Returns:
+        dict[QPushButton, Tuple[dict, dict]
+
+
+    """
+
     PB_MAP: dict = {}
-    PB_MAP.clear()
     PB_MAP = {
         self.ui.load_articles_db_btn: (
             get_paths_of_icons("database"),

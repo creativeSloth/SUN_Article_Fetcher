@@ -2,7 +2,7 @@ from typing import Any
 
 from PyQt5.QtWidgets import QHBoxLayout, QPushButton, QTableWidget, QWidget
 
-from files.file_sys_handler import compare_src_docs_with_article_list
+from files.sys_files import compare_src_docs_with_article_list
 from ui.buttons.utils import (
     create_and_set_obj_property,
     list_objects_of_class,
@@ -45,7 +45,7 @@ class ButtonLists:
             return self._move_to_BL_btns[table_name]
 
     def refresh(self):
-        from files.blacklist import BLACKLISTS
+        from blacklist.blacklist import BLACKLISTS
 
         blacklist_pushbuttons: list[QPushButton] = []
         all_pushbuttons: list[QPushButton] = []

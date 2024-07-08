@@ -3,7 +3,7 @@ from typing import Any
 from PyQt5.QtCore import QEvent
 from PyQt5.QtWidgets import QPushButton
 
-from event_system.utils import (
+from events.utils import (
     enter_key_pressed,
     lmbutton_presses_pb,
     lmbutton_releases_pb,
