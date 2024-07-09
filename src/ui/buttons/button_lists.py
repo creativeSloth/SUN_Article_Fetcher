@@ -45,7 +45,7 @@ class ButtonLists:
             return self._move_to_BL_btns[table_name]
 
     def refresh(self):
-        from blacklist.blacklist import BLACKLISTS
+        from blacklist.constants import BLACKLISTS
 
         blacklist_pushbuttons: list[QPushButton] = []
         all_pushbuttons: list[QPushButton] = []

@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import (
     QWidget,
 )
 
-import blacklist.blacklist as blacklist
+import blacklist.constants as blacklist
 from ui.buttons.utils import create_and_set_obj_property, list_objects_of_class
 from ui.tables.table_decorators import customize_table_row
 from ui.text_edits.ui_fields_base import get_articles_table, get_device_tables

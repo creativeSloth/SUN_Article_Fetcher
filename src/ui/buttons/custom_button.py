@@ -5,7 +5,7 @@ from typing import Dict
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor, QIcon, QPainter, QPixmap
 
-from directories.directory_base import dir_paths
+from directories.constants import dir_paths
 from ui.text_edits.ui_fields_base import get_all_mainwindow_tables
 
 

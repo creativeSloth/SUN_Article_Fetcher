@@ -2,8 +2,8 @@ import pandas as pd
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QPushButton, QTableWidget
 
-from blacklist.blacklist import (
-    get_article_nos_on_bl,
+from blacklist.blacklist_gui import (
+    get_article_numbers_on_bl,
     get_data_of_articles_from_bl,
     init_blacklist_button_click_signal,
 )
@@ -77,7 +77,7 @@ def put_non_bl_articles_on_table(
 ):
     clear_table(table=table)
 
-    blacklist_article_numbers = get_article_nos_on_bl(table)
+    blacklist_article_numbers = get_article_numbers_on_bl(table)
     if df is not None:
         for _, df_row in df.iterrows():
             # Überprüfen Sie, ob die Artikelnummer nicht in der Blacklist enthalten ist
@@ -281,7 +281,7 @@ def fill_bl_tables(self, device_table_name: str, table: QtWidgets.QTableWidget) 
 def remove_article_from_table_row(
     table: QTableWidget = None, push_button: QPushButton = None
 ):
-    from blacklist.blacklist import update_blacklist
+    from blacklist.blacklist_gui import update_blacklist
 
     removed, article_no, article_name = remove_row_with_button_from_table(
         table, push_button
@@ -301,7 +301,7 @@ def remove_article_from_table_row(
 
 
 def remove_articles_from_table(table):
-    from blacklist.blacklist import update_blacklist
+    from blacklist.blacklist_gui import update_blacklist
 
     # Holen Sie sich alle ausgewählten Dateien im Table Widget
     df = pd.DataFrame(columns=["article_no", "article_name"])

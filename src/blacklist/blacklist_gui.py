@@ -6,12 +6,10 @@ from typing import List, Tuple
 
 import pandas as pd
 from PyQt5.QtWidgets import QDialog, QPushButton, QTableWidget
-from sqlalchemy import Boolean, Column, Date, Integer, String, create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
 
+from blacklist.constants import BLACKLISTS, BLACKLISTS_TABLE_MAP, get_blacklist_map
 from blacklist.utils import is_on_blacklist
-from directories.directory_base import dir_paths
+from directories.constants import dir_paths
 from styles.styles_Handler import initialize_ui_style
 from ui.buttons.button_lists import add_btns_into_table_cells
 from ui.buttons.custom_button import customize_push_buttons
@@ -35,8 +33,6 @@ class BlacklistWindow(QDialog):
         self.setWindowTitle(table_name_ger)
 
         self.initialize()
-        # Verbinde die Signale mit den entsprechenden Slots
-        self.map_ui_buttons()
 
     def initialize(self):
         initialize_ui_style(self)
@@ -44,30 +40,6 @@ class BlacklistWindow(QDialog):
         from ui.tables.utils import connect_sort_indicator_changed
 
         connect_sort_indicator_changed(self)
-
-    def map_ui_buttons(self):
-        pass
-
-
-BLACKLISTS = []
-BLACKLISTS_TABLE_MAP = []
-
-
-def get_blacklist_map(self):
-
-    button_dict = {
-        "PV_modules_list": (self.ui.open_PV_modules_blacklist, "PV-Module"),
-        "PV_inverters_list": (self.ui.open_PV_inverters_blacklist, "PV-Wechselrichter"),
-        "BAT_inverters_list": (
-            self.ui.open_BAT_inverters_blacklist,
-            "Batterie-Wechselrichter",
-        ),
-        "BAT_storage_list": (self.ui.open_BAT_storage_blacklist, "Batterie-Speicher"),
-        "CHG_point_list": (self.ui.open_CHG_point_blacklist, "Ladestation"),
-        "articles_list": (self.ui.open_articles_blacklist, "Allgemeine Artikel"),
-    }
-
-    return button_dict
 
 
 def initialize_blacklist_dialogs(self):
@@ -225,8 +197,8 @@ def get_data_of_articles_from_bl(table_name: str) -> List[Tuple[str, str, str]]:
     return bl_articles
 
 
-def get_article_nos_on_bl(table):
-    from blacklist.blacklist import get_data_of_articles_from_bl
+def get_article_numbers_on_bl(table):
+    from blacklist.blacklist_gui import get_data_of_articles_from_bl
 
     table_name = table.objectName()
     # Laden Sie die Artikelnummern aus der Blacklist

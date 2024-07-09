@@ -1,4 +1,4 @@
-from directories.directory_base import dir_paths
+from directories.constants import dir_paths
 
 
 def initialize_ui_style(self) -> None:

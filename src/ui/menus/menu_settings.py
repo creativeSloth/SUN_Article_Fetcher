@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QDialog
 
+import directories.document_helpers
 import files.logs_and_config as logs_and_config
-from directories import directory_base
 from directories.dirs_decorators import get_file_path, get_folder_path
 from styles.styles_Handler import initialize_ui_style
 from ui.windows import settingsConnectionWindow, settingsPathsWindow
@@ -62,17 +62,21 @@ class SettPathsDlg(QDialog):
     @get_folder_path
     def on_source_path_btn_click(self, folder_path):
         self.ui.source_path_text.setPlainText(folder_path)
-        directory_base.set_source_dir(dir=folder_path)
+        directories.document_helpers.set_source_dir(dir=folder_path)
         logs_and_config.update_config_file("Pfade", "source_path", folder_path)
 
     @get_file_path
     def on_source_btn_matstr_click(self, file_path):
         self.ui.source_path_text_matstr.setPlainText(file_path)
-        directory_base.set_template_dir(template="template_1_path", dir=file_path)
+        directories.document_helpers.set_template_dir(
+            template="template_1_path", dir=file_path
+        )
         logs_and_config.update_config_file("Pfade", "template_1_path", file_path)
 
     @get_file_path
     def on_source_btn_docu_click(self, file_path):
         self.ui.source_path_text_docu.setPlainText(file_path)
-        directory_base.set_template_dir(template="template_2_path", dir=file_path)
+        directories.document_helpers.set_template_dir(
+            template="template_2_path", dir=file_path
+        )
         logs_and_config.update_config_file("Pfade", "template_2_path", file_path)

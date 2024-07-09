@@ -2,19 +2,18 @@ import sys
 
 from PyQt5.QtWidgets import QApplication, QFileDialog, QMainWindow
 
-from blacklist.blacklist import initialize_blacklist_dialogs
-from data_sources.data_base import execute_query, get_sql_query, read_data_from_file
-from directories.directory_base import (
-    check_path_existence,
-    dir_paths,
+from blacklist.blacklist_db import init_blacklists_db
+from blacklist.blacklist_gui import initialize_blacklist_dialogs
+from directories.constants import dir_paths
+from directories.constants_helpers import set_static_directories
+from directories.dirs_decorators import check_path_existence, get_folder_path
+from directories.document_helpers import (
     get_docs_paths,
     get_save_file_dir,
     set_doc_1_dir,
-    set_static_directories,
     set_target_1_dir,
     set_target_2_dir,
 )
-from directories.dirs_decorators import get_folder_path
 from events.filter import event_Filter
 from files.logs_and_config import (
     create_config_file,
@@ -33,6 +32,7 @@ from files.sys_files import (
 )
 from save_file.load import load_fields_text, load_tables_content
 from save_file.save import save_fields_text, save_tables_content
+from source.data_origins import execute_query, get_sql_query, read_data_from_file
 from styles.styles_Handler import initialize_ui_style
 from ui.buttons.button_lists import initialize_push_buttons
 from ui.buttons.custom_button import customize_push_buttons
@@ -70,6 +70,8 @@ class MainWindow(QMainWindow):
     def initialize(self) -> None:
 
         set_static_directories()
+        init_blacklists_db(self)
+
         menus_base.initialize_menu_dialogs(self)
         initialize_blacklist_dialogs(self)
         initialize_push_buttons(self)

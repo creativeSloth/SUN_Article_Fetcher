@@ -6,7 +6,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QCheckBox, QMessageBox, QTableWidget, QWidget
 
-import directories.directory_base as directory_base
+import directories.constants as directory_base
 import files.logs_and_config as logs_and_config
 
 
