@@ -45,7 +45,7 @@ class ButtonLists:
             return self._move_to_BL_btns[table_name]
 
     def refresh(self):
-        from blacklist.constants import BLACKLISTS
+        from ui.blacklists.constants import BLACKLISTS
 
         blacklist_pushbuttons: list[QPushButton] = []
         all_pushbuttons: list[QPushButton] = []
@@ -208,7 +208,9 @@ def create_button_into_table_cell(
 
     if on_button_pressed:
         push_button.clicked.connect(
-            lambda _, tbl=table_of_cell, btn=push_button: on_button_pressed(tbl, btn)
+            lambda _, tbl=table_of_cell, btn=push_button: on_button_pressed(
+                self, tbl, btn
+            )
         )
 
     layout: QHBoxLayout

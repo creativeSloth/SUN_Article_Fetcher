@@ -2,20 +2,19 @@ import pandas as pd
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QPushButton, QTableWidget
 
-from blacklist.blacklist_gui import (
-    get_article_numbers_on_bl,
-    get_data_of_articles_from_bl,
-    init_blacklist_button_click_signal,
-)
 from files import logs_and_config
 from files.sys_files import get_files_in_source_path, get_paths
+from ui.blacklists.blacklist_db import update_blacklist_db
+from ui.blacklists.blacklist_file import update_blacklist_file
+from ui.blacklists.blacklist_gui import init_blacklist_button_click_signal
+from ui.blacklists.utils import get_article_numbers_on_bl, get_data_of_articles_from_bl
 from ui.buttons.button_lists import add_btns_into_table_cells, add_doc_avlbl_btns
 from ui.buttons.custom_button import customize_push_buttons
+from ui.tables.decorators import customize_table_row
 from ui.tables.search_bar import (
     add_table_header_search_box,
     init_search_button_click_signal,
 )
-from ui.tables.table_decorators import customize_table_row
 from ui.tables.utils import (
     clear_table,
     disable_colums_edit,
@@ -58,6 +57,7 @@ def initialize_table_search(self):
 
 @customize_table_row
 def fill_article_table(self, table: QtWidgets.QTableWidget, df: pd.DataFrame = None):
+
     put_non_bl_articles_on_table(table, df, import_column_count=3)
     mark_documents_availability(self, table)
     add_btns_into_table_cells(
@@ -279,49 +279,13 @@ def fill_bl_tables(self, device_table_name: str, table: QtWidgets.QTableWidget) 
 
 
 def remove_article_from_table_row(
-    table: QTableWidget = None, push_button: QPushButton = None
+    self, table: QTableWidget = None, push_button: QPushButton = None
 ):
-    from blacklist.blacklist_gui import update_blacklist
 
     removed, article_no, article_name = remove_row_with_button_from_table(
         table, push_button
     )
 
     if removed:
-        # Holen Sie sich alle ausgewählten Dateien im Table Widget
-        df = pd.DataFrame(columns=["article_no", "article_name"])
-
-        new_data = pd.DataFrame(
-            {"article_no": [article_no], "article_name": [article_name]}
-        )
-        # Füge die neuen Daten zum vorhandenen DataFrame hinzu
-        df = pd.concat([df, new_data], ignore_index=True)
-
-        update_blacklist(df, table.objectName())
-
-
-def remove_articles_from_table(table):
-    from blacklist.blacklist_gui import update_blacklist
-
-    # Holen Sie sich alle ausgewählten Dateien im Table Widget
-    df = pd.DataFrame(columns=["article_no", "article_name"])
-    rows_to_remove = []
-    for row in range(table.rowCount()):
-        checkbox_item = table.item(row, 0)
-        article_no = table.item(row, 1).text()
-        article_name = table.item(row, 2).text()
-
-        # Überprüfe, ob die Checkbox in der aktuellen Zeile angehakt ist
-        if checkbox_item and checkbox_item.checkState() == QtCore.Qt.Checked:
-
-            new_data = pd.DataFrame(
-                {"article_no": [article_no], "article_name": [article_name]}
-            )
-            # Füge die neuen Daten zum vorhandenen DataFrame hinzu
-            df = pd.concat([df, new_data], ignore_index=True)
-            rows_to_remove.append(row)
-    # Entfernen Sie die ausgewählten Zeilen
-    for row in reversed(rows_to_remove):
-        table.removeRow(row)
-
-    update_blacklist(df, table.objectName())
+        update_blacklist_file(article_no, article_name, table)
+        update_blacklist_db(self, article_no, article_name, table, mode="add")

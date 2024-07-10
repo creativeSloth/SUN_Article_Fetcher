@@ -1,5 +1,5 @@
 import files.logs_and_config as logs_and_config
-from ui.tables.tables_base import fill_tables_content
+from ui.tables.data_content import fill_tables_content
 from ui.text_edits.ui_fields_base import get_mapped_context
 
 
