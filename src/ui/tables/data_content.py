@@ -1,13 +1,12 @@
-import pandas as pd
+from pandas import DataFrame
 from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtWidgets import QPushButton, QTableWidget
+from PyQt5.QtWidgets import QTableWidget
 
 from files import logs_and_config
 from files.sys_files import get_files_in_source_path, get_paths
-from ui.blacklists.blacklist_db import update_blacklist_db
-from ui.blacklists.blacklist_file import update_blacklist_file
 from ui.blacklists.blacklist_gui import init_blacklist_button_click_signal
-from ui.blacklists.utils import get_article_numbers_on_bl, get_data_of_articles_from_bl
+from ui.blacklists.constants import COLUMN_ARTICLE_NAME, COLUMN_ARTICLE_NO
+from ui.blacklists.utils import get_bl_df_from_db, get_data_of_articles_from_bl
 from ui.buttons.button_lists import add_btns_into_table_cells, add_doc_avlbl_btns
 from ui.buttons.custom_button import customize_push_buttons
 from ui.tables.decorators import customize_table_row
@@ -23,7 +22,7 @@ from ui.tables.utils import (
     get_fixed_val_columns,
     import_from_df_row,
     is_not_on_bl,
-    remove_row_with_button_from_table,
+    remove_article_from_table_row,
     resize_columns_to_contents,
     table_name_and_count_are_valid,
 )
@@ -56,9 +55,9 @@ def initialize_table_search(self):
 
 
 @customize_table_row
-def fill_article_table(self, table: QtWidgets.QTableWidget, df: pd.DataFrame = None):
+def fill_article_table(self, table: QtWidgets.QTableWidget, df: DataFrame = None):
 
-    put_non_bl_articles_on_table(table, df, import_column_count=3)
+    put_non_bl_articles_on_table(self, table, df, import_column_count=3)
     mark_documents_availability(self, table)
     add_btns_into_table_cells(
         self,
@@ -72,35 +71,6 @@ def fill_article_table(self, table: QtWidgets.QTableWidget, df: pd.DataFrame = N
     disable_colums_edit(table, firstcol=1, lastcol=4)
 
 
-def put_non_bl_articles_on_table(
-    table: QtWidgets.QTableWidget, df: pd.DataFrame, import_column_count: int = 0
-):
-    clear_table(table=table)
-
-    blacklist_article_numbers = get_article_numbers_on_bl(table)
-    if df is not None:
-        for _, df_row in df.iterrows():
-            # Überprüfen Sie, ob die Artikelnummer nicht in der Blacklist enthalten ist
-            if is_not_on_bl(blacklist_article_numbers, df_row):
-                import_from_df_row(
-                    table, data_row=df_row, import_column_count=import_column_count
-                )
-
-
-def mark_documents_availability(self, table: QTableWidget):
-
-    source_path, _, _ = get_paths()
-    all_files = get_files_in_source_path(self, source_path)
-    add_doc_avlbl_btns(
-        self,
-        table=table,
-        column=0,
-        button_type="doc_available",
-        all_files=all_files,
-        on_button_pressed=None,
-    )
-
-
 def fill_device_lists(self, df):
     tables = get_device_tables(self)
     for table in tables:
@@ -112,9 +82,9 @@ def fill_device_lists(self, df):
 
 
 @customize_table_row
-def fill_specific_device_list(self, table: QtWidgets.QTableWidget, df: pd.DataFrame):
+def fill_specific_device_list(self, table: QtWidgets.QTableWidget, df: DataFrame):
 
-    put_non_bl_articles_on_table(table, df, import_column_count=4)
+    put_non_bl_articles_on_table(self, table, df, import_column_count=4)
     add_btns_into_table_cells(
         self,
         table,
@@ -155,6 +125,66 @@ def adding_specific_columns(self, table, tw_row=None, df_row=None):
 
     if table == self.ui.CHG_point_list:
         pass
+
+
+# def put_non_bl_articles_on_table(
+#     table: QtWidgets.QTableWidget, df: pd.DataFrame, import_column_count: int = 0
+# ):
+#     """
+#     Sammelt nicht-Blacklistige Artikel aus dem DataFrame und fügt sie in die angegebene Tabelle ein.
+#     :param table: QTableWidget, in der die Artikel eingefügt werden sollen
+#     :param df: DataFrame, aus dem die Artikel geladen werden sollen
+#     :param import_column_count: Anzahl der Spalten, die von der Datenbank importiert werden sollen
+#     :return: None"""
+#     clear_table(table=table)
+
+#     blacklist_article_numbers = get_article_numbers_on_bl(table)
+
+#     if df is not None:
+#         for _, df_row in df.iterrows():
+#             # Überprüfen Sie, ob die Artikelnummer nicht in der Blacklist enthalten ist
+#             if is_not_on_bl(blacklist_article_numbers, df_row):
+#                 import_from_df_row(
+#                     table, data_row=df_row, import_column_count=import_column_count
+#                 )
+
+
+def put_non_bl_articles_on_table(
+    self, table: QtWidgets.QTableWidget, df: DataFrame, import_column_count: int = 0
+):
+    """
+    Sammelt nicht-Blacklistige Artikel aus dem DataFrame und fügt sie in die angegebene Tabelle ein.
+    :param table: QTableWidget, in der die Artikel eingefügt werden sollen
+    :param df: DataFrame, aus dem die Artikel geladen werden sollen
+    :param import_column_count: Anzahl der Spalten, die von der Datenbank importiert werden sollen
+    :return: None"""
+
+    clear_table(table=table)
+
+    bl_df: DataFrame = get_bl_df_from_db(self, table)
+    blacklist_article_numbers = bl_df[COLUMN_ARTICLE_NO].to_list()
+
+    if df is not None and bl_df is not None:
+        for _, df_row in df.iterrows():
+            # Überprüfen Sie, ob die Artikelnummer nicht in der Blacklist enthalten ist
+            if is_not_on_bl(blacklist_article_numbers, df_row):
+                import_from_df_row(
+                    table, data_row=df_row, import_column_count=import_column_count
+                )
+
+
+def mark_documents_availability(self, table: QTableWidget):
+
+    source_path, _, _ = get_paths()
+    all_files = get_files_in_source_path(self, source_path)
+    add_doc_avlbl_btns(
+        self,
+        table=table,
+        column=0,
+        button_type="doc_available",
+        all_files=all_files,
+        on_button_pressed=None,
+    )
 
 
 def collect_data_from_table(table, article_no_col_index, discard_columns):
@@ -266,26 +296,24 @@ def fill_tables_content(self, saved_tables_content):
 
 
 @customize_table_row
-def fill_bl_tables(self, device_table_name: str, table: QtWidgets.QTableWidget) -> None:
+def fill_bl_tables(
+    self, device_table: QTableWidget, table: QtWidgets.QTableWidget
+) -> None:
     from ui.tables.utils import import_from_df_row
 
-    bl_article_data = get_data_of_articles_from_bl(table_name=device_table_name)
+    bl_df = get_bl_df_from_db(self, device_table)
+    bl_df_selected: DataFrame = bl_df[
+        [
+            COLUMN_ARTICLE_NO,
+            COLUMN_ARTICLE_NAME,
+            self.GENERAL_TABLE_MAP[device_table]["db_added_to_bl_date"],
+        ]
+    ]
+
+    print(bl_df_selected)
 
     # Zum Sicherstellen dass bl_articles eine Instanz von List ist und ein Element hat
-    if isinstance(bl_article_data, list) and bl_article_data:
-        for data in bl_article_data:
+    if isinstance(bl_df_selected, DataFrame):
+        for _, data in bl_df_selected.iterrows():
             # Import data from each row of the blacklist articles
             import_from_df_row(table, data_row=data, import_column_count=3)
-
-
-def remove_article_from_table_row(
-    self, table: QTableWidget = None, push_button: QPushButton = None
-):
-
-    removed, article_no, article_name = remove_row_with_button_from_table(
-        table, push_button
-    )
-
-    if removed:
-        update_blacklist_file(article_no, article_name, table)
-        update_blacklist_db(self, article_no, article_name, table, mode="add")

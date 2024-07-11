@@ -2,22 +2,22 @@ import json
 from configparser import ConfigParser
 from typing import List, Tuple
 
+import pandas as pd
+from PyQt5.QtWidgets import QTableWidget
 from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 from directories.constants import dir_paths
+from ui.blacklists.constants import DB_TABLE_NAME_BLACKLISTS
+from ui.blacklists.queries import get_query_for_articles_on_table
 
 
 def is_on_blacklist(table_name, art_no, config):
     return config.has_section(table_name) and config.has_option(table_name, art_no)
 
 
-def get_db_engine():
-    db_path: str = dir_paths.dict["blacklist_db_path"]
-    engine = create_engine(f"sqlite:///{db_path}", echo=True)
-    return engine
-
-
-def get_data_of_articles_from_bl(table_name: str) -> List[Tuple[str, str, str]]:
+def get_data_of_articles_from_bl(table: QTableWidget) -> List[Tuple[str, str, str]]:
+    table_name = table.objectName()
     blacklist_path = dir_paths.dict["blacklist_path"]
     config = ConfigParser()
     config.read(blacklist_path)
@@ -39,13 +39,31 @@ def get_data_of_articles_from_bl(table_name: str) -> List[Tuple[str, str, str]]:
     return bl_articles
 
 
-def get_article_numbers_on_bl(table):
+def get_bl_df_from_db(self, table: QTableWidget):
 
-    table_name = table.objectName()
-    # Laden Sie die Artikelnummern aus der Blacklist
-    bl_article_nos = [
-        article_no
-        for article_no, _, _ in get_data_of_articles_from_bl(table_name=table_name)
-    ]
+    bl_bool_arg = self.GENERAL_TABLE_MAP[table]["db_bl_bool"]
+    bl_date_arg = self.GENERAL_TABLE_MAP[table]["db_added_to_bl_date"]
+    db_table = DB_TABLE_NAME_BLACKLISTS
 
-    return bl_article_nos
+    # Definiere die SQL-Abfrage, um nur bestimmte Spalten auszuwählen
+    engine = get_db_engine()
+    query = get_query_for_articles_on_table(self, db_table, bl_bool_arg, bl_date_arg)
+    # Lese die Tabelle direkt in einen DataFrame
+    bl_df = pd.DataFrame()
+    bl_df = pd.read_sql_query(query, con=engine)
+
+    bl_df[bl_date_arg] = bl_df[bl_date_arg].fillna("Auf allgemeiner Blackliste")
+
+    return bl_df
+
+
+def get_db_engine():
+    db_path: str = dir_paths.dict["blacklist_db_path"]
+    engine = create_engine(f"sqlite:///{db_path}", echo=True)
+    return engine
+
+
+def create_session():
+    ENGINE = get_db_engine()
+    Session = sessionmaker(bind=ENGINE)
+    return Session

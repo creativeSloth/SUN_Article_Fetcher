@@ -108,7 +108,7 @@ def on_blacklist_button_click(self, device_table: QTableWidget) -> None:
 
     from ui.tables.data_content import fill_bl_tables
 
-    fill_bl_tables(self, device_table_name=device_table_name, table=blacklist_table)
+    fill_bl_tables(self, device_table=device_table, table=blacklist_table)
     add_btns_into_table_cells(
         dialog_instance,
         table=blacklist_table,

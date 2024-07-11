@@ -11,6 +11,8 @@ from PyQt5.QtWidgets import (
 )
 
 import ui.blacklists.constants as blacklist
+from ui.blacklists.blacklist_db import update_blacklist_db
+from ui.blacklists.blacklist_file import update_blacklist_file
 from ui.buttons.utils import create_and_set_obj_property, list_objects_of_class
 from ui.tables.decorators import customize_table_row
 from ui.text_edits.ui_fields_base import get_articles_table, get_device_tables
@@ -173,3 +175,16 @@ def connect_sort_indicator_changed(self):
                 self, table=table
             )
         )
+
+
+def remove_article_from_table_row(
+    self, table: QTableWidget = None, push_button: QPushButton = None
+):
+
+    removed, article_no, article_name = remove_row_with_button_from_table(
+        table, push_button
+    )
+
+    if removed:
+        update_blacklist_file(article_no, article_name, table)
+        update_blacklist_db(self, article_no, article_name, table, mode="add")
