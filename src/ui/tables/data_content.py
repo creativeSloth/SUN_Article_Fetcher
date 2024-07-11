@@ -310,8 +310,6 @@ def fill_bl_tables(
         ]
     ]
 
-    print(bl_df_selected)
-
     # Zum Sicherstellen dass bl_articles eine Instanz von List ist und ein Element hat
     if isinstance(bl_df_selected, DataFrame):
         for _, data in bl_df_selected.iterrows():

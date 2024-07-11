@@ -65,6 +65,14 @@ def update_blacklist_db(
 
     Session = create_session()
     with Session() as session:
+
+        bl_bool_val, bl_date_val = set_val_by_mode(mode)
+
+        blacklist_change: dict = {
+            bl_bool_arg: bl_bool_val,
+            bl_date_arg: bl_date_val,
+        }
+
         # Überprüfen, ob article_no bereits in der Blacklists-Tabelle existiert
         existing_entry = (
             session.query(Blacklists).filter_by(article_no=article_no).first()
@@ -72,15 +80,9 @@ def update_blacklist_db(
 
         if existing_entry:
 
-            bl_bool_val, bl_date_val = set_val_by_mode(self, mode, existing_entry)
-
-            blacklist_change: dict = {
-                bl_bool_arg: bl_bool_val,
-                bl_date_arg: bl_date_val,
-            }
-
             setattr(existing_entry, bl_bool_arg, bl_bool_val)
             setattr(existing_entry, bl_date_arg, bl_date_val)
+            set_general_bl_to_none(self, mode, existing_entry)
 
             session.commit()
 
@@ -93,7 +95,7 @@ def update_blacklist_db(
     session.close()
 
 
-def set_val_by_mode(self, mode, existing_entry):
+def set_val_by_mode(mode):
     if mode == "add":
         bl_bool_val: bool = True
         bl_date_val: str = datetime.now().strftime("%Y-%m-%d - %H:%M:%S")
@@ -102,7 +104,14 @@ def set_val_by_mode(self, mode, existing_entry):
         bl_bool_val: bool = False
         bl_date_val: str = None
 
-        # Setzt auch die Werte in den allgemeinen Artikelspalten, da
+    return bl_bool_val, bl_date_val
+
+
+def set_general_bl_to_none(self, mode, existing_entry):
+
+    if mode == "remove":
+
+        # Setzt die Werte in den allgemeinen Artikelspalten, da
         # die Blacklist-Werte für dieses Artikel gelöscht werden sollen.
         # Diese Änderungen werden in den allgemeinen Artikelspalten gespeichert.
 
@@ -115,5 +124,3 @@ def set_val_by_mode(self, mode, existing_entry):
 
         setattr(existing_entry, bl_bool_general, False)
         setattr(existing_entry, bl_date_general, None)
-
-    return bl_bool_val, bl_date_val
