@@ -4,8 +4,8 @@ from PyQt5.QtWidgets import QTableWidget
 
 from files import logs_and_config
 from files.sys_files import get_files_in_source_path, get_paths
-from ui.blacklists.blacklist_gui import init_blacklist_button_click_signal
 from ui.blacklists.constants import COLUMN_ARTICLE_NAME, COLUMN_ARTICLE_NO
+from ui.blacklists.gui_window import init_blacklist_button_click_signal
 from ui.blacklists.utils import get_bl_df_from_db, get_data_of_articles_from_bl
 from ui.buttons.button_lists import add_btns_into_table_cells, add_doc_avlbl_btns
 from ui.buttons.custom_button import customize_push_buttons

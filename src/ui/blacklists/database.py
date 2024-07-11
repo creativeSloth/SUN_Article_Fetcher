@@ -98,7 +98,7 @@ def update_blacklist_db(
 def set_val_by_mode(mode):
     if mode == "add":
         bl_bool_val: bool = True
-        bl_date_val: str = datetime.now().strftime("%Y-%m-%d - %H:%M:%S")
+        bl_date_val: str = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
     elif mode == "remove":
         bl_bool_val: bool = False

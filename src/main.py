@@ -32,8 +32,8 @@ from save_file.load import load_fields_text, load_tables_content
 from save_file.save import save_fields_text, save_tables_content
 from source.data_origins import execute_query, get_sql_query, read_data_from_file
 from styles.styles_Handler import initialize_ui_style
-from ui.blacklists.blacklist_db import init_blacklists_db
-from ui.blacklists.blacklist_gui import initialize_blacklist_dialogs
+from ui.blacklists.database import init_blacklists_db
+from ui.blacklists.gui_window import initialize_blacklist_dialogs
 from ui.buttons.button_lists import initialize_push_buttons
 from ui.buttons.custom_button import customize_push_buttons
 from ui.menus import menus_base
@@ -71,7 +71,6 @@ class MainWindow(QMainWindow):
     def initialize(self) -> None:
         set_general_table_map(self)
         set_static_directories()
-        init_blacklists_db()
 
         menus_base.initialize_menu_dialogs(self)
         initialize_blacklist_dialogs(self)
@@ -80,7 +79,8 @@ class MainWindow(QMainWindow):
         customize_push_buttons(self)
 
         create_config_file()
-        create_device_related_storage_list(storage_file="blacklist_path")
+        # create_device_related_storage_list(storage_file="blacklist_path")
+        init_blacklists_db()
         create_device_related_storage_list(storage_file="device_specs_list_path")
 
         config_to_fields(self)

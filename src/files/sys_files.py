@@ -1,19 +1,20 @@
 import os
 import shutil
+from datetime import datetime
 
 import pandas as pd
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QCheckBox, QMessageBox, QTableWidget, QWidget
 
-import directories.constants as directory_base
 import files.logs_and_config as logs_and_config
+from directories.constants import dir_paths
 
 
 def get_paths():
-    source_path = directory_base.dir_paths.dict["source_path"]
-    target_path = directory_base.dir_paths.dict["target_1_path"]
-    log_sub2folder_path = directory_base.dir_paths.dict["log_subfolder_2_path"]
+    source_path = dir_paths.dict["source_path"]
+    target_path = dir_paths.dict["target_1_path"]
+    log_sub2folder_path = dir_paths.dict["log_subfolder_2_path"]
     return source_path, target_path, log_sub2folder_path
 
 
@@ -80,16 +81,36 @@ def mark_matching_files(self, matching_files):
             article_no_item.setFont(font)
 
 
-def copy_files(self, matching_files, source_path, target_path):
+def copy_files(self, matching_files: list, source_path: str, target_path: str) -> int:
+    """
+    Kopiert gewählte Dateien aus dem Quellordner nach dem Zielordner.
+    Dabei wird auch die Anzahl der verschobenen Dateien gezählt, welches ausgegeben wird
+    :param matching_files: Liste der gefundenen Dateien
+    :param source_path: Pfad zum Quellordner
+    :param target_path: Pfad zum Zielordner
+        --> es werden zusätzlich zum Zielordner zwei sich verkettende Unterordner erstellt /Projektnummer/Zeitstempel
+        --> weiterhin werden die Unterordner der Quelldaten beachtet und ebenfalls erstellt
+
+    :return: Anzahl der verschobenen Dateien
+    """
+
     count = 0
+
+    project_no: str = self.ui.project.toPlainText()
+    date: str = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
     for matching_filename in matching_files:
         source_file_path = os.path.join(source_path, matching_filename)
-        target_file_path = os.path.join(target_path, matching_filename)
-        target_file_path_ext = os.path.dirname(target_file_path)
+        target_file_path = os.path.join(
+            target_path, project_no, date, matching_filename
+        )
+
         try:
-            if not os.path.exists(target_file_path_ext):
-                os.makedirs(target_file_path_ext)
+            # Der Pfad der Dateien, welche in Unterordnern muss vorab bestimmt werden
+            target_file_path_ext = os.path.dirname(target_file_path)
+            # Verzeichnis erstellen, falls es nicht existiert
+            os.makedirs(target_file_path_ext, exist_ok=True)
+
         except Exception as e:
             QMessageBox.warning(
                 self,

@@ -141,7 +141,7 @@ def log_copy_details(self, source_path, target_path, source_files, matching_file
             log_file.write(df.to_csv(index=False))
 
 
-def create_device_related_storage_list(storage_file=None):
+def create_device_related_storage_list(storage_file: str = None):
     related_path = directories.constants.dir_paths.dict[storage_file]
 
     if os.path.exists(related_path):

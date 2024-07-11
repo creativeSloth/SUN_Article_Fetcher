@@ -59,7 +59,7 @@ def get_bl_df_from_db(self, table: QTableWidget):
 
 def get_db_engine():
     db_path: str = dir_paths.dict["blacklist_db_path"]
-    engine = create_engine(f"sqlite:///{db_path}", echo=True)
+    engine = create_engine(f"sqlite:///{db_path}", echo=False)
     return engine
 
 

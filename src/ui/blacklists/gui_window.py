@@ -3,9 +3,9 @@ from typing import Any
 from PyQt5.QtWidgets import QDialog, QMainWindow, QPushButton, QTableWidget
 
 from styles.styles_Handler import initialize_ui_style
-from ui.blacklists.blacklist_db import update_blacklist_db
-from ui.blacklists.blacklist_file import remove_articles_from_bl
 from ui.blacklists.constants import BLACKLISTS, BLACKLISTS_TABLE_MAP
+from ui.blacklists.database import update_blacklist_db
+from ui.blacklists.storage_file import remove_articles_from_bl
 from ui.buttons.button_lists import add_btns_into_table_cells
 from ui.buttons.custom_button import customize_push_buttons
 from ui.tables.utils import (
