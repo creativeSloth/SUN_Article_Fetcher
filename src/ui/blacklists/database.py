@@ -1,25 +1,33 @@
 from datetime import datetime
 
 from PyQt5.QtWidgets import QTableWidget
-from sqlalchemy import Boolean, Column, Integer, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy.orm import relationship
 
 from ui.blacklists.constants import (
     BASE,
     COLUMN_ARTICLE_NAME,
     COLUMN_ARTICLE_NO,
+    DB_TABLE_NAME_ARTICLES,
     DB_TABLE_NAME_BLACKLISTS,
 )
 from ui.blacklists.utils import create_session, get_db_engine
 
 
-# Definition der Tabelle
-class Blacklists(BASE):
-    __tablename__ = DB_TABLE_NAME_BLACKLISTS
-
+class Articles(BASE):
+    __tablename__ = DB_TABLE_NAME_ARTICLES
     id = Column(Integer, primary_key=True, autoincrement=True)
     article_no = Column(String, nullable=False, unique=True, name=COLUMN_ARTICLE_NO)
     article_name = Column(String, nullable=False, name=COLUMN_ARTICLE_NAME)
 
+
+# Definition der Tabelle
+class Blacklists(BASE):
+    __tablename__ = DB_TABLE_NAME_BLACKLISTS
+    id = Column(Integer, primary_key=True)
+    article_id = Column(
+        Integer, ForeignKey(f"{DB_TABLE_NAME_ARTICLES}.id"), nullable=False
+    )
     on_articles_bl = Column(Boolean, default=False)
     on_modules_bl = Column(Boolean, default=False)
     on_pv_inv_bl = Column(Boolean, default=False)
@@ -33,6 +41,8 @@ class Blacklists(BASE):
     added_to_bat_inv_bl = Column(String, nullable=True)
     added_to_bat_bl = Column(String, nullable=True)
     added_to_chg_point_bl = Column(String, nullable=True)
+
+    article = relationship("Articles", backref="blacklists")
 
 
 def init_blacklists_db():
@@ -63,8 +73,9 @@ def update_blacklist_db(
     bl_bool_arg = self.GENERAL_TABLE_MAP[table]["db_bl_bool"]
     bl_date_arg = self.GENERAL_TABLE_MAP[table]["db_added_to_bl_date"]
 
-    Session = create_session()
-    with Session() as session:
+    session = create_session()
+
+    try:
 
         bl_bool_val, bl_date_val = set_val_by_mode(mode)
 
@@ -74,25 +85,41 @@ def update_blacklist_db(
         }
 
         # Überprüfen, ob article_no bereits in der Blacklists-Tabelle existiert
-        existing_entry = (
-            session.query(Blacklists).filter_by(article_no=article_no).first()
+        existing_article = (
+            session.query(Articles).filter_by(article_no=article_no).first()
         )
 
-        if existing_entry:
+        if existing_article:
+            existing_blacklist_entry = (
+                session.query(Blacklists)
+                .filter_by(article_id=existing_article.id)
+                .first()
+            )
 
-            setattr(existing_entry, bl_bool_arg, bl_bool_val)
-            setattr(existing_entry, bl_date_arg, bl_date_val)
-            set_general_bl_to_none(self, mode, existing_entry)
+            setattr(existing_blacklist_entry, bl_bool_arg, bl_bool_val)
+            setattr(existing_blacklist_entry, bl_date_arg, bl_date_val)
+            set_general_bl_to_none(self, mode, existing_blacklist_entry)
 
             session.commit()
 
         else:
+            new_article_entry = Articles(
+                article_no=article_no,
+                article_name=article_name,
+            )
+            session.add(new_article_entry)
+            session.commit()
+
             new_blacklist_entry = Blacklists(
-                article_no=article_no, article_name=article_name, **blacklist_change
+                article_id=new_article_entry.id, **blacklist_change
             )
             session.add(new_blacklist_entry)
             session.commit()
-    session.close()
+    except Exception as e:
+        session.rollback()
+        raise e
+    finally:
+        session.close()
 
 
 def set_val_by_mode(mode):

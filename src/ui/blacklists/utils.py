@@ -66,4 +66,6 @@ def get_db_engine():
 def create_session():
     ENGINE = get_db_engine()
     Session = sessionmaker(bind=ENGINE)
-    return Session
+    session = Session()
+
+    return session
