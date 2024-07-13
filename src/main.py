@@ -12,7 +12,7 @@ from directories.constants import (
     TEMPLATE_1,
     TEMPLATE_2,
 )
-from directories.constants_helpers import set_static_directories
+from directories.directories_handler import set_static_directories
 from directories.dirs_decorators import check_path_existence, get_folder_path
 from directories.document_helpers import (
     get_docs_paths,
