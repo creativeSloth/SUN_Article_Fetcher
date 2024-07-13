@@ -5,13 +5,13 @@ from datetime import datetime
 
 from PyQt5.QtWidgets import QTableWidget
 
-from directories.constants import dir_paths
-from ui.blacklists.utils import is_on_blacklist
+from directories.constants import DB, DIRS
+from ui.blacklists.storage_file_utils import is_on_blacklist
 
 
 def remove_articles_from_bl(related_table: QTableWidget, article_no: str):
     table_name = related_table.objectName()
-    blacklist_path = dir_paths.dict["blacklist_path"]
+    blacklist_path = DIRS.paths[DB]
 
     config = configparser.ConfigParser()
 
@@ -31,7 +31,7 @@ def update_blacklist_file(
     article_no: str, article_name: str, table: QTableWidget
 ) -> None:
     table_name = table.objectName()
-    blacklist_path = dir_paths.dict["blacklist_path"]
+    blacklist_path = DIRS.paths[DB]
 
     blacklist = configparser.ConfigParser()
 

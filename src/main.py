@@ -2,7 +2,16 @@ import sys
 
 from PyQt5.QtWidgets import QApplication, QFileDialog, QMainWindow
 
-from directories.constants import dir_paths
+from database.classes import init_blacklists_db
+from directories.constants import (
+    DIRS,
+    DOC_1,
+    DOC_2,
+    TARGET_1,
+    TARGET_2,
+    TEMPLATE_1,
+    TEMPLATE_2,
+)
 from directories.constants_helpers import set_static_directories
 from directories.dirs_decorators import check_path_existence, get_folder_path
 from directories.document_helpers import (
@@ -13,15 +22,14 @@ from directories.document_helpers import (
     set_target_2_dir,
 )
 from events.filter import event_Filter
-from files.logs_and_config import (
+from files.logs_and_config import (  # create_device_related_storage_list,
     create_config_file,
-    create_device_related_storage_list,
     create_save_file,
     update_config_file,
 )
 from files.sys_files import (
     copy_files,
-    get_files_in_source_path,
+    get_files_in_directory,
     get_matching_files,
     get_paths,
     get_selected_files_and_df,
@@ -32,18 +40,17 @@ from save_file.load import load_fields_text, load_tables_content
 from save_file.save import save_fields_text, save_tables_content
 from source.data_origins import execute_query, get_sql_query, read_data_from_file
 from styles.styles_Handler import initialize_ui_style
-from ui.blacklists.database import init_blacklists_db
 from ui.blacklists.gui_window import initialize_blacklist_dialogs
 from ui.buttons.button_lists import initialize_push_buttons
 from ui.buttons.custom_button import customize_push_buttons
 from ui.menus import menus_base
 from ui.tables.constants import set_general_table_map
 from ui.tables.data_content import (
-    check_specs_in_device_tables,
     fill_article_table,
     fill_device_lists,
     initialize_table_search,
 )
+from ui.tables.data_content_helper import collect_specs_of_articles
 from ui.tables.utils import connect_sort_indicator_changed
 from ui.text_edits.ui_fields_base import (
     char_validation,
@@ -79,9 +86,9 @@ class MainWindow(QMainWindow):
         customize_push_buttons(self)
 
         create_config_file()
-        # create_device_related_storage_list(storage_file="blacklist_path")
+        # create_device_related_storage_list(storage_file=BLACKLISTS)
         init_blacklists_db()
-        create_device_related_storage_list(storage_file="device_specs_list_path")
+        # create_device_related_storage_list(storage_file=DEVICE_SPECS)
 
         config_to_fields(self)
 
@@ -159,15 +166,15 @@ class MainWindow(QMainWindow):
     def on_target_path_btn_click(self, folder_path):
         self.ui.target_path_text.setPlainText(folder_path)
         set_target_1_dir(folder_path)
-        update_config_file("Pfade", "target_1_path", folder_path)
+        update_config_file("Pfade", TARGET_1, folder_path)
 
     @check_path_existence(modus=0)
     def on_copy_files_btn_click(self, *args, **kwargs):
         source_path, target_path, log_subfolder_2_path = get_paths()
-        source_files = get_files_in_source_path(self, source_path)
+        source_files = get_files_in_directory(self, source_path)
         selected_files, df = get_selected_files_and_df(self)
         matching_files = get_matching_files(source_files, selected_files)
-        mark_matching_files(self, matching_files)
+        mark_matching_files(self, matching_files, table=self.ui.articles_list)
         count = copy_files(self, matching_files, source_path, target_path)
 
         log_and_show_result(
@@ -185,16 +192,12 @@ class MainWindow(QMainWindow):
 
     def on_btn_create_doc1_clicked(self):
         set_doc_1_dir(self)
-        replace_fields_in_doc(
-            self, doc_path="doc_1_path", template_path="template_1_path"
-        )
+        replace_fields_in_doc(self, doc_path=DOC_1, template_path=TEMPLATE_1)
 
     def on_btn_create_doc2_clicked(self):
         _, doc_2 = get_docs_paths(self.ui.project.toPlainText())
-        dir_paths.dict["doc_2_path"] = doc_2
-        replace_fields_in_doc(
-            self, doc_path="doc_2_path", template_path="template_2_path"
-        )
+        DIRS.paths[DOC_2] = doc_2
+        replace_fields_in_doc(self, doc_path=DOC_2, template_path=TEMPLATE_2)
 
     def on_load_data_to_device_list_btn_click(self):
         clear_docu_fields(self)
@@ -210,15 +213,13 @@ class MainWindow(QMainWindow):
         fill_docu_fields(self)
 
     def on_store_device_specs_btn_click(self):
-        check_specs_in_device_tables(self)
+        collect_specs_of_articles(self)
 
     @get_folder_path
     def on_target_path_btn_2_click(self, folder_path):
         self.ui.target_path_text_2.setPlainText(folder_path)
         set_target_2_dir(folder_path)
-        update_config_file("Pfade", "target_2_path", folder_path)
-
-    # * * * * * * * * * * * * * * * * * Settings * * * * * * * * * * * * * * * *
+        update_config_file("Pfade", TARGET_2, folder_path)
 
     def on_save_btn_click(self):
         file_path = create_save_file(self)

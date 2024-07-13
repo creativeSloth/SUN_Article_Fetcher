@@ -2,7 +2,14 @@ import os
 
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
 
-from directories.constants import dir_paths
+from directories.constants import (
+    DIRS,
+    SOURCE,
+    TARGET_1,
+    TARGET_2,
+    TEMPLATE_1,
+    TEMPLATE_2,
+)
 
 
 def get_folder_path(func):
@@ -27,11 +34,11 @@ def check_path_existence(modus):
     def sub_check_path_existence(func):
         def wrapper(self, *args, **kwargs):
 
-            source_path = dir_paths.dict["source_path"]
-            target_1_path = dir_paths.dict["target_1_path"]
-            template_1_path = dir_paths.dict["template_1_path"]
-            target_2_path = dir_paths.dict["target_2_path"]
-            template_2_path = dir_paths.dict["template_2_path"]
+            source_path = DIRS.paths[SOURCE]
+            target_1_path = DIRS.paths[TARGET_1]
+            template_1_path = DIRS.paths[TEMPLATE_1]
+            target_2_path = DIRS.paths[TARGET_2]
+            template_2_path = DIRS.paths[TEMPLATE_2]
 
             paths_and_messages = [
                 (source_path, "Quellpfad existiert nicht."),

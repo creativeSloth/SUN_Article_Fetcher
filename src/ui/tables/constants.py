@@ -38,3 +38,14 @@ def set_general_table_map(self):
             "db_added_to_bl_date": "added_to_articles_bl",
         },
     }
+
+
+SPEC_DB_MAP = {
+    "Modulleistung [kWp]": "module_power_kWp",
+    "WR-Leistung [kW]": "inv_power_kW",
+    "BWR-Leistung [kW]": "bat_inv_power_kW",
+    "Art der Kopplung": "coupling_type",
+    "Speicherkapazität [kWh]": "bat_capacity_kWh",
+    "Max. Entladeleistung [kW]": "max_discharge_power_kW",
+    "Batterietechnologie": "bat_technology_type",
+}

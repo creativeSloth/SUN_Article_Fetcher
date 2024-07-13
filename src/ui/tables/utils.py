@@ -1,3 +1,5 @@
+from typing import List
+
 import pandas as pd
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
@@ -11,15 +13,23 @@ from PyQt5.QtWidgets import (
 )
 
 import ui.blacklists.constants as blacklist
-from ui.blacklists.database import update_blacklist_db
-from ui.blacklists.storage_file import update_blacklist_file
+from database.queries import update_db_blacklist
 from ui.buttons.utils import create_and_set_obj_property, list_objects_of_class
 from ui.tables.decorators import customize_table_row
 from ui.text_edits.ui_fields_base import get_articles_table, get_device_tables
 
+# from ui.blacklists.storage_file import update_blacklist_file
+
 
 def get_fixed_val_columns():
-    discard_columns = ["<>", "Menge verbraucht [Stk.]", "Seriennummer", "Artikelnummer"]
+    discard_columns = [
+        "<>",
+        "Menge verbraucht [Stk.]",
+        "Seriennummer",
+        "Artikelnummer",
+        "Artikelbezeichnung",
+        "x",
+    ]
     return discard_columns
 
 
@@ -70,8 +80,9 @@ def disable_colums_edit(table: QTableWidget, firstcol=0, lastcol: int = None):
             # Das vorhandene QTableWidgetItem abrufen
             item = table.item(row, col)
             # Entfernt das Bearbeitungsflag für die Zelle
-            if item is not None:
-                item.setFlags(item.flags() & ~Qt.ItemIsEditable)
+            if item is None:
+                continue
+            item.setFlags(item.flags() & ~Qt.ItemIsEditable)
 
 
 @customize_table_row
@@ -108,8 +119,8 @@ def remove_row_with_button_from_table(table: QTableWidget, push_button: QPushBut
     return removed, article_no, article_name
 
 
-def is_not_on_bl(blacklist_article_numbers, df_row):
-    return str(df_row.iloc[0]) not in blacklist_article_numbers
+def is_on_bl(df_row: pd.Series, blacklist_article_numbers: List[str]) -> bool:
+    return str(df_row.iloc[0]) in blacklist_article_numbers
 
 
 def import_from_df_row(
@@ -117,13 +128,10 @@ def import_from_df_row(
     data_row,
     import_column_count: int = None,
 ) -> None:
-    """Importiert eine Zeile aus einem Datensatz, der Datensatz kann ein DataFrame oder ein Tuple sein
-
-    Args:
-        table (QtWidgets.QTableWidget): Die Tabelle die den Datensatz aufnehmen soll
-        data_row (pd.Series | tuple): Eine Datenzeile, deren Datensätze in eine jeweilige Spalte eingefügt werden soll.
-        Hier soll die 0 Spalte der Tabelle für eine Checkbox, übersprungen werden
-        import_column_count (int, optional): Die Anzahl der Spalten in die eingefügt werden soll.
+    """Importiert eine Zeile aus einem Datensatz, der Datensatz kann ein DataFrame oder ein Tuple sein.
+    :param table: QTableWidget, in der die Artikel eingefügt werden sollen
+    :param data_row: Eine Datenzeile, deren Datensätze in eine jeweilige Spalte eingefügt werden sollen.
+    :param import_column_count: Die Anzahl der Spalten in die eingefügt werden soll.
     """
 
     tw_row = table.rowCount()
@@ -187,4 +195,4 @@ def remove_article_from_table_row(
 
     if removed:
         # update_blacklist_file(article_no, article_name, table)
-        update_blacklist_db(self, article_no, article_name, table, mode="add")
+        update_db_blacklist(self, article_no, article_name, table, mode="add")

@@ -221,11 +221,12 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.open_articles_blacklist_label.sizePolicy().hasHeightForWidth())
         self.open_articles_blacklist_label.setSizePolicy(sizePolicy)
         self.open_articles_blacklist_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.open_articles_blacklist_label.setWordWrap(False)
 
         self.verticalLayout_27.addWidget(self.open_articles_blacklist_label, 0, Qt.AlignHCenter)
 
 
-        self.horizontalLayout_7.addWidget(self.frame_57, 0, Qt.AlignLeft)
+        self.horizontalLayout_7.addWidget(self.frame_57, 0, Qt.AlignHCenter)
 
         self.frame = QFrame(self.frame_6)
         self.frame.setObjectName(u"frame")
@@ -716,7 +717,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 1759, 5378))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, -4125, 1759, 5378))
         sizePolicy.setHeightForWidth(self.scrollAreaWidgetContents.sizePolicy().hasHeightForWidth())
         self.scrollAreaWidgetContents.setSizePolicy(sizePolicy)
         self.gridLayout_5 = QGridLayout(self.scrollAreaWidgetContents)
@@ -2536,7 +2537,7 @@ class Ui_MainWindow(object):
         self.load_articles_file_btn.setText("")
         self.load_articles_label.setText(QCoreApplication.translate("MainWindow", u"Laden", None))
         self.open_articles_blacklist.setText("")
-        self.open_articles_blacklist_label.setText(QCoreApplication.translate("MainWindow", u"Blacklist", None))
+        self.open_articles_blacklist_label.setText(QCoreApplication.translate("MainWindow", u"Blacklist  ", None))
 #if QT_CONFIG(tooltip)
         self.target_path_btn.setToolTip(QCoreApplication.translate("MainWindow", u"Zielpfad f\u00fcr gew\u00fcnschte artikelbezogene Dokumente ausw\u00e4hlen!", None))
 #endif // QT_CONFIG(tooltip)
@@ -2570,8 +2571,8 @@ class Ui_MainWindow(object):
         self.fill_fields_label.setText(QCoreApplication.translate("MainWindow", u"F\u00fcllen", None))
 #if QT_CONFIG(tooltip)
         self.store_device_specs_btn.setToolTip(QCoreApplication.translate("MainWindow", u"Es werden f\u00fcr zuk\u00fcnftige Abfragen die  technische Daten gemerkt, wenn in der jeweiligen \n"
-"Ger\u00e4teliste Eingaben diem jeweilige Tabellenzelle (z.B. Modulleistung [kWp], \n"
-"AC-Nennleistung [kW] usw.) i vorgenommen werden.", None))
+"Ger\u00e4teliste Eingaben in eine Tabellenzelle (z.B. Modulleistung [kWp], \n"
+"AC-Nennleistung [kW])  f\u00fcr einen Artikel vorgenommen werden.", None))
 #endif // QT_CONFIG(tooltip)
         self.store_device_specs_btn.setText("")
         self.store_device_specs_label.setText(QCoreApplication.translate("MainWindow", u"Merken", None))
@@ -2620,7 +2621,7 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem6 = self.PV_modules_list.horizontalHeaderItem(1)
         ___qtablewidgetitem6.setText(QCoreApplication.translate("MainWindow", u"Artikelnummer", None));
         ___qtablewidgetitem7 = self.PV_modules_list.horizontalHeaderItem(2)
-        ___qtablewidgetitem7.setText(QCoreApplication.translate("MainWindow", u"Modul-Typ", None));
+        ___qtablewidgetitem7.setText(QCoreApplication.translate("MainWindow", u"Artikelbezeichnung", None));
         ___qtablewidgetitem8 = self.PV_modules_list.horizontalHeaderItem(3)
         ___qtablewidgetitem8.setText(QCoreApplication.translate("MainWindow", u"Menge verbraucht [Stk.]", None));
         ___qtablewidgetitem9 = self.PV_modules_list.horizontalHeaderItem(4)
@@ -2641,14 +2642,13 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem13 = self.PV_inverters_list.horizontalHeaderItem(1)
         ___qtablewidgetitem13.setText(QCoreApplication.translate("MainWindow", u"Artikelnummer", None));
         ___qtablewidgetitem14 = self.PV_inverters_list.horizontalHeaderItem(2)
-        ___qtablewidgetitem14.setText(QCoreApplication.translate("MainWindow", u"Wechselrichter-Typ", None));
+        ___qtablewidgetitem14.setText(QCoreApplication.translate("MainWindow", u"Artikelbezeichnung", None));
         ___qtablewidgetitem15 = self.PV_inverters_list.horizontalHeaderItem(3)
         ___qtablewidgetitem15.setText(QCoreApplication.translate("MainWindow", u"Menge verbraucht [Stk.]", None));
         ___qtablewidgetitem16 = self.PV_inverters_list.horizontalHeaderItem(4)
         ___qtablewidgetitem16.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
         ___qtablewidgetitem17 = self.PV_inverters_list.horizontalHeaderItem(5)
-        ___qtablewidgetitem17.setText(QCoreApplication.translate("MainWindow", u"Zugeordnete \n"
-"WR-Leistung [kW]", None));
+        ___qtablewidgetitem17.setText(QCoreApplication.translate("MainWindow", u"WR-Leistung [kW]", None));
         ___qtablewidgetitem18 = self.PV_inverters_list.horizontalHeaderItem(6)
         ___qtablewidgetitem18.setText(QCoreApplication.translate("MainWindow", u"x", None));
         self.open_PV_inverters_blacklist.setText("")
@@ -2666,14 +2666,13 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem20 = self.BAT_inverters_list.horizontalHeaderItem(1)
         ___qtablewidgetitem20.setText(QCoreApplication.translate("MainWindow", u"Artikelnummer", None));
         ___qtablewidgetitem21 = self.BAT_inverters_list.horizontalHeaderItem(2)
-        ___qtablewidgetitem21.setText(QCoreApplication.translate("MainWindow", u"Wechselrichter-Typ", None));
+        ___qtablewidgetitem21.setText(QCoreApplication.translate("MainWindow", u"Artikelbezeichnung", None));
         ___qtablewidgetitem22 = self.BAT_inverters_list.horizontalHeaderItem(3)
         ___qtablewidgetitem22.setText(QCoreApplication.translate("MainWindow", u"Menge verbraucht [Stk.]", None));
         ___qtablewidgetitem23 = self.BAT_inverters_list.horizontalHeaderItem(4)
         ___qtablewidgetitem23.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
         ___qtablewidgetitem24 = self.BAT_inverters_list.horizontalHeaderItem(5)
-        ___qtablewidgetitem24.setText(QCoreApplication.translate("MainWindow", u"Zugeordnete \n"
-"WR-Leistung [kW]", None));
+        ___qtablewidgetitem24.setText(QCoreApplication.translate("MainWindow", u"BWR-Leistung [kW]", None));
         ___qtablewidgetitem25 = self.BAT_inverters_list.horizontalHeaderItem(6)
         ___qtablewidgetitem25.setText(QCoreApplication.translate("MainWindow", u"Art der Kopplung", None));
         ___qtablewidgetitem26 = self.BAT_inverters_list.horizontalHeaderItem(7)
@@ -2691,18 +2690,15 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem28 = self.BAT_storage_list.horizontalHeaderItem(1)
         ___qtablewidgetitem28.setText(QCoreApplication.translate("MainWindow", u"Artikelnummer", None));
         ___qtablewidgetitem29 = self.BAT_storage_list.horizontalHeaderItem(2)
-        ___qtablewidgetitem29.setText(QCoreApplication.translate("MainWindow", u"Speicher-Typ", None));
+        ___qtablewidgetitem29.setText(QCoreApplication.translate("MainWindow", u"Artikelbezeichnung", None));
         ___qtablewidgetitem30 = self.BAT_storage_list.horizontalHeaderItem(3)
         ___qtablewidgetitem30.setText(QCoreApplication.translate("MainWindow", u"Menge verbraucht [Stk.]", None));
         ___qtablewidgetitem31 = self.BAT_storage_list.horizontalHeaderItem(4)
         ___qtablewidgetitem31.setText(QCoreApplication.translate("MainWindow", u"Seriennummer", None));
         ___qtablewidgetitem32 = self.BAT_storage_list.horizontalHeaderItem(5)
-        ___qtablewidgetitem32.setText(QCoreApplication.translate("MainWindow", u"Nutzbare \n"
-"Speicherkapazit\u00e4t\n"
-"[kWh]", None));
+        ___qtablewidgetitem32.setText(QCoreApplication.translate("MainWindow", u"Speicherkapazit\u00e4t [kWh]", None));
         ___qtablewidgetitem33 = self.BAT_storage_list.horizontalHeaderItem(6)
-        ___qtablewidgetitem33.setText(QCoreApplication.translate("MainWindow", u"Max. Entladeleistung\n"
-"im Dauerbetrieb", None));
+        ___qtablewidgetitem33.setText(QCoreApplication.translate("MainWindow", u"Max. Entladeleistung [kW]", None));
         ___qtablewidgetitem34 = self.BAT_storage_list.horizontalHeaderItem(7)
         ___qtablewidgetitem34.setText(QCoreApplication.translate("MainWindow", u"Batterietechnologie", None));
         ___qtablewidgetitem35 = self.BAT_storage_list.horizontalHeaderItem(8)
@@ -2728,7 +2724,7 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem37 = self.CHG_point_list.horizontalHeaderItem(1)
         ___qtablewidgetitem37.setText(QCoreApplication.translate("MainWindow", u"Artikelnummer", None));
         ___qtablewidgetitem38 = self.CHG_point_list.horizontalHeaderItem(2)
-        ___qtablewidgetitem38.setText(QCoreApplication.translate("MainWindow", u"Ladestations-Typ", None));
+        ___qtablewidgetitem38.setText(QCoreApplication.translate("MainWindow", u"Artikelbezeichnung", None));
         ___qtablewidgetitem39 = self.CHG_point_list.horizontalHeaderItem(3)
         ___qtablewidgetitem39.setText(QCoreApplication.translate("MainWindow", u"Menge verbraucht [Stk.]", None));
         ___qtablewidgetitem40 = self.CHG_point_list.horizontalHeaderItem(4)

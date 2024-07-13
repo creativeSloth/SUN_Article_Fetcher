@@ -1,10 +1,10 @@
 from typing import Any
 
-from PyQt5.QtWidgets import QDialog, QMainWindow, QPushButton, QTableWidget
+from PyQt5.QtWidgets import QDialog, QPushButton, QTableWidget
 
+from database.queries import update_db_blacklist
 from styles.styles_Handler import initialize_ui_style
 from ui.blacklists.constants import BLACKLISTS, BLACKLISTS_TABLE_MAP
-from ui.blacklists.database import update_blacklist_db
 from ui.blacklists.storage_file import remove_articles_from_bl
 from ui.buttons.button_lists import add_btns_into_table_cells
 from ui.buttons.custom_button import customize_push_buttons
@@ -133,8 +133,8 @@ def on_remove_articles_from_gui_bl(
         table=bl_table, push_button=push_button
     )
     if removed:
-        remove_articles_from_bl(related_table=related_table, article_no=article_no)
-        update_blacklist_db(
+        # remove_articles_from_bl(related_table=related_table, article_no=article_no)
+        update_db_blacklist(
             self.parent(),
             article_no=article_no,
             article_name=article_name,

@@ -1,6 +1,7 @@
 import os
 import shutil
 from datetime import datetime
+from typing import List
 
 import pandas as pd
 from PyQt5.QtCore import Qt
@@ -8,13 +9,13 @@ from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QCheckBox, QMessageBox, QTableWidget, QWidget
 
 import files.logs_and_config as logs_and_config
-from directories.constants import dir_paths
+from directories.constants import DIRS, LOG_SUBF_2, SOURCE, TARGET_1
 
 
 def get_paths():
-    source_path = dir_paths.dict["source_path"]
-    target_path = dir_paths.dict["target_1_path"]
-    log_sub2folder_path = dir_paths.dict["log_subfolder_2_path"]
+    source_path = DIRS.paths[SOURCE]
+    target_path = DIRS.paths[TARGET_1]
+    log_sub2folder_path = DIRS.paths[LOG_SUBF_2]
     return source_path, target_path, log_sub2folder_path
 
 
@@ -68,9 +69,8 @@ def get_matching_files(source_files, selected_files):
     ]
 
 
-def mark_matching_files(self, matching_files):
+def mark_matching_files(self, matching_files, table: QTableWidget) -> None:
 
-    table = self.ui.articles_list
     for row in range(table.rowCount()):
         article_no_item = table.item(row, 1)
         article_no = article_no_item.text()
@@ -154,24 +154,16 @@ def log_and_show_result(
     )
 
 
-def get_files_in_source_path(self, directory):
-    all_files: list[str] = []
+def get_files_in_directory(self, directory: str) -> List[str]:
+    """Ermittelt alle Dateien im angegebenen Pfad
+    ________________________________________________________________________________________________________________________________
+    :param directory:
+    :return: Liste aller Dateien im angegebenen Pfad
+    ________________________________________________________________________________________________________________________________
+    """
 
     try:
-        for root, _, files in os.walk(directory):
-            for file in files:
-                try:
-                    file_path = os.path.relpath(os.path.join(root, file), directory)
-                    all_files.append(file_path)
-
-                except Exception as e:
-                    QMessageBox.warning(
-                        self,
-                        "Fehler!",
-                        f"Die Datei für {file_path} konnte nicht gelesen werden.\n\n {e}",
-                    )
-
-        return all_files
+        return itter_through_sub_directories(self, directory)
 
     except Exception as e:
         QMessageBox.warning(
@@ -179,6 +171,27 @@ def get_files_in_source_path(self, directory):
             "Fehler!",
             f"Die Datei für {directory} konnte nicht gelesen werden.\n\n {e}",
         )
+
+
+def itter_through_sub_directories(self, directory):
+    all_files: list[str] = []
+    for root, _, files in os.walk(directory):
+        itter_through_files(self, directory, all_files, root, files)
+    return all_files
+
+
+def itter_through_files(self, directory, all_files, root, files):
+    for file in files:
+        try:
+            file_path = os.path.relpath(os.path.join(root, file), directory)
+            all_files.append(file_path)
+
+        except Exception as e:
+            QMessageBox.warning(
+                self,
+                "Fehler!",
+                f"Die Datei für {file_path} konnte nicht gelesen werden.\n\n {e}",
+            )
 
 
 def compare_src_docs_with_article_list(

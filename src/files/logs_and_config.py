@@ -4,12 +4,21 @@ from datetime import datetime
 
 from PyQt5.QtWidgets import QMessageBox
 
-import directories.constants
 import directories.document_helpers as directory_base
+from directories.constants import (
+    CONFIG,
+    DIRS,
+    LOG_SUBF_2,
+    SOURCE,
+    TARGET_1,
+    TARGET_2,
+    TEMPLATE_1,
+    TEMPLATE_2,
+)
 
 
 def create_config_file():
-    config_path = directories.constants.dir_paths.dict["config_path"]
+    config_path = DIRS.paths[CONFIG]
 
     if os.path.exists(config_path):
         return
@@ -18,12 +27,12 @@ def create_config_file():
 
     # Fülle die Konfiguration mit Standardwerten
     config["Pfade"] = {
-        "source_path": "",
-        "target_1_path": "",
-        "template_1_path": "",
-        "template_2_path": "",
-        "target_2_path": "",
-        "config_path": config_path,
+        SOURCE: "",
+        TARGET_1: "",
+        TEMPLATE_1: "",
+        TEMPLATE_2: "",
+        TARGET_2: "",
+        CONFIG: config_path,
     }
 
     config["Abfrage"] = {"sql1": "", "sql2": ""}
@@ -61,7 +70,7 @@ def update_save_file(field_map, file_path, section):
             save_file.write(savefile)
 
 
-def load_save_file(file_path, section):
+def load_save_file(file_path: str, section: str):
     save_file = configparser.ConfigParser()
     save_file.read(file_path)
     saved_field_values = {}
@@ -72,7 +81,7 @@ def load_save_file(file_path, section):
 
 
 def update_config_file(section, option, value):
-    config_path = directories.constants.dir_paths.dict["config_path"]
+    config_path = DIRS.paths[CONFIG]
     config = configparser.ConfigParser()
     config.read(config_path)
     config[section][option] = value
@@ -82,7 +91,7 @@ def update_config_file(section, option, value):
 
 
 def read_config_value(section, option):
-    config_path = directories.constants.dir_paths.dict["config_path"]
+    config_path = DIRS.paths[CONFIG]
     config = configparser.ConfigParser()
     config.read(config_path)
     value = config[section][option]
@@ -94,7 +103,7 @@ def log_copy_details(self, source_path, target_path, source_files, matching_file
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
     log_source_file_name = f"datalog_{timestamp}.txt"
 
-    log_subfolder_2_path = directories.constants.dir_paths.dict["log_subfolder_2_path"]
+    log_subfolder_2_path = DIRS.paths[LOG_SUBF_2]
 
     # Pfad zur Log-Datei im Unterordner "logs"
     log_file_path = os.path.join(log_subfolder_2_path, log_source_file_name)
@@ -142,7 +151,7 @@ def log_copy_details(self, source_path, target_path, source_files, matching_file
 
 
 def create_device_related_storage_list(storage_file: str = None):
-    related_path = directories.constants.dir_paths.dict[storage_file]
+    related_path = DIRS.paths[storage_file]
 
     if os.path.exists(related_path):
         return
@@ -154,14 +163,14 @@ def create_device_related_storage_list(storage_file: str = None):
 
 
 def update_device_related_storage_list(storage_file, data_set):
-    file_path = directories.constants.dir_paths.dict[storage_file]
+    file_path = DIRS.paths[storage_file]
     store_file = configparser.ConfigParser()
 
     # Lade vorhandene Konfiguration, wenn die Datei vorhanden ist
     if os.path.exists(storage_file):
         store_file.read(storage_file)
 
-    for section, option, value in data_set:
+    for section, _, option, value in data_set:
         # Erstellen Sie die Sektion, wenn sie noch nicht existiert
         if not store_file.has_section(section):
             store_file.add_section(section)
@@ -176,7 +185,7 @@ def update_device_related_storage_list(storage_file, data_set):
 
 
 def read_device_related_storage_list(storage_file, section, option):
-    file_path = directories.constants.dir_paths.dict[storage_file]
+    file_path = DIRS.paths[storage_file]
 
     stored_file = configparser.ConfigParser()
     stored_file.read(file_path)

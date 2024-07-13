@@ -5,12 +5,12 @@ from typing import Dict
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor, QIcon, QPainter, QPixmap
 
-from directories.constants import dir_paths
+from directories.constants import DIRS
 from ui.text_edits.ui_fields_base import get_all_mainwindow_tables
 
 
 def get_paths_of_icons(icon_name: str = None):
-    icon_folder_path = dir_paths.dict["icons_folder_path"]
+    icon_folder_path = DIRS.paths["icons_folder_path"]
 
     default_color_appendix = "_48dp_WHITE.png"
 
@@ -79,7 +79,7 @@ def get_button_icons_color_connected(
         PB_MAP[button] = (get_paths_of_icons("search"), get_color_combo("blue"))
 
     for button in self.button_list.get_open_BL_btns():
-        PB_MAP[button] = (get_paths_of_icons("preview_off"), get_color_combo("yellow"))
+        PB_MAP[button] = (get_paths_of_icons("preview_off"), get_color_combo("black"))
 
     for button in self.button_list.get_doc_available_btns():
         PB_MAP[button] = (get_paths_of_icons("documents"), get_color_combo("gold"))
@@ -161,13 +161,8 @@ def get_color_combo(buttoncolor=None):
         },
         "black": {
             "normal": QColor(0, 0, 0, 255),
-            "hover": QColor(0, 0, 0, 61),
+            "hover": QColor(0, 0, 0, 60),
             "click": QColor(0, 0, 0, 20),
-        },
-        "white": {
-            "normal": QColor(255, 255, 255, 255),
-            "hover": QColor(255, 255, 255, 60),
-            "click": QColor(255, 255, 255, 20),
         },
         "white": {
             "normal": QColor(255, 255, 255, 255),

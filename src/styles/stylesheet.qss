@@ -167,15 +167,18 @@ QPushButton[button_type="search"]::pressed {
 }
 /* -------------------------------------- */
 QPushButton[button_type="open_bl"] {
-	background-color: rgba(0, 0, 0, 255);
+	background-color: rgba(255, 255, 255, 255);
+	border: 1px solid rgba(0, 0, 0, 255)
 }
 /* Spezielle QPushButton Hover */
 QPushButton[button_type="open_bl"]::hover {
-	background-color: rgba(0, 0, 0, 150);
+	background-color: rgba(255, 255, 255, 150);
+	border: 1px solid rgba(0, 0, 0, 60)
 }
 /* Spezielle QPushButton Pressed */
 QPushButton[button_type="open_bl"]::pressed {
-	background-color: rgba(0, 0, 0, 50);
+	background-color: rgba(255, 255, 255, 50);
+	border: 1px solid rgba(0, 0, 0, 20)
 }
 /* -------------------------------------- */
 QPushButton[button_type="doc_available"] {
