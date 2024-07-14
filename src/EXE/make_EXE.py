@@ -2,6 +2,16 @@ import os
 import shutil
 import subprocess
 
+from directories.constants import (
+    ICON_NAME,
+    ICONSF_NAME,
+    ICONSSUPERF_NAME,
+    INCLUDING_PATHS,
+    MAIN,
+    SOFTWARE_NAME,
+    VERSION,
+)
+
 # Hilfsfunktion, um das Wurzelverzeichnis zu ermitteln
 
 
@@ -16,16 +26,16 @@ file_path = os.path.abspath(__file__)
 BASE_DIR = os.path.dirname(file_path)
 PARENT_DIR = os.path.dirname(BASE_DIR)
 SOURCE_DIR_root = PARENT_DIR
-SOURCE_DIR = os.path.join(SOURCE_DIR_root, "main.py")
+SOURCE_DIR = os.path.join(SOURCE_DIR_root, MAIN)
 
 # Name des Programms
-exe_name = "SUN-DOC"
+exe_name = f"{SOFTWARE_NAME}_v{VERSION}"
 
 # Pfad zur Textdatei in der alle zu übertragenden Ordner und deren Zielordner festgehalten sind
-paths_dir = os.path.join(BASE_DIR, "paths.txt")
+paths_dir = os.path.join(BASE_DIR, INCLUDING_PATHS)
 
 # Pfad
-icon_path = os.path.join(SOURCE_DIR_root, "ui", "icons", "launch.ico")
+icon_path = os.path.join(SOURCE_DIR_root, ICONSSUPERF_NAME, ICONSF_NAME, ICON_NAME)
 
 
 # Pfade aus der Textdatei lesen

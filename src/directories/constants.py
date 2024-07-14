@@ -1,3 +1,13 @@
+"""
+Name of Software
+"""
+
+SOFTWARE_NAME = "SUN_DOC"
+VERSION = "3.10"
+
+"""
+keywords for Directory-Dict-Object
+"""
 SOURCE = "source_path"
 TARGET_1 = "target_1_path"
 TEMPLATE_1 = "template_1_path"
@@ -15,20 +25,30 @@ DEVICE_SPECS = "device_specs_list_path"
 STYLESHEET = "stylesheet_path"
 ICONS_FOLDER = "icons_folder_path"
 
+"""
+Template File Names
+"""
 DOC_1_NAME = "Doku - Anlagendaten für MaStR"
 DOC_2_NAME = "Doku NIO - SQL Adressen V1.0"
 
+"""
+Static Directories
+"""
+# Folder
 LOG_SUBF_NAME = "logs"
 LOG_SUBF_2_NAME = "hist"
-CONFIG_NAME = "config.ini"
-BLACKLISTS_NAME = "blacklists.ini"
-DB_NAME = "SUN_DOC_DB.db"
-DEVICE_SPECS_NAME = "device_specs_list.ini"
-STYLESHEETF_NAME = "styles"
-STYLESHEET_NAME = "stylesheet.qss"
 ICONSSUPERF_NAME = "ui"
-
+STYLESHEETF_NAME = "styles"
 ICONSF_NAME = "icons"
+# Files
+CONFIG_NAME = "config.ini"
+DB_NAME = f"{SOFTWARE_NAME}_DB.db"
+BLACKLISTS_NAME = "blacklists.ini"
+DEVICE_SPECS_NAME = "device_specs_list.ini"
+STYLESHEET_NAME = "stylesheet.qss"
+ICON_NAME = "launch.ico"
+INCLUDING_PATHS = "paths.txt"
+MAIN = "main.py"
 
 
 class Paths:
