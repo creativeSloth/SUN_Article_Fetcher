@@ -2,7 +2,7 @@ import sys
 
 from PyQt5.QtWidgets import QApplication, QFileDialog, QMainWindow
 
-from database.classes import init_blacklists_db
+from database.classes import init_local_db
 from directories.constants import (
     DIRS,
     DOC_1,
@@ -86,8 +86,9 @@ class MainWindow(QMainWindow):
         customize_push_buttons(self)
 
         create_config_file()
+        init_local_db()
         # create_device_related_storage_list(storage_file=BLACKLISTS)
-        init_blacklists_db()
+
         # create_device_related_storage_list(storage_file=DEVICE_SPECS)
 
         config_to_fields(self)

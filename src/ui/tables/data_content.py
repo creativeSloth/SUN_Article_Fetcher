@@ -10,7 +10,7 @@ from ui.buttons.custom_button import customize_push_buttons
 from ui.tables.data_content_helper import (
     fill_device_specs_in_device_tables,
     mark_documents_availability,
-    put_non_bl_articles_on_table,
+    put_non_bl_articles_on_table_via_db,
 )
 from ui.tables.decorators import customize_table_row
 from ui.tables.search_bar import (
@@ -58,7 +58,13 @@ def initialize_table_search(self):
 @customize_table_row
 def fill_article_table(self, table: QtWidgets.QTableWidget, df: DataFrame = None):
 
-    put_non_bl_articles_on_table(self, table, df, import_column_count=3)
+    put_non_bl_articles_on_table_via_db(self, table, df, import_column_count=3)
+
+    # ? ________________________________________________________________________________________________________________________________
+    # ? wurde deaktiviert weil das blacklist-Handling mitlerweile über die DB läuft
+    # put_non_bl_articles_on_table_via_file(self, table, df, import_column_count=3)
+    # ? ________________________________________________________________________________________________________________________________
+
     mark_documents_availability(self, table)
     add_btns_into_table_cells(
         self,
@@ -85,7 +91,7 @@ def fill_device_lists(self, df):
 @customize_table_row
 def fill_specific_device_list(self, table: QtWidgets.QTableWidget, df: DataFrame):
 
-    put_non_bl_articles_on_table(self, table, df, import_column_count=4)
+    put_non_bl_articles_on_table_via_db(self, table, df, import_column_count=4)
     add_btns_into_table_cells(
         self,
         table,

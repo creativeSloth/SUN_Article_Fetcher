@@ -2,11 +2,17 @@ import configparser
 import json
 import os
 from datetime import datetime
+from typing import List, Tuple
 
 from PyQt5.QtWidgets import QTableWidget
 
+from database.queries import update_db_blacklist
 from directories.constants import DB, DIRS
-from ui.blacklists.storage_file_utils import is_on_blacklist
+from ui.blacklists.storage_file_utils import (
+    change_date_format,
+    get_article_numbers_on_bl,
+    is_on_blacklist,
+)
 
 
 def remove_articles_from_bl(related_table: QTableWidget, article_no: str):
@@ -46,7 +52,7 @@ def update_blacklist_file(
     # Überprüfen, ob Artikel bereits vorhanden sind, und nur neue hinzufügen
     existing_articles = set(blacklist.options(table_name))
 
-    date = datetime.now().strftime("%Y-%m-%d - %H:%M:%S")
+    date = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     data = json.dumps(
         {"article_no": article_no, "article_name": article_name, "date": date}
     )
@@ -57,3 +63,21 @@ def update_blacklist_file(
     # Schreibe die aktualisierte Konfiguration in die Datei
     with open(blacklist_path, "w") as blacklist_file:
         blacklist.write(blacklist_file)
+
+
+def transmit_bl_from_file_to_db(self, table):
+    bl_old: List[Tuple[str, str, str]] = get_article_numbers_on_bl(table)
+
+    for entry in bl_old:
+        article_no: str = entry[0]
+        article_name: str = entry[1]
+        date: str = change_date_format(entry)
+
+        update_db_blacklist(
+            self,
+            article_no=article_no,
+            article_name=article_name,
+            table=table,
+            mode="add",
+            date=date,
+        )

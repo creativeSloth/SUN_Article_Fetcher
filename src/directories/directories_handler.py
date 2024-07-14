@@ -2,25 +2,7 @@ import inspect
 import os
 import sys
 
-from directories.constants import (
-    BLACKLISTS_NAME,
-    CONFIG,
-    CONFIG_NAME,
-    DB,
-    DB_NAME,
-    DEVICE_SPECS_NAME,
-    DIRS,
-    ICONS_FOLDER,
-    ICONSF_NAME,
-    ICONSSUPERF_NAME,
-    LOG_SUBF,
-    LOG_SUBF_2,
-    LOG_SUBF_2_NAME,
-    LOG_SUBF_NAME,
-    STYLESHEET,
-    STYLESHEET_NAME,
-    STYLESHEETF_NAME,
-)
+from directories.constants import *
 
 
 def get_main_dir() -> str:
@@ -39,56 +21,60 @@ def get_main_dir() -> str:
     return script_dir
 
 
-def create_storage_files(log_path):
+def create_name_of_files(log_path):
     script_dir = get_main_dir()
     # Pfad zur Config
     config_path = os.path.join(log_path, CONFIG_NAME)
     # Pfad zur blacklist
-    # blacklist_path = os.path.join(log_path, BLACKLISTS_NAME)
+    blacklist_path = os.path.join(log_path, BLACKLISTS_NAME)
     db_path = os.path.join(log_path, DB_NAME)
-    # device_specs_list_path = os.path.join(log_path, DEVICE_SPECS_NAME)
+    device_specs_list_path = os.path.join(log_path, DEVICE_SPECS_NAME)
     stylesheet_path = os.path.join(script_dir, STYLESHEETF_NAME, STYLESHEET_NAME)
     icons_folder_path = os.path.join(script_dir, ICONSSUPERF_NAME, ICONSF_NAME)
     return (
         config_path,
-        # blacklist_path,
+        blacklist_path,
         db_path,
-        # device_specs_list_path,
+        device_specs_list_path,
         stylesheet_path,
         icons_folder_path,
     )
 
 
-def create_static_dirs():
-    log_subfolder_path, log_subfolder_2_path = create_log_subfolders()
+def create_name_of_static_dirs():
+    log_subfolder_path, log_subfolder_2_path = create_name_of_log_subfolders()
     (
         config_path,
-        # blacklist_path,
+        blacklist_path,
         db_path,
-        # device_specs_list_path,
+        device_specs_list_path,
         stylesheet_path,
         icons_folder_path,
-    ) = create_storage_files(log_subfolder_path)
+    ) = create_name_of_files(log_subfolder_path)
     return (
         log_subfolder_path,
         log_subfolder_2_path,
         config_path,
-        # blacklist_path,
+        blacklist_path,
         db_path,
-        # device_specs_list_path,
+        device_specs_list_path,
         stylesheet_path,
         icons_folder_path,
     )
 
 
-def create_log_subfolders():
+def create_name_of_log_subfolders():
     script_dir = get_main_dir()
     # Pfad zum Unterordner "logs"
     log_subfolder_path = os.path.join(script_dir, LOG_SUBF_NAME)
-    os.makedirs(log_subfolder_path, exist_ok=True)
     log_subfolder_2_path = os.path.join(log_subfolder_path, LOG_SUBF_2_NAME)
-    os.makedirs(log_subfolder_2_path, exist_ok=True)
+    make_subfolders(log_subfolder_path, log_subfolder_2_path)
     return log_subfolder_path, log_subfolder_2_path
+
+
+def make_subfolders(log_subfolder_path, log_subfolder_2_path):
+    os.makedirs(log_subfolder_path, exist_ok=True)
+    os.makedirs(log_subfolder_2_path, exist_ok=True)
 
 
 def set_static_directories():
@@ -97,19 +83,19 @@ def set_static_directories():
         log_subfolder_path,
         log_subfolder_2_path,
         config_path,
-        # blacklist_path,
+        blacklist_path,
         db_path,
-        # device_specs_list_path,
+        device_specs_list_path,
         stylesheet_path,
         icons_folder_path,
-    ) = create_static_dirs()
+    ) = create_name_of_static_dirs()
 
-    # Setze die Pfade direkt im dict-Attribut der _main_paths Instanz
+    # Setze die Pfade direkt im dict-Attribut der DIRS Instanz
     DIRS.set_path(LOG_SUBF, log_subfolder_path)
     DIRS.set_path(LOG_SUBF_2, log_subfolder_2_path)
     DIRS.set_path(CONFIG, config_path)
-    # dir_paths.set_path("blacklist_path", blacklist_path)
+    DIRS.set_path(BLACKLISTS, blacklist_path)
     DIRS.set_path(DB, db_path)
-    # DIRS.set_path(DEVICE_SPECS, device_specs_list_path)
+    DIRS.set_path(DEVICE_SPECS, device_specs_list_path)
     DIRS.set_path(STYLESHEET, stylesheet_path)
     DIRS.set_path(ICONS_FOLDER, icons_folder_path)

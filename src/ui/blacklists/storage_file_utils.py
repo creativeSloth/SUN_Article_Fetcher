@@ -1,10 +1,11 @@
 import json
 from configparser import ConfigParser
+from os import replace
 from typing import List, Tuple
 
 from PyQt5.QtWidgets import QTableWidget
 
-from directories.constants import DB, DIRS
+from directories.constants import BLACKLISTS, DIRS
 
 
 def is_on_blacklist(table_name, art_no, config):
@@ -13,7 +14,7 @@ def is_on_blacklist(table_name, art_no, config):
 
 def get_data_of_articles_from_bl(table: QTableWidget) -> List[Tuple[str, str, str]]:
     table_name = table.objectName()
-    blacklist_path = DIRS.paths[DB]
+    blacklist_path = DIRS.paths[BLACKLISTS]
     config = ConfigParser()
     config.read(blacklist_path)
     # Überprüfe, ob die angegebene Sektion vorhanden ist
@@ -32,3 +33,18 @@ def get_data_of_articles_from_bl(table: QTableWidget) -> List[Tuple[str, str, st
         ]
 
     return bl_articles
+
+
+def get_article_numbers_on_bl(table):
+
+    # Laden Sie die Artikelnummern aus der Blacklist
+    bl_article_nos = [
+        (article_no, article_name, date)
+        for article_no, article_name, date in get_data_of_articles_from_bl(table=table)
+    ]
+
+    return bl_article_nos
+
+
+def change_date_format(entry):
+    return entry[2].replace(" - ", "_").replace(":", "-")

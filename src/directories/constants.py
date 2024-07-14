@@ -44,9 +44,9 @@ class Paths:
             LOG_SUBF: "",
             LOG_SUBF_2: "",
             CONFIG: "",
-            # BLACKLISTS: "",
+            BLACKLISTS: "",
             DB: "",
-            # DEVICE_SPECS: "",
+            DEVICE_SPECS: "",
             STYLESHEET: "",
             ICONS_FOLDER: "",
         }

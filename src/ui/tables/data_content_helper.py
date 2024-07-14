@@ -1,3 +1,4 @@
+import os
 from typing import List
 
 from pandas import DataFrame
@@ -10,7 +11,10 @@ from database.queries import (
     get_value_from_db_art_specs_list,
     update_db_article_spec_list,
 )
+from directories.constants import BLACKLISTS, BLACKLISTS_NAME, DIRS
 from files.sys_files import get_files_in_directory, get_paths
+from ui.blacklists.storage_file import transmit_bl_from_file_to_db
+from ui.blacklists.storage_file_utils import get_article_numbers_on_bl
 from ui.buttons.button_lists import add_doc_avlbl_btns
 from ui.tables.utils import (
     clear_table,
@@ -22,7 +26,6 @@ from ui.tables.utils import (
 from ui.text_edits.ui_fields_base import get_device_tables
 
 # from files.logs_and_config import update_device_related_storage_list
-# from files import logs_and_confi
 
 
 def collect_table_data(
@@ -148,7 +151,7 @@ def mark_documents_availability(self, table: QTableWidget) -> None:
     )
 
 
-def put_non_bl_articles_on_table(
+def put_non_bl_articles_on_table_via_db(
     self,
     table: QtWidgets.QTableWidget,
     all_articles_df: DataFrame,
@@ -173,6 +176,16 @@ def put_non_bl_articles_on_table(
 
     if bl_df is None:
         return
+    #! ________________________________________________________________________________________________________________________________
+
+    #! Der folgende Abschnitt kann entfernt werden, wenn alte blacklists.ini erfolgreich in db.blacklists übertragen wurde
+    if os.path.exists(DIRS.paths[BLACKLISTS]):
+        transmit_bl_from_file_to_db(self, table)
+        # print(f"Die Datei '{BLACKLISTS_NAME}' existiert!")
+    # else:
+    # print(f"Die Datei '{BLACKLISTS_NAME}' existiert nicht!")
+
+    #! ________________________________________________________________________________________________________________________________
 
     for _, df_row in all_articles_df.iterrows():
         # Überprüfen Sie, ob die Artikelnummer nicht in der Blacklist enthalten ist
@@ -183,23 +196,26 @@ def put_non_bl_articles_on_table(
         )
 
 
-# def put_non_bl_articles_on_table(
-#     table: QtWidgets.QTableWidget, df: pd.DataFrame, import_column_count: int = 0
-# ):
-#     """
-#     Sammelt nicht-Blacklistige Artikel aus dem DataFrame und fügt sie in die angegebene Tabelle ein.
-#     :param table: QTableWidget, in der die Artikel eingefügt werden sollen
-#     :param df: DataFrame, aus dem die Artikel geladen werden sollen
-#     :param import_column_count: Anzahl der Spalten, die von der Datenbank importiert werden sollen
-#     :return: None"""
-#     clear_table(table=table)
+def put_non_bl_articles_on_table_via_file(
+    table: QtWidgets.QTableWidget, df: DataFrame, import_column_count: int = 0
+):
+    """
+    Sammelt nicht-Blacklistige Artikel aus dem DataFrame und fügt sie in die angegebene Tabelle ein.
+    :param table: QTableWidget, in der die Artikel eingefügt werden sollen
+    :param df: DataFrame, aus dem die Artikel geladen werden sollen
+    :param import_column_count: Anzahl der Spalten, die von der Datenbank importiert werden sollen
+    :return: None"""
+    clear_table(table=table)
 
-#     blacklist_article_numbers = get_article_numbers_on_bl(table)
+    blacklist_article_numbers = get_article_numbers_on_bl(table)
 
-#     if df is not None:
-#         for _, df_row in df.iterrows():
-#             # Überprüfen Sie, ob die Artikelnummer nicht in der Blacklist enthalten ist
-#             if is_not_on_bl(blacklist_article_numbers, df_row):
-#                 import_from_df_row(
-#                     table, data_row=df_row, import_column_count=import_column_count
-#                 )
+    if df is not None:
+        for _, df_row in df.iterrows():
+            # Überprüfen Sie, ob die Artikelnummer nicht in der Blacklist enthalten ist
+            if is_on_bl(
+                blacklist_article_numbers=blacklist_article_numbers, df_row=df_row
+            ):
+                continue
+            import_from_df_row(
+                table, data_row=df_row, import_column_count=import_column_count
+            )

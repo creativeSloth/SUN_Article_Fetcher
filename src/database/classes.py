@@ -11,7 +11,15 @@ from database.constants import (
 )
 
 
-def init_blacklists_db():
+def init_local_db() -> None:
+    """
+    Initialisiert eine lokale Datenbank in der Zusätzliche Informationen gespeichert werden können,
+    welche durch den Nutzer der Software selbst angelegt und geupdated werden.
+    Derzeit implementiert ist Speicherung von Artikeln und zusätzliche Informationen zu den Artikeln.
+    Derzeit wird bezüglich der Artikel Folgendes in referenzierenden Tabellen gespeichert:
+        - Listung auf Blacklisten , auf die Artikel durch den User gesetzt aber auch wieder entfernt werden können
+        - Hinterlegung von technischen Kennzahlen eines Artikels, welche durch den Nutzer in Formularen eingetragen werden können
+    """
     from database.utils import get_db_engine
 
     ENGINE = get_db_engine()

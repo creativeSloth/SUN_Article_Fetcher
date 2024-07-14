@@ -39,7 +39,12 @@ def get_query_for_articles_on_table(self, bool_arg, date_arg):
 
 
 def update_db_blacklist(
-    self, article_no: str, article_name: str, table: QTableWidget, mode: str = "add"
+    self,
+    article_no: str,
+    article_name: str,
+    table: QTableWidget,
+    mode: str = "add",
+    date: str = None,
 ) -> None:
     """
     Aktualisiert die Blacklists-Tabelle in der blacklist.db.
@@ -65,7 +70,7 @@ def update_db_blacklist(
 
     try:
 
-        bl_bool_val, bl_date_val = set_val_by_mode(mode)
+        bl_bool_val, bl_date_val = set_val_by_mode(mode, date)
 
         blacklist_change: dict = {
             bl_bool_arg: bl_bool_val,
