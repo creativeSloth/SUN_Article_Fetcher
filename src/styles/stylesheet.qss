@@ -287,7 +287,7 @@ QTableWidget::item:alternate {
 	); /* Beispielhintergrundfarbe für alternative Zeilen */
 }
 
-QTableWidget::item:alternate::selected {
+QTableWidget::item:alternate:selected {
 	background-color: rgb(
 		200,
 		255,
@@ -304,6 +304,18 @@ QTableWidget::item::selected {
 	); /* Beispielhintergrundfarbe für alternative Zeilen */
 	color: #13213b;
 }
+
+QTableWidget::item[property="isZero"]::selected {
+	background-color: rgb(
+		200,
+		255,
+		255
+	); /* Beispielhintergrundfarbe für alternative Zeilen */
+	color: #e20000;
+}
+
+
+
 
 QHeaderView::section {
 	background-color: rgb(220, 255, 255);

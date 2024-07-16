@@ -1,17 +1,22 @@
 from PyQt5.QtGui import QColor
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QMessageBox, QTableWidget
 
 
-def change_foreground_if_zero(table):
+def change_foreground_if_zero(table: QTableWidget):
 
     for row in range(table.rowCount()):
-        count: float = table.item(row, 3).text()
+        amount_item = table.item(row, 3)
+        count: float = amount_item.text()
         try:
-            if table.item(row, 3) is not None and float(count) == 0:
+            if amount_item is None or float(count) != 0:
+                continue
 
-                for column in range(1, table.columnCount()):
-                    if table.item(row, column) is not None:
-                        table.item(row, column).setForeground(QColor("#e20000"))
+            for column in range(1, table.columnCount()):
+                if table.item(row, column) is None:
+                    continue
+                table.item(row, column).setForeground(QColor("#e20000"))
+                setattr(table.item(row, column), "property", "isZero")
+
         except ValueError:
             pass
 

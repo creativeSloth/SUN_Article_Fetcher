@@ -3,6 +3,7 @@ from typing import List
 import pandas as pd
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
+    QApplication,
     QCheckBox,
     QHBoxLayout,
     QHeaderView,
@@ -59,6 +60,10 @@ def resize_columns_to_contents(table):
     header = table.horizontalHeader()
     for i in range(columns):
         header.setSectionResizeMode(i, QHeaderView.ResizeToContents)
+
+    # Eine Verzögerung einfügen, um sicherzustellen, dass die Größenanpassung abgeschlossen ist
+    QApplication.processEvents()
+    for i in range(columns):
         header.setSectionResizeMode(i, QHeaderView.Interactive)
 
 
@@ -114,7 +119,10 @@ def remove_row_with_button_from_table(table: QTableWidget, push_button: QPushBut
             row = index.row()
             article_no = table.item(row, 1).text()
             article_name = table.item(row, 2).text()
+            # Scroll-Position speichern
+            scroll_pos = table.verticalScrollBar().value()
             table.removeRow(row)
+            table.verticalScrollBar().setValue(scroll_pos)
             removed: bool = True
     return removed, article_no, article_name
 
