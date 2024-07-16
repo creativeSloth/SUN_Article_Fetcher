@@ -172,20 +172,20 @@ def put_non_bl_articles_on_table_via_db(
     clear_table(table=table)
 
     bl_df: DataFrame = get_bl_df_from_db(self, table)
-    blacklist_article_numbers: list = set(bl_df[COLUMN_ARTICLE_NO].to_list())
+    blacklist_article_numbers: set = set(bl_df[COLUMN_ARTICLE_NO].to_list())
 
     if bl_df is None:
         return
-    #! ________________________________________________________________________________________________________________________________
+    # #! ________________________________________________________________________________________________________________________________
 
-    #! Der folgende Abschnitt kann entfernt werden, wenn alte blacklists.ini erfolgreich in db.blacklists übertragen wurde
-    if os.path.exists(DIRS.paths[BLACKLISTS]):
-        transmit_bl_from_file_to_db(self, table)
-        # print(f"Die Datei '{BLACKLISTS_NAME}' existiert!")
-    # else:
-    # print(f"Die Datei '{BLACKLISTS_NAME}' existiert nicht!")
+    # #! Der folgende Abschnitt kann entfernt werden, wenn alte blacklists.ini erfolgreich in db.blacklists übertragen wurde
+    # if os.path.exists(DIRS.paths[BLACKLISTS]):
+    #     transmit_bl_from_file_to_db(self, table)
+    #     # print(f"Die Datei '{BLACKLISTS_NAME}' existiert!")
+    # # else:
+    # # print(f"Die Datei '{BLACKLISTS_NAME}' existiert nicht!")
 
-    #! ________________________________________________________________________________________________________________________________
+    # #! ________________________________________________________________________________________________________________________________
 
     for _, df_row in all_articles_df.iterrows():
         # Überprüfen Sie, ob die Artikelnummer nicht in der Blacklist enthalten ist
