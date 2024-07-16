@@ -1,8 +1,10 @@
 from typing import Any
 
+from pandas import Series
 from PyQt5.QtWidgets import QHBoxLayout, QPushButton, QTableWidget, QWidget
 
-from files.sys_files import compare_src_docs_with_article_list
+from files.sys_files import compare_src_docs_with_article_no
+from ui.buttons.custom_button import customize_push_buttons
 from ui.buttons.utils import (
     create_and_set_obj_property,
     list_objects_of_class,
@@ -143,31 +145,13 @@ def add_doc_avlbl_btns(
     button_type: str = None,
     all_files: list = [str],
     on_button_pressed: Any = None,
+    row: int = 0,
 ) -> None:
 
-    for row in range(table.rowCount()):
-        has_doc = compare_src_docs_with_article_list(table, row, all_files)
-        if has_doc:
-            create_button_into_table_cell(
-                self,
-                table_of_cell=table,
-                row=row,
-                column=column,
-                button_type=button_type,
-                on_button_pressed=on_button_pressed,
-            )
-
-
-def add_btns_into_table_cells(
-    self,
-    table: QTableWidget = None,
-    column: int = None,
-    button_type: str = "",
-    on_button_pressed: Any = None,
-) -> None:
-
-    for row in range(table.rowCount()):
-        create_button_into_table_cell(
+    # for row in range(table.rowCount()):
+    has_doc = compare_src_docs_with_article_no(table, row, all_files)
+    if has_doc:
+        add_btns_into_table_cells(
             self,
             table_of_cell=table,
             row=row,
@@ -177,22 +161,22 @@ def add_btns_into_table_cells(
         )
 
 
-def create_button_into_table_cell(
+def add_btns_into_table_cells(
     self,
     table_of_cell: QTableWidget = None,
-    row: int = None,
-    column: int = 0,
+    row: int = 0,
+    column: int = None,
     button_type: str = "",
-    text: str = "",
-    on_button_pressed=None,
+    on_button_pressed: Any = None,
 ) -> None:
 
-    # Erstelle dynamisch ein Attribut für jede Tabelle
+    # Erstelle dynamisch ein Attribut
     setattr(
         self,
         f"push_button_{table_of_cell.objectName()}_{row}_{column}",
-        QPushButton(text),
+        QPushButton(""),
     )
+
     push_button: QPushButton = getattr(
         self, f"push_button_{table_of_cell.objectName()}_{row}_{column}", None
     )

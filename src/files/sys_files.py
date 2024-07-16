@@ -194,7 +194,7 @@ def itter_through_files(self, directory, all_files, root, files):
             )
 
 
-def compare_src_docs_with_article_list(
+def compare_src_docs_with_article_no(
     table: QTableWidget, row: int, all_files: list
 ) -> bool:
     """

@@ -90,37 +90,14 @@ def init_blacklist_button_click_signal(self, table: QTableWidget):
             lambda: on_blacklist_button_click(self, device_table=table)
         )
 
-
-def on_blacklist_button_click(self, device_table: QTableWidget) -> None:
-
-    device_table_name: str = device_table.objectName()
-
-    # Zugriff auf die entsprechende Instanz des Blacklist-Dialogs
-    dialog_instance: BlacklistWindow = getattr(
-        self, f"{device_table_name}_blacklist_dlg", None
-    )
-    blacklist_table: QTableWidget = dialog_instance.ui.blacklist
-    clear_table(blacklist_table)
-
-    # Überprüfe, ob die Instanz existiert, bevor du die Methode aufrufst
-    if dialog_instance is not None:
-        dialog_instance.show()
-
-    from ui.tables.data_content import fill_bl_tables
-
-    fill_bl_tables(self, device_table=device_table, table=blacklist_table)
-    add_btns_into_table_cells(
-        dialog_instance,
-        table=blacklist_table,
-        column=4,
-        button_type="move_from_bl",
-        on_button_pressed=on_remove_articles_from_gui_bl,
-    )
-
-    customize_push_buttons(self)
-
-    resize_columns_to_contents(blacklist_table)
-    disable_colums_edit(blacklist_table)
+    # fill_bl_tables(self, device_table=device_table, table=blacklist_table)
+    # add_btns_into_table_cells(
+    #     dialog_instance,
+    #     table=blacklist_table,
+    #     column=4,
+    #     button_type="move_from_bl",
+    #     on_button_pressed=on_remove_articles_from_gui_bl,
+    # )
 
 
 def on_remove_articles_from_gui_bl(
@@ -141,3 +118,20 @@ def on_remove_articles_from_gui_bl(
             table=related_table,
             mode="remove",
         )
+
+
+def on_blacklist_button_click(self, device_table: QTableWidget) -> None:
+    # device_table_name: str = device_table.objectName()
+
+    # # Zugriff auf die entsprechende Instanz des Blacklist-Dialogs
+    # dialog_instance: BlacklistWindow = getattr(
+    #     self, f"{device_table_name}_blacklist_dlg", None
+    # )
+    # blacklist_table: QTableWidget = dialog_instance.ui.blacklist
+    # # Überprüfe, ob die Instanz existiert, bevor du die Methode aufrufst
+    # if dialog_instance is not None:
+    #     dialog_instance.show()
+    # clear_table(blacklist_table)
+    from ui.tables.data_content import fill_bl_tables
+
+    fill_bl_tables(self, table=device_table)

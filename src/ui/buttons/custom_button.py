@@ -4,6 +4,7 @@ from typing import Dict
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor, QIcon, QPainter, QPixmap
+from PyQt5.QtWidgets import QPushButton
 
 from directories.constants import DIRS
 from ui.text_edits.ui_fields_base import get_all_mainwindow_tables

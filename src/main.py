@@ -223,12 +223,14 @@ class MainWindow(QMainWindow):
         update_config_file("Pfade", TARGET_2, folder_path)
 
     def on_save_btn_click(self):
+
         file_path = create_save_file(self)
         if file_path != "":
             save_fields_text(self, file_path)
             save_tables_content(self, file_path)
 
     def on_load_btn_click(self):
+
         file_path = get_save_file_dir(self)
         if file_path != "":
             load_fields_text(self, file_path)
