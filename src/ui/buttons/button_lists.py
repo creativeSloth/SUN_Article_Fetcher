@@ -1,14 +1,15 @@
 from typing import Any
 
-from pandas import Series
-from PyQt5.QtWidgets import QHBoxLayout, QPushButton, QTableWidget, QWidget
+from PyQt5.QtWidgets import QHBoxLayout, QPushButton, QTableWidget
 
 from files.sys_files import compare_src_docs_with_article_no
-from ui.buttons.custom_button import customize_push_buttons
+from ui.buttons.custom_button import customize_dynamic_pb
 from ui.buttons.utils import (
     create_and_set_obj_property,
     list_objects_of_class,
     list_of_property_members,
+    set_cell_widget,
+    set_pushbutton_for_cell,
 )
 from ui.text_edits.ui_fields_base import get_all_mainwindow_tables
 
@@ -109,13 +110,16 @@ class ButtonLists:
 
 
 def initialize_push_buttons(self):
+    from ui.blacklists.gui_window import init_blacklist_button_click_signal
+
     self.ui.load_articles_file_btn.hide()
 
     # Erstelle eine PushButton-Instanz
     self.button_list = ButtonLists(self)
+    # Initializiere die PushButton zum öffnen der Blackliste der jeweiligen Tabelle
+    init_blacklist_button_click_signal(self)
 
     set_btn_attr_of_open_BL_btns(self)
-    self.button_list.refresh()
 
 
 def set_btn_attr_of_open_BL_btns(self):
@@ -168,50 +172,17 @@ def add_btns_into_table_cells(
     column: int = None,
     button_type: str = "",
     on_button_pressed: Any = None,
+    window_instance: Any = None,
 ) -> None:
+    if window_instance is not None:
+        self = window_instance
 
-    # Erstelle dynamisch ein Attribut
-    setattr(
-        self,
-        f"push_button_{table_of_cell.objectName()}_{row}_{column}",
-        QPushButton(""),
+    push_button = set_pushbutton_for_cell(
+        self, table_of_cell, row, column, button_type, on_button_pressed
     )
 
-    push_button: QPushButton = getattr(
-        self, f"push_button_{table_of_cell.objectName()}_{row}_{column}", None
-    )
-    push_button.setObjectName(
-        f"push_button_{table_of_cell.objectName()}_{row}_{column}"
-    )
+    customize_dynamic_pb(self, push_button)
 
-    create_and_set_obj_property(
-        obj=push_button, property_type="button_type", property_value=button_type
-    )
-
-    push_button.setFixedSize(25, 25)
-
-    if on_button_pressed:
-        push_button.clicked.connect(
-            lambda _, tbl=table_of_cell, btn=push_button: on_button_pressed(
-                self, tbl, btn
-            )
-        )
-
-    layout: QHBoxLayout
-    cell_widget: QWidget = table_of_cell.cellWidget(row, column)
-    if cell_widget is None:
-        cell_widget = QWidget()
-        layout = QHBoxLayout()
-        layout.setObjectName(f"Layout_{table_of_cell.objectName()}_{row}_{column}")
-        layout.setContentsMargins(7, 2, 7, 2)
-        layout.setSpacing(2)
-        cell_widget.setLayout(layout)
-
-    cell_widget.layout().addWidget(push_button)
-    create_and_set_obj_property(
-        obj=cell_widget,
-        property_type="cell_widget",
-        property_value="contains_push_button",
-    )
+    cell_widget = set_cell_widget(table_of_cell, row, column, push_button)
 
     table_of_cell.setCellWidget(row, column, cell_widget)

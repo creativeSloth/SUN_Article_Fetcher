@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import create_engine
+from sqlalchemy import Engine, create_engine
 from sqlalchemy.orm import sessionmaker
 
 from directories.constants import DB, DIRS
@@ -24,7 +24,7 @@ def set_val_by_mode(mode, date):
 
 def get_db_engine():
     db_path: str = DIRS.paths[DB]
-    engine = create_engine(f"sqlite:///{db_path}", echo=False)
+    engine: Engine = create_engine(f"sqlite:///{db_path}", echo=False)
     return engine
 
 

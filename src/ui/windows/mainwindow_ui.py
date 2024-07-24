@@ -717,7 +717,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, -4125, 1759, 5378))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 1759, 5540))
         sizePolicy.setHeightForWidth(self.scrollAreaWidgetContents.sizePolicy().hasHeightForWidth())
         self.scrollAreaWidgetContents.setSizePolicy(sizePolicy)
         self.gridLayout_5 = QGridLayout(self.scrollAreaWidgetContents)
@@ -2435,8 +2435,9 @@ class Ui_MainWindow(object):
         self.project.setInputMethodHints(Qt.ImhMultiLine)
         self.project.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.project.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.project.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
+        self.project.setSizeAdjustPolicy(QAbstractScrollArea.AdjustIgnored)
         self.project.setTabChangesFocus(False)
+        self.project.setLineWrapMode(QPlainTextEdit.NoWrap)
 
         self.horizontalLayout_5.addWidget(self.project)
 

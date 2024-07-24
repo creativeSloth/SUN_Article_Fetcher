@@ -2,19 +2,10 @@ from pandas import DataFrame
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QTableWidget
 
-from database.constants import COLUMN_ARTICLE_NAME, COLUMN_ARTICLE_NO
-from database.queries import get_bl_df_from_db
-from ui.blacklists.gui_window import (
-    BlacklistWindow,
-    init_blacklist_button_click_signal,
-    on_remove_articles_from_gui_bl,
-)
-from ui.buttons.button_lists import add_btns_into_table_cells
-from ui.buttons.custom_button import customize_push_buttons
 from ui.tables.data_content_helper import (
-    fill_device_specs_in_device_tables,
-    mark_documents_availability,
-    put_non_bl_articles_on_table_via_db,
+    bl_art_to_bl,
+    dev_specs_to_table,
+    none_bl_art_to_table,
 )
 from ui.tables.decorators import customize_table_row
 from ui.tables.search_bar import (
@@ -25,13 +16,10 @@ from ui.tables.utils import (
     clear_table,
     disable_colums_edit,
     get_all_tables_to_layout_map,
-    remove_article_from_table_row,
     resize_columns_to_contents,
     table_name_and_count_are_valid,
 )
 from ui.text_edits.ui_fields_base import get_all_mainwindow_tables, get_device_tables
-
-# from ui.blacklists.storage_file_utils import get_data_of_articles_from_bl
 
 
 def initialize_table_search(self):
@@ -51,38 +39,22 @@ def initialize_table_search(self):
         )
 
         # Initialisiere das Signal für den Suchbutton-Klick
-        init_search_button_click_signal(table=table, button=button, text_edit=text_edit)
-
-        # ? methode passt nicht so richtig hier her
-        # Falls die Tabelle eine Gerätetabelle ist, initialisiere das Signal für den Blacklist-Button-Klick
-        if table in get_all_mainwindow_tables(self):
-            init_blacklist_button_click_signal(self, table=table)
+        init_search_button_click_signal(
+            self, table=table, button=button, text_edit=text_edit
+        )
 
 
-@customize_table_row
-def fill_article_table(self, table: QtWidgets.QTableWidget, df: DataFrame = None):
+def fill_article_table(self, table: QTableWidget, df: DataFrame = None):
 
-    put_non_bl_articles_on_table_via_db(self, table, df, import_column_count=3)
-
-    # ? ________________________________________________________________________________________________________________________________
-    # ? wurde deaktiviert weil das blacklist-Handling mitlerweile über die DB läuft
-    # put_non_bl_articles_on_table_via_file(self, table, df, import_column_count=3)
-    # ? ________________________________________________________________________________________________________________________________
-
-    # mark_documents_availability(self, table)
-    # add_btns_into_table_cells(
-    #     self,
-    #     table,
-    #     column=table.columnCount() - 1,
-    #     button_type="move_to_bl",
-    #     on_button_pressed=remove_article_from_table_row,
-    # )
-    customize_push_buttons(self)
+    none_bl_art_to_table(self, table=table, df=df, import_column_count=3)
     resize_columns_to_contents(table=table)
     disable_colums_edit(table, firstcol=1, lastcol=4)
+    QtWidgets.QMessageBox.information(
+        self, "Abgeschlossen!", "Artikelliste wurden geladen!"
+    )
 
 
-def fill_device_lists(self, df):
+def fill_device_tables(self, df: DataFrame = None):
     tables = get_device_tables(self)
     for table in tables:
         fill_specific_device_list(self, table=table, df=df)
@@ -92,24 +64,30 @@ def fill_device_lists(self, df):
     )
 
 
-@customize_table_row
-def fill_specific_device_list(self, table: QtWidgets.QTableWidget, df: DataFrame):
+def fill_specific_device_list(self, table: QTableWidget, df: DataFrame) -> None:
+    """
+    Füllt die Geräteigenschaften aus den in der Datenbank hinterlegten Werten in die entsprechende Zelle des QTableWidgets.
+    ________________________________________________________________________________________________________________________________
+    :param table: QTableWidget, in der die Gerätespezifikationen geladen werden sollen
+    :param df : DataFrame, aus dem die Artikel geladen werden sollen
+    :return: None
+    ________________________________________________________________________________________________________________________________
+    """
 
-    put_non_bl_articles_on_table_via_db(self, table, df, import_column_count=4)
-    # add_btns_into_table_cells(
-    #     self,
-    #     table,
-    #     column=table.columnCount() - 1,
-    #     button_type="move_to_bl",
-    #     on_button_pressed=remove_article_from_table_row,
-    # )
-    customize_push_buttons(self)
-    fill_device_specs_in_device_tables(table)
+    none_bl_art_to_table(self, table=table, df=df, import_column_count=4)
+    dev_specs_to_table(table)
     resize_columns_to_contents(table=table)
     disable_colums_edit(table, firstcol=1, lastcol=5)
 
 
-def adding_specific_columns(self, table, tw_row=None, df_row=None):
+def adding_specific_columns(self, table: QTableWidget, tw_row=None, df_row=None):
+    """
+    Fügt spezielle Spalten hinzu, je nach der Art der Gerätetabelle
+    :param table: Gerätetabelle
+    :param tw_row: Zeile der Gerätetabelle
+    :param df_row: Zeile des DataFrames
+    :return: None
+    """
     if table == self.ui.PV_modules_list:
         # Spalte 6 (dynamisch) mit den Werten aus der Spalte 4 des DataFrames
         table.setItem(tw_row, 5, QtWidgets.QTableWidgetItem(""))
@@ -139,66 +117,24 @@ def adding_specific_columns(self, table, tw_row=None, df_row=None):
 
 
 @customize_table_row
-def fill_bl_tables(
-    self, table: QTableWidget  # , table: QtWidgets.QTableWidget
-) -> None:
-    from ui.tables.utils import import_from_df_row
+def fill_bl_tables(self, bl_table: QTableWidget) -> None:
+    """
+    Füllt die Qt-Tabellen mit den Blacklist-Artikeln.
+    :param table: Die Qt-Tabelle, in der die Blacklist-Artikel gefüllt werden sollen.
+    :return: None"""
 
-    device_table_name: str = table.objectName()
-
-    # Zugriff auf die entsprechende Instanz des Blacklist-Dialogs
-    dialog_instance: BlacklistWindow = getattr(
-        self, f"{device_table_name}_blacklist_dlg", None
-    )
-    blacklist_table: QTableWidget = dialog_instance.ui.blacklist
-    # Überprüfe, ob die Instanz existiert, bevor du die Methode aufrufst
-    if dialog_instance is not None:
-        dialog_instance.show()
-
-    clear_table(blacklist_table)
-
-    bl_df = get_bl_df_from_db(self, table)
-    bl_df_selected: DataFrame = bl_df[
-        [
-            COLUMN_ARTICLE_NO,
-            COLUMN_ARTICLE_NAME,
-            self.GENERAL_TABLE_MAP[table]["db_added_to_bl_date"],
-        ]
-    ]
-
-    # Zum Sicherstellen dass bl_articles eine Instanz von List ist und ein Element hat
-    if isinstance(bl_df_selected, DataFrame):
-        for row, data in bl_df_selected.iterrows():
-            # Import data from each row of the blacklist articles
-            import_from_df_row(blacklist_table, data_row=data, import_column_count=3)
-            add_btns_into_table_cells(
-                dialog_instance,
-                table_of_cell=blacklist_table,
-                row=row,
-                column=4,
-                button_type="move_from_bl",
-                on_button_pressed=on_remove_articles_from_gui_bl,
-            )
-
-    customize_push_buttons(self)
-
-    resize_columns_to_contents(blacklist_table)
-    disable_colums_edit(blacklist_table)
+    bl_art_to_bl(self, bl_table)
+    resize_columns_to_contents(bl_table)
+    disable_colums_edit(bl_table)
 
 
-def fill_tables_content(self, saved_tables_content: dict):
+def fill_tables_content(self, saved_tables_content: dict) -> None:
     """
     Diese Funktion füllt die gespeicherten Inhalte der Qt-Tabellen.
     Es wird verwendet, um vorher gespeicherte Inhalte wiederherzustellen.
-    Args:
-        saved_tables_content (dict): Ein Dictionary, das die gespeicherten Inhalte enthält.
-        Keys sind Strings, die den Namen der gespeicherten Qt-Tabelle enthalten,
-        und Values sind DataFrames, die die gespeicherten Inhalte enthalten.
-
-
-
-
-    """
+    :param saved_tables_content:
+    Ein Dictionary, das die gespeicherten Inhalte enthält.
+    :return: None"""
 
     # Alle Tabellen holen
     tables = get_all_mainwindow_tables(self)

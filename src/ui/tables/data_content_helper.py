@@ -1,40 +1,34 @@
-import os
 from typing import List
 
-from pandas import DataFrame, Series
+from pandas import DataFrame
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QTableWidget
 
-from database.constants import COLUMN_ARTICLE_NO
+from database.constants import COLUMN_ARTICLE_NAME, COLUMN_ARTICLE_NO
 from database.queries import (
     get_bl_df_from_db,
     get_value_from_db_art_specs_list,
     update_db_article_spec_list,
 )
-
-# from directories.constants import BLACKLISTS, BLACKLISTS_NAME, DIRS
 from files.sys_files import get_files_in_directory, get_paths
-
-# from ui.blacklists.storage_file import transmit_bl_from_file_to_db
-from ui.blacklists.storage_file_utils import get_article_numbers_on_bl
-from ui.buttons.button_lists import add_btns_into_table_cells, add_doc_avlbl_btns
+from ui.blacklists.gui_window import BlacklistWindow
+from ui.buttons.button_lists import add_doc_avlbl_btns
+from ui.tables.decorators import customize_table_row
 from ui.tables.utils import (
     clear_table,
     get_column_index,
     get_fixed_val_columns,
     import_from_df_row,
     is_on_bl,
-    remove_article_from_table_row,
 )
-from ui.text_edits.ui_fields_base import get_articles_table, get_device_tables
-
-# from files.logs_and_config import update_device_related_storage_list
+from ui.text_edits.ui_fields_base import get_device_tables
 
 
-def put_non_bl_articles_on_table_via_db(
+@customize_table_row
+def none_bl_art_to_table(
     self,
     table: QtWidgets.QTableWidget,
-    all_articles_df: DataFrame,
+    df: DataFrame,
     import_column_count: int = 0,
 ) -> None:
     """
@@ -46,10 +40,11 @@ def put_non_bl_articles_on_table_via_db(
     :return: None
     ________________________________________________________________________________________________________________________________
     """
-    if all_articles_df is None:
+    if df is None:
         return
 
     clear_table(table=table)
+    table.verticalScrollBar().setValue(0)
 
     bl_df: DataFrame = get_bl_df_from_db(self, table)
     if bl_df is None:
@@ -57,19 +52,7 @@ def put_non_bl_articles_on_table_via_db(
 
     blacklist_article_numbers: set = set(bl_df[COLUMN_ARTICLE_NO])
 
-    # #! ________________________________________________________________________________________________________________________________
-
-    # #! Der folgende Abschnitt kann entfernt werden, wenn alte blacklists.ini erfolgreich in db.blacklists übertragen wurde
-    # if os.path.exists(DIRS.paths[BLACKLISTS]):
-    #     transmit_bl_from_file_to_db(self, table)
-    #     # print(f"Die Datei '{BLACKLISTS_NAME}' existiert!")
-    # # else:
-    # # print(f"Die Datei '{BLACKLISTS_NAME}' existiert nicht!")
-
-    # #! ________________________________________________________________________________________________________________________________
-
-    count: int = 0
-    for _, df_row in all_articles_df.iterrows():
+    for _, df_row in df.iterrows():
 
         # Überprüfen Sie, ob die Artikelnummer nicht in der Blacklist enthalten ist
         if is_on_bl(blacklist_article_numbers=blacklist_article_numbers, df_row=df_row):
@@ -78,18 +61,42 @@ def put_non_bl_articles_on_table_via_db(
             table, data_row=df_row, import_column_count=import_column_count
         )
 
-        if table in get_articles_table(self):
-            mark_documents_availability(self, table, row=count)
 
-        add_btns_into_table_cells(
-            self,
-            table,
-            row=count,
-            column=table.columnCount() - 1,
-            button_type="move_to_bl",
-            on_button_pressed=remove_article_from_table_row,
-        )
-        count += 1
+def bl_art_to_bl(self, bl_table: QTableWidget) -> None:
+    """
+    Öffnet eine neue Blacklist und fügt alle Artikelnummern aus der angegebenen Blacklist-Tabelle hinzu
+    ________________________________________________________________________________________________________________________________
+    :param bl_table: QTableWidget, in der die Blacklist-Artikel hinzugefügt werden sollen
+    :return: None
+    ________________________________________________________________________________________________________________________________
+    """
+    dialog_instance: BlacklistWindow = getattr(bl_table, "related_window", None)
+    if dialog_instance is None:
+        return
+    else:
+        dialog_instance.show()
+
+    clear_table(table=bl_table)
+    bl_table.verticalScrollBar().setValue(0)
+
+    related_table = getattr(bl_table, "related_table", None)
+    bl_df = get_bl_df_from_db(self, table=related_table)
+    bl_df_selected: DataFrame = bl_df[
+        [
+            COLUMN_ARTICLE_NO,
+            COLUMN_ARTICLE_NAME,
+            self.GENERAL_TABLE_MAP[related_table]["db_added_to_bl_date"],
+        ]
+    ]
+
+    # Zum Sicherstellen dass bl_articles eine Instanz von List ist und ein Element hat
+    if isinstance(bl_df_selected, DataFrame):
+        # Füge jede Zeile der Blacklist-Tabelle hinzu, um die Daten der Artikel zu importieren
+        from ui.tables.utils import import_from_df_row
+
+        for _, data in bl_df_selected.iterrows():
+            # Import data from each row of the blacklist articles
+            import_from_df_row(bl_table, data_row=data, import_column_count=3)
 
 
 def collect_table_data(
@@ -150,15 +157,11 @@ def collect_specs_of_articles(self):
 
         data_set |= collect_table_data(table, article_no_col_index, fixed_val_columns)
 
-    # Sortiere das data_set nach der section
-    # sorted_data_set = sorted(data_set, key=lambda x: x[0])
-
     # Aktualisiere die Gerätespezifikationsliste
     update_db_article_spec_list(data_set)
-    # update_device_related_storage_list("device_specs_list_path", sorted_data_set)
 
 
-def fill_device_specs_in_device_tables(table: QTableWidget) -> None:
+def dev_specs_to_table(table: QTableWidget) -> None:
     """
     Füllt die Geräteeigenschaften aus den in der Datenbank hinterlegten Werten in die entsprechende Zelle des QTableWidgets.
 
@@ -183,9 +186,6 @@ def fill_device_specs_in_device_tables(table: QTableWidget) -> None:
                 article_no = article_no_item.text()
 
                 article_no = table.item(row, article_no_col_index).text()
-                # value = logs_and_config.read_device_related_storage_list(
-                #     "device_specs_list_path", article_no, column_header
-                # )
                 value = get_value_from_db_art_specs_list(
                     article_no=article_no, column_header=column_header
                 )
@@ -214,28 +214,3 @@ def mark_documents_availability(self, table: QTableWidget = None, row: int = 0) 
         on_button_pressed=None,
         row=row,
     )
-
-
-def put_non_bl_articles_on_table_via_file(
-    table: QtWidgets.QTableWidget, df: DataFrame, import_column_count: int = 0
-):
-    """
-    Sammelt nicht-Blacklistige Artikel aus dem DataFrame und fügt sie in die angegebene Tabelle ein.
-    :param table: QTableWidget, in der die Artikel eingefügt werden sollen
-    :param df: DataFrame, aus dem die Artikel geladen werden sollen
-    :param import_column_count: Anzahl der Spalten, die von der Datenbank importiert werden sollen
-    :return: None"""
-    clear_table(table=table)
-
-    blacklist_article_numbers = get_article_numbers_on_bl(table)
-
-    if df is not None:
-        for _, df_row in df.iterrows():
-            # Überprüfen Sie, ob die Artikelnummer nicht in der Blacklist enthalten ist
-            if is_on_bl(
-                blacklist_article_numbers=blacklist_article_numbers, df_row=df_row
-            ):
-                continue
-            import_from_df_row(
-                table, data_row=df_row, import_column_count=import_column_count
-            )

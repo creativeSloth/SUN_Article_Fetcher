@@ -72,7 +72,7 @@ def config_to_fields(self):
         config_path = DIRS.paths["config_path"]
         if os.path.exists(config_path):
             os.remove(config_path)
-        logs_and_config.create_config_file()
+        logs_and_config.init_config_file()
 
 
 def char_validation(self):
@@ -315,8 +315,11 @@ def get_device_tables(self):
 
 def get_articles_table(self):
     # Alle Tabellen mit PV-Geräten
-    articles_table = [self.ui.articles_list]
-    return articles_table
+    if hasattr(self.ui, "articles_list"):
+        articles_table = [self.ui.articles_list]
+        return articles_table
+    else:
+        return []
 
 
 def get_all_mainwindow_tables(self) -> list:

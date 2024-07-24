@@ -1831,9 +1831,9 @@ AC-Nennleistung [kW])  für einen Artikel vorgenommen werden.</string>
                    <property name="geometry">
                     <rect>
                      <x>0</x>
-                     <y>-4125</y>
+                     <y>0</y>
                      <width>1759</width>
-                     <height>5378</height>
+                     <height>5540</height>
                     </rect>
                    </property>
                    <property name="sizePolicy">
@@ -5926,10 +5926,13 @@ Zuschlag in einer Ausschreibung:</string>
               <enum>Qt::ScrollBarAlwaysOff</enum>
              </property>
              <property name="sizeAdjustPolicy">
-              <enum>QAbstractScrollArea::AdjustToContents</enum>
+              <enum>QAbstractScrollArea::AdjustIgnored</enum>
              </property>
              <property name="tabChangesFocus">
               <bool>false</bool>
+             </property>
+             <property name="lineWrapMode">
+              <enum>QPlainTextEdit::NoWrap</enum>
              </property>
              <property name="plainText">
               <string>MRS 19-001</string>

@@ -17,7 +17,7 @@ from directories.constants import (
 )
 
 
-def create_config_file():
+def init_config_file():
     config_path = DIRS.paths[CONFIG]
 
     if os.path.exists(config_path):

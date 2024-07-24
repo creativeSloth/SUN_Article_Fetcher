@@ -1,7 +1,7 @@
 from typing import List
 
 import pandas as pd
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtWidgets import (
     QApplication,
     QCheckBox,
@@ -13,8 +13,9 @@ from PyQt5.QtWidgets import (
     QWidget,
 )
 
-import ui.blacklists.constants as blacklist
 from database.queries import update_db_blacklist
+from ui.blacklists.constants import BLACKLISTS_TABLE_MAP
+from ui.buttons.button_lists import add_btns_into_table_cells
 from ui.buttons.utils import create_and_set_obj_property, list_objects_of_class
 from ui.tables.decorators import customize_table_row
 from ui.text_edits.ui_fields_base import get_articles_table, get_device_tables
@@ -43,9 +44,7 @@ def get_all_tables_to_layout_map(self):
     device_table_layout = self.ui.verticalLayout_3
     DEVICE_TABLE_MAP = [(table, device_table_layout) for table in device_tables]
     # Kombiniere die Artikeltabelle, Gerätetabellen und die Blacklist-Tabellen
-    GENERAL_TABLE_MAP = (
-        ARTICLES_TABLE_MAP + DEVICE_TABLE_MAP + blacklist.BLACKLISTS_TABLE_MAP
-    )
+    GENERAL_TABLE_MAP = ARTICLES_TABLE_MAP + DEVICE_TABLE_MAP + BLACKLISTS_TABLE_MAP
 
     return GENERAL_TABLE_MAP
 
@@ -53,6 +52,13 @@ def get_all_tables_to_layout_map(self):
 def clear_table(table: QTableWidget):
     # Setze die Anzahl der Zeilen auf 0, um alle Zeilen zu entfernen
     table.setRowCount(0)
+
+
+@customize_table_row
+def on_sort_indicator_changed(self, **kwargs):
+
+    # on_table_view_changed(self, **kwargs)
+    pass
 
 
 def resize_columns_to_contents(table):
@@ -90,16 +96,17 @@ def disable_colums_edit(table: QTableWidget, firstcol=0, lastcol: int = None):
             item.setFlags(item.flags() & ~Qt.ItemIsEditable)
 
 
-@customize_table_row
-def on_sort_indicator_changed(self, table):
-    pass
-
-
 def table_name_and_count_are_valid(table, table_name, table_row):
     return table_name == table.objectName().lower() and table.rowCount() <= table_row
 
 
 def remove_row_with_button_from_table(table: QTableWidget, push_button: QPushButton):
+    """
+    Entfernt eine Zeile aus einer QTableWidget, die durch einen QPushButton betätigt wurde.
+    :param table: QTableWidget, aus der die Zeile entfernt werden soll
+    :param push_button: QPushButton, der die Zeile entfernt
+    :return: bool, ob die Zeile entfernt wurde, str, der Artikelnummer, str, der Artikelname
+    """
     removed: bool = False
     article_no: str = ""
     article_name: str = ""
@@ -122,6 +129,7 @@ def remove_row_with_button_from_table(table: QTableWidget, push_button: QPushBut
             # Scroll-Position speichern
             scroll_pos = table.verticalScrollBar().value()
             table.removeRow(row)
+            table.verticalScrollBar().setValue(scroll_pos + 1)
             table.verticalScrollBar().setValue(scroll_pos)
             removed: bool = True
     return removed, article_no, article_name
@@ -204,3 +212,94 @@ def remove_article_from_table_row(
     if removed:
         # update_blacklist_file(article_no, article_name, table)
         update_db_blacklist(self, article_no, article_name, table, mode="add")
+
+
+def connect_tables_scroll_bar(self):
+
+    tables: List[QTableWidget] = list_objects_of_class(self, QTableWidget)
+
+    for table in tables:
+
+        table.verticalScrollBar().valueChanged.connect(
+            lambda _, table=table: on_table_view_changed(self, table)
+        )
+
+
+def on_table_view_changed(self, table: QTableWidget):
+
+    # Implementierung für Scroll-Bar-Verhalten
+    first_row, last_row = get_last_visible_row(table)
+    button_type, on_button_pressed, window_instance = set_button_type_by_table(table)
+
+    for row in range(first_row, last_row):
+
+        column = table.columnCount() - 1
+        cell_widget_property = check_cell_widget_prop(table, row, column)
+        if cell_widget_property in ["contains_push_button"]:
+            continue
+        add_btns_into_table_cells(
+            self,
+            table_of_cell=table,
+            row=row,
+            column=column,
+            button_type=button_type,
+            on_button_pressed=on_button_pressed,
+            window_instance=window_instance,
+        )
+
+        from ui.tables.data_content_helper import mark_documents_availability
+
+        if table in get_articles_table(self):
+            mark_documents_availability(self, table, row=row)
+
+
+def check_cell_widget_prop(table, row, column):
+    cell_widget = table.cellWidget(row, column)
+
+    # Überprüfen, ob die benutzerdefinierte Eigenschaft gesetzt ist
+    cell_widget_property = getattr(cell_widget, "cell_widget", None)
+    return cell_widget_property
+
+
+def set_button_type_by_table(table):
+    from ui.blacklists.gui_window import on_remove_articles_from_gui_bl
+
+    if table.objectName() == "blacklist":
+        button_type = "move_from_bl"
+        on_button_pressed = on_remove_articles_from_gui_bl
+        related_instance = getattr(table, "related_window", None)
+    else:
+        button_type = "move_to_bl"
+        on_button_pressed = remove_article_from_table_row
+        related_instance = None
+
+    return button_type, on_button_pressed, related_instance
+
+
+def isRowVisible(table: QTableWidget, row: int) -> bool:
+    viewport_rect: QRect = table.viewport().rect()
+    index = table.model().index(row, 0)
+    row_rect: QRect = table.visualRect(index)
+
+    return row_rect.isValid() and viewport_rect.intersects(row_rect)
+
+
+def get_last_visible_row(table: QTableWidget) -> int:
+    # Hole die sichtbare Fläche des Viewports
+    viewport_rect = table.viewport().rect()
+
+    # Berechne die Zeilenhöhe (nehmen wir an, alle Zeilen haben dieselbe Höhe)
+    row_count = table.rowCount()
+
+    # Bestimme die Start- und Endzeile des sichtbaren Bereichs
+    start_row = table.rowAt(viewport_rect.top())
+    end_row = table.rowAt(viewport_rect.bottom() + 10)
+    if start_row == -1:
+        start_row = 0
+    if end_row == -1:
+        end_row = row_count
+
+    # Falls die Endzeile über die Anzahl der Zeilen hinausgeht, setze sie auf die letzte Zeile
+    end_row = min(end_row, row_count)
+
+    return start_row, end_row

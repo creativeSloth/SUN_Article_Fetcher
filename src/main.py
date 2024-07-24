@@ -23,8 +23,8 @@ from directories.document_helpers import (
 )
 from events.filter import event_Filter
 from files.logs_and_config import (  # create_device_related_storage_list,
-    create_config_file,
     create_save_file,
+    init_config_file,
     update_config_file,
 )
 from files.sys_files import (
@@ -42,16 +42,16 @@ from source.data_origins import execute_query, get_sql_query, read_data_from_fil
 from styles.styles_Handler import initialize_ui_style
 from ui.blacklists.gui_window import initialize_blacklist_dialogs
 from ui.buttons.button_lists import initialize_push_buttons
-from ui.buttons.custom_button import customize_push_buttons
+from ui.buttons.custom_button import customize_static_pb
 from ui.menus import menus_base
 from ui.tables.constants import set_general_table_map
 from ui.tables.data_content import (
     fill_article_table,
-    fill_device_lists,
+    fill_device_tables,
     initialize_table_search,
 )
 from ui.tables.data_content_helper import collect_specs_of_articles
-from ui.tables.utils import connect_sort_indicator_changed
+from ui.tables.utils import connect_sort_indicator_changed, connect_tables_scroll_bar
 from ui.text_edits.ui_fields_base import (
     char_validation,
     clear_docu_fields,
@@ -76,20 +76,18 @@ class MainWindow(QMainWindow):
         self.map_ui_buttons()
 
     def initialize(self) -> None:
-        set_general_table_map(self)
+
+        # self.ui.project.installEventFilter(self)
         set_static_directories()
-
-        menus_base.initialize_menu_dialogs(self)
+        set_general_table_map(self)
         initialize_blacklist_dialogs(self)
-        initialize_push_buttons(self)
         initialize_table_search(self)
-        customize_push_buttons(self)
-
-        create_config_file()
+        connect_tables_scroll_bar(self)
+        menus_base.initialize_menu_dialogs(self)
+        initialize_push_buttons(self)
+        customize_static_pb(self)
+        init_config_file()
         init_local_db()
-        # create_device_related_storage_list(storage_file=BLACKLISTS)
-
-        # create_device_related_storage_list(storage_file=DEVICE_SPECS)
 
         config_to_fields(self)
 
@@ -204,7 +202,7 @@ class MainWindow(QMainWindow):
         clear_docu_fields(self)
         df = execute_query(self, query="sql1")
         update_config_file("Abfrage", "sql1", get_sql_query(self)["sql1"])
-        fill_device_lists(self, df)
+        fill_device_tables(self, df)
 
     def on_fill_fields_btn_click(self):
 

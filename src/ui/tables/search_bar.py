@@ -10,6 +10,7 @@ from PyQt5.QtWidgets import (
 )
 
 from ui.buttons.utils import create_and_set_obj_property
+from ui.tables.decorators import customize_table_row
 
 
 def add_table_header_search_box(self, table, layout):
@@ -53,16 +54,19 @@ def add_table_header_search_box(self, table, layout):
     return push_button, text_edit
 
 
-def init_search_button_click_signal(table, button, text_edit):
-    button.clicked.connect(lambda: on_search_button_click(table, text_edit))
+def init_search_button_click_signal(self, table, button, text_edit):
+    button.clicked.connect(
+        lambda: on_search_button_click(self, table=table, text_edit=text_edit)
+    )
 
 
-def on_search_button_click(table, text_edit):
+@customize_table_row
+def on_search_button_click(self, table: QTableWidget, text_edit: QTextEdit):
     search_string = text_edit.toPlainText()
     hide_rows_without_string(table, search_string)
 
 
-def hide_rows_without_string(table, search_string):
+def hide_rows_without_string(table: QTableWidget, search_string: str):
     search_string_lower = search_string.lower()
     for row in range(table.rowCount()):
         found = False
@@ -82,10 +86,3 @@ def add_search_bar_itms_attrs(
         create_and_set_obj_property(obj, property_type="func", property_value=func)
     if table:
         create_and_set_obj_property(obj, property_type="table", property_value=table)
-
-
-def is_search_box(source):
-    return (
-        isinstance(source, QTextEdit)
-        and getattr(source, "text_edit_type", None) is not None
-    )
