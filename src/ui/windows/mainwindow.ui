@@ -156,7 +156,7 @@
            <enum>QTabWidget::West</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <property name="iconSize">
            <size>
@@ -1833,7 +1833,7 @@ AC-Nennleistung [kW])  für einen Artikel vorgenommen werden.</string>
                      <x>0</x>
                      <y>0</y>
                      <width>1759</width>
-                     <height>5540</height>
+                     <height>5378</height>
                     </rect>
                    </property>
                    <property name="sizePolicy">
@@ -1964,7 +1964,7 @@ AC-Nennleistung [kW])  für einen Artikel vorgenommen werden.</string>
                                     </property>
                                     <property name="maximumSize">
                                      <size>
-                                      <width>150</width>
+                                      <width>500</width>
                                       <height>30</height>
                                      </size>
                                     </property>
@@ -2019,7 +2019,7 @@ AC-Nennleistung [kW])  für einen Artikel vorgenommen werden.</string>
                                     </property>
                                     <property name="maximumSize">
                                      <size>
-                                      <width>150</width>
+                                      <width>500</width>
                                       <height>30</height>
                                      </size>
                                     </property>
@@ -2066,7 +2066,7 @@ AC-Nennleistung [kW])  für einen Artikel vorgenommen werden.</string>
                                     </property>
                                     <property name="maximumSize">
                                      <size>
-                                      <width>150</width>
+                                      <width>500</width>
                                       <height>30</height>
                                      </size>
                                     </property>
@@ -2113,7 +2113,7 @@ AC-Nennleistung [kW])  für einen Artikel vorgenommen werden.</string>
                                     </property>
                                     <property name="maximumSize">
                                      <size>
-                                      <width>150</width>
+                                      <width>500</width>
                                       <height>30</height>
                                      </size>
                                     </property>
@@ -2178,7 +2178,7 @@ AC-Nennleistung [kW])  für einen Artikel vorgenommen werden.</string>
                                     </property>
                                     <property name="maximumSize">
                                      <size>
-                                      <width>150</width>
+                                      <width>500</width>
                                       <height>30</height>
                                      </size>
                                     </property>
@@ -2211,7 +2211,7 @@ AC-Nennleistung [kW])  für einen Artikel vorgenommen werden.</string>
                                     </property>
                                     <property name="maximumSize">
                                      <size>
-                                      <width>150</width>
+                                      <width>500</width>
                                       <height>30</height>
                                      </size>
                                     </property>
@@ -2258,7 +2258,7 @@ AC-Nennleistung [kW])  für einen Artikel vorgenommen werden.</string>
                                     </property>
                                     <property name="maximumSize">
                                      <size>
-                                      <width>150</width>
+                                      <width>500</width>
                                       <height>30</height>
                                      </size>
                                     </property>
@@ -2308,7 +2308,7 @@ AC-Nennleistung [kW])  für einen Artikel vorgenommen werden.</string>
                                     </property>
                                     <property name="maximumSize">
                                      <size>
-                                      <width>150</width>
+                                      <width>500</width>
                                       <height>30</height>
                                      </size>
                                     </property>
@@ -2634,6 +2634,18 @@ AC-Nennleistung [kW])  für einen Artikel vorgenommen werden.</string>
                                      </item>
                                      <item row="0" column="3">
                                       <widget class="QLabel" name="maj_card_point_label">
+                                       <property name="sizePolicy">
+                                        <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+                                         <horstretch>0</horstretch>
+                                         <verstretch>0</verstretch>
+                                        </sizepolicy>
+                                       </property>
+                                       <property name="maximumSize">
+                                        <size>
+                                         <width>500</width>
+                                         <height>16777215</height>
+                                        </size>
+                                       </property>
                                        <property name="text">
                                         <string>Überwiegend:</string>
                                        </property>
@@ -2641,27 +2653,8 @@ AC-Nennleistung [kW])  für einen Artikel vorgenommen werden.</string>
                                      </item>
                                      <item row="1" column="0">
                                       <widget class="QLabel" name="min_azimuth_label">
-                                       <property name="minimumSize">
-                                        <size>
-                                         <width>0</width>
-                                         <height>30</height>
-                                        </size>
-                                       </property>
-                                       <property name="maximumSize">
-                                        <size>
-                                         <width>16777215</width>
-                                         <height>30</height>
-                                        </size>
-                                       </property>
-                                       <property name="text">
-                                        <string>Ausrichtung weitere:</string>
-                                       </property>
-                                      </widget>
-                                     </item>
-                                     <item row="2" column="3">
-                                      <widget class="QLabel" name="min_tilt_label">
                                        <property name="sizePolicy">
-                                        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                                        <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
                                          <horstretch>0</horstretch>
                                          <verstretch>0</verstretch>
                                         </sizepolicy>
@@ -2674,7 +2667,32 @@ AC-Nennleistung [kW])  für einen Artikel vorgenommen werden.</string>
                                        </property>
                                        <property name="maximumSize">
                                         <size>
-                                         <width>16777215</width>
+                                         <width>500</width>
+                                         <height>30</height>
+                                        </size>
+                                       </property>
+                                       <property name="text">
+                                        <string>Ausrichtung weitere:</string>
+                                       </property>
+                                      </widget>
+                                     </item>
+                                     <item row="2" column="3">
+                                      <widget class="QLabel" name="min_tilt_label">
+                                       <property name="sizePolicy">
+                                        <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+                                         <horstretch>0</horstretch>
+                                         <verstretch>0</verstretch>
+                                        </sizepolicy>
+                                       </property>
+                                       <property name="minimumSize">
+                                        <size>
+                                         <width>0</width>
+                                         <height>30</height>
+                                        </size>
+                                       </property>
+                                       <property name="maximumSize">
+                                        <size>
+                                         <width>500</width>
                                          <height>30</height>
                                         </size>
                                        </property>
@@ -2726,6 +2744,18 @@ AC-Nennleistung [kW])  für einen Artikel vorgenommen werden.</string>
                                      </item>
                                      <item row="1" column="3">
                                       <widget class="QLabel" name="min_card_point_label">
+                                       <property name="sizePolicy">
+                                        <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+                                         <horstretch>0</horstretch>
+                                         <verstretch>0</verstretch>
+                                        </sizepolicy>
+                                       </property>
+                                       <property name="maximumSize">
+                                        <size>
+                                         <width>500</width>
+                                         <height>16777215</height>
+                                        </size>
+                                       </property>
                                        <property name="text">
                                         <string>Weitere:</string>
                                        </property>
@@ -2749,6 +2779,12 @@ AC-Nennleistung [kW])  für einen Artikel vorgenommen werden.</string>
                                      </item>
                                      <item row="0" column="0">
                                       <widget class="QLabel" name="maj_azimuth_label">
+                                       <property name="sizePolicy">
+                                        <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+                                         <horstretch>0</horstretch>
+                                         <verstretch>0</verstretch>
+                                        </sizepolicy>
+                                       </property>
                                        <property name="minimumSize">
                                         <size>
                                          <width>0</width>
@@ -2757,7 +2793,7 @@ AC-Nennleistung [kW])  für einen Artikel vorgenommen werden.</string>
                                        </property>
                                        <property name="maximumSize">
                                         <size>
-                                         <width>16777215</width>
+                                         <width>500</width>
                                          <height>30</height>
                                         </size>
                                        </property>
@@ -2804,7 +2840,7 @@ AC-Nennleistung [kW])  für einen Artikel vorgenommen werden.</string>
                                      <item row="2" column="0">
                                       <widget class="QLabel" name="maj_tilt_label">
                                        <property name="sizePolicy">
-                                        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                                        <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
                                          <horstretch>0</horstretch>
                                          <verstretch>0</verstretch>
                                         </sizepolicy>
@@ -2817,7 +2853,7 @@ AC-Nennleistung [kW])  für einen Artikel vorgenommen werden.</string>
                                        </property>
                                        <property name="maximumSize">
                                         <size>
-                                         <width>16777215</width>
+                                         <width>500</width>
                                          <height>30</height>
                                         </size>
                                        </property>
@@ -5815,13 +5851,13 @@ Zuschlag in einer Ausschreibung:</string>
           <property name="minimumSize">
            <size>
             <width>200</width>
-            <height>40</height>
+            <height>45</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
             <width>500</width>
-            <height>40</height>
+            <height>45</height>
            </size>
           </property>
           <property name="frameShape">
@@ -5899,13 +5935,13 @@ Zuschlag in einer Ausschreibung:</string>
              <property name="minimumSize">
               <size>
                <width>200</width>
-               <height>30</height>
+               <height>35</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
                <width>250</width>
-               <height>30</height>
+               <height>35</height>
               </size>
              </property>
              <property name="font">
@@ -5915,6 +5951,12 @@ Zuschlag in einer Ausschreibung:</string>
                <italic>false</italic>
                <bold>false</bold>
               </font>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::ClickFocus</enum>
+             </property>
+             <property name="acceptDrops">
+              <bool>true</bool>
              </property>
              <property name="inputMethodHints">
               <set>Qt::ImhMultiLine</set>
@@ -5926,7 +5968,7 @@ Zuschlag in einer Ausschreibung:</string>
               <enum>Qt::ScrollBarAlwaysOff</enum>
              </property>
              <property name="sizeAdjustPolicy">
-              <enum>QAbstractScrollArea::AdjustIgnored</enum>
+              <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
              </property>
              <property name="tabChangesFocus">
               <bool>false</bool>
@@ -5962,7 +6004,7 @@ Zuschlag in einer Ausschreibung:</string>
           <property name="maximumSize">
            <size>
             <width>16777215</width>
-            <height>40</height>
+            <height>45</height>
            </size>
           </property>
           <property name="frameShape">
@@ -6040,13 +6082,13 @@ Zuschlag in einer Ausschreibung:</string>
              <property name="minimumSize">
               <size>
                <width>1000</width>
-               <height>30</height>
+               <height>35</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
                <width>16777215</width>
-               <height>30</height>
+               <height>35</height>
               </size>
              </property>
              <property name="font">
