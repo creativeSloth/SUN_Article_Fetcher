@@ -1,5 +1,6 @@
 from PyQt5.QtCore import QEvent, Qt
-from PyQt5.QtWidgets import QPlainTextEdit, QWidget
+from PyQt5.QtGui import QColor, QPainter
+from PyQt5.QtWidgets import QPlainTextEdit, QTableWidget, QTableWidgetItem, QWidget
 
 from events.utils import (
     enter_key_pressed,
@@ -13,6 +14,7 @@ from events.utils import (
 
 
 def event_Filter(self, source: QWidget = None, event: QEvent = None) -> bool:
+
     if is_pushbutton(source):
         if mouse_enters_pb(event):
             source.setIcon(source.hover_icon)
@@ -32,19 +34,29 @@ def event_Filter(self, source: QWidget = None, event: QEvent = None) -> bool:
                 if func:
                     func(self, table=table, text_edit=source)
                     return True
-    # if source.objectName() == "project" and isinstance(source, QPlainTextEdit):
-    #     if lmbutton_presses(event):
-    #         print("hi")
-    #         # Event ignorieren, um das Scrollen zu verhindern
-    #         return False
-    #     elif event.type() == QEvent.MouseMove and event.buttons() & Qt.LeftButton:
-    #         # Mausbewegungen beim Drücken der linken Maustaste ignorieren
-    #         return False
-    #     elif (
-    #         event.type() == QEvent.MouseButtonRelease
-    #         and event.button() == Qt.LeftButton
-    #     ):
-    #         # Mausfreigabe-Ereignis behandeln, wenn nötig
-    #         pass
+
+    if isinstance(source, QTableWidget):
+        if event.type() == QEvent.Paint:
+            print(event)
+
+            rect = event.rect()
+
+            row = source.rowAt(rect.bottom()) - 1
+            amount_item: QTableWidgetItem = source.item(row, 3)
+            if amount_item:
+                count: float = float(amount_item.text())
+            print(row)
+
+            # Prüfen, ob amount_item vorhanden ist und den Wert 0 hat
+            if amount_item is None or count != 0:
+                return False
+
+            # Alle Zellen in der Zeile färben
+            for column in range(source.columnCount()):
+                item = source.item(row, column)
+                if item:
+                    source.item(row, column).setForeground(QColor("#e20000"))
+
+            return True
 
     return False

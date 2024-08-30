@@ -49,6 +49,7 @@ from ui.tables.data_content import (
     fill_article_table,
     fill_device_tables,
     initialize_table_search,
+    install_eventfilter_on_tables,
 )
 from ui.tables.data_content_helper import collect_specs_of_articles
 from ui.tables.utils import connect_sort_indicator_changed, connect_tables_scroll_bar
@@ -81,6 +82,7 @@ class MainWindow(QMainWindow):
         set_static_directories()
         set_general_table_map(self)
         initialize_blacklist_dialogs(self)
+        install_eventfilter_on_tables(self)
         initialize_table_search(self)
         connect_tables_scroll_bar(self)
         menus_base.initialize_menu_dialogs(self)
@@ -95,8 +97,8 @@ class MainWindow(QMainWindow):
 
         self.previous_project_text = self.ui.project.toPlainText()
 
-    def eventFilter(self, source, event):
-        return event_Filter(self, source, event)
+    def eventFilter(self, watched, event):
+        return event_Filter(self, watched, event)
 
     def map_ui_buttons(self) -> None:
         #  *********************************** Mapping buttons for "Article Fetcher"-module *****************************************

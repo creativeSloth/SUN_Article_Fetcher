@@ -22,6 +22,13 @@ from ui.tables.utils import (
 from ui.text_edits.ui_fields_base import get_all_mainwindow_tables, get_device_tables
 
 
+def install_eventfilter_on_tables(self):
+    # Hole alle Artikeltabellen
+    tables = get_all_mainwindow_tables(self)
+    for table in tables:
+        table.installEventFilter(self)
+
+
 def initialize_table_search(self):
     # Hole die Artikeltabelle und ihr Layout
     GENERAL_TABLE_MAP = get_all_tables_to_layout_map(self)

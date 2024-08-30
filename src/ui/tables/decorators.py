@@ -1,15 +1,18 @@
+from typing import Any
+
 from PyQt5.QtGui import QColor
-from PyQt5.QtWidgets import QMessageBox, QTableWidget
+from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem
 
 
 def change_foreground_if_zero(table: QTableWidget):
     if table.objectName() == "blacklist":
         return
     for row in range(table.rowCount()):
-        amount_item = table.item(row, 3)
-        count: float = amount_item.text()
+        amount_item: QTableWidgetItem = table.item(row, 3)
+        if amount_item:
+            count: float = float(amount_item.text())
         try:
-            if amount_item is None or float(count) != 0:
+            if amount_item is None or count != 0:
                 continue
 
             for column in range(1, table.columnCount()):
@@ -22,7 +25,7 @@ def change_foreground_if_zero(table: QTableWidget):
             pass
 
 
-def customize_table_row(func):
+def customize_table_row(func: Any):
     def wrapper(self, *args, **kwargs):
         if "table" in kwargs:
             table = kwargs["table"]

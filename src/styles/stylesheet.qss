@@ -288,21 +288,21 @@ QTableWidget::item:alternate {
 }
 
 QTableWidget::item:alternate:selected {
-	background-color: rgb(
-		200,
-		255,
-		255
+	background-color: rgba(
+		54, 169, 36, 255
 	); /* Beispielhintergrundfarbe für alternative Zeilen */
 	color: #13213b;
 }
 
 QTableWidget::item::selected {
-	background-color: rgb(
-		200,
-		255,
-		255
-	); /* Beispielhintergrundfarbe für alternative Zeilen */
+	background-color: rgba(54, 169, 36, 255); /* Beispielhintergrundfarbe für alternative Zeilen */
 	color: #13213b;
+}
+
+QTableWidget::item[property="isZero"]{
+
+	/* Beispielhintergrundfarbe für alternative Zeilen */
+	color: #e20000;
 }
 
 QTableWidget::item[property="isZero"]::selected {
@@ -313,8 +313,6 @@ QTableWidget::item[property="isZero"]::selected {
 	); /* Beispielhintergrundfarbe für alternative Zeilen */
 	color: #e20000;
 }
-
-
 
 
 QHeaderView::section {

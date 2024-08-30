@@ -11,7 +11,8 @@ def mouse_leaves_pb(event):
 
 
 def lmbutton_presses(event):
-    return event.type() == QEvent.MouseButtonPress and event.button() == Qt.LeftButton
+
+    return event.type() == QEvent.MouseButtonPress and event.buttons() == Qt.LeftButton
 
 
 def enter_key_pressed(event):
